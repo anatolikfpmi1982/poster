@@ -1,0 +1,15 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}Рама{% endblock %}
+
+{% block body %}
+    <div>
+        <p>Рама {{ frame.title }}</p>
+        <p>Цвет {{ frame.color }}</p>
+        <p>Материал {{ frame.material }}</p>
+        <p>Ширина {{ frame.width }}</p>
+        <p>Высота {{ frame.height }}</p>
+    </div>
+    {% set images = frame.images %}
+    {% block images_list %} {% include 'AppBundle::Images/list.block.html.twig' %} {% endblock %}
+{% endblock %}

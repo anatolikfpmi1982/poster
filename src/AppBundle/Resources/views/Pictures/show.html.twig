@@ -1,0 +1,16 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}Картина{% endblock %}
+
+{% block body %}
+    <div>
+        <p>Артикул: {{ picture.code }}</p>
+        <p>Картина "{{ picture.title }}"</p>
+        {% if picture.author %}
+            <p>Автор: {{ picture.author.name }}</p>
+        {% endif %}
+        <img src="/files/pictures/thumb/{{ picture.image.getFilename() }}" class="admin-preview" />
+    </div>
+    {% block frames_list %} {% include 'AppBundle::Frames/list.block.html.twig' %} {% endblock %}
+    {% block sizes_list %} {% include 'AppBundle::Sizes/select.block.html.twig' %} {% endblock %}
+{% endblock %}

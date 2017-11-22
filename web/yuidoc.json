@@ -1,0 +1,15 @@
+{
+	"name": "App",
+	"description": "App",
+	"version": "1",
+	"url": "http://example.com",
+    "devDependencies": {
+        "grunt": "~0.4.1",
+        "grunt-contrib-yuidoc": "*"
+    },
+	"options": {
+		"paths": ["app"],
+		"exclude": "vendor",
+		"outdir": "./api_docs"
+	}
+}

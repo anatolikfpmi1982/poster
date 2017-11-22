@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru" class="no-js js desktop landscape" dir="ltr">
+<head>
+    <meta charset="{{ _charset }}"/>
+    <meta name="robots" content="noindex,nofollow"/>
+    <title>{% block title %}{% endblock %}</title>
+    {% block head %}{% endblock %}
+    <style media="screen" type="text/css">
+        @import url("{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css', absolute=true) }}");
+        @import url("{{ asset('bower_components/bootstrap/dist/css/bootstrap-theme.min.css', absolute=true) }}");
+        @import url("{{ asset('bundles/app/css/custom.css', absolute=true) }}");
+    </style>
+</head>
+<body>
+<div class="container">
+
+    {% include('AppBundle:Component:header.html.twig') %}
+
+    <div class="row">
+        <aside class="col-md-3 container">
+            {% include('AppBundle:Component:blocks.html.twig') %}
+        </aside>
+        <section class="col-md-9">
+            <div class="container-fluid">
+
+                {% block body %}{% endblock %}
+
+            </div>
+        </section>
+    </div>
+
+
+    {% block before_footer %}{% endblock %}
+</div>
+</body>
+</html>

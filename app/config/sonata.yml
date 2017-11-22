@@ -1,0 +1,74 @@
+sonata_block:
+  default_contexts: [cms]
+  blocks:
+    # Enable the SonataAdminBundle block
+    sonata.admin.block.admin_list:
+      contexts:  [admin]
+    sonata.user.block.menu:  # used to display the menu in profile pages
+    sonata.user.block.account: # used to display menu option (login option)
+    sonata.block.service.text: # used to if you plan to use Sonata user routes
+
+
+sonata_user:
+  #security_acl: true # Uncomment for ACL support
+  manager_type: orm # can be orm or mongodb
+   
+
+fos_user:
+#  db_driver:  orm # can be orm or odm
+  firewall_name:  main
+  user_class:  Sonata\UserBundle\Entity\BaseUser
+
+  group:
+    group_class:  Sonata\UserBundle\Entity\BaseGroup
+    group_manager: sonata.user.orm.group_manager  
+
+  service:
+    user_manager: sonata.user.orm.user_manager
+
+sonata_classification:
+    class:
+        tag:          Application\Sonata\ClassificationBundle\Entity\Tag
+        category:     Application\Sonata\ClassificationBundle\Entity\Category
+        collection:   Application\Sonata\ClassificationBundle\Entity\Collection
+        media:        Application\Sonata\MediaBundle\Entity\Media
+        context:      Application\Sonata\ClassificationBundle\Entity\Context
+
+    admin:
+        tag:
+            class:        Sonata\ClassificationBundle\Admin\TagAdmin
+            controller:   SonataAdminBundle:CRUD
+            translation:  SonataClassificationBundle
+        category:
+            class:        Sonata\ClassificationBundle\Admin\CategoryAdmin
+            controller:   SonataClassificationBundle:CategoryAdmin
+            translation:  SonataClassificationBundle
+        collection:
+            class:        Sonata\ClassificationBundle\Admin\CollectionAdmin
+            controller:   SonataAdminBundle:CRUD
+            translation:  SonataClassificationBundle
+        context:
+            class:        Sonata\ClassificationBundle\Admin\ContextAdmin
+            controller:   SonataAdminBundle:CRUD
+            translation:  SonataClassificationBundle
+
+sonata_admin:
+    security:
+        handler: sonata.admin.security.handler.acl
+
+#        role_admin: ROLE_ADMIN
+#        role_super_admin: ROLE_SUPER_ADMIN
+
+        # acl security information
+        information:
+            GUEST:    [VIEW, LIST]
+            STAFF:    [EDIT, LIST, CREATE]
+            EDITOR:   [OPERATOR, EXPORT]
+            ADMIN:    [MASTER]
+
+        # permissions not related to an object instance and also to be available when objects do not exist
+        # the DELETE admin permission means the user is allowed to batch delete objects
+        admin_permissions: [CREATE, LIST, DELETE, UNDELETE, EXPORT, OPERATOR, MASTER]
+
+        # permission related to the objects
+        object_permissions: [VIEW, EDIT, DELETE, UNDELETE, OPERATOR, MASTER, OWNER]

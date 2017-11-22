@@ -1,0 +1,12 @@
+<p>
+{% for mat in getMats() %}
+<div>{{ mat.title }}</div>
+<div>
+    {% if frame.images|length > 0 %}
+        <img src="/files/frames/mini_thumb/{{ frame.images[0].getFilename() }}" class="admin-preview" /><br>
+    {% else %}
+        <span>No picture</span>
+    {% endif %}
+</div>
+{% endfor %}
+</p>

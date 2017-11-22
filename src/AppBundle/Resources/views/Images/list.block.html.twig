@@ -1,0 +1,7 @@
+<p>
+{% for image in images %}
+<div>
+    <img src="/files/frames/mini_thumb/{{ image.getFilename() }}" class="admin-preview" /><br>
+</div>
+{% endfor %}
+</p>

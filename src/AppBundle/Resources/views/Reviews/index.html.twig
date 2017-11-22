@@ -1,0 +1,30 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}Отзывы{% endblock %}
+
+{% block body %}
+    <div class="count">
+        {{ pagination.getTotalItemCount }}
+    </div>
+    <table border="1">
+        <tr>
+            {# sorting of properties based on query components #}
+            <th>{{ knp_pagination_sortable(pagination, 'Id', 'r.id') }}</th>
+            <th{% if pagination.isSorted('r.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Name', 'r.name') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Release', 'r.createdAt') }}</th>
+        </tr>
+
+        {# table body #}
+        {% for article in pagination %}
+            <tr {% if loop.index is odd %}class="color"{% endif %}>
+                <td>{{ article.id }}</td>
+                <td>{{ article.name }}</td>
+                <td>{{ article.createdAt | date('Y-m-d') }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,101 @@
+services:
+    app.admin.frame:
+        class: AppBundle\Admin\FrameAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Рамки", label: "Рамки", show_in_dashboard: true}
+        arguments:
+             - ~
+             - AppBundle\Entity\Frame
+             - 'SonataAdminBundle:CRUD'
+             - '@app.image_manager'
+    app.admin.framecolor:
+        class: AppBundle\Admin\FrameColorAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Рамки", label: "Цвет рамки", show_in_dashboard: true}
+        arguments:
+             - ~
+             - AppBundle\Entity\FrameColor
+             - 'SonataAdminBundle:CRUD'
+    app.admin.framematerial:
+        class: AppBundle\Admin\FrameMaterialAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Рамки", label: "Материал рамки", show_in_dashboard: true}
+        arguments:
+             - ~
+             - AppBundle\Entity\FrameMaterial
+             - 'SonataAdminBundle:CRUD'
+    app.admin.mat:
+        class: AppBundle\Admin\MatAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Картины", label: "Паспарту", show_in_dashboard: true}
+        arguments:
+             - ~
+             - AppBundle\Entity\Mat
+             - 'SonataAdminBundle:CRUD'
+    app.admin.page:
+        class: AppBundle\Admin\PageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Страницы", show_in_dashboard: true }
+        arguments:
+            - ~
+            - AppBundle\Entity\Page
+            - 'SonataAdminBundle:CRUD'
+    app.admin.call:
+        class: AppBundle\Admin\CallAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Заказанные звонки", show_in_dashboard: true }
+        arguments:
+            - ~
+            - AppBundle\Entity\Call
+            - 'SonataAdminBundle:CRUD'
+    app.admin.review:
+        class: AppBundle\Admin\ReviewAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Отзывы", show_in_dashboard: true}
+        arguments:
+             - ~
+             - AppBundle\Entity\Review
+             - 'SonataAdminBundle:CRUD'
+    app.admin.picture:
+        class: AppBundle\Admin\PictureAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Картины", label: "Картины", show_in_dashboard: true }
+        arguments:
+            - ~
+            - AppBundle\Entity\Picture
+            - 'SonataAdminBundle:CRUD'
+            - '@app.image_manager'
+            - '@doctrine.orm.entity_manager'
+    app.admin.picturesize:
+        class: AppBundle\Admin\PictureSizeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Картины", label: "Размеры картин", show_in_dashboard: true }
+        arguments:
+            - ~
+            - AppBundle\Entity\PictureSize
+            - 'SonataAdminBundle:CRUD'
+    app.admin.author:
+        class: AppBundle\Admin\AuthorAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Картины", label: "Автор картины", show_in_dashboard: true }
+        arguments:
+            - ~
+            - AppBundle\Entity\Author
+            - 'SonataAdminBundle:CRUD'
+#    app.admin.category:
+#        class: AppBundle\Admin\CategoryAdmin
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Категории", show_in_dashboard: true }
+#        arguments:
+#            - ~
+#            - AppBundle\Entity\Category
+#            - 'SonataAdminBundle:CRUD'
+#            - '@doctrine.orm.entity_manager'
+    app.admin.image:
+        class: AppBundle\Admin\ImageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Content, label: Image, show_in_dashboard: false}
+        arguments:
+            - ~
+            - AppBundle\Entity\Image
+            - 'SonataAdminBundle:CRUD'

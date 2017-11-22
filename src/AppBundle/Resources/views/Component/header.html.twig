@@ -1,0 +1,90 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="row text-left">
+            <div class="col-md-4 container az-header-top">
+                <div class="row az-logo-title-img-div">
+                    <img src="{{ asset('bundles/app/images/logo.png') }}" class="az-logo-title-img" title="{% trans %}Logo{% endtrans %}"/>
+                </div>
+                <div class="row az-logo-title-text-div">
+                    Картины, постеры и фотообои по всей Беларуси. <br/>Быстро и удобно на заказ.
+                </div>
+            </div>
+            <div class="col-md-3 container az-header-top">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img src="{{ asset('bundles/app/images/telephone.png') }}" class="az-phone-title-img" title="{% trans %}phone{% endtrans %}"/>
+                    </div>
+                    <div class="col-md-9 container az-header-address-div">
+                        <div class="row az-header-address-container az-header-phone-number">+ 375 29 <b class="az-header-phone-number-bold">699-99-99</b></div>
+                        <div class="row az-header-address-container az-header-email">info@artzakaz.by</div>
+                        <div class="row az-header-address-container az-header-feedback-btn-div">
+                            <button class="btn btn-bg az-header-feedback-btn">Обратный звонок</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 container az-header-top">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img src="{{ asset('bundles/app/images/download.png') }}" class="az-download-title-img" title="{% trans %}download{% endtrans %}"/>
+                    </div>
+                    <div class="col-md-9 container az-header-download-div">
+                        Загрузить свое <br/>изображение.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 container az-header-top-last">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img src="{{ asset('bundles/app/images/basket.png') }}" class="az-basket-title-img" title="{% trans %}basket{% endtrans %}"/>
+                    </div>
+                    <div class="col-md-9 container az-header-basket-div">
+                        <div class="row az-header-basket-container az-header-basket-text">Корзина</div>
+                        <div class="row az-header-basket-container az-header-basket-count-text">Товаров: <span class="az-header-basket-count">0</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-header">Nav header</li>
+                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="col-sm-3 col-md-3 pull-right">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>

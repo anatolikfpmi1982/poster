@@ -1,0 +1,77 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}Web easy soft blog{% endblock %}
+
+{% block content_header '' %}
+
+{% block content %}
+
+    <div id="main-wrapper" class="main-wrapper header_top_page" role="main">
+        <div class="container-12">
+            <div class="grid-12">
+                <div id="main" class="main clearfix">
+                    {% block page %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer" class="footer page-footer" role="contentinfo">
+        {% include('AppBundle:Components:footer.html.twig') %}
+    </footer>
+
+    <noscript>
+        <style>img[data-src] {
+                display: none;
+            }</style>
+    </noscript>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $("img[data-src]").lazyloader({
+                distance: 0,
+                icon: "/drupal_53129/sites/all/modules/tm_lazyload/loader/loader-8.gif"
+            });
+        });
+    </script>
+    <script type="text/javascript">window.NREUM || (NREUM = {});
+        NREUM.info = {
+            "beacon": "bam.nr-data.net",
+            "licenseKey": "72d7dcce33",
+            "applicationID": "1388850",
+            "transactionName": "ZV1TZ0FTVkFVWkwKXlwXcFBHW1dcG1tUDFZtSFBUVm1UU0dN",
+            "queueTime": 0,
+            "applicationTime": 1984,
+            "atts": "SRpQEQlJRU8=",
+            "errorBeacon": "bam.nr-data.net",
+            "agent": "js-agent.newrelic.com\/nr-768.min.js"
+        }</script>
+    <div style="display: none;" id="cboxOverlay"></div>
+    <div style="display: none;" tabindex="-1" role="dialog" class="" id="colorbox">
+        <div id="cboxWrapper">
+            <div>
+                <div style="float: left;" id="cboxTopLeft"></div>
+                <div style="float: left;" id="cboxTopCenter"></div>
+                <div style="float: left;" id="cboxTopRight"></div>
+            </div>
+            <div style="clear: left;">
+                <div style="float: left;" id="cboxMiddleLeft"></div>
+                <div style="float: left;" id="cboxContent">
+                    <div style="float: left;" id="cboxTitle"></div>
+                    <div style="float: left;" id="cboxCurrent"></div>
+                    <button id="cboxPrevious" type="button"></button>
+                    <button id="cboxNext" type="button"></button>
+                    <button id="cboxSlideshow"></button>
+                    <div style="float: left;" id="cboxLoadingOverlay"></div>
+                    <div style="float: left;" id="cboxLoadingGraphic"></div>
+                </div>
+                <div style="float: left;" id="cboxMiddleRight"></div>
+            </div>
+            <div style="clear: left;">
+                <div style="float: left;" id="cboxBottomLeft"></div>
+                <div style="float: left;" id="cboxBottomCenter"></div>
+                <div style="float: left;" id="cboxBottomRight"></div>
+            </div>
+        </div>
+        <div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div>
+    </div><a style="right: 50%; margin-right: -690px; display: block;" href="#" id="backtotop"><span id="toTopHover"></span></a>
+
+{% endblock %}

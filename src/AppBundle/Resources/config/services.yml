@@ -1,0 +1,25 @@
+services:
+    helper.imageresizer:
+        class: AppBundle\Helper\ImageResizer
+
+    app.image_manager:
+        class: AppBundle\Service\ImageManagement
+        arguments:
+            - '@doctrine.orm.entity_manager'
+
+    app.session_manager:
+        class: AppBundle\Service\SessionManagement
+        arguments:
+            - '@service_container'
+
+    pictures.service:
+        class: AppBundle\Service\PicturesService
+        arguments:
+            - '@doctrine.orm.entity_manager'
+
+    app.twig_pictures_extension:
+        class: AppBundle\Twig\PicturesExtension
+        arguments:
+            - '@service_container'
+        tags:
+            - { name: twig.extension }

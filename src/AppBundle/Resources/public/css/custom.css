@@ -1,0 +1,42 @@
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+.az-header-top {
+    padding: 20px 0 0 30px;
+}
+
+.az-header-top-last {
+    padding: 20px 0 0 0;
+}
+
+.az-logo-title-img {
+    width: 270px;
+    height: 75px;
+}
+
+.az-header-feedback-btn {
+    color: white;
+    background-color: #cc262c;
+}
+
+.az-header-address-div {
+    padding-left: 25px;
+}
+
+.az-header-basket-div {
+    padding-left: 45px;
+}
+
+.az-header-address-container {
+    line-height: 24px;
+}
+
+.az-header-feedback-btn-div {
+    margin-top: 10px;
+}

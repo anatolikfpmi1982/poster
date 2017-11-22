@@ -1,0 +1,15 @@
+services:
+    app.frame_event_listener:
+        class: AppBundle\EventSubscriber\FrameSubscriber
+        arguments:
+            - '@service_container'
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate }
+            - { name: doctrine.event_listener, event: postPersist }
+    app.picture_event_listener:
+        class: AppBundle\EventSubscriber\PictureSubscriber
+        arguments:
+            - '@service_container'
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate }
+            - { name: doctrine.event_listener, event: postPersist }

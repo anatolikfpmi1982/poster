@@ -1,0 +1,40 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}Рамы{% endblock %}
+
+{% block body %}
+    <div class="count">
+        {{ pagination.getTotalItemCount }}
+    </div>
+    <table border="1">
+        <tr>
+            {# sorting of properties based on query components #}
+            <th>{{ knp_pagination_sortable(pagination, 'Id', 'f.id') }}</th>
+            <th></th>
+            <th{% if pagination.isSorted('f.title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Артикул', 'f.title') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Ширина', 'f.width') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Высота', 'f.height') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Материал', 'f.material') }}</th>
+        </tr>
+
+        {# table body #}
+        {% for frame in pagination %}
+            <tr {% if loop.index is odd %}class="color"{% endif %}>
+                <td>{{ frame.id }}</td>
+                <td>
+                    <a href="{{ path('frame', { id: frame.id }) }}">
+                        <img src="/files/frames/mini_thumb/{{ frame.images[0].getFilename() }}" class="admin-preview" />
+                    </a>
+                </td>
+                <td>{{ frame.title }}</td>
+                <td>{{ frame.width }}</td>
+                <td>{{ frame.height }}</td>
+                <td>{{ frame.material }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

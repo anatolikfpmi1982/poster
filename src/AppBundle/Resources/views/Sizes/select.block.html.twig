@@ -1,0 +1,7 @@
+<p>
+<select name="picture-size">
+    {% for size in getSizes() %}
+    <option value = '{{ size.width }} {{ size.height }}'>{{ size.width }} X {{ size.height }} см</option>
+    {% endfor %}
+</select>
+</p>
