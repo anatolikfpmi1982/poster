@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Entity\ImageInterface;
-use Application\Sonata\ClassificationBundle\Entity\Category;
+//use Application\Sonata\ClassificationBundle\Entity\Category;
 
 /**
  * Page
@@ -116,7 +116,7 @@ class Picture implements ImageInterface
      * Many Pictures have Many Categories.
      *
      * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="\Application\Sonata\ClassificationBundle\Entity\Category", inversedBy="pictures", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="\AppBundle\Entity\Category", inversedBy="pictures", fetch="EXTRA_LAZY", cascade={"persist"})
      * @ORM\JoinTable(name="pictures2_categories")
      */
     private $categories;
@@ -409,7 +409,7 @@ class Picture implements ImageInterface
     }
 
     /**
-     * @param \Application\Sonata\ClassificationBundle\Entity\Category $category
+     * @param Category $category
      * @return Picture
      */
     public function addCategory(Category $category)
@@ -420,7 +420,7 @@ class Picture implements ImageInterface
     }
 
     /**
-     * @param \Application\Sonata\ClassificationBundle\Entity\Category $category
+     * @param Category $category
      * @return Picture
      */
     public function removeCategory(Category $category)

@@ -1,0 +1,14 @@
+{% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+
+{% block breadcrumb %}
+    <li><a href="{{ url('sonata_admin_dashboard') }}">{% trans %}Dashboard{% endtrans %}</a><span class="divider">/</span></li>
+    <li class="active">Настройки сайта</li>
+{% endblock %}
+
+{% block content %}
+    <h1>Настройки сайта</h1>
+    Custom content
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}

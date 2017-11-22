@@ -63,18 +63,17 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
-#        naming_strategy: doctrine.orm.naming_strategy.underscore
 #        auto_mapping: true
+#        naming_strategy: doctrine.orm.naming_strategy.underscore
         entity_managers:
             default:
-#                auto_mapping: true
                 mappings:
                     ApplicationSonataUserBundle: ~
+#                    ApplicationSonataClassificationBundle: ~
                     SonataUserBundle: ~
                     FOSUserBundle: ~
                     AppBundle: ~
                     SonataClassificationBundle: ~
-                    ApplicationSonataClassificationBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -125,3 +124,10 @@ braincrafted_bootstrap:
         variables_file: ~
         bootstrap_output: %kernel.root_dir%/Resources/less/bootstrap.less
         bootstrap_template: BraincraftedBootstrapBundle:Bootstrap:bootstrap.less.twig
+
+doctrine_migrations:
+    dir_name: "%kernel.root_dir%/DoctrineMigrations"
+    namespace: AppBundle\Migrations
+    table_name: migration_versions
+    name: Application Migrations
+    #organize_migrations: false # Version >=1.2 Possible values are: "BY_YEAR", "BY_YEAR_AND_MONTH", false

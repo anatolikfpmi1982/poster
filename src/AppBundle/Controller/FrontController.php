@@ -44,6 +44,7 @@ class FrontController extends Controller {
      * @return array
      */
     protected function getPopularBlock() {
+//        return $this->get( 'blocks.service' )->getPopularBlock();
         return $this->get( 'doctrine.orm.entity_manager' )->getRepository( 'AppBundle:Review' )->getLatestReviews();
     }
 
