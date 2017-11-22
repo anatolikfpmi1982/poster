@@ -17,9 +17,19 @@ services:
         arguments:
             - '@doctrine.orm.entity_manager'
 
+    menu.service:
+        class: AppBundle\Service\MenuService
+        arguments:
+            - '@doctrine.orm.entity_manager'
+
     app.twig_pictures_extension:
         class: AppBundle\Twig\PicturesExtension
         arguments:
             - '@service_container'
         tags:
             - { name: twig.extension }
+
+    app.menu_listener:
+        class: AppBundle\EventListener\MenuBuilderListener
+        tags:
+            - { name: kernel.event_listener, event: sonata.admin.event.configure.menu.sidebar, method: addMenuItems }

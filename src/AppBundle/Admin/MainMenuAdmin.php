@@ -2,15 +2,14 @@
 
 namespace AppBundle\Admin;
 
-use AppBundle\Entity\Page;
+use AppBundle\Entity\MainMenu;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 
-class PageAdmin extends AbstractAdmin
+class MainMenuAdmin extends AbstractAdmin
 {
     /**
      * @param FormMapper $formMapper
@@ -20,9 +19,8 @@ class PageAdmin extends AbstractAdmin
         $formMapper
             ->with('Main')
             ->add('title', null, ['required' => true, 'label' => 'Название'])
-            ->add('body', CKEditorType::class, ['required' => true, 'label' => 'Текст'])
-            ->add('slug', null, ['required' => false, 'label' => 'URL'])
-//            ->add('isInMenu', null, ['required' => false, 'label' => 'Отображать в главном меню'])
+            ->add('target', null, ['required' => true, 'label' => 'Ссылка'])
+            ->add('weight', null, ['required' => true, 'label' => 'Вес'])
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
             ->end();
     }
@@ -35,10 +33,10 @@ class PageAdmin extends AbstractAdmin
         $listMapper
             ->add('id', null, ['required' => true, 'label' => 'ID'])
             ->add('title', null, ['required' => true, 'label' => 'Название'])
-            ->add('slug', null, ['required' => false, 'label' => 'URL'])
+            ->add('target', null, ['required' => true, 'label' => 'Ссылка'])
+            ->add('weight', null, ['required' => true, 'label' => 'Вес'])
 //            ->add('createdAt', null, ['label' => 'Создано'])
 //            ->add('updatedAt', null, ['label' => 'Обновлено'])
-//            ->add('isInMenu', null, ['label' => 'В меню'])
             ->add('isActive', null, ['label' => 'Показывать'])
             ->add(
                 '_action',
@@ -59,29 +57,29 @@ class PageAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('title', null, ['label' => 'Название'])
-//            ->add('isInMenu', null, ['label' => 'В меню'])
-            ->add('isActive', null, ['label' => 'Показать'])
+            ->add('target', null, ['label' => 'Ссылка'])
+            ->add('isActive', null, ['label' => 'Показывать'])
         ;
     }
 
     /**
-     * @param mixed $page
+     * @param mixed $menu
      */
-    public function prePersist($page)
+    public function prePersist($menu)
     {
-        if($page instanceof Page) {
-            $page->setCreatedAt(new \DateTime());
-            $page->setUpdatedAt(new \DateTime());
+        if($menu instanceof MainMenu) {
+            $menu->setCreatedAt(new \DateTime());
+            $menu->setUpdatedAt(new \DateTime());
         }
     }
 
     /**
-     * @param mixed $page
+     * @param mixed $menu
      */
-    public function preUpdate($page)
+    public function preUpdate($menu)
     {
-        if($page instanceof Page) {
-            $page->setUpdatedAt(new \DateTime());
+        if($menu instanceof MainMenu) {
+            $menu->setUpdatedAt(new \DateTime());
         }
     }
 }

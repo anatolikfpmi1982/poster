@@ -9,15 +9,15 @@ use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Page
+ * MainMenu
  *
- * @ORM\Table(name="pages")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\PageRepository")
+ * @ORM\Table(name="main_menu_items")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\MainMenuRepository")
  */
-class Page
+class MainMenu
 {
     /** class name */
-    const JSON_NAME = 'page';
+    const JSON_NAME = 'main_menu';
 
     /**
      * @var int
@@ -38,16 +38,15 @@ class Page
     /**
      * @var string
      *
-     * @ORM\Column(name="body", type="text")
+     * @ORM\Column(name="target", type="string")
      */
-    private $body;
+    private $target;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="slug", type="string")
+     * @var integer
+     * @ORM\Column(name="weight", type="integer")
      */
-    private $slug;
+    private $weight;
 
     /**
      * @var \DateTime
@@ -85,7 +84,7 @@ class Page
      *
      * @param string $title
      *
-     * @return Page
+     * @return MainMenu
      */
     public function setTitle($title)
     {
@@ -105,44 +104,39 @@ class Page
     }
 
     /**
-     * Set body
-     *
-     * @param string $body
-     *
-     * @return Page
+     * @return string
      */
-    public function setBody($body)
+    public function getTarget()
     {
-        $this->body = $body;
+        return $this->target;
+    }
+
+    /**
+     * @param string $target
+     * @return MainMenu
+     */
+    public function setTarget($target)
+    {
+        $this->target = $target;
 
         return $this;
     }
 
     /**
-     * Get body
-     *
-     * @return string
+     * @return integer
      */
-    public function getBody()
+    public function getWeight()
     {
-        return $this->body;
+        return $this->weight;
     }
 
     /**
-     * @return string
+     * @param integer $weight
+     * @return MainMenu
      */
-    public function getSlug()
+    public function setWeight($weight)
     {
-        return $this->slug;
-    }
-
-    /**
-     * @param string $slug
-     * @return Page
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
+        $this->weight = $weight;
 
         return $this;
     }
@@ -152,7 +146,7 @@ class Page
      * Set createdAt
      *
      * @param  \DateTime $createdAt
-     * @return Page
+     * @return MainMenu
      */
     public function setCreatedAt($createdAt)
     {
@@ -175,7 +169,7 @@ class Page
      * Set updatedAt
      *
      * @param  \DateTime $updatedAt
-     * @return Page
+     * @return MainMenu
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -204,7 +198,7 @@ class Page
 
     /**
      * @param boolean $isActive
-     * @return Page
+     * @return MainMenu
      */
     public function setIsActive($isActive)
     {

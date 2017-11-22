@@ -23,7 +23,7 @@ services:
         arguments:
              - ~
              - AppBundle\Entity\FrameMaterial
-             - 'SonataAdminBundle:CRUD'
+             - 'AppBundle:Admin\FrameMaterialAdmin'
     app.admin.mat:
         class: AppBundle\Admin\MatAdmin
         tags:
@@ -39,6 +39,14 @@ services:
         arguments:
             - ~
             - AppBundle\Entity\Page
+            - 'SonataAdminBundle:CRUD'
+    app.admin.mainmenu:
+        class: AppBundle\Admin\MainMenuAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Главное меню", show_in_dashboard: true }
+        arguments:
+            - ~
+            - AppBundle\Entity\MainMenu
             - 'SonataAdminBundle:CRUD'
     app.admin.call:
         class: AppBundle\Admin\CallAdmin
@@ -82,6 +90,14 @@ services:
             - ~
             - AppBundle\Entity\Author
             - 'SonataAdminBundle:CRUD'
+#    app.admin.settings:
+#        class: AppBundle\Admin\SettingsAdmin
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Настройки сайта", show_in_dashboard: true }
+#        arguments:
+#            - ~
+#            - AppBundle\Entity\Settings
+#            - 'AppBundleAdmin:SettingsAdmin'
 #    app.admin.category:
 #        class: AppBundle\Admin\CategoryAdmin
 #        tags:

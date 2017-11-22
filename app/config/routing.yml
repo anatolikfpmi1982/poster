@@ -35,3 +35,7 @@ _sonata_admin:
     resource: .
     type: sonata_admin
     prefix: /admin
+
+sonata_admin_settings:
+    pattern:  /admin/settings
+    defaults: { _controller: AppBundle:Admin:settings }

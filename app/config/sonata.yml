@@ -12,27 +12,17 @@ sonata_block:
 sonata_user:
   #security_acl: true # Uncomment for ACL support
   manager_type: orm # can be orm or mongodb
-   
-
-fos_user:
-#  db_driver:  orm # can be orm or odm
-  firewall_name:  main
-  user_class:  Sonata\UserBundle\Entity\BaseUser
-
-  group:
-    group_class:  Sonata\UserBundle\Entity\BaseGroup
-    group_manager: sonata.user.orm.group_manager  
-
-  service:
-    user_manager: sonata.user.orm.user_manager
+#  class:
+#      user: AppBundle\Entity\User
+#      group: AppBundle\Entity\Group
 
 sonata_classification:
     class:
-        tag:          Application\Sonata\ClassificationBundle\Entity\Tag
-        category:     Application\Sonata\ClassificationBundle\Entity\Category
-        collection:   Application\Sonata\ClassificationBundle\Entity\Collection
-        media:        Application\Sonata\MediaBundle\Entity\Media
-        context:      Application\Sonata\ClassificationBundle\Entity\Context
+        tag:          AppBundle\Entity\Tag
+        category:     AppBundle\Entity\Category
+        collection:   AppBundle\Entity\Collection
+        #media:        Application\Sonata\MediaBundle\Entity\Media
+        context:      AppBundle\Entity\Context
 
     admin:
         tag:
@@ -72,3 +62,6 @@ sonata_admin:
 
         # permission related to the objects
         object_permissions: [VIEW, EDIT, DELETE, UNDELETE, OPERATOR, MASTER, OWNER]
+
+    templates:
+        layout: AppBundle::Admin\standard_layout.html.twig

@@ -57,22 +57,33 @@ class FrameMaterialAdmin extends AbstractAdmin
         ;
     }
 
-    public function getBatchActions()
-    {
-        $actions = parent::getBatchActions();
-
-        var_dump('dfsfsd!!!!!!!!!!!!222222!');
-        if ($this->hasRoute('edit')) {
-            var_dump('dfsfsd!!!!!!!!!!!!!');
-
-            $actions['test'] = array(
-                'label'            => 'Test',
-                'ask_confirmation' => false
-            );
-        }
-
-        return $actions;
-    }
+//    public function getBatchActions()
+//    {
+//        $actions = parent::getBatchActions();
+//
+//        if ($this->hasRoute('edit')) {
+//
+//            $actions['test'] = array(
+//                'label'            => 'Test',
+//                'ask_confirmation' => false
+//            );
+//        }
+//
+//        return $actions;
+//    }
+//
+//    public function getTemplate($name)
+//    {
+//        switch ($name) {
+//            case 'list':
+//                return 'AppBundle:FrameMaterial:list.html.twig';
+//                break;
+//
+//            default:
+//                return parent::getTemplate($name);
+//                break;
+//        }
+//    }
 
     /**
      * @param mixed $material
