@@ -21,7 +21,7 @@ sonata_classification:
         tag:          AppBundle\Entity\Tag
         category:     AppBundle\Entity\Category
         collection:   AppBundle\Entity\Collection
-        #media:        Application\Sonata\MediaBundle\Entity\Media
+        media:        AppBundle\Entity\Media
         context:      AppBundle\Entity\Context
 
     admin:
