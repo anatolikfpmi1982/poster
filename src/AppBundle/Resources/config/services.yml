@@ -22,6 +22,11 @@ services:
         arguments:
             - '@doctrine.orm.entity_manager'
 
+    blocks.service:
+        class: AppBundle\Service\BlocksService
+        arguments:
+            - '@doctrine.orm.entity_manager'
+
     app.twig_pictures_extension:
         class: AppBundle\Twig\PicturesExtension
         arguments:
