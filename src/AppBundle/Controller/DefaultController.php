@@ -18,7 +18,7 @@ class DefaultController extends FrontController {
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction( Request $request ) {
-        $this->blocks = [ 'CategoryMenu' => 1, 'Popular' => 2 ];
+        $this->blocks = [ 'CategoryMenu' => 1, 'Popular' => 2 , 'MainMenu' => 3 ];
         $this->doBlocks();
         // replace this example code with whatever you need
         return $this->render( 'AppBundle:Main:index.html.twig', $this->data );

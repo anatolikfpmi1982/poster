@@ -18,7 +18,7 @@ class CategoriesController extends Controller
     {
         $em = $this->get('doctrine.orm.entity_manager');
 
-        $category = $em->getRepository('AppBundle:Category')->findOneBySlug($slug);
+        $category = $em->getRepository('AppBundle:Category3')->findOneBySlug($slug);
         $category->count = count($category->getPictures());
 
         $queryBuilder = $em->getRepository('AppBundle:Picture')->getActivePicturesFromCategory($category->getId());

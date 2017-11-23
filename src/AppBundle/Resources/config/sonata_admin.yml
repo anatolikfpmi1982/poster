@@ -90,6 +90,15 @@ services:
             - ~
             - AppBundle\Entity\Author
             - 'SonataAdminBundle:CRUD'
+#    app.admin.category2:
+#            class: Sonata\ClassificationBundle\Admin\CategoryAdmin
+#            tags:
+#                - { name: sonata.admin, manager_type: orm, group: "XXX", label: "Категории", show_in_dashboard: true }
+#            arguments:
+#                - ~
+#                - AppBundle\Entity\Category
+#                - 'SonataClassificationBundle:CategoryAdmin'
+#                - '@sonata.classification.manager.context'
 #    app.admin.settings:
 #        class: AppBundle\Admin\SettingsAdmin
 #        tags:
@@ -98,15 +107,15 @@ services:
 #            - ~
 #            - AppBundle\Entity\Settings
 #            - 'AppBundleAdmin:SettingsAdmin'
-#    app.admin.category:
-#        class: AppBundle\Admin\CategoryAdmin
-#        tags:
-#            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Категории", show_in_dashboard: true }
-#        arguments:
-#            - ~
-#            - AppBundle\Entity\Category
-#            - 'SonataAdminBundle:CRUD'
-#            - '@doctrine.orm.entity_manager'
+    app.admin.category3:
+        class: AppBundle\Admin\CategoryNewAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Категории", show_in_dashboard: true }
+        arguments:
+            - ~
+            - AppBundle\Entity\Category3
+            - 'SonataAdminBundle:CRUD'
+            - '@doctrine.orm.entity_manager'
     app.admin.image:
         class: AppBundle\Admin\ImageAdmin
         tags:

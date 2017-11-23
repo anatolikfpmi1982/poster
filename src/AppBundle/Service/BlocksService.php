@@ -2,6 +2,7 @@
 namespace AppBundle\Service;
 
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class BlocksService
 {
@@ -11,26 +12,55 @@ class BlocksService
     protected $em;
 
     /**
+     * @var ContainerInterface
+     */
+    protected $container;
+
+    /**
      * BlocksService constructor.
      * @param EntityManager $em
      */
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManager $em, ContainerInterface $container)
     {
         $this->em = $em;
+        $this->container = $container;
     }
 
     public function getPopularBlock() {
         return $this->em->getRepository( 'AppBundle:Review' )->getLatestReviews();
     }
 
+    public function getMainMenuBlock() {
+        return $this->em->getRepository('AppBundle:MainMenu')->findBy([], ['weight' => 'ASC']);
+    }
 
-//    public function getFrames()
+    /**
+    * @return array
+    */
+    public function getCategoriesBlock()
+    {
+        $categories = $this->em->getRepository('AppBundle:Category3')->getRoot();
+
+        return $categories;
+    }
+
+//    /**
+//     * @return array
+//     */
+//    public function getCategoriesBlock()
 //    {
-//        return  $this->em->getRepository('AppBundle:Frame')->findBy(['isActive' => true]);
-//    }
+//        $categoryManager = $this->container->get('sonata.classification.manager.category');
+//        $currentContext = false;
 //
-//    public function getSizes()
-//    {
-//        return  $this->em->getRepository('AppBundle:PictureSize')->findBy(['isActive' => true]);
+//        // all root categories.
+//        $rootCategoriesSplitByContexts = $categoryManager->getRootCategoriesSplitByContexts(false);
+//
+//        $currentCategories = current($rootCategoriesSplitByContexts)[0]->getChildren();
+//
+//        return $currentCategories;
+//    }
+
+//    private function generateTree($cats) {
+//        return $cats;
 //    }
 }

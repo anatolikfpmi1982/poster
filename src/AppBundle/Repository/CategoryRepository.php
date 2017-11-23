@@ -10,4 +10,13 @@ namespace AppBundle\Repository;
  */
 class CategoryRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getRoot() {
+        return $this->createQueryBuilder( 'category' )
+            ->where( 'category.isActive = :status' )
+            ->andWhere('category.parent_category IS NULL')
+            ->orderBy( 'category.id', 'DESC' )
+            ->setParameter( 'status', true )
+            ->getQuery()
+            ->getResult();
+    }
 }

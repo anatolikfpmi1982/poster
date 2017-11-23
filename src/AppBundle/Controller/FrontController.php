@@ -37,7 +37,7 @@ class FrontController extends Controller {
      * @return array
      */
     protected function getCategoryMenuBlock() {
-        return [ ];
+        return $this->get( 'blocks.service' )->getCategoriesBlock();
     }
 
     /**
@@ -48,4 +48,10 @@ class FrontController extends Controller {
         return $this->get( 'doctrine.orm.entity_manager' )->getRepository( 'AppBundle:Review' )->getLatestReviews();
     }
 
+    /**
+     * @return array
+     */
+    protected function getMainMenuBlock() {
+        return $this->get( 'blocks.service' )->getMainMenuBlock();
+    }
 }
