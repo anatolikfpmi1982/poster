@@ -26,6 +26,7 @@ services:
         class: AppBundle\Service\BlocksService
         arguments:
             - '@doctrine.orm.entity_manager'
+            - '@service_container'
 
     app.twig_pictures_extension:
         class: AppBundle\Twig\PicturesExtension

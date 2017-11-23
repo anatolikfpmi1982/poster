@@ -116,8 +116,8 @@ class Picture implements ImageInterface
      * Many Pictures have Many Categories.
      *
      * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="\AppBundle\Entity\Category", inversedBy="pictures", fetch="EXTRA_LAZY", cascade={"persist"})
-     * @ORM\JoinTable(name="pictures2_categories")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Category3", inversedBy="pictures", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinTable(name="pictures3_categories")
      */
     private $categories;
 

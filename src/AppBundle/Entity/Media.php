@@ -12,7 +12,7 @@ use JMS\Serializer\Annotation as JMS;
  * @ORM\Table(name="classification__media")
  * @ORM\Entity(repositoryClass="Doctrine\ORM\EntityRepository")
  */
-class Media
+class Media implements MediaInterface
 {
     /**
      * @var int

@@ -3,4 +3,5 @@ define(function (require, exports, module) {
     require('validate');
     require('validate/localization');
     require('bootstrap');
+    require('cycle2');
 });
