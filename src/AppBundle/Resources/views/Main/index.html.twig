@@ -4,12 +4,28 @@
 
 {% block body %}
     <div class="row az-page-main-section-div">
-        Slider
+        <div class="cycle-slideshow"
+             data-cycle-fx=scrollHorz
+             data-cycle-timeout=2000
+             data-cycle-overlay-template="<span class=left>&nbsp;<br>{{ '{{' }} slideNum {{ '}}' }} / {{ '{{' }} slideCount {{ '}}' }}</span>{{ '{{' }} date {{ '}}' }} - {{ '{{' }} title {{ '}}' }}<br>{{ '{{' }} desc {{ '}}' }}"
+        >
+            <!-- empty element for overlay -->
+            <div class="cycle-overlay custom"></div>
+
+            <img src="http://malsup.github.io/images/p1.jpg" data-date="May, 2012" data-title="Sonnenberg Gardens" data-cycle-desc="Sonnenberg Gardens">
+            <img src="http://malsup.github.io/images/p2.jpg" data-date="June, 2012" data-title="Redwoods" data-cycle-desc="Muir Woods National Monument">
+            <img src="http://malsup.github.io/images/p3.jpg" data-date="June, 2012" data-title="Angel Island" data-cycle-desc="San Franscisco Bay">
+            <img src="http://malsup.github.io/images/p4.jpg" data-date="July, 2012" data-title="Raquette Lake" data-cycle-desc="Adirondack State Park">
+        </div>
     </div>
 
     <div class="row az-page-main-section-div container-fluid">
         <div class="row az-page-section-header az-page-main-description-header">Мы предлагаем</div>
-        <div class="row az-page-section-body az-page-main-description">Описание 1</div>
+        <div class="row az-page-section-body az-page-main-description">Лучший сайт картин, постеров и фотообоев на заказ! В нашей базе более 90.000 уникальных изображений для
+            подбора картины вашего интерьера. Для Вас удобный выбор по темам картин любого размера. К нас Вы можете так же выбрать любую раму и паспарту к нужному изображению в
+            нашем каталоге или загрузить свое. Есть возможность заказать роспись по аналогу, а также осуществить заказ картины или портрета по фото. Работаем как с юридическими
+            так и с физическими лицами. И еще мы очень любим то , что делаем и постараемся Вас порадовать.
+        </div>
     </div>
 
     <div class="row az-page-main-section-div container-fluid">
