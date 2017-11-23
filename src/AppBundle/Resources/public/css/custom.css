@@ -1,6 +1,7 @@
 body {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #eeeeee;
 }
 
 .navbar {
@@ -8,9 +9,13 @@ body {
 }
 
 .az-header-top {
-    padding: 20px 0 0 30px;
+    padding: 20px 0 30px 30px;
 }
 
+.az-logo-title-text-div {
+    margin: -20px 0 0 80px;
+    font-size: 10px;
+}
 .az-header-top-last {
     padding: 20px 0 0 0;
 }
@@ -25,6 +30,8 @@ body {
     background-color: #cc262c;
 }
 
+
+/** header contacts**/
 .az-header-address-div {
     padding-left: 25px;
 }
@@ -35,8 +42,74 @@ body {
 
 .az-header-address-container {
     line-height: 24px;
+    font-weight: 600;
 }
 
+.az-header-phone-number {
+    color: #cc262c;
+}
+
+.az-header-phone-number-bold {
+    font-size: 18px;
+
+}
+
+/** basket**/
+
+.az-header-basket-count-text {
+    color: #b4b4b4;
+    font-size: 13px;
+}
+
+
+/**search**/
+
+
+.btn-default{
+
+    background-color: #cc262c;
+    background-image: none !important;
+    border:  1px solid #cc262c;
+}
 .az-header-feedback-btn-div {
     margin-top: 10px;
+}
+
+.az-sidebar {
+    margin: 10px 0 10px;
+    background-color: #FFFFFF;
+}
+
+.az-sidebar-popular-item-header {
+    color: white;
+    background-color: #cc262c;
+    padding: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.az-sidebar-popular-item {
+    margin: 10px;
+}
+
+.az-review-block-img {
+    margin: 0 10px 0 10px;
+}
+
+.az-page-main-section-div {
+    margin: 10px;
+    padding: 10px;
+    background-color: #FFFFFF;
+}
+
+.az-page-section-header {
+    margin: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #333333;
+}
+
+.az-page-section-body {
+    margin: 10px;
+    color: #333333;
 }
