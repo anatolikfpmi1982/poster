@@ -38,6 +38,7 @@ class ImageManagement
 SELECT id, filename, created_at, updated_at
 FROM images
 WHERE id NOT IN (SELECT DISTINCT image_id FROM frames_images)
+AND id NOT IN (SELECT DISTINCT image_id FROM slider)
 AND id NOT IN (SELECT DISTINCT image_id FROM pictures)', $rsm);
 
         $images = $query->getResult();

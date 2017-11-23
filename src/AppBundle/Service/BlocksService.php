@@ -44,6 +44,22 @@ class BlocksService
         return $categories;
     }
 
+    /**
+     * @return array
+     */
+    public function getLastVisitedItems()
+    {
+        return $this->container->get('session')->get('lastVisited');
+    }
+
+    /**
+     * @return array
+     */
+    public function getSliderItems()
+    {
+        return $this->em->getRepository('AppBundle:SliderItems')->findBy([], ['weight' => 'ASC']);
+    }
+
 //    /**
 //     * @return array
 //     */

@@ -4,12 +4,10 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-//use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Entity\ImageInterface;
-//use Application\Sonata\ClassificationBundle\Entity\Category;
 
 /**
  * Page
@@ -35,13 +33,6 @@ class Picture implements ImageInterface
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="name", type="string", nullable=true)
-//     */
-//    private $name;
 
     /**
      * @var string
@@ -173,25 +164,6 @@ class Picture implements ImageInterface
     {
         return $this->title;
     }
-
-//    /**
-//     * @param string $name
-//     * @return Picture
-//     */
-//    public function setName($name)
-//    {
-//        $this->name = $name;
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * @return string
-//     */
-//    public function getName()
-//    {
-//        return $this->name;
-//    }
 
     /**
      * Set body
