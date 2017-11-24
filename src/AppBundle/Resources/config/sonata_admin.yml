@@ -19,11 +19,19 @@ services:
     app.admin.framematerial:
         class: AppBundle\Admin\FrameMaterialAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Рамки", label: "Материал рамки", show_in_dashboard: true}
+            - { name: sonata.admin, manager_type: orm, group: "Материалы", label: "Материал рамки", show_in_dashboard: true}
         arguments:
              - ~
              - AppBundle\Entity\FrameMaterial
-             - 'AppBundle:Admin\FrameMaterialAdmin'
+             - 'SonataAdminBundle:CRUD'
+    app.admin.bannermaterial:
+        class: AppBundle\Admin\BannerMaterialAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Материалы", label: "Материал баннера", show_in_dashboard: true}
+        arguments:
+             - ~
+             - AppBundle\Entity\BannerMaterial
+             - 'SonataAdminBundle:CRUD'
     app.admin.mat:
         class: AppBundle\Admin\MatAdmin
         tags:

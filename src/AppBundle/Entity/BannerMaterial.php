@@ -11,13 +11,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Frame Material
  *
- * @ORM\Table(name="frame_materials")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\FrameMaterialRepository")
+ * @ORM\Table(name="banner_materials")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\BannerMaterialRepository")
  */
-class FrameMaterial
+class BannerMaterial
 {
     /** class name */
-    const JSON_NAME = 'frame_material';
+    const JSON_NAME = 'banner_material';
 
     /**
      * @var int
@@ -201,7 +201,7 @@ class FrameMaterial
      *
      * @param float $ratio
      *
-     * @return FrameMaterial
+     * @return BannerMaterial
      */
     public function setRatio($ratio)
     {
@@ -225,7 +225,7 @@ class FrameMaterial
      *
      * @param float $minArea
      *
-     * @return FrameMaterial
+     * @return BannerMaterial
      */
     public function setMinArea($minArea)
     {
@@ -249,7 +249,7 @@ class FrameMaterial
      *
      * @param float $maxArea
      *
-     * @return FrameMaterial
+     * @return BannerMaterial
      */
     public function setMaxArea($maxArea)
     {
@@ -273,7 +273,7 @@ class FrameMaterial
      *
      * @param float $minPrice
      *
-     * @return FrameMaterial
+     * @return BannerMaterial
      */
     public function setMinPrice($minPrice)
     {
@@ -297,7 +297,7 @@ class FrameMaterial
      *
      * @param float $maxPrice
      *
-     * @return FrameMaterial
+     * @return BannerMaterial
      */
     public function setMaxPrice($maxPrice)
     {
