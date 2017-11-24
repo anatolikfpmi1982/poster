@@ -16,6 +16,7 @@ body {
     margin: -20px 0 0 80px;
     font-size: 10px;
 }
+
 .az-header-top-last {
     padding: 20px 0 0 0;
 }
@@ -29,7 +30,6 @@ body {
     color: white;
     background-color: #cc262c;
 }
-
 
 /** header contacts**/
 .az-header-address-div {
@@ -61,48 +61,14 @@ body {
     font-size: 13px;
 }
 
-
 /**search**/
-.input-group-btn{
-    border-radius: 4px;
-}
 
-.btn-default{
+.btn-default {
 
     background-color: #cc262c;
     background-image: none !important;
-    border:  1px solid #cc262c;
-    color: #ffffff !important;
-    text-shadow: none !important;
-
+    border: 1px solid #cc262c;
 }
-
-
-
-/**menu**/
-
-.navbar-brand, .navbar-nav > li > a{
-    color: #000000 !important;
-    text-shadow: none;
-    font-size: 16px;
-
-}
-
-.navbar-nav > li:active {
-    color: #cc262c;
-
-}
-
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > li > a:hover
-{
-    background-image: none;
-    color: #cc262c !important;
-    box-shadow: none !important;
-    background-color: #f8f8f8 !important;
-
-}
-
-
 
 .az-header-feedback-btn-div {
     margin-top: 10px;
@@ -145,4 +111,12 @@ body {
 .az-page-section-body {
     margin: 10px;
     color: #333333;
+}
+
+.az-main-popular-item-img {
+    width: 200px;
+}
+
+.az-logo-footer-img {
+    width: 200px;
 }
