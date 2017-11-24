@@ -3,14 +3,12 @@ namespace AppBundle\Admin;
 
 use AppBundle\Entity\Underframe;
 use AppBundle\Entity\Image;
-use Doctrine\ORM\EntityManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use AppBundle\Service\ImageManagement;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 
 /**
  * Admin class for underframe
@@ -90,14 +88,14 @@ class UnderframeAdmin extends AbstractAdmin
     }
 
     /**
-     * @param mixed $underframe
+     * @param mixed $moduleType
      */
-    public function prePersist($underframe)
+    public function prePersist($moduleType)
     {
-        if($underframe instanceof Underframe) {
-            $underframe->setCreatedAt(new \DateTime());
-            $underframe->setUpdatedAt(new \DateTime());
-            $this->manageEmbeddedImageAdmins($underframe);
+        if($moduleType instanceof Underframe) {
+            $moduleType->setCreatedAt(new \DateTime());
+            $moduleType->setUpdatedAt(new \DateTime());
+            $this->manageEmbeddedImageAdmins($moduleType);
         }
     }
 

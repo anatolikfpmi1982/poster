@@ -1,21 +1,18 @@
 <?php
 namespace AppBundle\Admin;
 
-use AppBundle\Entity\Frame;
+use AppBundle\Entity\ModuleType;
 use AppBundle\Entity\Image;
-use Doctrine\ORM\EntityManager;
-use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use AppBundle\Service\ImageManagement;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 
 /**
- * Admin class for frame
+ * Admin class for module type
  */
-class FrameAdmin extends AbstractAdmin
+class ModuleTypeAdmin extends AbstractAdmin
 {
     /**
      * @var ImageManagement
@@ -47,29 +44,10 @@ class FrameAdmin extends AbstractAdmin
     {
         $formMapper
             ->with('Main')
-            ->add('title', null, ['required' => true, 'label' => 'Артикул'])
-            ->add('description', CKEditorType::class, ['required' => false, 'label' => 'Описание'])
-            ->add('height', null, ['required' => false, 'label' => 'Высота'])
-            ->add('width', null, ['required' => false, 'label' => 'Ширина'])
+            ->add('name', null, ['required' => true, 'label' => 'Название'])
             ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент'])
-            ->add('useRatio', null, ['required' => false, 'label' => 'Использовать коэффициент'])
-//            ->add('color', 'choices', array('label' => 'Цвет',
-//                'choices' => ['Status1' => 'Alias1', 'Status2' => 'Alias2']))
-            ->add('color', null, array('label' => 'Цвет'))
-            ->add('material', null, array('label' => 'Материал'))
+            ->add('serviceName', null, ['required' => true, 'label' => 'Сервисное имя (не изменять без необходимости)'])
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
-            ->add('images', 'sonata_type_collection', array(
-                'by_reference' => true,
-                'label' => 'Изображения',
-                'type_options' => array('delete' => true),
-                'cascade_validation' => true,
-                'btn_add' => 'Добавить изображение',
-                'required' => false
-            ),
-                array(
-                    'edit' => 'inline',
-                    'inline' => 'table'
-                ))
             ->end();
     }
 
@@ -79,14 +57,10 @@ class FrameAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id', null, ['required' => true, 'label' => 'ID'])
-            ->add('images', null,
-                ['required' => true, 'label' => 'Изображение', 'template' => 'AppBundle:Admin:frame_list_image.html.twig'])
-            ->add('title', null, ['editable'=> true, 'required' => true, 'label' => 'Артикул'])
-            ->add('height', null, ['editable' => true, 'required' => true, 'label' => 'Высота'])
-            ->add('width', null, ['editable' => true, 'required' => true, 'label' => 'Ширина'])
-            ->add('color', null, ['editable' => true, 'required' => true, 'label' => 'Цвет'])
-            ->add('material', null, ['editable' => true, 'required' => true, 'label' => 'Материал'])
+//            ->add('images', null,
+//                ['required' => true, 'label' => 'Изображение', 'template' => 'AppBundle:Admin:frame_list_image.html.twig'])
+            ->add('name', null, ['editable'=> true, 'label' => 'Название'])
+            ->add('ratio', null, ['editable' => true, 'label' => 'Коэффициент'])
 //            ->add('createdAt', null, ['label' => 'Создано'])
 //            ->add('updatedAt', null, ['label' => 'Обновлено'])
             ->add('isActive', null, ['editable' => true, 'label' => 'Показывать'])
@@ -108,11 +82,7 @@ class FrameAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, ['label' => 'Артикул'])
-            ->add('width', null, ['label' => 'Ширина'])
-            ->add('height', null, ['label' => 'Высота'])
-            ->add('color', null, ['label' => 'Цвет'])
-            ->add('material', null, ['label' => 'Материал'])
+            ->add('name', null, ['label' => 'Название'])
             ->add('isActive', null, ['label' => 'Показывать'])
         ;
     }
@@ -122,7 +92,7 @@ class FrameAdmin extends AbstractAdmin
      */
     public function prePersist($moduleType)
     {
-        if($moduleType instanceof Frame) {
+        if($moduleType instanceof ModuleType) {
             $moduleType->setCreatedAt(new \DateTime());
             $moduleType->setUpdatedAt(new \DateTime());
             $this->manageEmbeddedImageAdmins($moduleType);
@@ -134,7 +104,7 @@ class FrameAdmin extends AbstractAdmin
      */
     public function preUpdate($moduleType)
     {
-        if($moduleType instanceof Frame) {
+        if($moduleType instanceof ModuleType) {
             $moduleType->setUpdatedAt(new \DateTime());
             $this->manageEmbeddedImageAdmins($moduleType);
         }
@@ -145,7 +115,7 @@ class FrameAdmin extends AbstractAdmin
      */
     public function postUpdate($moduleType)
     {
-        if($moduleType instanceof Frame) {
+        if($moduleType instanceof ModuleType) {
             $this->imageManagement->cleanGarbageImages();
         }
     }
@@ -154,15 +124,15 @@ class FrameAdmin extends AbstractAdmin
      * @param mixed $moduleType
      */
     public function preRemove($moduleType){
-        if($moduleType instanceof Frame) {
+        if($moduleType instanceof ModuleType) {
             $this->imageManagement->deleteImages($moduleType->getImages());
         }
     }
 
     /**
-     * @param Frame $frame
+     * @param ModuleType $moduleType
      */
-    private function manageEmbeddedImageAdmins(Frame $frame)
+    private function manageEmbeddedImageAdmins(ModuleType $moduleType)
     {
         // Cycle through each field
         foreach ($this->getFormFieldDescriptions() as $fieldName => $fieldDescription) {
@@ -176,7 +146,7 @@ class FrameAdmin extends AbstractAdmin
                 $setter = 'set'.$fieldName;
 
                 /** @var ArrayCollection $image */
-                $images = $frame->$getter();
+                $images = $moduleType->$getter();
 
                 if (count($images)>0) {
                     foreach($images as $image) {
@@ -185,10 +155,10 @@ class FrameAdmin extends AbstractAdmin
                             // update the Image to trigger file management
                             $image->refreshUpdated()
                                 ->setCreatedAt(new \DateTime())
-                                ->setEntityName($frame::IMAGE_PATH);
+                                ->setEntityName($moduleType::IMAGE_PATH);
                         } elseif (!$image->getFile() && !$image->getFilename()) {
                             // prevent Sf/Sonata trying to create and persist an empty Image
-                            $frame->$setter(null);
+                            $moduleType->$setter(null);
                         }
                     }
 

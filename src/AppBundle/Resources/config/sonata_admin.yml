@@ -17,10 +17,19 @@ services:
              - AppBundle\Entity\Underframe
              - 'SonataAdminBundle:CRUD'
              - '@app.image_manager'
+    app.admin.moduletype:
+        class: AppBundle\Admin\ModuleTypeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Картины", label: "Модульность", show_in_dashboard: true}
+        arguments:
+             - ~
+             - AppBundle\Entity\ModuleType
+             - 'SonataAdminBundle:CRUD'
+             - '@app.image_manager'
     app.admin.framecolor:
         class: AppBundle\Admin\FrameColorAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Рамы", label: "Цвет рамки", show_in_dashboard: true}
+            - { name: sonata.admin, manager_type: orm, group: "Рамы", label: "Цвет рамы", show_in_dashboard: true}
         arguments:
              - ~
              - AppBundle\Entity\FrameColor
@@ -28,7 +37,7 @@ services:
     app.admin.framematerial:
         class: AppBundle\Admin\FrameMaterialAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Материалы", label: "Материал рамки", show_in_dashboard: true}
+            - { name: sonata.admin, manager_type: orm, group: "Материалы", label: "Материал рамы", show_in_dashboard: true}
         arguments:
              - ~
              - AppBundle\Entity\FrameMaterial
