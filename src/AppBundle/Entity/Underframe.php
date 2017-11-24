@@ -1,7 +1,6 @@
 <?php
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
@@ -62,6 +61,13 @@ class Underframe implements ImageInterface
      * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
+
+    /**
+     * @var Image
+     * @ORM\OneToOne(targetEntity="Image", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     */
+    private $image;
 
     /**
      * @var boolean
@@ -227,5 +233,29 @@ class Underframe implements ImageInterface
     public function getRatio()
     {
         return $this->ratio;
+    }
+
+    /**
+     * Set image
+     *
+     * @param Image $image
+     *
+     * @return Underframe
+     */
+    public function setImage(Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return Image
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

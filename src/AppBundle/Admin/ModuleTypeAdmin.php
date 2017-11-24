@@ -44,6 +44,7 @@ class ModuleTypeAdmin extends AbstractAdmin
     {
         $formMapper
             ->with('Main')
+            ->add('image', 'sonata_type_admin', ['required' => false, 'label' => 'Изображение'])
             ->add('name', null, ['required' => true, 'label' => 'Название'])
             ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент'])
             ->add('serviceName', null, ['required' => true, 'label' => 'Сервисное имя (не изменять без необходимости)'])
@@ -57,8 +58,8 @@ class ModuleTypeAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-//            ->add('images', null,
-//                ['required' => true, 'label' => 'Изображение', 'template' => 'AppBundle:Admin:frame_list_image.html.twig'])
+            ->add('image', null,
+                ['label' => 'Изображение', 'template' => 'AppBundle:Admin:module_type_list_image.html.twig'])
             ->add('name', null, ['editable'=> true, 'label' => 'Название'])
             ->add('ratio', null, ['editable' => true, 'label' => 'Коэффициент'])
 //            ->add('createdAt', null, ['label' => 'Создано'])
@@ -145,23 +146,19 @@ class ModuleTypeAdmin extends AbstractAdmin
                 $getter = 'get'.$fieldName;
                 $setter = 'set'.$fieldName;
 
-                /** @var ArrayCollection $image */
-                $images = $moduleType->$getter();
+                /** @var Image $image */
+                $image = $moduleType->$getter();
 
-                if (count($images)>0) {
-                    foreach($images as $image) {
-                        /** @var Image $image */;
-                        if ($image->getFile()) {
-                            // update the Image to trigger file management
-                            $image->refreshUpdated()
-                                ->setCreatedAt(new \DateTime())
-                                ->setEntityName($moduleType::IMAGE_PATH);
-                        } elseif (!$image->getFile() && !$image->getFilename()) {
-                            // prevent Sf/Sonata trying to create and persist an empty Image
-                            $moduleType->$setter(null);
-                        }
+                if ($image) {
+                    if ($image->getFile()) {
+                        // update the Image to trigger file management
+                        $image->refreshUpdated()
+                            ->setCreatedAt(new \DateTime())
+                            ->setEntityName($moduleType::IMAGE_PATH);
+                    } elseif (!$image->getFile() && !$image->getFilename()) {
+                        // prevent Sf/Sonata trying to create and persist an empty Image
+                        $moduleType->$setter(null);
                     }
-
                 }
             }
         }

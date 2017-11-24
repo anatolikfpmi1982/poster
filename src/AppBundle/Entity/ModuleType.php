@@ -13,10 +13,15 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="module_types")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ModuleTypeRepository")
  */
-class ModuleType
+class ModuleType implements ImageInterface
 {
     /** class name */
     const JSON_NAME = 'module_type';
+
+    /**
+     * Image sub folder
+     */
+    const IMAGE_PATH = 'module_types';
 
     /**
      * @var int
@@ -47,6 +52,13 @@ class ModuleType
      * @ORM\Column(name="ratio", type="float", nullable=true)
      */
     private $ratio;
+
+    /**
+     * @var Image
+     * @ORM\OneToOne(targetEntity="Image", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     */
+    private $image;
 
     /**
      * @var \DateTime
@@ -228,5 +240,29 @@ class ModuleType
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \AppBundle\Entity\Image $image
+     *
+     * @return ModuleType
+     */
+    public function setImage(\AppBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \AppBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

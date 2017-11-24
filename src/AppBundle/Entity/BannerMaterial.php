@@ -14,10 +14,15 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="banner_materials")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\BannerMaterialRepository")
  */
-class BannerMaterial
+class BannerMaterial implements ImageInterface
 {
     /** class name */
     const JSON_NAME = 'banner_material';
+
+    /**
+     * Image sub folder
+     */
+    const IMAGE_PATH = 'banner_materials';
 
     /**
      * @var int
@@ -70,6 +75,13 @@ class BannerMaterial
      * @ORM\Column(name="max_price", type="float")
      */
     private $maxPrice;
+
+    /**
+     * @var Image
+     * @ORM\OneToOne(targetEntity="Image", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     */
+    private $image;
 
     /**
      * @var \DateTime
@@ -324,5 +336,29 @@ class BannerMaterial
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \AppBundle\Entity\Image $image
+     *
+     * @return BannerMaterial
+     */
+    public function setImage(\AppBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \AppBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

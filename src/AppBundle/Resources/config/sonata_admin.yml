@@ -42,6 +42,7 @@ services:
              - ~
              - AppBundle\Entity\FrameMaterial
              - 'SonataAdminBundle:CRUD'
+             - '@app.image_manager'
     app.admin.bannermaterial:
         class: AppBundle\Admin\BannerMaterialAdmin
         tags:
@@ -50,6 +51,7 @@ services:
              - ~
              - AppBundle\Entity\BannerMaterial
              - 'SonataAdminBundle:CRUD'
+             - '@app.image_manager'
     app.admin.mat:
         class: AppBundle\Admin\MatAdmin
         tags:

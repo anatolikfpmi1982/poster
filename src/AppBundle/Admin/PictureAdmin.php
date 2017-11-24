@@ -2,6 +2,7 @@
 
 namespace AppBundle\Admin;
 
+use AppBundle\Entity\Image;
 use AppBundle\Entity\Picture;
 use Doctrine\ORM\EntityManager;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -74,7 +75,7 @@ class PictureAdmin extends AbstractAdmin
         $listMapper
             ->add('id', null, ['required' => true, 'label' => 'ID'])
             ->add('image', null,
-                ['required' => true, 'label' => 'Изображение', 'template' => 'AppBundle:Admin:pictures_list_image.html.twig'])
+                ['label' => 'Изображение', 'template' => 'AppBundle:Admin:pictures_list_image.html.twig'])
 //            ->addIdentifier('code', null, ['required' => true, 'label' => 'Артикул'])
             ->add('title', null, ['required' => true, 'label' => 'Название', 'editable' => true])
             ->add('slug', null, ['required' => false, 'label' => 'Slug', 'editable' => true])

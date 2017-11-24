@@ -39,6 +39,10 @@ SELECT id, filename, created_at, updated_at
 FROM images
 WHERE id NOT IN (SELECT DISTINCT image_id FROM frames_images)
 AND id NOT IN (SELECT DISTINCT image_id FROM slider)
+AND id NOT IN (SELECT DISTINCT image_id FROM underframes)
+AND id NOT IN (SELECT DISTINCT image_id FROM frame_materials)
+AND id NOT IN (SELECT DISTINCT image_id FROM banner_materials)
+AND id NOT IN (SELECT DISTINCT image_id FROM module_types)
 AND id NOT IN (SELECT DISTINCT image_id FROM pictures)', $rsm);
 
         $images = $query->getResult();

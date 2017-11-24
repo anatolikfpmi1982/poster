@@ -3,7 +3,6 @@ namespace AppBundle\Admin;
 
 use AppBundle\Entity\Underframe;
 use AppBundle\Entity\Image;
-use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -45,6 +44,7 @@ class UnderframeAdmin extends AbstractAdmin
     {
         $formMapper
             ->with('Main')
+            ->add('image', 'sonata_type_admin', ['required' => false, 'label' => 'Изображение'])
             ->add('depth', null, ['required' => false, 'label' => 'Толщина'])
             ->add('price', null, ['required' => false, 'label' => 'Цена'])
             ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент'])
@@ -59,6 +59,8 @@ class UnderframeAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('id', null, ['label' => 'ID'])
+            ->add('image', null,
+                ['label' => 'Изображение', 'template' => 'AppBundle:Admin:underframes_list_image.html.twig'])
             ->add('depth', null, ['editable' => true, 'label' => 'Толщина'])
             ->add('price', null, ['editable' => true, 'label' => 'Цена'])
             ->add('ratio', null, ['editable' => true, 'label' => 'Коэффициент'])
@@ -88,14 +90,14 @@ class UnderframeAdmin extends AbstractAdmin
     }
 
     /**
-     * @param mixed $moduleType
+     * @param mixed $underframe
      */
-    public function prePersist($moduleType)
+    public function prePersist($underframe)
     {
-        if($moduleType instanceof Underframe) {
-            $moduleType->setCreatedAt(new \DateTime());
-            $moduleType->setUpdatedAt(new \DateTime());
-            $this->manageEmbeddedImageAdmins($moduleType);
+        if($underframe instanceof Underframe) {
+            $underframe->setCreatedAt(new \DateTime());
+            $underframe->setUpdatedAt(new \DateTime());
+            $this->manageEmbeddedImageAdmins($underframe);
         }
     }
 
@@ -136,7 +138,6 @@ class UnderframeAdmin extends AbstractAdmin
     {
         // Cycle through each field
         foreach ($this->getFormFieldDescriptions() as $fieldName => $fieldDescription) {
-
             // detect embedded Admins that manage Images
             if ($fieldDescription->getType() === 'sonata_type_collection' &&
                 ($associationMapping = $fieldDescription->getAssociationMapping()) &&
@@ -145,23 +146,19 @@ class UnderframeAdmin extends AbstractAdmin
                 $getter = 'get'.$fieldName;
                 $setter = 'set'.$fieldName;
 
-                /** @var ArrayCollection $image */
-                $images = $underframe->$getter();
+                /** @var Image $image */
+                $image = $underframe->$getter();
 
-                if (count($images)>0) {
-                    foreach($images as $image) {
-                        /** @var Image $image */;
-                        if ($image->getFile()) {
-                            // update the Image to trigger file management
-                            $image->refreshUpdated()
-                                ->setCreatedAt(new \DateTime())
-                                ->setEntityName($underframe::IMAGE_PATH);
-                        } elseif (!$image->getFile() && !$image->getFilename()) {
-                            // prevent Sf/Sonata trying to create and persist an empty Image
-                            $underframe->$setter(null);
-                        }
+                if ($image) {
+                    if ($image->getFile()) {
+                        // update the Image to trigger file management
+                        $image->refreshUpdated()
+                            ->setCreatedAt(new \DateTime())
+                            ->setEntityName($underframe::IMAGE_PATH);
+                    } elseif (!$image->getFile() && !$image->getFilename()) {
+                        // prevent Sf/Sonata trying to create and persist an empty Image
+                        $underframe->$setter(null);
                     }
-
                 }
             }
         }

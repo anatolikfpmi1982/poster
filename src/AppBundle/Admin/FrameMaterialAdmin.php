@@ -8,9 +8,33 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use AppBundle\Service\ImageManagement;
 
 class FrameMaterialAdmin extends AbstractAdmin
 {
+    /**
+     * @var ImageManagement
+     */
+    protected $imageManagement;
+
+    /**
+     * Constructor
+     *
+     * @param string $code
+     * @param string $class
+     * @param string $baseControllerName
+     * @param ImageManagement $imageManagement
+     */
+    public function __construct(
+        $code,
+        $class,
+        $baseControllerName,
+        ImageManagement $imageManagement
+    ) {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->imageManagement = $imageManagement;
+    }
+
     /**
      * @param FormMapper $formMapper
      */
@@ -19,6 +43,7 @@ class FrameMaterialAdmin extends AbstractAdmin
         $formMapper
             ->with('Main')
             ->add('title', null, ['required' => true, 'label' => 'Название'])
+            ->add('image', 'sonata_type_admin', ['required' => false, 'label' => 'Изображение'])
             ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент'])
             ->add('minArea', null, ['required' => false, 'label' => 'Минимальная площадь'])
             ->add('maxArea', null, ['required' => false, 'label' => 'Максимальная площадь'])
@@ -35,6 +60,8 @@ class FrameMaterialAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('id', null, ['label' => 'ID'])
+            ->add('image', null,
+                ['label' => 'Изображение', 'template' => 'AppBundle:Admin:frame_material_list_image.html.twig'])
             ->add('title', null, ['editable' => true, 'label' => 'Название'])
             ->add('ratio', null, ['editable' => true, 'label' => 'Коэффициент'])
             ->add('minArea', null, ['editable' => true, 'label' => 'Минимальная площадь'])
@@ -103,6 +130,7 @@ class FrameMaterialAdmin extends AbstractAdmin
         if($material instanceof FrameMaterial) {
             $material->setCreatedAt(new \DateTime());
             $material->setUpdatedAt(new \DateTime());
+            $this->manageEmbeddedImageAdmins($material);
         }
     }
 
@@ -113,6 +141,60 @@ class FrameMaterialAdmin extends AbstractAdmin
     {
         if($material instanceof FrameMaterial) {
             $material->setUpdatedAt(new \DateTime());
+            $this->manageEmbeddedImageAdmins($material);
+        }
+    }
+
+    /**
+     * @param mixed $material
+     */
+    public function postUpdate($material)
+    {
+        if($material instanceof FrameMaterial) {
+            $this->imageManagement->cleanGarbageImages();
+        }
+    }
+
+    /**
+     * @param mixed $material
+     */
+    public function preRemove($material){
+        if($material instanceof FrameMaterial) {
+            $this->imageManagement->deleteImages($material->getImages());
+        }
+    }
+
+    /**
+     * @param FrameMaterial $material
+     */
+    private function manageEmbeddedImageAdmins(FrameMaterial $material)
+    {
+        // Cycle through each field
+        foreach ($this->getFormFieldDescriptions() as $fieldName => $fieldDescription) {
+
+            // detect embedded Admins that manage Images
+            if ($fieldDescription->getType() === 'sonata_type_collection' &&
+                ($associationMapping = $fieldDescription->getAssociationMapping()) &&
+                $associationMapping['targetEntity'] === 'AppBundle\Entity\Image'
+            ) {
+                $getter = 'get'.$fieldName;
+                $setter = 'set'.$fieldName;
+
+                /** @var Image $image */
+                $image = $material->$getter();
+
+                if ($image) {
+                    if ($image->getFile()) {
+                        // update the Image to trigger file management
+                        $image->refreshUpdated()
+                            ->setCreatedAt(new \DateTime())
+                            ->setEntityName($material::IMAGE_PATH);
+                    } elseif (!$image->getFile() && !$image->getFilename()) {
+                        // prevent Sf/Sonata trying to create and persist an empty Image
+                        $material->$setter(null);
+                    }
+                }
+            }
         }
     }
 }

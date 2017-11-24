@@ -3,6 +3,7 @@
 namespace AppBundle\Admin;
 
 use AppBundle\Entity\SliderItem;
+use AppBundle\Entity\Image;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -57,7 +58,7 @@ class SliderAdmin extends AbstractAdmin
             ->add('text', null, ['required' => true, 'label' => 'Описание', 'editable' => true])
             ->add('title', null, ['required' => true, 'label' => 'Имя', 'editable' => true])
             ->add('link', null, ['required' => true, 'label' => 'Ссылка', 'editable' => true])
-            ->add('weight', null, ['required' => true, 'label' => 'Порядок', 'editable' => true])
+            ->add('weight', null, ['required' => true, 'label' => '', 'editable' => true])
             ->add('isActive', null, ['label' => 'Показывать', 'editable' => true])
             ->add(
                 '_action',
