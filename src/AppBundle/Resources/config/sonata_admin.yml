@@ -2,16 +2,25 @@ services:
     app.admin.frame:
         class: AppBundle\Admin\FrameAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Рамки", label: "Рамки", show_in_dashboard: true}
+            - { name: sonata.admin, manager_type: orm, group: "Рамы", label: "Рамы", show_in_dashboard: true}
         arguments:
              - ~
              - AppBundle\Entity\Frame
              - 'SonataAdminBundle:CRUD'
              - '@app.image_manager'
+    app.admin.underframe:
+        class: AppBundle\Admin\UnderframeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Рамы", label: "Подрамники", show_in_dashboard: true}
+        arguments:
+             - ~
+             - AppBundle\Entity\Underframe
+             - 'SonataAdminBundle:CRUD'
+             - '@app.image_manager'
     app.admin.framecolor:
         class: AppBundle\Admin\FrameColorAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Рамки", label: "Цвет рамки", show_in_dashboard: true}
+            - { name: sonata.admin, manager_type: orm, group: "Рамы", label: "Цвет рамки", show_in_dashboard: true}
         arguments:
              - ~
              - AppBundle\Entity\FrameColor

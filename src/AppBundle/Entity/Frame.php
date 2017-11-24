@@ -2,6 +2,7 @@
 namespace AppBundle\Entity;
 
 use AppBundle\Entity\FrameColor;
+use AppBundle\Entity\FrameMaterial;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -47,16 +48,29 @@ class Frame implements ImageInterface
     private $description;
 
     /**
-     * @var integer
-     * @ORM\Column(name="height", type="integer")
+     * @var float
+     * @ORM\Column(name="height", type="float")
      */
     private $height;
 
     /**
-     * @var integer
-     * @ORM\Column(name="width", type="integer")
+     * @var float
+     * @ORM\Column(name="width", type="float")
      */
     private $width;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="ratio", type="float")
+     */
+    private $ratio;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="use_ratio", type="boolean")
+     */
+    private $useRatio;
 
     /**
      * @var ArrayCollection
@@ -358,5 +372,62 @@ class Frame implements ImageInterface
 
         return $this;
     }
-}
 
+    /**
+     * Set ratio
+     *
+     * @param float $ratio
+     *
+     * @return Frame
+     */
+    public function setRatio($ratio)
+    {
+        $this->ratio = $ratio;
+
+        return $this;
+    }
+
+    /**
+     * Get ratio
+     *
+     * @return float
+     */
+    public function getRatio()
+    {
+        return $this->ratio;
+    }
+
+    /**
+     * Set useRatio
+     *
+     * @param boolean $useRatio
+     *
+     * @return Frame
+     */
+    public function setUseRatio($useRatio)
+    {
+        $this->useRatio = $useRatio;
+
+        return $this;
+    }
+
+    /**
+     * Get useRatio
+     *
+     * @return boolean
+     */
+    public function getUseRatio()
+    {
+        return $this->useRatio;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+}
