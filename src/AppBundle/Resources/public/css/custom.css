@@ -16,6 +16,7 @@ body {
     margin: -20px 0 0 80px;
     font-size: 10px;
 }
+
 .az-header-top-last {
     padding: 20px 0 0 0;
 }
@@ -29,7 +30,6 @@ body {
     color: white;
     background-color: #cc262c;
 }
-
 
 /** header contacts**/
 .az-header-address-div {
@@ -61,16 +61,15 @@ body {
     font-size: 13px;
 }
 
-
 /**search**/
 
-
-.btn-default{
+.btn-default {
 
     background-color: #cc262c;
     background-image: none !important;
-    border:  1px solid #cc262c;
+    border: 1px solid #cc262c;
 }
+
 .az-header-feedback-btn-div {
     margin-top: 10px;
 }
@@ -112,4 +111,12 @@ body {
 .az-page-section-body {
     margin: 10px;
     color: #333333;
+}
+
+.az-main-popular-item-img {
+    width: 200px;
+}
+
+.az-logo-footer-img {
+    width: 200px;
 }
