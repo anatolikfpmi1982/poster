@@ -5,7 +5,7 @@ body {
 }
 
 .navbar {
-    margin-bottom: 5px;
+    margin-bottom: 7px;
 }
 
 .az-header-top {
@@ -16,7 +16,6 @@ body {
     margin: -20px 0 0 80px;
     font-size: 10px;
 }
-
 .az-header-top-last {
     padding: 20px 0 0 0;
 }
@@ -30,6 +29,7 @@ body {
     color: white;
     background-color: #cc262c;
 }
+
 
 /** header contacts**/
 .az-header-address-div {
@@ -61,14 +61,48 @@ body {
     font-size: 13px;
 }
 
-/**search**/
 
-.btn-default {
+/**search**/
+.input-group-btn{
+    border-radius: 4px;
+}
+
+.btn-default{
 
     background-color: #cc262c;
     background-image: none !important;
-    border: 1px solid #cc262c;
+    border:  1px solid #cc262c;
+    color: #ffffff !important;
+    text-shadow: none !important;
+
 }
+
+
+
+/**menu**/
+
+.navbar-brand, .navbar-nav > li > a{
+    color: #000000 !important;
+    text-shadow: none;
+    font-size: 16px;
+
+}
+
+.navbar-nav > li:active {
+    color: #cc262c;
+
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > li > a:hover
+{
+    background-image: none;
+    color: #cc262c !important;
+    box-shadow: none !important;
+    background-color: #f8f8f8 !important;
+
+}
+
+
 
 .az-header-feedback-btn-div {
     margin-top: 10px;
@@ -112,10 +146,69 @@ body {
     margin: 10px;
     color: #333333;
 }
+.az-main-popular-item-img-div {
+    background-color: #eeeeee;
+}
 
 .az-main-popular-item-img {
-    width: 200px;
+    width: 65%;
 }
+.az-main-popular-item-header-type {
+    text-align: center;
+    font-size: 12px;
+    margin: 10px 0 20px 0;
+}
+.az-main-popular-item-header-category{
+    color: #cc262c;
+    text-transform: uppercase;
+    margin: 15px 0 10px 0;
+    text-align: center;
+    font-weight: 600;}
+
+.btn {
+    background-color: #cc262c;
+    color: #fffff;
+    padding: 5px 30px;
+}
+
+button, input, optgroup, select, textarea {
+    color: #ffffff;
+}
+/** footer**/
+footer {
+    background-color: #ffffff;
+    padding: 15px;
+}
+
+.az-logo-footer-img {
+    margin: 5px 0 10px 0;
+}
+
+.az-phone-footer-img {
+    padding: 10px 0;
+}
+
+/**mobile**/
+
+
+@media screen and (min-width:480px) and (max-width:800px) {
+
+    .az-header-top-last {
+        padding: 20px 30px 0 30px !important;}
+
+    .az-header-download-div{
+        float: left;}
+}
+
+
+@media screen and (max-width:479px){
+    .az-header-top-last {
+        padding: 20px 30px 0 30px !important;
+    }
+    .az-header-download-div{
+        float: left;}
+}
+
 
 .az-logo-footer-img {
     width: 200px;
