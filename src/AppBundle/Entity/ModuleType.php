@@ -3,26 +3,25 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Frame Material
+ * ModuleType
  *
- * @ORM\Table(name="frame_materials")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\FrameMaterialRepository")
+ * @ORM\Table(name="module_types")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ModuleTypeRepository")
  */
-class FrameMaterial implements ImageInterface
+class ModuleType implements ImageInterface
 {
     /** class name */
-    const JSON_NAME = 'frame_material';
+    const JSON_NAME = 'module_type';
 
     /**
      * Image sub folder
      */
-    const IMAGE_PATH = 'frame_materials';
+    const IMAGE_PATH = 'module_types';
 
     /**
      * @var int
@@ -36,45 +35,23 @@ class FrameMaterial implements ImageInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=100)
+     * @ORM\Column(name="name", type="string")
      */
+    private $name;
 
-    private $title;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="service_name", type="string", nullable=true)
+     */
+    private $serviceName;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="ratio", type="float")
+     * @ORM\Column(name="ratio", type="float", nullable=true)
      */
     private $ratio;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="min_area", type="float")
-     */
-    private $minArea;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="max_area", type="float")
-     */
-    private $maxArea;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="min_price", type="float")
-     */
-    private $minPrice;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="max_price", type="float")
-     */
-    private $maxPrice;
 
     /**
      * @var Image
@@ -104,9 +81,12 @@ class FrameMaterial implements ImageInterface
     private $isActive;
 
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
-        return (string)$this->title;
+        return (string)$this->name;
     }
 
     /**
@@ -120,34 +100,30 @@ class FrameMaterial implements ImageInterface
     }
 
     /**
-     * Set title
+     * @param string $name
      *
-     * @param string $title
-     *
-     * @return FrameMaterial
+     * @return Author
      */
-    public function setTitle($title)
+    public function setName($name)
     {
-        $this->title = $title;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get title
-     *
      * @return string
      */
-    public function getTitle()
+    public function getName()
     {
-        return $this->title;
+        return $this->name;
     }
 
     /**
      * Set createdAt
      *
      * @param  \DateTime $createdAt
-     * @return FrameMaterial
+     * @return Author
      */
     public function setCreatedAt($createdAt)
     {
@@ -170,7 +146,7 @@ class FrameMaterial implements ImageInterface
      * Set updatedAt
      *
      * @param  \DateTime $updatedAt
-     * @return FrameMaterial
+     * @return Author
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -199,7 +175,7 @@ class FrameMaterial implements ImageInterface
 
     /**
      * @param boolean $isActive
-     * @return FrameMaterial
+     * @return Author
      */
     public function setIsActive($isActive)
     {
@@ -209,11 +185,35 @@ class FrameMaterial implements ImageInterface
     }
 
     /**
+     * Set serviceName
+     *
+     * @param string $serviceName
+     *
+     * @return ModuleType
+     */
+    public function setServiceName($serviceName)
+    {
+        $this->serviceName = $serviceName;
+
+        return $this;
+    }
+
+    /**
+     * Get serviceName
+     *
+     * @return string
+     */
+    public function getServiceName()
+    {
+        return $this->serviceName;
+    }
+
+    /**
      * Set ratio
      *
      * @param float $ratio
      *
-     * @return FrameMaterial
+     * @return ModuleType
      */
     public function setRatio($ratio)
     {
@@ -233,102 +233,6 @@ class FrameMaterial implements ImageInterface
     }
 
     /**
-     * Set minArea
-     *
-     * @param float $minArea
-     *
-     * @return FrameMaterial
-     */
-    public function setMinArea($minArea)
-    {
-        $this->minArea = $minArea;
-
-        return $this;
-    }
-
-    /**
-     * Get minArea
-     *
-     * @return float
-     */
-    public function getMinArea()
-    {
-        return $this->minArea;
-    }
-
-    /**
-     * Set maxArea
-     *
-     * @param float $maxArea
-     *
-     * @return FrameMaterial
-     */
-    public function setMaxArea($maxArea)
-    {
-        $this->maxArea = $maxArea;
-
-        return $this;
-    }
-
-    /**
-     * Get maxArea
-     *
-     * @return float
-     */
-    public function getMaxArea()
-    {
-        return $this->maxArea;
-    }
-
-    /**
-     * Set minPrice
-     *
-     * @param float $minPrice
-     *
-     * @return FrameMaterial
-     */
-    public function setMinPrice($minPrice)
-    {
-        $this->minPrice = $minPrice;
-
-        return $this;
-    }
-
-    /**
-     * Get minPrice
-     *
-     * @return float
-     */
-    public function getMinPrice()
-    {
-        return $this->minPrice;
-    }
-
-    /**
-     * Set maxPrice
-     *
-     * @param float $maxPrice
-     *
-     * @return FrameMaterial
-     */
-    public function setMaxPrice($maxPrice)
-    {
-        $this->maxPrice = $maxPrice;
-
-        return $this;
-    }
-
-    /**
-     * Get maxPrice
-     *
-     * @return float
-     */
-    public function getMaxPrice()
-    {
-        return $this->maxPrice;
-    }
-
-    /**
      * Get isActive
      *
      * @return boolean
@@ -343,7 +247,7 @@ class FrameMaterial implements ImageInterface
      *
      * @param \AppBundle\Entity\Image $image
      *
-     * @return FrameMaterial
+     * @return ModuleType
      */
     public function setImage(\AppBundle\Entity\Image $image = null)
     {

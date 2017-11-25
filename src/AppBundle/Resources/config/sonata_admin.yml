@@ -2,16 +2,34 @@ services:
     app.admin.frame:
         class: AppBundle\Admin\FrameAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Рамки", label: "Рамки", show_in_dashboard: true}
+            - { name: sonata.admin, manager_type: orm, group: "Рамы", label: "Рамы", show_in_dashboard: true}
         arguments:
              - ~
              - AppBundle\Entity\Frame
              - 'SonataAdminBundle:CRUD'
              - '@app.image_manager'
+    app.admin.underframe:
+        class: AppBundle\Admin\UnderframeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Рамы", label: "Подрамники", show_in_dashboard: true}
+        arguments:
+             - ~
+             - AppBundle\Entity\Underframe
+             - 'SonataAdminBundle:CRUD'
+             - '@app.image_manager'
+    app.admin.moduletype:
+        class: AppBundle\Admin\ModuleTypeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Картины", label: "Модульность", show_in_dashboard: true}
+        arguments:
+             - ~
+             - AppBundle\Entity\ModuleType
+             - 'SonataAdminBundle:CRUD'
+             - '@app.image_manager'
     app.admin.framecolor:
         class: AppBundle\Admin\FrameColorAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Рамки", label: "Цвет рамки", show_in_dashboard: true}
+            - { name: sonata.admin, manager_type: orm, group: "Рамы", label: "Цвет рамы", show_in_dashboard: true}
         arguments:
              - ~
              - AppBundle\Entity\FrameColor
@@ -19,11 +37,21 @@ services:
     app.admin.framematerial:
         class: AppBundle\Admin\FrameMaterialAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Рамки", label: "Материал рамки", show_in_dashboard: true}
+            - { name: sonata.admin, manager_type: orm, group: "Материалы", label: "Материал рамы", show_in_dashboard: true}
         arguments:
              - ~
              - AppBundle\Entity\FrameMaterial
-             - 'AppBundle:Admin\FrameMaterialAdmin'
+             - 'SonataAdminBundle:CRUD'
+             - '@app.image_manager'
+    app.admin.bannermaterial:
+        class: AppBundle\Admin\BannerMaterialAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Материалы", label: "Материал баннера", show_in_dashboard: true}
+        arguments:
+             - ~
+             - AppBundle\Entity\BannerMaterial
+             - 'SonataAdminBundle:CRUD'
+             - '@app.image_manager'
     app.admin.mat:
         class: AppBundle\Admin\MatAdmin
         tags:
@@ -90,6 +118,16 @@ services:
             - ~
             - AppBundle\Entity\Author
             - 'SonataAdminBundle:CRUD'
+    app.admin.slider:
+        class: AppBundle\Admin\SliderAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Слайдер", show_in_dashboard: true }
+        arguments:
+            - ~
+            - AppBundle\Entity\SliderItem
+            - 'SonataAdminBundle:CRUD'
+            - '@app.image_manager'
+
 #    app.admin.category2:
 #            class: Sonata\ClassificationBundle\Admin\CategoryAdmin
 #            tags:

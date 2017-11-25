@@ -11,18 +11,18 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Frame Material
  *
- * @ORM\Table(name="frame_materials")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\FrameMaterialRepository")
+ * @ORM\Table(name="banner_materials")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\BannerMaterialRepository")
  */
-class FrameMaterial implements ImageInterface
+class BannerMaterial implements ImageInterface
 {
     /** class name */
-    const JSON_NAME = 'frame_material';
+    const JSON_NAME = 'banner_material';
 
     /**
      * Image sub folder
      */
-    const IMAGE_PATH = 'frame_materials';
+    const IMAGE_PATH = 'banner_materials';
 
     /**
      * @var int
@@ -213,7 +213,7 @@ class FrameMaterial implements ImageInterface
      *
      * @param float $ratio
      *
-     * @return FrameMaterial
+     * @return BannerMaterial
      */
     public function setRatio($ratio)
     {
@@ -237,7 +237,7 @@ class FrameMaterial implements ImageInterface
      *
      * @param float $minArea
      *
-     * @return FrameMaterial
+     * @return BannerMaterial
      */
     public function setMinArea($minArea)
     {
@@ -261,7 +261,7 @@ class FrameMaterial implements ImageInterface
      *
      * @param float $maxArea
      *
-     * @return FrameMaterial
+     * @return BannerMaterial
      */
     public function setMaxArea($maxArea)
     {
@@ -285,7 +285,7 @@ class FrameMaterial implements ImageInterface
      *
      * @param float $minPrice
      *
-     * @return FrameMaterial
+     * @return BannerMaterial
      */
     public function setMinPrice($minPrice)
     {
@@ -309,7 +309,7 @@ class FrameMaterial implements ImageInterface
      *
      * @param float $maxPrice
      *
-     * @return FrameMaterial
+     * @return BannerMaterial
      */
     public function setMaxPrice($maxPrice)
     {
@@ -343,7 +343,7 @@ class FrameMaterial implements ImageInterface
      *
      * @param \AppBundle\Entity\Image $image
      *
-     * @return FrameMaterial
+     * @return BannerMaterial
      */
     public function setImage(\AppBundle\Entity\Image $image = null)
     {

@@ -2,7 +2,8 @@
 
 namespace AppBundle\Admin;
 
-use AppBundle\Entity\FrameMaterial;
+use AppBundle\Entity\BannerMaterial;
+use AppBundle\Entity\Image;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -10,7 +11,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use AppBundle\Service\ImageManagement;
 
-class FrameMaterialAdmin extends AbstractAdmin
+class BannerMaterialAdmin extends AbstractAdmin
 {
     /**
      * @var ImageManagement
@@ -61,7 +62,7 @@ class FrameMaterialAdmin extends AbstractAdmin
         $listMapper
             ->add('id', null, ['label' => 'ID'])
             ->add('image', null,
-                ['label' => 'Изображение', 'template' => 'AppBundle:Admin:frame_material_list_image.html.twig'])
+                ['label' => 'Изображение', 'template' => 'AppBundle:Admin:banner_material_list_image.html.twig'])
             ->add('title', null, ['editable' => true, 'label' => 'Название'])
             ->add('ratio', null, ['editable' => true, 'label' => 'Коэффициент'])
             ->add('minArea', null, ['editable' => true, 'label' => 'Минимальная площадь'])
@@ -94,40 +95,12 @@ class FrameMaterialAdmin extends AbstractAdmin
         ;
     }
 
-//    public function getBatchActions()
-//    {
-//        $actions = parent::getBatchActions();
-//
-//        if ($this->hasRoute('edit')) {
-//
-//            $actions['test'] = array(
-//                'label'            => 'Test',
-//                'ask_confirmation' => false
-//            );
-//        }
-//
-//        return $actions;
-//    }
-//
-//    public function getTemplate($name)
-//    {
-//        switch ($name) {
-//            case 'list':
-//                return 'AppBundle:FrameMaterial:list.html.twig';
-//                break;
-//
-//            default:
-//                return parent::getTemplate($name);
-//                break;
-//        }
-//    }
-
     /**
      * @param mixed $material
      */
     public function prePersist($material)
     {
-        if($material instanceof FrameMaterial) {
+        if($material instanceof BannerMaterial) {
             $material->setCreatedAt(new \DateTime());
             $material->setUpdatedAt(new \DateTime());
             $this->manageEmbeddedImageAdmins($material);
@@ -139,7 +112,7 @@ class FrameMaterialAdmin extends AbstractAdmin
      */
     public function preUpdate($material)
     {
-        if($material instanceof FrameMaterial) {
+        if($material instanceof BannerMaterial) {
             $material->setUpdatedAt(new \DateTime());
             $this->manageEmbeddedImageAdmins($material);
         }
@@ -150,7 +123,7 @@ class FrameMaterialAdmin extends AbstractAdmin
      */
     public function postUpdate($material)
     {
-        if($material instanceof FrameMaterial) {
+        if($material instanceof BannerMaterial) {
             $this->imageManagement->cleanGarbageImages();
         }
     }
@@ -159,15 +132,15 @@ class FrameMaterialAdmin extends AbstractAdmin
      * @param mixed $material
      */
     public function preRemove($material){
-        if($material instanceof FrameMaterial) {
+        if($material instanceof BannerMaterial) {
             $this->imageManagement->deleteImages($material->getImages());
         }
     }
 
     /**
-     * @param FrameMaterial $material
+     * @param BannerMaterial $material
      */
-    private function manageEmbeddedImageAdmins(FrameMaterial $material)
+    private function manageEmbeddedImageAdmins(BannerMaterial $material)
     {
         // Cycle through each field
         foreach ($this->getFormFieldDescriptions() as $fieldName => $fieldDescription) {

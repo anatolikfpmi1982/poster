@@ -31,7 +31,6 @@ class ImageAdmin extends AbstractAdmin
         $fileFieldOptions = array('required' => false);
 
         if (is_array($subject)) {
-            $img = $subject;
             if (is_array($subject) && array_key_exists(self::$imageIndex, $subject)) {
                 $img = $subject[self::$imageIndex];
                 self::$imageIndex++;
@@ -41,16 +40,15 @@ class ImageAdmin extends AbstractAdmin
 
             if($img !== null) {
                 /** @var Image $img */
-                $fileFieldOptions['sonata_help'] = '<img src="/files/'.$img->getEntityName().'/mini_thumb/'.$img->getFilename().'" class="admin-preview" /><br>';
+                $fileFieldOptions['help'] = '<img src="/files/'.$img->getEntityName().'/mini_thumb/'.$img->getFilename().'" class="admin-preview" /><br>';
             }
 
         } elseif ($subject instanceof Image) {
             // add a 'help' option containing the preview's img tag
-            $fileFieldOptions['sonata_help'] = '<img src="/files/'.$subject->getEntityName().'/mini_thumb/'.$subject->getFilename().'" class="admin-preview" /><br>';
+            $fileFieldOptions['help'] = '<img src="/files/'.$subject->getEntityName().'/mini_thumb/'.$subject->getFilename().'" class="admin-preview" /><br>';
         }
 
         $formMapper
-            ->add('name',       null,     array('required' => false))
             ->add('file',       'file',     $fileFieldOptions);
 
     }

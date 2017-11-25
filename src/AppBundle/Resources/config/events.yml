@@ -13,3 +13,38 @@ services:
         tags:
             - { name: doctrine.event_listener, event: postUpdate }
             - { name: doctrine.event_listener, event: postPersist }
+    app.underframe_event_listener:
+        class: AppBundle\EventSubscriber\UnderframeSubscriber
+        arguments:
+            - '@service_container'
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate }
+            - { name: doctrine.event_listener, event: postPersist }
+    app.slider_event_listener:
+        class: AppBundle\EventSubscriber\SliderSubscriber
+        arguments:
+            - '@service_container'
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate }
+            - { name: doctrine.event_listener, event: postPersist }
+    app.module_type_event_listener:
+        class: AppBundle\EventSubscriber\ModuleTypeSubscriber
+        arguments:
+            - '@service_container'
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate }
+            - { name: doctrine.event_listener, event: postPersist }
+    app.frame_material_event_listener:
+        class: AppBundle\EventSubscriber\FrameMaterialSubscriber
+        arguments:
+            - '@service_container'
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate }
+            - { name: doctrine.event_listener, event: postPersist }
+    app.banner_material_event_listener:
+        class: AppBundle\EventSubscriber\BannerMaterialSubscriber
+        arguments:
+            - '@service_container'
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate }
+            - { name: doctrine.event_listener, event: postPersist }

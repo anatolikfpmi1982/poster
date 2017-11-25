@@ -51,9 +51,11 @@ class FrameAdmin extends AbstractAdmin
             ->add('description', CKEditorType::class, ['required' => false, 'label' => 'Описание'])
             ->add('height', null, ['required' => false, 'label' => 'Высота'])
             ->add('width', null, ['required' => false, 'label' => 'Ширина'])
-            ->add('color', 'choices', array('label' => 'Цвет',
-                'choices' => ['Status1' => 'Alias1', 'Status2' => 'Alias2']))
-//            ->add('color', null, array('label' => 'Цвет'))
+            ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент'])
+            ->add('useRatio', null, ['required' => false, 'label' => 'Использовать коэффициент'])
+//            ->add('color', 'choices', array('label' => 'Цвет',
+//                'choices' => ['Status1' => 'Alias1', 'Status2' => 'Alias2']))
+            ->add('color', null, array('label' => 'Цвет'))
             ->add('material', null, array('label' => 'Материал'))
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
             ->add('images', 'sonata_type_collection', array(
@@ -116,44 +118,44 @@ class FrameAdmin extends AbstractAdmin
     }
 
     /**
-     * @param mixed $frame
+     * @param mixed $moduleType
      */
-    public function prePersist($frame)
+    public function prePersist($moduleType)
     {
-        if($frame instanceof Frame) {
-            $frame->setCreatedAt(new \DateTime());
-            $frame->setUpdatedAt(new \DateTime());
-            $this->manageEmbeddedImageAdmins($frame);
+        if($moduleType instanceof Frame) {
+            $moduleType->setCreatedAt(new \DateTime());
+            $moduleType->setUpdatedAt(new \DateTime());
+            $this->manageEmbeddedImageAdmins($moduleType);
         }
     }
 
     /**
-     * @param mixed $frame
+     * @param mixed $moduleType
      */
-    public function preUpdate($frame)
+    public function preUpdate($moduleType)
     {
-        if($frame instanceof Frame) {
-            $frame->setUpdatedAt(new \DateTime());
-            $this->manageEmbeddedImageAdmins($frame);
+        if($moduleType instanceof Frame) {
+            $moduleType->setUpdatedAt(new \DateTime());
+            $this->manageEmbeddedImageAdmins($moduleType);
         }
     }
 
     /**
-     * @param mixed $frame
+     * @param mixed $moduleType
      */
-    public function postUpdate($frame)
+    public function postUpdate($moduleType)
     {
-        if($frame instanceof Frame) {
+        if($moduleType instanceof Frame) {
             $this->imageManagement->cleanGarbageImages();
         }
     }
 
     /**
-     * @param mixed $frame
+     * @param mixed $moduleType
      */
-    public function preRemove($frame){
-        if($frame instanceof Frame) {
-            $this->imageManagement->deleteImages($frame->getImages());
+    public function preRemove($moduleType){
+        if($moduleType instanceof Frame) {
+            $this->imageManagement->deleteImages($moduleType->getImages());
         }
     }
 

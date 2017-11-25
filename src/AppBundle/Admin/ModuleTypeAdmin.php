@@ -1,16 +1,18 @@
 <?php
-
 namespace AppBundle\Admin;
 
-use AppBundle\Entity\FrameMaterial;
+use AppBundle\Entity\ModuleType;
+use AppBundle\Entity\Image;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Form\FormMapper;
 use AppBundle\Service\ImageManagement;
 
-class FrameMaterialAdmin extends AbstractAdmin
+/**
+ * Admin class for module type
+ */
+class ModuleTypeAdmin extends AbstractAdmin
 {
     /**
      * @var ImageManagement
@@ -42,13 +44,10 @@ class FrameMaterialAdmin extends AbstractAdmin
     {
         $formMapper
             ->with('Main')
-            ->add('title', null, ['required' => true, 'label' => 'Название'])
             ->add('image', 'sonata_type_admin', ['required' => false, 'label' => 'Изображение'])
+            ->add('name', null, ['required' => true, 'label' => 'Название'])
             ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент'])
-            ->add('minArea', null, ['required' => false, 'label' => 'Минимальная площадь'])
-            ->add('maxArea', null, ['required' => false, 'label' => 'Максимальная площадь'])
-            ->add('minPrice', null, ['required' => false, 'label' => 'Минимальная цена'])
-            ->add('maxPrice', null, ['required' => false, 'label' => 'Максимальная цена'])
+            ->add('serviceName', null, ['required' => true, 'label' => 'Сервисное имя (не изменять без необходимости)'])
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
             ->end();
     }
@@ -59,18 +58,13 @@ class FrameMaterialAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id', null, ['label' => 'ID'])
             ->add('image', null,
-                ['label' => 'Изображение', 'template' => 'AppBundle:Admin:frame_material_list_image.html.twig'])
-            ->add('title', null, ['editable' => true, 'label' => 'Название'])
+                ['label' => 'Изображение', 'template' => 'AppBundle:Admin:module_type_list_image.html.twig'])
+            ->add('name', null, ['editable'=> true, 'label' => 'Название'])
             ->add('ratio', null, ['editable' => true, 'label' => 'Коэффициент'])
-            ->add('minArea', null, ['editable' => true, 'label' => 'Минимальная площадь'])
-            ->add('maxArea', null, ['editable' => true, 'label' => 'Максимальная площадь'])
-            ->add('minPrice', null, ['editable' => true, 'label' => 'Минимальная цена'])
-            ->add('maxPrice', null, ['editable' => true, 'label' => 'Максимальная цена'])
 //            ->add('createdAt', null, ['label' => 'Создано'])
-//            ->add('updatedAt', null, ['label' => 'Опубликовано'])
-            ->add('isActive', null, ['label' => 'Показывать', 'editable' => true])
+//            ->add('updatedAt', null, ['label' => 'Обновлено'])
+            ->add('isActive', null, ['editable' => true, 'label' => 'Показывать'])
             ->add(
                 '_action',
                 'actions',
@@ -89,85 +83,57 @@ class FrameMaterialAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, ['label' => 'Название'])
+            ->add('name', null, ['label' => 'Название'])
             ->add('isActive', null, ['label' => 'Показывать'])
         ;
     }
 
-//    public function getBatchActions()
-//    {
-//        $actions = parent::getBatchActions();
-//
-//        if ($this->hasRoute('edit')) {
-//
-//            $actions['test'] = array(
-//                'label'            => 'Test',
-//                'ask_confirmation' => false
-//            );
-//        }
-//
-//        return $actions;
-//    }
-//
-//    public function getTemplate($name)
-//    {
-//        switch ($name) {
-//            case 'list':
-//                return 'AppBundle:FrameMaterial:list.html.twig';
-//                break;
-//
-//            default:
-//                return parent::getTemplate($name);
-//                break;
-//        }
-//    }
-
     /**
-     * @param mixed $material
+     * @param mixed $moduleType
      */
-    public function prePersist($material)
+    public function prePersist($moduleType)
     {
-        if($material instanceof FrameMaterial) {
-            $material->setCreatedAt(new \DateTime());
-            $material->setUpdatedAt(new \DateTime());
-            $this->manageEmbeddedImageAdmins($material);
+        if($moduleType instanceof ModuleType) {
+            $moduleType->setCreatedAt(new \DateTime());
+            $moduleType->setUpdatedAt(new \DateTime());
+            $this->manageEmbeddedImageAdmins($moduleType);
         }
     }
 
     /**
-     * @param mixed $material
+     * @param mixed $moduleType
      */
-    public function preUpdate($material)
+    public function preUpdate($moduleType)
     {
-        if($material instanceof FrameMaterial) {
-            $material->setUpdatedAt(new \DateTime());
-            $this->manageEmbeddedImageAdmins($material);
+        if($moduleType instanceof ModuleType) {
+            $moduleType->setUpdatedAt(new \DateTime());
+            $this->manageEmbeddedImageAdmins($moduleType);
         }
     }
 
     /**
-     * @param mixed $material
+     * @param mixed $moduleType
      */
-    public function postUpdate($material)
+    public function postUpdate($moduleType)
     {
-        if($material instanceof FrameMaterial) {
+        if($moduleType instanceof ModuleType) {
             $this->imageManagement->cleanGarbageImages();
         }
     }
 
     /**
-     * @param mixed $material
+     * @param mixed $moduleType
      */
-    public function preRemove($material){
-        if($material instanceof FrameMaterial) {
-            $this->imageManagement->deleteImages($material->getImages());
+    public function preRemove($moduleType){
+        if($moduleType instanceof ModuleType) {
+            $this->imageManagement->deleteImages($moduleType->getImages());
         }
     }
 
     /**
-     * @param FrameMaterial $material
+     * @param ModuleType $moduleType
      */
-    private function manageEmbeddedImageAdmins(FrameMaterial $material)
+    private function manageEmbeddedImageAdmins(ModuleType $moduleType)
     {
         // Cycle through each field
         foreach ($this->getFormFieldDescriptions() as $fieldName => $fieldDescription) {
@@ -181,17 +147,17 @@ class FrameMaterialAdmin extends AbstractAdmin
                 $setter = 'set'.$fieldName;
 
                 /** @var Image $image */
-                $image = $material->$getter();
+                $image = $moduleType->$getter();
 
                 if ($image) {
                     if ($image->getFile()) {
                         // update the Image to trigger file management
                         $image->refreshUpdated()
                             ->setCreatedAt(new \DateTime())
-                            ->setEntityName($material::IMAGE_PATH);
+                            ->setEntityName($moduleType::IMAGE_PATH);
                     } elseif (!$image->getFile() && !$image->getFilename()) {
                         // prevent Sf/Sonata trying to create and persist an empty Image
-                        $material->$setter(null);
+                        $moduleType->$setter(null);
                     }
                 }
             }

@@ -54,4 +54,11 @@ class FrontController extends Controller {
     protected function getMainMenuBlock() {
         return $this->get( 'blocks.service' )->getMainMenuBlock();
     }
+
+    /**
+     * @return array
+     */
+    protected function getSliderBlock() {
+        return $this->get( 'blocks.service' )->getSliderItems();
+    }
 }
