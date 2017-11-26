@@ -1,8 +1,8 @@
 <?php
 namespace AppBundle\EventSubscriber;
 
-use AppBundle\Entity\Image;
 use AppBundle\Entity\BannerMaterial;
+use AppBundle\Entity\Image;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

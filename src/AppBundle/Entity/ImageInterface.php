@@ -1,8 +1,7 @@
 <?php
 namespace AppBundle\Entity;
 
-interface ImageInterface
-{
+interface ImageInterface {
     /**
      * Thumb image height
      */
@@ -32,4 +31,14 @@ interface ImageInterface
      * Mini thumb image width
      */
     const THUMB_MINI_IMAGE_WIDTH = 150;
+
+    /**
+     * Mini thumb image height
+     */
+    const THUMB_MAX_IMAGE_HEIGHT = 600;
+
+    /**
+     * Mini thumb image width
+     */
+    const THUMB_MAX_IMAGE_WIDTH = 800;
 }

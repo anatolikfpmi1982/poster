@@ -2,27 +2,33 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class PicturesController
  */
-class PicturesController extends Controller
-{
+class PicturesController extends FrontController {
     /**
+     * @param int $id
+     *
      * @Route("/picture/{id}", name="picture")
+     *
+     * @return Response
      */
-    public function showAction($id)
-    {
-        $em = $this->get('doctrine.orm.entity_manager');
-        $picture = $em->getRepository('AppBundle:Picture')->find($id);
+    public function showAction( $id ) {
+        $em      = $this->get( 'doctrine.orm.entity_manager' );
+        $picture = $em->getRepository( 'AppBundle:Picture' )->find( $id );
 
-        $this->get('app.session_manager')->addLastVisitedItem($picture->getId());
+        $this->blocks = [ 'CategoryMenu' => 1, 'Popular' => 2, 'MainMenu' => 3 ];
+        $this->doBlocks();
+
+        $this->get( 'app.session_manager' )->addLastVisitedItem( $picture->getId() );
+
+        $this->data['picture'] = $picture;
 
         // parameters to template
-        return $this->render('AppBundle:Pictures:show.html.twig', array('picture' => $picture));
+        return $this->render( 'AppBundle:Pictures:show.html.twig', $this->data );
     }
 
 }

@@ -20,6 +20,7 @@ class DefaultController extends FrontController {
     public function indexAction( Request $request ) {
         $this->blocks = [ 'CategoryMenu' => 1, 'Popular' => 2 , 'MainMenu' => 3 ];
         $this->doBlocks();
+        $this->data['sliders'] = $this->get( 'blocks.service' )->getSliderItems();
         // replace this example code with whatever you need
         return $this->render( 'AppBundle:Main:index.html.twig', $this->data );
     }

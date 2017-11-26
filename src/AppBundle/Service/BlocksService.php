@@ -4,8 +4,7 @@ namespace AppBundle\Service;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class BlocksService
-{
+class BlocksService {
     /**
      * @var EntityManager
      */
@@ -18,11 +17,11 @@ class BlocksService
 
     /**
      * BlocksService constructor.
+     *
      * @param EntityManager $em
      */
-    public function __construct(EntityManager $em, ContainerInterface $container)
-    {
-        $this->em = $em;
+    public function __construct( EntityManager $em, ContainerInterface $container ) {
+        $this->em        = $em;
         $this->container = $container;
     }
 
@@ -31,33 +30,28 @@ class BlocksService
     }
 
     public function getMainMenuBlock() {
-        return $this->em->getRepository('AppBundle:MainMenu')->findBy([], ['weight' => 'ASC']);
-    }
-
-    /**
-    * @return array
-    */
-    public function getCategoriesBlock()
-    {
-        $categories = $this->em->getRepository('AppBundle:Category3')->getRoot();
-
-        return $categories;
+        return $this->em->getRepository( 'AppBundle:MainMenu' )->findBy( [ ], [ 'weight' => 'ASC' ] );
     }
 
     /**
      * @return array
      */
-    public function getLastVisitedItems()
-    {
-        return $this->container->get('session')->get('lastVisited');
+    public function getCategoriesBlock() {
+        return $this->em->getRepository( 'AppBundle:Category3' )->getRoot();
     }
 
     /**
      * @return array
      */
-    public function getSliderItems()
-    {
-        return $this->em->getRepository('AppBundle:SliderItems')->findBy([], ['weight' => 'ASC']);
+    public function getLastVisitedItems() {
+        return $this->container->get( 'session' )->get( 'lastVisited' );
+    }
+
+    /**
+     * @return array
+     */
+    public function getSliderItems() {
+        return $this->em->getRepository( 'AppBundle:SliderItem' )->findBy( [ 'isActive' => true ], [ 'weight' => 'ASC' ] );
     }
 
 //    /**

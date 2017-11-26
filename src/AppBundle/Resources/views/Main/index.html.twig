@@ -7,15 +7,22 @@
         <div class="cycle-slideshow"
              data-cycle-fx=scrollHorz
              data-cycle-timeout=2000
-             data-cycle-overlay-template="<span class=left>&nbsp;<br>{{ '{{' }} slideNum {{ '}}' }} / {{ '{{' }} slideCount {{ '}}' }}</span>{{ '{{' }} date {{ '}}' }} - {{ '{{' }} title {{ '}}' }}<br>{{ '{{' }} desc {{ '}}' }}"
+             data-cycle-overlay-template="<span class=left>&nbsp;<br>{{ '{{' }}slideNum{{ '}}' }} / {{ '{{' }}slideCount{{ '}}' }}</span>
+             {{ '{{' }}date{{ '}}' }} - {{ '{{' }}title{{ '}}' }}<br>{{ '{{' }}desc{{ '}}' }}"
         >
             <!-- empty element for overlay -->
             <div class="cycle-overlay custom"></div>
+            <div class="cycle-prev"></div>
+            <div class="cycle-next"></div>
+            {% if sliders %}
 
-            <img src="http://malsup.github.io/images/p1.jpg" data-date="May, 2012" data-title="Sonnenberg Gardens" data-cycle-desc="Sonnenberg Gardens">
-            <img src="http://malsup.github.io/images/p2.jpg" data-date="June, 2012" data-title="Redwoods" data-cycle-desc="Muir Woods National Monument">
-            <img src="http://malsup.github.io/images/p3.jpg" data-date="June, 2012" data-title="Angel Island" data-cycle-desc="San Franscisco Bay">
-            <img src="http://malsup.github.io/images/p4.jpg" data-date="July, 2012" data-title="Raquette Lake" data-cycle-desc="Adirondack State Park">
+                {% for slider in sliders %}
+                    <img src="/files/slider/max_thumb/{{ slider.image.filename }}"
+                         data-date="{{ slider.createdAt|date('M, d') }}"
+                         data-title="{{ slider.title }}"
+                         data-cycle-desc="{{ slider.text }}">
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
 
