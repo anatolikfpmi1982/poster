@@ -19,6 +19,11 @@ class FrontController extends Controller {
     protected $blocks = [ ];
 
     /**
+     * @var string
+     */
+    protected $menu = '';
+
+    /**
      *
      */
     public function doBlocks() {
@@ -31,6 +36,8 @@ class FrontController extends Controller {
                 }
             }
         }
+
+        $this->data['active_menu'] = $this->menu;
     }
 
     /**
