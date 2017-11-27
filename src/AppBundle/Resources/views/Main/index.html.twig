@@ -7,15 +7,14 @@
         <div class="cycle-slideshow"
              data-cycle-fx=scrollHorz
              data-cycle-timeout=2000
-             data-cycle-overlay-template="<span class=left>&nbsp;<br>{{ '{{' }}slideNum{{ '}}' }} / {{ '{{' }}slideCount{{ '}}' }}</span>
-             {{ '{{' }}date{{ '}}' }} - {{ '{{' }}title{{ '}}' }}<br>{{ '{{' }}desc{{ '}}' }}"
+             data-cycle-overlay-template="
+             <span class=az-slider-title>{{ '{{' }}title{{ '}}' }}</span><span class='az-slider-description'>{{ '{{' }}desc{{ '}}' }}</span>"
         >
             <!-- empty element for overlay -->
             <div class="cycle-overlay custom"></div>
             <div class="cycle-prev"></div>
             <div class="cycle-next"></div>
             {% if sliders %}
-
                 {% for slider in sliders %}
                     <img src="/files/slider/max_thumb/{{ slider.image.filename }}"
                          data-date="{{ slider.createdAt|date('M, d') }}"

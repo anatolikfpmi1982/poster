@@ -4,7 +4,7 @@
             <img src="{{ asset('bundles/app/images/catalog.png') }}" class="az-sidebar-block-img az-catalog-block-img" title="{{ category.title }}"/>
             {{ category.title }}
         </div>
-        {% if category.children %}
+        {% if category.children is defined %}
             <div class="row container-fluid">
                 {% for subcategory in category.children %}
                     <div class="row az-sidebar-subcategory-item">
