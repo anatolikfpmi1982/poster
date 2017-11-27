@@ -162,3 +162,11 @@ services:
             - ~
             - AppBundle\Entity\Image
             - 'SonataAdminBundle:CRUD'
+    app.admin.popular:
+        class: AppBundle\Admin\PopularAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Популярные", show_in_dashboard: true}
+        arguments:
+            - ~
+            - AppBundle\Entity\Popular
+            - 'SonataAdminBundle:CRUD'
