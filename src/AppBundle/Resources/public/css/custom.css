@@ -16,6 +16,7 @@ body {
     margin: -20px 0 0 80px;
     font-size: 10px;
 }
+
 .az-header-top-last {
     padding: 20px 0 0 0;
 }
@@ -29,7 +30,6 @@ body {
     color: white;
     background-color: #fd1200;
 }
-
 
 /** header contacts**/
 .az-header-address-div {
@@ -45,8 +45,8 @@ body {
     font-weight: 600;
 }
 
-.az-header-phone-number {    color:    #fd1200
-;
+.az-header-phone-number {
+    color: #fd1200;
 }
 
 .az-header-phone-number-bold {
@@ -61,59 +61,55 @@ body {
     font-size: 13px;
 }
 
-
 /**search**/
-.input-group-btn{
+.input-group-btn {
     border-radius: 4px;
 }
 
-.btn-default{
+.btn-default {
 
     background-color: #fd1200;
     background-image: none !important;
-    border:  1px solid #fd1200;
+    border: 1px solid #fd1200;
     color: #ffffff !important;
     text-shadow: none !important;
 
 }
 
-
-
 /**menu**/
 .navbar-collapse {
     padding: 0;
 }
-.navbar-brand, .navbar-nav > li > a{
+
+.navbar-brand, .navbar-nav > li > a {
     color: #000000 !important;
     text-shadow: none;
     font-size: 16px;
-    vertical-align: middle ;
+    vertical-align: middle;
 
 }
 
 .nav > li > a {
     padding: 10px 25px 15px 0;
 }
+
 .nav > li > a > img {
     padding: 0 10px 0 0;
     vertical-align: text-bottom;
 }
-
 
 .navbar-nav > li:active {
     color: #fd1200;
 
 }
 
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > li > a:hover
-{
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > li > a:hover {
     background-image: none;
     color: #fd1200 !important;
     box-shadow: none !important;
     background-color: none;
 
 }
-
 
 .az-header-feedback-btn-div {
     margin-top: 10px;
@@ -153,7 +149,7 @@ body {
     font-weight: bold;
     color: #fd1200;
     letter-spacing: 1px;
-    font: 20px/46px 'Open Sans','arial','sans-serif';
+    font: 20px/46px 'Open Sans', 'arial', 'sans-serif';
 
 }
 
@@ -161,15 +157,17 @@ body {
     margin: 10px;
     color: #333333;
 }
+
 .az-main-popular-item-img-div {
     background-color: #eeeeee;
     margin: 0 2px;
 }
+
 .az-main-popular-item-img-div img {
     text-align: center;
     float: none;
     display: table-cell;
-    padding:  15px;
+    padding: 15px;
 }
 
 .az-main-popular-item-img {
@@ -177,17 +175,20 @@ body {
     text-align: center;
     margin: 0 auto;
 }
+
 .az-main-popular-item-header-type {
     text-align: center;
     font-size: 12px;
     margin: 10px 0 20px 0;
 }
-.az-main-popular-item-header-category{
-    color:#fd1200;
+
+.az-main-popular-item-header-category {
+    color: #fd1200;
     text-transform: uppercase;
     margin: 15px 0 10px 0;
     text-align: center;
-    font-weight: 600;}
+    font-weight: 600;
+}
 
 .btn {
     background-color: #fd1200;
@@ -203,6 +204,7 @@ body {
 button, input, optgroup, select, textarea {
     color: #ffffff;
 }
+
 /**feedback**/
 
 .az-sidebar-popular-item-name {
@@ -210,17 +212,18 @@ button, input, optgroup, select, textarea {
     line-height: 22px;
     padding: 20px 0 0 0;
 }
+
 .az-sidebar-popular-item-date {
     color: #fd1200;
     font-size: 13px;
     margin-bottom: 15px;
 }
+
 .az-sidebar-popular-item-body {
-    font: 11px/16px 'arial','helvetica','sans-serif';
+    font: 11px/16px 'arial', 'helvetica', 'sans-serif';
     color: #595959;
     font-style: italic;
 }
-
 
 /** footer**/
 footer {
@@ -238,26 +241,39 @@ footer {
 
 /**mobile**/
 
+@media screen and (min-width: 480px) and (max-width: 800px) {
 
-@media screen and (min-width:480px) and (max-width:800px) {
-
-    .az-header-top-last {
-        padding: 20px 30px 0 30px !important;}
-
-    .az-header-download-div{
-        float: left;}
-}
-
-
-@media screen and (max-width:479px){
     .az-header-top-last {
         padding: 20px 30px 0 30px !important;
     }
-    .az-header-download-div{
-        float: left;}
+
+    .az-header-download-div {
+        float: left;
+    }
 }
 
+@media screen and (max-width: 479px) {
+    .az-header-top-last {
+        padding: 20px 30px 0 30px !important;
+    }
+
+    .az-header-download-div {
+        float: left;
+    }
+}
 
 .az-logo-footer-img {
     width: 200px;
+}
+
+.az-sidebar-header {
+    color: white;
+    background-color: #cc262c;
+    padding: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.az-sidebar-block-img {
+    margin: 0 10px 0 10px;
 }
