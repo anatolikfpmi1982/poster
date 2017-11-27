@@ -1,1 +1,22 @@
-Menu item
+<div class="row az-sidebar az-sidebar-catalog container-fluid">
+    {% for category in block %}
+        <div class="row az-sidebar-header az-sidebar-catalog-item-header">
+            <img src="{{ asset('bundles/app/images/catalog.png') }}" class="az-sidebar-block-img az-catalog-block-img" title="{{ category.title }}"/>
+            {{ category.title }}
+        </div>
+        {% if category.children %}
+            <div class="row container-fluid">
+                {% for subcategory in category.children %}
+                    <div class="row az-sidebar-subcategory-item">
+                        <div class="col-md-3">
+                            <img src="{{ asset('bundles/app/images/arrows.png') }}" class="az-sidebar-block-img az-catalog-block-img" title="{{ subcategory.title }}"/>
+                        </div>
+                        <div class="col-md-9">
+                            {{ subcategory.title }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
