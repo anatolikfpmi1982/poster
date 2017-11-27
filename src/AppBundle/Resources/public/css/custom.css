@@ -27,7 +27,7 @@ body {
 
 .az-header-feedback-btn {
     color: white;
-    background-color: #cc262c;
+    background-color: #fd1200;
 }
 
 
@@ -45,8 +45,8 @@ body {
     font-weight: 600;
 }
 
-.az-header-phone-number {
-    color: #cc262c;
+.az-header-phone-number {    color:    #fd1200
+;
 }
 
 .az-header-phone-number-bold {
@@ -69,9 +69,9 @@ body {
 
 .btn-default{
 
-    background-color: #cc262c;
+    background-color: #fd1200;
     background-image: none !important;
-    border:  1px solid #cc262c;
+    border:  1px solid #fd1200;
     color: #ffffff !important;
     text-shadow: none !important;
 
@@ -89,21 +89,20 @@ body {
 }
 
 .navbar-nav > li:active {
-    color: #cc262c;
+    color: #fd1200;
 
 }
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > li > a:hover
 {
     background-image: none;
-    color: #cc262c !important;
+    color: #fd1200 !important;
     box-shadow: none !important;
     background-color: #f8f8f8 !important;
 
 }
 
-
-
+.
 .az-header-feedback-btn-div {
     margin-top: 10px;
 }
@@ -115,10 +114,11 @@ body {
 
 .az-sidebar-popular-item-header {
     color: white;
-    background-color: #cc262c;
+    background-color: #fd1200;
     padding: 10px;
     text-transform: uppercase;
     font-weight: bold;
+    font-size: 15px;
 }
 
 .az-sidebar-popular-item {
@@ -139,7 +139,10 @@ body {
     margin: 10px;
     text-transform: uppercase;
     font-weight: bold;
-    color: #333333;
+    color: #fd1200;
+    letter-spacing: 1px;
+    font: 20px/46px 'Open Sans','arial','sans-serif';
+
 }
 
 .az-page-section-body {
@@ -148,10 +151,19 @@ body {
 }
 .az-main-popular-item-img-div {
     background-color: #eeeeee;
+    margin: 0 2px;
+}
+.az-main-popular-item-img-div img {
+    text-align: center;
+    float: none;
+    display: table-cell;
+    padding:  15px;
 }
 
 .az-main-popular-item-img {
-    width: 65%;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
 }
 .az-main-popular-item-header-type {
     text-align: center;
@@ -159,21 +171,45 @@ body {
     margin: 10px 0 20px 0;
 }
 .az-main-popular-item-header-category{
-    color: #cc262c;
+    color:#fd1200;
     text-transform: uppercase;
     margin: 15px 0 10px 0;
     text-align: center;
     font-weight: 600;}
 
 .btn {
-    background-color: #cc262c;
+    background-color: #fd1200;
     color: #fffff;
-    padding: 5px 30px;
+    padding: 5px 20px;
+}
+
+.btn.focus, .btn:focus, .btn:hover {
+    background-color: #595959;
+    color: #fff;
 }
 
 button, input, optgroup, select, textarea {
     color: #ffffff;
 }
+/**feedback**/
+
+.az-sidebar-popular-item-name {
+    font-size: 15px;
+    line-height: 22px;
+    padding: 20px 0 0 0;
+}
+.az-sidebar-popular-item-date {
+    color: #fd1200;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+.az-sidebar-popular-item-body {
+    font: 11px/16px 'arial','helvetica','sans-serif';
+    color: #595959;
+    font-style: italic;
+}
+
+
 /** footer**/
 footer {
     background-color: #ffffff;
