@@ -369,15 +369,31 @@ footer {
 /* overlay */
 .cycle-overlay {
     position: absolute;
-    bottom: 0;
+    top: 30%;
     width: 100%;
     z-index: 600;
     background: black;
     color: white;
     padding: 15px;
-    opacity: .5;
+    opacity: .8;
+    font-size: larger;
 }
 
+.az-slider-title {
+    font: 45px 'Open Sans','arial','helvetica','sans-serif';
+    display: block;
+    text-align: center;
+    opacity: 1;
+
+}
+
+
+.slider_item_cat {
+    font: 14px 'fregatregular','arial','helvetica','sans-serif';
+    opacity: 1;
+    text-align: center;
+    padding: 0 20px;
+}
 /* prev / next links */
 .cycle-prev, .cycle-next {
     position: absolute;
