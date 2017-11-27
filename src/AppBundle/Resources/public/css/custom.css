@@ -108,7 +108,7 @@ body {
 
 .navbar-nav > li:active {
     color: #fd1200;
-    background-color: none;
+    background-color: #f8f8f8;
 
 }
 
@@ -116,7 +116,7 @@ body {
     background-image: none;
     color: #fd1200 !important;
     box-shadow: none !important;
-    background-color: none;
+    background-color: #f8f8f8;
 
 }
 
@@ -124,17 +124,29 @@ body {
     margin-top: 10px;
 }
 
+
 .az-sidebar {
     margin: 10px 0 10px;
     background-color: #FFFFFF;
 }
 
+
+.az-sidebar-subcategory-item {
+    line-height: 26px;
+
+}
+
+/**slider**/
+
+
+.az-sidebar-popular{
+    margin: 45px 0 0 0;
+}
 .az-sidebar-popular-item-header {
     color: white;
     background-color: #fd1200;
     padding: 10px;
     text-transform: uppercase;
-    font-weight: bold;
     font-size: 15px;
 }
 
@@ -206,8 +218,9 @@ body {
 }
 
 .btn.focus, .btn:focus, .btn:hover {
-    background-color: #595959;
-    color: #fff;
+    background-color: #ffffff;
+    border: 1px solid #fd1200;
+    color: #fd1200;
 }
 
 button, input, optgroup, select, textarea {
@@ -277,10 +290,10 @@ footer {
 
 .az-sidebar-header {
     color: white;
-    background-color: #cc262c;
-    padding: 10px;
+    background-color: #fd1200;
+    padding: 8px;
     text-transform: uppercase;
-    font-weight: bold;
+    font-size:16px;
 }
 
 .az-sidebar-block-img {
