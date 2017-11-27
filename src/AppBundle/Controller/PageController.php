@@ -14,7 +14,7 @@ class PageController extends Controller
     /**
      * @Route("/page/{slug}", name="page")
      */
-    public function showAction($slug)
+    public function showAction($slug, Request $request)
     {
         $em = $this->get('doctrine.orm.entity_manager');
         $page = $em->getRepository('AppBundle:Page')->findOneBy(['slug' => $slug, 'isActive' => true]);

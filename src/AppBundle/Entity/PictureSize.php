@@ -3,16 +3,16 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Picture Size
  *
  * @ORM\Table(name="picture_sizes")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PictureSizeRepository")
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 class PictureSize
 {
@@ -25,18 +25,24 @@ class PictureSize
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @JMS\Expose
      */
     private $id;
 
     /**
      * @var integer
      * @ORM\Column(name="height", type="integer")
+     *
+     * @JMS\Expose
      */
     private $height;
 
     /**
      * @var integer
      * @ORM\Column(name="width", type="integer")
+     *
+     * @JMS\Expose
      */
     private $width;
 
@@ -60,7 +66,11 @@ class PictureSize
      */
     private $isActive;
 
-
+    /**
+     * Picture Size to string
+     *
+     * @return string
+     */
     public function __toString()
     {
         return $this->height . " x " . $this->width;

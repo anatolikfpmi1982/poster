@@ -39,3 +39,13 @@ _sonata_admin:
 sonata_admin_settings:
     pattern:  /admin/settings
     defaults: { _controller: AppBundle:Admin:settings }
+
+psizes:
+    type: rest
+    prefix: /api
+    resource: AppBundle\Controller\PictureSizesController
+
+underframes:
+    type: rest
+    prefix: /api
+    resource: AppBundle\Controller\UnderframesController

@@ -4,12 +4,13 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Underframe
  * @ORM\Table(name="underframes")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UnderframeRepository")
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 class Underframe implements ImageInterface
 {
@@ -26,18 +27,24 @@ class Underframe implements ImageInterface
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @JMS\Expose
      */
     private $id;
 
     /**
      * @var float
      * @ORM\Column(name="depth", type="float")
+     *
+     * @JMS\Expose
      */
     private $depth;
 
     /**
      * @var float
      * @ORM\Column(name="price", type="float")
+     *
+     * @JMS\Expose
      */
     private $price;
 
@@ -45,6 +52,7 @@ class Underframe implements ImageInterface
      * @var float
      *
      * @ORM\Column(name="ratio", type="float")
+     * @JMS\Expose
      */
     private $ratio;
 
@@ -66,6 +74,7 @@ class Underframe implements ImageInterface
      * @var Image
      * @ORM\OneToOne(targetEntity="Image", fetch="EXTRA_LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     *
      */
     private $image;
 
@@ -257,5 +266,14 @@ class Underframe implements ImageInterface
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * @JMS\VirtualProperty
+     * @JMS\SerializedName("image")
+     */
+    public function img()
+    {
+        return '/files/underframes/origin/' . $this->image->getFilename();
     }
 }

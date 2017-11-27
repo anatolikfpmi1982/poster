@@ -131,3 +131,14 @@ doctrine_migrations:
     table_name: migration_versions
     name: Application Migrations
     #organize_migrations: false # Version >=1.2 Possible values are: "BY_YEAR", "BY_YEAR_AND_MONTH", false
+
+fos_rest:
+    param_fetcher_listener: true
+    body_listener: true
+    format_listener: true
+    view:
+        view_response_listener: 'force'
+        formats:
+             json: true
+    routing_loader:
+            default_format: json

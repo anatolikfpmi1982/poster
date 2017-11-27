@@ -29,8 +29,10 @@ class AppKernel extends Kernel
             new CoopTilleuls\Bundle\AclSonataAdminExtensionBundle\CoopTilleulsAclSonataAdminExtensionBundle(),
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle()
         );
