@@ -2,12 +2,11 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
-use AppBundle\Entity\ImageInterface;
 
 /**
  * Page
@@ -126,9 +125,27 @@ class Picture implements ImageInterface
      */
     private $author;
 
+    /**
+     * @var Popular
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Popular")
+     * @ORM\JoinColumn(name="popular_id", referencedColumnName="id")
+     */
+    private $popular;
 
+    /**
+     * Picture constructor.
+     */
     public function __construct() {
         $this->categories = new ArrayCollection();
+    }
+
+    /**
+     * Return string entity name from admin.
+     *
+     * @return string
+     */
+    public function __toString(){
+        return $this->title . '( #' . $this->id .' )';
     }
 
     /**
@@ -438,4 +455,24 @@ class Picture implements ImageInterface
     {
         return $this->isActive;
     }
+
+    /**
+     * @return Popular
+     */
+    public function getPopular() {
+        return $this->popular;
+    }
+
+    /**
+     * @param Popular|null $popular
+     *
+     * @return Picture
+     */
+    public function setPopular( $popular ) {
+        $this->popular = $popular;
+
+        return $this;
+    }
+
+
 }
