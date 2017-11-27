@@ -15,7 +15,6 @@
             <div class="cycle-prev"></div>
             <div class="cycle-next"></div>
             {% if sliders %}
-
                 {% for slider in sliders %}
                     <img src="/files/slider/max_thumb/{{ slider.image.filename }}"
                          data-date="{{ slider.createdAt|date('M, d') }}"
