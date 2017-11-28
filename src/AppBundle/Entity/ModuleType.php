@@ -5,13 +5,14 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ModuleType
  *
  * @ORM\Table(name="module_types")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ModuleTypeRepository")
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 class ModuleType implements ImageInterface
 {
@@ -29,6 +30,8 @@ class ModuleType implements ImageInterface
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @JMS\Expose
      */
     private $id;
 
@@ -36,6 +39,8 @@ class ModuleType implements ImageInterface
      * @var string
      *
      * @ORM\Column(name="name", type="string")
+     *
+     * @JMS\Expose
      */
     private $name;
 
@@ -43,6 +48,8 @@ class ModuleType implements ImageInterface
      * @var string
      *
      * @ORM\Column(name="service_name", type="string", nullable=true)
+     *
+     * @JMS\Expose
      */
     private $serviceName;
 
@@ -50,6 +57,8 @@ class ModuleType implements ImageInterface
      * @var float
      *
      * @ORM\Column(name="ratio", type="float", nullable=true)
+     *
+     * @JMS\Expose
      */
     private $ratio;
 
@@ -102,7 +111,7 @@ class ModuleType implements ImageInterface
     /**
      * @param string $name
      *
-     * @return Author
+     * @return ModuleType
      */
     public function setName($name)
     {
@@ -123,7 +132,7 @@ class ModuleType implements ImageInterface
      * Set createdAt
      *
      * @param  \DateTime $createdAt
-     * @return Author
+     * @return ModuleType
      */
     public function setCreatedAt($createdAt)
     {
@@ -146,7 +155,7 @@ class ModuleType implements ImageInterface
      * Set updatedAt
      *
      * @param  \DateTime $updatedAt
-     * @return Author
+     * @return ModuleType
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -175,7 +184,7 @@ class ModuleType implements ImageInterface
 
     /**
      * @param boolean $isActive
-     * @return Author
+     * @return ModuleType
      */
     public function setIsActive($isActive)
     {
@@ -245,11 +254,11 @@ class ModuleType implements ImageInterface
     /**
      * Set image
      *
-     * @param \AppBundle\Entity\Image $image
+     * @param Image $image
      *
      * @return ModuleType
      */
-    public function setImage(\AppBundle\Entity\Image $image = null)
+    public function setImage(Image $image = null)
     {
         $this->image = $image;
 
@@ -259,10 +268,19 @@ class ModuleType implements ImageInterface
     /**
      * Get image
      *
-     * @return \AppBundle\Entity\Image
+     * @return Image
      */
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * @JMS\VirtualProperty
+     * @JMS\SerializedName("image_link")
+     */
+    public function getImageLink()
+    {
+        return '/files/' . $this->image->getEntityName() . '/' . $this->image->getFilename();
     }
 }

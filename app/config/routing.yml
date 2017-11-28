@@ -40,12 +40,37 @@ sonata_admin_settings:
     pattern:  /admin/settings
     defaults: { _controller: AppBundle:Admin:settings }
 
-psizes:
+picture_sizes:
     type: rest
     prefix: /api
-    resource: AppBundle\Controller\PictureSizesController
+    resource: AppBundle\Controller\Api\PictureSizesController
 
 underframes:
     type: rest
     prefix: /api
-    resource: AppBundle\Controller\UnderframesController
+    resource: AppBundle\Controller\Api\UnderframesController
+
+module_types:
+    type: rest
+    prefix: /api
+    resource: AppBundle\Controller\Api\ModuleTypesController
+
+mats:
+    type: rest
+    prefix: /api
+    resource: AppBundle\Controller\Api\MatsController
+
+frame_materials:
+    type: rest
+    prefix: /api
+    resource: AppBundle\Controller\Api\FrameMaterialsController
+
+frames:
+    type: rest
+    prefix: /api
+    resource: AppBundle\Controller\Api\FramesController
+
+banner_materials:
+    type: rest
+    prefix: /api
+    resource: AppBundle\Controller\Api\BannerMaterialsController

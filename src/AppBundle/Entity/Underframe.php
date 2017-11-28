@@ -270,10 +270,10 @@ class Underframe implements ImageInterface
 
     /**
      * @JMS\VirtualProperty
-     * @JMS\SerializedName("image")
+     * @JMS\SerializedName("image_link")
      */
-    public function img()
+    public function getImageLink()
     {
-        return '/files/underframes/' . $this->image->getFilename();
+        return '/files/' . $this->image->getEntityName() . '/' . $this->image->getFilename();
     }
 }

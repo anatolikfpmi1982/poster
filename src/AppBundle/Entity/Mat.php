@@ -3,16 +3,16 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Mat
  *
  * @ORM\Table(name="mats")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\MatRepository")
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 class Mat
 {
@@ -25,18 +25,24 @@ class Mat
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @JMS\Expose
      */
     private $id;
 
     /**
      * @var string
      * @ORM\Column(name="title", type="string", length=100)
+     *
+     * @JMS\Expose
      */
     private $title;
 
     /**
      * @var string
      * @ORM\Column(name="color", type="string", length=10)
+     *
+     * @JMS\Expose
      */
     private $color;
 
@@ -183,5 +189,14 @@ class Mat
 
         return $this;
     }
-}
 
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+}

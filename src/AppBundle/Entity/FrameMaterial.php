@@ -13,6 +13,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="frame_materials")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\FrameMaterialRepository")
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 class FrameMaterial implements ImageInterface
 {
@@ -30,6 +32,8 @@ class FrameMaterial implements ImageInterface
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @JMS\Expose
      */
     private $id;
 
@@ -37,6 +41,8 @@ class FrameMaterial implements ImageInterface
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=100)
+     *
+     * @JMS\Expose
      */
 
     private $title;
@@ -45,6 +51,8 @@ class FrameMaterial implements ImageInterface
      * @var float
      *
      * @ORM\Column(name="ratio", type="float")
+     *
+     * @JMS\Expose
      */
     private $ratio;
 
@@ -52,6 +60,8 @@ class FrameMaterial implements ImageInterface
      * @var integer
      *
      * @ORM\Column(name="min_area", type="float")
+     *
+     * @JMS\Expose
      */
     private $minArea;
 
@@ -59,6 +69,8 @@ class FrameMaterial implements ImageInterface
      * @var integer
      *
      * @ORM\Column(name="max_area", type="float")
+     *
+     * @JMS\Expose
      */
     private $maxArea;
 
@@ -66,6 +78,8 @@ class FrameMaterial implements ImageInterface
      * @var float
      *
      * @ORM\Column(name="min_price", type="float")
+     *
+     * @JMS\Expose
      */
     private $minPrice;
 
@@ -73,6 +87,8 @@ class FrameMaterial implements ImageInterface
      * @var float
      *
      * @ORM\Column(name="max_price", type="float")
+     *
+     * @JMS\Expose
      */
     private $maxPrice;
 
@@ -341,11 +357,11 @@ class FrameMaterial implements ImageInterface
     /**
      * Set image
      *
-     * @param \AppBundle\Entity\Image $image
+     * @param Image $image
      *
      * @return FrameMaterial
      */
-    public function setImage(\AppBundle\Entity\Image $image = null)
+    public function setImage(Image $image = null)
     {
         $this->image = $image;
 
@@ -355,10 +371,19 @@ class FrameMaterial implements ImageInterface
     /**
      * Get image
      *
-     * @return \AppBundle\Entity\Image
+     * @return Image
      */
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * @JMS\VirtualProperty
+     * @JMS\SerializedName("image_link")
+     */
+    public function getImageLink()
+    {
+        return '/files/' . $this->image->getEntityName() . '/' . $this->image->getFilename();
     }
 }

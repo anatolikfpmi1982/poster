@@ -188,5 +188,14 @@ class PictureSize
 
         return $this;
     }
+
+    /**
+     * @JMS\VirtualProperty
+     * @JMS\SerializedName("title")
+     */
+    public function getTitle()
+    {
+        return $this->height . ' X ' . $this->width . ' см';
+    }
 }
 

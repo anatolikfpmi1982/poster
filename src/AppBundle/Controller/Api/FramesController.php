@@ -1,12 +1,12 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\Api;
 
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class UnderframesController extends Controller implements ClassResourceInterface
+class FramesController extends Controller implements ClassResourceInterface
 {
     /**
      * Collection get action
@@ -16,7 +16,7 @@ class UnderframesController extends Controller implements ClassResourceInterface
     public function cgetAction(Request $request)
     {
         $em = $this->get('doctrine.orm.entity_manager');
-        $entities = $em->getRepository('AppBundle:Underframe')->findBy(['isActive' => true]);
+        $entities = $em->getRepository('AppBundle:Frame')->findBy(['isActive' => true]);
 
         return $entities;
     }

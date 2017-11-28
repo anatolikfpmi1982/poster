@@ -13,6 +13,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Frame
  * @ORM\Table(name="frames")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\FrameRepository")
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 class Frame implements ImageInterface
 {
@@ -29,6 +31,8 @@ class Frame implements ImageInterface
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @JMS\Expose
      */
     private $id;
 
@@ -37,6 +41,8 @@ class Frame implements ImageInterface
      * @ORM\Column(name="title", type="string", length=300)
      *
      * @Assert\Length(min=1, max=100)
+     *
+     * @JMS\Expose
      */
     private $title;
 
@@ -50,12 +56,16 @@ class Frame implements ImageInterface
     /**
      * @var float
      * @ORM\Column(name="height", type="float")
+     *
+     * @JMS\Expose
      */
     private $height;
 
     /**
      * @var float
      * @ORM\Column(name="width", type="float")
+     *
+     * @JMS\Expose
      */
     private $width;
 
@@ -63,12 +73,16 @@ class Frame implements ImageInterface
      * @var float
      *
      * @ORM\Column(name="ratio", type="float")
+     *
+     * @JMS\Expose
      */
     private $ratio;
 
     /**
      * @var boolean
      * @ORM\Column(name="use_ratio", type="boolean")
+     *
+     * @JMS\Expose
      */
     private $useRatio;
 
@@ -429,5 +443,17 @@ class Frame implements ImageInterface
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * @JMS\VirtualProperty
+     * @JMS\SerializedName("image_link")
+     */
+    public function getImageLink()
+    {
+        if(count($this->images) > 0) {
+            return '/files/' . $this->images[0]->getEntityName() . '/mini_thumb/' . $this->images[0]->getFilename();
+        }
+
     }
 }
