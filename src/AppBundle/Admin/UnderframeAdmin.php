@@ -127,7 +127,7 @@ class UnderframeAdmin extends AbstractAdmin
      */
     public function preRemove($underframe){
         if($underframe instanceof Underframe) {
-            $this->imageManagement->deleteImages($underframe->getImages());
+            $this->imageManagement->deleteImage($underframe->getImage());
         }
     }
 
@@ -139,7 +139,7 @@ class UnderframeAdmin extends AbstractAdmin
         // Cycle through each field
         foreach ($this->getFormFieldDescriptions() as $fieldName => $fieldDescription) {
             // detect embedded Admins that manage Images
-            if ($fieldDescription->getType() === 'sonata_type_collection' &&
+            if ($fieldDescription->getType() === 'sonata_type_admin' &&
                 ($associationMapping = $fieldDescription->getAssociationMapping()) &&
                 $associationMapping['targetEntity'] === 'AppBundle\Entity\Image'
             ) {

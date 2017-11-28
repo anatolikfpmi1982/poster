@@ -55,11 +55,7 @@ class ModuleTypeSubscriber
 
         if($image->getOriginFile() && file_exists($image->getOriginFile())) {
             $this->container->get('helper.imageresizer')
-                ->resizeImage($image->getOriginFile(), $image->getThumbBasePath(), $moduleType::THUMB_IMAGE_HEIGHT, $moduleType::THUMB_IMAGE_WIDTH);
-            $this->container->get('helper.imageresizer')
-                ->resizeImage($image->getOriginFile(), $image->getMiniThumbBasePath(), $moduleType::THUMB_MINI_IMAGE_HEIGHT, $moduleType::THUMB_MINI_IMAGE_WIDTH);
-            $this->container->get('helper.imageresizer')
-                ->resizeImage($image->getOriginFile(), $image->getBasePath(), $moduleType::IMAGE_HEIGHT, $moduleType::IMAGE_WIDTH);
+                ->copyImage($image->getOriginFile(), $image->getBasePath(), $image->getFilename());
             unlink($image->getOriginFile());
         }
     }

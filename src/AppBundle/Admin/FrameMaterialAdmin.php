@@ -160,7 +160,7 @@ class FrameMaterialAdmin extends AbstractAdmin
      */
     public function preRemove($material){
         if($material instanceof FrameMaterial) {
-            $this->imageManagement->deleteImages($material->getImages());
+            $this->imageManagement->deleteImage($material->getImage());
         }
     }
 
@@ -173,7 +173,7 @@ class FrameMaterialAdmin extends AbstractAdmin
         foreach ($this->getFormFieldDescriptions() as $fieldName => $fieldDescription) {
 
             // detect embedded Admins that manage Images
-            if ($fieldDescription->getType() === 'sonata_type_collection' &&
+            if ($fieldDescription->getType() === 'sonata_type_admin' &&
                 ($associationMapping = $fieldDescription->getAssociationMapping()) &&
                 $associationMapping['targetEntity'] === 'AppBundle\Entity\Image'
             ) {

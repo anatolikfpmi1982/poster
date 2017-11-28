@@ -70,6 +70,22 @@ class ImageResizer {
     }
 
     /**
+     * Resize an image
+     *
+     * @param string $image (The full image path with filename and extension)
+     * @param string $newPath (The new path to where the image needs to be stored)
+     * @param int $height (The new height to resize the image to)
+     * @param int $width (The new width to resize the image to)
+     * @return string (The new path to the reized image)
+     */
+    public function copyImage($path, $newPath, $filename){
+        $filesystem = new Filesystem();
+        $filesystem->mkdir($newPath, 0744);
+
+        copy($path, $newPath . '/' . $filename);
+    }
+
+    /**
      *
      * Gets image details such as the extension, sizes and filename and returns them as a standard object.
      *

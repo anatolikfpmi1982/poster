@@ -126,7 +126,7 @@ class ModuleTypeAdmin extends AbstractAdmin
      */
     public function preRemove($moduleType){
         if($moduleType instanceof ModuleType) {
-            $this->imageManagement->deleteImages($moduleType->getImages());
+            $this->imageManagement->deleteImage($moduleType->getImage());
         }
     }
 
@@ -139,7 +139,7 @@ class ModuleTypeAdmin extends AbstractAdmin
         foreach ($this->getFormFieldDescriptions() as $fieldName => $fieldDescription) {
 
             // detect embedded Admins that manage Images
-            if ($fieldDescription->getType() === 'sonata_type_collection' &&
+            if ($fieldDescription->getType() === 'sonata_type_admin' &&
                 ($associationMapping = $fieldDescription->getAssociationMapping()) &&
                 $associationMapping['targetEntity'] === 'AppBundle\Entity\Image'
             ) {

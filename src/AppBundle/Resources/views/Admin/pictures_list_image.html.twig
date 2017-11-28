@@ -3,7 +3,7 @@
 {% block field %}
     <div>
         {% if object.image != null %}
-            <img src="/files/pictures/mini_thumb/{{ object.image.getFilename() }}" class="admin-preview" /><br>
+            <img src="/files/{{ object.image.getEntityName() }}/mini_thumb/{{ object.image.getFilename() }}" class="admin-preview" /><br>
         {% else %}
             <span>No picture</span>
         {% endif %}

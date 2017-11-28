@@ -72,7 +72,7 @@ class Underframe implements ImageInterface
 
     /**
      * @var Image
-     * @ORM\OneToOne(targetEntity="Image", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Image", fetch="EAGER", cascade={"persist"})
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
      *
      */
@@ -274,6 +274,6 @@ class Underframe implements ImageInterface
      */
     public function img()
     {
-        return '/files/underframes/origin/' . $this->image->getFilename();
+        return '/files/underframes/' . $this->image->getFilename();
     }
 }

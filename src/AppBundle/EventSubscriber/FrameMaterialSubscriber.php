@@ -55,11 +55,7 @@ class FrameMaterialSubscriber
 
         if($image->getOriginFile() && file_exists($image->getOriginFile())) {
             $this->container->get('helper.imageresizer')
-                ->resizeImage($image->getOriginFile(), $image->getThumbBasePath(), $material::THUMB_IMAGE_HEIGHT, $material::THUMB_IMAGE_WIDTH);
-            $this->container->get('helper.imageresizer')
-                ->resizeImage($image->getOriginFile(), $image->getMiniThumbBasePath(), $material::THUMB_MINI_IMAGE_HEIGHT, $material::THUMB_MINI_IMAGE_WIDTH);
-            $this->container->get('helper.imageresizer')
-                ->resizeImage($image->getOriginFile(), $image->getBasePath(), $material::IMAGE_HEIGHT, $material::IMAGE_WIDTH);
+                ->copyImage($image->getOriginFile(), $image->getBasePath(), $image->getFilename());
             unlink($image->getOriginFile());
         }
     }

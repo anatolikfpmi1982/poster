@@ -10,4 +10,15 @@ namespace AppBundle\Repository;
  */
 class PageRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function findOneActiveBySlug($slug) {
+        return $this->createQueryBuilder( 'page' )
+            ->where( 'page.isActive = :status' )
+            ->andWhere( 'page.slug = :slug' )
+            ->setMaxResults(1)
+            ->setParameter( 'status', true )
+            ->setParameter( 'slug', $slug )
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -55,11 +55,7 @@ class UnderframeSubscriber
 
         if($image->getOriginFile() && file_exists($image->getOriginFile())) {
             $this->container->get('helper.imageresizer')
-                ->resizeImage($image->getOriginFile(), $image->getThumbBasePath(), $underframe::THUMB_IMAGE_HEIGHT, $underframe::THUMB_IMAGE_WIDTH);
-            $this->container->get('helper.imageresizer')
-                ->resizeImage($image->getOriginFile(), $image->getMiniThumbBasePath(), $underframe::THUMB_MINI_IMAGE_HEIGHT, $underframe::THUMB_MINI_IMAGE_WIDTH);
-            $this->container->get('helper.imageresizer')
-                ->resizeImage($image->getOriginFile(), $image->getBasePath(), $underframe::IMAGE_HEIGHT, $underframe::IMAGE_WIDTH);
+                ->copyImage($image->getOriginFile(), $image->getBasePath(), $image->getFilename());
             unlink($image->getOriginFile());
         }
     }

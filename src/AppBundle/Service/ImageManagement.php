@@ -66,4 +66,15 @@ AND id NOT IN (SELECT DISTINCT image_id FROM pictures)', $rsm);
             $this->em->flush();
         }
     }
+
+    /**
+     * Delete image by ORM.
+     * @param $image
+     */
+    public function deleteImage($image){
+        /** @var Image $image  */
+        $this->em->remove($image);
+        $image->onPreRemove();
+        $this->em->flush();
+    }
 }
