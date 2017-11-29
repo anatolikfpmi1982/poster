@@ -3,40 +3,46 @@
 {% block title %}Картина{% endblock %}
 
 {% block body %}
-    {#<div>#}
-    {#<p>Артикул: {{ picture.code }}</p>#}
-    {#<p>Картина "{{ picture.title }}"</p>#}
-    {#{% if picture.author %}#}
-    {#<p>Автор: {{ picture.author.name }}</p>#}
-    {#{% endif %}#}
-    {#<img src="/files/pictures/thumb/{{ picture.image.getFilename() }}" class="admin-preview" />#}
-    {#</div>#}
-    {#{% block frames_list %} {% include 'AppBundle::Frames/list.block.html.twig' %} {% endblock %}#}
-    {#{% block sizes_list %} {% include 'AppBundle::Sizes/select.block.html.twig' %} {% endblock %}#}
-    <div class="row az-page-main-section-div">Breadcrumb</div>
+    <div class="row az-page-main-section-div">
+        {% include('AppBundle:Component:Blocks/breadcrumb.html.twig') %}
+    </div>
     <div class="row az-page-main-section-div">
         <div class="col-md-9 container-fluid">
             <div class="row az-picture-page-title">Картина "{{ picture.title }}"</div>
-            <div class="row">
+            <div class="row az-picture-page-author-articul-div">
                 <div class="col-md-6">Автор: <a href="#">{{ picture.author.name }}</a></div>
                 <div class="col-md-6">Артикул: {{ picture.code }}</div>
             </div>
-            <div class="row">
+            <div class="row text-center">
                 <img src="/files/pictures/thumb/{{ picture.image.getFilename() }}" class="admin-preview"/>
             </div>
             <div class="row">Выбор цвета стены</div>
         </div>
         <div class="col-md-3 container-fluid">
             <div class="row az-picture-page-constructor-block">Отложенные блок</div>
-            <div class="row az-picture-page-constructor-block">Цена блок</div>
-            <div class="row az-picture-page-constructor-block">Тип блок</div>
-            <div class="row az-picture-page-constructor-block">Размер блок</div>
-            <div class="row az-picture-page-constructor-block">Материал блок</div>
-            <div class="row az-picture-page-constructor-block">Толщина блок</div>
-            <div class="row az-picture-page-constructor-block">Выбор блок</div>
-            <div class="row az-picture-page-constructor-block">Выбор блок</div>
-            <div class="row az-picture-page-constructor-block">Цена блок</div>
+            <div class="row az-picture-page-constructor-block">
+                {% include('AppBundle:Component:Constructor/price.html.twig') %}
+            </div>
+            <div class="row az-picture-page-constructor-block">
+                {% include('AppBundle:Component:Constructor/type.html.twig') %}
+            </div>
+            <div class="row az-picture-page-constructor-block">
+                {% include('AppBundle:Component:Constructor/size.html.twig') %}
+            </div>
+            <div class="row az-picture-page-constructor-block">
+                {% include('AppBundle:Component:Constructor/material.html.twig') %}
+            </div>
+            <div class="row az-picture-page-constructor-block">
+                {% include('AppBundle:Component:Constructor/thickness.html.twig') %}
+            </div>
+            <div class="row az-picture-page-constructor-block">
+                {% include('AppBundle:Component:Constructor/choose.html.twig') %}
+            </div>
+            <div class="row az-picture-page-constructor-block">
+                {% include('AppBundle:Component:Constructor/price.html.twig') %}
+            </div>
             <div class="row az-picture-page-constructor-block">Соц сети блок</div>
         </div>
     </div>
+    {% include('AppBundle:Component:Blocks/similar.html.twig') %}
 {% endblock %}

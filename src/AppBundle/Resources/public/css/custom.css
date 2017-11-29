@@ -465,3 +465,64 @@ footer {
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
+.az-picture-page-sidebar-price-btn {
+    min-width: 80px;
+    max-width: 160px;
+    width: 80px;
+    padding: 5px 5px;
+    font: 15px 'Open Sans', 'arial', 'helvetica', 'sans-serif';
+    line-height: 1;
+}
+
+.az-picture-page-sidebar-price-btn-div-left {
+    padding-left: 0;
+}
+
+.az-picture-page-sidebar-price-btn-div-right {
+    padding-right: 0;
+    padding-left: 10px;
+}
+
+.az-picture-page-hint {
+    border: 1px dashed #fd1200;
+    color: black;
+    background-color: #ffffff;
+    padding: 3px 5px 3px 5px;
+    font-size: 9px;
+}
+
+.az-picture-page-sidebar-header-block {
+    padding: 10px;
+    font-size: 12px;
+}
+
+.az-picture-page-sidebar-size-div-left {
+    /*padding-left: 0;*/
+}
+
+.az-picture-page-sidebar-size-div-body {
+    padding: 5px;
+}
+
+.az-picture-page-sidebar-size-select {
+    width: 100%;
+}
+
+.az-picture-page-sidebar-div-right {
+    padding-top: 10px;
+}
+
+.az-picture-page-material-radio-div {
+    margin-bottom: 5px;
+}
+
+.az-picture-page-title {
+    font: 45px 'fregatregular', 'arial', 'sans-serif';
+}
+
+.az-picture-page-author-articul-div {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}

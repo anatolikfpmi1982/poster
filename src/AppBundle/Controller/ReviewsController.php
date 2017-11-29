@@ -2,14 +2,13 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class ReviewsController
  */
-class ReviewsController extends Controller
+class ReviewsController extends FrontController
 {
     /**
      * @Route("/reviews", name="reviews")
@@ -17,7 +16,6 @@ class ReviewsController extends Controller
     public function indexAction(Request $request)
     {
         $em    = $this->get('doctrine.orm.entity_manager');
-
         $queryBuilder = $em->getRepository('AppBundle:Review')->createQueryBuilder('r')->where('r.isActive = true');
         $query = $queryBuilder->getQuery();
 
@@ -28,8 +26,14 @@ class ReviewsController extends Controller
             3/*limit per page*/
         );
 
+        $this->blocks = [ 'CategoryMenu' => 1, 'Popular' => 2 , 'MainMenu' => 3 ];
+        $this->menu = '/reviews';
+        $this->doBlocks();
+
+        $this->data['pagination'] = $pagination;
+
         // parameters to template
-        return $this->render('AppBundle:Reviews:index.html.twig', array('pagination' => $pagination));
+        return $this->render('AppBundle:Reviews:index.html.twig', $this->data);
     }
 
 }

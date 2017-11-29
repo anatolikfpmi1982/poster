@@ -36,6 +36,11 @@ class Image
     const THUMB_MINI_IMAGE_WIDTH = 150;
 
     /** thumb sub folder */
+    const THUMB_SMALL_IMAGE_FOLDER = 'small_thumb/';
+    const THUMB_SMALL_IMAGE_HEIGHT = 38;
+    const THUMB_SMALL_IMAGE_WIDTH = 54;
+
+    /** thumb sub folder */
     const THUMB_MAX_IMAGE_FOLDER = 'max_thumb/';
     const THUMB_MAX_IMAGE_HEIGHT = 600;
     const THUMB_MAX_IMAGE_WIDTH = 800;
@@ -266,6 +271,11 @@ class Image
         if (file_exists($file)) {
             unlink($file);
         }
+
+        $file = $this->getSmallThumbBaseFile();
+        if (file_exists($file)) {
+            unlink($file);
+        }
     }
 
     /**
@@ -320,6 +330,24 @@ class Image
     public function getMiniThumbBasePath()
     {
         return $this->getBasePath().self::THUMB_MINI_IMAGE_FOLDER;
+    }
+
+    /**
+     * Get thumb img file
+     * @return string
+     */
+    public function getSmallThumbBaseFile()
+    {
+        return $this->getBasePath().self::THUMB_SMALL_IMAGE_FOLDER.$this->filename;
+    }
+
+    /**
+     * Get thumb img path
+     * @return string
+     */
+    public function getSmallThumbBasePath()
+    {
+        return $this->getBasePath().self::THUMB_SMALL_IMAGE_FOLDER;
     }
 
     /**

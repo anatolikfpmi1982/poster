@@ -25,7 +25,9 @@ class PicturesController extends FrontController {
 
         $this->get( 'app.session_manager' )->addLastVisitedItem( $picture->getId() );
 
-        $this->data['picture'] = $picture;
+        $this->data['picture']     = $picture;
+        $this->data['pictureSize'] = $em->getRepository( 'AppBundle:PictureSize' )->findBy( [ 'isActive' => true ], [ 'width' => 'ASC' ] );
+        $this->data['materials'] = $em->getRepository( 'AppBundle:BannerMaterial' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
 
         // parameters to template
         return $this->render( 'AppBundle:Pictures:show.html.twig', $this->data );
