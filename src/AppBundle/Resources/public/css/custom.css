@@ -260,6 +260,11 @@ footer {
     padding: 10px 0;
 }
 
+.az-up-footer-img{
+    border: 2px solid #fd1200;
+    border-radius: 5px;
+    padding: 5px;
+}
 /**mobile**/
 
 @media screen and (min-width: 480px) and (max-width: 800px) {
