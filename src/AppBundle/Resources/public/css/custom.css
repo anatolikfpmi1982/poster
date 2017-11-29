@@ -371,20 +371,28 @@ footer {
     top: 30%;
     width: 100%;
     z-index: 600;
-    background: black;
     color: white;
-    padding: 15px;
+    padding:  15px 80px;
     opacity: .8;
     font-size: larger;
 }
 
 .az-slider-title {
-    font: 45px 'Open Sans', 'arial', 'helvetica', 'sans-serif';
+    font: 40px 'Open Sans', 'arial', 'helvetica', 'sans-serif';
     display: block;
     text-align: center;
     opacity: 1;
+    padding: 10px 0;
+    background-color: rgba(0, 0, 0, 0.8)
 
 }
+
+.az-slider-description{
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: block;
+    padding: 15px;}
+
 
 .slider_item_cat {
     font: 14px 'fregatregular', 'arial', 'helvetica', 'sans-serif';
@@ -397,29 +405,45 @@ footer {
 .cycle-prev, .cycle-next {
     position: absolute;
     top: 0;
-    width: 30%;
+    width: 50%;
     opacity: 0;
     filter: alpha(opacity=0);
-    z-index: 800;
     height: 100%;
     cursor: pointer;
+    z-index: 800;
 }
 
 .cycle-prev {
-    left: 0;
-    background: url(http://malsup.github.com/images/left.png) 50% 50% no-repeat;
+    display: block;
+    color:#fff;
+    left: 10px;
+    position: absolute;
+    margin-top: 1px;
+    margin-left: -8px;
+    background: url('../images/prev.png')5% 50% no-repeat;
+    opacity: 1;
+
 }
 
 .cycle-next {
-    right: 0;
-    background: url(http://malsup.github.com/images/right.png) 50% 50% no-repeat;
+    background: url('../images/next.png')95% 50% no-repeat;
+    display: block;
+    color: #fff;
+    right: 10px;
+    position: absolute;
+    margin-top: 1px;
+    margin-left: -8px;
+    opacity: 1;
 }
 
 .cycle-prev:hover, .cycle-next:hover {
-    opacity: .7;
-    filter: alpha(opacity=70)
-}
 
+    background: url('../images/prev_hover.png')5% 50% no-repeat;
+
+}
+.cycle-next:hover {
+    background: url('../images/next_hover.png')95% 50% no-repeat;
+}
 .disabled {
     opacity: .5;
     filter: alpha(opacity=50);
