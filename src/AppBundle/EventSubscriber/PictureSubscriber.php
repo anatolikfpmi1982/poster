@@ -31,8 +31,19 @@ class PictureSubscriber
     public function postPersist(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-        if($entity instanceof Picture && $image = $entity->getImage()) {
-            $this->createResize($entity, $image);
+        if($entity instanceof Picture) {
+            if($image = $entity->getImage()) {
+                $this->createResize($entity, $image);
+            }
+            if($image = $entity->getImageBanner()) {
+                $this->createResize($entity, $image);
+            }
+            if($image = $entity->getImageModule()) {
+                $this->createResize($entity, $image);
+            }
+            if($image = $entity->getImageFrame()) {
+                $this->createResize($entity, $image);
+            }
         }
     }
 
@@ -42,8 +53,19 @@ class PictureSubscriber
     public function postUpdate(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-        if($entity instanceof Picture && $image = $entity->getImage()) {
-            $this->createResize($entity, $image);
+        if($entity instanceof Picture) {
+            if($image = $entity->getImage()) {
+                $this->createResize($entity, $image);
+            }
+            if($image = $entity->getImageBanner()) {
+                $this->createResize($entity, $image);
+            }
+            if($image = $entity->getImageModule()) {
+                $this->createResize($entity, $image);
+            }
+            if($image = $entity->getImageFrame()) {
+                $this->createResize($entity, $image);
+            }
         }
     }
 
