@@ -8,13 +8,18 @@
     </div>
     <div class="row az-page-main-section-div">
         <div class="col-md-9 container-fluid">
-            <div class="row az-picture-page-title">Картина "{{ picture.title }}"</div>
+            <div class="row page-title az-picture-page-title">Картина "{{ picture.title }}"</div>
             <div class="row az-picture-page-author-articul-div">
                 <div class="col-md-6">Автор: <a href="#">{{ picture.author.name }}</a></div>
                 <div class="col-md-6">Артикул: {{ picture.code }}</div>
             </div>
+            {% if picture.image and picture.image.getFilename() %}
+                {% set img = '/files/pictures/thumb/' ~ picture.image.getFilename() %}
+            {% else %}
+                {% set img = asset('bundles/app/images/default_picture.jpg') %}
+            {% endif %}
             <div class="row text-center">
-                <img src="/files/pictures/thumb/{{ picture.image.getFilename() }}" class="admin-preview"/>
+                <img src="{{ img }}" class="admin-preview"/>
             </div>
             <div class="row">Выбор цвета стены</div>
         </div>

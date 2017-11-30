@@ -315,8 +315,10 @@ class Picture implements ImageInterface
      */
     public function setImage($image)
     {
-        $this->name = $image->getName();
-        $this->image = $image;
+        if($image instanceof ImageInterface) {
+            $this->name  = $image->getName();
+            $this->image = $image;
+        }
 
         return $this;
     }

@@ -2,17 +2,21 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class CategoriesController
  */
-class CategoriesController extends Controller
+class CategoriesController extends FrontController
 {
     /**
+     * @param string $slug
+     * @param Request $request
+     *
      * @Route("/category/{slug}", name="category")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showAction($slug, Request $request)
     {
@@ -37,8 +41,15 @@ class CategoriesController extends Controller
             $lastVisited = $em->getRepository('AppBundle:Picture')->findLastVisited($lastVisited);
         }
 
+        $this->blocks = [ 'CategoryMenu' => 1, 'Popular' => 2 , 'MainMenu' => 3 ];
+        $this->menu = '/';
+        $this->doBlocks();
+        $this->data['pagination'] = $pagination;
+        $this->data['category'] = $category;
+        $this->data['lastVisited'] = $lastVisited;
+
         // parameters to template
-        return $this->render('AppBundle:Categories:show.html.twig', array('pagination' => $pagination, 'category' => $category, 'lastVisited' => $lastVisited));
+        return $this->render('AppBundle:Categories:show.html.twig', $this->data);
     }
 
 }

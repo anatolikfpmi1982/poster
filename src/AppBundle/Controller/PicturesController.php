@@ -28,6 +28,7 @@ class PicturesController extends FrontController {
         $this->data['picture']     = $picture;
         $this->data['pictureSize'] = $em->getRepository( 'AppBundle:PictureSize' )->findBy( [ 'isActive' => true ], [ 'width' => 'ASC' ] );
         $this->data['materials'] = $em->getRepository( 'AppBundle:BannerMaterial' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
+        $this->data['thicknesses'] = $em->getRepository( 'AppBundle:Underframe' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
 
         // parameters to template
         return $this->render( 'AppBundle:Pictures:show.html.twig', $this->data );
