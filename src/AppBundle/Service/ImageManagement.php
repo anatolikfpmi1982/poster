@@ -43,6 +43,9 @@ AND id NOT IN (SELECT DISTINCT image_id FROM underframes)
 AND id NOT IN (SELECT DISTINCT image_id FROM frame_materials)
 AND id NOT IN (SELECT DISTINCT image_id FROM banner_materials)
 AND id NOT IN (SELECT DISTINCT image_id FROM module_types)
+AND id NOT IN (SELECT DISTINCT image_banner_id FROM pictures)
+AND id NOT IN (SELECT DISTINCT image_module_id FROM pictures)
+AND id NOT IN (SELECT DISTINCT image_frame_id FROM pictures)
 AND id NOT IN (SELECT DISTINCT image_id FROM pictures)', $rsm);
 
         $images = $query->getResult();

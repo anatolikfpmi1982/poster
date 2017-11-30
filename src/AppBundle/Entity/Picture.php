@@ -119,6 +119,27 @@ class Picture implements ImageInterface
     private $image;
 
     /**
+     * @var Image
+     * @ORM\OneToOne(targetEntity="Image", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="image_banner_id", referencedColumnName="id")
+     */
+    private $imageBanner;
+
+    /**
+     * @var Image
+     * @ORM\OneToOne(targetEntity="Image", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="image_module_id", referencedColumnName="id")
+     */
+    private $imageModule;
+
+    /**
+     * @var Image
+     * @ORM\OneToOne(targetEntity="Image", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="image_frame_id", referencedColumnName="id")
+     */
+    private $imageFrame;
+
+    /**
      * @var Author
      * @ORM\ManyToOne(targetEntity="Author")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
@@ -315,8 +336,10 @@ class Picture implements ImageInterface
      */
     public function setImage($image)
     {
-        $this->name = $image->getName();
-        $this->image = $image;
+        if($image instanceof ImageInterface) {
+            $this->name  = $image->getName();
+            $this->image = $image;
+        }
 
         return $this;
     }
@@ -475,4 +498,76 @@ class Picture implements ImageInterface
     }
 
 
+
+    /**
+     * Set imageBanner
+     *
+     * @param \AppBundle\Entity\Image $imageBanner
+     *
+     * @return Picture
+     */
+    public function setImageBanner(\AppBundle\Entity\Image $imageBanner = null)
+    {
+        $this->imageBanner = $imageBanner;
+
+        return $this;
+    }
+
+    /**
+     * Get imageBanner
+     *
+     * @return \AppBundle\Entity\Image
+     */
+    public function getImageBanner()
+    {
+        return $this->imageBanner;
+    }
+
+    /**
+     * Set imageModule
+     *
+     * @param \AppBundle\Entity\Image $imageModule
+     *
+     * @return Picture
+     */
+    public function setImageModule(\AppBundle\Entity\Image $imageModule = null)
+    {
+        $this->imageModule = $imageModule;
+
+        return $this;
+    }
+
+    /**
+     * Get imageModule
+     *
+     * @return \AppBundle\Entity\Image
+     */
+    public function getImageModule()
+    {
+        return $this->imageModule;
+    }
+
+    /**
+     * Set imageFrame
+     *
+     * @param \AppBundle\Entity\Image $imageFrame
+     *
+     * @return Picture
+     */
+    public function setImageFrame(\AppBundle\Entity\Image $imageFrame = null)
+    {
+        $this->imageFrame = $imageFrame;
+
+        return $this;
+    }
+
+    /**
+     * Get imageFrame
+     *
+     * @return \AppBundle\Entity\Image
+     */
+    public function getImageFrame()
+    {
+        return $this->imageFrame;
+    }
 }

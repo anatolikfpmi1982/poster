@@ -8,6 +8,23 @@
         </div>
     </div>
     <div class="row az-picture-page-sidebar-size-div-body az-picture-page-sidebar-thickness-div-select">
-
+        {% if thicknesses %}
+        {% set ind = 1 %}
+        {% for thickness in thicknesses %}
+        <div class="col-md-6 container-fluid">
+            <div class="row text-center">
+                <img src="/files/underframes/small_thumb/{{ thickness.image.getFilename() }}" class="az-picture-page-material-img"/>
+            </div>
+            <div class="row text-center az-picture-page-material-radio-div">
+                <input type="radio" class="btn" value="1" title="az-picture-page-thickness" name="az-picture-page-thickness" {% if ind == 1 %}checked{% endif %}/>
+            </div>
+        </div>
+        {% if ind is even %}
+    </div>
+    <div class="row">
+        {% endif %}
+        {% set ind = ind + 1 %}
+        {% endfor %}
+        {% endif %}
     </div>
 </div>

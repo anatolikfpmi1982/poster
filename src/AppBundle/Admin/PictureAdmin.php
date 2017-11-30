@@ -53,7 +53,10 @@ class PictureAdmin extends AbstractAdmin
     {
         $formMapper
             ->with('Main')
-            ->add('image', 'sonata_type_admin', ['required' => true, 'label' => 'Изображение'])
+            ->add('image', 'sonata_type_admin', ['required' => false, 'label' => 'Изображение'])
+            ->add('imageBanner', 'sonata_type_admin', ['required' => true, 'label' => 'Изображение-баннер'])
+            ->add('imageModule', 'sonata_type_admin', ['required' => true, 'label' => 'Изображение-модульное'])
+            ->add('imageFrame', 'sonata_type_admin', ['required' => true, 'label' => 'Изображение-рама'])
 //            ->add('code', null, ['required' => true, 'label' => 'Артикул'])
             ->add('title', null, ['required' => true, 'label' => 'Название'])
             ->add('body', CKEditorType::class, ['required' => true, 'label' => 'Текст'])
