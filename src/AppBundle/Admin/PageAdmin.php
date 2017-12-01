@@ -21,8 +21,10 @@ class PageAdmin extends AbstractAdmin
             ->with('Main')
             ->add('title', null, ['required' => true, 'label' => 'Название'])
             ->add('body', CKEditorType::class, ['required' => true, 'label' => 'Текст'])
-            ->add('slug', null, ['required' => false, 'label' => 'URL'])
-//            ->add('isInMenu', null, ['required' => false, 'label' => 'Отображать в главном меню'])
+            ->add('seoTitle', null, ['required' => false, 'label' => 'SEO - Title'])
+            ->add('seoDescription', null, ['required' => false, 'label' => 'SEO - Description'])
+            ->add('seoKeywords', null, ['required' => false, 'label' => 'SEO - Keywords'])
+            ->add('slug', null, ['required' => false, 'label' => 'Алиас'])
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
             ->end();
     }
@@ -35,10 +37,12 @@ class PageAdmin extends AbstractAdmin
         $listMapper
             ->add('id', null, ['required' => true, 'label' => 'ID'])
             ->add('title', null, ['required' => true, 'label' => 'Название'])
-            ->add('slug', null, ['required' => false, 'label' => 'URL'])
+            ->add('slug', null, ['required' => false, 'label' => 'Алиас'])
+            ->add('seoTitle', null, ['required' => true, 'label' => 'SEO - Title'])
+            ->add('seoDescription', null, ['required' => true, 'label' => 'SEO - Description'])
+            ->add('seoKeywords', null, ['required' => true, 'label' => 'SEO - Keywords'])
 //            ->add('createdAt', null, ['label' => 'Создано'])
 //            ->add('updatedAt', null, ['label' => 'Обновлено'])
-//            ->add('isInMenu', null, ['label' => 'В меню'])
             ->add('isActive', null, ['label' => 'Показывать'])
             ->add(
                 '_action',
@@ -59,7 +63,6 @@ class PageAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('title', null, ['label' => 'Название'])
-//            ->add('isInMenu', null, ['label' => 'В меню'])
             ->add('isActive', null, ['label' => 'Показать'])
         ;
     }

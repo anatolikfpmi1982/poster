@@ -38,6 +38,27 @@ class Page
     /**
      * @var string
      *
+     * @ORM\Column(name="seo_title", type="string", length=200)
+     */
+    private $seoTitle;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="seo_description", type="text")
+     */
+    private $seoDescription;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="seo_keywords", type="text")
+     */
+    private $seoKeywords;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="body", type="text")
      */
     private $body;
@@ -212,5 +233,86 @@ class Page
 
         return $this;
     }
-}
 
+    /**
+     * Set seoTitle
+     *
+     * @param string $seoTitle
+     *
+     * @return Page
+     */
+    public function setSeoTitle($seoTitle)
+    {
+        $this->seoTitle = $seoTitle;
+
+        return $this;
+    }
+
+    /**
+     * Get seoTitle
+     *
+     * @return string
+     */
+    public function getSeoTitle()
+    {
+        return $this->seoTitle;
+    }
+
+    /**
+     * Set seoDescription
+     *
+     * @param string $seoDescription
+     *
+     * @return Page
+     */
+    public function setSeoDescription($seoDescription)
+    {
+        $this->seoDescription = $seoDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get seoDescription
+     *
+     * @return string
+     */
+    public function getSeoDescription()
+    {
+        return $this->seoDescription;
+    }
+
+    /**
+     * Set seoKeywords
+     *
+     * @param string $seoKeywords
+     *
+     * @return Page
+     */
+    public function setSeoKeywords($seoKeywords)
+    {
+        $this->seoKeywords = $seoKeywords;
+
+        return $this;
+    }
+
+    /**
+     * Get seoKeywords
+     *
+     * @return string
+     */
+    public function getSeoKeywords()
+    {
+        return $this->seoKeywords;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+}
