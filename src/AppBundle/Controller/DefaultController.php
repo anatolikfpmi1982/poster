@@ -18,7 +18,7 @@ class DefaultController extends FrontController {
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction( Request $request ) {
-        $this->blocks = [ 'CategoryMenu' => 1, 'Popular' => 2 , 'MainMenu' => 3 ];
+        $this->blocks = [ 'CategoryMenu' => 1, 'Reviews' => 2, 'MainMenu' => 3, 'Popular' => 4 ];
         $this->menu = '/';
         $this->doBlocks();
         $this->data['sliders'] = $this->get( 'blocks.service' )->getSliderItems();

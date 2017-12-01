@@ -26,7 +26,7 @@ class ReviewsController extends FrontController
             3/*limit per page*/
         );
 
-        $this->blocks = [ 'CategoryMenu' => 1, 'Popular' => 2 , 'MainMenu' => 3 ];
+        $this->blocks = [ 'CategoryMenu' => 1, 'Reviews' => 2 , 'MainMenu' => 3 ];
         $this->menu = '/reviews';
         $this->doBlocks();
 

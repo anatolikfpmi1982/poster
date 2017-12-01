@@ -1,8 +1,8 @@
 {% if site_blocks is defined and site_blocks %}
     {% for key, block in site_blocks %}
         {% if block %}
-            {% if key == 'Popular' %}
-                {% include('AppBundle:Component:Blocks/popular.html.twig') %}
+            {% if key == 'Reviews' %}
+                {% include('AppBundle:Component:Blocks/reviews.html.twig') %}
             {% elseif key == 'CategoryMenu' %}
                 {% include('AppBundle:Component:Blocks/menu.html.twig') %}
             {% endif %}

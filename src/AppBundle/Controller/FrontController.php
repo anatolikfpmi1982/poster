@@ -24,6 +24,16 @@ class FrontController extends Controller {
     protected $menu = '';
 
     /**
+     * @var string
+     */
+    protected $pageType = '';
+
+    /**
+     * @var string|int
+     */
+    protected $pageSlug;
+
+    /**
      *
      */
     public function doBlocks() {
@@ -50,9 +60,15 @@ class FrontController extends Controller {
     /**
      * @return array
      */
-    protected function getPopularBlock() {
-//        return $this->get( 'blocks.service' )->getPopularBlock();
+    protected function getReviewsBlock() {
         return $this->get( 'doctrine.orm.entity_manager' )->getRepository( 'AppBundle:Review' )->getLatestReviews();
+    }
+
+    /**
+     * @return array
+     */
+    protected function getPopularBlock() {
+        return $this->get( 'doctrine.orm.entity_manager' )->getRepository( 'AppBundle:Popular' )->findBy( [ ] );
     }
 
     /**
@@ -60,5 +76,12 @@ class FrontController extends Controller {
      */
     protected function getMainMenuBlock() {
         return $this->get( 'blocks.service' )->getMainMenuBlock();
+    }
+
+    /**
+     * @return array
+     */
+    protected function getBreadCrumbBlock() {
+        return $this->get( 'app.breadcrumb_service' )->buildBreadCrumb( $this->pageSlug, $this->pageType );
     }
 }
