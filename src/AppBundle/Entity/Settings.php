@@ -36,7 +36,7 @@ class Settings
     /**
      * @var string
      *
-     * @ORM\Column(name="settings", type="text", nullable=true)
+     * @ORM\Column(name="settings", type="text", nullable=true, length=65535)
      */
     private $settings;
 
