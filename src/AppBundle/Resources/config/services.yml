@@ -39,3 +39,9 @@ services:
         class: AppBundle\EventListener\MenuBuilderListener
         tags:
             - { name: kernel.event_listener, event: sonata.admin.event.configure.menu.sidebar, method: addMenuItems }
+
+    app.breadcrumb_service:
+        class: AppBundle\Service\BreadCrumbService
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@service_container'
