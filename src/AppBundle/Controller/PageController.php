@@ -21,7 +21,7 @@ class PageController extends FrontController {
         $em   = $this->get( 'doctrine.orm.entity_manager' );
         $page = $em->getRepository( 'AppBundle:Page' )->findOneBy( [ 'slug' => $slug, 'isActive' => true ] );
 
-        $this->blocks = [ 'CategoryMenu' => 1, 'Popular' => 2 , 'MainMenu' => 3, 'BreadCrumb' => 4 ];
+        $this->blocks = [ 'CategoryMenu' => 1, 'Reviews' => 2 , 'MainMenu' => 3, 'BreadCrumb' => 4 ];
         $this->menu = '/page/' . $page->getSlug();
         $this->pageSlug = $slug;
         $this->pageType = 'static_page';

@@ -60,8 +60,15 @@ class FrontController extends Controller {
     /**
      * @return array
      */
-    protected function getPopularBlock() {
+    protected function getReviewsBlock() {
         return $this->get( 'doctrine.orm.entity_manager' )->getRepository( 'AppBundle:Review' )->getLatestReviews();
+    }
+
+    /**
+     * @return array
+     */
+    protected function getPopularBlock() {
+        return $this->get( 'doctrine.orm.entity_manager' )->getRepository( 'AppBundle:Popular' )->findBy( [ ] );
     }
 
     /**

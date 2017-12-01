@@ -1,0 +1,53 @@
+{% if picture.image and picture.image.getFilename() %}
+    {% set img = '/files/pictures/thumb/' ~ picture.image.getFilename() %}
+{% else %}
+    {% set img = asset('bundles/app/images/default_picture.jpg') %}
+{% endif %}
+<div class="col-md-4 az-popular-item container">
+    <div class="row az-main-popular-item-img-div">
+        <a href="{{ path('picture', {'id': picture.id}) }}"><img src="{{ img }}" class="az-main-popular-item-img"></a>
+    </div>
+    <div class="row">
+        <div class="az-main-popular-item-header-category">
+            <a href="{{ path('picture', {'id': picture.id}) }}">"{{ picture.title }}"</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="az-main-popular-item-header-category">
+            <a href="{{ path('picture', {'id': picture.id}) }}">Автор: {{ picture.author.name }}</a>
+        </div>
+    </div>
+    {% if picture.categories is defined and picture.categories %}
+        <div class="row">
+            <div class="az-main-popular-item-header-type">
+                {% for category in picture.categories %}
+                    {{ category.title }}{% if not loop.last %},{% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    <div class="row">
+        <div class="az-main-popular-item-header-buttons container-fluid">
+            <div class="row">
+                <div class="col-md-6 text-left">
+                    ID: {{ picture.id }}
+                </div>
+                <div class="col-md-6 text-right">
+                    Артикул: {{ picture.code }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="az-main-popular-item-header-buttons container-fluid">
+            <div class="row">
+                <div class="col-md-6 text-left">
+                    <button class="btn">Заказать</button>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button class="btn">Отложить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

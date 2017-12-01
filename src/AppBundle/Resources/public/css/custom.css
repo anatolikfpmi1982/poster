@@ -12,6 +12,7 @@ body {
     background-image: none;
     background-color: #ffffff;
 }
+
 .az-header-top {
     padding: 20px 0 30px 30px;
 }
@@ -182,6 +183,7 @@ body {
     margin: 10px;
     color: #333333;
 }
+
 .az-popular-item {
     border-bottom: 1px solid #e6e6e6;
     border-top: 1px solid #e6e6e6;
@@ -189,16 +191,18 @@ body {
     padding-bottom: 15px;
 }
 
-.az-popular-item:first-child{
+.az-popular-item:first-child {
     border-left: 1px solid #e6e6e6;
 }
+
 .container-fluid .az-main {
-    padding-left:0;
+    padding-left: 0;
     padding-right: 0;
 }
+
 .az-main {
-    padding-left:0;
-    padding-right:0;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .az-main-popular-item-img-div img {
@@ -509,9 +513,11 @@ footer {
         right: 4px
     }
 }
+
 .az-picture-page-constructor-block:first-child {
     border-top: 1px solid #e6e6e6;
 }
+
 .az-picture-page-constructor-block {
     border-left: 1px solid #e6e6e6;
     border-bottom: 1px dotted #e6e6e6;
@@ -551,9 +557,10 @@ footer {
 
 }
 
-.az-picture-page-sidebar-price{
+.az-picture-page-sidebar-price {
     font-size: 30px;
 }
+
 .az-picture-page-sidebar-size-div-left {
     /*padding-left: 0;*/
 }
@@ -597,19 +604,21 @@ footer {
     border-bottom: 1px solid #e6e6e6;
 }
 
-.az-picture-page-author-articul-div .col-md-6{
+.az-picture-page-author-articul-div .col-md-6 {
     border-left: 1px solid #e6e6e6;
 
 }
-.az-picture-page-author-articul-div .col-md-6:first-child{
+
+.az-picture-page-author-articul-div .col-md-6:first-child {
     border-left: none;
 }
 
-.az-picture-page-author-articul-div .col-md-6 a{
+.az-picture-page-author-articul-div .col-md-6 a {
     color: #333;
     text-decoration: underline;
 }
-.az-picture-page-author-articul-div .col-md-6 a:hover, .az-picture-page-author-articul-div .col-md-6 a:focus{
+
+.az-picture-page-author-articul-div .col-md-6 a:hover, .az-picture-page-author-articul-div .col-md-6 a:focus {
     color: #fd1200;
     text-decoration: none;
 }
@@ -619,7 +628,6 @@ body {
     padding-bottom: 10px;
     background-color: #eeeeee;
 }
-
 
 .az-header-top {
     padding: 20px 0 30px 30px;
@@ -787,7 +795,7 @@ body {
 
 .az-main-popular-item-img-div {
     background-color: #eeeeee;
-    margin: 0 2px;
+    margin: 15px 2px;
 }
 
 .az-main-popular-item-img-div img {
@@ -1118,13 +1126,9 @@ footer {
     font-size: 9px;
 }
 
-
-
 .az-picture-page-sidebar-size-div-left {
     /*padding-left: 0;*/
 }
-
-
 
 .az-picture-page-sidebar-size-select {
     width: 100%;

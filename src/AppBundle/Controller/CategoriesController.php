@@ -41,7 +41,7 @@ class CategoriesController extends FrontController
             $lastVisited = $em->getRepository('AppBundle:Picture')->findLastVisited($lastVisited);
         }
 
-        $this->blocks = [ 'CategoryMenu' => 1, 'Popular' => 2 , 'MainMenu' => 3, 'BreadCrumb' => 4 ];
+        $this->blocks = [ 'CategoryMenu' => 1, 'Reviews' => 2 , 'MainMenu' => 3, 'BreadCrumb' => 4 ];
         $this->menu = '/';
         $this->pageSlug = $slug;
         $this->pageType = 'category';
