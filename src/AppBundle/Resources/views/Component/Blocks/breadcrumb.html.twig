@@ -1,6 +1,6 @@
 <div class="row">
     <nav class="breadcrumb">
-        {% if site_blocks is defined and site_blocks and site_blocks.BreadCrumb %}
+        {% if site_blocks is defined and site_blocks and site_blocks.BreadCrumb is defined and site_blocks.BreadCrumb %}
             <a class="breadcrumb-item" href="/">Главная</a>
             {% for breadcrumb in site_blocks.BreadCrumb|reverse %}
                 {% if not loop.last %}
