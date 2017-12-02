@@ -178,3 +178,11 @@ services:
             - ~
             - AppBundle\Entity\Tag2
             - 'SonataAdminBundle:CRUD'
+    app.admin.picture_colors:
+        class: AppBundle\Admin\PictureColorAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Картины", label: "Цвет картины", show_in_dashboard: true}
+        arguments:
+            - ~
+            - AppBundle\Entity\PictureColor
+            - 'SonataAdminBundle:CRUD'

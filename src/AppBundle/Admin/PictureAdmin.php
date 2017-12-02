@@ -69,6 +69,7 @@ class PictureAdmin extends AbstractAdmin
             ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент', 'empty_data' => '1', 'attr' => ['placeholder' => 1]])
             ->add('categories', null, ['required' => false, 'label' => 'Категории'])
             ->add('similar', null, ['required' => false, 'label' => 'Похожие картины'])
+            ->add('colors', null, ['required' => false, 'label' => 'Цвет картины'])
             ->add('isTop', null, ['required' => false, 'label' => 'Топ'])
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
             ->end();

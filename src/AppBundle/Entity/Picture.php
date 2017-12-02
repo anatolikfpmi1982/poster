@@ -153,6 +153,13 @@ class Picture implements ImageInterface
     private $author;
 
     /**
+     * @var PictureColor
+     * @ORM\ManyToOne(targetEntity="PictureColor")
+     * @ORM\JoinColumn(name="picture_color_id", referencedColumnName="id")
+     */
+    private $color;
+
+    /**
      * @var Popular
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Popular")
      * @ORM\JoinColumn(name="popular_id", referencedColumnName="id")
@@ -174,11 +181,26 @@ class Picture implements ImageInterface
     private $similar;
 
     /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="\AppBundle\Entity\PictureColor", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinTable(name="pictures_colors",
+     *      joinColumns={
+     *          @ORM\JoinColumn(name="picture_id", referencedColumnName="id"),
+     *      },
+     *      inverseJoinColumns={
+     *          @ORM\JoinColumn(name="color_id", referencedColumnName="id", onDelete="CASCADE")
+     *      }
+     * )
+     */
+    private $colors;
+
+    /**
      * Picture constructor.
      */
     public function __construct() {
         $this->categories = new ArrayCollection();
         $this->similar = new ArrayCollection();
+        $this->colors = new ArrayCollection();
     }
 
     /**
@@ -650,5 +672,63 @@ class Picture implements ImageInterface
     public function getIsTop()
     {
         return $this->isTop;
+    }
+
+    /**
+     * Set color
+     *
+     * @param PictureColor $color
+     *
+     * @return Picture
+     */
+    public function setColor(PictureColor $color = null)
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    /**
+     * Get color
+     *
+     * @return PictureColor
+     */
+    public function getColor()
+    {
+        return $this->color;
+    }
+
+    /**
+     * Add color
+     *
+     * @param PictureColor $color
+     *
+     * @return Picture
+     */
+    public function addColor(PictureColor $color)
+    {
+        $this->colors[] = $color;
+
+        return $this;
+    }
+
+    /**
+     * Remove color
+     *
+     * @param PictureColor $color
+     */
+    public function removeColor(PictureColor $color)
+    {
+        $this->colors->removeElement($color);
+    }
+
+    /**
+     * Get colors
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getColors()
+    {
+        return $this->colors;
     }
 }
