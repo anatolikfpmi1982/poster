@@ -153,13 +153,6 @@ class Picture implements ImageInterface
     private $author;
 
     /**
-     * @var PictureColor
-     * @ORM\ManyToOne(targetEntity="PictureColor")
-     * @ORM\JoinColumn(name="picture_color_id", referencedColumnName="id")
-     */
-    private $color;
-
-    /**
      * @var Popular
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Popular")
      * @ORM\JoinColumn(name="popular_id", referencedColumnName="id")
@@ -193,6 +186,13 @@ class Picture implements ImageInterface
      * )
      */
     private $colors;
+
+    /**
+     * @var PictureForm
+     * @ORM\ManyToOne(targetEntity="PictureForm")
+     * @ORM\JoinColumn(name="form_id", referencedColumnName="id")
+     */
+    private $form;
 
     /**
      * Picture constructor.
@@ -675,30 +675,6 @@ class Picture implements ImageInterface
     }
 
     /**
-     * Set color
-     *
-     * @param PictureColor $color
-     *
-     * @return Picture
-     */
-    public function setColor(PictureColor $color = null)
-    {
-        $this->color = $color;
-
-        return $this;
-    }
-
-    /**
-     * Get color
-     *
-     * @return PictureColor
-     */
-    public function getColor()
-    {
-        return $this->color;
-    }
-
-    /**
      * Add color
      *
      * @param PictureColor $color
@@ -730,5 +706,29 @@ class Picture implements ImageInterface
     public function getColors()
     {
         return $this->colors;
+    }
+
+    /**
+     * Set form
+     *
+     * @param PictureForm $form
+     *
+     * @return Picture
+     */
+    public function setForm(PictureForm $form = null)
+    {
+        $this->form = $form;
+
+        return $this;
+    }
+
+    /**
+     * Get form
+     *
+     * @return PictureForm
+     */
+    public function getForm()
+    {
+        return $this->form;
     }
 }

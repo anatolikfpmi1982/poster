@@ -186,3 +186,12 @@ services:
             - ~
             - AppBundle\Entity\PictureColor
             - 'SonataAdminBundle:CRUD'
+    app.admin.picture_form:
+        class: AppBundle\Admin\PictureFormAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Картины", label: "Форма картины", show_in_dashboard: true}
+        arguments:
+            - ~
+            - AppBundle\Entity\PictureForm
+            - 'SonataAdminBundle:CRUD'
+            - '@app.image_manager'

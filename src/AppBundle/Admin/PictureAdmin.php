@@ -70,6 +70,7 @@ class PictureAdmin extends AbstractAdmin
             ->add('categories', null, ['required' => false, 'label' => 'Категории'])
             ->add('similar', null, ['required' => false, 'label' => 'Похожие картины'])
             ->add('colors', null, ['required' => false, 'label' => 'Цвет картины'])
+            ->add('form', null, ['required' => false, 'label' => 'Форма картины'])
             ->add('isTop', null, ['required' => false, 'label' => 'Топ'])
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
             ->end();
@@ -120,6 +121,8 @@ class PictureAdmin extends AbstractAdmin
             ->add('type', null, ['label' => 'Арт/Фото'])
             ->add('price', null, ['label' => 'Цена'])
             ->add('ratio', null, ['label' => 'Коэффициент'])
+            ->add('colors', null, ['label' => 'Цвет'])
+            ->add('form', null, ['label' => 'Форма'])
             ->add('categories', null, ['label' => 'Категории'])
             ->add('isActive', null, ['label' => 'Показывать'])
         ;
