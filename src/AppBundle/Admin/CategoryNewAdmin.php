@@ -3,6 +3,7 @@
 namespace AppBundle\Admin;
 
 use AppBundle\Entity\Category;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -43,9 +44,13 @@ class CategoryNewAdmin extends AbstractAdmin
         $formMapper
             ->with('Main')
             ->add('title', null, ['required' => true, 'label' => 'Название'])
-            ->add('description', null, ['required' => false, 'label' => 'Описание'])
-            ->add('slug', null, ['required' => false, 'label' => 'URL'])
+            ->add('description', CKEditorType::class, ['required' => false, 'label' => 'Описание'])
+            ->add('seoTitle', null, ['required' => false, 'label' => 'SEO - Title'])
+            ->add('seoDescription', null, ['required' => false, 'label' => 'SEO - Description'])
+            ->add('seoKeywords', null, ['required' => false, 'label' => 'SEO - Keywords'])
+            ->add('slug', null, ['required' => false, 'label' => 'Алиас'])
             ->add('parent_category', null, ['required' => false, 'label' => 'Родительская категория'])
+            ->add('tags', null, ['required' => false, 'label' => 'Теги'])
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
             ->end();
     }
@@ -62,6 +67,7 @@ class CategoryNewAdmin extends AbstractAdmin
 //            ->add('createdAt', null, ['label' => 'Создано'])
 //            ->add('updatedAt', null, ['label' => 'Обновлено'])
             ->add('parent_category', null, ['label' => 'Родительская категория'])
+            ->add('tags', null, ['label' => 'Теги'])
             ->add('isActive', null, ['label' => 'Показывать', 'editable' => true])
             ->add(
                 '_action',
@@ -82,6 +88,8 @@ class CategoryNewAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('title', null, ['label' => 'Название'])
+            ->add('parent_category', null, ['label' => 'Родительская категория'])
+            ->add('tags', null, ['label' => 'Тег'])
             ->add('isActive', null, ['label' => 'Показывать'])
         ;
     }

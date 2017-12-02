@@ -47,6 +47,27 @@ class Category3 implements ImageInterface
     private $description;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="seo_title", type="string", length=200)
+     */
+    private $seoTitle;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="seo_description", type="text")
+     */
+    private $seoDescription;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="seo_keywords", type="text")
+     */
+    private $seoKeywords;
+
+    /**
      * @var \DateTime
      * @ORM\Column(name="created_at", type="datetime", nullable=true)
      * @Gedmo\Timestampable(on="create")
@@ -87,6 +108,20 @@ class Category3 implements ImageInterface
     private $children;
 
     /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="\AppBundle\Entity\Tag2", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinTable(name="categories_tags",
+     *      joinColumns={
+     *          @ORM\JoinColumn(name="category_id", referencedColumnName="id"),
+     *      },
+     *      inverseJoinColumns={
+     *          @ORM\JoinColumn(name="tags_id", referencedColumnName="id", onDelete="CASCADE")
+     *      }
+     * )
+     */
+    private $tags;
+
+    /**
      * @var string
      * @ORM\Column(name="slug", type="string", length=300)
      *
@@ -100,7 +135,8 @@ class Category3 implements ImageInterface
     public function __construct()
     {
         $this->pictures = new ArrayCollection();
-        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->children = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     public function __toString()
@@ -112,7 +148,7 @@ class Category3 implements ImageInterface
      * Set createdAt
      *
      * @param  \DateTime $createdAt
-     * @return Frame
+     * @return Category3
      */
     public function setCreatedAt($createdAt)
     {
@@ -135,7 +171,7 @@ class Category3 implements ImageInterface
      * Set updatedAt
      *
      * @param  \DateTime $updatedAt
-     * @return Frame
+     * @return Category3
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -164,7 +200,7 @@ class Category3 implements ImageInterface
 
     /**
      * @param int $id
-     * @return Frame
+     * @return Category3
      */
     public function setId($id)
     {
@@ -183,7 +219,7 @@ class Category3 implements ImageInterface
 
     /**
      * @param string $title
-     * @return Frame
+     * @return Category3
      */
     public function setTitle($title)
     {
@@ -202,7 +238,7 @@ class Category3 implements ImageInterface
 
     /**
      * @param boolean $isActive
-     * @return Frame
+     * @return Category3
      */
     public function setIsActive($isActive)
     {
@@ -214,7 +250,7 @@ class Category3 implements ImageInterface
     /**
     /**
      * @param ArrayCollection $pictures
-     * @return Category
+     * @return Category3
      */
     public function setPictures($pictures)
     {
@@ -226,9 +262,9 @@ class Category3 implements ImageInterface
     /**
      * Add picture
      *
-     * @param \AppBundle\Entity\Picture $picture
+     * @param Picture $picture
      *
-     * @return Category
+     * @return Category3
      */
     public function addPicture(Picture $picture)
     {
@@ -240,7 +276,7 @@ class Category3 implements ImageInterface
     /**
      * Remove picture
      *
-     * @param \AppBundle\Entity\Picture $picture
+     * @param Picture $picture
      */
     public function removePicture(Picture $picture)
     {
@@ -267,7 +303,7 @@ class Category3 implements ImageInterface
 
     /**
      * @param string $description
-     * @return Frame
+     * @return Category3
      */
     public function setDescription($description)
     {
@@ -289,11 +325,11 @@ class Category3 implements ImageInterface
     /**
      * Set parentCategory
      *
-     * @param \AppBundle\Entity\Category3 $parentCategory
+     * @param Category3 $parentCategory
      *
      * @return Category3
      */
-    public function setParentCategory(\AppBundle\Entity\Category3 $parentCategory = null)
+    public function setParentCategory(Category3 $parentCategory = null)
     {
         $this->parent_category = $parentCategory;
 
@@ -303,7 +339,7 @@ class Category3 implements ImageInterface
     /**
      * Get parentCategory
      *
-     * @return \AppBundle\Entity\Category3
+     * @return Category3
      */
     public function getParentCategory()
     {
@@ -313,11 +349,11 @@ class Category3 implements ImageInterface
     /**
      * Add child
      *
-     * @param \AppBundle\Entity\Category3 $child
+     * @param Category3 $child
      *
      * @return Category3
      */
-    public function addChild(\AppBundle\Entity\Category3 $child)
+    public function addChild(Category3 $child)
     {
         $this->children[] = $child;
 
@@ -327,9 +363,9 @@ class Category3 implements ImageInterface
     /**
      * Remove child
      *
-     * @param \AppBundle\Entity\Category3 $child
+     * @param Category3 $child
      */
-    public function removeChild(\AppBundle\Entity\Category3 $child)
+    public function removeChild(Category3 $child)
     {
         $this->children->removeElement($child);
     }
@@ -366,5 +402,111 @@ class Category3 implements ImageInterface
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set seoTitle
+     *
+     * @param string $seoTitle
+     *
+     * @return Category3
+     */
+    public function setSeoTitle($seoTitle)
+    {
+        $this->seoTitle = $seoTitle;
+
+        return $this;
+    }
+
+    /**
+     * Get seoTitle
+     *
+     * @return string
+     */
+    public function getSeoTitle()
+    {
+        return $this->seoTitle;
+    }
+
+    /**
+     * Set seoDescription
+     *
+     * @param string $seoDescription
+     *
+     * @return Category3
+     */
+    public function setSeoDescription($seoDescription)
+    {
+        $this->seoDescription = $seoDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get seoDescription
+     *
+     * @return string
+     */
+    public function getSeoDescription()
+    {
+        return $this->seoDescription;
+    }
+
+    /**
+     * Set seoKeywords
+     *
+     * @param string $seoKeywords
+     *
+     * @return Category3
+     */
+    public function setSeoKeywords($seoKeywords)
+    {
+        $this->seoKeywords = $seoKeywords;
+
+        return $this;
+    }
+
+    /**
+     * Get seoKeywords
+     *
+     * @return string
+     */
+    public function getSeoKeywords()
+    {
+        return $this->seoKeywords;
+    }
+
+    /**
+     * Add tag
+     *
+     * @param Tag2 $tag
+     *
+     * @return Category3
+     */
+    public function addTag(Tag2 $tag)
+    {
+        $this->tags[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param Tag2 $tag
+     */
+    public function removeTag(Tag2 $tag)
+    {
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }
