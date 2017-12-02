@@ -323,28 +323,6 @@ class Picture implements ImageInterface
     }
 
     /**
-     * @return Image
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * @param Image $image
-     * @return Picture
-     */
-    public function setImage($image)
-    {
-        if($image instanceof ImageInterface) {
-            $this->name  = $image->getName();
-            $this->image = $image;
-        }
-
-        return $this;
-    }
-
-    /**
      * Set createdAt
      *
      * @param  \DateTime $createdAt
@@ -502,11 +480,11 @@ class Picture implements ImageInterface
     /**
      * Set imageBanner
      *
-     * @param \AppBundle\Entity\Image $imageBanner
+     * @param Image $imageBanner
      *
      * @return Picture
      */
-    public function setImageBanner(\AppBundle\Entity\Image $imageBanner = null)
+    public function setImageBanner(Image $imageBanner = null)
     {
         $this->imageBanner = $imageBanner;
 
@@ -516,7 +494,7 @@ class Picture implements ImageInterface
     /**
      * Get imageBanner
      *
-     * @return \AppBundle\Entity\Image
+     * @return Image
      */
     public function getImageBanner()
     {
@@ -526,11 +504,11 @@ class Picture implements ImageInterface
     /**
      * Set imageModule
      *
-     * @param \AppBundle\Entity\Image $imageModule
+     * @param Image $imageModule
      *
      * @return Picture
      */
-    public function setImageModule(\AppBundle\Entity\Image $imageModule = null)
+    public function setImageModule(Image $imageModule = null)
     {
         $this->imageModule = $imageModule;
 
@@ -540,7 +518,7 @@ class Picture implements ImageInterface
     /**
      * Get imageModule
      *
-     * @return \AppBundle\Entity\Image
+     * @return Image
      */
     public function getImageModule()
     {
@@ -550,11 +528,11 @@ class Picture implements ImageInterface
     /**
      * Set imageFrame
      *
-     * @param \AppBundle\Entity\Image $imageFrame
+     * @param Image $imageFrame
      *
      * @return Picture
      */
-    public function setImageFrame(\AppBundle\Entity\Image $imageFrame = null)
+    public function setImageFrame(Image $imageFrame = null)
     {
         $this->imageFrame = $imageFrame;
 
@@ -564,10 +542,34 @@ class Picture implements ImageInterface
     /**
      * Get imageFrame
      *
-     * @return \AppBundle\Entity\Image
+     * @return Image
      */
     public function getImageFrame()
     {
         return $this->imageFrame;
+    }
+
+    /**
+     * Set image
+     *
+     * @param Image $image
+     *
+     * @return Picture
+     */
+    public function setImage(Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return Image
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

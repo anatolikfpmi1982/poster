@@ -60,9 +60,9 @@ class PictureAdmin extends AbstractAdmin
 //            ->add('code', null, ['required' => true, 'label' => 'Артикул'])
             ->add('title', null, ['required' => true, 'label' => 'Название'])
             ->add('body', CKEditorType::class, ['required' => true, 'label' => 'Текст'])
-            ->add('slug', null, ['required' => false, 'label' => 'Slug'])
+            ->add('slug', null, ['required' => false, 'label' => 'Алиас'])
             ->add('author', null, ['required' => false, 'label' => 'Автор'])
-            ->add('type', null, ['required' => true, 'label' => 'Арт (Фото, если не выбрано)'])
+            ->add('type', null, ['required' => false, 'label' => 'Арт (Фото, если не выбрано)'])
             ->add('price', null, ['required' => true, 'label' => 'Цена'])
             ->add('ratio', null, ['required' => true, 'label' => 'Коэффициент'])
             ->add('categories', null, ['required' => false, 'label' => 'Категории'])
@@ -81,7 +81,8 @@ class PictureAdmin extends AbstractAdmin
                 ['label' => 'Изображение', 'template' => 'AppBundle:Admin:pictures_list_image.html.twig'])
 //            ->addIdentifier('code', null, ['required' => true, 'label' => 'Артикул'])
             ->add('title', null, ['required' => true, 'label' => 'Название', 'editable' => true])
-            ->add('slug', null, ['required' => false, 'label' => 'Slug', 'editable' => true])
+            ->add('code', null, ['required' => true, 'label' => 'Артикул'])
+            ->add('slug', null, ['required' => false, 'label' => 'Алиас', 'editable' => true])
             ->add('author', null, ['required' => false, 'label' => 'Автор'])
             ->add('type', null, ['required' => true, 'label' => 'Арт', 'editable' => true])
             ->add('price', null, ['required' => true, 'label' => 'Цена', 'editable' => true])
@@ -109,6 +110,7 @@ class PictureAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('title', null, ['label' => 'Название'])
+            ->add('code', null, ['label' => 'Артикул'])
             ->add('author', null, ['label' => 'Автор'])
             ->add('type', null, ['label' => 'Арт/Фото'])
             ->add('price', null, ['label' => 'Цена'])
@@ -133,6 +135,7 @@ class PictureAdmin extends AbstractAdmin
 
     /**
      * @param mixed $picture
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function postPersist($picture)
     {
@@ -168,6 +171,7 @@ class PictureAdmin extends AbstractAdmin
 
     /**
      * @param mixed $picture
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function preRemove($picture){
         if($picture instanceof Picture) {
