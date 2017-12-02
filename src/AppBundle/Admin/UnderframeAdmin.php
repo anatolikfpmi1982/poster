@@ -45,8 +45,7 @@ class UnderframeAdmin extends AbstractAdmin
         $formMapper
             ->with('Main')
             ->add('image', 'sonata_type_admin', ['required' => false, 'label' => 'Изображение'])
-            ->add('depth', null, ['required' => false, 'label' => 'Толщина'])
-            ->add('price', null, ['required' => false, 'label' => 'Цена', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
+            ->add('depth', null, ['required' => false, 'label' => 'Толщина', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
             ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент',  'empty_data' => '1', 'attr' => ['placeholder' => 1]])
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
             ->end();
@@ -62,7 +61,6 @@ class UnderframeAdmin extends AbstractAdmin
             ->add('image', null,
                 ['label' => 'Изображение', 'template' => 'AppBundle:Admin:list_image.html.twig'])
             ->add('depth', null, ['editable' => true, 'label' => 'Толщина'])
-            ->add('price', null, ['editable' => true, 'label' => 'Цена'])
             ->add('ratio', null, ['editable' => true, 'label' => 'Коэффициент'])
 //            ->add('createdAt', null, ['label' => 'Создано'])
 //            ->add('updatedAt', null, ['label' => 'Обновлено'])
@@ -124,6 +122,7 @@ class UnderframeAdmin extends AbstractAdmin
 
     /**
      * @param mixed $underframe
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function preRemove($underframe){
         if($underframe instanceof Underframe) {

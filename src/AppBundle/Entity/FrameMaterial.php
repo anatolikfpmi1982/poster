@@ -57,6 +57,15 @@ class FrameMaterial implements ImageInterface
     private $ratio;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="price", type="float")
+     *
+     * @JMS\Expose
+     */
+    private $price;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="min_area", type="float")
@@ -385,5 +394,29 @@ class FrameMaterial implements ImageInterface
     public function getImageLink()
     {
         return '/files/' . $this->image->getEntityName() . '/' . $this->image->getFilename();
+    }
+
+    /**
+     * Set price
+     *
+     * @param float $price
+     *
+     * @return FrameMaterial
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
     }
 }

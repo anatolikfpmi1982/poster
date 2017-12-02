@@ -46,10 +46,11 @@ class BannerMaterialAdmin extends AbstractAdmin
             ->add('title', null, ['required' => true, 'label' => 'Название'])
             ->add('image', 'sonata_type_admin', ['required' => false, 'label' => 'Изображение'])
             ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент', 'empty_data' => '1', 'attr' => ['placeholder' => 1]])
-            ->add('minArea', null, ['required' => false, 'label' => 'Минимальная площадь'])
-            ->add('maxArea', null, ['required' => false, 'label' => 'Максимальная площадь'])
-            ->add('minPrice', null, ['required' => false, 'label' => 'Минимальная цена'])
-            ->add('maxPrice', null, ['required' => false, 'label' => 'Максимальная цена'])
+            ->add('price', null, ['required' => false, 'label' => 'Цена', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
+            ->add('minArea', null, ['required' => false, 'label' => 'Минимальная площадь', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
+            ->add('maxArea', null, ['required' => false, 'label' => 'Максимальная площадь', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
+            ->add('minPrice', null, ['required' => false, 'label' => 'Минимальная цена', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
+            ->add('maxPrice', null, ['required' => false, 'label' => 'Максимальная цена', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
             ->end();
     }
@@ -65,6 +66,7 @@ class BannerMaterialAdmin extends AbstractAdmin
                 ['label' => 'Изображение', 'template' => 'AppBundle:Admin:list_image.html.twig'])
             ->add('title', null, ['editable' => true, 'label' => 'Название'])
             ->add('ratio', null, ['editable' => true, 'label' => 'Коэффициент'])
+            ->add('price', null, ['editable' => true, 'label' => 'Цена'])
             ->add('minArea', null, ['editable' => true, 'label' => 'Минимальная площадь'])
             ->add('maxArea', null, ['editable' => true, 'label' => 'Максимальная площадь'])
             ->add('minPrice', null, ['editable' => true, 'label' => 'Минимальная цена'])
@@ -130,6 +132,7 @@ class BannerMaterialAdmin extends AbstractAdmin
 
     /**
      * @param mixed $material
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function preRemove($material){
         if($material instanceof BannerMaterial) {
