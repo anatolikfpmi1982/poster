@@ -1145,3 +1145,33 @@ footer {
 .az-category-page-description-div {
     margin: 5px;
 }
+
+/**breadcrumb**/
+
+.breadcrumb {
+    background-color: #ffffff;
+    border: 1px solid #f0f0f0;
+    padding: 0 3px;
+    height: 34px;
+    margin: 0 10px;
+    border-radius: inherit;
+}
+.breadcrumb a{
+    display: block;
+    float: left;
+    font: 11px/31px 'arial','helvetica','sans-serif';
+    text-decoration: none;
+    color: #808080;
+    padding: 0 20px 0 6px;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAeCAMAAADAd2R7AAAAUVBMVEXm5ub////m5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5uZFPaD0AAAAG3RSTlMAAAECAxElJicpKk9wcnR2eKTCxMXHycrd3t8Pa2o7AAAAbElEQVR4XlWRRw7AIBADl9QC6T3/f2ikOJbW3EYMsDYWl8zcmpOn8qo8xlXdXty7FndTd1C3EXfPxR3FfVpxD3UndTtxz8KC2wsf8RyId4L4HgizgDgniBlAyPcTspPQCwmdkdAnCV2T3D+EF1lXBCZgHdt7AAAAAElFTkSuQmCC') no-repeat 100% 0%;
+}
+
+
+.breadcrumb a:hover, .breadcrumb a:focus {
+    color: #fd1200;
+}
+.breadcrumb > .active {
+    font: 11px/31px 'arial','helvetica','sans-serif';
+    color: #fd1200;
+    padding: 0 0 0 5px;
+}
