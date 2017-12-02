@@ -21,7 +21,7 @@ use AppBundle\Entity\Settings;
  */
 class AdminController extends CoreController
 {
-    const FOLDER = __DIR__.'/../../../web/files/system/';
+    const FOLDER = __DIR__.'/../../../web/';
 
     /**
      * @var EntityManager
@@ -30,12 +30,18 @@ class AdminController extends CoreController
 
     private $record = null;
 
+    private $logo = null;
+
     public function settingsAction(Request $request)
     {
         $this->em = $this->container->get('doctrine.orm.entity_manager');
         $this->record = $this->em->getRepository('AppBundle:Settings')->findOneByName('site_settings');
         if($this->record) {
             $data = unserialize($this->record->getSettings());
+            if(!empty($data['logo'])) {
+                $this->logo = $data['logo'];
+                unset($data['logo']);
+            }
         } else {
             $data = [
                 'phone' => '',
@@ -47,6 +53,8 @@ class AdminController extends CoreController
                 'contacts' => '',
                 'metrics_yandex' => '',
                 'metrics_google' => '',
+                'fb_buttons' => '',
+                'vk_buttons' => '',
                 'seo_keywords' => '',
                 'seo_description' => '',
                 'seo_title' => '',
@@ -67,6 +75,8 @@ class AdminController extends CoreController
             ->add('favicon', FileType::class, ['label' => 'Favicon', 'required' => false])
             ->add('metrics_yandex', TextAreaType::class, ['label' => 'Метрики Яндекс', 'required' => false])
             ->add('metrics_google', TextAreaType::class, ['label' => 'Метрики Google', 'required' => false])
+            ->add('fb_buttons', TextAreaType::class, ['label' => 'Код кнопок Facebook', 'required' => false])
+            ->add('vk_buttons', TextAreaType::class, ['label' => 'Код кнопок Вконтакте', 'required' => false])
             ->add('seo_keywords', TextAreaType::class, ['label' => 'SEO - Keywords', 'required' => false])
             ->add('seo_description', TextAreaType::class, ['label' => 'SEO - Description', 'required' => false])
             ->add('seo_title', TextType::class, ['label' => 'SEO - Title', 'required' => false])
@@ -103,15 +113,16 @@ class AdminController extends CoreController
             $this->prepareSystemFolder();
             $file = $form['logo']->getData();
             $ext = $file->guessExtension();
-            $file->move(self::FOLDER, 'logo.' . $ext);
+            $file->move(self::FOLDER . 'files/system/', 'logo.' . $ext);
             $data['logo'] = 'files/system/logo.' . $ext;
+        } elseif($this->logo) {
+            $data['logo'] = $this->logo;
         }
         if($data['favicon']) {
-            $this->prepareSystemFolder();
             $file = $form['favicon']->getData();
             $ext = $file->guessExtension();
             $file->move(self::FOLDER, 'favicon.' . $ext);
-            $data['logo'] = 'files/system/favicon.' . $ext;
+            unset($data['favicon']);
         }
 
         if(!$this->record) {
