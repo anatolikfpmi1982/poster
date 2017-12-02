@@ -188,7 +188,7 @@ body {
     border-bottom: 1px solid #e6e6e6;
     border-top: 1px solid #e6e6e6;
     border-right: 1px solid #e6e6e6;
-    padding-bottom: 15px;
+    padding: 0 10px 15px 10px;
 }
 
 .az-popular-item:first-child {
@@ -205,31 +205,11 @@ body {
     padding-right: 0;
 }
 
-.az-main-popular-item-img-div img {
-    text-align: center;
-    float: none;
-    display: table-cell;
-    padding: 15px;
-}
 
 .az-main-popular-item-img {
     width: 100%;
     text-align: center;
     margin: 0 auto;
-}
-
-.az-main-popular-item-header-type {
-    text-align: center;
-    font-size: 12px;
-    margin: 10px 0 20px 0;
-}
-
-.az-main-popular-item-header-category {
-    color: #fd1200;
-    text-transform: uppercase;
-    margin: 15px 0 10px 0;
-    text-align: center;
-    font-weight: 600;
 }
 
 .btn {
@@ -793,8 +773,12 @@ body {
     color: #333333;
 }
 
+
+/**popular**/
+
+
 .az-main-popular-item-img-div {
-    background-color: #eeeeee;
+    height: 250px;
     margin: 15px 2px;
 }
 
@@ -809,26 +793,47 @@ body {
     width: 100%;
     text-align: center;
     margin: 0 auto;
+    padding: 15px;
 }
 
 .az-main-popular-item-header-type {
-    text-align: center;
+    text-align: left;
     font-size: 12px;
-    margin: 10px 0 20px 0;
-}
+    padding-right: 15px;
+    padding-left: 15px;
+    margin: 20px auto 5px auto;}
 
 .az-main-popular-item-header-category {
     color: #fd1200;
-    text-transform: uppercase;
-    margin: 15px 0 10px 0;
-    text-align: center;
-    font-weight: 600;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    height: 45px;
+}
+.az_author {
+    color: #333;
+}
+.text-left_id {
+    font-size: 11px;
+    text-align: left;
+    margin-bottom: 5px;
+}
+.text-right_artik {
+    font-size: 11px;
+    padding: 0 20px 0 0;
+    text-align: right;
+}
+
+.az-main-popular-item-header-category a:hover,
+.az-main-popular-item-header-category a:focus{
+    color: #333;
 }
 
 .btn {
     background-color: #fd1200;
     color: #fffff;
-    padding: 7px 20px;
+    padding: 5px 20px;
     text-transform: lowercase;
     font-size: 13px;
 }
@@ -1147,7 +1152,6 @@ footer {
 }
 
 /**breadcrumb**/
-
 .breadcrumb {
     background-color: #ffffff;
     border: 1px solid #f0f0f0;

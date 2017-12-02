@@ -43,7 +43,7 @@
                 {% if popular.pictures is defined and popular.pictures %}
                 {% for picture in popular.pictures %}
                 {% include('AppBundle:Component:picture.cell.html.twig') %}
-                {% if loop.index != 0 and (loop.index + 1) % 3 == 0 %}
+                {% if loop.index != 1 and loop.index % 3 == 0 %}
             </div>
             <div class="row">
                 {% endif %}
