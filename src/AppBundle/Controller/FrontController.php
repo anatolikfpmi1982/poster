@@ -58,6 +58,13 @@ class FrontController extends Controller {
     /**
      * @return array
      */
+    protected function getSiteSettings() {
+        return $this->get( 'doctrine.orm.entity_manager' )->getRepository( 'AppBundle:Settings' )->findOneByName('site_settings');
+    }
+
+    /**
+     * @return array
+     */
     protected function getCategoryMenuBlock() {
         return $this->get( 'blocks.service' )->getCategoriesBlock();
     }
