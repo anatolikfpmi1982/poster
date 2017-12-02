@@ -44,7 +44,7 @@ class FrameMaterialAdmin extends AbstractAdmin
             ->with('Main')
             ->add('title', null, ['required' => true, 'label' => 'Название'])
             ->add('image', 'sonata_type_admin', ['required' => false, 'label' => 'Изображение'])
-            ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент'])
+            ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент', 'empty_data' => '1', 'attr' => ['placeholder' => 1]])
             ->add('minArea', null, ['required' => false, 'label' => 'Минимальная площадь'])
             ->add('maxArea', null, ['required' => false, 'label' => 'Максимальная площадь'])
             ->add('minPrice', null, ['required' => false, 'label' => 'Минимальная цена'])

@@ -46,8 +46,8 @@ class UnderframeAdmin extends AbstractAdmin
             ->with('Main')
             ->add('image', 'sonata_type_admin', ['required' => false, 'label' => 'Изображение'])
             ->add('depth', null, ['required' => false, 'label' => 'Толщина'])
-            ->add('price', null, ['required' => false, 'label' => 'Цена'])
-            ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент'])
+            ->add('price', null, ['required' => false, 'label' => 'Цена', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
+            ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент',  'empty_data' => '1', 'attr' => ['placeholder' => 1]])
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
             ->end();
     }

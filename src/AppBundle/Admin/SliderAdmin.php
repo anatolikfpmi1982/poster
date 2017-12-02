@@ -41,7 +41,7 @@ class SliderAdmin extends AbstractAdmin
             ->add('title', null, ['required' => true, 'label' => 'Имя'])
             ->add('text', null, ['required' => false, 'label' => 'Описание'])
             ->add('link', null, ['required' => true, 'label' => 'Ссылка'])
-            ->add('weight', null, ['required' => true, 'label' => 'Порядок'])
+            ->add('weight', null, ['required' => true, 'label' => 'Порядок', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
             ->add('image', 'sonata_type_admin', ['required' => true, 'label' => 'Изображение'])
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
             ->end();

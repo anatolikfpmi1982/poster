@@ -46,7 +46,7 @@ class ModuleTypeAdmin extends AbstractAdmin
             ->with('Main')
             ->add('image', 'sonata_type_admin', ['required' => false, 'label' => 'Изображение'])
             ->add('name', null, ['required' => true, 'label' => 'Название'])
-            ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент'])
+            ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент', 'empty_data' => '1', 'attr' => ['placeholder' => 1]])
             ->add('serviceName', null, ['required' => true, 'label' => 'Сервисное имя (не изменять без необходимости)'])
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
             ->end();
