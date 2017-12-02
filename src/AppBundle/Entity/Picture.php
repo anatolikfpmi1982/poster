@@ -75,6 +75,12 @@ class Picture implements ImageInterface
     private $isActive;
 
     /**
+     * @var boolean
+     * @ORM\Column(name="is_top", type="boolean", nullable=false)
+     */
+    private $isTop;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="code", type="string", length=30, nullable=false)
@@ -620,5 +626,29 @@ class Picture implements ImageInterface
     public function getSimilar()
     {
         return $this->similar;
+    }
+
+    /**
+     * Set isTop
+     *
+     * @param boolean $isTop
+     *
+     * @return Picture
+     */
+    public function setIsTop($isTop)
+    {
+        $this->isTop = $isTop;
+
+        return $this;
+    }
+
+    /**
+     * Get isTop
+     *
+     * @return boolean
+     */
+    public function getIsTop()
+    {
+        return $this->isTop;
     }
 }
