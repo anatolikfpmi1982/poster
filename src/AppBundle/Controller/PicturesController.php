@@ -20,9 +20,10 @@ class PicturesController extends FrontController {
         $em      = $this->get( 'doctrine.orm.entity_manager' );
         $picture = $em->getRepository( 'AppBundle:Picture' )->find( $id );
 
-        $this->blocks   = [ 'CategoryMenu' => 1, 'Reviews' => 2, 'MainMenu' => 3, 'BreadCrumb' => 4 ];
+        $this->blocks   = [ 'Reviews' => 2, 'MainMenu' => 3, 'BreadCrumb' => 4, 'Similar' => 5];
         $this->pageSlug = $id;
         $this->pageType = 'picture';
+        $this->id = $id;
         $this->doBlocks();
 
         $this->get( 'app.session_manager' )->addLastVisitedItem( $picture->getId() );

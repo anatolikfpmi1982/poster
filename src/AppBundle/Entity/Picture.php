@@ -154,10 +154,25 @@ class Picture implements ImageInterface
     private $popular;
 
     /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="\AppBundle\Entity\Picture", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinTable(name="similar_pictures",
+     *      joinColumns={
+     *          @ORM\JoinColumn(name="picture_id", referencedColumnName="id"),
+     *      },
+     *      inverseJoinColumns={
+     *          @ORM\JoinColumn(name="similar_id", referencedColumnName="id", onDelete="CASCADE")
+     *      }
+     * )
+     */
+    private $similar;
+
+    /**
      * Picture constructor.
      */
     public function __construct() {
         $this->categories = new ArrayCollection();
+        $this->similar = new ArrayCollection();
     }
 
     /**
@@ -571,5 +586,39 @@ class Picture implements ImageInterface
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Add similar
+     *
+     * @param Picture $similar
+     *
+     * @return Picture
+     */
+    public function addSimilar(Picture $similar)
+    {
+        $this->similar[] = $similar;
+
+        return $this;
+    }
+
+    /**
+     * Remove similar
+     *
+     * @param Picture $similar
+     */
+    public function removeSimilar(Picture $similar)
+    {
+        $this->similar->removeElement($similar);
+    }
+
+    /**
+     * Get similar
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSimilar()
+    {
+        return $this->similar;
     }
 }

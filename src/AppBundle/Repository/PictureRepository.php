@@ -29,4 +29,23 @@ class PictureRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function getActiveSimilar($id)
+    {
+        $entities = $this->createQueryBuilder('p')
+            ->innerJoin('p.similar', 's') // Inner Join with similar
+            ->where('p.id = :id')
+            ->andWhere('p.isActive = true')
+            ->andWhere('s.isActive = true')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult()
+            ;
+
+        if(count($entities) > 0) {
+            return $entities[0]->getSimilar();
+        }
+
+        return [];
+    }
 }

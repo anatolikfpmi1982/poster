@@ -34,6 +34,11 @@ class FrontController extends Controller {
     protected $pageSlug;
 
     /**
+     * @var string|int
+     */
+    protected $id;
+
+    /**
      *
      */
     public function doBlocks() {
@@ -76,6 +81,13 @@ class FrontController extends Controller {
      */
     protected function getMainMenuBlock() {
         return $this->get( 'blocks.service' )->getMainMenuBlock();
+    }
+
+    /**
+     * @return array
+     */
+    protected function getSimilarBlock() {
+        return $this->get( 'doctrine.orm.entity_manager' )->getRepository( 'AppBundle:Picture' )->getActiveSimilar($this->id);
     }
 
     /**

@@ -73,6 +73,15 @@ class BlocksService {
         return $this->em->getRepository( 'AppBundle:SliderItem' )->findBy( [ 'isActive' => true ], [ 'weight' => 'ASC' ] );
     }
 
+    /**
+     * Return data for similar block.
+     *
+     * @return array
+     */
+    public function getSimilarBlock($id) {
+        return $this->em->getRepository( 'AppBundle:Picture' )->getActiveSimilar($id);
+    }
+
 //    /**
 //     * @return array
 //     */
