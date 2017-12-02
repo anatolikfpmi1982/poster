@@ -127,24 +127,6 @@ services:
             - AppBundle\Entity\SliderItem
             - 'SonataAdminBundle:CRUD'
             - '@app.image_manager'
-
-#    app.admin.category2:
-#            class: Sonata\ClassificationBundle\Admin\CategoryAdmin
-#            tags:
-#                - { name: sonata.admin, manager_type: orm, group: "XXX", label: "Категории", show_in_dashboard: true }
-#            arguments:
-#                - ~
-#                - AppBundle\Entity\Category
-#                - 'SonataClassificationBundle:CategoryAdmin'
-#                - '@sonata.classification.manager.context'
-#    app.admin.settings:
-#        class: AppBundle\Admin\SettingsAdmin
-#        tags:
-#            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Настройки сайта", show_in_dashboard: true }
-#        arguments:
-#            - ~
-#            - AppBundle\Entity\Settings
-#            - 'AppBundleAdmin:SettingsAdmin'
     app.admin.category3:
         class: AppBundle\Admin\CategoryNewAdmin
         tags:

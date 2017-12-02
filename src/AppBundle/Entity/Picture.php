@@ -442,10 +442,10 @@ class Picture implements ImageInterface
     }
 
     /**
-     * @param Category $category
+     * @param Category3 $category
      * @return Picture
      */
-    public function addCategory(Category $category)
+    public function addCategory(Category3 $category)
     {
         $this->categories[] = $category;
 
@@ -453,10 +453,10 @@ class Picture implements ImageInterface
     }
 
     /**
-     * @param Category $category
+     * @param Category3 $category
      * @return Picture
      */
-    public function removeCategory(Category $category)
+    public function removeCategory(Category3 $category)
     {
         $this->categories->removeElement($category);
 
