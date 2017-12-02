@@ -60,7 +60,7 @@ class UnderframeAdmin extends AbstractAdmin
         $listMapper
             ->add('id', null, ['label' => 'ID'])
             ->add('image', null,
-                ['label' => 'Изображение', 'template' => 'AppBundle:Admin:underframes_list_image.html.twig'])
+                ['label' => 'Изображение', 'template' => 'AppBundle:Admin:list_image.html.twig'])
             ->add('depth', null, ['editable' => true, 'label' => 'Толщина'])
             ->add('price', null, ['editable' => true, 'label' => 'Цена'])
             ->add('ratio', null, ['editable' => true, 'label' => 'Коэффициент'])

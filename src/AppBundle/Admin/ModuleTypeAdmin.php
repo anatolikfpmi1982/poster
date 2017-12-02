@@ -59,7 +59,7 @@ class ModuleTypeAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('image', null,
-                ['label' => 'Изображение', 'template' => 'AppBundle:Admin:module_type_list_image.html.twig'])
+                ['label' => 'Изображение', 'template' => 'AppBundle:Admin:list_image.html.twig'])
             ->add('name', null, ['editable'=> true, 'label' => 'Название'])
             ->add('ratio', null, ['editable' => true, 'label' => 'Коэффициент'])
 //            ->add('createdAt', null, ['label' => 'Создано'])

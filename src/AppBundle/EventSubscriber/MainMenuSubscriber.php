@@ -1,15 +1,15 @@
 <?php
 namespace AppBundle\EventSubscriber;
 
+use AppBundle\Entity\MainMenu;
 use AppBundle\Entity\Image;
-use AppBundle\Entity\ModuleType;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class ModuleTypeSubscriber
+ * Class MainMenuSubscriber
  */
-class ModuleTypeSubscriber
+class MainMenuSubscriber
 {
     /**
      * @var ContainerInterface
@@ -17,7 +17,7 @@ class ModuleTypeSubscriber
     protected $container;
 
     /**
-     * ModuleTypeSubscriber constructor.
+     * MainMenuSubscriber constructor.
      * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
@@ -31,7 +31,7 @@ class ModuleTypeSubscriber
     public function postPersist(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-        if($entity instanceof ModuleType && $image = $entity->getImage()) {
+        if($entity instanceof MainMenu && $image = $entity->getImage()) {
             $this->createResize($entity, $image);
         }
     }
@@ -42,16 +42,16 @@ class ModuleTypeSubscriber
     public function postUpdate(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-        if($entity instanceof ModuleType && $image = $entity->getImage()) {
+        if($entity instanceof MainMenu && $image = $entity->getImage()) {
             $this->createResize($entity, $image);
         }
     }
 
     /**
-     * @param ModuleType $moduleType
+     * @param MainMenu $material
      * @param Image $image
      */
-    private function createResize(ModuleType $moduleType, Image $image) {
+    private function createResize(MainMenu $material, Image $image) {
 
         if($image->getOriginFile() && file_exists($image->getOriginFile())) {
             $this->container->get('helper.imageresizer')

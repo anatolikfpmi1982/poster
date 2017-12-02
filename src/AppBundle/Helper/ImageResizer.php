@@ -25,8 +25,9 @@ class ImageResizer {
         $ratio = $ImageDetails->ratio;
         $jpegQuality = 75;
 
-        //Resize dimensions are bigger than original image, stop processing
+        //Resize dimensions are bigger than original image, in different way just copy, stop processing
         if ($width > $width_orig && $height > $height_orig){
+            $this->copyImage($image, $newPath, $name . "." . $fileExtention);
             return false;
         }
 

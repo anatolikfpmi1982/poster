@@ -43,7 +43,7 @@ class Popular
 
     /**
      * One popular to several pictures.
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Picture", mappedBy="popular", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Picture", mappedBy="popular")
      */
     private $pictures;
 
@@ -170,49 +170,36 @@ class Popular
     }
 
     /**
-     * @return Picture[]
+     * Add picture
+     *
+     * @param \AppBundle\Entity\Picture $picture
+     *
+     * @return Popular
      */
-    public function getPictures() {
+    public function addPicture(\AppBundle\Entity\Picture $picture)
+    {
+        $this->pictures[] = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Remove picture
+     *
+     * @param \AppBundle\Entity\Picture $picture
+     */
+    public function removePicture(\AppBundle\Entity\Picture $picture)
+    {
+        $this->pictures->removeElement($picture);
+    }
+
+    /**
+     * Get pictures
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPictures()
+    {
         return $this->pictures;
     }
-
-    /**
-     * @param mixed $pictures
-     *
-     * @return Popular
-     */
-    public function setPictures( $pictures ) {
-        $this->pictures = $pictures;
-
-        return $this;
-    }
-
-    /**
-     * @param Picture $picture
-     *
-     * @return Popular
-     */
-    public function addPicture(Picture $picture) {
-//        if(!$this->pictures->contains($picture) ) {
-            $this->pictures[] = $picture;
-//        }
-        return $this;
-    }
-
-    /**
-     * Remove sources
-     *
-     * @param Picture $picture
-     *
-     * @return Popular
-     */
-    public function removeSource(Picture $picture)
-    {
-        if($this->pictures->contains($picture) ) {
-            $this->pictures->removeElement($picture);
-        }
-
-        return $this;
-    }
 }
-

@@ -20,6 +20,11 @@ class MainMenu
     const JSON_NAME = 'main_menu';
 
     /**
+     * Image sub folder
+     */
+    const IMAGE_PATH = 'main_menu';
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -38,7 +43,7 @@ class MainMenu
     /**
      * @var string
      *
-     * @ORM\Column(name="target", type="string")
+     * @ORM\Column(name="target", type="string", nullable=true)
      */
     private $target;
 
@@ -67,6 +72,21 @@ class MainMenu
      * @ORM\Column(name="is_active", type="boolean", nullable=false)
      */
     private $isActive;
+
+    /**
+     * @var Page
+     * @ORM\OneToOne(targetEntity="Page")
+     * @ORM\JoinColumn(name="page_id", referencedColumnName="id", nullable=true)
+     */
+    private $page;
+
+    /**
+     * @var Image
+     * @ORM\OneToOne(targetEntity="Image", fetch="EAGER", cascade={"persist"})
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     *
+     */
+    private $image;
 
 
     /**
@@ -206,5 +226,62 @@ class MainMenu
 
         return $this;
     }
-}
 
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * Set page
+     *
+     * @param Page $page
+     *
+     * @return MainMenu
+     */
+    public function setPage(Page $page = null)
+    {
+        $this->page = $page;
+
+        return $this;
+    }
+
+    /**
+     * Get page
+     *
+     * @return Page
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    /**
+     * Set image
+     *
+     * @param Image $image
+     *
+     * @return MainMenu
+     */
+    public function setImage(Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return Image
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+}

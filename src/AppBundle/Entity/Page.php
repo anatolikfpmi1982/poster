@@ -90,6 +90,16 @@ class Page
      */
     private $isActive;
 
+    /**
+     * Page to string
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->title;
+    }
+
 
     /**
      * Get id

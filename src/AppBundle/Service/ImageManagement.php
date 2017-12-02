@@ -43,6 +43,7 @@ AND id NOT IN (SELECT DISTINCT image_id FROM underframes)
 AND id NOT IN (SELECT DISTINCT image_id FROM frame_materials)
 AND id NOT IN (SELECT DISTINCT image_id FROM banner_materials)
 AND id NOT IN (SELECT DISTINCT image_id FROM module_types)
+AND id NOT IN (SELECT DISTINCT image_id FROM main_menu_items)
 AND id NOT IN (SELECT DISTINCT image_banner_id FROM pictures)
 AND id NOT IN (SELECT DISTINCT image_module_id FROM pictures)
 AND id NOT IN (SELECT DISTINCT image_frame_id FROM pictures)
@@ -58,6 +59,7 @@ AND id NOT IN (SELECT DISTINCT image_id FROM pictures)', $rsm);
     /**
      * Delete images by ORM.
      * @param $images
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function deleteImages($images){
         if (count($images) > 0) {
@@ -73,6 +75,7 @@ AND id NOT IN (SELECT DISTINCT image_id FROM pictures)', $rsm);
     /**
      * Delete image by ORM.
      * @param $image
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function deleteImage($image){
         /** @var Image $image  */

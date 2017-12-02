@@ -40,14 +40,13 @@ class ImageAdmin extends AbstractAdmin
 
             if($img !== null) {
                 /** @var Image $img */
-                $fileFieldOptions['help'] = '<img src="/files/'.$img->getEntityName().'/mini_thumb/'.$img->getFilename().'" class="admin-preview" /><br>';
+                $fileFieldOptions['help'] = '<img src="/files/'.$img->getEntityName().'/small_thumb/'.$img->getFilename().'" class="admin-preview" /><br>';
             }
 
         } elseif ($subject instanceof Image) {
             // add a 'help' option containing the preview's img tag
-            $fileFieldOptions['help'] = '<img src="/files/'.$subject->getEntityName().'/mini_thumb/'.$subject->getFilename().'" class="admin-preview" /><br>';
+            $fileFieldOptions['help'] = '<img src="/files/'.$subject->getEntityName().'/small_thumb/'.$subject->getFilename().'" class="admin-preview" /><br>';
         }
-
         $formMapper
             ->add('file',       'file',     $fileFieldOptions);
 

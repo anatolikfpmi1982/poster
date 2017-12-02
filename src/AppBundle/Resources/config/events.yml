@@ -48,3 +48,10 @@ services:
         tags:
             - { name: doctrine.event_listener, event: postUpdate }
             - { name: doctrine.event_listener, event: postPersist }
+    app.main_menu_event_listener:
+        class: AppBundle\EventSubscriber\MainMenuSubscriber
+        arguments:
+            - '@service_container'
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate }
+            - { name: doctrine.event_listener, event: postPersist }

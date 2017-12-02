@@ -61,7 +61,7 @@ class FrameMaterialAdmin extends AbstractAdmin
         $listMapper
             ->add('id', null, ['label' => 'ID'])
             ->add('image', null,
-                ['label' => 'Изображение', 'template' => 'AppBundle:Admin:frame_material_list_image.html.twig'])
+                ['label' => 'Изображение', 'template' => 'AppBundle:Admin:list_image.html.twig'])
             ->add('title', null, ['editable' => true, 'label' => 'Название'])
             ->add('ratio', null, ['editable' => true, 'label' => 'Коэффициент'])
             ->add('minArea', null, ['editable' => true, 'label' => 'Минимальная площадь'])

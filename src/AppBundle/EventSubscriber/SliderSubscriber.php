@@ -62,6 +62,8 @@ class SliderSubscriber
                             ->resizeImage($image->getOriginFile(), $image->getMaxThumbBasePath(), $slider::THUMB_MAX_IMAGE_HEIGHT, $slider::THUMB_MAX_IMAGE_WIDTH);
             $this->container->get('helper.imageresizer')
                 ->resizeImage($image->getOriginFile(), $image->getBasePath(), $slider::IMAGE_HEIGHT, $slider::IMAGE_WIDTH);
+            $this->container->get('helper.imageresizer')
+                ->resizeImage($image->getOriginFile(), $image->getSmallThumbBasePath(), $image::THUMB_SMALL_IMAGE_HEIGHT, $image::THUMB_SMALL_IMAGE_WIDTH);
             unlink($image->getOriginFile());
         }
     }
