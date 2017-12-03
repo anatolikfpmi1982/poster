@@ -86,6 +86,7 @@ class CategoryNewAdmin extends AbstractAdmin
                     'actions' => [
                         'edit' => [],
                         'delete' => [],
+                        'generate' => ['template' => 'AppBundle:Admin:list__action_generate.html.twig']
                     ],
                 ]
             );
