@@ -13,41 +13,20 @@
                 {{ category.description }}
             </div>
             <div class="row az-category-page-filters-div">
-                Filters block
+                {% include('AppBundle:Component:Category/filter.html.twig') %}
             </div>
             {% if category.pictures %}
                 <div class="row az-category-page-pictures-div">
                     <div class="row az-page-section-body az-page-main-popular container-fluid">
                         <div class="row">
                             {% for picture in category.pictures %}
-                                {% if picture.image and picture.image.getFilename() %}
-                                    {% set img = '/files/pictures/thumb/' ~ picture.image.getFilename() %}
-                                {% else %}
-                                    {% set img = asset('bundles/app/images/default_picture.jpg') %}
-                                {% endif %}
-                                <div class="col-md-4 container">
-                                    <div class="row az-main-popular-item-img-div">
-                                        <img src="{{ img }}" data-date="{{ picture.createdAt|date('F, d') }}" class="az-category-page-item-img">
-                                    </div>
-                                    <div class="row">
-                                        <div class="az-main-popular-item-header-category">Летний день, Мерикюль</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="az-main-popular-item-header-type">Живописные холсты</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="az-main-popular-item-header-buttons container-fluid">
-                                            <div class="row">
-                                                <div class="col-md-6 text-left">
-                                                    <button class="btn">Заказать</button>
-                                                </div>
-                                                <div class="col-md-6 text-right">
-                                                    <button class="btn">Отложить</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
+                            {% include('AppBundle:Component:picture.cell.html.twig') %}
+                            {% if loop.index != 1 and loop.index % 3 == 0 %}
+                        </div>
+                        <div class="row">
+                            {% endif %}
+
                             {% endfor %}
                         </div>
                     </div>
