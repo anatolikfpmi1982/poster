@@ -809,7 +809,7 @@ body {
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-    height: 45px;
+    height: 40px;
 }
 .az_author {
     color: #333;
@@ -1179,3 +1179,37 @@ footer {
     color: #fd1200;
     padding: 0 0 0 5px;
 }
+
+/**public**/
+
+.az-category-page-filters-div {
+    margin: 15px auto;
+    border: 1px solid #e6e6e6;
+}
+
+.az-category-page-filters-div .az-picture-page-constructor-block{
+    border: none;
+    padding: 5px 8px;
+    border-left: 1px solid #e6e6e6;
+    height: 40px;
+}
+
+.az-category-page-filters-div .az-picture-page-constructor-block:first-child{
+    border-left: none;
+}
+
+
+.az-category-page-filter-photo{
+    vertical-align: middle;
+    font-size: 11px;
+    line-height: 15px;
+}
+
+.az-category-page-filter-radio {
+    display: block;
+    text-align: center;
+    margin: 5px auto 0 !important;
+}
+
+.glyphicon-chevron-down{
+    margin-left: 3px;}
