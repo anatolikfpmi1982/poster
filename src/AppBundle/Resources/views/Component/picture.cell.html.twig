@@ -14,7 +14,7 @@
     </div>
     <div class="row">
         <div class="az-main-popular-item-header-category">
-            <a href="{{ path('picture', {'id': picture.id}) }}">Автор: {{ picture.author.name }}</a>
+            <span class="az_author"> Автор:</span>  <a href="{{ path('picture', {'id': picture.id}) }}"> {{ picture.author.name }}</a>
         </div>
     </div>
     {% if picture.categories is defined and picture.categories %}
@@ -29,10 +29,10 @@
     <div class="row">
         <div class="az-main-popular-item-header-buttons container-fluid">
             <div class="row">
-                <div class="col-md-6 text-left">
+                <div class="col-md-6 text-left_id">
                     ID: {{ picture.id }}
                 </div>
-                <div class="col-md-6 text-right">
+                <div class="col-md-6 text-right_artik">
                     Артикул: {{ picture.code }}
                 </div>
             </div>
