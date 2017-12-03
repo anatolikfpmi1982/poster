@@ -60,13 +60,22 @@ class CategoryNewAdmin extends AbstractAdmin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
+        $categoriesChoices = [];
+        $categories = $this->em->getRepository('AppBundle\Entity\Category3')->findBy(['isActive' => true]);
+        if($categories) {
+            foreach ($categories as $v) {
+                $categoriesChoices[$v->getId()] = (string)$v;
+            }
+        }
+
         $listMapper
             ->add('id', null, ['required' => true, 'label' => 'ID'])
             ->add('title', null, ['required' => true, 'label' => 'Название', 'editable' => true])
             ->add('slug', null, ['label' => 'Алиас', 'editable' => true])
 //            ->add('createdAt', null, ['label' => 'Создано'])
 //            ->add('updatedAt', null, ['label' => 'Обновлено'])
-            ->add('parent_category', null, ['label' => 'Родительская категория'])
+            ->add('parent_category', 'choice', ['label' => 'Родительская категория', 'editable' => true,
+                'class' => 'Appbundle\Entity\Category3', 'choices' => $categoriesChoices])
             ->add('tags', null, ['label' => 'Теги'])
             ->add('isActive', null, ['label' => 'Показывать', 'editable' => true])
             ->add(
