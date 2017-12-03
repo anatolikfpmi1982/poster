@@ -75,7 +75,8 @@ class CategoryNewAdmin extends AbstractAdmin
 //            ->add('createdAt', null, ['label' => 'Создано'])
 //            ->add('updatedAt', null, ['label' => 'Обновлено'])
             ->add('parent_category', 'choice', ['label' => 'Родительская категория', 'editable' => true,
-                'class' => 'Appbundle\Entity\Category3', 'choices' => $categoriesChoices])
+                'class' => 'Appbundle\Entity\Category3', 'choices' => $categoriesChoices, 'sortable' => true,
+                'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'parent_category']]])
             ->add('tags', null, ['label' => 'Теги'])
             ->add('isActive', null, ['label' => 'Показывать', 'editable' => true])
             ->add(

@@ -105,15 +105,15 @@ class PictureAdmin extends AbstractAdmin
             ->add('title', null, ['label' => 'Название', 'editable' => true])
             ->add('slug', null, ['label' => 'Алиас', 'editable' => true])
             ->add('author', 'choice', ['label' => 'Автор','editable' => true,
-                'class' => 'Appbundle\Entity\Author', 'choices' => $authorsChoices])
+                'class' => 'Appbundle\Entity\Author', 'choices' => $authorsChoices, 'sortable' => true,
+                'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'author']]])
             ->add('type', null, ['label' => 'Арт', 'editable' => true])
             ->add('price', null, ['label' => 'Цена', 'editable' => true,
                 'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
             ->add('ratio', null, ['label' => 'Коэффициент', 'editable' => true,
                 'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
-            ->add('categories', null, ['label' => 'Категории', 'editable' => true])
-//            ->add('categories', 'choice', ['label' => 'Категории', 'editable' => true,
-//                'class' => 'Appbundle\Entity\Author', 'choices' => $categoriesChoices])
+            ->add('categories', null, ['label' => 'Категории', 'editable' => true, 'sortable' => true,
+                'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'categories']]])
 //            ->add('createdAt', null, ['label' => 'Создано'])
 //            ->add('updatedAt', null, ['label' => 'Обновлено'])
             ->add('isActive', null, ['label' => 'Показывать', 'editable' => true])

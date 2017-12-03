@@ -70,7 +70,8 @@ class MainMenuAdmin extends AbstractAdmin
             ->add('image', null,
                 ['label' => 'Изображение', 'template' => 'AppBundle:Admin:list_image.html.twig'])
             ->add('page', 'choice', ['label' => 'Страница','editable' => true,
-                'class' => 'Appbundle\Entity\Page', 'choices' => $pagesChoices])
+                'class' => 'Appbundle\Entity\Page', 'choices' => $pagesChoices, 'sortable' => true,
+                'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'page']]])
             ->add('target', null, ['label' => 'Ссылка'])
             ->add('weight', null, ['label' => 'Вес', 'editable' => true])
 //            ->add('createdAt', null, ['label' => 'Создано'])

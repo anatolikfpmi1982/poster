@@ -111,9 +111,11 @@ class FrameAdmin extends AbstractAdmin
             ->add('width', null, ['editable' => true, 'label' => 'Ширина',
                 'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
             ->add('color', 'choice', ['editable' => true, 'label' => 'Цвет','editable' => true,
-                'class' => 'Appbundle\Entity\FrameColor', 'choices' => $colorsChoices])
+                'class' => 'Appbundle\Entity\FrameColor', 'choices' => $colorsChoices, 'sortable' => true,
+                'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'color']]])
             ->add('material', 'choice', ['editable' => true, 'label' => 'Материал','editable' => true,
-                'class' => 'Appbundle\Entity\FrameMaterial', 'choices' => $materialsChoices])
+                'class' => 'Appbundle\Entity\FrameMaterial', 'choices' => $materialsChoices, 'sortable' => true,
+                'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'material']]])
 //            ->add('createdAt', null, ['label' => 'Создано'])
 //            ->add('updatedAt', null, ['label' => 'Обновлено'])
             ->add('isActive', null, ['editable' => true, 'label' => 'Показывать'])
