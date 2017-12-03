@@ -60,8 +60,10 @@ class UnderframeAdmin extends AbstractAdmin
             ->add('id', null, ['label' => 'ID'])
             ->add('image', null,
                 ['label' => 'Изображение', 'template' => 'AppBundle:Admin:list_image.html.twig'])
-            ->add('depth', null, ['editable' => true, 'label' => 'Толщина'])
-            ->add('ratio', null, ['editable' => true, 'label' => 'Коэффициент'])
+            ->add('depth', null, ['editable' => true, 'label' => 'Толщина',
+                'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
+            ->add('ratio', null, ['editable' => true, 'label' => 'Коэффициент',
+                'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
 //            ->add('createdAt', null, ['label' => 'Создано'])
 //            ->add('updatedAt', null, ['label' => 'Обновлено'])
             ->add('isActive', null, ['editable' => true, 'label' => 'Показывать'])

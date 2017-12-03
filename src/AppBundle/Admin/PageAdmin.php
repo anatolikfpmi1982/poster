@@ -35,12 +35,12 @@ class PageAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id', null, ['required' => true, 'label' => 'ID'])
-            ->add('title', null, ['required' => true, 'label' => 'Название'])
-            ->add('slug', null, ['required' => false, 'label' => 'Алиас'])
-            ->add('seoTitle', null, ['required' => true, 'label' => 'SEO - Title'])
-            ->add('seoDescription', null, ['required' => true, 'label' => 'SEO - Description'])
-            ->add('seoKeywords', null, ['required' => true, 'label' => 'SEO - Keywords'])
+            ->add('id', null, ['label' => 'ID'])
+            ->add('title', null, ['editable' => true, 'label' => 'Название'])
+            ->add('slug', null, ['editable' => false, 'label' => 'Алиас'])
+            ->add('seoTitle', null, ['editable' => true, 'label' => 'SEO - Title'])
+            ->add('seoDescription', null, ['editable' => true, 'label' => 'SEO - Description'])
+            ->add('seoKeywords', null, ['editable' => true, 'label' => 'SEO - Keywords'])
 //            ->add('createdAt', null, ['label' => 'Создано'])
 //            ->add('updatedAt', null, ['label' => 'Обновлено'])
             ->add('isActive', null, ['label' => 'Показывать'])

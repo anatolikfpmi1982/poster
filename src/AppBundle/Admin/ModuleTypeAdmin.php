@@ -61,7 +61,8 @@ class ModuleTypeAdmin extends AbstractAdmin
             ->add('image', null,
                 ['label' => 'Изображение', 'template' => 'AppBundle:Admin:list_image.html.twig'])
             ->add('name', null, ['editable'=> true, 'label' => 'Название'])
-            ->add('ratio', null, ['editable' => true, 'label' => 'Коэффициент'])
+            ->add('ratio', null, ['editable' => true, 'label' => 'Коэффициент',
+                'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
 //            ->add('createdAt', null, ['label' => 'Создано'])
 //            ->add('updatedAt', null, ['label' => 'Обновлено'])
             ->add('isActive', null, ['editable' => true, 'label' => 'Показывать'])
