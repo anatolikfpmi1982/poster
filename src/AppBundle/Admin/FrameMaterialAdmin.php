@@ -64,12 +64,18 @@ class FrameMaterialAdmin extends AbstractAdmin
             ->add('image', null,
                 ['label' => 'Изображение', 'template' => 'AppBundle:Admin:list_image.html.twig'])
             ->add('title', null, ['editable' => true, 'label' => 'Название'])
-            ->add('ratio', null, ['editable' => true, 'label' => 'Коэффициент'])
-            ->add('price', null, ['editable' => true, 'label' => 'Цена'])
-            ->add('minArea', null, ['editable' => true, 'label' => 'Минимальная площадь'])
-            ->add('maxArea', null, ['editable' => true, 'label' => 'Максимальная площадь'])
-            ->add('minPrice', null, ['editable' => true, 'label' => 'Минимальная цена'])
-            ->add('maxPrice', null, ['editable' => true, 'label' => 'Максимальная цена'])
+            ->add('ratio', null, ['editable' => true, 'label' => 'Коэффициент',
+                'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
+            ->add('price', null, ['editable' => true, 'label' => 'Цена',
+                'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
+            ->add('minArea', null, ['editable' => true, 'label' => 'Минимальная площадь',
+                'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
+            ->add('maxArea', null, ['editable' => true, 'label' => 'Максимальная площадь',
+                'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
+            ->add('minPrice', null, ['editable' => true, 'label' => 'Минимальная цена',
+                'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
+            ->add('maxPrice', null, ['editable' => true, 'label' => 'Максимальная цена',
+                'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
 //            ->add('createdAt', null, ['label' => 'Создано'])
 //            ->add('updatedAt', null, ['label' => 'Опубликовано'])
             ->add('isActive', null, ['label' => 'Показывать', 'editable' => true])

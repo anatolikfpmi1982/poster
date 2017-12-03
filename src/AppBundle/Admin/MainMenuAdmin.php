@@ -34,15 +34,15 @@ class MainMenuAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('id', null, ['label' => 'ID'])
-            ->add('title', null, ['label' => 'Название'])
+            ->add('title', null, ['label' => 'Название', 'editable' => true])
             ->add('image', null,
                 ['label' => 'Изображение', 'template' => 'AppBundle:Admin:list_image.html.twig'])
             ->add('page', null, ['label' => 'Страница'])
             ->add('target', null, ['label' => 'Ссылка'])
-            ->add('weight', null, ['label' => 'Вес'])
+            ->add('weight', null, ['label' => 'Вес', 'editable' => true])
 //            ->add('createdAt', null, ['label' => 'Создано'])
 //            ->add('updatedAt', null, ['label' => 'Обновлено'])
-            ->add('isActive', null, ['label' => 'Показывать'])
+            ->add('isActive', null, ['label' => 'Показывать', 'editable' => true])
             ->add(
                 '_action',
                 'actions',

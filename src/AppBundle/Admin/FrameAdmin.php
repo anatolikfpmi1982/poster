@@ -82,11 +82,13 @@ class FrameAdmin extends AbstractAdmin
             ->add('id', null, ['required' => true, 'label' => 'ID'])
             ->add('images', null,
                 ['required' => true, 'label' => 'Изображение', 'template' => 'AppBundle:Admin:frame_list_image.html.twig'])
-            ->add('title', null, ['editable'=> true, 'required' => true, 'label' => 'Артикул'])
-            ->add('height', null, ['editable' => true, 'required' => true, 'label' => 'Высота'])
-            ->add('width', null, ['editable' => true, 'required' => true, 'label' => 'Ширина'])
-            ->add('color', null, ['editable' => true, 'required' => true, 'label' => 'Цвет'])
-            ->add('material', null, ['editable' => true, 'required' => true, 'label' => 'Материал'])
+            ->add('title', null, ['editable'=> true, 'label' => 'Артикул'])
+            ->add('height', null, ['editable' => true, 'label' => 'Высота',
+                'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
+            ->add('width', null, ['editable' => true, 'label' => 'Ширина',
+                'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
+            ->add('color', null, ['editable' => true, 'label' => 'Цвет'])
+            ->add('material', null, ['editable' => true, 'label' => 'Материал'])
 //            ->add('createdAt', null, ['label' => 'Создано'])
 //            ->add('updatedAt', null, ['label' => 'Обновлено'])
             ->add('isActive', null, ['editable' => true, 'label' => 'Показывать'])

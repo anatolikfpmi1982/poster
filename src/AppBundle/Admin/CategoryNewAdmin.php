@@ -63,7 +63,7 @@ class CategoryNewAdmin extends AbstractAdmin
         $listMapper
             ->add('id', null, ['required' => true, 'label' => 'ID'])
             ->add('title', null, ['required' => true, 'label' => 'Название', 'editable' => true])
-            ->add('slug', null, ['label' => 'Алиас'])
+            ->add('slug', null, ['label' => 'Алиас', 'editable' => true])
 //            ->add('createdAt', null, ['label' => 'Создано'])
 //            ->add('updatedAt', null, ['label' => 'Обновлено'])
             ->add('parent_category', null, ['label' => 'Родительская категория'])

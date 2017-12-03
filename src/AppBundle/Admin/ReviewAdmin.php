@@ -34,15 +34,15 @@ class ReviewAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id', null, ['required' => true, 'label' => 'ID'])
-            ->add('name', null, ['required' => true, 'label' => 'ФИО'])
-            ->add('review', null, ['required' => true, 'label' => 'Отзыв'])
-            ->add('city', null, ['required' => true, 'label' => 'Город'])
-            ->add('email', null, ['required' => true, 'label' => 'Email'])
-            ->add('slug', null, ['required' => false, 'label' => 'Алиас'])
+            ->add('id', null, ['label' => 'ID'])
+            ->add('name', null, ['editable' => true, 'label' => 'ФИО'])
+            ->add('review', null, ['editable' => true, 'label' => 'Отзыв'])
+            ->add('city', null, ['editable' => true, 'label' => 'Город'])
+            ->add('email', null, ['editable' => true, 'label' => 'Email'])
+            ->add('slug', null, ['editable' => true, 'label' => 'Алиас'])
             ->add('createdAt', null, ['label' => 'Создано'])
             ->add('updatedAt', null, ['label' => 'Обновлено'])
-            ->add('isActive', null, ['label' => 'Показывать'])
+            ->add('isActive', null, ['label' => 'Показывать', 'editable' => true])
             ->add(
                 '_action',
                 'actions',
