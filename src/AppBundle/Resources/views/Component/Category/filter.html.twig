@@ -25,13 +25,37 @@
         Популярность <span class="glyphicon glyphicon-chevron-down"></span>
     </div>
 </div>
-<div class="col-md-3 text-center az-picture-page-constructor-block container-fluid">
+<div class="col-md-1 text-center az-picture-page-constructor-block container-fluid">
     <div class="row az-category-page-filter az-category-page-filter-photo">
-        Цвет
+        <button class="btn az-category-page-filter-random-btn">Случайно</button>
+    </div>
+</div>
+<div class="col-md-2 text-center az-picture-page-constructor-block container-fluid">
+    <div class="row az-category-page-filter az-category-page-filter-photo">
+        <div class="col-md-6 container-fluid">
+            <div class="row">
+                <div class="col-md-6 az-category-page-filter-color-div az-category-page-filter-color-1-div">
+                    <div class="az-category-page-filter-color az-category-page-filter-color-1">&nbsp;</div>
+                </div>
+                <div class="col-md-6 az-category-page-filter-color-div az-category-page-filter-color-2-div">
+                    <div class="az-category-page-filter-color az-category-page-filter-color-2">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">Цвет<span class="glyphicon glyphicon-chevron-down"></span></div>
+
     </div>
 </div>
 <div class="col-md-3 text-center az-picture-page-constructor-block container-fluid">
     <div class="row az-category-page-filter az-category-page-filter-photo">
-        Шаблон
+        {% if filters is defined and filters and filters.tpls is defined and filters.tpls %}
+            {% set loopIndex = 1 %}
+            {% for tpl in filters.tpls if loopIndex < 5 %}
+                {#<div class="col-md-3 text-center az-category-page-filter-tpl-div">#}
+                    <img src="/files/picture_forms/small_thumb/{{ tpl.image.getFilename() }}" class="az-picture-page-material-img"/>
+                {#</div>#}
+                {% set loopIndex = loopIndex + 1 %}
+            {% endfor %}
+        {% endif %}
     </div>
 </div>
