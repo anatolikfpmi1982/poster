@@ -103,4 +103,16 @@ class FrontController extends Controller {
     protected function getBreadCrumbBlock() {
         return $this->get( 'app.breadcrumb_service' )->buildBreadCrumb( $this->pageSlug, $this->pageType );
     }
+
+    /**
+     * @return array
+     */
+    protected function getLastVisitedBlock() {
+        $lastVisited = $this->get('app.session_manager')->getLastVisitedItems();
+        if($lastVisited) {
+            $lastVisited = $this->get( 'doctrine.orm.entity_manager' )->getRepository('AppBundle:Picture')->findLastVisited($lastVisited);
+        }
+
+        return $lastVisited;
+    }
 }

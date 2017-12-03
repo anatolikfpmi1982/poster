@@ -1,40 +1,49 @@
 <?php
 namespace AppBundle\Service;
 
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class SessionManagement
-{
+/**
+ * Class SessionManagement
+ */
+class SessionManagement {
     /**
      * @var ContainerInterface
      */
     private $container;
 
-    public function __construct(ContainerInterface $container)
-    {
+    /**
+     * SessionManagement constructor.
+     *
+     * @param ContainerInterface $container
+     */
+    public function __construct( ContainerInterface $container ) {
         $this->container = $container;
     }
 
-    public function addLastVisitedItem($id)
-    {
-        $session = $this->container->get('session');
-        if($lastVisited = $session->get('lastVisited')) {
-            if(count($lastVisited) >= 5) {
-                array_pop($lastVisited);
+    /**
+     * @param int $id
+     */
+    public function addLastVisitedItem( $id ) {
+        $session = $this->container->get( 'session' );
+        if ( $lastVisited = $session->get( 'lastVisited' ) ) {
+            if ( count( $lastVisited ) >= 5 ) {
+                array_pop( $lastVisited );
             }
-            if(in_array($id, $lastVisited)) {
-                unset($lastVisited[array_search($id, $lastVisited)]);
+            if ( in_array( $id, $lastVisited, false ) ) {
+                unset( $lastVisited[ array_search( $id, $lastVisited, false ) ] );
             }
-            array_unshift($lastVisited, $id);
+            array_unshift( $lastVisited, $id );
         } else {
-            $lastVisited = [$id];
+            $lastVisited = [ $id ];
         }
-        $session->set('lastVisited', $lastVisited);
+        $session->set( 'lastVisited', $lastVisited );
     }
 
-    public function getLastVisitedItems()
-    {
-        return $this->container->get('session')->get('lastVisited');
+    /**
+     * @return mixed
+     */
+    public function getLastVisitedItems() {
+        return $this->container->get( 'session' )->get( 'lastVisited' );
     }
 }

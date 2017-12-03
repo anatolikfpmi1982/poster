@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class CategoriesController extends FrontController
 {
+    const PAGE_LIMIT = 16;
+
     /**
      * @param string $slug
      * @param Request $request
@@ -32,23 +34,16 @@ class CategoriesController extends FrontController
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
-            10/*limit per page*/
+            self::PAGE_LIMIT/*limit per page*/
         );
 
-        $lastVisited = $this->get('app.session_manager')->getLastVisitedItems();
-
-        if($lastVisited) {
-            $lastVisited = $em->getRepository('AppBundle:Picture')->findLastVisited($lastVisited);
-        }
-
-        $this->blocks = [ 'CategoryMenu' => 1, 'Reviews' => 2 , 'MainMenu' => 3, 'BreadCrumb' => 4 ];
+        $this->blocks = [ 'CategoryMenu' => 1, 'Reviews' => 2 , 'MainMenu' => 3, 'BreadCrumb' => 4, 'LastVisited' => 5 ];
         $this->menu = '/';
         $this->pageSlug = $slug;
         $this->pageType = 'category';
         $this->doBlocks();
         $this->data['pagination'] = $pagination;
         $this->data['category'] = $category;
-        $this->data['lastVisited'] = $lastVisited;
 
         // parameters to template
         return $this->render('AppBundle:Categories:show.html.twig', $this->data);

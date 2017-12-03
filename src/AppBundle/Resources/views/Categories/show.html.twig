@@ -19,7 +19,7 @@
                 <div class="row az-category-page-pictures-div">
                     <div class="row az-page-section-body az-page-main-popular container-fluid">
                         <div class="row">
-                            {% for picture in category.pictures %}
+                            {% for picture in pagination %}
 
                             {% include('AppBundle:Component:picture.cell.html.twig') %}
                             {% if loop.index != 1 and loop.index % 3 == 0 %}
@@ -37,10 +37,10 @@
                 </div>
             {% endif %}
             <div class="row az-pagination-block az-category-page-pagination-div">
-                Pagination block
+                {{ knp_pagination_render(pagination) }}
             </div>
             <div class="row az-visited-block az-category-page-visited-div">
-                Visited block
+                {% include('AppBundle:Component:Blocks/last.visited.html.twig') %}
             </div>
         </div>
     </div>
