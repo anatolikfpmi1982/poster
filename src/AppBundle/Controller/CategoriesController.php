@@ -44,6 +44,7 @@ class CategoriesController extends FrontController
         $this->doBlocks();
         $this->data['pagination'] = $pagination;
         $this->data['category'] = $category;
+        $this->data['filters']['tpls'] = $em->getRepository('AppBundle:PictureForm')->findBy(['isActive' => true]);
 
         // parameters to template
         return $this->render('AppBundle:Categories:show.html.twig', $this->data);
