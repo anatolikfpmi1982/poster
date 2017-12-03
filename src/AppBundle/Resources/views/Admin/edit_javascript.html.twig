@@ -1,0 +1,5 @@
+{% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/app/js/slug.js') }}" type="text/javascript"></script>
+{% endblock %}

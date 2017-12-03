@@ -23,7 +23,7 @@ class ReviewAdmin extends AbstractAdmin
             ->add('review', null, ['required' => true, 'label' => 'Отзыв'])
             ->add('city', null, ['required' => true, 'label' => 'Город'])
             ->add('email', null, ['required' => true, 'label' => 'Email'])
-            ->add('slug', null, ['required' => false, 'label' => 'URL'])
+            ->add('slug', null, ['required' => false, 'label' => 'Алиас'])
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
             ->end();
     }
@@ -39,7 +39,7 @@ class ReviewAdmin extends AbstractAdmin
             ->add('review', null, ['required' => true, 'label' => 'Отзыв'])
             ->add('city', null, ['required' => true, 'label' => 'Город'])
             ->add('email', null, ['required' => true, 'label' => 'Email'])
-            ->add('slug', null, ['required' => false, 'label' => 'URL'])
+            ->add('slug', null, ['required' => false, 'label' => 'Алиас'])
             ->add('createdAt', null, ['label' => 'Создано'])
             ->add('updatedAt', null, ['label' => 'Обновлено'])
             ->add('isActive', null, ['label' => 'Показывать'])
@@ -66,6 +66,13 @@ class ReviewAdmin extends AbstractAdmin
             ->add('email', null, ['label' => 'Email'])
             ->add('isActive', null, ['label' => 'Показывать'])
         ;
+    }
+
+    /**
+     * Configure admin
+     */
+    public function configure() {
+        $this->setTemplate('edit', 'AppBundle:Admin:edit_javascript.html.twig');
     }
 
     /**

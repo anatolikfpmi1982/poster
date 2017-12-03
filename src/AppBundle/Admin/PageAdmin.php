@@ -24,7 +24,7 @@ class PageAdmin extends AbstractAdmin
             ->add('seoTitle', null, ['required' => false, 'label' => 'SEO - Title'])
             ->add('seoDescription', null, ['required' => false, 'label' => 'SEO - Description'])
             ->add('seoKeywords', null, ['required' => false, 'label' => 'SEO - Keywords'])
-            ->add('slug', null, ['required' => false, 'label' => 'Алиас'])
+            ->add('slug', null, ['required' => false, 'label' => 'Алиас', 'attr' => ['name' => 'slug1']])
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
             ->end();
     }
@@ -65,6 +65,13 @@ class PageAdmin extends AbstractAdmin
             ->add('title', null, ['label' => 'Название'])
             ->add('isActive', null, ['label' => 'Показать'])
         ;
+    }
+
+    /**
+     * Configure admin
+     */
+    public function configure() {
+        $this->setTemplate('edit', 'AppBundle:Admin:edit_javascript.html.twig');
     }
 
     /**
