@@ -73,7 +73,7 @@ doctrine:
                     SonataUserBundle: ~
                     FOSUserBundle: ~
                     AppBundle: ~
-                    SonataClassificationBundle: ~
+#                    SonataClassificationBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:

@@ -95,6 +95,13 @@ class CategoryNewAdmin extends AbstractAdmin
     }
 
     /**
+     * Configure admin
+     */
+    public function configure() {
+        $this->setTemplate('edit', 'AppBundle:Admin:edit_javascript.html.twig');
+    }
+
+    /**
      * @param mixed $category
      */
     public function prePersist($category)

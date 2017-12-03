@@ -129,6 +129,13 @@ class PictureAdmin extends AbstractAdmin
     }
 
     /**
+     * Configure admin
+     */
+    public function configure() {
+        $this->setTemplate('edit', 'AppBundle:Admin:edit_javascript.html.twig');
+    }
+
+    /**
      * @param mixed $picture
      */
     public function prePersist($picture)

@@ -42,14 +42,6 @@ class Underframe implements ImageInterface
 
     /**
      * @var float
-     * @ORM\Column(name="price", type="float")
-     *
-     * @JMS\Expose
-     */
-    private $price;
-
-    /**
-     * @var float
      *
      * @ORM\Column(name="ratio", type="float")
      * @JMS\Expose
@@ -93,7 +85,7 @@ class Underframe implements ImageInterface
      * Set createdAt
      *
      * @param  \DateTime $createdAt
-     * @return Frame
+     * @return UnderFrame
      */
     public function setCreatedAt($createdAt)
     {
@@ -116,7 +108,7 @@ class Underframe implements ImageInterface
      * Set updatedAt
      *
      * @param  \DateTime $updatedAt
-     * @return Frame
+     * @return UnderFrame
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -194,30 +186,6 @@ class Underframe implements ImageInterface
     public function getDepth()
     {
         return $this->depth;
-    }
-
-    /**
-     * Set price
-     *
-     * @param float $price
-     *
-     * @return Underframe
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * Get price
-     *
-     * @return float
-     */
-    public function getPrice()
-    {
-        return $this->price;
     }
 
     /**
