@@ -18,21 +18,21 @@
         </div>
     </div>
     {% if picture.categories is defined and picture.categories %}
-        <div class="row">
+        <!--<div class="row">
             <div class="az-main-popular-item-header-type">
                 {% for category in picture.categories %}
                     {{ category.title }}{% if not loop.last %},{% endif %}
                 {% endfor %}
             </div>
-        </div>
+        </div>-->
     {% endif %}
     <div class="row">
         <div class="az-main-popular-item-header-buttons container-fluid">
             <div class="row">
-                <div class="col-md-6 text-left_id">
+                <!--<div class="col-md-6 text-left_id">
                     ID: {{ picture.id }}
-                </div>
-                <div class="col-md-6 text-right_artik">
+                </div>-->
+                <div class="col-md-6 text-left_artik">
                     Артикул: {{ picture.code }}
                 </div>
             </div>
@@ -41,12 +41,13 @@
     <div class="row">
         <div class="az-main-popular-item-header-buttons container-fluid">
             <div class="row">
-                <div class="col-md-6 text-left">
-                    <button class="btn">Заказать</button>
-                </div>
                 <div class="col-md-6 text-right">
-                    <button class="btn">Отложить</button>
+                    <button class="btn_az-main-popular_defer">Отложить</button>
                 </div>
+                <div class="col-md-6 text-left">
+                    <button class="btn_az-main-popular_order">Выбрать </br>тип картины,</br> размер, цену, </br>заказать</button>
+                </div>
+
             </div>
         </div>
     </div>
