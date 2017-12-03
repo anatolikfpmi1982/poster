@@ -23,21 +23,29 @@ class FrameAdmin extends AbstractAdmin
     protected $imageManagement;
 
     /**
+     * @var EntityManager
+     */
+    protected $em;
+
+    /**
      * Constructor
      *
      * @param string $code
      * @param string $class
      * @param string $baseControllerName
      * @param ImageManagement $imageManagement
+     * @param EntityManager $entityManager
      */
     public function __construct(
         $code,
         $class,
         $baseControllerName,
-        ImageManagement $imageManagement
+        ImageManagement $imageManagement,
+        EntityManager $entityManager
     ) {
         parent::__construct($code, $class, $baseControllerName);
         $this->imageManagement = $imageManagement;
+        $this->em = $entityManager;
     }
 
     /**
@@ -78,6 +86,21 @@ class FrameAdmin extends AbstractAdmin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
+        $colorsChoices = [];
+        $colors = $this->em->getRepository('AppBundle\Entity\FrameColor')->findBy(['isActive' => true]);
+        if($colors) {
+            foreach ($colors as $v) {
+                $colorsChoices[$v->getId()] = (string)$v;
+            }
+        }
+        $materialsChoices = [];
+        $materials = $this->em->getRepository('AppBundle\Entity\FrameMaterial')->findBy(['isActive' => true]);
+        if($materials) {
+            foreach ($materials as $v) {
+                $materialsChoices[$v->getId()] = (string)$v;
+            }
+        }
+
         $listMapper
             ->add('id', null, ['required' => true, 'label' => 'ID'])
             ->add('images', null,
@@ -87,8 +110,12 @@ class FrameAdmin extends AbstractAdmin
                 'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
             ->add('width', null, ['editable' => true, 'label' => 'Ширина',
                 'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
-            ->add('color', null, ['editable' => true, 'label' => 'Цвет'])
-            ->add('material', null, ['editable' => true, 'label' => 'Материал'])
+            ->add('color', 'choice', ['editable' => true, 'label' => 'Цвет','editable' => true,
+                'class' => 'Appbundle\Entity\FrameColor', 'choices' => $colorsChoices, 'sortable' => true,
+                'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'color']]])
+            ->add('material', 'choice', ['editable' => true, 'label' => 'Материал','editable' => true,
+                'class' => 'Appbundle\Entity\FrameMaterial', 'choices' => $materialsChoices, 'sortable' => true,
+                'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'material']]])
 //            ->add('createdAt', null, ['label' => 'Создано'])
 //            ->add('updatedAt', null, ['label' => 'Обновлено'])
             ->add('isActive', null, ['editable' => true, 'label' => 'Показывать'])
@@ -154,6 +181,7 @@ class FrameAdmin extends AbstractAdmin
 
     /**
      * @param mixed $moduleType
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function preRemove($moduleType){
         if($moduleType instanceof Frame) {

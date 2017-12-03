@@ -8,6 +8,7 @@ services:
              - AppBundle\Entity\Frame
              - 'SonataAdminBundle:CRUD'
              - '@app.image_manager'
+             - '@doctrine.orm.entity_manager'
     app.admin.underframe:
         class: AppBundle\Admin\UnderframeAdmin
         tags:
@@ -76,6 +77,7 @@ services:
             - ~
             - AppBundle\Entity\MainMenu
             - 'SonataAdminBundle:CRUD'
+            - '@doctrine.orm.entity_manager'
     app.admin.call:
         class: AppBundle\Admin\CallAdmin
         tags:

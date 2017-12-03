@@ -8,9 +8,33 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Doctrine\ORM\EntityManager;
 
 class MainMenuAdmin extends AbstractAdmin
 {
+    /**
+     * @var EntityManager
+     */
+    protected $em;
+
+    /**
+     * Constructor
+     *
+     * @param string $code
+     * @param string $class
+     * @param string $baseControllerName
+     * @param EntityManager $entityManager
+     */
+    public function __construct(
+        $code,
+        $class,
+        $baseControllerName,
+        EntityManager $entityManager
+    ) {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->em = $entityManager;
+    }
+
     /**
      * @param FormMapper $formMapper
      */
@@ -32,12 +56,22 @@ class MainMenuAdmin extends AbstractAdmin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
+        $pagesChoices = [];
+        $pages = $this->em->getRepository('AppBundle\Entity\Page')->findBy(['isActive' => true]);
+        if($pages) {
+            foreach ($pages as $v) {
+                $pagesChoices[$v->getId()] = (string)$v;
+            }
+        }
+
         $listMapper
             ->add('id', null, ['label' => 'ID'])
             ->add('title', null, ['label' => 'Название', 'editable' => true])
             ->add('image', null,
                 ['label' => 'Изображение', 'template' => 'AppBundle:Admin:list_image.html.twig'])
-            ->add('page', null, ['label' => 'Страница'])
+            ->add('page', 'choice', ['label' => 'Страница','editable' => true,
+                'class' => 'Appbundle\Entity\Page', 'choices' => $pagesChoices, 'sortable' => true,
+                'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'page']]])
             ->add('target', null, ['label' => 'Ссылка'])
             ->add('weight', null, ['label' => 'Вес', 'editable' => true])
 //            ->add('createdAt', null, ['label' => 'Создано'])

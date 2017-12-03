@@ -21,7 +21,7 @@ class PictureAdmin extends AbstractAdmin
     protected $imageManagement;
 
     /**
-     * @var
+     * @var EntityManager
      */
     protected $em;
 
@@ -81,6 +81,22 @@ class PictureAdmin extends AbstractAdmin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
+        $authorsChoices = [];
+        $authors = $this->em->getRepository('AppBundle\Entity\Author')->findBy(['isActive' => true]);
+        if($authors) {
+            foreach ($authors as $v) {
+                $authorsChoices[$v->getId()] = (string)$v;
+            }
+        }
+
+        $categoriesChoices = [];
+        $categories = $this->em->getRepository('AppBundle\Entity\Category3')->findBy(['isActive' => true]);
+        if($categories) {
+            foreach ($categories as $v) {
+                $categoriesChoices[$v->getId()] = (string)$v;
+            }
+        }
+
         $listMapper
             ->add('id', null, ['label' => 'ID'])
             ->add('code', null, ['label' => 'Артикул'])
@@ -88,13 +104,16 @@ class PictureAdmin extends AbstractAdmin
                 ['label' => 'Изображение', 'template' => 'AppBundle:Admin:pictures_list_image.html.twig'])
             ->add('title', null, ['label' => 'Название', 'editable' => true])
             ->add('slug', null, ['label' => 'Алиас', 'editable' => true])
-            ->add('author', null, ['editable' => true, 'label' => 'Автор'])
+            ->add('author', 'choice', ['label' => 'Автор','editable' => true,
+                'class' => 'Appbundle\Entity\Author', 'choices' => $authorsChoices, 'sortable' => true,
+                'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'author']]])
             ->add('type', null, ['label' => 'Арт', 'editable' => true])
             ->add('price', null, ['label' => 'Цена', 'editable' => true,
                 'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
             ->add('ratio', null, ['label' => 'Коэффициент', 'editable' => true,
                 'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
-            ->add('categories', null, ['label' => 'Категории', 'editable' => true])
+            ->add('categories', null, ['label' => 'Категории', 'editable' => true, 'sortable' => true,
+                'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'categories']]])
 //            ->add('createdAt', null, ['label' => 'Создано'])
 //            ->add('updatedAt', null, ['label' => 'Обновлено'])
             ->add('isActive', null, ['label' => 'Показывать', 'editable' => true])
@@ -105,6 +124,7 @@ class PictureAdmin extends AbstractAdmin
                     'actions' => [
                         'edit' => [],
                         'delete' => [],
+                        'generate' => ['template' => 'AppBundle:Admin:list__action_generate.html.twig']
                     ],
                 ]
             );

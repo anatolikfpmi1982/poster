@@ -37,7 +37,7 @@ class PageAdmin extends AbstractAdmin
         $listMapper
             ->add('id', null, ['label' => 'ID'])
             ->add('title', null, ['editable' => true, 'label' => 'Название'])
-            ->add('slug', null, ['editable' => false, 'label' => 'Алиас'])
+            ->add('slug', null, ['editable' => true, 'label' => 'Алиас'])
             ->add('seoTitle', null, ['editable' => true, 'label' => 'SEO - Title'])
             ->add('seoDescription', null, ['editable' => true, 'label' => 'SEO - Description'])
             ->add('seoKeywords', null, ['editable' => true, 'label' => 'SEO - Keywords'])
