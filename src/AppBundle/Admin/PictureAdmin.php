@@ -82,19 +82,19 @@ class PictureAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id', null, ['required' => true, 'label' => 'ID'])
-            ->add('code', null, ['required' => true, 'label' => 'Артикул'])
+            ->add('id', null, ['label' => 'ID'])
+            ->add('code', null, ['label' => 'Артикул'])
             ->add('image', null,
                 ['label' => 'Изображение', 'template' => 'AppBundle:Admin:pictures_list_image.html.twig'])
-            ->add('title', null, ['required' => true, 'label' => 'Название', 'editable' => true])
-            ->add('slug', null, ['required' => false, 'label' => 'Алиас', 'editable' => true])
-            ->add('author', null, ['required' => false, 'label' => 'Автор'])
-            ->add('type', null, ['required' => true, 'label' => 'Арт', 'editable' => true])
-            ->add('price', null, ['required' => true, 'field_name' => 'price', 'label' => 'Цена', 'editable' => true,
+            ->add('title', null, ['label' => 'Название', 'editable' => true])
+            ->add('slug', null, ['label' => 'Алиас', 'editable' => true])
+            ->add('author', null, ['editable' => true, 'label' => 'Автор'])
+            ->add('type', null, ['label' => 'Арт', 'editable' => true])
+            ->add('price', null, ['label' => 'Цена', 'editable' => true,
                 'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
-            ->add('ratio', null, ['required' => true, 'label' => 'Коэффициент', 'editable' => true,
+            ->add('ratio', null, ['label' => 'Коэффициент', 'editable' => true,
                 'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
-            ->add('categories', null, ['required' => false, 'label' => 'Категории', 'editable' => true])
+            ->add('categories', null, ['label' => 'Категории', 'editable' => true])
 //            ->add('createdAt', null, ['label' => 'Создано'])
 //            ->add('updatedAt', null, ['label' => 'Обновлено'])
             ->add('isActive', null, ['label' => 'Показывать', 'editable' => true])
@@ -124,7 +124,7 @@ class PictureAdmin extends AbstractAdmin
             ->add('ratio', null, ['label' => 'Коэффициент'])
             ->add('colors', null, ['label' => 'Цвет'])
             ->add('form', null, ['label' => 'Форма'])
-            ->add('categories', null, ['label' => 'Категории'])
+            ->add('categories', null, ['label' => 'Категории'], null, ['multiple' => true])
             ->add('isActive', null, ['label' => 'Показывать'])
         ;
     }
