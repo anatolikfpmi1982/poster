@@ -205,7 +205,6 @@ body {
     padding-right: 0;
 }
 
-
 .az-main-popular-item-img {
     width: 100%;
     text-align: center;
@@ -774,9 +773,7 @@ body {
     color: #333333;
 }
 
-
 /**popular**/
-
 
 .az-main-popular-item-img-div {
     height: 250px;
@@ -790,7 +787,7 @@ body {
     padding: 15px;
 }
 
-.btn_az-main-popular_order{
+.btn_az-main-popular_order {
     font-size: 13px;
     background-color: #fd1200;
     color: #fffff;
@@ -816,12 +813,13 @@ body {
     text-transform: lowercase;
 
 }
+
 .btn_az-main-popular_order:hover,
-.btn_az-main-popular_order:focus{
+.btn_az-main-popular_order:focus {
     background-color: #ffffff;
     border: 1px solid #fd1200;
-    color: #fd1200;}
-
+    color: #fd1200;
+}
 
 .az-main-popular-item-img {
     width: 100%;
@@ -835,7 +833,8 @@ body {
     font-size: 12px;
     padding-right: 15px;
     padding-left: 15px;
-    margin: 20px auto 5px auto;}
+    margin: 20px auto 5px auto;
+}
 
 .az-main-popular-item-header-category {
     color: #fd1200;
@@ -845,14 +844,17 @@ body {
     margin-left: auto;
     height: 40px;
 }
+
 .az_author {
     color: #333;
 }
+
 .text-left_id {
     font-size: 11px;
     text-align: left;
     margin-bottom: 5px;
 }
+
 .text-left_artik {
     font-size: 11px;
     text-align: left;
@@ -863,7 +865,8 @@ body {
 .btn_az-main-popular_defer:hover {
     background-color: #ffffff;
     border: 1px solid #fd1200;
-    color: #fd1200;}
+    color: #fd1200;
+}
 
 .btn_az-main-popular_defer {
     float: left;
@@ -891,8 +894,9 @@ body {
     border-radius: 4px;
     text-transform: lowercase;
 }
+
 .az-main-popular-item-header-category a:hover,
-.az-main-popular-item-header-category a:focus{
+.az-main-popular-item-header-category a:focus {
     color: #333;
 }
 
@@ -1071,7 +1075,6 @@ footer {
     font-size: larger;
 }
 
-
 .slider_item_cat {
     font: 14px 'fregatregular', 'arial', 'helvetica', 'sans-serif';
     opacity: 1;
@@ -1210,22 +1213,23 @@ footer {
     margin: 0 10px;
     border-radius: inherit;
 }
-.breadcrumb a{
+
+.breadcrumb a {
     display: block;
     float: left;
-    font: 11px/31px 'arial','helvetica','sans-serif';
+    font: 11px/31px 'arial', 'helvetica', 'sans-serif';
     text-decoration: none;
     color: #808080;
     padding: 0 20px 0 6px;
     background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAeCAMAAADAd2R7AAAAUVBMVEXm5ub////m5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5uZFPaD0AAAAG3RSTlMAAAECAxElJicpKk9wcnR2eKTCxMXHycrd3t8Pa2o7AAAAbElEQVR4XlWRRw7AIBADl9QC6T3/f2ikOJbW3EYMsDYWl8zcmpOn8qo8xlXdXty7FndTd1C3EXfPxR3FfVpxD3UndTtxz8KC2wsf8RyId4L4HgizgDgniBlAyPcTspPQCwmdkdAnCV2T3D+EF1lXBCZgHdt7AAAAAElFTkSuQmCC') no-repeat 100% 0%;
 }
 
-
 .breadcrumb a:hover, .breadcrumb a:focus {
     color: #fd1200;
 }
+
 .breadcrumb > .active {
-    font: 11px/31px 'arial','helvetica','sans-serif';
+    font: 11px/31px 'arial', 'helvetica', 'sans-serif';
     color: #fd1200;
     padding: 0 0 0 5px;
 }
@@ -1237,19 +1241,18 @@ footer {
     border: 1px solid #e6e6e6;
 }
 
-.az-category-page-filters-div .az-picture-page-constructor-block{
+.az-category-page-filters-div .az-picture-page-constructor-block {
     border: none;
     padding: 5px 8px;
     border-left: 1px solid #e6e6e6;
     height: 40px;
 }
 
-.az-category-page-filters-div .az-picture-page-constructor-block:first-child{
+.az-category-page-filters-div .az-picture-page-constructor-block:first-child {
     border-left: none;
 }
 
-
-.az-category-page-filter-photo{
+.az-category-page-filter-photo {
     vertical-align: middle;
     font-size: 11px;
     line-height: 15px;
@@ -1261,5 +1264,27 @@ footer {
     margin: 5px auto 0 !important;
 }
 
-.glyphicon-chevron-down{
-    margin-left: 3px;}
+.glyphicon-chevron-down {
+    margin-left: 3px;
+}
+
+.az-category-page-filter-random-btn {
+    width: 60px;
+    font: 9px/31px 'arial', 'helvetica', 'sans-serif';
+    padding: 0 10px;
+}
+
+.az-category-page-filter-color {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #000000;
+    background-color: #ffffff;
+}
+
+.az-category-page-filter-color-1 {
+    background-color: #00A000;
+}
+
+.az-category-page-filter-color-2 {
+    background-color: #fd1200;
+}

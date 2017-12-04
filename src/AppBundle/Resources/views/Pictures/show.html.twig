@@ -1,6 +1,6 @@
 {% extends "AppBundle::layout.html.twig" %}
 
-{% block title %}Картина "{{ picture.title }}" {% endblock %}
+{% block title %}Картина "{{ pictureMain.title }}" {% endblock %}
 
 {% block body %}
     <div class="row az-page-main-section-div">
@@ -8,13 +8,13 @@
     </div>
     <div class="row az-page-main-section-div">
         <div class="col-md-9 container-fluid">
-            <div class="row page-title az-picture-page-title">Картина "{{ picture.title }}"</div>
+            <div class="row page-title az-picture-page-title">Картина "{{ pictureMain.title }}"</div>
             <div class="row az-picture-page-author-articul-div">
-                <div class="col-md-6">Автор: <a href="#">{{ picture.author.name }}</a></div>
-                <div class="col-md-6">Артикул: {{ picture.code }}</div>
+                <div class="col-md-6">Автор: <a href="#">{{ pictureMain.author.name }}</a></div>
+                <div class="col-md-6">Артикул: {{ pictureMain.code }}</div>
             </div>
-            {% if picture.image and picture.image.getFilename() %}
-                {% set img = '/files/pictures/thumb/' ~ picture.image.getFilename() %}
+            {% if pictureMain.image and pictureMain.image.getFilename() %}
+                {% set img = '/files/pictures/thumb/' ~ pictureMain.image.getFilename() %}
             {% else %}
                 {% set img = asset('bundles/app/images/default_picture.jpg') %}
             {% endif %}
