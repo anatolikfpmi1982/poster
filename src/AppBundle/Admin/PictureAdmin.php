@@ -156,6 +156,24 @@ class PictureAdmin extends AbstractAdmin
     }
 
     /**
+     * @param array $actions
+     * @return array
+     */
+    public function configureBatchActions($actions)
+    {
+        if (
+            $this->hasRoute('edit') && $this->hasAccess('edit')
+        ) {
+            $actions['merge'] = array(
+                'ask_confirmation' => true
+            );
+
+        }
+
+        return $actions;
+    }
+
+    /**
      * @param mixed $picture
      */
     public function prePersist($picture)
