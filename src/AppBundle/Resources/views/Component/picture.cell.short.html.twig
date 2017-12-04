@@ -3,13 +3,13 @@
 {% else %}
     {% set img = asset('bundles/app/images/default_picture.jpg') %}
 {% endif %}
-<div class="col-md-4 az-popular-item container">
-    <div class="row az-main-popular-item-img-div">
-        <a href="{{ path('picture', {'id': picture.id}) }}"><img src="{{ img }}" class="az-main-popular-item-img"></a>
+<div class="col-md-4 az-vizited-item container">
+    <div class="row az-vizited-item-img-div">
+        <a href="{{ path('picture', {'id': picture.id}) }}"><img src="{{ img }}" class="az-vizited-item-img"></a>
     </div>
     <div class="row">
-        <div class="az-main-popular-item-header-category">
+        <!--<div class="az-main-popular-item-header-category">
             <a href="{{ path('picture', {'id': picture.id}) }}">"{{ picture.title }}"</a>
-        </div>
+        </div>-->
     </div>
 </div>
