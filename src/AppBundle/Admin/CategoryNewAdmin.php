@@ -44,7 +44,7 @@ class CategoryNewAdmin extends AbstractAdmin
         $formMapper
             ->with('Main')
             ->add('title', null, ['required' => true, 'label' => 'Название'])
-            ->add('description', CKEditorType::class, ['required' => false, 'label' => 'Описание'])
+            ->add('description', CKEditorType::class, ['required' => true, 'label' => 'Описание'])
             ->add('seoTitle', null, ['required' => false, 'label' => 'SEO - Title'])
             ->add('seoDescription', null, ['required' => false, 'label' => 'SEO - Description'])
             ->add('seoKeywords', null, ['required' => false, 'label' => 'SEO - Keywords'])
