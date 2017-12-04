@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Settings;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
@@ -53,13 +54,19 @@ class FrontController extends Controller {
         }
 
         $this->data['active_menu'] = $this->menu;
+        $this->data['site_settings'] = $this->getSiteSettings();
     }
 
     /**
      * @return array
      */
     protected function getSiteSettings() {
-        return $this->get( 'doctrine.orm.entity_manager' )->getRepository( 'AppBundle:Settings' )->findOneByName('site_settings');
+        $_siteSettings = $this->get( 'doctrine.orm.entity_manager' )->getRepository( 'AppBundle:Settings' )->findOneByName('site_settings');
+        $siteSettings = [];
+        if($_siteSettings instanceof Settings) {
+            $siteSettings = unserialize($_siteSettings->getSettings());
+        }
+        return $siteSettings;
     }
 
     /**

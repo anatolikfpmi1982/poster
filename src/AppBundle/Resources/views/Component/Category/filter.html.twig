@@ -51,9 +51,7 @@
         {% if filters is defined and filters and filters.tpls is defined and filters.tpls %}
             {% set loopIndex = 1 %}
             {% for tpl in filters.tpls if loopIndex < 5 %}
-                {#<div class="col-md-3 text-center az-category-page-filter-tpl-div">#}
                     <img src="/files/picture_forms/small_thumb/{{ tpl.image.getFilename() }}" class="az-picture-page-material-img"/>
-                {#</div>#}
                 {% set loopIndex = loopIndex + 1 %}
             {% endfor %}
         {% endif %}

@@ -6,7 +6,9 @@
                     <img src="{{ asset('bundles/app/images/logo.png') }}" class="az-logo-title-img" title="{% trans %}Logo{% endtrans %}"/>
                 </div>
                 <div class="row az-logo-title-text-div">
-                    Картины, постеры и фотообои по всей Беларуси. <br/>Быстро и удобно на заказ.
+                    {% if site_settings is defined and site_settings and site_settings.logo_header_text is defined and site_settings.logo_header_text %}
+                        {{ site_settings.logo_header_text|raw }}
+                    {% endif %}
                 </div>
             </div>
             <div class="col-md-3 container az-header-top">
@@ -15,8 +17,16 @@
                         <img src="{{ asset('bundles/app/images/telephone.png') }}" class="az-phone-title-img" title="{% trans %}phone{% endtrans %}"/>
                     </div>
                     <div class="col-md-9 container az-header-address-div">
-                        <div class="row az-header-address-container az-header-phone-number">+ 375 29 <b class="az-header-phone-number-bold">699-99-99</b></div>
-                        <div class="row az-header-address-container az-header-email">info@artzakaz.by</div>
+                        <div class="row az-header-address-container az-header-phone-number">
+                            {% if site_settings is defined and site_settings and site_settings.phone is defined and site_settings.phone %}
+                                {{ site_settings.phone|raw }}
+                            {% endif %}
+                        </div>
+                        <div class="row az-header-address-container az-header-email">
+                            {% if site_settings is defined and site_settings and site_settings.email is defined and site_settings.email %}
+                                {{ site_settings.email|raw }}
+                            {% endif %}
+                        </div>
 
                     </div>
                 </div>
@@ -41,7 +51,8 @@
                         <div class="row az-header-basket-container az-header-basket-count-text">Товаров: <span class="az-header-basket-count">0</span></div>
                         <div class="row az-header-address-container az-header-feedback-btn-div">
                             <button class="btn btn-bg az-header-feedback-btn">Обратный звонок</button>
-                        </div></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -60,7 +71,7 @@
                 <ul class="nav navbar-nav">
                     {% set index = 1 %}
                     {% for menu in site_blocks.MainMenu %}
-                        {% if index == 1  %}
+                        {% if index == 1 %}
                             {% set img_icon_name = 'home.png' %}
                         {% elseif index == 2 %}
                             {% set img_icon_name = 'portret.png' %}
@@ -72,9 +83,9 @@
                             {% set img_icon_name = 'delivery.png' %}
                         {% elseif index == 6 %}
                             {% set img_icon_name = 'phone_menu.png' %}
-                        {% endif  %}
+                        {% endif %}
                         <li {% if menu.target == active_menu %}class="active"{% endif %}><a href="{{ menu.target }}">
-                                <img src="{{ asset('bundles/app/images/' ~ img_icon_name ) }}" />{{ menu.title }}</a>
+                                <img src="{{ asset('bundles/app/images/' ~ img_icon_name ) }}"/>{{ menu.title }}</a>
                         </li>
                         {% set index = index + 1 %}
                     {% endfor %}
