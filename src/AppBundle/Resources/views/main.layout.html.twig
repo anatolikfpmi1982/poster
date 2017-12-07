@@ -3,6 +3,8 @@
 <head>
     <meta charset="{{ _charset }}"/>
     <meta name="robots" content="noindex,nofollow"/>
+    <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+    <meta name="description" content="{% block meta_description %}{% endblock %}">
     <title>{% block title %}{% endblock %}</title>
     {% block head %}{% endblock %}
     <style media="screen" type="text/css">
