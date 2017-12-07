@@ -28,7 +28,6 @@ class CategoriesController extends FrontController
         $category->count = count($category->getPictures());
 
         $queryBuilder = $em->getRepository('AppBundle:Picture')->getActivePicturesFromCategory($category->getId());
-//        $queryBuilder->addSelect('title as HIDDEN sort_title');
         $query = $queryBuilder->getQuery();
 
 

@@ -14,6 +14,7 @@ class PictureRepository extends EntityRepository {
     public function getActivePicturesFromCategory( $id ) {
         return $this->createQueryBuilder( 'p' )
                     ->innerJoin( 'p.categories', 'c' )// Inner Join with users
+                    ->innerJoin( 'p.form', 'f' )// Inner Join with users
                     ->where( 'c.id = :category' )
                     ->andWhere( 'p.isActive = true' )
                     ->setParameter( 'category', $id );

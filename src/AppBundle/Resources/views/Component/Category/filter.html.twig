@@ -29,7 +29,7 @@
     <div class="row az-category-page-filter az-category-page-filter-photo">
         Фото
         <input type="radio" class="btn az-category-page-filter-radio" name="az-category-page-filter-photo" title="az-category-page-filter-photo" value="1"
-               data-filerurl="{{ app.request.pathinfo }}?sort={{ sort_field }}&direction={{ sort_direction }}&page={{ pagination.currentPageNumber }}&filterField=p.type&filterValue=false"
+               data-filterurl="{{ app.request.pathinfo }}?sort={{ sort_field }}&direction={{ sort_direction }}&page={{ pagination.currentPageNumber }}&filterField=p.type&filterValue=false"
                {% if photo_filter %}checked{% endif %}>
     </div>
 </div>
@@ -41,7 +41,7 @@
     <div class="row az-category-page-filter az-category-page-filter-photo">
         Арт
         <input type="radio" class="btn az-category-page-filter-radio" name="az-category-page-filter-photo" title="az-category-page-filter-photo"
-               data-filerurl="{{ app.request.pathinfo }}?sort={{ sort_field }}&direction={{ sort_direction }}&page={{ pagination.currentPageNumber }}&filterField=p.type&filterValue=true"
+               data-filterurl="{{ app.request.pathinfo }}?sort={{ sort_field }}&direction={{ sort_direction }}&page={{ pagination.currentPageNumber }}&filterField=p.type&filterValue=true"
                value="1" {% if art_filter %}checked{% endif %}>
     </div>
 </div>
@@ -98,7 +98,14 @@
         {% if filters is defined and filters and filters.tpls is defined and filters.tpls %}
             {% set loopIndex = 1 %}
             {% for tpl in filters.tpls if loopIndex < 5 %}
-                <img src="/files/picture_forms/small_thumb/{{ tpl.image.getFilename() }}" class="az-picture-page-material-img"/>
+                {% set form_filter = false %}
+                {% if filter_field == 'f.id' and filter_value == tpl.id %}
+                    {% set form_filter = true %}
+                {% endif %}
+                <a href="#" class="az-picture-page-material-img-a"
+                   data-filterurl="{{ app.request.pathinfo }}?sort={{ sort_field }}&direction={{ sort_direction }}&page={{ pagination.currentPageNumber }}&filterField=f.id&filterValue={{ tpl.id }}">
+                    <img src="/files/picture_forms/small_thumb/{{ tpl.image.getFilename() }}" class="az-picture-page-material-img{% if form_filter %} selected{% endif %}"/>
+                </a>
                 {% set loopIndex = loopIndex + 1 %}
             {% endfor %}
         {% endif %}

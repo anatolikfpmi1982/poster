@@ -12,7 +12,14 @@ define(function (require, exports, module) {
         // category page filter radio button art|photo
         $("input.az-category-page-filter-radio").click(function (event) {
             event.stopImmediatePropagation();
-            window.location.replace($("input.az-category-page-filter-radio:checked").data('filerurl'));
+            window.location.replace($(this).data('filterurl'));
+        });
+
+        // category page filter radio button art|photo
+        $("a.az-picture-page-material-img-a").click(function (event) {
+            event.stopImmediatePropagation();
+            window.location.replace($(this).data('filterurl'));
+            return false;
         });
     });
 
