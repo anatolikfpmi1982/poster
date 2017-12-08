@@ -1,0 +1,76 @@
+ROLE_SONATA_ADMIN: Администратор (доступ в админку)
+ROLE_SUPER_ADMIN: Супер Администратор
+ROLE_ADMIN: Администратор
+ROLE_ALLOWED_TO_SWITCH: Возможность смены пользователя
+ROLE_USER: Пользователь
+'ROLE_SUPER_ADMIN: ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH': 'Супер Администратор: Администратор, Возможность смены пользователя'
+'ROLE_ADMIN: ROLE_USER, ROLE_SONATA_ADMIN': 'Администратор: Пользователь, Администратор (доступ в админку)'
+ROLE_APP_ADMIN_TAGS_GUEST: Гость для тэгов
+ROLE_APP_ADMIN_TAGS_EDITOR: Редактор для тегов
+ROLE_APP_ADMIN_TAGS_ADMIN: Администратор для тегов
+ROLE_APP_ADMIN_PICTURE_COLORS_GUEST: Гость для цветов картин
+ROLE_APP_ADMIN_PICTURE_COLORS_EDITOR: Редактор для цветов картин
+ROLE_APP_ADMIN_PICTURE_COLORS_ADMIN: Администратор для цветов картин
+ROLE_APP_ADMIN_PICTURE_FORM_GUEST: Гость для форм картин
+ROLE_APP_ADMIN_PICTURE_FORM_EDITOR: Редактор для форм картин
+ROLE_APP_ADMIN_PICTURE_FORM_ADMIN: Администратор для форм картин
+ROLE_SONATA_USER_ADMIN_USER_GUEST: Гость для пользователей
+ROLE_SONATA_USER_ADMIN_USER_EDITOR: Редактор для пользователей
+ROLE_SONATA_USER_ADMIN_USER_ADMIN: Администратор для пользователей
+ROLE_SONATA_USER_ADMIN_GROUP_GUEST: Гость для групп пользователей
+ROLE_SONATA_USER_ADMIN_GROUP_EDITOR: Редактор для групп пользователей
+ROLE_SONATA_USER_ADMIN_GROUP_ADMIN: Администратор для групп пользователей
+ROLE_APP_ADMIN_FRAME_GUEST: Гость для рам
+ROLE_APP_ADMIN_FRAME_EDITOR: Редактор для рам
+ROLE_APP_ADMIN_FRAME_ADMIN: Администратор для рам
+ROLE_APP_ADMIN_UNDERFRAME_GUEST: Гость для подрамников
+ROLE_APP_ADMIN_UNDERFRAME_EDITOR: Редактор для подрамников
+ROLE_APP_ADMIN_UNDERFRAME_ADMIN: Администратор для подрамников
+ROLE_APP_ADMIN_MODULETYPE_GUEST: Гость для типов модульности
+ROLE_APP_ADMIN_MODULETYPE_EDITOR: Редактор для типов модульности
+ROLE_APP_ADMIN_MODULETYPE_ADMIN: Администратор для типом модульности
+ROLE_APP_ADMIN_FRAMECOLOR_GUEST: Гость для цветов рамы
+ROLE_APP_ADMIN_FRAMECOLOR_EDITOR: Редактор для цветов рамы
+ROLE_APP_ADMIN_FRAMECOLOR_ADMIN: Администратор для цветов рамы
+ROLE_APP_ADMIN_FRAMEMATERIAL_GUEST: Гость для материалов рамы
+ROLE_APP_ADMIN_FRAMEMATERIAL_EDITOR: Редактор для материалов рамы
+ROLE_APP_ADMIN_FRAMEMATERIAL_ADMIN: Администратор для материалов рамы
+ROLE_APP_ADMIN_BANNERMATERIAL_GUEST: Гость для материалов баннера
+ROLE_APP_ADMIN_BANNERMATERIAL_EDITOR: Редактор для материалов баннера
+ROLE_APP_ADMIN_BANNERMATERIAL_ADMIN: Администратор для материалов баннера
+ROLE_APP_ADMIN_MAT_GUEST: Гость для подложки
+ROLE_APP_ADMIN_MAT_EDITOR: Редактор для подложки
+ROLE_APP_ADMIN_MAT_ADMIN: Администратор для подложки
+ROLE_APP_ADMIN_PAGE_GUEST: Гость для страниц
+ROLE_APP_ADMIN_PAGE_EDITOR: Редактор для страниц
+ROLE_APP_ADMIN_PAGE_ADMIN: Администратор для страниц
+ROLE_APP_ADMIN_MAINMENU_GUEST: Гость для главного меню
+ROLE_APP_ADMIN_MAINMENU_EDITOR: Редактор для главного меню
+ROLE_APP_ADMIN_MAINMENU_ADMIN: Администратор для главного меню
+ROLE_APP_ADMIN_CALL_GUEST: Гость для заказанных звонков
+ROLE_APP_ADMIN_CALL_EDITOR: Редактор для заказанных звонков
+ROLE_APP_ADMIN_CALL_ADMIN: Администратор для заказанных звонков
+ROLE_APP_ADMIN_REVIEW_GUEST: Гость для отзывов
+ROLE_APP_ADMIN_REVIEW_EDITOR: Редактор для отзывов
+ROLE_APP_ADMIN_REVIEW_ADMIN: Администратор для отзывов
+ROLE_APP_ADMIN_PICTURE_GUEST: Гость для картин
+ROLE_APP_ADMIN_PICTURE_EDITOR: Редактор для картин
+ROLE_APP_ADMIN_PICTURE_ADMIN: Администратор для картин
+ROLE_APP_ADMIN_PICTURESIZE_GUEST: Гость для размеров картин
+ROLE_APP_ADMIN_PICTURESIZE_EDITOR: Редактор для размеров картин
+ROLE_APP_ADMIN_PICTURESIZE_ADMIN: Администратор для размеров картин
+ROLE_APP_ADMIN_AUTHOR_GUEST: Гость для авторов картин
+ROLE_APP_ADMIN_AUTHOR_EDITOR: Редактор для авторов картин
+ROLE_APP_ADMIN_AUTHOR_ADMIN: Администратор для авторов картин
+ROLE_APP_ADMIN_SLIDER_GUEST: Гость для слайдера
+ROLE_APP_ADMIN_SLIDER_EDITOR: Редактор для слайдера
+ROLE_APP_ADMIN_SLIDER_ADMIN: Администратор для слайдера
+ROLE_APP_ADMIN_CATEGORY3_GUEST: Гость для категорий
+ROLE_APP_ADMIN_CATEGORY3_EDITOR: Редактор для категорий
+ROLE_APP_ADMIN_CATEGORY3_ADMIN: Админстратор для категорий
+ROLE_APP_ADMIN_IMAGE_GUEST: Гость для изображений
+ROLE_APP_ADMIN_IMAGE_EDITOR: Редактор для изображений
+ROLE_APP_ADMIN_IMAGE_ADMIN: Администратор для изображений
+ROLE_APP_ADMIN_POPULAR_GUEST: Гость для популярных
+ROLE_APP_ADMIN_POPULAR_EDITOR: Редактор для популярных
+ROLE_APP_ADMIN_POPULAR_ADMIN: Администратор для популярных

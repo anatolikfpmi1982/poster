@@ -30,6 +30,8 @@ class CategoriesController extends FrontController
         $queryBuilder = $em->getRepository('AppBundle:Picture')->getActivePicturesFromCategory($category->getId());
         $query = $queryBuilder->getQuery();
 
+
+//        echo $query->getSQL();die();
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $query, /* query NOT result */

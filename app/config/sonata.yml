@@ -52,8 +52,7 @@ sonata_admin:
         # acl security information
         information:
             GUEST:    [VIEW, LIST]
-            STAFF:    [EDIT, LIST, CREATE]
-            EDITOR:   [OPERATOR, EXPORT]
+            EDITOR:   [EDIT, LIST, CREATE, OPERATOR, EXPORT]
             ADMIN:    [MASTER]
 
         # permissions not related to an object instance and also to be available when objects do not exist

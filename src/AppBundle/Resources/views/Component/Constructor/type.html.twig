@@ -8,6 +8,41 @@
         </div>
     </div>
     <div class="row az-picture-page-sidebar-size-div-body az-picture-page-sidebar-type-div-select">
-
+        {% set numPicture = 0 %}
+        {% if pictureMain.imageBanner is defined and pictureMain.imageBanner %}
+            <div class="col-md-6 container-fluid">
+                <div class="row text-center">
+                    <img src="/files/pictures/small_thumb/{{ pictureMain.imageBanner.getFilename() }}" class="az-picture-page-type-img"/>
+                </div>
+                <div class="row text-center az-picture-page-material-radio-div">
+                    <input type="radio" class="btn" value="1" title="az-picture-page-type" name="az-picture-page-type" checked/>
+                </div>
+            </div>
+            {% set numPicture = numPicture + 1 %}
+        {% endif %}
+        {% if pictureMain.image is defined and pictureMain.image %}
+            <div class="col-md-6 container-fluid">
+                <div class="row text-center">
+                    <img src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}" class="az-picture-page-type-img"/>
+                </div>
+                <div class="row text-center az-picture-page-material-radio-div">
+                    <input type="radio" class="btn" value="1" title="az-picture-page-type" name="az-picture-page-type"/>
+                </div>
+            </div>
+            {% set numPicture = numPicture + 1 %}
+        {% endif %}
+        {% if numPicture == 2 %} </div>
+    <div class="row"> {% endif %}
+        {% if pictureMain.imageModule is defined and pictureMain.imageModule %}
+            <div class="col-md-6 container-fluid">
+                <div class="row text-center">
+                    <img src="/files/pictures/small_thumb/{{ pictureMain.imageModule.getFilename() }}" class="az-picture-page-type-img"/>
+                </div>
+                <div class="row text-center az-picture-page-material-radio-div">
+                    <input type="radio" class="btn" value="1" title="az-picture-page-type" name="az-picture-page-type"/>
+                </div>
+            </div>
+            {% set numPicture = numPicture + 1 %}
+        {% endif %}
     </div>
 </div>

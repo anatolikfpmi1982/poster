@@ -1,23 +1,70 @@
+{% if pagination.params is defined and pagination.params %}
+    {% if pagination.params.sort is defined and pagination.params.sort %}
+        {% set sort_field = pagination.params.sort %}
+    {% else %}
+        {% set sort_field = 'p.id' %}
+    {% endif %}
+    {% if pagination.params.direction is defined and pagination.params.direction %}
+        {% set sort_direction = pagination.params.direction %}
+    {% else %}
+        {% set sort_direction = 'DESC' %}
+    {% endif %}
+
+    {% if pagination.params.filterField is defined and pagination.params.filterField %}
+        {% set filter_field = pagination.params.filterField %}
+    {% else %}
+        {% set filter_field = '' %}
+    {% endif %}
+    {% if pagination.params.filterValue is defined and pagination.params.filterValue %}
+        {% set filter_value = pagination.params.filterValue %}
+    {% else %}
+        {% set filter_value = '' %}
+    {% endif %}
+{% endif %}
 <div class="col-md-1 text-center az-picture-page-constructor-block container-fluid">
+    {% set photo_filter = false %}
+    {% if filter_field == 'p.type' and filter_value == 'false' %}
+        {% set photo_filter = true %}
+    {% endif %}
     <div class="row az-category-page-filter az-category-page-filter-photo">
         Фото
-        <input type="radio" class="btn az-category-page-filter-radio" name="az-category-page-filter-photo" title="az-category-page-filter-photo" value="1" checked>
+        <input type="radio" class="btn az-category-page-filter-radio" name="az-category-page-filter-photo" title="az-category-page-filter-photo" value="1"
+               data-filterurl="{{ app.request.pathinfo }}?sort={{ sort_field }}&direction={{ sort_direction }}&page={{ pagination.currentPageNumber }}&filterField=p.type&filterValue=false"
+               {% if photo_filter %}checked{% endif %}>
     </div>
 </div>
 <div class="col-md-1 text-center az-picture-page-constructor-block container-fluid">
+    {% set art_filter = false %}
+    {% if filter_field == 'p.type' and filter_value == 'true' %}
+        {% set art_filter = true %}
+    {% endif %}
     <div class="row az-category-page-filter az-category-page-filter-photo">
         Арт
-        <input type="radio" class="btn az-category-page-filter-radio" name="az-category-page-filter-photo" title="az-category-page-filter-photo" value="1">
+        <input type="radio" class="btn az-category-page-filter-radio" name="az-category-page-filter-photo" title="az-category-page-filter-photo"
+               data-filterurl="{{ app.request.pathinfo }}?sort={{ sort_field }}&direction={{ sort_direction }}&page={{ pagination.currentPageNumber }}&filterField=p.type&filterValue=true"
+               value="1" {% if art_filter %}checked{% endif %}>
+    </div>
+</div>
+{#{{ dump(pagination) }}#}
+<div class="col-md-1 text-center az-picture-page-constructor-block container-fluid">
+    <div class="row az-category-page-filter az-category-page-filter-photo">
+        {% set title_direction = 'DESC' %}
+        {% if sort_field == 'p.title' %}
+            {% if sort_direction == 'DESC' %}{% set title_direction = 'ASC' %}{% endif %}
+        {% endif %}
+        <a href="{{ app.request.pathinfo }}?sort=p.title&direction={{ title_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Имя <span
+                    class="glyphicon glyphicon-chevron-{% if title_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
     </div>
 </div>
 <div class="col-md-1 text-center az-picture-page-constructor-block container-fluid">
     <div class="row az-category-page-filter az-category-page-filter-photo">
-        Имя <span class="glyphicon glyphicon-chevron-down"></span>
-    </div>
-</div>
-<div class="col-md-1 text-center az-picture-page-constructor-block container-fluid">
-    <div class="row az-category-page-filter az-category-page-filter-photo">
-        Дата <span class="glyphicon glyphicon-chevron-down"></span>
+        {% set date_direction = 'DESC' %}
+        {% if sort_field == 'p.createdAt' %}
+            {% if sort_direction == 'DESC' %}{% set date_direction = 'ASC' %}{% endif %}
+        {% endif %}
+        <a href="{{ app.request.pathinfo }}?sort=p.createdAt&direction={{ date_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Дата <span
+                    class="glyphicon
+        glyphicon-chevron-{% if date_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
     </div>
 </div>
 <div class="col-md-2 text-center az-picture-page-constructor-block container-fluid">
@@ -51,7 +98,14 @@
         {% if filters is defined and filters and filters.tpls is defined and filters.tpls %}
             {% set loopIndex = 1 %}
             {% for tpl in filters.tpls if loopIndex < 5 %}
-                    <img src="/files/picture_forms/small_thumb/{{ tpl.image.getFilename() }}" class="az-picture-page-material-img"/>
+                {% set form_filter = false %}
+                {% if filter_field == 'f.id' and filter_value == tpl.id %}
+                    {% set form_filter = true %}
+                {% endif %}
+                <a href="#" class="az-picture-page-material-img-a"
+                   data-filterurl="{{ app.request.pathinfo }}?sort={{ sort_field }}&direction={{ sort_direction }}&page={{ pagination.currentPageNumber }}&filterField=f.id&filterValue={{ tpl.id }}">
+                    <img src="/files/picture_forms/small_thumb/{{ tpl.image.getFilename() }}" class="az-picture-page-material-img{% if form_filter %} selected{% endif %}"/>
+                </a>
                 {% set loopIndex = loopIndex + 1 %}
             {% endfor %}
         {% endif %}

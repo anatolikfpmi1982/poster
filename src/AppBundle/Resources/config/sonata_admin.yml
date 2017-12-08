@@ -101,7 +101,7 @@ services:
         arguments:
             - ~
             - AppBundle\Entity\Picture
-            - 'SonataAdminBundle:CRUD'
+            - 'AppBundle:CRUD'
             - '@app.image_manager'
             - '@doctrine.orm.entity_manager'
     app.admin.picturesize:

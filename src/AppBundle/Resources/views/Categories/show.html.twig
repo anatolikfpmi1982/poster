@@ -10,7 +10,7 @@
         <div class="col-md-12 container-fluid">
             <div class="row page-title az-picture-page-title">{{ category.title }}</div>
             <div class="row az-category-page-description-div">
-                {{ category.description }}
+                {{ category.description|raw }}
             </div>
             <div class="row az-category-page-filters-div">
                 {% include('AppBundle:Component:Category/filter.html.twig') %}
