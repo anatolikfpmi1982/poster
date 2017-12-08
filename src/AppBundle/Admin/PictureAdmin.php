@@ -155,19 +155,52 @@ class PictureAdmin extends AbstractAdmin
         $this->setTemplate('edit', 'AppBundle:Admin:edit_javascript.html.twig');
     }
 
-    /**
-     * @param array $actions
-     * @return array
-     */
-    public function configureBatchActions($actions)
+    public function getTemplate($name)
     {
-        if (
-            $this->hasRoute('edit') && $this->hasAccess('edit')
-        ) {
-            $actions['merge'] = array(
-                'ask_confirmation' => true
-            );
+        switch ($name) {
+            case 'list':
+                return 'AppBundle:Categories:list.html.twig';
+                break;
 
+            default:
+                return parent::getTemplate($name);
+                break;
+        }
+    }
+
+    public function getBatchActions()
+    {
+        $actions = parent::getBatchActions();
+
+        if ($this->hasRoute('edit') && $this->isGranted('EDIT')) {
+            $actions['change_author'] = array(
+                'label'            => 'Изменить автора',
+                'ask_confirmation' => false
+            );
+            $actions['change_art'] = array(
+                'label'            => 'Изменить арт/фото',
+                'ask_confirmation' => false
+            );
+            $actions['change_price'] = array(
+                'label'            => 'Изменить цену',
+                'ask_confirmation' => false
+            );
+            $actions['change_ratio'] = array(
+                'label'            => 'Изменить коэффициент',
+                'ask_confirmation' => false
+            );
+            $actions['change_show'] = array(
+                'label'            => 'Изменить показывать',
+                'ask_confirmation' => false
+            );
+            $actions['add_category'] = array(
+                'label'            => 'Добавить категорию',
+                'ask_confirmation' => false
+            );
+            $actions['delete_category'] = array(
+                'label'            => 'Удалить категорию',
+                'ask_confirmation' => false
+            );
         }
 
         return $actions;

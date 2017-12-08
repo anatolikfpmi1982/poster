@@ -101,7 +101,7 @@ services:
         arguments:
             - ~
             - AppBundle\Entity\Picture
-            - 'AppBundle:CRUD'
+            - 'AppBundle:PicturesCRUD'
             - '@app.image_manager'
             - '@doctrine.orm.entity_manager'
     app.admin.picturesize:

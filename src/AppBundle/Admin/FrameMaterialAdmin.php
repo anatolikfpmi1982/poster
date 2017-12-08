@@ -165,6 +165,7 @@ class FrameMaterialAdmin extends AbstractAdmin
 
     /**
      * @param mixed $material
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function preRemove($material){
         if($material instanceof FrameMaterial) {
