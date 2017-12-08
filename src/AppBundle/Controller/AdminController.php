@@ -2,6 +2,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Settings;
+use Doctrine\DBAL\Types\FloatType;
 use Doctrine\ORM\EntityManager;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Controller\CoreController;
@@ -9,6 +10,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -102,6 +104,46 @@ class AdminController extends CoreController
         ));
     }
 
+    public function frameSettingsAction(Request $request)
+    {
+        $this->em = $this->container->get('doctrine.orm.entity_manager');
+        $this->record = $this->em->getRepository('AppBundle:Settings')->findOneByName('frame_settings');
+        if($this->record) {
+            $data = unserialize($this->record->getSettings());
+        } else {
+            $data = [
+                'minArea' => 0,
+                'maxArea' => 0,
+                'minPrice' => 0,
+                'maxPrice' => 0
+            ];
+        }
+
+        $form = $this->createFormBuilder()
+            ->add('minArea', NumberType::class, ['label' => 'Минимальная площадь', 'required' => false])
+            ->add('maxArea', NumberType::class, ['label' => 'Максимальная площадь', 'required' => false])
+            ->add('minPrice', NumberType::class, ['label' => 'Минимальная цена', 'required' => false])
+            ->add('maxPrice', NumberType::class, ['label' => 'Максимальная цена', 'required' => false])
+            ->add('save', SubmitType::class, array('label' => 'Сохранить'))
+            ->getForm();
+
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->saveFrameSettingsForm($form);
+        } else {
+            $form->setData($data);
+        }
+
+        return $this->render('AppBundle:Admin:frame_settings.html.twig', array(
+            'base_template'   => $this->getBaseTemplate(),
+            'admin_pool'      => $this->container->get('sonata.admin.pool'),
+            'blocks'          => $this->container->getParameter('sonata.admin.configuration.dashboard_blocks'),
+            'form'            => $form->createView(),
+        ));
+    }
+
     private function saveForm($form) {
         $data = $form->getData();
         $data['enable_call_back'] = (boolean)$data['enable_call_back'];
@@ -126,6 +168,18 @@ class AdminController extends CoreController
         if(!$this->record) {
             $this->record = new Settings();
             $this->record->setName('site_settings');
+        }
+
+        $this->record->setSettings(serialize($data));
+        $this->em->persist($this->record);
+        $this->em->flush();
+    }
+
+    private function saveFrameSettingsForm($form) {
+        $data = $form->getData();
+        if(!$this->record) {
+            $this->record = new Settings();
+            $this->record->setName('frame_settings');
         }
 
         $this->record->setSettings(serialize($data));
