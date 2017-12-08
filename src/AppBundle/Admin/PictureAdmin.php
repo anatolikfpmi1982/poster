@@ -61,10 +61,12 @@ class PictureAdmin extends AbstractAdmin
             ->add('id', null, ['required' => false, 'label' => 'ID', 'disabled' =>true])
             ->add('code', null, ['required' => false, 'label' => 'Артикул', 'disabled' =>true])
             ->add('title', null, ['required' => true, 'label' => 'Название'])
-            ->add('body', CKEditorType::class, ['required' => true, 'label' => 'Текст'])
+            ->add('body', CKEditorType::class, ['required' => true, 'label' => 'Описание'])
             ->add('slug', null, ['required' => false, 'label' => 'Алиас'])
             ->add('author', null, ['required' => false, 'label' => 'Автор'])
+            ->add('image.name', null, ['required' => false, 'label' => 'Имя файла', 'disabled' =>true])
             ->add('type', null, ['required' => false, 'label' => 'Арт (Фото, если не выбрано)'])
+            ->add('note', null, ['required' => true, 'label' => 'Примечание'])
             ->add('price', null, ['required' => false, 'label' => 'Цена', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
             ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент', 'empty_data' => '1', 'attr' => ['placeholder' => 1]])
             ->add('categories', null, ['required' => false, 'label' => 'Категории'])
@@ -102,8 +104,10 @@ class PictureAdmin extends AbstractAdmin
             ->add('code', null, ['label' => 'Артикул'])
             ->add('image', null,
                 ['label' => 'Изображение', 'template' => 'AppBundle:Admin:pictures_list_image.html.twig'])
+            ->add('image.name', null, ['label' => 'Имя файла'])
             ->add('title', null, ['label' => 'Название', 'editable' => true])
             ->add('slug', null, ['label' => 'Алиас', 'editable' => true])
+            ->add('note', null, ['label' => 'Примечание', 'editable' => true])
             ->add('author', 'choice', ['label' => 'Автор','editable' => true,
                 'class' => 'Appbundle\Entity\Author', 'choices' => $authorsChoices, 'sortable' => true,
                 'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'author']]])
@@ -114,9 +118,10 @@ class PictureAdmin extends AbstractAdmin
                 'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
             ->add('categories', null, ['label' => 'Категории', 'editable' => true, 'sortable' => true,
                 'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'categories']]])
-//            ->add('createdAt', null, ['label' => 'Создано'])
-//            ->add('updatedAt', null, ['label' => 'Обновлено'])
+//            ->add('body', null, ['label' => 'Примечание', 'editable' => true])
             ->add('isActive', null, ['label' => 'Показывать', 'editable' => true])
+            ->add('createdAt', null, ['label' => 'Создано'])
+            ->add('updatedAt', null, ['label' => 'Обновлено'])
             ->add(
                 '_action',
                 'actions',
@@ -137,6 +142,7 @@ class PictureAdmin extends AbstractAdmin
         $datagridMapper
             ->add('title', null, ['label' => 'Название'])
             ->add('code', null, ['label' => 'Артикул'])
+            ->add('image.name', null, ['label' => 'Имя файла'])
             ->add('author', null, ['label' => 'Автор'])
             ->add('type', null, ['label' => 'Арт/Фото'])
             ->add('price', null, ['label' => 'Цена'])
@@ -227,6 +233,7 @@ class PictureAdmin extends AbstractAdmin
     {
         if($picture instanceof Picture) {
             $picture->setCode(100500 + $picture->getId());
+            $picture->setName($picture->getImage()->getName());
             $this->em->persist($picture);
             $this->em->flush();
         }
@@ -251,6 +258,7 @@ class PictureAdmin extends AbstractAdmin
     public function postUpdate($picture)
     {
         if($picture instanceof Picture) {
+            $picture->setName($picture->getImage()->getName());
             $this->imageManagement->cleanGarbageImages();
         }
     }
