@@ -3,7 +3,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -38,21 +37,21 @@ class Page
     /**
      * @var string
      *
-     * @ORM\Column(name="seo_title", type="string", length=200, nullable=true)
+     * @ORM\Column(name="seo_title", type="string", length=200)
      */
     private $seoTitle;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="seo_description", type="text", nullable=true)
+     * @ORM\Column(name="seo_description", type="text")
      */
     private $seoDescription;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="seo_keywords", type="text", nullable=true)
+     * @ORM\Column(name="seo_keywords", type="text")
      */
     private $seoKeywords;
 
@@ -97,7 +96,7 @@ class Page
      */
     public function __toString()
     {
-        return $this->title ? $this->title : '';
+        return (string)$this->title;
     }
 
 
