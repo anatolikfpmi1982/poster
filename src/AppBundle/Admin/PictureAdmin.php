@@ -16,6 +16,11 @@ use AppBundle\Service\ImageManagement;
 class PictureAdmin extends AbstractAdmin
 {
     /**
+     * @var array
+     */
+    protected $perPageOptions = array(16, 32, 64, 128, 192, 384);
+
+    /**
      * @var ImageManagement
      */
     protected $imageManagement;
