@@ -3,6 +3,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Settings;
 use Doctrine\ORM\EntityManager;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Controller\CoreController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -67,7 +68,7 @@ class AdminController extends CoreController
             ->add('under_slider_text', TextAreaType::class, ['label' => 'Текст под слайдером', 'required' => false])
             ->add('logo_header_text', TextareaType::class, ['label' => 'Текст под лого (хедер)', 'required' => false])
             ->add('logo_footer_text', TextareaType::class, ['label' => 'Текст под лого (футер)', 'required' => false])
-            ->add('contacts', TextareaType::class, ['label' => 'Контактные данные (футер)', 'required' => false])
+            ->add('contacts', CKEditorType::class, ['label' => 'Контактные данные (футер)', 'required' => false])
             ->add('logo', FileType::class, ['label' => 'Логотип', 'required' => false])
             ->add('favicon', FileType::class, ['label' => 'Favicon', 'required' => false])
             ->add('metrics_yandex', TextAreaType::class, ['label' => 'Метрики Яндекс', 'required' => false])
