@@ -200,6 +200,31 @@ class PicturesCRUDController extends BaseController
         ));
     }
 
+    public function batchActionChangeShow(ProxyQueryInterface $query)
+    {
+        $show = (bool)$this->get('request')->request->get('a_show');
+
+        $modelManager = $this->admin->getModelManager();
+        try {
+            foreach ($query->execute() as $entity) {
+                $entity->setIsActive($show);
+
+                // Model Manager missing flush() method.
+                $modelManager->update($entity);
+            }
+
+            $this->addFlash('sonata_flash_success', 'Успешно изменено отображение картины');
+        } catch (ModelManagerException $e) {
+            $this->handleModelManagerException($e);
+            $this->addFlash('sonata_flash_error', 'flash_batch_delete_error');
+        }
+
+        return new RedirectResponse($this->admin->generateUrl(
+            'list',
+            array('filter' => $this->admin->getFilterParameters())
+        ));
+    }
+
     public function batchActionDeleteCategory(ProxyQueryInterface $query)
     {
         $category = (int)$this->get('request')->request->get('a_category');
