@@ -121,7 +121,7 @@ class PictureAdmin extends AbstractAdmin
                 'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
             ->add('ratio', null, ['label' => 'Коэффициент', 'editable' => true,
                 'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
-            ->add('body', 'html', ['label' => 'Текст', 'editable' => true])
+            ->add('body', 'html', ['label' => 'Описание', 'editable' => true])
             ->add('categories', null, ['label' => 'Категории', 'editable' => true, 'sortable' => true,
                 'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'categories']]])
 //            ->add('body', null, ['label' => 'Примечание', 'editable' => true])
