@@ -4,14 +4,13 @@ namespace AppBundle\Admin;
 
 use AppBundle\Entity\Image;
 use AppBundle\Entity\Picture;
+use AppBundle\Service\ImageManagement;
 use Doctrine\ORM\EntityManager;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use AppBundle\Service\ImageManagement;
+use Sonata\AdminBundle\Form\FormMapper;
 
 class PictureAdmin extends AbstractAdmin
 {
@@ -201,7 +200,7 @@ class PictureAdmin extends AbstractAdmin
                 'ask_confirmation' => false
             );
             $actions['change_show'] = array(
-                'label'            => 'Изменить показывать',
+                'label'            => 'Изменить доступность на сайте',
                 'ask_confirmation' => false
             );
             $actions['add_category'] = array(

@@ -15,7 +15,7 @@ $(function() {
         if($('.actions_fields').siblings('.select2-container').text().trim() == 'Изменить коэффициент') {
             $('.actions_fields').children('#a_ratio').show();
         }
-        if($('.actions_fields').siblings('.select2-container').text().trim() == 'Изменить показывать') {
+        if($('.actions_fields').siblings('.select2-container').text().trim() == 'Изменить доступность на сайте') {
             $('.actions_fields').children('#a_show').show();
         }
         if($('.actions_fields').siblings('.select2-container').text().trim() == 'Добавить категорию') {
