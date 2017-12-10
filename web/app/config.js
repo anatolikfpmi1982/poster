@@ -7,7 +7,8 @@ require.config({
         'validate/localization': '../bower_components/jquery.validation/src/localization/messages_ru',
         'underscore': '../bower_components/underscore/underscore',
         'bootstrap': '../bower_components/bootstrap/dist/js/bootstrap',
-        'cycle2': '../bower_components/jquery.cycle2/index'
+        'cycle2': '../bower_components/jquery.cycle2/index',
+        'ConstructorOverview': '../bundles/app/js/ConstructorOverview'
     },
     'shim': {
         'jsrender': {
@@ -27,6 +28,9 @@ require.config({
         },
         'cycle2': {
             'deps': ['bootstrap']
+        },
+        'ConstructorOverview': {
+            'deps': ['jquery']
         }
     },
     urlArgs: "bust3=" + (new Date()).getTime()

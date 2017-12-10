@@ -50,9 +50,23 @@ class Picture implements ImageInterface
     /**
      * @var string
      *
+     * @ORM\Column(name="note", type="text")
+     */
+    private $note;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="slug", type="string")
      */
     private $slug;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="file_name", type="string", nullable=true)
+     */
+    private $name;
 
     /**
      * @var \DateTime
@@ -730,5 +744,55 @@ class Picture implements ImageInterface
     public function getForm()
     {
         return $this->form;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Picture
+     */
+    public function setName($name)
+    {
+//        if($fileName == $this->image->getName()) {
+            $this->name = $name . 111;
+//        }
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set note
+     *
+     * @param string $note
+     *
+     * @return Picture
+     */
+    public function setNote($note)
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
+    /**
+     * Get note
+     *
+     * @return string
+     */
+    public function getNote()
+    {
+        return $this->note;
     }
 }
