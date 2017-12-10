@@ -1,13 +1,13 @@
 <?php
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Picture;
 use Sonata\AdminBundle\Controller\CRUDController as BaseController;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Form\FormView;
 
 class PicturesCRUDController extends BaseController
 {
@@ -58,6 +58,10 @@ class PicturesCRUDController extends BaseController
             ->add('a_author', 'choice', array('choices' => $authorsChoices, 'required' => false, 'label' => 'tested at'))
             ->add('a_art', 'choice', array('choices' => [1 => 'Арт', 0 => 'Фото'],'required' => false, 'label' => 'tested at'))
             ->add('a_show', 'choice', array('choices' => [1 => 'Да', 0 => 'Нет'], 'required' => false, 'label' => 'tested at'))
+            ->add('a_top', 'choice', array('choices' => [1 => 'Да', 0 => 'Нет'], 'required' => false, 'label' => 'tested at'))
+            ->add('a_title', 'text', ['required' => false, 'label' => 'Title'])
+            ->add('a_description', 'text', ['required' => false, 'label' => 'Description'])
+            ->add('a_note', 'text', ['required' => false, 'label' => 'Note'])
             ->add('a_category', 'choice', array('choices' => $categoriesChoices, 'required' => false, 'label' => 'tested at'))
             ->getForm();
 
@@ -213,7 +217,33 @@ class PicturesCRUDController extends BaseController
                 $modelManager->update($entity);
             }
 
-            $this->addFlash('sonata_flash_success', 'Успешно изменено отображение картины');
+            $this->addFlash('sonata_flash_success', 'Успешно изменено отображение картины.');
+        } catch (ModelManagerException $e) {
+            $this->handleModelManagerException($e);
+            $this->addFlash('sonata_flash_error', 'flash_batch_delete_error');
+        }
+
+        return new RedirectResponse($this->admin->generateUrl(
+            'list',
+            array('filter' => $this->admin->getFilterParameters())
+        ));
+    }
+
+    public function batchActionChangeTop(ProxyQueryInterface $query)
+    {
+        $top = (bool)$this->get('request')->request->get('a_top');
+
+        $modelManager = $this->admin->getModelManager();
+        try {
+            foreach ($query->execute() as $entity) {
+                /** @var Picture $entity */
+                $entity->setIsTop($top);
+
+                // Model Manager missing flush() method.
+                $modelManager->update($entity);
+            }
+
+            $this->addFlash('sonata_flash_success', 'Успешно задали топы.');
         } catch (ModelManagerException $e) {
             $this->handleModelManagerException($e);
             $this->addFlash('sonata_flash_error', 'flash_batch_delete_error');
@@ -274,6 +304,84 @@ class PicturesCRUDController extends BaseController
             }
 
             $this->addFlash('sonata_flash_success', 'Успешно добавлена категория');
+        } catch (ModelManagerException $e) {
+            $this->handleModelManagerException($e);
+            $this->addFlash('sonata_flash_error', 'flash_batch_delete_error');
+        }
+
+        return new RedirectResponse($this->admin->generateUrl(
+            'list',
+            array('filter' => $this->admin->getFilterParameters())
+        ));
+    }
+
+    public function batchActionChangeTitle(ProxyQueryInterface $query)
+    {
+        $title = $this->get('request')->request->get('a_title');
+
+        $modelManager = $this->admin->getModelManager();
+        try {
+            foreach ($query->execute() as $entity) {
+                /** @var Picture $entity */
+                $entity->setTitle($title);
+
+                // Model Manager missing flush() method.
+                $modelManager->update($entity);
+            }
+
+            $this->addFlash('sonata_flash_success', 'Успешно изменено название.');
+        } catch (ModelManagerException $e) {
+            $this->handleModelManagerException($e);
+            $this->addFlash('sonata_flash_error', 'flash_batch_delete_error');
+        }
+
+        return new RedirectResponse($this->admin->generateUrl(
+            'list',
+            array('filter' => $this->admin->getFilterParameters())
+        ));
+    }
+
+    public function batchActionChangeDescription(ProxyQueryInterface $query)
+    {
+        $description = $this->get('request')->request->get('a_description');
+
+        $modelManager = $this->admin->getModelManager();
+        try {
+            foreach ($query->execute() as $entity) {
+                /** @var Picture $entity */
+                $entity->setBody($description);
+
+                // Model Manager missing flush() method.
+                $modelManager->update($entity);
+            }
+
+            $this->addFlash('sonata_flash_success', 'Успешно изменено описание.');
+        } catch (ModelManagerException $e) {
+            $this->handleModelManagerException($e);
+            $this->addFlash('sonata_flash_error', 'flash_batch_delete_error');
+        }
+
+        return new RedirectResponse($this->admin->generateUrl(
+            'list',
+            array('filter' => $this->admin->getFilterParameters())
+        ));
+    }
+
+    public function batchActionChangeNote(ProxyQueryInterface $query)
+    {
+        $note = $this->get('request')->request->get('a_note');
+
+        $modelManager = $this->admin->getModelManager();
+        try {
+            foreach ($query->execute() as $entity) {
+                /** @var Picture $entity */
+                $entity->setNote($note);
+
+                // Model Manager missing flush() method.
+                $modelManager->update($entity);
+            }
+
+            $this->addFlash('sonata_flash_success', 'Успешно изменено примечание.');
         } catch (ModelManagerException $e) {
             $this->handleModelManagerException($e);
             $this->addFlash('sonata_flash_error', 'flash_batch_delete_error');

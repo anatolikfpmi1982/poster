@@ -48,6 +48,36 @@
     </div>
 </div>
 <div class="col-md-1 text-center az-picture-page-constructor-block container-fluid">
+    <div class="row az-category-page-filter az-category-page-filter-photo">
+        <button class="btn az-category-page-filter-btn az-category-page-filter-random-btn">Случайно</button>
+    </div>
+</div>
+<div class="col-md-1 text-center az-picture-page-constructor-block container-fluid">
+    <div class="row az-category-page-filter az-category-page-filter-photo">
+        <button class="btn az-category-page-filter-btn az-category-page-filter-random-btn az-category-page-filter-clear-btn" data-filterurl="{{ app.request.pathinfo }}">Сбросить
+        </button>
+    </div>
+</div>
+<div class="col-md-4 text-center az-picture-page-constructor-block container-fluid">
+    <div class="row az-category-page-filter az-category-page-filter-photo">
+        Вид формы:
+        {% if filters is defined and filters and filters.tpls is defined and filters.tpls %}
+            {% set loopIndex = 1 %}
+            {% for tpl in filters.tpls if loopIndex < 5 %}
+                {% set form_filter = false %}
+                {% if filter_field == 'f.id' and filter_value == tpl.id %}
+                    {% set form_filter = true %}
+                {% endif %}
+                <a href="#" class="az-picture-page-material-img-a"
+                   data-filterurl="{{ app.request.pathinfo }}?sort={{ sort_field }}&direction={{ sort_direction }}&page={{ pagination.currentPageNumber }}&filterField=f.id&filterValue={{ tpl.id }}">
+                    <img src="/files/picture_forms/small_thumb/{{ tpl.image.getFilename() }}" class="az-picture-page-material-img{% if form_filter %} selected{% endif %}"/>
+                </a>
+                {% set loopIndex = loopIndex + 1 %}
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+<div class="col-md-1 text-center az-picture-page-constructor-block container-fluid">
     {% set photo_filter = false %}
     {% if filter_field == 'p.type' and filter_value == 'false' %}
         {% set photo_filter = true %}
@@ -71,31 +101,4 @@
                value="1" {% if art_filter %}checked{% endif %}>
     </div>
 </div>
-<div class="col-md-4 text-center az-picture-page-constructor-block container-fluid">
-    <div class="row az-category-page-filter az-category-page-filter-photo">
-        {% if filters is defined and filters and filters.tpls is defined and filters.tpls %}
-            {% set loopIndex = 1 %}
-            {% for tpl in filters.tpls if loopIndex < 5 %}
-                {% set form_filter = false %}
-                {% if filter_field == 'f.id' and filter_value == tpl.id %}
-                    {% set form_filter = true %}
-                {% endif %}
-                <a href="#" class="az-picture-page-material-img-a"
-                   data-filterurl="{{ app.request.pathinfo }}?sort={{ sort_field }}&direction={{ sort_direction }}&page={{ pagination.currentPageNumber }}&filterField=f.id&filterValue={{ tpl.id }}">
-                    <img src="/files/picture_forms/small_thumb/{{ tpl.image.getFilename() }}" class="az-picture-page-material-img{% if form_filter %} selected{% endif %}"/>
-                </a>
-                {% set loopIndex = loopIndex + 1 %}
-            {% endfor %}
-        {% endif %}
-    </div>
-</div>
-<div class="col-md-1 text-center az-picture-page-constructor-block container-fluid">
-    <div class="row az-category-page-filter az-category-page-filter-photo">
-        <button class="btn az-category-page-filter-btn az-category-page-filter-random-btn">Случайно</button>
-    </div>
-</div>
-<div class="col-md-1 text-center az-picture-page-constructor-block container-fluid">
-    <div class="row az-category-page-filter az-category-page-filter-photo">
-        <button class="btn az-category-page-filter-btn az-category-page-filter-clear-btn" data-filterurl="{{ app.request.pathinfo }}">Сбросить</button>
-    </div>
-</div>
+

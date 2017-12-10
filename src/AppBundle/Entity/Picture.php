@@ -36,16 +36,16 @@ class Picture implements ImageInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=100)
+     * @ORM\Column(name="title", type="string", length=100, nullable=true, options={"default" : ""})
      */
-    private $title;
+    private $title = '';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="body", type="text")
+     * @ORM\Column(name="body", type="string", length=5000, nullable=true)
      */
-    private $body;
+    private $body = '';
 
     /**
      * @var string
@@ -57,7 +57,7 @@ class Picture implements ImageInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="string")
+     * @ORM\Column(name="slug", type="string", nullable=true)
      */
     private $slug;
 
@@ -207,6 +207,13 @@ class Picture implements ImageInterface
      * @ORM\JoinColumn(name="form_id", referencedColumnName="id")
      */
     private $form;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="popularity", type="integer", nullable=true, options={"default" : 0})
+     */
+    private $popularity;
 
     /**
      * Picture constructor.
@@ -755,10 +762,7 @@ class Picture implements ImageInterface
      */
     public function setName($name)
     {
-//        if($fileName == $this->image->getName()) {
-            $this->name = $name . 111;
-//        }
-
+        $this->name = $name;
         return $this;
     }
 
@@ -794,5 +798,23 @@ class Picture implements ImageInterface
     public function getNote()
     {
         return $this->note;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPopularity() {
+        return $this->popularity;
+    }
+
+    /**
+     * @param int $popularity
+     *
+     * @return Picture
+     */
+    public function setPopularity( $popularity ) {
+        $this->popularity = $popularity;
+
+        return $this;
     }
 }

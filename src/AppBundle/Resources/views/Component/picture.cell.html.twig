@@ -1,5 +1,5 @@
-{% if picture.image and picture.image.getFilename() %}
-    {% set img = '/files/pictures/thumb/' ~ picture.image.getFilename() %}
+{% if picture.imageBanner and picture.imageBanner.getFilename() %}
+    {% set img = '/files/pictures/thumb/' ~ picture.imageBanner.getFilename() %}
 {% else %}
     {% set img = asset('bundles/app/images/default_picture.jpg') %}
 {% endif %}
