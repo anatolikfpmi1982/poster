@@ -45,3 +45,11 @@ services:
         arguments:
             - '@doctrine.orm.entity_manager'
             - '@service_container'
+
+    app.sonata.admin.builder.orm_datagrid:
+        class: AppBundle\Sonata\DatagridBuilder
+        arguments:
+            - '@form.factory'
+            - '@sonata.admin.builder.filter.factory'
+            - '@sonata.admin.guesser.orm_datagrid_chain'
+            - '%form.type_extension.csrf.enabled%'

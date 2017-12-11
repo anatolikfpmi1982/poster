@@ -6,6 +6,7 @@ use AppBundle\Entity\Image;
 use AppBundle\Entity\Picture;
 use AppBundle\Service\ImageManagement;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -67,9 +68,8 @@ class PictureAdmin extends AbstractAdmin
             ->add('body', null, ['required' => false, 'label' => 'Описание'])
             ->add('slug', null, ['required' => false, 'label' => 'Алиас'])
             ->add('author', null, ['required' => false, 'label' => 'Автор'])
-            ->add('image', null, ['required' => false, 'label' => 'Имя файла', 'disabled' =>true])
             ->add('type', null, ['required' => false, 'label' => 'Арт (Фото, если не выбрано)'])
-            ->add('note', null, ['required' => true, 'label' => 'Примечание'])
+            ->add('note', null, ['required' => false, 'label' => 'Примечание'])
             ->add('price', null, ['required' => false, 'label' => 'Цена', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
             ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент', 'empty_data' => '1', 'attr' => ['placeholder' => 1]])
             ->add('similar', null, ['required' => false, 'label' => 'Похожие картины'])
@@ -93,14 +93,6 @@ class PictureAdmin extends AbstractAdmin
             }
         }
 
-        $categoriesChoices = [];
-        $categories = $this->em->getRepository('AppBundle\Entity\Category3')->findBy(['isActive' => true]);
-        if($categories) {
-            foreach ($categories as $v) {
-                $categoriesChoices[$v->getId()] = (string)$v;
-            }
-        }
-
         $listMapper
             ->add('id', null, ['label' => 'ID'])
             ->add('code', null, ['label' => 'Артикул'])
@@ -120,7 +112,6 @@ class PictureAdmin extends AbstractAdmin
             ->add('body', 'html', ['label' => 'Описание', 'editable' => true, 'template' => 'AppBundle:Admin:picture_description_list.html.twig'])
             ->add('categories', null, ['label' => 'Категории', 'editable' => true, 'sortable' => true,
                 'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'categories']]])
-//            ->add('body', null, ['label' => 'Примечание', 'editable' => true])
             ->add('isActive', null, ['label' => 'Показывать', 'editable' => true])
             ->add(
                 '_action',
@@ -144,24 +135,68 @@ class PictureAdmin extends AbstractAdmin
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
+        $categoriesChoices = [];
+        $categories = $this->em->getRepository('AppBundle\Entity\Category3')->findBy(['isActive' => true]);
+        if($categories) {
+            foreach ($categories as $v) {
+                $categoriesChoices[$v->getId()] = (string)$v;
+            }
+        }
+
         $datagridMapper
             ->add('title', null, ['label' => 'Название'])
             ->add('note', null, ['label' => 'Примечание'])
             ->add('body', null, ['label' => 'Описание'])
             ->add('code', null, ['label' => 'Артикул'])
-            ->add('image.name', null, ['label' => 'Имя файла'])
+            ->add('name', null, ['label' => 'Имя файла'])
             ->add('author', null, ['label' => 'Автор'])
             ->add('type', null, ['label' => 'Арт/Фото'])
             ->add('price', null, ['label' => 'Цена'])
             ->add('ratio', null, ['label' => 'Коэффициент'])
             ->add('colors', null, ['label' => 'Цвет'])
             ->add('form', null, ['label' => 'Форма'])
-            ->add('categories', null, ['label' => 'Категории'], null, ['multiple' => true])
+//            ->add('categories', 'doctrine_orm_callback', [
+//                'label' => 'Категории',
+////                'multiple' => true,
+//                'callback'   => [$this, 'changeFilerForCategories']
+//            ], null, ['multiple' => true])
+            ->add('categories', 'doctrine_orm_callback', [
+                'label' => 'Категории',
+                'callback'   => [$this, 'changeFilerForCategories'],
+                'field_type' => 'choice',
+                'field_options' => array(
+                    'choices' => $categoriesChoices,
+                    'required' => false,
+                    'multiple' => true,
+                    'attr' => array('size' => 7),
+                ),
+            ])
             ->add('isActive', null, ['label' => 'Показывать'])
             ->add('isTop', null, ['label' => 'Топ'])
             ->add('createdAt', 'doctrine_orm_date_range', ['label' => 'Создано'])
             ->add('updatedAt', 'doctrine_orm_date_range', ['label' => 'Обновлено'])
         ;
+    }
+
+    /**
+     * @param QueryBuilder $queryBuilder
+     * @param string $alias
+     * @param string $field
+     * @param string|array $value
+     *
+     * @return bool|void
+     */
+    public function changeFilerForCategories($queryBuilder, $alias, $field, $value)
+    {
+        if (!$value['value']) {
+            return null;
+        }
+
+        $queryBuilder->join(sprintf('%s.categories', $alias), 'p');
+        $queryBuilder->andWhere('p.id IN ('. implode(',', $value['value']) .')');
+        $queryBuilder->addGroupBy(sprintf('%s.id', $alias));
+        $queryBuilder->having('COUNT(DISTINCT p.id) = ' . count($value['value']));
+        return true;
     }
 
     /**
@@ -301,7 +336,9 @@ class PictureAdmin extends AbstractAdmin
      */
     public function preRemove($picture){
         if($picture instanceof Picture) {
-            $this->imageManagement->deleteImages($picture->getImages());
+            $this->imageManagement->deleteImages($picture->getImageBanner());
+            $this->imageManagement->deleteImages($picture->getImageFrame());
+            $this->imageManagement->deleteImages($picture->getImageModule());
         }
     }
 

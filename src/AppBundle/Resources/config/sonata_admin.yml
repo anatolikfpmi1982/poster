@@ -96,6 +96,10 @@ services:
              - 'SonataAdminBundle:CRUD'
     app.admin.picture:
         class: AppBundle\Admin\PictureAdmin
+        calls:
+            - method: setDatagridBuilder
+              arguments:
+                  - '@app.sonata.admin.builder.orm_datagrid'
         tags:
             - { name: sonata.admin, manager_type: orm, group: "Картины", label: "Картины", show_in_dashboard: true }
         arguments:
