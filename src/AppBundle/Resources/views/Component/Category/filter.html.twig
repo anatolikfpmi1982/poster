@@ -83,7 +83,7 @@
         {% set photo_filter = true %}
     {% endif %}
     <div class="row az-category-page-filter az-category-page-filter-photo">
-        Фото
+        <span class="az-category-page-filter-art-title">Фото</span>
         <input type="radio" class="btn az-category-page-filter-radio" name="az-category-page-filter-photo" title="az-category-page-filter-photo" value="1"
                data-filterurl="{{ app.request.pathinfo }}?sort={{ sort_field }}&direction={{ sort_direction }}&page={{ pagination.currentPageNumber }}&filterField=p.type&filterValue=false"
                {% if photo_filter %}checked{% endif %}>
@@ -95,7 +95,7 @@
         {% set art_filter = true %}
     {% endif %}
     <div class="row az-category-page-filter az-category-page-filter-photo">
-        Арт
+        <span class="az-category-page-filter-art-title">Арт</span>
         <input type="radio" class="btn az-category-page-filter-radio" name="az-category-page-filter-photo" title="az-category-page-filter-photo"
                data-filterurl="{{ app.request.pathinfo }}?sort={{ sort_field }}&direction={{ sort_direction }}&page={{ pagination.currentPageNumber }}&filterField=p.type&filterValue=true"
                value="1" {% if art_filter %}checked{% endif %}>

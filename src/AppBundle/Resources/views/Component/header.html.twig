@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="row text-left">
-            <div class="col-md-4 container az-header-top">
+            <div class="col-md-4 container-fluid az-header-top">
                 <div class="row az-logo-title-img-div">
                     {% if site_settings is defined and site_settings and site_settings.logo is defined and site_settings.logo %}
                         {% set site_logo = '/' ~ site_settings.logo %}
@@ -16,11 +16,8 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="col-md-3 container az-header-top">
+            <div class="col-md-4 container-fluid az-header-top">
                 <div class="row">
-                    <!--<div class="col-md-3">
-                        <img src="{{ asset('bundles/app/images/telephone.png') }}" class="az-phone-title-img" title="{% trans %}phone{% endtrans %}"/>
-                    </div>-->
                     <div class="col-md-9 container az-header-address-div">
                         <div class="row az-header-address-container az-header-phone-number">
                             {% if site_settings is defined and site_settings and site_settings.phone is defined and site_settings.phone %}
@@ -36,33 +33,40 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 container az-header-top">
+            <div class="col-md-2 container-fluid az-header-top">
                 <div class="row">
                     <div class="col-md-3">
-                        <img src="{{ asset('bundles/app/images/download.png') }}" class="az-download-title-img" title="{% trans %}download{% endtrans %}"/>
+                        <img src="{{ asset('bundles/app/images/download.png') }}" class="az-download-title-img az-basket-title-img" title="{% trans %}download{% endtrans %}"/>
                     </div>
                     <div class="col-md-9 container az-header-download-div">
                         Загрузить свое <br/>изображение.
                     </div>
                 </div>
             </div>
-            <div class="col-md-2 container az-header-top-last">
-                <div class="row">
-                    <div class="col-md-3">
+            <div class="col-md-2 container-fluid text-right">
+                <div class="row text-right">
+                    <div class="col-md-3">&nbsp;</div>
+                    <div class="col-md-3 az-main-page-header-top-cells az-main-page-header-icon-cell">
                         <img src="{{ asset('bundles/app/images/basket.png') }}" class="az-basket-title-img" title="{% trans %}basket{% endtrans %}"/>
                     </div>
-                    <div class="col-md-9 container az-header-basket-div">
-                        <div class="row az-header-basket-container az-header-basket-text">Корзина</div>
-                        <div class="row az-header-basket-container az-header-basket-count-text">Товаров: <span class="az-header-basket-count">0</span></div>
-                        <div class="row az-header-address-container az-header-feedback-btn-div">
-                            <button class="btn btn-bg az-header-feedback-btn">Обратный звонок</button>
+                    <div class="col-md-6 container text-left az-main-page-header-top-cells az-header-basket-div">
+                        <div class="row az-header-basket-container az-header-basket-text">
+                            <div class="col-md-12">Корзина</div>
                         </div>
+                        <div class="row az-header-basket-container az-header-basket-count-text">
+                            <div class="col-md-12">Товаров: <span class="az-header-basket-count">0</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row az-header-address-container az-header-feedback-btn-div">
+                    <div class="col-md-12">
+                        <button class="btn btn-bg az-header-feedback-btn">Обратный звонок</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid az-main-page-top-menu-div">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
@@ -96,7 +100,7 @@
                     {% endfor %}
                 </ul>
             {% endif %}
-            <div class="col-sm-3 col-md-3 pull-right">
+            <div class="col-sm-3 col-md-3 pull-right az-main-page-search">
                 <form class="navbar-form" role="search">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
