@@ -2,7 +2,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Settings;
-use Doctrine\DBAL\Types\FloatType;
 use Doctrine\ORM\EntityManager;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Controller\CoreController;
@@ -15,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * Class AdminController
@@ -28,23 +28,49 @@ class AdminController extends CoreController
      */
     private $em;
 
+    /**
+     * @var Settings
+     */
     private $record = null;
 
+    /**
+     * @var string
+     */
     private $logo = null;
 
+    /**
+     * @var string
+     */
+    private $favicon = null;
+
+    /**
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function settingsAction(Request $request)
     {
         $this->em = $this->container->get('doctrine.orm.entity_manager');
         $this->record = $this->em->getRepository('AppBundle:Settings')->findOneByName('site_settings');
         if($this->record) {
             $data = unserialize($this->record->getSettings());
+            if(array_key_exists('phone', $data)) {
+                $data['info_text'] = $data['phone'];
+                unset($data['phone']);
+            }
+            $this->logo = '';
+            $this->favicon = '';
             if(!empty($data['logo'])) {
                 $this->logo = $data['logo'];
-                unset($data['logo']);
+//                unset($data['logo']);
+            }
+            if(!empty($data['favicon'])) {
+                $this->favicon = $data['favicon'];
+//                unset($data['favicon']);
             }
         } else {
             $data = [
-                'phone' => '',
+                'info_text' => '',
                 'email' => '',
                 'title' => '',
                 'under_slider_text' => '',
@@ -64,11 +90,11 @@ class AdminController extends CoreController
         }
 
         $form = $this->createFormBuilder()
-            ->add('phone', TextType::class, ['label' => 'Телефон', 'required' => false])
+            ->add('info_text', CKEditorType::class, ['label' => 'Блок информации(шапка и футер)', 'required' => false])
             ->add('email', EmailType::class, ['label' => 'Email', 'required' => false])
-            ->add('title', TextType::class, ['label' => 'Заголовок', 'required' => false])
-            ->add('under_slider_text', TextAreaType::class, ['label' => 'Текст под слайдером', 'required' => false])
-            ->add('logo_header_text', TextareaType::class, ['label' => 'Текст под лого (хедер)', 'required' => false])
+            ->add('title', TextType::class, ['label' => 'Заголовок под слайдером', 'required' => false])
+            ->add('under_slider_text', CKEditorType::class, ['label' => 'Текст под слайдером', 'required' => false])
+            ->add('logo_header_text', TextareaType::class, ['label' => 'Текст под лого (шапка)', 'required' => false])
             ->add('logo_footer_text', TextareaType::class, ['label' => 'Текст под лого (футер)', 'required' => false])
             ->add('contacts', CKEditorType::class, ['label' => 'Контактные данные (футер)', 'required' => false])
             ->add('logo', FileType::class, ['label' => 'Логотип', 'required' => false])
@@ -85,23 +111,27 @@ class AdminController extends CoreController
             ->add('save', SubmitType::class, array('label' => 'Сохранить'))
             ->getForm();
 
+        $data['logo'] = $data['favicon'] = null;
+        $form->setData( $data );
 
-        $form->handleRequest($request);
+        if($request->getMethod() === 'POST') {
+            $form->handleRequest( $request );
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->saveForm($form);
-        } else {
-            unset($data['logo']);
-            unset($data['favicon']);
-            $form->setData($data);
+            if ( $form->isValid() ) {
+                $this->saveForm( $form );
+            } else {
+                throw new BadRequestHttpException($form->getErrors());
+            }
         }
 
-        return $this->render('AppBundle:Admin:settings.html.twig', array(
+        return $this->render('AppBundle:Admin:settings.html.twig', [
             'base_template'   => $this->getBaseTemplate(),
             'admin_pool'      => $this->container->get('sonata.admin.pool'),
             'blocks'          => $this->container->getParameter('sonata.admin.configuration.dashboard_blocks'),
             'form'            => $form->createView(),
-        ));
+            'logo_value'      => $this->logo,
+            'favicon_value'   => $this->favicon,
+        ]);
     }
 
     public function frameSettingsAction(Request $request)
@@ -158,11 +188,15 @@ class AdminController extends CoreController
         } elseif($this->logo) {
             $data['logo'] = $this->logo;
         }
+
         if($data['favicon']) {
+            $this->prepareSystemFolder();
             $file = $form['favicon']->getData();
             $ext = $file->guessExtension();
-            $file->move(self::FOLDER, 'favicon.' . $ext);
-            unset($data['favicon']);
+            $file->move(self::FOLDER . 'files/system/', 'favicon.' . $ext);
+            $data['favicon'] = 'files/system/favicon.' . $ext;
+        } elseif($this->favicon) {
+            $data['favicon'] = $this->favicon;
         }
 
         if(!$this->record) {
