@@ -1,6 +1,6 @@
 <?php
 namespace AppBundle\Controller;
-
+error_reporting(E_ALL);
 use AppBundle\Entity\Settings;
 use Doctrine\ORM\EntityManager;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
@@ -62,11 +62,9 @@ class AdminController extends CoreController
             $this->favicon = '';
             if(!empty($data['logo'])) {
                 $this->logo = $data['logo'];
-//                unset($data['logo']);
             }
             if(!empty($data['favicon'])) {
                 $this->favicon = $data['favicon'];
-//                unset($data['favicon']);
             }
         } else {
             $data = [

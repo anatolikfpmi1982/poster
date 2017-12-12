@@ -9,7 +9,6 @@
     <h1>Настройки сайта</h1>
     {{ form_start(form) }}
     {{ form_row(form._token) }}
-    {#{{ form_widget(form) }}#}
     {{ form_row(form.info_text) }}
     {{ form_row(form.email) }}
     {{ form_row(form.title) }}
@@ -20,13 +19,13 @@
     <div class="form-group">
         {{ form_label(form.logo) }}
         {{ form_widget(form.logo) }}
-        {% if logo_value %}<br><img src="{{ '/' ~ logo_value }}" class="admin-preview"/><br>{% endif %}
+        {% if logo_value is defined and logo_value %}<br><img src="{{ '/' ~ logo_value }}?tmp={{ csrf_token('authenticate') }}" class="admin-preview"/><br>{% endif %}
     </div>
     <div class="form-group">
         {{ form_label(form.favicon) }}
         {{ form_widget(form.favicon) }}
-        {{ dump(favicon_value) }}
-        {% if favicon_value %}<br><img src="{{ '/' ~ favicon_value }}" class="admin-preview-favicon"/><br>{% endif %}
+        {% if favicon_value is defined and favicon_value %}<br><img src="{{ '/' ~ favicon_value }}?tmp={{ csrf_token('authenticate') }}" class="admin-preview-favicon"/>
+            <br>{% endif %}
     </div>
     {{ form_row(form.metrics_yandex) }}
     {{ form_row(form.metrics_google) }}
@@ -38,7 +37,7 @@
     {{ form_row(form.enable_call_back) }}
     {{ form_row(form.enable_sms) }}
     {{ form_row(form.save) }}
-    {#{{ form_end(form) }}#}
+    {{ form_end(form) }}
 {% endblock %}
 
 {% block stylesheets %}
