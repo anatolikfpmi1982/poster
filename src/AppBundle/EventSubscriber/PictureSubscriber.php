@@ -36,6 +36,11 @@ class PictureSubscriber
                 $this->createResize($entity, $image);
             }
             if($image = $entity->getImageBanner()) {
+                $form = $this->container->get('helper.imageformidentifier')->identify($entity->getImageBanner());
+                if($formEntity = $this->container->get('doctrine.orm.entity_manager')->getRepository('AppBundle:PictureForm')->findOneBy(['serviceName' => $form])) {
+                    $entity->setForm($formEntity);
+                }
+
                 $this->createResize($entity, $image);
             }
             if($image = $entity->getImageModule()) {
@@ -44,6 +49,8 @@ class PictureSubscriber
             if($image = $entity->getImageFrame()) {
                 $this->createResize($entity, $image);
             }
+            $entity->generateCode();
+            $entity->setSlug($this->container->get('helper.slugcreator')->createSlug($entity->getTitle()));
         }
     }
 
@@ -66,6 +73,7 @@ class PictureSubscriber
             if($image = $entity->getImageFrame()) {
                 $this->createResize($entity, $image);
             }
+            $entity->setSlug($this->container->get('helper.slugcreator')->createSlug($entity->getTitle()));
         }
     }
 

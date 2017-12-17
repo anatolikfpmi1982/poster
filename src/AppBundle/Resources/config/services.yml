@@ -2,6 +2,12 @@ services:
     helper.imageresizer:
         class: AppBundle\Helper\ImageResizer
 
+    helper.slugcreator:
+        class: AppBundle\Helper\SlugCreator
+
+    helper.imageformidentifier:
+        class: AppBundle\Helper\ImageFormIdentifier
+
     app.image_manager:
         class: AppBundle\Service\ImageManagement
         arguments:

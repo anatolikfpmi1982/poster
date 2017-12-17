@@ -293,7 +293,6 @@ class PictureAdmin extends AbstractAdmin
     public function postPersist($picture)
     {
         if($picture instanceof Picture) {
-            $picture->setCode(100500 + $picture->getId());
             if(!$picture->getName() && $picture->getImageBanner() instanceof Image)  {
                 $picture->setName( $picture->getImageBanner()->getName() );
             }
@@ -317,6 +316,7 @@ class PictureAdmin extends AbstractAdmin
 
     /**
      * @param mixed $picture
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function postUpdate($picture)
     {

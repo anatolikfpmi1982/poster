@@ -330,6 +330,17 @@ class Picture implements ImageInterface
     }
 
     /**
+     * Generate code
+     * @return Picture
+     */
+    public function generateCode()
+    {
+        $this->code = 100500 + $this->id;
+
+        return $this;
+    }
+
+    /**
      * @return boolean
      */
     public function getType()
