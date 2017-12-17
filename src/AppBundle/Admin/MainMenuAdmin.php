@@ -124,7 +124,6 @@ class MainMenuAdmin extends AbstractAdmin
         if($menu instanceof MainMenu) {
             $menu->setCreatedAt(new \DateTime());
             $menu->setUpdatedAt(new \DateTime());
-            $menu->createUrl();
             $this->manageEmbeddedImageAdmins($menu);
         }
     }
@@ -136,7 +135,6 @@ class MainMenuAdmin extends AbstractAdmin
     {
         if($menu instanceof MainMenu) {
             $menu->setUpdatedAt(new \DateTime());
-            $menu->createUrl();
             $this->manageEmbeddedImageAdmins($menu);
         }
     }
