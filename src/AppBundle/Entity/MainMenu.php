@@ -81,6 +81,20 @@ class MainMenu
     private $page;
 
     /**
+     * @var Category3
+     * @ORM\OneToOne(targetEntity="Category3")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true)
+     */
+    private $category;
+
+    /**
+     * @var Picture
+     * @ORM\OneToOne(targetEntity="Picture")
+     * @ORM\JoinColumn(name="picture_id", referencedColumnName="id", nullable=true)
+     */
+    private $picture;
+
+    /**
      * @var Image
      * @ORM\OneToOne(targetEntity="Image", fetch="EAGER", cascade={"persist"})
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
@@ -88,6 +102,17 @@ class MainMenu
      */
     private $image;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", nullable=true)
+     */
+    private $type;
+
+    /**
+     * @var string
+     */
+    private $url;
 
     /**
      * Get id
@@ -283,5 +308,112 @@ class MainMenu
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return MainMenu
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \AppBundle\Entity\Category3 $category
+     *
+     * @return MainMenu
+     */
+    public function setCategory(\AppBundle\Entity\Category3 $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \AppBundle\Entity\Category3
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set picture
+     *
+     * @param \AppBundle\Entity\Picture $picture
+     *
+     * @return MainMenu
+     */
+    public function setPicture(\AppBundle\Entity\Picture $picture = null)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Get picture
+     *
+     * @return \AppBundle\Entity\Picture
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * Set url
+     *
+     * @param string $url
+     *
+     * @return MainMenu
+     */
+    public function setUrl($url)
+    {
+        $this->type = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        switch ($this->type) {
+            case 'page':
+                return 'page/' . $this->page->getId();
+            case 'category':
+                return 'category/' . $this->category->getId();
+            case 'picture':
+                return 'picture/' . $this->picture->getId();
+            case 'target':
+                return $this->target;
+            default:
+                return '';
+        }
     }
 }

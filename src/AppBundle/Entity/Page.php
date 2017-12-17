@@ -37,21 +37,21 @@ class Page
     /**
      * @var string
      *
-     * @ORM\Column(name="seo_title", type="string", length=200)
+     * @ORM\Column(name="seo_title", type="string", length=200, nullable=true)
      */
     private $seoTitle;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="seo_description", type="text")
+     * @ORM\Column(name="seo_description", type="text", nullable=true)
      */
     private $seoDescription;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="seo_keywords", type="text")
+     * @ORM\Column(name="seo_keywords", type="text", nullable=true)
      */
     private $seoKeywords;
 

@@ -73,25 +73,15 @@
         <div id="navbar" class="navbar-collapse collapse">
             {% if site_blocks and site_blocks.MainMenu %}
                 <ul class="nav navbar-nav">
-                    {% set index = 1 %}
                     {% for menu in site_blocks.MainMenu %}
-                        {% if index == 1 %}
-                            {% set img_icon_name = 'home.png' %}
-                        {% elseif index == 2 %}
-                            {% set img_icon_name = 'portret.png' %}
-                        {% elseif index == 3 %}
-                            {% set img_icon_name = 'kartina.png' %}
-                        {% elseif index == 4 %}
-                            {% set img_icon_name = 'reviews.png' %}
-                        {% elseif index == 5 %}
-                            {% set img_icon_name = 'delivery.png' %}
-                        {% elseif index == 6 %}
-                            {% set img_icon_name = 'phone_menu.png' %}
-                        {% endif %}
-                        <li {% if menu.target == active_menu %}class="active"{% endif %}><a href="{{ menu.target }}">
-                                <img src="{{ asset('bundles/app/images/' ~ img_icon_name ) }}"/>{{ menu.title }}</a>
+                        <li {% if menu.target == active_menu %}class="active"{% endif %}>
+                            <a href="{{ menu.getUrl() }}">
+                                {% if menu.image %}
+                                    <img src="/files/main_menu/{{ menu.image.getFilename() }}"/>
+                                {% endif %}
+                                {{ menu.title }}
+                            </a>
                         </li>
-                        {% set index = index + 1 %}
                     {% endfor %}
                 </ul>
             {% endif %}
