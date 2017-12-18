@@ -2,7 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-
+    - { resource: ivory/ivory_ckeditor.yml }
     - { resource: sonata.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
@@ -69,11 +69,13 @@ doctrine:
             default:
                 mappings:
                     ApplicationSonataUserBundle: ~
-#                    ApplicationSonataClassificationBundle: ~
+                    ApplicationSonataClassificationBundle: ~
                     SonataUserBundle: ~
                     FOSUserBundle: ~
                     AppBundle: ~
-#                    SonataClassificationBundle: ~
+                    SonataMediaBundle: ~
+                    ApplicationSonataMediaBundle: ~
+                    SonataClassificationBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:

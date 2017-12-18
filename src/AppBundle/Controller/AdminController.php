@@ -1,6 +1,6 @@
 <?php
 namespace AppBundle\Controller;
-error_reporting(E_ALL);
+
 use AppBundle\Entity\Settings;
 use Doctrine\ORM\EntityManager;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;

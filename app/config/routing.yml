@@ -78,3 +78,11 @@ banner_materials:
     type: rest
     prefix: /api
     resource: AppBundle\Controller\Api\BannerMaterialsController
+
+gallery:
+    resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
+    prefix: /media/gallery
+
+media:
+    resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
+    prefix: /media
