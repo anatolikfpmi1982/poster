@@ -1,22 +1,66 @@
-<div class="row az-sidebar az-sidebar-catalog container-fluid">
-    {% for category in block %}
-        <div class="row az-sidebar-header az-sidebar-catalog-item-header">
-            <img src="{{ asset('bundles/app/images/catalog.png') }}" class="az-sidebar-block-img az-catalog-block-img" title="{{ category.title }}"/>
-            {{ category.title }}
-        </div>
-        {% if category.children is defined %}
-            <div class="row container-fluid">
-                {% for subcategory in category.children %}
-                    <div class="row az-sidebar-subcategory-item">
-                        <div class="col-md-3">
-                            <img src="{{ asset('bundles/app/images/arrows.png') }}" class="az-sidebar-block-img az-catalog-block-img" title="{{ subcategory.title }}"/>
-                        </div>
-                        <div class="col-md-9">
-                            {{ subcategory.title }}
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
+<div class="row az-sidebar az-sidebar-catalog">
+    {% set active_category_parent_id = 0 %}
+    {% set active_category_parent_parent_id = 0 %}
+    {% if category is defined and category %}
+        {% set active_category_id = category.id %}
+        {% if category.parentCategory is defined and category.parentCategory and category.parentCategory.id is defined and category.parentCategory.id %}
+            {% set active_category_parent_id = category.parentCategory.id %}
+            {% if category.parentCategory.parentCategory is defined and category.parentCategory.parentCategory and category.parentCategory.parentCategory.id is defined and category.parentCategory.parentCategory.id %}
+                {% set active_category_parent_parent_id = category.parentCategory.parentCategory.id %}
+            {% endif %}
         {% endif %}
+    {% else %}
+        {% set active_category_id = 0 %}
+    {% endif %}
+    <input type="hidden" name="block_menu_active_category" id="block_menu_active_category" value="{{ active_category_id }}">
+    <input type="hidden" name="block_menu_active_category_parent" id="block_menu_active_category_parent" value="{{ active_category_parent_id }}">
+    <input type="hidden" name="block_menu_active_category_parent_parent" id="block_menu_active_category_parent_parent" value="{{ active_category_parent_parent_id }}">
+    {% set category_index = 1 %}
+    {% for category in block %}
+        <div class="col-md-12 container-fluid">
+            <div class="row az-sidebar-header az-sidebar-catalog-item-header" data-id="{{ category.id }}" data-url="{{ path('category', {'slug': category.slug}) }}">
+                <div class="col-md-12">
+                    <img src="{{ asset('bundles/app/images/catalog.png') }}" class="az-sidebar-block-img az-catalog-block-img" title="{{ category.title }}"/>
+                    {{ category.title }}
+                </div>
+            </div>
+            {% if category.children is defined and category.children %}
+                <div class="row category-menu children-category-{{ category.id }}" id="children-category-{{ category.id }}"
+                     style="display: {% if category_index == 1 %}block{% else %}none{% endif %};">
+                    <div class="col-md-12 container-fluid">
+                        {% for subcategory in category.children %}
+                            <div class="row az-sidebar-subcategory-item" data-id="{{ subcategory.id }}" data-parent-id="{{ category.id }}"
+                                 data-url="{{ path('category', {'slug': subcategory.slug}) }}">
+                                <div class="col-md-3">
+                                    <img src="{{ asset('bundles/app/images/arrows.png') }}" class="az-sidebar-block-img az-catalog-block-img" title="{{ subcategory.title }}"/>
+                                </div>
+                                <div class="col-md-9 container-fluid">
+                                    {{ subcategory.title }}
+                                    {% if subcategory.children is defined and subcategory.children %}
+                                        <div class="row category-menu children-subcategory-{{ category.id }}" id="children-subcategory-{{ subcategory.id }}"
+                                             style="display: none;">
+                                            <div class="col-md-12 container-fluid">
+                                                {% for subsubcategory in subcategory.children %}
+                                                    <div class="row subcategory-menu az-sidebar-subcategory-item children-subsubcategory-{{ subcategory.id }}"
+                                                         data-url="{{ path('category', {'slug': subsubcategory.slug}) }}">
+                                                        <div class="col-md-3">
+                                                            <span class="glyphicon glyphicon-chevron-right"></span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            {{ subsubcategory.title }}
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+            {% set category_index = category_index + 1 %}
+        </div>
     {% endfor %}
 </div>

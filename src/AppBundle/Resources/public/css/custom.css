@@ -103,14 +103,9 @@
 
 }
 
-.az-sidebar {
-    margin: 10px 0 10px;
-    background-color: #FFFFFF;
-}
-
 .az-sidebar-subcategory-item {
     line-height: 26px;
-
+    cursor: pointer;
 }
 
 /**slider**/
@@ -267,10 +262,7 @@ footer {
     padding: 8px;
     text-transform: uppercase;
     font-size: 16px;
-}
-
-.az-sidebar-block-img {
-    margin: 0 10px 0 10px;
+    cursor: pointer;
 }
 
 .cycle-slideshow, .cycle-slideshow * {
@@ -683,11 +675,6 @@ body {
     background-color: #FFFFFF;
 }
 
-.az-sidebar-subcategory-item {
-    line-height: 26px;
-
-}
-
 /**slider**/
 
 .az-sidebar-popular {
@@ -944,18 +931,6 @@ footer {
 
 .az-logo-footer-img {
     width: 200px;
-}
-
-.az-sidebar-header {
-    color: white;
-    background-color: #fd1200;
-    padding: 8px;
-    text-transform: uppercase;
-    font-size: 16px;
-}
-
-.az-sidebar-block-img {
-    margin: 0 10px 0 10px;
 }
 
 .cycle-slideshow, .cycle-slideshow * {
