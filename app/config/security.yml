@@ -94,5 +94,8 @@ security:
         - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
         - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
+        - { path: ^/efconnect, role: ROLE_USER }
+        - { path: ^/elfinder, role: ROLE_USER }
+
     acl:
         connection: default

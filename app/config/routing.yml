@@ -36,6 +36,9 @@ _sonata_admin:
     type: sonata_admin
     prefix: /admin
 
+elfinder:
+    resource: "@FMElfinderBundle/Resources/config/routing.yml"
+
 sonata_admin_settings:
     pattern:  /admin/settings
     defaults: { _controller: AppBundle:Admin:settings }

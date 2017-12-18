@@ -34,6 +34,7 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new FM\ElfinderBundle\FMElfinderBundle(),
             new AppBundle\AppBundle()
         );
 
