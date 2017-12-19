@@ -33,7 +33,7 @@ class ParserController extends Controller
         $output = new NullOutput();
         $application->run($input, $output);
 
-        return new Response("Парсер отработал");
+        return new Response("Парсер начал работу! Проверьте результаты работы через несколько минут!");
     }
 
 }
