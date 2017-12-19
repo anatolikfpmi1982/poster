@@ -19,7 +19,7 @@
     {% for category in block %}
         <div class="col-md-12 container-fluid">
             <div class="row az-sidebar-header az-sidebar-catalog-item-header" data-id="{{ category.id }}" data-url="{{ path('category', {'slug': category.slug}) }}">
-                <div class="col-md-12">
+                <div class="col-md-12 az-catalog-menu-block-img-div">
                     <img src="{{ asset('bundles/app/images/catalog.png') }}" class="az-sidebar-block-img az-catalog-block-img" title="{{ category.title }}"/>
                     {{ category.title }}
                 </div>
@@ -31,10 +31,10 @@
                         {% for subcategory in category.children %}
                             <div class="row az-sidebar-subcategory-item" data-id="{{ subcategory.id }}" data-parent-id="{{ category.id }}"
                                  data-url="{{ path('category', {'slug': subcategory.slug}) }}">
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <img src="{{ asset('bundles/app/images/arrows.png') }}" class="az-sidebar-block-img az-catalog-block-img" title="{{ subcategory.title }}"/>
                                 </div>
-                                <div class="col-md-9 container-fluid">
+                                <div class="col-md-10 container-fluid az-sidebar-catalog-subcategory-item-text">
                                     {{ subcategory.title }}
                                     {% if subcategory.children is defined and subcategory.children %}
                                         <div class="row category-menu children-subcategory-{{ category.id }}" id="children-subcategory-{{ subcategory.id }}"
@@ -43,10 +43,10 @@
                                                 {% for subsubcategory in subcategory.children %}
                                                     <div class="row subcategory-menu az-sidebar-subcategory-item children-subsubcategory-{{ subcategory.id }}"
                                                          data-url="{{ path('category', {'slug': subsubcategory.slug}) }}">
-                                                        <div class="col-md-3">
+                                                        <div class="col-md-1 padding-left-right-0">
                                                             <span class="glyphicon glyphicon-chevron-right"></span>
                                                         </div>
-                                                        <div class="col-md-9">
+                                                        <div class="col-md-11 padding-left-0">
                                                             {{ subsubcategory.title }}
                                                         </div>
                                                     </div>

@@ -101,7 +101,7 @@ define(function (require, exports, module) {
         var activeCategoryId = $('#block_menu_active_category').val(),
             activeCategoryParentId = $('#block_menu_active_category_parent').val(),
             activeCategoryParentParentId = $('#block_menu_active_category_parent_parent').val();
-        if (activeCategoryId) {
+        if (activeCategoryId != 0) {
             $('div.category-menu').hide();
             $('div.subcategory-menu').hide();
             if (activeCategoryParentParentId != 0 && activeCategoryParentId != 0) {
