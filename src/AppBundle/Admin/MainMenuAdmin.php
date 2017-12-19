@@ -122,6 +122,7 @@ class MainMenuAdmin extends AbstractAdmin
     public function prePersist($menu)
     {
         if($menu instanceof MainMenu) {
+            $menu = $this->clearEntities($menu);
             $menu->setCreatedAt(new \DateTime());
             $menu->setUpdatedAt(new \DateTime());
             $this->manageEmbeddedImageAdmins($menu);
@@ -134,9 +135,30 @@ class MainMenuAdmin extends AbstractAdmin
     public function preUpdate($menu)
     {
         if($menu instanceof MainMenu) {
+            $menu = $this->clearEntities($menu);
             $menu->setUpdatedAt(new \DateTime());
             $this->manageEmbeddedImageAdmins($menu);
         }
+    }
+
+    /**
+     * Delete entities dependencies
+     *
+     * @param MainMenu $menu
+     * @return MainMenu
+     */
+    private function clearEntities(MainMenu $menu) {
+        if($menu->getType() != 'page') {
+            $menu->setPage(null);
+        }
+        if($menu->getType() != 'category') {
+            $menu->setCategory(null);
+        }
+        if($menu->getType() != 'picture') {
+            $menu->setPicture(null);
+        }
+
+        return $menu;
     }
 
     /**

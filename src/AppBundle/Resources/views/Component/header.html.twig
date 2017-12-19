@@ -75,7 +75,7 @@
                 <ul class="nav navbar-nav">
                     {% for menu in site_blocks.MainMenu %}
                         <li {% if menu.target == active_menu %}class="active"{% endif %}>
-                            <a href="{{ menu.getUrl() }}">
+                            <a href="/{{ menu.getUrl() }}">
                                 {% if menu.image %}
                                     <img src="/files/main_menu/{{ menu.image.getFilename() }}"/>
                                 {% endif %}
