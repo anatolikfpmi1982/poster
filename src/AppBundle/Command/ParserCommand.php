@@ -16,7 +16,7 @@ use ZipArchive;
 
 class ParserCommand extends ContainerAwareCommand
 {
-    const PARSE_DIR = __DIR__ . '/../../../web/files/upload';
+    const PARSE_DIR = __DIR__ . '/../../../web/uploads';
     const ARCHIVE_FILENAME = 'archive.zip';
     const CSV_FILENAME = 'upload.csv';
     const TEMP_FOLDER_NAME = 'TMP';
