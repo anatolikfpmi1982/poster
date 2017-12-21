@@ -149,6 +149,7 @@ ivory_ck_editor:
     configs:
         ckeditor:
             removePlugins: 'flash,print,forms,div,newpage'
+            extraPlugins: 'more'
             allowedContent: true
             entities: false
             autoParagraph: false
@@ -156,6 +157,10 @@ ivory_ck_editor:
             filebrowserBrowseRoute: elfinder
             filebrowserBrowseRouteParameters:
                 instance: ckeditor
+    plugins:
+        more:
+            path:     "/bundles/app/js/ckeditor_more/"
+            filename: "plugin.js"
 
 fm_elfinder:
     #assets_path: / # default is /assets, this is where css/js elfinder files are
