@@ -125,4 +125,16 @@ class FrontController extends Controller {
 
         return $lastVisited;
     }
+
+    /**
+     * @return array
+     */
+    protected function getDeferredBlock() {
+        $deferred = $this->get('app.session_manager')->getDeferredItems();
+        if($deferred) {
+            $deferred = $this->get( 'doctrine.orm.entity_manager' )->getRepository('AppBundle:Picture')->findDeferred($deferred);
+        }
+
+        return $deferred;
+    }
 }

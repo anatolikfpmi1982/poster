@@ -1,0 +1,16 @@
+<div class="row az-page-main-section-div container-fluid">
+    <div class="row az-page-section-header az-page-main-popular-header">Отложенные:</div>
+    <div class="row az-page-section-body az-page-main-popular container-fluid">
+        <div class="row">
+            {% if site_blocks is defined and site_blocks and site_blocks.Deferred is defined and site_blocks.Deferred %}
+            {% for picture in site_blocks.Deferred %}
+            {% include('AppBundle:Component:picture.cell.short.html.twig') %}
+            {% if loop.index != 0 and loop.index % 3 == 0 %}
+        </div>
+        <div class="row">
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>

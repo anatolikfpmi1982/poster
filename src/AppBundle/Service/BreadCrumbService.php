@@ -53,6 +53,9 @@ class BreadCrumbService {
             case 'picture':
                 $result = $this->buildPictureBreadCrumb($param);
                 break;
+            case 'author':
+                $result = $this->buildAuthorBreadCrumb($param);
+                break;
         }
         return $result;
     }
@@ -70,6 +73,22 @@ class BreadCrumbService {
         return [[
             'title' => $page->getTitle(),
             'url' => $this->container->get('router')->generate('page', array('slug' => $page->getSlug())),
+        ]];
+    }
+
+    /**
+     * Get full author page bread crumb path.
+     *
+     * @param string $authorSlug
+     *
+     * @return array
+     */
+    public function buildAuthorBreadCrumb( $authorSlug ) {
+        /** @var Author $author */
+        $author = $this->em->getRepository( 'AppBundle:Author' )->findOneBy( [ 'slug' => $authorSlug, 'isActive' => true ] );
+        return [[
+            'title' => $author->getName(),
+            'url' => $this->container->get('router')->generate('author', array('slug' => $author->getSlug())),
         ]];
     }
 

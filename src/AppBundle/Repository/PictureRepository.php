@@ -3,6 +3,7 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * PictureRepository
@@ -11,6 +12,12 @@ use Doctrine\ORM\EntityRepository;
  * repository methods below.
  */
 class PictureRepository extends EntityRepository {
+    /**
+     * * Get query builder for active pictures by category id
+     *
+     * @param integer $id
+     * @return QueryBuilder
+     */
     public function getActivePicturesFromCategory( $id ) {
         return $this->createQueryBuilder( 'p' )
                     ->innerJoin( 'p.categories', 'c' )// Inner Join with categories
@@ -20,6 +27,12 @@ class PictureRepository extends EntityRepository {
                     ->setParameter( 'category', $id );
     }
 
+    /**
+     * Get query builder for active pictures by author slug
+     *
+     * @param string $slug
+     * @return QueryBuilder
+     */
     public function getActivePicturesByAuthor( $slug ) {
         return $this->createQueryBuilder( 'p' )
             ->innerJoin( 'p.author', 'a' )// Inner Join with author
@@ -29,6 +42,12 @@ class PictureRepository extends EntityRepository {
             ->setParameter( 'slug', $slug );
     }
 
+    /**
+     * Get active last visited pictures
+     *
+     * @param array $ids
+     * @return array
+     */
     public function findLastVisited( $ids ) {
 
         return $this->createQueryBuilder( 'p' )
@@ -38,6 +57,27 @@ class PictureRepository extends EntityRepository {
                     ->getResult();
     }
 
+    /**
+     * Get active deferred pictures
+     *
+     * @param array $ids
+     * @return array
+     */
+    public function findDeferred( $ids ) {
+
+        return $this->createQueryBuilder( 'p' )
+            ->where( 'p.id IN (:ids)' )
+            ->setParameter( 'ids', $ids )
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Get active similar for picture
+     *
+     * @param integer $id
+     * @return array
+     */
     public function getActiveSimilar( $id ) {
         $entities = $this->createQueryBuilder( 'p' )
                          ->innerJoin( 'p.similar', 's' )// Inner Join with similar
