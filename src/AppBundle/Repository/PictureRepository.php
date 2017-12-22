@@ -13,11 +13,20 @@ use Doctrine\ORM\EntityRepository;
 class PictureRepository extends EntityRepository {
     public function getActivePicturesFromCategory( $id ) {
         return $this->createQueryBuilder( 'p' )
-                    ->innerJoin( 'p.categories', 'c' )// Inner Join with users
-                    ->innerJoin( 'p.form', 'f' )// Inner Join with users
+                    ->innerJoin( 'p.categories', 'c' )// Inner Join with categories
+                    ->innerJoin( 'p.form', 'f' )// Inner Join with picture forms
                     ->where( 'c.id = :category' )
                     ->andWhere( 'p.isActive = true' )
                     ->setParameter( 'category', $id );
+    }
+
+    public function getActivePicturesByAuthor( $slug ) {
+        return $this->createQueryBuilder( 'p' )
+            ->innerJoin( 'p.author', 'a' )// Inner Join with author
+            ->innerJoin( 'p.form', 'f' )// Inner Join with picture form
+            ->where( 'a.slug = :slug' )
+            ->andWhere( 'p.isActive = true' )
+            ->setParameter( 'slug', $slug );
     }
 
     public function findLastVisited( $ids ) {

@@ -19,6 +19,7 @@ class AuthorAdmin extends AbstractAdmin
         $formMapper
             ->with('Main')
             ->add('name', null, ['required' => true, 'label' => 'Имя'])
+            ->add('slug', null, ['required' => false, 'label' => 'Алиас'])
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
             ->end();
     }
@@ -30,6 +31,7 @@ class AuthorAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('name', null, ['required' => true, 'label' => 'Имя', 'editable' => true])
+            ->add('slug', null, ['label' => 'Алиас', 'editable' => true])
             ->add('isActive', null, ['label' => 'Показывать', 'editable' => true])
             ->add(
                 '_action',
@@ -41,6 +43,13 @@ class AuthorAdmin extends AbstractAdmin
                     ],
                 ]
             );
+    }
+
+    /**
+     * Configure admin
+     */
+    public function configure() {
+        $this->setTemplate('edit', 'AppBundle:Admin:edit_javascript.html.twig');
     }
 
     /**
