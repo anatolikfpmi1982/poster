@@ -41,6 +41,8 @@ class FramesController extends Controller
         $em = $this->get('doctrine.orm.entity_manager');
         $frame = $em->getRepository('AppBundle:Frame')->find($id);
 
+        $frame->setDescription($this->get('helper.textformater')->formatMoreText($frame->getDescription()));
+
         // parameters to template
         return $this->render('AppBundle:Frames:show.html.twig', array('frame' => $frame));
     }

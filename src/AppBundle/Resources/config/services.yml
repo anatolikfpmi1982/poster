@@ -8,6 +8,9 @@ services:
     helper.imageformidentifier:
         class: AppBundle\Helper\ImageFormIdentifier
 
+    helper.textformater:
+        class: AppBundle\Helper\TextFormater
+
     app.image_manager:
         class: AppBundle\Service\ImageManagement
         arguments:

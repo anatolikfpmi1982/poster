@@ -65,6 +65,9 @@ class FrontController extends Controller {
         $siteSettings = [];
         if($_siteSettings instanceof Settings) {
             $siteSettings = unserialize($_siteSettings->getSettings());
+            $siteSettings['contacts'] = $this->get('helper.textformater')->formatMoreText($siteSettings['contacts']);
+            $siteSettings['under_slider_text'] = $this->get('helper.textformater')->formatMoreText($siteSettings['under_slider_text']);
+            $siteSettings['info_text'] = $this->get('helper.textformater')->formatMoreText($siteSettings['info_text']);
         }
         return $siteSettings;
     }
