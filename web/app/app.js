@@ -39,8 +39,8 @@ define(function (require, exports, module) {
             $.ajax({
                 url: "/ajax/picture/defer",
                 data: {'id': id}
-            }).done(function() {
-                $this.text( "Отложено" );
+            }).done(function () {
+                $this.text("Отложено");
                 $this.prop('disabled', true);
             });
             return false;
@@ -107,6 +107,7 @@ define(function (require, exports, module) {
         });
 
         setActiveCategoryInMenu();
+        setShowBoard();
     });
 
     function onBefore(e, opts, outgoing, incoming, forward) {
@@ -122,11 +123,7 @@ define(function (require, exports, module) {
     }
 
     function setShowBoard() {
-        ConstructorOverview.type = $("input.az-picture-page-constructor-type-radio:checked").data('title');
-        ConstructorOverview.size = $("select.az-picture-page-sidebar-size-select").val();
-        ConstructorOverview.material = $("input.az-picture-page-constructor-material-radio:checked").val();
-        ConstructorOverview.thickness = $("input.z-picture-page-thickness:checked").val();
-        ConstructorOverview.color = '';
+        ConstructorOverview.init();
         ConstructorOverview.show();
     }
 

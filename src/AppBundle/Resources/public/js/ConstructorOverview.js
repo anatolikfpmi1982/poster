@@ -1,15 +1,15 @@
 var ConstructorOverview = new function () {
     this.type = "";
     this.size = "";
-    this.material = "aaa";
+    this.material = "";
     this.thickness = "";
     this.color = "";
 
     this.init = function () {
-        this.type = $('input.az-picture-page-constructor-type-radio:checked').data('title');
-        this.size = $('select.az-picture-page-sidebar-size-select').val();
-        this.material = $('input.az-picture-page-constructor-material-radio:checked').data('title');
-        this.thickness = $('input.az-picture-page-constructor-type-radio:checked').data('title');
+        this.type = $("input.az-picture-page-constructor-type-radio:checked").data('title');
+        this.size = $("select.az-picture-page-sidebar-size-select").val();
+        this.material = $("input.az-picture-page-constructor-material-radio:checked").val();
+        this.thickness = $("input.z-picture-page-thickness:checked").val();
         this.color = '';
     };
 

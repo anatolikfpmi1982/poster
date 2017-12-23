@@ -16,14 +16,14 @@
     </div>
     <div class="row">
         <div class="az-main-popular-item-header-category">
-            <span class="az_author"> Автор:</span> <a href="{{ path('author', {'slug': picture.author.slug}) }}"> {{ picture.author.name }}</a>
+            {% if picture.author is defined and picture.author and picture.author.slug is defined and picture.author.slug %}
+                {% set author_url = path('author', {'slug': picture.author.slug}) %}
+            {% else %}
+                {% set author_url = '#' %}
+            {% endif %}
+            <span class="az_author"> Автор:</span> <a href="{{ author_url }}"> {{ picture.author.name }}</a>
         </div>
     </div>
-    {% if picture.categories is defined and picture.categories %}
-        {% for category in picture.categories %}
-            {{ category.title }}{% if not loop.last %},{% endif %}
-        {% endfor %}
-    {% endif %}
     <div class="row">
         <div class="az-main-popular-item-header-buttons container-fluid">
             <div class="row">
@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 az_btn_order text-left">
-                    <button class="btn_az-main-popular_order">Выбрать </br>тип картины,</br> размер, цену, </br>заказать</button>
+                    <button class="btn_az-main-popular_order">Выбрать <br/>тип картины,<br/> размер, цену, <br/>заказать</button>
                 </div>
 
             </div>
