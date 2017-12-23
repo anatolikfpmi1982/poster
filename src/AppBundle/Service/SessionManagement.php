@@ -41,9 +41,31 @@ class SessionManagement {
     }
 
     /**
+     * @param int $id
+     */
+    public function addDeferredItem( $id ) {
+        $session = $this->container->get( 'session' );
+        if ( $deferred = $session->get( 'deferred' ) ) {
+            if ( !in_array( $id, $deferred, false ) ) {
+                array_shift($deferred, $id);
+            }
+        } else {
+            $deferred = [ $id ];
+        }
+        $session->set( 'deferred', $deferred );
+    }
+
+    /**
      * @return mixed
      */
     public function getLastVisitedItems() {
         return $this->container->get( 'session' )->get( 'lastVisited' );
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDeferredItems() {
+        return $this->container->get( 'session' )->get( 'deferred' );
     }
 }

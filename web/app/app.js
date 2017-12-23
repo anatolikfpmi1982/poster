@@ -30,6 +30,22 @@ define(function (require, exports, module) {
             return false;
         });
 
+        // Picture cell
+        // picture cell defer picture
+        $("button.btn_az-main-popular_defer").click(function (event) {
+            event.stopImmediatePropagation();
+            var $this = $(this);
+            var id = $this.attr('data-id');
+            $.ajax({
+                url: "/ajax/picture/defer",
+                data: {'id': id}
+            }).done(function() {
+                $this.text( "Отложено" );
+                $this.prop('disabled', true);
+            });
+            return false;
+        });
+
 
         // Picture page
         // picture page constructor type

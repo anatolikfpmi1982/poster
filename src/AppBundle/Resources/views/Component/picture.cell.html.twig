@@ -16,7 +16,7 @@
     </div>
     <div class="row">
         <div class="az-main-popular-item-header-category">
-            <span class="az_author"> Автор:</span> <a href="{{ path('picture', {'id': picture.id}) }}"> {{ picture.author.name }}</a>
+            <span class="az_author"> Автор:</span> <a href="{{ path('author', {'slug': picture.author.slug}) }}"> {{ picture.author.name }}</a>
         </div>
     </div>
     {% if picture.categories is defined and picture.categories %}
@@ -30,7 +30,7 @@
                 <div class="col-md-6 text-right container-fluid az_btn_postpone">
                     <div class="row">
                         <div class="col-md-12">
-                            <button class="btn_az-main-popular_defer">Отложить</button>
+                            <button class="btn_az-main-popular_defer" data-id="{{ picture.id }}">Отложить</button>
                         </div>
                     </div>
                     <div class="row az-main-popular-item-header-buttons">

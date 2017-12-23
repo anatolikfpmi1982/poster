@@ -6,9 +6,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class CategoriesController
+ * Class AuthorsController
  */
-class CategoriesController extends FrontController
+class AuthorsController extends FrontController
 {
     const PAGE_LIMIT = 16;
 
@@ -16,7 +16,7 @@ class CategoriesController extends FrontController
      * @param string $slug
      * @param Request $request
      *
-     * @Route("/category/{slug}", name="category")
+     * @Route("/author/{slug}", name="author")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -24,14 +24,11 @@ class CategoriesController extends FrontController
     {
         $em = $this->get('doctrine.orm.entity_manager');
 
-        $category = $em->getRepository('AppBundle:Category3')->findOneBySlug($slug);
-        $category->count = count($category->getPictures());
+        $author = $em->getRepository('AppBundle:Author')->findOneBySlug($slug);
 
-        $queryBuilder = $em->getRepository('AppBundle:Picture')->getActivePicturesFromCategory($category->getId());
+        $queryBuilder = $em->getRepository('AppBundle:Picture')->getActivePicturesByAuthor($author->getSlug());
         $query = $queryBuilder->getQuery();
 
-
-//        echo $query->getSQL();die();
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
@@ -39,18 +36,17 @@ class CategoriesController extends FrontController
             self::PAGE_LIMIT/*limit per page*/
         );
 
-        $this->blocks = [ 'CategoryMenu' => 1, 'Reviews' => 2 , 'MainMenu' => 3, 'BreadCrumb' => 4, 'LastVisited' => 5, 'Deferred' => 6 ];
+        $this->blocks = [ 'CategoryMenu' => 1, 'Reviews' => 2 , 'MainMenu' => 3, 'BreadCrumb' => 4, 'LastVisited' => 5 ];
         $this->menu = '/';
         $this->pageSlug = $slug;
-        $this->pageType = 'category';
+        $this->pageType = 'author';
         $this->doBlocks();
         $this->data['pagination'] = $pagination;
-        $category->setDescription($this->get('helper.textformater')->formatMoreText($category->getDescription()));
-        $this->data['category'] = $category;
+        $this->data['author'] = $author;
         $this->data['filters']['tpls'] = $em->getRepository('AppBundle:PictureForm')->findBy(['isActive' => true]);
 
         // parameters to template
-        return $this->render('AppBundle:Categories:show.html.twig', $this->data);
+        return $this->render('AppBundle:Authors:show.html.twig', $this->data);
     }
 
 }

@@ -16,7 +16,8 @@ use ZipArchive;
 
 class ParserCommand extends ContainerAwareCommand
 {
-    const PARSE_DIR = __DIR__ . '/../../../web/files/upload';
+    const PARSE_DIR = __DIR__ . '/../../../web/uploads';
+    const TMP_DIR = __DIR__ . '/../../../web/TMP';
     const ARCHIVE_FILENAME = 'archive.zip';
     const CSV_FILENAME = 'upload.csv';
     const TEMP_FOLDER_NAME = 'TMP';
@@ -46,7 +47,8 @@ class ParserCommand extends ContainerAwareCommand
     {
         parent::__construct($name);
         $this->fs = new Filesystem();
-        $this->tmpFolder = sys_get_temp_dir() . '/' . self::TEMP_FOLDER_NAME;
+//        $this->tmpFolder = sys_get_temp_dir() . '/' . self::TEMP_FOLDER_NAME;
+        $this->tmpFolder = self::TMP_DIR;
     }
 
     /**

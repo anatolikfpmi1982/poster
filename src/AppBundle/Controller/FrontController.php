@@ -65,6 +65,9 @@ class FrontController extends Controller {
         $siteSettings = [];
         if($_siteSettings instanceof Settings) {
             $siteSettings = unserialize($_siteSettings->getSettings());
+            $siteSettings['contacts'] = $this->get('helper.textformater')->formatMoreText($siteSettings['contacts']);
+            $siteSettings['under_slider_text'] = $this->get('helper.textformater')->formatMoreText($siteSettings['under_slider_text']);
+            $siteSettings['info_text'] = $this->get('helper.textformater')->formatMoreText($siteSettings['info_text']);
         }
         return $siteSettings;
     }
@@ -121,5 +124,17 @@ class FrontController extends Controller {
         }
 
         return $lastVisited;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getDeferredBlock() {
+        $deferred = $this->get('app.session_manager')->getDeferredItems();
+        if($deferred) {
+            $deferred = $this->get( 'doctrine.orm.entity_manager' )->getRepository('AppBundle:Picture')->findDeferred($deferred);
+        }
+
+        return $deferred;
     }
 }
