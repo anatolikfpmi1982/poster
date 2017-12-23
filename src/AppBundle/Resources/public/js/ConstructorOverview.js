@@ -1,7 +1,7 @@
 var ConstructorOverview = new function () {
     this.type = "";
     this.size = "";
-    this.material = "";
+    this.material = "aaa";
     this.thickness = "";
     this.color = "";
 

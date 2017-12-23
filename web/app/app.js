@@ -1,6 +1,6 @@
 define(function (require, exports, module) {
     require('utils');
-
+    require('ConstructorOverview')
 
     function init() {
         var test = require('test');
@@ -36,7 +36,27 @@ define(function (require, exports, module) {
         $("input.az-picture-page-constructor-type-radio").click(function (event) {
             event.stopImmediatePropagation();
             setShowBoard();
-            return false;
+        });
+
+        // Picture page
+        // picture page constructor material
+        $("input.az-picture-page-constructor-material-radio").click(function (event) {
+            event.stopImmediatePropagation();
+            setShowBoard();
+        });
+
+        // Picture page
+        // picture page constructor thickness
+        $("input.z-picture-page-thickness").click(function (event) {
+            event.stopImmediatePropagation();
+            setShowBoard();
+        });
+
+        // Picture page
+        // picture page constructor size
+        $("select.az-picture-page-sidebar-size-select").change(function (event) {
+            event.stopImmediatePropagation();
+            setShowBoard();
         });
 
         // Any page
@@ -86,7 +106,12 @@ define(function (require, exports, module) {
     }
 
     function setShowBoard() {
-        $("input.az-picture-page-constructor-type-radio").data('title');
+        ConstructorOverview.type = $("input.az-picture-page-constructor-type-radio:checked").data('title');
+        ConstructorOverview.size = $("select.az-picture-page-sidebar-size-select").val();
+        ConstructorOverview.material = $("input.az-picture-page-constructor-material-radio:checked").val();
+        ConstructorOverview.thickness = $("input.z-picture-page-thickness:checked").val();
+        ConstructorOverview.color = '';
+        ConstructorOverview.show();
     }
 
     function constructorUpdate() {
@@ -101,7 +126,7 @@ define(function (require, exports, module) {
         var activeCategoryId = $('#block_menu_active_category').val(),
             activeCategoryParentId = $('#block_menu_active_category_parent').val(),
             activeCategoryParentParentId = $('#block_menu_active_category_parent_parent').val();
-        if (activeCategoryId) {
+        if (activeCategoryId != 0) {
             $('div.category-menu').hide();
             $('div.subcategory-menu').hide();
             if (activeCategoryParentParentId != 0 && activeCategoryParentId != 0) {
