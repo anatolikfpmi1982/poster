@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ReviewsController extends FrontController {
 
-    const PAGE_LIMIT = 10;
+    const PAGE_LIMIT = 5;
 
     /**
      * @Route("/reviews", name="reviews")
