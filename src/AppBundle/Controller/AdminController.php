@@ -143,7 +143,8 @@ class AdminController extends CoreController
                 'minArea' => 0,
                 'maxArea' => 0,
                 'minPrice' => 0,
-                'maxPrice' => 0
+                'maxPrice' => 0,
+                'price' => 0
             ];
         }
 
@@ -152,6 +153,7 @@ class AdminController extends CoreController
             ->add('maxArea', NumberType::class, ['label' => 'Максимальная площадь', 'required' => false])
             ->add('minPrice', NumberType::class, ['label' => 'Минимальная цена', 'required' => false])
             ->add('maxPrice', NumberType::class, ['label' => 'Максимальная цена', 'required' => false])
+            ->add('price', NumberType::class, ['label' => 'Добавочная цена', 'required' => false])
             ->add('save', SubmitType::class, array('label' => 'Сохранить'))
             ->getForm();
 

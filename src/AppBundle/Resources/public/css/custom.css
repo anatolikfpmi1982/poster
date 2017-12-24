@@ -1304,3 +1304,7 @@ footer {
     padding-left: 0;
     padding-right: 0;
 }
+
+.az-picture-page-type-img-text {
+    font-size: 10px;
+}

@@ -16,8 +16,8 @@
                 <img src="/files/underframes/small_thumb/{{ thickness.image.getFilename() }}" class="az-picture-page-material-img"/>
             </div>
             <div class="row text-center az-picture-page-material-radio-div">
-                <input type="radio" class="btn z-picture-page-thickness" value="{{ thickness.depth }} см" title="az-picture-page-thickness" name="az-picture-page-thickness"
-                       {% if ind == 1 %}checked{% endif %}/>
+                <input type="radio" class="btn z-picture-page-thickness" value="{{ thickness.depth }} см" title="az-picture-page-thickness"
+                       data-ratio="{{ thickness.ratio }}" name="az-picture-page-thickness" {% if ind == 1 %}checked{% endif %}/>
             </div>
         </div>
         {% if ind is even %}
