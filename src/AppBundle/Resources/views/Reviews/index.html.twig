@@ -3,28 +3,38 @@
 {% block title %}Отзывы{% endblock %}
 
 {% block body %}
-    <div class="count">
-        {{ pagination.getTotalItemCount }}
-    </div>
-    <table border="1">
-        <tr>
-            {# sorting of properties based on query components #}
-            <th>{{ knp_pagination_sortable(pagination, 'Id', 'r.id') }}</th>
-            <th{% if pagination.isSorted('r.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Name', 'r.name') }}</th>
-            <th>{{ knp_pagination_sortable(pagination, 'Release', 'r.createdAt') }}</th>
-        </tr>
 
-        {# table body #}
-        {% for article in pagination %}
-            <tr {% if loop.index is odd %}class="color"{% endif %}>
-                <td>{{ article.id }}</td>
-                <td>{{ article.name }}</td>
-                <td>{{ article.createdAt | date('Y-m-d') }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-    {# display navigation #}
-    <div class="navigation">
-        {{ knp_pagination_render(pagination) }}
+    <div class="col-md-12 container-fluid">
+    <div class="row az-page-main-section-div">
+        {% include('AppBundle:Component:Blocks/breadcrumb.html.twig') %}
+    </div>
+
+        <div class="row az-page-main-section-div">
+
+        <div class="col-md-12 container-fluid">
+            <div class="row page-title az-picture-page-title">Отзывы</div>
+            {# rewiews body #}
+            {% for article in pagination %}
+
+                <div class="row az-reviews">
+                    <div class="col-md container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 az-reviews-name">{{ article.name }}</div>
+                            <div class="col-md-6 az-rewiews-date">{{ article.createdAt | date('Y-m-d') }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md az-rewiews-article">{{ article.review }}</div>
+                        </div>
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+            {# display navigation #}
+            <div class="pagination">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
     </div>
 {% endblock %}

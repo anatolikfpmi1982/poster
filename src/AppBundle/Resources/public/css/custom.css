@@ -1304,3 +1304,100 @@ footer {
     padding-left: 0;
     padding-right: 0;
 }
+
+.az-reviews {
+    padding: 13px 15px 8px;
+    border: 1px solid #e6e6e6;
+    position: relative;
+    margin: 20px 10px 28px 10px;
+}
+
+.az-reviews:after
+{position: absolute;
+    width: 14px;
+    height: 14px;
+    background: url(../images/icons.png) no-repeat -48px -49px;
+    left: -1px;
+    bottom: -14px;
+}
+
+.az-reviews-name {
+    font: 20px/20px 'Open Sans','arial','helvetica','sans-serif';
+    font-family: "Open Sans", "arial", "helvetica", "sans-serif";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 20px;
+    font-size-adjust: none;
+    font-stretch: normal;
+    -x-system-font: none;
+    font-feature-settings: normal;
+    font-language-override: normal;
+    font-kerning: auto;
+    font-variant-alternates: normal;
+    font-variant-caps: normal;
+    font-variant-east-asian: normal;
+    font-variant-ligatures: normal;
+    font-variant-numeric: normal;
+    font-variant-position: normal;
+    color: #000;
+    padding-right: 15px;
+    padding-left: 15px;
+    border-right: 1px solid #e6e6e6;
+    display: inline-block;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALAQMAAACTYuVlAAAABlBMVEUwrSMwrSMGiLPTAAAAAXRSTlMAQObYZgAAABJJREFUeF5j4GNAoP8PIAhZEABkXgYOXW/zqwAAAABJRU5ErkJggg==') no-repeat 0% 60%;
+}
+.az-rewiews-date {
+    padding-left: 15px;
+    display: inline-block;
+    color: #f43812;
+    font: 16px/21px 'arial','helvetica','sans-serif';
+}
+
+.az-rewiews-article {
+    margin: 10px 0;
+}
+
+.current, .next, .page, .last{
+    margin-right: 2px;
+    transition: background .3s ease 0s;
+    transition-property: background;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+    font: 16px/16px 'arial','helvetica','sans-serif';
+    color: #595959;
+    display: block;
+    padding: 6px 10px 6px 9px;
+    text-align: center;
+    background: #fff;
+    text-decoration: none;
+    border: 2px solid #e4e4e4;
+    float:left;
+}
+
+.first, .previous{
+    text-decoration: none;
+    border: 2px solid #e4e4e4;
+    color: #595959;
+    display: block;
+    padding: 6px 10px 6px 9px;
+    background: #fff;
+    text-decoration: none;
+    color: #595959;
+
+}
+.current a,  .page a, .last a, .next a {
+    color: #333;
+    text-decoration: none;
+}
+
+.current:hover,  .page:hover, .next:hover, .last:hover, .last:hover, .next:hover {
+    color: #333;
+    border: 2px solid #fd1200;
+}
+
+.current:active,  .page:active, .next:active, .last:active, .last:active, .next:active {
+    color: #333;
+    border: 2px solid #fd1200;
+}

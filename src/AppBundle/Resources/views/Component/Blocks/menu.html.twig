@@ -18,6 +18,11 @@
     {% set category_index = 1 %}
     {% for category in block %}
         <div class="col-md-12 container-fluid">
+            {% if category.slug is defined and category.slug %}
+                {% set category_slug = category.slug %}
+            {% else %}
+                {% set category_slug = '#' %}
+            {% endif %}
             <div class="row az-sidebar-header az-sidebar-catalog-item-header" data-id="{{ category.id }}" data-url="{{ path('category', {'slug': category.slug}) }}">
                 <div class="col-md-12">
                     <img src="{{ asset('bundles/app/images/catalog.png') }}" class="az-sidebar-block-img az-catalog-block-img" title="{{ category.title }}"/>
@@ -29,8 +34,13 @@
                      style="display: {% if category_index == 1 %}block{% else %}none{% endif %};">
                     <div class="col-md-12 container-fluid">
                         {% for subcategory in category.children %}
+                            {% if subcategory.slug is defined and subcategory.slug %}
+                                {% set subcategory_slug = subcategory.slug %}
+                            {% else %}
+                                {% set subcategory_slug = '#' %}
+                            {% endif %}
                             <div class="row az-sidebar-subcategory-item" data-id="{{ subcategory.id }}" data-parent-id="{{ category.id }}"
-                                 data-url="{{ path('category', {'slug': subcategory.slug}) }}">
+                                 data-url="{{ path('category', {'slug': subcategory_slug}) }}">
                                 <div class="col-md-3">
                                     <img src="{{ asset('bundles/app/images/arrows.png') }}" class="az-sidebar-block-img az-catalog-block-img" title="{{ subcategory.title }}"/>
                                 </div>
@@ -41,8 +51,13 @@
                                              style="display: none;">
                                             <div class="col-md-12 container-fluid">
                                                 {% for subsubcategory in subcategory.children %}
+                                                    {% if subsubcategory.slug is defined and subsubcategory.slug %}
+                                                        {% set subsubcategory_slug = subsubcategory.slug %}
+                                                    {% else %}
+                                                        {% set subsubcategory_slug = '#' %}
+                                                    {% endif %}
                                                     <div class="row subcategory-menu az-sidebar-subcategory-item children-subsubcategory-{{ subcategory.id }}"
-                                                         data-url="{{ path('category', {'slug': subsubcategory.slug}) }}">
+                                                         data-url="{{ path('category', {'slug': subsubcategory_slug }) }}">
                                                         <div class="col-md-3">
                                                             <span class="glyphicon glyphicon-chevron-right"></span>
                                                         </div>
