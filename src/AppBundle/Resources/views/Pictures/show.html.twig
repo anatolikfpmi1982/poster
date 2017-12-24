@@ -22,6 +22,24 @@
                 <img src="{{ img }}" class="admin-preview"/>
             </div>
             <div class="row">Выбор цвета стены</div>
+            {% if frameSettings is defined and frameSettings %}
+                {% set banner_min_square = frameSettings.minArea %}
+                {% set banner_max_square = frameSettings.maxArea %}
+                {% set banner_min_price = frameSettings.minPrice %}
+                {% set banner_max_price = frameSettings.maxPrice %}
+                {% set banner_add_price = frameSettings.price %}
+            {% else %}
+                {% set banner_min_square = 0 %}
+                {% set banner_max_square = 0 %}
+                {% set banner_min_price = 0 %}
+                {% set banner_max_price = 0 %}
+                {% set banner_add_price = 0 %}
+            {% endif %}
+            <input type="hidden" name="constructor_banner_min_square" id="constructor_banner_min_square" value="{{ banner_min_square }}">
+            <input type="hidden" name="constructor_banner_max_square" id="constructor_banner_max_square" value="{{ banner_max_square }}">
+            <input type="hidden" name="constructor_banner_min_price" id="constructor_banner_min_price" value="{{ banner_min_price }}">
+            <input type="hidden" name="constructor_banner_max_price" id="constructor_banner_max_price" value="{{ banner_max_price }}">
+            <input type="hidden" name="constructor_banner_additional_price" id="constructor_banner_additional_price" value="{{ banner_add_price }}">
         </div>
         <div class="col-md-3 container-fluid">
             <div class="row az-picture-page-constructor-block">Отложенные блок</div>

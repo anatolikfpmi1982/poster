@@ -124,6 +124,7 @@ define(function (require, exports, module) {
 
     function setShowBoard() {
         ConstructorOverview.init();
+        ConstructorOverview.showPrice();
         ConstructorOverview.show();
     }
 
