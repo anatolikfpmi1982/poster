@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Service;
 
+use AppBundle\Entity\Author;
 use AppBundle\Entity\Category3;
 use AppBundle\Entity\Page;
 use AppBundle\Entity\Picture;
@@ -56,8 +57,23 @@ class BreadCrumbService {
             case 'author':
                 $result = $this->buildAuthorBreadCrumb($param);
                 break;
+            case 'review':
+                $result = $this->buildReviewBreadCrumb();
+                break;
         }
         return $result;
+    }
+
+    /**
+     * Get full review bread crumb path.
+     *
+     * @return array
+     */
+    public function buildReviewBreadCrumb() {
+        return [[
+            'title' => 'Отзывы',
+            'url' => $this->container->get('router')->generate('/reviews/'),
+        ]];
     }
 
     /**
