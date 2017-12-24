@@ -72,7 +72,7 @@ class BreadCrumbService {
     public function buildReviewBreadCrumb() {
         return [[
             'title' => 'Отзывы',
-            'url' => $this->container->get('router')->generate('/reviews/'),
+            'url' => $this->container->get('router')->generate('reviews'),
         ]];
     }
 
