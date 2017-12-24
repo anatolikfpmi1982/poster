@@ -62,6 +62,14 @@ class Author
      */
     private $isActive;
 
+    /**
+     * @var string
+     * @ORM\Column(name="slug", type="string", length=300)
+     *
+     * @Assert\Length(min=1, max=300)
+     */
+    private $slug;
+
 
     /**
      * @return string
@@ -184,5 +192,38 @@ class Author
 
         return $this;
     }
-}
 
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Author
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+}

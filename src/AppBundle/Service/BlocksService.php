@@ -65,6 +65,14 @@ class BlocksService {
     }
 
     /**
+     * @return array
+     */
+    public function getDeferredItems() {
+        return $this->container->get( 'session' )->get( 'deferred' );
+    }
+
+
+    /**
      * Return data for slider main page.
      *
      * @return array

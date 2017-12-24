@@ -2,13 +2,11 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-//use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
-use AppBundle\Entity\ImageInterface;
 
 /**
  * Page
@@ -38,13 +36,6 @@ class Picture implements ImageInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string")
-     */
-    private $name;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="title", type="string", length=100)
      */
     private $title;
@@ -59,9 +50,23 @@ class Picture implements ImageInterface
     /**
      * @var string
      *
+     * @ORM\Column(name="note", type="text")
+     */
+    private $note;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="slug", type="string")
      */
     private $slug;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="file_name", type="string", nullable=true)
+     */
+    private $name;
 
     /**
      * @var \DateTime
@@ -84,9 +89,15 @@ class Picture implements ImageInterface
     private $isActive;
 
     /**
+     * @var boolean
+     * @ORM\Column(name="is_top", type="boolean", nullable=false)
+     */
+    private $isTop;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="code", type="string", length=30)
+     * @ORM\Column(name="code", type="string", length=30, nullable=false)
      */
     private $code;
 
@@ -112,10 +123,11 @@ class Picture implements ImageInterface
     private $type;
 
     /**
-     * @var ArrayCollection
      * Many Pictures have Many Categories.
-     * @ORM\ManyToMany(targetEntity="Category", inversedBy="pictires")
-     * @ORM\JoinTable(name="pictures_categories")
+     *
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Category3", inversedBy="pictures", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinTable(name="pictures3_categories")
      */
     private $categories;
 
@@ -127,15 +139,91 @@ class Picture implements ImageInterface
     private $image;
 
     /**
+     * @var Image
+     * @ORM\OneToOne(targetEntity="Image", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="image_banner_id", referencedColumnName="id")
+     */
+    private $imageBanner;
+
+    /**
+     * @var Image
+     * @ORM\OneToOne(targetEntity="Image", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="image_module_id", referencedColumnName="id")
+     */
+    private $imageModule;
+
+    /**
+     * @var Image
+     * @ORM\OneToOne(targetEntity="Image", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="image_frame_id", referencedColumnName="id")
+     */
+    private $imageFrame;
+
+    /**
      * @var Author
      * @ORM\ManyToOne(targetEntity="Author")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
     private $author;
 
+    /**
+     * @var Popular
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Popular")
+     * @ORM\JoinColumn(name="popular_id", referencedColumnName="id")
+     */
+    private $popular;
 
+    /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="\AppBundle\Entity\Picture", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinTable(name="similar_pictures",
+     *      joinColumns={
+     *          @ORM\JoinColumn(name="picture_id", referencedColumnName="id"),
+     *      },
+     *      inverseJoinColumns={
+     *          @ORM\JoinColumn(name="similar_id", referencedColumnName="id", onDelete="CASCADE")
+     *      }
+     * )
+     */
+    private $similar;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="\AppBundle\Entity\PictureColor", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinTable(name="pictures_colors",
+     *      joinColumns={
+     *          @ORM\JoinColumn(name="picture_id", referencedColumnName="id"),
+     *      },
+     *      inverseJoinColumns={
+     *          @ORM\JoinColumn(name="color_id", referencedColumnName="id", onDelete="CASCADE")
+     *      }
+     * )
+     */
+    private $colors;
+
+    /**
+     * @var PictureForm
+     * @ORM\ManyToOne(targetEntity="PictureForm")
+     * @ORM\JoinColumn(name="form_id", referencedColumnName="id")
+     */
+    private $form;
+
+    /**
+     * Picture constructor.
+     */
     public function __construct() {
         $this->categories = new ArrayCollection();
+        $this->similar = new ArrayCollection();
+        $this->colors = new ArrayCollection();
+    }
+
+    /**
+     * Return string entity name from admin.
+     *
+     * @return string
+     */
+    public function __toString(){
+        return $this->title . '( #' . $this->id .' )';
     }
 
     /**
@@ -170,25 +258,6 @@ class Picture implements ImageInterface
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * @param string $name
-     * @return Picture
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**
@@ -311,26 +380,6 @@ class Picture implements ImageInterface
     }
 
     /**
-     * @return Image
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * @param Image $image
-     * @return Picture
-     */
-    public function setImage($image)
-    {
-        $this->name = $image->getName();
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
      * Set createdAt
      *
      * @param  \DateTime $createdAt
@@ -407,10 +456,10 @@ class Picture implements ImageInterface
     }
 
     /**
-     * @param Category $category
+     * @param Category3 $category
      * @return Picture
      */
-    public function addCategory(Category $category)
+    public function addCategory(Category3 $category)
     {
         $this->categories[] = $category;
 
@@ -418,10 +467,10 @@ class Picture implements ImageInterface
     }
 
     /**
-     * @param Category $category
+     * @param Category3 $category
      * @return Picture
      */
-    public function removeCategory(Category $category)
+    public function removeCategory(Category3 $category)
     {
         $this->categories->removeElement($category);
 
@@ -454,5 +503,272 @@ class Picture implements ImageInterface
 
         return $this;
     }
-}
 
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @return Popular
+     */
+    public function getPopular() {
+        return $this->popular;
+    }
+
+    /**
+     * @param Popular|null $popular
+     *
+     * @return Picture
+     */
+    public function setPopular( $popular ) {
+        $this->popular = $popular;
+
+        return $this;
+    }
+
+
+
+    /**
+     * Set imageBanner
+     *
+     * @param Image $imageBanner
+     *
+     * @return Picture
+     */
+    public function setImageBanner(Image $imageBanner = null)
+    {
+        $this->imageBanner = $imageBanner;
+
+        return $this;
+    }
+
+    /**
+     * Get imageBanner
+     *
+     * @return Image
+     */
+    public function getImageBanner()
+    {
+        return $this->imageBanner;
+    }
+
+    /**
+     * Set imageModule
+     *
+     * @param Image $imageModule
+     *
+     * @return Picture
+     */
+    public function setImageModule(Image $imageModule = null)
+    {
+        $this->imageModule = $imageModule;
+
+        return $this;
+    }
+
+    /**
+     * Get imageModule
+     *
+     * @return Image
+     */
+    public function getImageModule()
+    {
+        return $this->imageModule;
+    }
+
+    /**
+     * Set imageFrame
+     *
+     * @param Image $imageFrame
+     *
+     * @return Picture
+     */
+    public function setImageFrame(Image $imageFrame = null)
+    {
+        $this->imageFrame = $imageFrame;
+
+        return $this;
+    }
+
+    /**
+     * Get imageFrame
+     *
+     * @return Image
+     */
+    public function getImageFrame()
+    {
+        return $this->imageFrame;
+    }
+
+    /**
+     * Set image
+     *
+     * @param Image $image
+     *
+     * @return Picture
+     */
+    public function setImage(Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return Image
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Add similar
+     *
+     * @param Picture $similar
+     *
+     * @return Picture
+     */
+    public function addSimilar(Picture $similar)
+    {
+        $this->similar[] = $similar;
+
+        return $this;
+    }
+
+    /**
+     * Remove similar
+     *
+     * @param Picture $similar
+     */
+    public function removeSimilar(Picture $similar)
+    {
+        $this->similar->removeElement($similar);
+    }
+
+    /**
+     * Get similar
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSimilar()
+    {
+        return $this->similar;
+    }
+
+    /**
+     * Set isTop
+     *
+     * @param boolean $isTop
+     *
+     * @return Picture
+     */
+    public function setIsTop($isTop)
+    {
+        $this->isTop = $isTop;
+
+        return $this;
+    }
+
+    /**
+     * Get isTop
+     *
+     * @return boolean
+     */
+    public function getIsTop()
+    {
+        return $this->isTop;
+    }
+
+    /**
+     * Add color
+     *
+     * @param PictureColor $color
+     *
+     * @return Picture
+     */
+    public function addColor(PictureColor $color)
+    {
+        $this->colors[] = $color;
+
+        return $this;
+    }
+
+    /**
+     * Remove color
+     *
+     * @param PictureColor $color
+     */
+    public function removeColor(PictureColor $color)
+    {
+        $this->colors->removeElement($color);
+    }
+
+    /**
+     * Get colors
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getColors()
+    {
+        return $this->colors;
+    }
+
+    /**
+     * Set form
+     *
+     * @param PictureForm $form
+     *
+     * @return Picture
+     */
+    public function setForm(PictureForm $form = null)
+    {
+        $this->form = $form;
+
+        return $this;
+    }
+
+    /**
+     * Get form
+     *
+     * @return PictureForm
+     */
+    public function getForm()
+    {
+        return $this->form;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Picture
+     */
+    public function setName($name)
+    {
+//        if($fileName == $this->image->getName()) {
+            $this->name = $name . 111;
+//        }
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+}

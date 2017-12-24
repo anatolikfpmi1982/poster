@@ -2,6 +2,15 @@ services:
     helper.imageresizer:
         class: AppBundle\Helper\ImageResizer
 
+    helper.slugcreator:
+        class: AppBundle\Helper\SlugCreator
+
+    helper.imageformidentifier:
+        class: AppBundle\Helper\ImageFormIdentifier
+
+    helper.textformater:
+        class: AppBundle\Helper\TextFormater
+
     app.image_manager:
         class: AppBundle\Service\ImageManagement
         arguments:
@@ -45,3 +54,11 @@ services:
         arguments:
             - '@doctrine.orm.entity_manager'
             - '@service_container'
+
+    app.sonata.admin.builder.orm_datagrid:
+        class: AppBundle\Sonata\DatagridBuilder
+        arguments:
+            - '@form.factory'
+            - '@sonata.admin.builder.filter.factory'
+            - '@sonata.admin.guesser.orm_datagrid_chain'
+            - '%form.type_extension.csrf.enabled%'

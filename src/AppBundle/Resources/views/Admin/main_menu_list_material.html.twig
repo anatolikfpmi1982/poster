@@ -1,0 +1,17 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    <div>
+        {% if object.type %}
+            {% if object.type == 'page' %}
+                Страница "{{ object.page.getTitle() }}"
+            {% elseif object.type == 'category' %}
+                Категория "{{ object.category.getTitle() }}"
+            {% elseif object.type == 'picture' %}
+                Картина "{{ object.picture.getTitle() }}"
+            {% elseif object.type == 'target' %}
+                Ссылка "{{ object.target }}"
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}

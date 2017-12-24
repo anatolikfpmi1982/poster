@@ -38,14 +38,24 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository {
                 $inner = [
                     'id'    => $category->getId(),
                     'title' => $category->getTitle(),
-                    'url'   => $category->getSlug(),
+                    'slug'   => $category->getSlug(),
                 ];
 
-                if ( $category->getParentCategory() && $category->getParentCategory()->getId() ) {
+                $parent1 = $category->getParentCategory();
+                $cause1 = $parent1 && $parent1->getId();
+                if ( $cause1 && !$parent1->getParentCategory()  ) {
                     if ( ! array_key_exists( $category->getParentCategory()->getId(), $categories ) ) {
                         $categories[ $category->getParentCategory()->getId() ]['children'] = [ ];
                     }
                     $categories[ $category->getParentCategory()->getId() ]['children'][ $category->getId() ] = $inner;
+                } else if ($cause1 && $parent1->getParentCategory() && $parent1->getParentCategory()->getId()){
+                    if ( ! array_key_exists( $parent1->getParentCategory()->getId(), $categories ) ) {
+                        $categories[ $parent1->getParentCategory()->getId() ]['children'] = [ ];
+                    }
+                    if ( ! array_key_exists( $category->getParentCategory()->getId(), $categories[$parent1->getParentCategory()->getId()] ) ) {
+                        $categories[$parent1->getParentCategory()->getId()][ $category->getParentCategory()->getId() ]['children'] = [ ];
+                    }
+                    $categories[$parent1->getParentCategory()->getId()]['children'][ $category->getParentCategory()->getId() ]['children'][ $category->getId() ] = $inner;
                 } else {
                     $categories[ $category->getId() ] = $inner;
                 }

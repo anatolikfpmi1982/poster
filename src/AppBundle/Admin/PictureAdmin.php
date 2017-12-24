@@ -6,7 +6,7 @@ use AppBundle\Entity\Image;
 use AppBundle\Entity\Picture;
 use AppBundle\Service\ImageManagement;
 use Doctrine\ORM\EntityManager;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -57,23 +57,21 @@ class PictureAdmin extends AbstractAdmin
     {
         $formMapper
             ->with('Main')
-            ->add('image', 'sonata_type_admin', ['required' => false, 'label' => 'Изображение'])
+            ->add('name', null, ['required' => false, 'label' => 'Имя файла'])
+            ->add('categories', null, ['required' => false, 'label' => 'Категории'])
             ->add('imageBanner', 'sonata_type_admin', ['required' => true, 'label' => 'Изображение-баннер'])
             ->add('imageModule', 'sonata_type_admin', ['required' => true, 'label' => 'Изображение-модульное'])
             ->add('imageFrame', 'sonata_type_admin', ['required' => true, 'label' => 'Изображение-рама'])
-//            ->add('code', null, ['required' => true, 'label' => 'Артикул'])
             ->add('id', null, ['required' => false, 'label' => 'ID', 'disabled' =>true])
             ->add('code', null, ['required' => false, 'label' => 'Артикул', 'disabled' =>true])
-            ->add('title', null, ['required' => true, 'label' => 'Название'])
-            ->add('body', CKEditorType::class, ['required' => true, 'label' => 'Описание'])
+            ->add('title', null, ['required' => false, 'label' => 'Название'])
+            ->add('body', null, ['required' => false, 'label' => 'Описание'])
             ->add('slug', null, ['required' => false, 'label' => 'Алиас'])
             ->add('author', null, ['required' => false, 'label' => 'Автор'])
-            ->add('image.name', null, ['required' => false, 'label' => 'Имя файла', 'disabled' =>true])
             ->add('type', null, ['required' => false, 'label' => 'Арт (Фото, если не выбрано)'])
-            ->add('note', null, ['required' => true, 'label' => 'Примечание'])
+            ->add('note', null, ['required' => false, 'label' => 'Примечание'])
             ->add('price', null, ['required' => false, 'label' => 'Цена', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
             ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент', 'empty_data' => '1', 'attr' => ['placeholder' => 1]])
-            ->add('categories', null, ['required' => false, 'label' => 'Категории'])
             ->add('similar', null, ['required' => false, 'label' => 'Похожие картины'])
             ->add('colors', null, ['required' => false, 'label' => 'Цвет картины'])
             ->add('form', null, ['required' => false, 'label' => 'Форма картины'])
@@ -95,22 +93,13 @@ class PictureAdmin extends AbstractAdmin
             }
         }
 
-        $categoriesChoices = [];
-        $categories = $this->em->getRepository('AppBundle\Entity\Category3')->findBy(['isActive' => true]);
-        if($categories) {
-            foreach ($categories as $v) {
-                $categoriesChoices[$v->getId()] = (string)$v;
-            }
-        }
-
         $listMapper
             ->add('id', null, ['label' => 'ID'])
             ->add('code', null, ['label' => 'Артикул'])
-            ->add('image', null,
+            ->add('imageBanner', null,
                 ['label' => 'Изображение', 'template' => 'AppBundle:Admin:pictures_list_image.html.twig'])
-            ->add('image.name', null, ['label' => 'Имя файла'])
+            ->add('name', null, ['label' => 'Имя файла', 'editable' => true])
             ->add('title', null, ['label' => 'Название', 'editable' => true])
-            ->add('slug', null, ['label' => 'Алиас', 'editable' => true])
             ->add('note', null, ['label' => 'Примечание', 'editable' => true])
             ->add('author', 'choice', ['label' => 'Автор','editable' => true,
                 'class' => 'Appbundle\Entity\Author', 'choices' => $authorsChoices, 'sortable' => true,
@@ -120,13 +109,10 @@ class PictureAdmin extends AbstractAdmin
                 'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
             ->add('ratio', null, ['label' => 'Коэффициент', 'editable' => true,
                 'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
-            ->add('body', 'html', ['label' => 'Описание', 'editable' => true])
+            ->add('body', 'html', ['label' => 'Описание', 'editable' => true, 'template' => 'AppBundle:Admin:picture_description_list.html.twig'])
             ->add('categories', null, ['label' => 'Категории', 'editable' => true, 'sortable' => true,
                 'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'categories']]])
-//            ->add('body', null, ['label' => 'Примечание', 'editable' => true])
             ->add('isActive', null, ['label' => 'Показывать', 'editable' => true])
-            ->add('createdAt', null, ['label' => 'Создано'])
-            ->add('updatedAt', null, ['label' => 'Обновлено'])
             ->add(
                 '_action',
                 'actions',
@@ -136,7 +122,12 @@ class PictureAdmin extends AbstractAdmin
                         'delete' => []
                     ],
                 ]
-            );
+            )
+            ->add('isTop', null, ['label' => 'Топ', 'sortable' => true, 'editable' => true])
+            ->add('createdAt', null, ['label' => 'Создано'])
+            ->add('updatedAt', null, ['label' => 'Обновлено'])
+            ->add('slug', null, ['label' => 'Алиас', 'editable' => true, 'template' => 'AppBundle:Admin:picture_slug_list.html.twig']);
+
     }
 
     /**
@@ -144,19 +135,68 @@ class PictureAdmin extends AbstractAdmin
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
+        $categoriesChoices = [];
+        $categories = $this->em->getRepository('AppBundle\Entity\Category3')->findBy(['isActive' => true]);
+        if($categories) {
+            foreach ($categories as $v) {
+                $categoriesChoices[$v->getId()] = (string)$v;
+            }
+        }
+
         $datagridMapper
             ->add('title', null, ['label' => 'Название'])
+            ->add('note', null, ['label' => 'Примечание'])
+            ->add('body', null, ['label' => 'Описание'])
             ->add('code', null, ['label' => 'Артикул'])
-            ->add('image.name', null, ['label' => 'Имя файла'])
+            ->add('name', null, ['label' => 'Имя файла'])
             ->add('author', null, ['label' => 'Автор'])
             ->add('type', null, ['label' => 'Арт/Фото'])
             ->add('price', null, ['label' => 'Цена'])
             ->add('ratio', null, ['label' => 'Коэффициент'])
             ->add('colors', null, ['label' => 'Цвет'])
             ->add('form', null, ['label' => 'Форма'])
-            ->add('categories', null, ['label' => 'Категории'], null, ['multiple' => true])
+//            ->add('categories', 'doctrine_orm_callback', [
+//                'label' => 'Категории',
+////                'multiple' => true,
+//                'callback'   => [$this, 'changeFilerForCategories']
+//            ], null, ['multiple' => true])
+            ->add('categories', 'doctrine_orm_callback', [
+                'label' => 'Категории',
+                'callback'   => [$this, 'changeFilerForCategories'],
+                'field_type' => 'choice',
+                'field_options' => array(
+                    'choices' => $categoriesChoices,
+                    'required' => false,
+                    'multiple' => true,
+                    'attr' => array('size' => 7),
+                ),
+            ])
             ->add('isActive', null, ['label' => 'Показывать'])
+            ->add('isTop', null, ['label' => 'Топ'])
+            ->add('createdAt', 'doctrine_orm_date_range', ['label' => 'Создано'])
+            ->add('updatedAt', 'doctrine_orm_date_range', ['label' => 'Обновлено'])
         ;
+    }
+
+    /**
+     * @param QueryBuilder $queryBuilder
+     * @param string $alias
+     * @param string $field
+     * @param string|array $value
+     *
+     * @return bool|void
+     */
+    public function changeFilerForCategories($queryBuilder, $alias, $field, $value)
+    {
+        if (!$value['value']) {
+            return null;
+        }
+
+        $queryBuilder->join(sprintf('%s.categories', $alias), 'p');
+        $queryBuilder->andWhere('p.id IN ('. implode(',', $value['value']) .')');
+        $queryBuilder->addGroupBy(sprintf('%s.id', $alias));
+        $queryBuilder->having('COUNT(DISTINCT p.id) = ' . count($value['value']));
+        return true;
     }
 
     /**
@@ -184,6 +224,18 @@ class PictureAdmin extends AbstractAdmin
         $actions = parent::getBatchActions();
 
         if ($this->hasRoute('edit') && $this->isGranted('EDIT')) {
+            $actions['change_title'] = array(
+                'label'            => 'Изменить название',
+                'ask_confirmation' => false
+            );
+            $actions['change_description'] = array(
+                'label'            => 'Изменить описание',
+                'ask_confirmation' => false
+            );
+            $actions['change_note'] = array(
+                'label'            => 'Изменить примечание',
+                'ask_confirmation' => false
+            );
             $actions['change_author'] = array(
                 'label'            => 'Изменить автора',
                 'ask_confirmation' => false
@@ -202,6 +254,10 @@ class PictureAdmin extends AbstractAdmin
             );
             $actions['change_show'] = array(
                 'label'            => 'Изменить доступность на сайте',
+                'ask_confirmation' => false
+            );
+            $actions['change_top'] = array(
+                'label'            => 'Задать топы',
                 'ask_confirmation' => false
             );
             $actions['add_category'] = array(
@@ -237,8 +293,9 @@ class PictureAdmin extends AbstractAdmin
     public function postPersist($picture)
     {
         if($picture instanceof Picture) {
-            $picture->setCode(100500 + $picture->getId());
-            $picture->setName($picture->getImage()->getName());
+            if(!$picture->getName() && $picture->getImageBanner() instanceof Image)  {
+                $picture->setName( $picture->getImageBanner()->getName() );
+            }
             $this->em->persist($picture);
             $this->em->flush();
         }
@@ -259,11 +316,16 @@ class PictureAdmin extends AbstractAdmin
 
     /**
      * @param mixed $picture
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function postUpdate($picture)
     {
         if($picture instanceof Picture) {
-            $picture->setName($picture->getImage()->getName());
+            if(!$picture->getName() && $picture->getImageBanner() instanceof Image) {
+                $picture->setName( $picture->getImageBanner()->getName() );
+                $this->em->persist($picture);
+                $this->em->flush();
+            }
             $this->imageManagement->cleanGarbageImages();
         }
     }
@@ -274,7 +336,9 @@ class PictureAdmin extends AbstractAdmin
      */
     public function preRemove($picture){
         if($picture instanceof Picture) {
-            $this->imageManagement->deleteImages($picture->getImages());
+            $this->imageManagement->deleteImages($picture->getImageBanner());
+            $this->imageManagement->deleteImages($picture->getImageFrame());
+            $this->imageManagement->deleteImages($picture->getImageModule());
         }
     }
 

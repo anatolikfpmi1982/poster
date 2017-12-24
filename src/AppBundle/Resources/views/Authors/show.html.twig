@@ -1,0 +1,44 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}Автор {{ author.name }}{% endblock %}
+
+{% block body %}
+    <div class="row az-page-main-section-div">
+        {% include('AppBundle:Component:Blocks/breadcrumb.html.twig') %}
+    </div>
+    <div class="row az-page-main-section-div">
+        <div class="col-md-12 container-fluid">
+            <div class="row page-title az-picture-page-title">{{ author.name }}</div>
+            <div class="row az-category-page-filters-div">
+                {% include('AppBundle:Component:Category/filter.html.twig') %}
+            </div>
+            {% if pagination|length > 0 %}
+                <div class="row az-category-page-pictures-div">
+                    <div class="row az-page-section-body az-page-main-popular container-fluid">
+                        <div class="row">
+                            {% for picture in pagination %}
+
+                            {% include('AppBundle:Component:picture.cell.html.twig') %}
+                            {% if loop.index != 1 and loop.index % 3 == 0 %}
+                        </div>
+                        <div class="row">
+                            {% endif %}
+
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="row az-category-page-pictures-div">
+                    У данного автора нет картин.
+                </div>
+            {% endif %}
+            <div class="row az-pagination-block az-category-page-pagination-div">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+            <div class="row az-visited-block az-category-page-visited-div">
+                {% include('AppBundle:Component:Blocks/last.visited.html.twig') %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

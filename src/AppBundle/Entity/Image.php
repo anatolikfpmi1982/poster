@@ -138,7 +138,6 @@ class Image
         if (null === $this->getFile()) {
             return;
         }
-
         $this->setFilename(sha1(uniqid((string)mt_rand(), true)).'.'.$this->getFile()->guessExtension());
         $this->setName(strtok($this->getFile()->getClientOriginalName(), '.'));
 

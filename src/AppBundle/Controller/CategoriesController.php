@@ -39,12 +39,13 @@ class CategoriesController extends FrontController
             self::PAGE_LIMIT/*limit per page*/
         );
 
-        $this->blocks = [ 'CategoryMenu' => 1, 'Reviews' => 2 , 'MainMenu' => 3, 'BreadCrumb' => 4, 'LastVisited' => 5 ];
+        $this->blocks = [ 'CategoryMenu' => 1, 'Reviews' => 2 , 'MainMenu' => 3, 'BreadCrumb' => 4, 'LastVisited' => 5, 'Deferred' => 6 ];
         $this->menu = '/';
         $this->pageSlug = $slug;
         $this->pageType = 'category';
         $this->doBlocks();
         $this->data['pagination'] = $pagination;
+        $category->setDescription($this->get('helper.textformater')->formatMoreText($category->getDescription()));
         $this->data['category'] = $category;
         $this->data['filters']['tpls'] = $em->getRepository('AppBundle:PictureForm')->findBy(['isActive' => true]);
 

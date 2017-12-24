@@ -8,6 +8,39 @@
 {% block content %}
     <h1>Настройки сайта</h1>
     {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_row(form._token) }}
+    {{ form_row(form.info_text) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.under_slider_text) }}
+    {{ form_row(form.logo_header_text) }}
+    {{ form_row(form.logo_footer_text) }}
+    {{ form_row(form.contacts) }}
+    <div class="form-group">
+        {{ form_label(form.logo) }}
+        {{ form_widget(form.logo) }}
+        {% if logo_value is defined and logo_value %}<br><img src="{{ '/' ~ logo_value }}?tmp={{ csrf_token('authenticate') }}" class="admin-preview"/><br>{% endif %}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.favicon) }}
+        {{ form_widget(form.favicon) }}
+        {% if favicon_value is defined and favicon_value %}<br><img src="{{ '/' ~ favicon_value }}?tmp={{ csrf_token('authenticate') }}" class="admin-preview-favicon"/>
+            <br>{% endif %}
+    </div>
+    {{ form_row(form.metrics_yandex) }}
+    {{ form_row(form.metrics_google) }}
+    {{ form_row(form.fb_buttons) }}
+    {{ form_row(form.vk_buttons) }}
+    {{ form_row(form.seo_keywords) }}
+    {{ form_row(form.seo_description) }}
+    {{ form_row(form.seo_title) }}
+    {{ form_row(form.enable_call_back) }}
+    {{ form_row(form.enable_sms) }}
+    {{ form_row(form.save) }}
     {{ form_end(form) }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/admin.custom.css', absolute=true) }}">
 {% endblock %}

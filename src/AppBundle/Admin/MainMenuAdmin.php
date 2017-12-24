@@ -43,8 +43,26 @@ class MainMenuAdmin extends AbstractAdmin
         $formMapper
             ->with('Main')
             ->add('title', null, ['required' => true, 'label' => 'Название'])
+            ->add('type', 'sonata_type_choice_field_mask', array(
+                'choices' => array(
+                    'page' => 'Страница',
+                    'category' => 'Категория',
+                    'picture' => 'Картина',
+                    'target' => 'Ссылка',
+                ),
+                'map' => array(
+                    'page' => array('page'),
+                    'category' => array('category'),
+                    'picture' => array('picture'),
+                    'target' => array('target'),
+                ),
+                'placeholder' => 'Выберите тип ссылки',
+                'required' => false
+            ))
             ->add('page', null, ['required' => false, 'label' => 'Выберите страницу'])
-            ->add('target', null, ['required' => false, 'label' => 'или укажите ссылку'])
+            ->add('category', null, ['required' => false, 'label' => 'Выберите категорию'])
+            ->add('picture', null, ['required' => false, 'label' => 'Выберите картину'])
+            ->add('target', null, ['required' => false, 'label' => 'Укажите ссылку'])
             ->add('weight', null, ['required' => false, 'label' => 'Вес', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
             ->add('image', 'sonata_type_admin', ['required' => false, 'label' => 'Изображение'])
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
@@ -69,13 +87,10 @@ class MainMenuAdmin extends AbstractAdmin
             ->add('title', null, ['label' => 'Название', 'editable' => true])
             ->add('image', null,
                 ['label' => 'Изображение', 'template' => 'AppBundle:Admin:list_image.html.twig'])
-            ->add('page', 'choice', ['label' => 'Страница','editable' => true,
-                'class' => 'Appbundle\Entity\Page', 'choices' => $pagesChoices, 'sortable' => true,
-                'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'page']]])
+            ->add('type', null,
+                ['label' => 'Материал', 'template' => 'AppBundle:Admin:main_menu_list_material.html.twig'])
             ->add('target', null, ['label' => 'Ссылка'])
             ->add('weight', null, ['label' => 'Вес', 'editable' => true])
-//            ->add('createdAt', null, ['label' => 'Создано'])
-//            ->add('updatedAt', null, ['label' => 'Обновлено'])
             ->add('isActive', null, ['label' => 'Показывать', 'editable' => true])
             ->add(
                 '_action',
@@ -107,6 +122,7 @@ class MainMenuAdmin extends AbstractAdmin
     public function prePersist($menu)
     {
         if($menu instanceof MainMenu) {
+            $menu = $this->clearEntities($menu);
             $menu->setCreatedAt(new \DateTime());
             $menu->setUpdatedAt(new \DateTime());
             $this->manageEmbeddedImageAdmins($menu);
@@ -119,9 +135,30 @@ class MainMenuAdmin extends AbstractAdmin
     public function preUpdate($menu)
     {
         if($menu instanceof MainMenu) {
+            $menu = $this->clearEntities($menu);
             $menu->setUpdatedAt(new \DateTime());
             $this->manageEmbeddedImageAdmins($menu);
         }
+    }
+
+    /**
+     * Delete entities dependencies
+     *
+     * @param MainMenu $menu
+     * @return MainMenu
+     */
+    private function clearEntities(MainMenu $menu) {
+        if($menu->getType() != 'page') {
+            $menu->setPage(null);
+        }
+        if($menu->getType() != 'category') {
+            $menu->setCategory(null);
+        }
+        if($menu->getType() != 'picture') {
+            $menu->setPicture(null);
+        }
+
+        return $menu;
     }
 
     /**

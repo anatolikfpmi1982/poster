@@ -12,6 +12,7 @@
         @import url("{{ asset('bower_components/bootstrap/dist/css/bootstrap-theme.min.css', absolute=true) }}");
         @import url("{{ asset('bundles/app/css/custom.css', absolute=true) }}");
     </style>
+    <script src="{{ asset('bundles/app/js/CategoryMenu.js', absolute=true) }}"></script>
 </head>
 <body>
 <div class="container">
@@ -19,7 +20,7 @@
     {% include('AppBundle:Component:header.html.twig') %}
 
     <div class="row">
-        <aside class="col-md-3 container">
+        <aside class="col-md-3 container-fluid">
             {% include('AppBundle:Component:blocks.html.twig') %}
         </aside>
         <section class="col-md-9 az-main">

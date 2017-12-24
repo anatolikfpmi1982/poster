@@ -2,8 +2,8 @@
 
 {% block field %}
     <div>
-        {% if object.image != null %}
-            <img src="/files/{{ object.image.getEntityName() }}/mini_thumb/{{ object.image.getFilename() }}" class="admin-preview"/><br>
+        {% if object.imageBanner != null %}
+            <img src="/files/{{ object.imageBanner.getEntityName() }}/mini_thumb/{{ object.imageBanner.getFilename() }}" class="admin-preview"/><br>
         {% else %}
             <span>No picture</span>
         {% endif %}

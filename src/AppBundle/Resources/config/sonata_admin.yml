@@ -96,6 +96,10 @@ services:
              - 'SonataAdminBundle:CRUD'
     app.admin.picture:
         class: AppBundle\Admin\PictureAdmin
+        calls:
+            - method: setDatagridBuilder
+              arguments:
+                  - '@app.sonata.admin.builder.orm_datagrid'
         tags:
             - { name: sonata.admin, manager_type: orm, group: "Картины", label: "Картины", show_in_dashboard: true }
         arguments:
@@ -169,6 +173,14 @@ services:
         arguments:
             - ~
             - AppBundle\Entity\PictureColor
+            - 'SonataAdminBundle:CRUD'
+    app.admin.parser_errors:
+        class: AppBundle\Admin\ParserErrorAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Система", label: "Ошибки парсера", show_in_dashboard: true}
+        arguments:
+            - ~
+            - AppBundle\Entity\ParserError
             - 'SonataAdminBundle:CRUD'
     app.admin.picture_form:
         class: AppBundle\Admin\PictureFormAdmin
