@@ -43,6 +43,21 @@ class PictureRepository extends EntityRepository {
     }
 
     /**
+     * Get query builder for active pictures by author slug
+     *
+     * @param string $searchString
+     * @return QueryBuilder
+     */
+    public function getActivePicturesForSearch( $searchString ) {
+        return $this->createQueryBuilder( 'p' )
+            ->innerJoin( 'p.author', 'a' )// Inner Join with author
+            ->innerJoin( 'p.form', 'f' )// Inner Join with picture form
+            ->where( 'p.isActive = true' )
+            ->andWhere("(a.name = :search OR p.title = :search OR p.code = :search)")
+            ->setParameter( 'search', $searchString);
+    }
+
+    /**
      * Get active last visited pictures
      *
      * @param array $ids
