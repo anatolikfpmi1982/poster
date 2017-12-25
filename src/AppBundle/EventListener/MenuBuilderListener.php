@@ -10,19 +10,23 @@ class MenuBuilderListener
     {
         $menu = $event->getMenu();
 
-        $menu->addChild('settings', [
-            'label' => 'Настройки сайта',
-            'route' => 'sonata_admin_settings',
-        ])->setExtras([
-            'icon' => '<i class="fa fa-cogs"></i>',
-        ]);
-
-        $menu->addChild('frame-settings', [
-            'label' => 'Настройки рамы',
-            'route' => 'sonata_admin_frame_settings',
-            'group' => "Рамы"
-        ])->setExtras([
-            'icon' => '<i class="fa fa-cogs"></i>',
-        ]);
+        $menu->addChild('Система', array())
+            ->setExtras([
+                'icon' => '<i class="fa fa-cogs"></i>',
+            ])
+            ->addChild('settings', [
+                'label' => 'Настройки сайта',
+                'route' => 'sonata_admin_settings',
+            ])
+            ->getParent()
+            ->addChild('frame-settings', [
+                'label' => 'Настройки рамы',
+                'route' => 'sonata_admin_frame_settings',
+            ])
+            ->getParent()
+            ->addChild('help-settings', [
+                'label' => 'Настройки подсказок',
+                'route' => 'sonata_admin_help_settings',
+            ]);
     }
 }

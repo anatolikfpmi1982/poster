@@ -174,6 +174,48 @@ class AdminController extends CoreController
         ));
     }
 
+    public function helpSettingsAction(Request $request)
+    {
+        $this->em = $this->container->get('doctrine.orm.entity_manager');
+        $this->record = $this->em->getRepository('AppBundle:Settings')->findOneByName('help_settings');
+        if($this->record) {
+            $data = unserialize($this->record->getSettings());
+        } else {
+            $data = [
+                'typeHelp' => '',
+                'sizeHelp' => '',
+                'materialHelp' => '',
+                'underframeHelp' => '',
+                'chooseHelp' => ''
+            ];
+        }
+
+        $form = $this->createFormBuilder()
+            ->add('typeHelp', CKEditorType::class, ['label' => 'Тип картины', 'required' => false])
+            ->add('sizeHelp', CKEditorType::class, ['label' => 'Размер картины', 'required' => false])
+            ->add('materialHelp', CKEditorType::class, ['label' => 'Материал', 'required' => false])
+            ->add('underframeHelp', CKEditorType::class, ['label' => 'Подрамник', 'required' => false])
+            ->add('chooseHelp', CKEditorType::class, ['label' => 'Выбрано', 'required' => false])
+            ->add('save', SubmitType::class, array('label' => 'Сохранить'))
+            ->getForm();
+
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->saveHelpSettingsForm($form);
+        } else {
+            $form->setData($data);
+        }
+
+        return $this->render('AppBundle:Admin:help_settings.html.twig', array(
+            'base_template'   => $this->getBaseTemplate(),
+            'admin_pool'      => $this->container->get('sonata.admin.pool'),
+            'blocks'          => $this->container->getParameter('sonata.admin.configuration.dashboard_blocks'),
+            'form'            => $form->createView(),
+        ));
+    }
+
     private function saveForm($form) {
         $data = $form->getData();
         $data['enable_call_back'] = (boolean)$data['enable_call_back'];
@@ -214,6 +256,18 @@ class AdminController extends CoreController
         if(!$this->record) {
             $this->record = new Settings();
             $this->record->setName('frame_settings');
+        }
+
+        $this->record->setSettings(serialize($data));
+        $this->em->persist($this->record);
+        $this->em->flush();
+    }
+
+    private function saveHelpSettingsForm($form) {
+        $data = $form->getData();
+        if(!$this->record) {
+            $this->record = new Settings();
+            $this->record->setName('help_settings');
         }
 
         $this->record->setSettings(serialize($data));

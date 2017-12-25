@@ -177,7 +177,7 @@ services:
     app.admin.parser_errors:
         class: AppBundle\Admin\ParserErrorAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Система", label: "Ошибки парсера", show_in_dashboard: true}
+            - { name: sonata.admin, manager_type: orm, group: 'Парсер', label: "Ошибки парсера", show_in_dashboard: true}
         arguments:
             - ~
             - AppBundle\Entity\ParserError
