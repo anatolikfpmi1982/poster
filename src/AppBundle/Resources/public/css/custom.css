@@ -7,6 +7,13 @@
     background-color: #ffffff;
 }
 
+.navbar-default .navbar-nav >
+.active > a, .navbar-default .navbar-nav >
+.active > a:focus, .navbar-default
+.navbar-nav > .active > a:hover {
+
+    backround-color: #ffffff;
+}
 .az-logo-title-text-div {
     margin: -20px 0 0 80px;
     font-size: 10px;
@@ -567,11 +574,11 @@ body {
 }
 
 .az-header-top {
-    padding: 20px 0 10px 20px;
+    padding: 20px 0 0 30px;
 }
 
 .az-logo-title-text-div {
-    margin: -20px 0 0 80px;
+    margin: -30px 0 0 80px;
     font-size: 10px;
 }
 
@@ -644,11 +651,10 @@ body {
     text-shadow: none;
     font-size: 17px;
     vertical-align: middle;
-
 }
 
 .nav > li > a {
-    padding: 0 20px 0 0;
+    padding: 0 15px 0 0;
 }
 
 .nav > li > a > img {
@@ -773,8 +779,7 @@ body {
 .az-main-popular-item-header-type {
     text-align: left;
     font-size: 12px;
-    padding-right: 15px;
-    padding-left: 15px;
+    padding: 8px 15px 0 15px;
     margin: 20px auto 5px auto;
 }
 
@@ -851,7 +856,7 @@ body {
 .btn {
     background-color: #fd1200;
     color: #fffff;
-    padding: 5px 20px;
+    padding: 7px 20px;
     text-transform: lowercase;
     font-size: 13px;
 }
@@ -1265,7 +1270,7 @@ footer {
 }
 
 .az-main-popular-item-header-buttons {
-    padding-top: 20px;
+    padding-top: 5px;
 }
 
 .az-main-page-header-top-cells {
