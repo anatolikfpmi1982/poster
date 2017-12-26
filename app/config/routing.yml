@@ -47,6 +47,10 @@ sonata_admin_frame_settings:
     pattern:  /admin/frame-settings
     defaults: { _controller: AppBundle:Admin:frameSettings }
 
+sonata_admin_help_settings:
+    pattern:  /admin/help-settings
+    defaults: { _controller: AppBundle:Admin:helpSettings }
+
 picture_sizes:
     type: rest
     prefix: /api

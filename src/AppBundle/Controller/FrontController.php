@@ -55,6 +55,7 @@ class FrontController extends Controller {
 
         $this->data['active_menu'] = $this->menu;
         $this->data['site_settings'] = $this->getSiteSettings();
+        $this->data['help_settings'] = $this->getHelpSettings();
     }
 
     /**
@@ -70,6 +71,18 @@ class FrontController extends Controller {
             $siteSettings['info_text'] = $this->get('helper.textformater')->formatMoreText($siteSettings['info_text']);
         }
         return $siteSettings;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getHelpSettings() {
+        $_helpSettings = $this->get( 'doctrine.orm.entity_manager' )->getRepository( 'AppBundle:Settings' )->findOneByName('help_settings');
+        $helpSettings = [];
+        if($_helpSettings instanceof Settings) {
+            $helpSettings = unserialize($_helpSettings->getSettings());
+        }
+        return $helpSettings;
     }
 
     /**

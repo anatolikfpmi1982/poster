@@ -60,6 +60,9 @@ class BreadCrumbService {
             case 'review':
                 $result = $this->buildReviewBreadCrumb();
                 break;
+            case 'search':
+                $result = $this->buildSearchBreadCrumb($param);
+                break;
         }
         return $result;
     }
@@ -73,6 +76,19 @@ class BreadCrumbService {
         return [[
             'title' => 'Отзывы',
             'url' => $this->container->get('router')->generate('reviews'),
+        ]];
+    }
+
+    /**
+     * Get full search bread crumb path.
+     *
+     * @param string $searchString
+     * @return array
+     */
+    public function buildSearchBreadCrumb( $searchString ) {
+        return [[
+            'title' => 'Поиск',
+            'url' => $this->container->get('router')->generate('search', ['search_string' => $searchString]),
         ]];
     }
 

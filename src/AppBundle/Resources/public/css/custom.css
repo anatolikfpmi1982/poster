@@ -1312,13 +1312,16 @@ footer {
     margin: 20px 10px 28px 10px;
 }
 
-.az-reviews:after
-{position: absolute;
+.bottomarrowleft {
     width: 14px;
     height: 14px;
-    background: url(../images/icons.png) no-repeat -48px -49px;
+    background: url(../images/download.png) no-repeat -48px -49px;
     left: -1px;
     bottom: -14px;
+    z-index: 1000;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.1);
+    display: block;
 }
 
 .az-reviews-name {
@@ -1375,26 +1378,56 @@ footer {
     border: 2px solid #e4e4e4;
     float:left;
 }
-
-.first, .previous{
-    text-decoration: none;
-    border: 2px solid #e4e4e4;
-    color: #595959;
+.next, .last{
+    margin-right: 2px;
+    transition: background .3s ease 0s;
+    transition-property: background;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+    font: 16px/16px 'arial','helvetica','sans-serif';
+    color: #e4e4e4;
     display: block;
     padding: 6px 10px 6px 9px;
+    text-align: center;
     background: #fff;
     text-decoration: none;
-    color: #595959;
-
+    float:left;
+    border: none;
 }
-.current a,  .page a, .last a, .next a {
+.first, .previous{
+    margin-right: 2px;
+    transition: background .3s ease 0s;
+    transition-property: background;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+    font: 16px/16px 'arial','helvetica','sans-serif';
+    color:#e4e4e4;
+    display: block;
+    padding: 6px 10px 6px 9px;
+    text-align: center;
+    background: #fff;
+    text-decoration: none;
+    float:right;
+}
+.current a,  .page a {
     color: #333;
     text-decoration: none;
 }
+.first a, .previous a, .last a, .next a{
+    color: #e4e4e4;
+    text-decoration: none;
+}
 
-.current:hover,  .page:hover, .next:hover, .last:hover, .last:hover, .next:hover {
+.current:hover,  .page:hover{
     color: #333;
     border: 2px solid #fd1200;
+}
+
+.previous a:hover, .next a:hover, .last a:hover, .first a:hover{
+    color: #fd1200;
+    text-decoration: none;
 }
 
 .current:active,  .page:active, .next:active, .last:active, .last:active, .next:active {
