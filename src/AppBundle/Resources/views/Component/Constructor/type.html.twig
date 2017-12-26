@@ -5,7 +5,9 @@
         </div>
         <div class="col-md-8 text-right az-picture-page-sidebar-div-right">
             <button class="btn az-picture-page-sidebar-size-btn az-picture-page-hint">Подробнее ?</button>
+            {% if help_settings is defined and help_settings and help_settings.typeHelp is defined and help_settings.typeHelp %}
             <div style="display: none;">{{ help_settings.typeHelp|raw }}</div>
+            {% endif %}
         </div>
     </div>
     <div class="row az-picture-page-sidebar-size-div-body az-picture-page-sidebar-type-div-select">
