@@ -5,6 +5,7 @@ namespace AppBundle\Command;
 use AppBundle\Entity\Author;
 use AppBundle\Entity\Image;
 use AppBundle\Entity\ParserError;
+use Oro\ORM\Query\AST\Platform\Functions\Mysql\Date;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -132,6 +133,8 @@ class ParserCommand extends ContainerAwareCommand
             $picture->setBody(iconv('Windows-1251', 'Utf-8', $row[8]));
             $picture->setIsActive(false);
             $picture->setIsTop(false);
+            $picture->setCreatedAt(new \DateTime());
+            $picture->setUpdatedAt(new \DateTime());
             $picture->setCode(0);
 
             if(!empty($row[3])) {
