@@ -128,8 +128,31 @@ button, input, optgroup, select, textarea {
 .az-sidebar-subcategory-item {
     line-height: 26px;
     cursor: pointer;
+    color: #fd1200;
+    border-left: 4px solid  #fd1200;
+    border-bottom: 1px solid  #fd1200;
+    font-weight: bolder;
+}
+.az-sidebar-subcategory-item:hover, .az-sidebar-subcategory-item:active {
+    line-height: 26px;
+    cursor: pointer;
+    color: #fd1200;
+
 }
 
+.children-subsubcategory-2 {
+    border: none;
+    background-color: #ffffff;
+    margin-left: 30px;
+    color: #333;
+    font-size: 12px;
+    font-weight: 400;
+    background: url("../images/child_menu.png") no-repeat;
+    line-height: 20px;
+}
+.az-img-subcategory {
+    padding: 0 5px;
+}
 /**slider**/
 
 .az-sidebar-popular {
@@ -277,7 +300,7 @@ footer {
 .az-logo-footer-img {
     width: 200px;
 }
-
+/**sidebar**/
 .az-sidebar-header {
     color: white;
     background-color: #fd1200;
@@ -287,6 +310,11 @@ footer {
     cursor: pointer;
 }
 
+
+.az-sidebar-header:hover {
+    background-color: #c22439;
+    cursor: pointer;
+}
 .cycle-slideshow, .cycle-slideshow * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -551,7 +579,7 @@ footer {
 }
 
 .page-title {
-    font: 40px Georgia, "Times New Roman", Times, serif;
+    font-size: 40px;
     font-weight: 400;
     padding: 15px 0;
     border-bottom: 1px solid #e6e6e6;
@@ -1178,8 +1206,9 @@ footer {
 }
 
 .breadcrumb > .active {
-    color: #fd1200;
-    padding: 0 0 0 5px;
+    font-weight: 600;
+    padding: 0 0 0 10px;
+    font: 11px/31px 'PT Sans', sans-serif;
 }
 
 /**public**/
@@ -1187,6 +1216,7 @@ footer {
 .az-category-page-filters-div {
     margin: 15px auto;
     border: 1px solid #e6e6e6;
+
 }
 
 .az-category-page-filters-div .az-picture-page-constructor-block {
@@ -1306,6 +1336,7 @@ footer {
 
 .az-catalog-block-img {
     padding-right: 10px;
+
 }
 
 .padding-left-0 {
