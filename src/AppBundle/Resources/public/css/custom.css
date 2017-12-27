@@ -134,7 +134,6 @@ button, input, optgroup, select, textarea {
     font-weight: bolder;
 }
 .az-sidebar-subcategory-item:hover, .az-sidebar-subcategory-item:active {
-    line-height: 26px;
     cursor: pointer;
     color: #fd1200;
 
@@ -149,6 +148,12 @@ button, input, optgroup, select, textarea {
     font-weight: 400;
     background: url("../images/child_menu.png") no-repeat;
     line-height: 20px;
+    padding: 0 10px;
+}
+
+.children-subsubcategory:active {
+    line-height: 20px;
+    color: #fd1200;
 }
 .az-img-subcategory {
     padding: 0 5px;
