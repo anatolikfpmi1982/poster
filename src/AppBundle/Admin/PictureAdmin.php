@@ -59,9 +59,9 @@ class PictureAdmin extends AbstractAdmin
             ->with('Main')
             ->add('name', null, ['required' => false, 'label' => 'Имя файла'])
             ->add('categories', null, ['required' => false, 'label' => 'Категории'])
-            ->add('imageBanner', 'sonata_type_admin', ['required' => true, 'label' => 'Изображение-баннер'])
-            ->add('imageModule', 'sonata_type_admin', ['required' => true, 'label' => 'Изображение-модульное'])
-            ->add('imageFrame', 'sonata_type_admin', ['required' => true, 'label' => 'Изображение-рама'])
+            ->add('imageBanner', 'sonata_type_admin', ['required' => true, 'label' => 'Изображение'])
+//            ->add('imageModule', 'sonata_type_admin', ['required' => true, 'label' => 'Изображение-модульное'])
+//            ->add('imageFrame', 'sonata_type_admin', ['required' => true, 'label' => 'Изображение-рама'])
             ->add('id', null, ['required' => false, 'label' => 'ID', 'disabled' =>true])
             ->add('code', null, ['required' => false, 'label' => 'Артикул', 'disabled' =>true])
             ->add('title', null, ['required' => false, 'label' => 'Название'])
@@ -337,8 +337,6 @@ class PictureAdmin extends AbstractAdmin
     public function preRemove($picture){
         if($picture instanceof Picture) {
             $this->imageManagement->deleteImages($picture->getImageBanner());
-            $this->imageManagement->deleteImages($picture->getImageFrame());
-            $this->imageManagement->deleteImages($picture->getImageModule());
         }
     }
 
