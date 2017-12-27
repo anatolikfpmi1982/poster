@@ -41,10 +41,10 @@
                             {% endif %}
                             <div class="row az-sidebar-subcategory-item" data-id="{{ subcategory.id }}" data-parent-id="{{ category.id }}"
                                  data-url="{{ path('category', {'slug': subcategory_slug}) }}">
-                                <div class="col-md-3">
+                                <div class="col-md-1 az-img-subcategory">
                                     <img src="{{ asset('bundles/app/images/arrows.png') }}" class="az-sidebar-block-img az-catalog-block-img" title="{{ subcategory.title }}"/>
                                 </div>
-                                <div class="col-md-9 container-fluid">
+                                <div class="col-md-11 container-fluid">
                                     {{ subcategory.title }}
                                     {% if subcategory.children is defined and subcategory.children %}
                                         <div class="row category-menu children-subcategory-{{ category.id }}" id="children-subcategory-{{ subcategory.id }}"
@@ -58,10 +58,8 @@
                                                     {% endif %}
                                                     <div class="row subcategory-menu az-sidebar-subcategory-item children-subsubcategory-{{ subcategory.id }}"
                                                          data-url="{{ path('category', {'slug': subsubcategory_slug }) }}">
-                                                        <div class="col-md-3">
-                                                            <span class="glyphicon glyphicon-chevron-right"></span>
-                                                        </div>
-                                                        <div class="col-md-9">
+
+                                                        <div class="col-md-12">
                                                             {{ subsubcategory.title }}
                                                         </div>
                                                     </div>

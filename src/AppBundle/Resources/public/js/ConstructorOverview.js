@@ -11,7 +11,9 @@ var ConstructorOverview = new function () {
     this.init = function () {
         this.type = $("input.az-picture-page-constructor-type-radio:checked").data('title');
         this.size = $("select.az-picture-page-sidebar-size-select").val();
-        this.material = $("input.az-picture-page-constructor-material-radio:checked").val();
+        this.material = this.type == 'Баннер' ?
+            $("input.az-picture-page-constructor-material-radio:checked").val() :
+            $("input.az-picture-page-constructor-material-picture-radio:checked").val();
         var thickness = $("input.z-picture-page-thickness:checked");
         this.thickness = thickness.val();
         this.thickness_ratio = thickness.data('ratio');
@@ -24,6 +26,29 @@ var ConstructorOverview = new function () {
         $('#az-constructor-choose-material').html(this.material);
         $('#az-constructor-choose-thickness').html(this.thickness);
         $('#az-constructor-choose-color').html(this.color);
+    };
+
+    this.buildConstructor = function () {
+        var thickness_div = $('div.az-picture-thickness-div');
+        var banner_material_div = $('div.az-picture-banner-material-div');
+        var picture_material_div = $('div.az-picture-picture-material-div');
+        switch (this.type) {
+            case 'Баннер':
+                thickness_div.show();
+                banner_material_div.show();
+                picture_material_div.hide();
+                break;
+            case 'Картина':
+                thickness_div.hide();
+                banner_material_div.hide();
+                picture_material_div.show();
+                break;
+            case 'Модульная картина':
+                thickness_div.hide();
+                banner_material_div.hide();
+                picture_material_div.show();
+                break;
+        }
     };
 
     this.showPrice = function () {

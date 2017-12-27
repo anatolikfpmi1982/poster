@@ -10,7 +10,12 @@
         <div class="col-md-9 container-fluid">
             <div class="row page-title az-picture-page-title">Картина "{{ pictureMain.title }}"</div>
             <div class="row az-picture-page-author-articul-div">
-                <div class="col-md-6">Автор: <a href="#">{{ pictureMain.author.name }}</a></div>
+                {% if pictureMain.author is defined and pictureMain.author and pictureMain.author.slug is defined and pictureMain.author.slug %}
+                    {% set author_link = path('author', {'slug': pictureMain.author.slug }) %}
+                {% else %}
+                    {% set author_link = '#' %}
+                {% endif %}
+                <div class="col-md-6">Автор: <a href="{{ author_link }}">{{ pictureMain.author.name }}</a></div>
                 <div class="col-md-6">Артикул: {{ pictureMain.code }}</div>
             </div>
             {% if pictureMain.imageBanner and pictureMain.imageBanner.getFilename() %}
@@ -53,7 +58,10 @@
                 {% include('AppBundle:Component:Constructor/size.html.twig') %}
             </div>
             <div class="row az-picture-page-constructor-block">
-                {% include('AppBundle:Component:Constructor/material.html.twig') %}
+                {% include('AppBundle:Component:Constructor/material.banner.html.twig') %}
+            </div>
+            <div class="row az-picture-page-constructor-block">
+                {% include('AppBundle:Component:Constructor/material.picture.html.twig') %}
             </div>
             <div class="row az-picture-page-constructor-block">
                 {% include('AppBundle:Component:Constructor/thickness.html.twig') %}

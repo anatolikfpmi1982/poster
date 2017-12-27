@@ -5,7 +5,9 @@
         </div>
         <div class="col-md-8 text-right az-picture-page-sidebar-div-right">
             <button class="btn az-picture-page-sidebar-size-btn az-picture-page-hint">Подробнее ?</button>
-            <div style="display: none;">{{ help_settings.sizeHelp }}</div>
+            {% if help_settings is defined and help_settings and help_settings.sizeHelp is defined and help_settings.sizeHelp %}
+                <div class="d-none">{{ help_settings.sizeHelp }}</div>
+            {% endif %}
         </div>
     </div>
     <div class="row az-picture-page-sidebar-size-div-body az-picture-page-sidebar-size-div-select">

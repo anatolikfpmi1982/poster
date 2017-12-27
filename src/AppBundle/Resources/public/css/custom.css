@@ -1,3 +1,15 @@
+body {
+    padding-bottom: 10px;
+    background-color: #eeeeee;
+    font-family: 'PT Sans', sans-serif;
+}
+
+button, input, select, textarea {
+    font-family: 'PT Sans', sans-serif;}
+
+
+button, input, optgroup, select, textarea {
+    font-family: 'PT Sans', sans-serif;}
 .navbar {
     margin-bottom: 7px;
 }
@@ -7,6 +19,13 @@
     background-color: #ffffff;
 }
 
+.navbar-default .navbar-nav >
+.active > a, .navbar-default .navbar-nav >
+.active > a:focus, .navbar-default
+.navbar-nav > .active > a:hover {
+
+    backround-color: #ffffff;
+}
 .az-logo-title-text-div {
     margin: -20px 0 0 80px;
     font-size: 10px;
@@ -77,6 +96,7 @@
     text-shadow: none;
     font-size: 16px;
     vertical-align: middle;
+    text-transform: uppercase;
 
 }
 
@@ -95,7 +115,9 @@
 
 }
 
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > li > a:hover {
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > li > a:hover {
     background-image: none;
     color: #fd1200 !important;
     box-shadow: none !important;
@@ -106,8 +128,31 @@
 .az-sidebar-subcategory-item {
     line-height: 26px;
     cursor: pointer;
+    color: #fd1200;
+    border-left: 4px solid  #fd1200;
+    border-bottom: 1px solid  #fd1200;
+    font-weight: bolder;
+}
+.az-sidebar-subcategory-item:hover, .az-sidebar-subcategory-item:active {
+    line-height: 26px;
+    cursor: pointer;
+    color: #fd1200;
+
 }
 
+.children-subsubcategory-2 {
+    border: none;
+    background-color: #ffffff;
+    margin-left: 30px;
+    color: #333;
+    font-size: 12px;
+    font-weight: 400;
+    background: url("../images/child_menu.png") no-repeat;
+    line-height: 20px;
+}
+.az-img-subcategory {
+    padding: 0 5px;
+}
 /**slider**/
 
 .az-sidebar-popular {
@@ -143,7 +188,7 @@
     font-weight: bold;
     color: #fd1200;
     letter-spacing: 1px;
-    font: 20px/46px 'Open Sans', 'arial', 'sans-serif';
+    font: 20px/46px 'PT Sans', sans-serif;
 
 }
 
@@ -204,7 +249,7 @@ button, input, optgroup, select, textarea {
 }
 
 .az-sidebar-popular-item-body {
-    font: 11px/16px 'arial', 'helvetica', 'sans-serif';
+    font: 11px/16px 'PT Sans', sans-serif;
     color: #595959;
     font-style: italic;
 }
@@ -255,16 +300,21 @@ footer {
 .az-logo-footer-img {
     width: 200px;
 }
-
+/**sidebar**/
 .az-sidebar-header {
     color: white;
     background-color: #fd1200;
     padding: 8px;
     text-transform: uppercase;
-    font-size: 16px;
+    font-size: 15px;
     cursor: pointer;
 }
 
+
+.az-sidebar-header:hover {
+    background-color: #c22439;
+    cursor: pointer;
+}
 .cycle-slideshow, .cycle-slideshow * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -344,14 +394,14 @@ footer {
 }
 
 .az-slider-title {
-    font: 40px 'Open Sans', 'arial', 'helvetica', 'sans-serif';
+    font: 36px 'PT Sans', sans-serif;
     display: block;
     text-align: center;
     opacity: 1;
-    padding: 10px 0;
-    background-color: rgba(70, 70, 70, 0.8)
+    padding: 15px 0;
+    background-color: rgba(70, 70, 70, 0.8);
+    text-transform: uppercase;}
 
-}
 
 .az-slider-description {
     text-align: center;
@@ -361,7 +411,7 @@ footer {
 }
 
 .slider_item_cat {
-    font: 14px 'fregatregular', 'arial', 'helvetica', 'sans-serif';
+    font: 14px 'PT Sans', sans-serif;
     opacity: 1;
     text-align: center;
     padding: 0 20px;
@@ -467,7 +517,7 @@ footer {
     max-width: 160px;
     width: 80px;
     padding: 5px 5px;
-    font: 12px 'Open Sans', 'arial', 'helvetica', 'sans-serif';
+    font: 12px 'PT Sans', sans-serif;
     line-height: 1;
     text-transform: lowercase;
 }
@@ -529,7 +579,7 @@ footer {
 }
 
 .page-title {
-    font: 40px Georgia, "Times New Roman", Times, serif;
+    font-size: 40px;
     font-weight: 400;
     padding: 15px 0;
     border-bottom: 1px solid #e6e6e6;
@@ -560,18 +610,12 @@ footer {
     color: #fd1200;
     text-decoration: none;
 }
-
-body {
-    padding-bottom: 10px;
-    background-color: #eeeeee;
-}
-
 .az-header-top {
-    padding: 20px 0 10px 20px;
+    padding: 20px 0 0 30px;
 }
 
 .az-logo-title-text-div {
-    margin: -20px 0 0 80px;
+    margin: -30px 0 0 80px;
     font-size: 10px;
 }
 
@@ -640,15 +684,15 @@ body {
 }
 
 .navbar-brand, .navbar-nav > li > a {
-    color: #000000 !important;
+    color: #333;
     text-shadow: none;
-    font-size: 17px;
+    font-size: 14px;
     vertical-align: middle;
-
+    line-height: 1;
 }
 
 .nav > li > a {
-    padding: 0 20px 0 0;
+    padding: 0 15px 0 0;
 }
 
 .nav > li > a > img {
@@ -702,9 +746,8 @@ body {
     text-transform: uppercase;
     font-weight: bold;
     color: #fd1200;
-    letter-spacing: 2px;
-    font: 20px/46px 'Open Sans', 'arial', 'sans-serif';
-
+    letter-spacing: 1px;
+    font: 20px/46px 'PT Sans', sans-serif;
 }
 
 .az-page-section-body {
@@ -773,15 +816,13 @@ body {
 .az-main-popular-item-header-type {
     text-align: left;
     font-size: 12px;
-    padding-right: 15px;
-    padding-left: 15px;
+    padding: 8px 15px 0 15px;
     margin: 20px auto 5px auto;
 }
 
 .az-main-popular-item-header-category {
     color: #fd1200;
-    padding-right: 15px;
-    padding-left: 15px;
+    padding: 8px  15px 0 15px;
     margin-right: auto;
     margin-left: auto;
     height: 40px;
@@ -851,7 +892,7 @@ body {
 .btn {
     background-color: #fd1200;
     color: #fffff;
-    padding: 5px 20px;
+    padding: 7px 20px;
     text-transform: lowercase;
     font-size: 13px;
 }
@@ -881,7 +922,7 @@ button, input, optgroup, select, textarea {
 }
 
 .az-sidebar-popular-item-body {
-    font: 11px/16px 'arial', 'helvetica', 'sans-serif';
+    font: 11px/16px 'PT Sans', sans-serif;
     color: #595959;
     font-style: italic;
 }
@@ -1012,7 +1053,7 @@ footer {
 }
 
 .slider_item_cat {
-    font: 14px 'fregatregular', 'arial', 'helvetica', 'sans-serif';
+    font: 14px 'PT Sans', sans-serif;
     opacity: 1;
     text-align: center;
     padding: 0 20px;
@@ -1153,7 +1194,7 @@ footer {
 .breadcrumb a {
     display: block;
     float: left;
-    font: 11px/31px 'arial', 'helvetica', 'sans-serif';
+    font: 11px/31px    'PT Sans', sans-serif;
     text-decoration: none;
     color: #808080;
     padding: 0 20px 0 6px;
@@ -1165,9 +1206,9 @@ footer {
 }
 
 .breadcrumb > .active {
-    font: 11px/31px 'arial', 'helvetica', 'sans-serif';
-    color: #fd1200;
-    padding: 0 0 0 5px;
+    font-weight: 600;
+    padding: 0 0 0 10px;
+    font: 11px/31px 'PT Sans', sans-serif;
 }
 
 /**public**/
@@ -1175,6 +1216,7 @@ footer {
 .az-category-page-filters-div {
     margin: 15px auto;
     border: 1px solid #e6e6e6;
+
 }
 
 .az-category-page-filters-div .az-picture-page-constructor-block {
@@ -1206,7 +1248,7 @@ footer {
 
 .az-category-page-filter-random-btn {
     width: 60px;
-    font: 9px/31px 'arial', 'helvetica', 'sans-serif';
+    font: 9px/31px 'PT Sans', sans-serif;
     padding: 0 10px;
 }
 
@@ -1240,7 +1282,7 @@ footer {
 
 .az-visited-block .az-page-main-section-div .az-page-section-header {
     text-transform: none;
-    font: 300 20px 'Open Sans', 'arial', 'helvetica', 'sans-serif' !important;
+    font: 300 20px 'PT Sans', sans-serif !important;
     color: #333;
 }
 
@@ -1265,7 +1307,7 @@ footer {
 }
 
 .az-main-popular-item-header-buttons {
-    padding-top: 20px;
+    padding-top: 5px;
 }
 
 .az-main-page-header-top-cells {
@@ -1294,6 +1336,7 @@ footer {
 
 .az-catalog-block-img {
     padding-right: 10px;
+
 }
 
 .padding-left-0 {
@@ -1325,8 +1368,7 @@ footer {
 }
 
 .az-reviews-name {
-    font: 20px/20px 'Open Sans','arial','helvetica','sans-serif';
-    font-family: "Open Sans", "arial", "helvetica", "sans-serif";
+    font: 20px/20px 'PT Sans', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 20px;
@@ -1354,7 +1396,7 @@ footer {
     padding-left: 15px;
     display: inline-block;
     color: #f43812;
-    font: 16px/21px 'arial','helvetica','sans-serif';
+    font: 16px/21px 'PT Sans', sans-serif;
 }
 
 .az-rewiews-article {
@@ -1368,7 +1410,7 @@ footer {
     transition-duration: 0.3s;
     transition-timing-function: ease;
     transition-delay: 0s;
-    font: 16px/16px 'arial','helvetica','sans-serif';
+    font: 16px/16px 'PT Sans', sans-serif;
     color: #595959;
     display: block;
     padding: 6px 10px 6px 9px;
@@ -1385,7 +1427,7 @@ footer {
     transition-duration: 0.3s;
     transition-timing-function: ease;
     transition-delay: 0s;
-    font: 16px/16px 'arial','helvetica','sans-serif';
+    font: 16px/16px 'PT Sans', sans-serif;
     color: #e4e4e4;
     display: block;
     padding: 6px 10px 6px 9px;
@@ -1402,7 +1444,7 @@ footer {
     transition-duration: 0.3s;
     transition-timing-function: ease;
     transition-delay: 0s;
-    font: 16px/16px 'arial','helvetica','sans-serif';
+    font: 16px/16px 'PT Sans', sans-serif;
     color:#e4e4e4;
     display: block;
     padding: 6px 10px 6px 9px;
@@ -1433,7 +1475,6 @@ footer {
 .current:active,  .page:active, .next:active, .last:active, .last:active, .next:active {
     color: #333;
     border: 2px solid #fd1200;
-}
 }
 
 .az-picture-page-type-img-text {

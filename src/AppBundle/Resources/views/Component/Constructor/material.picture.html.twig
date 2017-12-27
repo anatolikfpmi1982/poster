@@ -1,0 +1,41 @@
+<div class="col-md-12 az-picture-size-div az-picture-picture-material-div container-fluid">
+    <div class="row az-picture-page-sidebar-size">
+        <div class="col-md-4 text-left az-picture-page-sidebar-header-block az-picture-page-sidebar-material-div-left">
+            <label data-for="picture-size">Материал: </label>
+        </div>
+        <div class="col-md-8 text-right az-picture-page-sidebar-div-right">
+            <button class="btn az-picture-page-sidebar-size-btn az-picture-page-hint">Подробнее ?</button>
+            {% if help_settings is defined and help_settings and help_settings.materialHelp is defined and help_settings.materialHelp %}
+                <div class="d-none">{{ help_settings.materialHelp|raw }}</div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row az-picture-page-sidebar-size-div-body az-picture-page-sidebar-material-div-select">
+        {% if pictureMaterials %}
+        {% set ind = 1 %}
+        {% for material in pictureMaterials %}
+        {% if material.image is defined and material.image %}
+            {% set img = '/files/banner_materials/small_thumb/' ~ material.image.getFilename() %}
+        {% else %}
+            {% set img = asset('bundles/app/images/material_default.png') %}
+        {% endif %}
+        <div class="col-md-6 container-fluid">
+            <div class="row text-center">
+                <img src="{{ img }}" class="az-picture-page-material-img"/><br/>
+                <span class="az-picture-page-type-img-text">{{ material.title }}</span>
+            </div>
+            <div class="row text-center az-picture-page-material-radio-div">
+                <input type="radio" class="btn az-picture-page-constructor-material-picture-radio" value="{{ material.title }}" title="az-picture-page-material"
+                       name="az-picture-page-material"
+                       data-title="{{ material.title }}" {% if ind == 1 %}checked{% endif %}/>
+            </div>
+        </div>
+        {% if ind is even %}
+    </div>
+    <div class="row">
+        {% endif %}
+        {% set ind = ind + 1 %}
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>

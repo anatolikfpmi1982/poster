@@ -1,11 +1,13 @@
-<div class="col-md-12 az-picture-size-div container-fluid">
+<div class="col-md-12 az-picture-size-div az-picture-banner-material-div container-fluid">
     <div class="row az-picture-page-sidebar-size">
         <div class="col-md-4 text-left az-picture-page-sidebar-header-block az-picture-page-sidebar-material-div-left">
             <label data-for="picture-size">Материал: </label>
         </div>
         <div class="col-md-8 text-right az-picture-page-sidebar-div-right">
             <button class="btn az-picture-page-sidebar-size-btn az-picture-page-hint">Подробнее ?</button>
-            <div style="display: none;">{{ help_settings.materialHelp|raw }}</div>
+            {% if help_settings is defined and help_settings and help_settings.materialHelp is defined and help_settings.materialHelp %}
+                <div class="d-none">{{ help_settings.materialHelp|raw }}</div>
+            {% endif %}
         </div>
     </div>
     <div class="row az-picture-page-sidebar-size-div-body az-picture-page-sidebar-material-div-select">
