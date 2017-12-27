@@ -1,3 +1,15 @@
+body {
+    padding-bottom: 10px;
+    background-color: #eeeeee;
+    font-family: 'PT Sans', sans-serif;
+}
+
+button, input, select, textarea {
+    font-family: 'PT Sans', sans-serif;}
+
+
+button, input, optgroup, select, textarea {
+    font-family: 'PT Sans', sans-serif;}
 .navbar {
     margin-bottom: 7px;
 }
@@ -84,6 +96,7 @@
     text-shadow: none;
     font-size: 16px;
     vertical-align: middle;
+    text-transform: uppercase;
 
 }
 
@@ -102,7 +115,9 @@
 
 }
 
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > li > a:hover {
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > li > a:hover {
     background-image: none;
     color: #fd1200 !important;
     box-shadow: none !important;
@@ -150,7 +165,7 @@
     font-weight: bold;
     color: #fd1200;
     letter-spacing: 1px;
-    font: 20px/46px 'Open Sans', 'arial', 'sans-serif';
+    font: 20px/46px 'PT Sans', sans-serif;
 
 }
 
@@ -211,7 +226,7 @@ button, input, optgroup, select, textarea {
 }
 
 .az-sidebar-popular-item-body {
-    font: 11px/16px 'arial', 'helvetica', 'sans-serif';
+    font: 11px/16px 'PT Sans', sans-serif;
     color: #595959;
     font-style: italic;
 }
@@ -268,7 +283,7 @@ footer {
     background-color: #fd1200;
     padding: 8px;
     text-transform: uppercase;
-    font-size: 16px;
+    font-size: 15px;
     cursor: pointer;
 }
 
@@ -351,14 +366,14 @@ footer {
 }
 
 .az-slider-title {
-    font: 40px 'Open Sans', 'arial', 'helvetica', 'sans-serif';
+    font: 36px 'PT Sans', sans-serif;
     display: block;
     text-align: center;
     opacity: 1;
-    padding: 10px 0;
-    background-color: rgba(70, 70, 70, 0.8)
+    padding: 15px 0;
+    background-color: rgba(70, 70, 70, 0.8);
+    text-transform: uppercase;}
 
-}
 
 .az-slider-description {
     text-align: center;
@@ -368,7 +383,7 @@ footer {
 }
 
 .slider_item_cat {
-    font: 14px 'fregatregular', 'arial', 'helvetica', 'sans-serif';
+    font: 14px 'PT Sans', sans-serif;
     opacity: 1;
     text-align: center;
     padding: 0 20px;
@@ -474,7 +489,7 @@ footer {
     max-width: 160px;
     width: 80px;
     padding: 5px 5px;
-    font: 12px 'Open Sans', 'arial', 'helvetica', 'sans-serif';
+    font: 12px 'PT Sans', sans-serif;
     line-height: 1;
     text-transform: lowercase;
 }
@@ -567,12 +582,6 @@ footer {
     color: #fd1200;
     text-decoration: none;
 }
-
-body {
-    padding-bottom: 10px;
-    background-color: #eeeeee;
-}
-
 .az-header-top {
     padding: 20px 0 0 30px;
 }
@@ -647,10 +656,11 @@ body {
 }
 
 .navbar-brand, .navbar-nav > li > a {
-    color: #000000 !important;
+    color: #333;
     text-shadow: none;
-    font-size: 17px;
+    font-size: 14px;
     vertical-align: middle;
+    line-height: 1;
 }
 
 .nav > li > a {
@@ -708,9 +718,8 @@ body {
     text-transform: uppercase;
     font-weight: bold;
     color: #fd1200;
-    letter-spacing: 2px;
-    font: 20px/46px 'Open Sans', 'arial', 'sans-serif';
-
+    letter-spacing: 1px;
+    font: 20px/46px 'PT Sans', sans-serif;
 }
 
 .az-page-section-body {
@@ -785,8 +794,7 @@ body {
 
 .az-main-popular-item-header-category {
     color: #fd1200;
-    padding-right: 15px;
-    padding-left: 15px;
+    padding: 8px  15px 0 15px;
     margin-right: auto;
     margin-left: auto;
     height: 40px;
@@ -886,7 +894,7 @@ button, input, optgroup, select, textarea {
 }
 
 .az-sidebar-popular-item-body {
-    font: 11px/16px 'arial', 'helvetica', 'sans-serif';
+    font: 11px/16px 'PT Sans', sans-serif;
     color: #595959;
     font-style: italic;
 }
@@ -1017,7 +1025,7 @@ footer {
 }
 
 .slider_item_cat {
-    font: 14px 'fregatregular', 'arial', 'helvetica', 'sans-serif';
+    font: 14px 'PT Sans', sans-serif;
     opacity: 1;
     text-align: center;
     padding: 0 20px;
@@ -1158,7 +1166,7 @@ footer {
 .breadcrumb a {
     display: block;
     float: left;
-    font: 11px/31px 'arial', 'helvetica', 'sans-serif';
+    font: 11px/31px    'PT Sans', sans-serif;
     text-decoration: none;
     color: #808080;
     padding: 0 20px 0 6px;
@@ -1170,7 +1178,6 @@ footer {
 }
 
 .breadcrumb > .active {
-    font: 11px/31px 'arial', 'helvetica', 'sans-serif';
     color: #fd1200;
     padding: 0 0 0 5px;
 }
@@ -1211,7 +1218,7 @@ footer {
 
 .az-category-page-filter-random-btn {
     width: 60px;
-    font: 9px/31px 'arial', 'helvetica', 'sans-serif';
+    font: 9px/31px 'PT Sans', sans-serif;
     padding: 0 10px;
 }
 
@@ -1245,7 +1252,7 @@ footer {
 
 .az-visited-block .az-page-main-section-div .az-page-section-header {
     text-transform: none;
-    font: 300 20px 'Open Sans', 'arial', 'helvetica', 'sans-serif' !important;
+    font: 300 20px 'PT Sans', sans-serif !important;
     color: #333;
 }
 
@@ -1330,8 +1337,7 @@ footer {
 }
 
 .az-reviews-name {
-    font: 20px/20px 'Open Sans','arial','helvetica','sans-serif';
-    font-family: "Open Sans", "arial", "helvetica", "sans-serif";
+    font: 20px/20px 'PT Sans', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 20px;
@@ -1359,7 +1365,7 @@ footer {
     padding-left: 15px;
     display: inline-block;
     color: #f43812;
-    font: 16px/21px 'arial','helvetica','sans-serif';
+    font: 16px/21px 'PT Sans', sans-serif;
 }
 
 .az-rewiews-article {
@@ -1373,7 +1379,7 @@ footer {
     transition-duration: 0.3s;
     transition-timing-function: ease;
     transition-delay: 0s;
-    font: 16px/16px 'arial','helvetica','sans-serif';
+    font: 16px/16px 'PT Sans', sans-serif;
     color: #595959;
     display: block;
     padding: 6px 10px 6px 9px;
@@ -1390,7 +1396,7 @@ footer {
     transition-duration: 0.3s;
     transition-timing-function: ease;
     transition-delay: 0s;
-    font: 16px/16px 'arial','helvetica','sans-serif';
+    font: 16px/16px 'PT Sans', sans-serif;
     color: #e4e4e4;
     display: block;
     padding: 6px 10px 6px 9px;
@@ -1407,7 +1413,7 @@ footer {
     transition-duration: 0.3s;
     transition-timing-function: ease;
     transition-delay: 0s;
-    font: 16px/16px 'arial','helvetica','sans-serif';
+    font: 16px/16px 'PT Sans', sans-serif;
     color:#e4e4e4;
     display: block;
     padding: 6px 10px 6px 9px;
