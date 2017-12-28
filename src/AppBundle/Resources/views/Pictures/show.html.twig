@@ -72,7 +72,34 @@
             <div class="row az-picture-page-constructor-block">
                 {% include('AppBundle:Component:Constructor/price.html.twig') %}
             </div>
-            <div class="row az-picture-page-constructor-block">Соц сети блок</div>
+            <div class="row az-picture-page-constructor-block">
+                <div class="soc-share"><a href="https://twitter.com/share?url=http://www.artzakaz.by/twitter-button/"
+                       title="Twitter" class="btn btn-twitter btn-lg"><i class="fa fa-twitter fa-fw"></i> </a></div>
+
+                <div class="soc-share"><a href="https://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://www.artzakaz.by&p[images][0]=&p[title]=Title%20Goes%20Here&p[summary]=Description%20goes%20here!"
+                   target="_blank" onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250'); return false"><button style="width: 32px; margin-top:10px;" type="button" class="btn btn-facebook btn-lg"><i class="fa fa-facebook fa-2"></i> </button></a>
+                </div>
+            <div class="soc-share"><a href="http://vk.com/share.php?url=_URL_&title=_TITLE_&description=_DESCRIPTION_&image=_URL_TO_IMAGE_" class="btn btn-vk">
+                    <i class="fa fa-vk fa-lg vk"></i></a></div>
+
+            <div class="soc-share" id="ok_shareWidget">
+            <script>
+                !function (d, id, did, st, title, description, image) {
+                    var js = d.createElement("script");
+                    js.src = "https://connect.ok.ru/connect.js";
+                    js.onload = js.onreadystatechange = function () {
+                        if (!this.readyState || this.readyState == "loaded" || this.readyState == "complete") {
+                            if (!this.executed) {
+                                this.executed = true;
+                                setTimeout(function () {
+                                    OK.CONNECT.insertShareWidget(id,did,st, title, description, image);
+                                }, 0);
+                            }
+                        }};
+                    d.documentElement.appendChild(js);
+                }(document,"ok_shareWidget","https://artzakaz.by",'{"sz":30,"st":"rounded","nc":1,"nt":1}',"","","");
+            </script>
+            </div></div>
         </div>
     </div>
     {% include('AppBundle:Component:Blocks/similar.html.twig') %}
