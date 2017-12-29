@@ -79,6 +79,15 @@ class Frame implements ImageInterface
     private $ratio;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="price", type="float", nullable=true)
+     *
+     * @JMS\Expose
+     */
+    private $price;
+
+    /**
      * @var boolean
      * @ORM\Column(name="use_ratio", type="boolean")
      *
@@ -409,6 +418,30 @@ class Frame implements ImageInterface
     public function getRatio()
     {
         return $this->ratio;
+    }
+
+    /**
+     * Set price
+     *
+     * @param float $price
+     *
+     * @return Frame
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
     }
 
     /**

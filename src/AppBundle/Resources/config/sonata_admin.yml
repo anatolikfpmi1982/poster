@@ -38,7 +38,7 @@ services:
     app.admin.framematerial:
         class: AppBundle\Admin\FrameMaterialAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Материалы", label: "Материал рамы", show_in_dashboard: true}
+            - { name: sonata.admin, manager_type: orm, group: "Материалы", label: "Материал для картин в раме", show_in_dashboard: true}
         arguments:
              - ~
              - AppBundle\Entity\FrameMaterial
@@ -47,7 +47,7 @@ services:
     app.admin.bannermaterial:
         class: AppBundle\Admin\BannerMaterialAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Материалы", label: "Материал баннера", show_in_dashboard: true}
+            - { name: sonata.admin, manager_type: orm, group: "Материалы", label: "Материал для баннеров", show_in_dashboard: true}
         arguments:
              - ~
              - AppBundle\Entity\BannerMaterial

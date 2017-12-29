@@ -10,18 +10,20 @@ class MenuBuilderListener
     {
         $menu = $event->getMenu();
 
-        $menu->addChild('Система', array())
+        $menu->getChild('Рамы')
+            ->addChild('frame-settings', [
+                'label' => 'Настройки рамы',
+                'route' => 'sonata_admin_frame_settings',
+            ])
+            ->getParent()
+            ->getParent()
+            ->addChild('Система', array())
             ->setExtras([
                 'icon' => '<i class="fa fa-cogs"></i>',
             ])
             ->addChild('settings', [
                 'label' => 'Настройки сайта',
                 'route' => 'sonata_admin_settings',
-            ])
-            ->getParent()
-            ->addChild('frame-settings', [
-                'label' => 'Настройки рамы',
-                'route' => 'sonata_admin_frame_settings',
             ])
             ->getParent()
             ->addChild('help-settings', [

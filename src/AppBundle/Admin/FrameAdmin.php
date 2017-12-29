@@ -59,6 +59,7 @@ class FrameAdmin extends AbstractAdmin
             ->add('description', CKEditorType::class, ['required' => false, 'label' => 'Описание'])
             ->add('height', null, ['required' => false, 'label' => 'Высота'])
             ->add('width', null, ['required' => false, 'label' => 'Ширина'])
+            ->add('price', null, ['required' => false, 'label' => 'Цена', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
             ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент', 'empty_data' => '1', 'attr' => ['placeholder' => 1]])
             ->add('useRatio', null, ['required' => false, 'label' => 'Использовать коэффициент'])
 //            ->add('color', 'choices', array('label' => 'Цвет',
