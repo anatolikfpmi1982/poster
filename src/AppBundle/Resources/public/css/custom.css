@@ -1141,7 +1141,6 @@ footer {
     }
 }
 
-
 /**galleries paint**/
 
 .owl-theme .owl-nav {
@@ -1163,8 +1162,8 @@ footer {
     margin-top: 1px;
     margin-left: -8px;
     background: url('../images/prev.png') 5% 50% no-repeat rgba(0, 120, 201, 0.7) !important;
-    opacity: 1; }
-
+    opacity: 1;
+}
 
 .az-picture-page-sidebar-price-btn-div-left {
     padding-left: 0;
@@ -1652,5 +1651,23 @@ footer {
     text-align: center;
     border-radius: 5px;
     padding: 5px;
+}
 
+.az-picture-page-constructor-frame-color {
+    list-style: none;
+    position: relative;
+    left: 0;
+    display: block;
+    transition: left .3s ease-out 0s;
+    -webkit-padding-start: 10px;
+}
+
+.az-picture-page-constructor-frame-color-item {
+    float: left;
+    padding: 0;
+    height: 58px;
+    width: 12px;
+    border: 1px solid #e6e6e6;
+    cursor: pointer;
+    margin-left: 1px;
 }
