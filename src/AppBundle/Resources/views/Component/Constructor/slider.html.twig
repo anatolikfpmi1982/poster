@@ -1,0 +1,13 @@
+<div class="row">
+    <div class="col-md-12 owl-carousel owl-theme" id="owl-example">
+        {% if pictureThicknesses is defined and pictureThicknesses %}
+            {% for thickness in pictureThicknesses %}
+                <div>
+                    <img src="http://malsup.github.io/images/beach1.jpg">
+                </div>
+            {% endfor %}
+        {% else %}
+            У нас пока отсутствуют рамы для данного вида картин.
+        {% endif %}
+    </div>
+</div>
