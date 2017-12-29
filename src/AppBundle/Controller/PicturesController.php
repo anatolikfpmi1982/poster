@@ -37,6 +37,7 @@ class PicturesController extends FrontController {
         $this->data['pictureMaterials']   = $em->getRepository( 'AppBundle:FrameMaterial' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
         $this->data['thicknesses'] = $em->getRepository( 'AppBundle:Underframe' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
         $this->data['pictureThicknesses'] = $em->getRepository( 'AppBundle:Frame' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
+        $this->data['mats'] = $em->getRepository( 'AppBundle:Mat' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
         $_frameSettings = $this->get( 'doctrine.orm.entity_manager' )->getRepository( 'AppBundle:Settings' )->findOneByName('frame_settings');
         $frameSettings = [];
         if($_frameSettings instanceof Settings) {

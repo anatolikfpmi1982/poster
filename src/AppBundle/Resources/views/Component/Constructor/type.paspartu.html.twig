@@ -2,7 +2,7 @@
     <div class="col-md-12 az-picture-size-div container-fluid">
         <div class="row az-picture-page-sidebar-size">
             <div class="col-md-12 text-left az-picture-page-sidebar-header-block az-picture-page-sidebar-size-div-left">
-                <label data-for="picture-size">Тип паспарту: </label>
+                <label data-for="picture-type-mat">Тип паспарту: </label>
                 <button class="btn az-picture-page-sidebar-size-btn az-picture-page-hint">Подробнее ?</button>
                 {% if help_settings is defined and help_settings and help_settings.sizeHelp is defined and help_settings.sizeHelp %}
                     <div class="d-none">{{ help_settings.sizeHelp }}</div>
@@ -10,12 +10,11 @@
             </div>
         </div>
         <div class="row az-picture-page-sidebar-size-div-body az-picture-page-sidebar-size-div-select">
-            <select class="btn az-picture-page-sidebar-size-select" name="picture-size" id="az-picture-page-constructor-size-select" title="">
-                <option value="own_size">Свой размер</option>
-                {% if pictureSize %}
+            <select class="btn az-picture-page-mat-type-select" name="picture-type-mat" id="az-picture-page-mat-type-select" title="picture-type-mat">
+                {% if mats is defined and mats %}
                     {% set size_default = 1 %}
-                    {% for size in pictureSize %}
-                        <option value="{{ size.width }}x{{ size.height }}" {% if size_default == 1 %}selected{% endif %}>{{ size.width }}x{{ size.height }}</option>
+                    {% for mat in mats %}
+                        <option value="{{ mat.title }}" {% if size_default == 1 %}selected{% endif %}>{{ mat.title }}</option>
                         {% set size_default = size_default + 1 %}
                     {% endfor %}
                 {% endif %}
