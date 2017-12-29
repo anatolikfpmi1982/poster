@@ -1136,6 +1136,31 @@ footer {
     }
 }
 
+
+/**galleries paint**/
+
+.owl-theme .owl-nav {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    opacity: 1;
+    filter: alpha(opacity=0);
+    height: 100%;
+    cursor: pointer;
+    z-index: 800;
+}
+
+.owl-prev {
+    display: block;
+    color: #fff;
+    left: 10px;
+    position: absolute;
+    margin-top: 1px;
+    margin-left: -8px;
+    background: url('../images/prev.png') 5% 50% no-repeat rgba(0, 120, 201, 0.7) !important;
+    opacity: 1; }
+
+
 .az-picture-page-sidebar-price-btn-div-left {
     padding-left: 0;
 }
