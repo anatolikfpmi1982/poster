@@ -46,6 +46,27 @@ define(function (require, exports, module) {
             return false;
         });
 
+        // Reviews page
+        // add review
+        $("#add_review").submit(function (event) {
+            event.stopImmediatePropagation();
+            $.ajax({
+                url: "/ajax/review/add",
+                method: 'POST',
+                data: {
+                    'name': $('#add_review_name').val(),
+                    'email': $('#add_review_email').val(),
+                    'city': $('#add_review_city').val(),
+                    'review': $('#add_review_description').val()
+                }
+            }).done(function (data) {
+                if(data['result'])
+                    alert('Спасибо! Отзыв отправлен на модерацию!');
+                else
+                    alert('Возникли проблемы при отправке отзыва.');
+            });
+            return false;
+        });
 
         // Picture page
         // picture page constructor type

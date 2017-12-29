@@ -37,4 +37,27 @@
             </div>
         </div>
     </div>
+    <p>
+        Добавить новый отзыв
+    </p>
+    <form id="add_review">
+        <div>
+            <label for="add_review_name">Ф.И.О.</label>
+            <input id="add_review_name" name="add_review_name" required />
+        </div>
+        <div>
+            <label for="add_review_email">Email</label>
+            <input id="add_review_email" name="add_review_email" required />
+        </div>
+        <div>
+            <label for="add_review_city">Город</label>
+            <input id="add_review_city" name="add_review_city" />
+        </div>
+        <div>
+            <label for="add_review_description">Отзыв</label>
+            <textarea id="add_review_description" name="add_review_description"
+                      placeholder="Введите текст отзыва" required></textarea>
+        </div>
+        <button type="submit">Отправить</button>
+    </form>
 {% endblock %}
