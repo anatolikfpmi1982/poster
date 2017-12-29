@@ -8,7 +8,8 @@ require.config({
         'underscore': '../bower_components/underscore/underscore',
         'bootstrap': '../bower_components/bootstrap/dist/js/bootstrap',
         'cycle2': '../bower_components/jquery.cycle2/index',
-        'ConstructorOverview': '../bundles/app/js/ConstructorOverview'
+        'ConstructorOverview': '../bundles/app/js/ConstructorOverview',
+        'owl': '../bower_components/owl.carousel/dist/owl.carousel.min'
     },
     'shim': {
         'jsrender': {
@@ -30,6 +31,9 @@ require.config({
             'deps': ['bootstrap']
         },
         'ConstructorOverview': {
+            'deps': ['jquery']
+        },
+        'owl': {
             'deps': ['jquery']
         }
     },

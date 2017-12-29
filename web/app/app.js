@@ -9,6 +9,12 @@ define(function (require, exports, module) {
     $(document).ready(function () {
         init();
 
+        $("#owl-example").owlCarousel({
+            items: 6,
+            dots: false,
+            nav: true
+        });
+
         // Category page
         // category page filter radio button art|photo
         $("input.az-category-page-filter-radio").click(function (event) {

@@ -24,7 +24,14 @@
                 {% set img = asset('bundles/app/images/default_picture.jpg') %}
             {% endif %}
             <div class="row text-center">
-                <img src="{{ img }}" class="admin-preview"/>
+                <div class="col-md-12">
+                    <img src="{{ img }}" class="az-picture-page-constructor-main-img"/>
+                </div>
+            </div>
+            <div class="row text-center az-picture-page-slider-material">
+                <div class="col-md-12">
+                    {% include('AppBundle:Component:Constructor/slider.html.twig') %}
+                </div>
             </div>
             <div class="row">Выбор цвета стены</div>
             {% if frameSettings is defined and frameSettings %}

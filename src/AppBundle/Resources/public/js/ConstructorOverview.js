@@ -30,21 +30,25 @@ var ConstructorOverview = new function () {
 
     this.buildConstructor = function () {
         var thickness_div = $('div.az-picture-thickness-div');
+        var thickness_picture_div = $('div.az-picture-page-slider-material');
         var banner_material_div = $('div.az-picture-banner-material-div');
         var picture_material_div = $('div.az-picture-picture-material-div');
         switch (this.type) {
             case 'Баннер':
                 thickness_div.show();
+                thickness_picture_div.hide();
                 banner_material_div.show();
                 picture_material_div.hide();
                 break;
             case 'Картина':
                 thickness_div.hide();
+                thickness_picture_div.show();
                 banner_material_div.hide();
                 picture_material_div.show();
                 break;
             case 'Модульная картина':
                 thickness_div.hide();
+                thickness_picture_div.hide();
                 banner_material_div.hide();
                 picture_material_div.show();
                 break;

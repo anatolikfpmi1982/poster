@@ -13,7 +13,7 @@
     <div class="row az-picture-page-sidebar-size-div-body az-picture-page-sidebar-type-div-select">
         {% set numPicture = 0 %}
         {% if pictureMain.imageBanner is defined and pictureMain.imageBanner %}
-            <div class="col-md-6 container-fluid">
+            <div class="col-md-4 container-fluid">
                 <div class="row text-center">
                     <img src="/files/pictures/small_thumb/{{ pictureMain.imageBanner.getFilename() }}" class="az-picture-page-type-img"/><br/>
                     <span class="az-picture-page-type-img-text">Баннер</span>
@@ -26,7 +26,7 @@
             {% set numPicture = numPicture + 1 %}
         {% endif %}
         {% if pictureMain.image is defined and pictureMain.image %}
-            <div class="col-md-6 container-fluid">
+            <div class="col-md-4 container-fluid">
                 <div class="row text-center">
                     <img src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}" class="az-picture-page-type-img"/><br/>
                     <span class="az-picture-page-type-img-text">Картина</span>
@@ -38,10 +38,8 @@
             </div>
             {% set numPicture = numPicture + 1 %}
         {% endif %}
-        {% if numPicture == 2 %} </div>
-    <div class="row"> {% endif %}
         {% if pictureMain.imageModule is defined and pictureMain.imageModule %}
-            <div class="col-md-6 container-fluid">
+            <div class="col-md-4 container-fluid">
                 <div class="row text-center">
                     <img src="/files/pictures/small_thumb/{{ pictureMain.imageModule.getFilename() }}" class="az-picture-page-type-img"/><br/>
                     <span class="az-picture-page-type-img-text">Модульная картина</span>
