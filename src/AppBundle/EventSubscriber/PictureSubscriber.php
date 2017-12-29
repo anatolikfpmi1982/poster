@@ -43,12 +43,6 @@ class PictureSubscriber
 
                 $this->createResize($entity, $image);
             }
-            if($image = $entity->getImageModule()) {
-                $this->createResize($entity, $image);
-            }
-            if($image = $entity->getImageFrame()) {
-                $this->createResize($entity, $image);
-            }
             $entity->generateCode();
             $entity->setSlug($this->container->get('helper.slugcreator')->createSlug($entity->getTitle()));
         }
@@ -65,12 +59,6 @@ class PictureSubscriber
                 $this->createResize($entity, $image);
             }
             if($image = $entity->getImageBanner()) {
-                $this->createResize($entity, $image);
-            }
-            if($image = $entity->getImageModule()) {
-                $this->createResize($entity, $image);
-            }
-            if($image = $entity->getImageFrame()) {
                 $this->createResize($entity, $image);
             }
             $entity->setSlug($this->container->get('helper.slugcreator')->createSlug($entity->getTitle()));

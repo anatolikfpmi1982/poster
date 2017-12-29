@@ -31,15 +31,14 @@ class CategoriesController extends FrontController
         $query = $queryBuilder->getQuery();
 
 
-//        echo $query->getSQL();die();
-        $paginator  = $this->get('knp_paginator');
+        $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             self::PAGE_LIMIT/*limit per page*/
         );
 
-        $this->blocks = [ 'CategoryMenu' => 1, 'Reviews' => 2 , 'MainMenu' => 3, 'BreadCrumb' => 4, 'LastVisited' => 5, 'Deferred' => 6 ];
+        $this->blocks = ['CategoryMenu' => 1, 'Reviews' => 2, 'MainMenu' => 3, 'BreadCrumb' => 4, 'LastVisited' => 5, 'Deferred' => 6];
         $this->menu = '/';
         $this->pageSlug = $slug;
         $this->pageType = 'category';
