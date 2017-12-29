@@ -186,7 +186,9 @@ class AdminController extends CoreController
                 'sizeHelp' => '',
                 'materialHelp' => '',
                 'underframeHelp' => '',
-                'chooseHelp' => ''
+                'chooseHelp' => '',
+                'matHelp' => '',
+                'matSizeHelp' => '',
             ];
         }
 
@@ -195,6 +197,8 @@ class AdminController extends CoreController
             ->add('sizeHelp', CKEditorType::class, ['label' => 'Размер картины', 'required' => false])
             ->add('materialHelp', CKEditorType::class, ['label' => 'Материал', 'required' => false])
             ->add('underframeHelp', CKEditorType::class, ['label' => 'Подрамник', 'required' => false])
+            ->add('matHelp', CKEditorType::class, ['label' => 'Тип паспарту', 'required' => false])
+            ->add('matSizeHelp', CKEditorType::class, ['label' => 'Размер паспарту', 'required' => false])
             ->add('chooseHelp', CKEditorType::class, ['label' => 'Выбрано', 'required' => false])
             ->add('save', SubmitType::class, array('label' => 'Сохранить'))
             ->getForm();
