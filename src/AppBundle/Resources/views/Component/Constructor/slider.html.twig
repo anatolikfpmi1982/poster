@@ -2,8 +2,13 @@
     <div class="col-md-12 owl-carousel owl-theme" id="owl-example">
         {% if pictureThicknesses is defined and pictureThicknesses %}
             {% for thickness in pictureThicknesses %}
+                {% if thickness.images is defined and thickness.images and thickness.images[0] is defined and thickness.images[0] %}
+                    {% set img = '/files/frames/mini_thumb/' ~ thickness.images[0].getFilename() %}
+                {% else %}
+                    {% set img = asset('bundles/app/images/material_default.png') %}
+                {% endif %}
                 <div>
-                    <img src="http://malsup.github.io/images/beach1.jpg">
+                    <img src="{{ img }}" class="az-picture-page-constructor-picture-thickness-img"/>
                 </div>
             {% endfor %}
         {% else %}
