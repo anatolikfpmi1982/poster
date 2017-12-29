@@ -49,6 +49,14 @@ class Underframe implements ImageInterface
     private $ratio;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="price", type="float", nullable=true)
+     * @JMS\Expose
+     */
+    private $price;
+
+    /**
      * @var \DateTime
      * @ORM\Column(name="created_at", type="datetime", nullable=true)
      * @Gedmo\Timestampable(on="create")
@@ -210,6 +218,30 @@ class Underframe implements ImageInterface
     public function getRatio()
     {
         return $this->ratio;
+    }
+
+    /**
+     * Set price
+     *
+     * @param float $price
+     *
+     * @return Underframe
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
     }
 
     /**

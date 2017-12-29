@@ -47,6 +47,7 @@ class UnderframeAdmin extends AbstractAdmin
             ->add('image', 'sonata_type_admin', ['required' => false, 'label' => 'Изображение'])
             ->add('depth', null, ['required' => false, 'label' => 'Толщина', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
             ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент',  'empty_data' => '1', 'attr' => ['placeholder' => 1]])
+            ->add('price', null, ['required' => false, 'label' => 'Цена',  'empty_data' => '0', 'attr' => ['placeholder' => 0]])
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
             ->end();
     }
@@ -63,6 +64,8 @@ class UnderframeAdmin extends AbstractAdmin
             ->add('depth', null, ['editable' => true, 'label' => 'Толщина',
                 'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
             ->add('ratio', null, ['editable' => true, 'label' => 'Коэффициент',
+                'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
+            ->add('price', null, ['editable' => true, 'label' => 'Цена',
                 'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
 //            ->add('createdAt', null, ['label' => 'Создано'])
 //            ->add('updatedAt', null, ['label' => 'Обновлено'])
