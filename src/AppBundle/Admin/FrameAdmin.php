@@ -3,14 +3,14 @@ namespace AppBundle\Admin;
 
 use AppBundle\Entity\Frame;
 use AppBundle\Entity\Image;
-use Doctrine\ORM\EntityManager;
+use AppBundle\Service\ImageManagement;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityManager;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use AppBundle\Service\ImageManagement;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 
 /**
  * Admin class for frame
@@ -72,7 +72,7 @@ class FrameAdmin extends AbstractAdmin
                 'type_options' => array('delete' => true),
                 'cascade_validation' => true,
                 'btn_add' => 'Добавить изображение',
-                'required' => false
+                'required' => true
             ),
                 array(
                     'edit' => 'inline',

@@ -4,4 +4,5 @@ define(function (require, exports, module) {
     require('validate/localization');
     require('bootstrap');
     require('cycle2');
+    require('owl');
 });

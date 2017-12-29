@@ -1,15 +1,3 @@
-body {
-    padding-bottom: 10px;
-    background-color: #eeeeee;
-    font-family: 'PT Sans', sans-serif;
-}
-
-button, input, select, textarea {
-    font-family: 'PT Sans', sans-serif;}
-
-
-button, input, optgroup, select, textarea {
-    font-family: 'PT Sans', sans-serif;}
 .navbar {
     margin-bottom: 7px;
 }
@@ -19,13 +7,6 @@ button, input, optgroup, select, textarea {
     background-color: #ffffff;
 }
 
-.navbar-default .navbar-nav >
-.active > a, .navbar-default .navbar-nav >
-.active > a:focus, .navbar-default
-.navbar-nav > .active > a:hover {
-
-    backround-color: #ffffff;
-}
 .az-logo-title-text-div {
     margin: -20px 0 0 80px;
     font-size: 10px;
@@ -96,7 +77,6 @@ button, input, optgroup, select, textarea {
     text-shadow: none;
     font-size: 16px;
     vertical-align: middle;
-    text-transform: uppercase;
 
 }
 
@@ -115,9 +95,7 @@ button, input, optgroup, select, textarea {
 
 }
 
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .open > a,
-.navbar-default .navbar-nav > li > a:hover {
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > li > a:hover {
     background-image: none;
     color: #fd1200 !important;
     box-shadow: none !important;
@@ -193,7 +171,7 @@ button, input, optgroup, select, textarea {
     font-weight: bold;
     color: #fd1200;
     letter-spacing: 1px;
-    font: 20px/46px 'PT Sans', sans-serif;
+    font: 20px/46px 'Open Sans', 'arial', 'sans-serif';
 
 }
 
@@ -254,7 +232,7 @@ button, input, optgroup, select, textarea {
 }
 
 .az-sidebar-popular-item-body {
-    font: 11px/16px 'PT Sans', sans-serif;
+    font: 11px/16px 'arial', 'helvetica', 'sans-serif';
     color: #595959;
     font-style: italic;
 }
@@ -311,7 +289,7 @@ footer {
     background-color: #fd1200;
     padding: 8px;
     text-transform: uppercase;
-    font-size: 15px;
+    font-size: 16px;
     cursor: pointer;
 }
 
@@ -399,14 +377,14 @@ footer {
 }
 
 .az-slider-title {
-    font: 36px 'PT Sans', sans-serif;
+    font: 40px 'Open Sans', 'arial', 'helvetica', 'sans-serif';
     display: block;
     text-align: center;
     opacity: 1;
-    padding: 15px 0;
-    background-color: rgba(70, 70, 70, 0.8);
-    text-transform: uppercase;}
+    padding: 10px 0;
+    background-color: rgba(70, 70, 70, 0.8)
 
+}
 
 .az-slider-description {
     text-align: center;
@@ -416,7 +394,7 @@ footer {
 }
 
 .slider_item_cat {
-    font: 14px 'PT Sans', sans-serif;
+    font: 14px 'fregatregular', 'arial', 'helvetica', 'sans-serif';
     opacity: 1;
     text-align: center;
     padding: 0 20px;
@@ -522,7 +500,7 @@ footer {
     max-width: 160px;
     width: 80px;
     padding: 5px 5px;
-    font: 12px 'PT Sans', sans-serif;
+    font: 12px 'Open Sans', 'arial', 'helvetica', 'sans-serif';
     line-height: 1;
     text-transform: lowercase;
 }
@@ -615,12 +593,18 @@ footer {
     color: #fd1200;
     text-decoration: none;
 }
+
+body {
+    padding-bottom: 10px;
+    background-color: #eeeeee;
+}
+
 .az-header-top {
-    padding: 20px 0 0 30px;
+    padding: 20px 0 10px 20px;
 }
 
 .az-logo-title-text-div {
-    margin: -30px 0 0 80px;
+    margin: -20px 0 0 80px;
     font-size: 10px;
 }
 
@@ -689,15 +673,15 @@ footer {
 }
 
 .navbar-brand, .navbar-nav > li > a {
-    color: #333;
+    color: #000000 !important;
     text-shadow: none;
-    font-size: 14px;
+    font-size: 17px;
     vertical-align: middle;
-    line-height: 1;
+
 }
 
 .nav > li > a {
-    padding: 0 15px 0 0;
+    padding: 0 20px 0 0;
 }
 
 .nav > li > a > img {
@@ -751,8 +735,9 @@ footer {
     text-transform: uppercase;
     font-weight: bold;
     color: #fd1200;
-    letter-spacing: 1px;
-    font: 20px/46px 'PT Sans', sans-serif;
+    letter-spacing: 2px;
+    font: 20px/46px 'Open Sans', 'arial', 'sans-serif';
+
 }
 
 .az-page-section-body {
@@ -821,13 +806,15 @@ footer {
 .az-main-popular-item-header-type {
     text-align: left;
     font-size: 12px;
-    padding: 8px 15px 0 15px;
+    padding-right: 15px;
+    padding-left: 15px;
     margin: 20px auto 5px auto;
 }
 
 .az-main-popular-item-header-category {
     color: #fd1200;
-    padding: 8px  15px 0 15px;
+    padding-right: 15px;
+    padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
     height: 40px;
@@ -897,7 +884,7 @@ footer {
 .btn {
     background-color: #fd1200;
     color: #fffff;
-    padding: 7px 20px;
+    padding: 5px 20px;
     text-transform: lowercase;
     font-size: 13px;
 }
@@ -927,7 +914,7 @@ button, input, optgroup, select, textarea {
 }
 
 .az-sidebar-popular-item-body {
-    font: 11px/16px 'PT Sans', sans-serif;
+    font: 11px/16px 'arial', 'helvetica', 'sans-serif';
     color: #595959;
     font-style: italic;
 }
@@ -1058,7 +1045,7 @@ footer {
 }
 
 .slider_item_cat {
-    font: 14px 'PT Sans', sans-serif;
+    font: 14px 'fregatregular', 'arial', 'helvetica', 'sans-serif';
     opacity: 1;
     text-align: center;
     padding: 0 20px;
@@ -1199,7 +1186,7 @@ footer {
 .breadcrumb a {
     display: block;
     float: left;
-    font: 11px/31px    'PT Sans', sans-serif;
+    font: 11px/31px 'arial', 'helvetica', 'sans-serif';
     text-decoration: none;
     color: #808080;
     padding: 0 20px 0 6px;
@@ -1253,7 +1240,7 @@ footer {
 
 .az-category-page-filter-random-btn {
     width: 60px;
-    font: 9px/31px 'PT Sans', sans-serif;
+    font: 9px/31px 'arial', 'helvetica', 'sans-serif';
     padding: 0 10px;
 }
 
@@ -1287,7 +1274,7 @@ footer {
 
 .az-visited-block .az-page-main-section-div .az-page-section-header {
     text-transform: none;
-    font: 300 20px 'PT Sans', sans-serif !important;
+    font: 300 20px 'Open Sans', 'arial', 'helvetica', 'sans-serif' !important;
     color: #333;
 }
 
@@ -1312,7 +1299,7 @@ footer {
 }
 
 .az-main-popular-item-header-buttons {
-    padding-top: 5px;
+    padding-top: 20px;
 }
 
 .az-main-page-header-top-cells {
@@ -1373,7 +1360,8 @@ footer {
 }
 
 .az-reviews-name {
-    font: 20px/20px 'PT Sans', sans-serif;
+    font: 20px/20px 'Open Sans', 'arial', 'helvetica', 'sans-serif';
+    font-family: "Open Sans", "arial", "helvetica", "sans-serif";
     font-style: normal;
     font-weight: normal;
     font-size: 20px;
@@ -1397,25 +1385,26 @@ footer {
     display: inline-block;
     background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALAQMAAACTYuVlAAAABlBMVEUwrSMwrSMGiLPTAAAAAXRSTlMAQObYZgAAABJJREFUeF5j4GNAoP8PIAhZEABkXgYOXW/zqwAAAABJRU5ErkJggg==') no-repeat 0% 60%;
 }
+
 .az-rewiews-date {
     padding-left: 15px;
     display: inline-block;
     color: #f43812;
-    font: 16px/21px 'PT Sans', sans-serif;
+    font: 16px/21px 'arial', 'helvetica', 'sans-serif';
 }
 
 .az-rewiews-article {
     margin: 10px 0;
 }
 
-.current, .next, .page, .last{
+.current, .next, .page, .last {
     margin-right: 2px;
     transition: background .3s ease 0s;
     transition-property: background;
     transition-duration: 0.3s;
     transition-timing-function: ease;
     transition-delay: 0s;
-    font: 16px/16px 'PT Sans', sans-serif;
+    font: 16px/16px 'arial', 'helvetica', 'sans-serif';
     color: #595959;
     display: block;
     padding: 6px 10px 6px 9px;
@@ -1423,65 +1412,209 @@ footer {
     background: #fff;
     text-decoration: none;
     border: 2px solid #e4e4e4;
-    float:left;
+    float: left;
 }
-.next, .last{
+
+.next, .last {
     margin-right: 2px;
     transition: background .3s ease 0s;
     transition-property: background;
     transition-duration: 0.3s;
     transition-timing-function: ease;
     transition-delay: 0s;
-    font: 16px/16px 'PT Sans', sans-serif;
+    font: 16px/16px 'arial', 'helvetica', 'sans-serif';
     color: #e4e4e4;
     display: block;
     padding: 6px 10px 6px 9px;
     text-align: center;
     background: #fff;
     text-decoration: none;
-    float:left;
+    float: left;
     border: none;
 }
-.first, .previous{
+
+.first, .previous {
     margin-right: 2px;
     transition: background .3s ease 0s;
     transition-property: background;
     transition-duration: 0.3s;
     transition-timing-function: ease;
     transition-delay: 0s;
-    font: 16px/16px 'PT Sans', sans-serif;
-    color:#e4e4e4;
+    font: 16px/16px 'arial', 'helvetica', 'sans-serif';
+    color: #e4e4e4;
     display: block;
     padding: 6px 10px 6px 9px;
     text-align: center;
     background: #fff;
     text-decoration: none;
-    float:right;
+    float: right;
 }
-.current a,  .page a {
+
+.current a, .page a {
     color: #333;
     text-decoration: none;
 }
-.first a, .previous a, .last a, .next a{
+
+.first a, .previous a, .last a, .next a {
     color: #e4e4e4;
     text-decoration: none;
 }
 
-.current:hover,  .page:hover{
+.current:hover, .page:hover {
     color: #333;
     border: 2px solid #fd1200;
 }
 
-.previous a:hover, .next a:hover, .last a:hover, .first a:hover{
+.previous a:hover, .next a:hover, .last a:hover, .first a:hover {
     color: #fd1200;
     text-decoration: none;
 }
 
-.current:active,  .page:active, .next:active, .last:active, .last:active, .next:active {
+.current:active, .page:active, .next:active, .last:active, .last:active, .next:active {
     color: #333;
     border: 2px solid #fd1200;
 }
 
 .az-picture-page-type-img-text {
     font-size: 10px;
+}
+
+.az-picture-page-slider-material {
+    padding-top: 20px;
+}
+
+.az-picture-page-constructor-main-img {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+/**social btn**/
+.soc-share {
+    float: left;
+    position: relative;
+    margin: 10px 1px 5px 2px;
+}
+
+.btn-twitter {
+    background: #00ACEE;
+    border-radius: 3px;
+    color: #fff;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #00ACEE;
+    width: 20px;
+    padding: 0;
+    margin: 0 0 0 3px;
+    line-height: normal;
+}
+
+.btn-twitter:link, .btn-twitter:visited {
+    color: #fff;
+}
+.btn-twitter:active, .btn-twitter:hover {
+    background: #0075a2;
+    color: #fff;
+    border-color:#0075a2 ;
+}
+
+/* nice bootstrap ready facebook share button http://justincron.com */
+
+.btn-facebook {
+    color: #fff;
+    background-color: #4C67A1;
+    width: 20px!important;
+    margin: 0 !important;
+    border-radius: 3px;
+    padding: 0;
+    font-size: 13px;
+    line-height: normal;
+}
+.btn-facebook:hover {
+    color: #fff;
+    background-color: #3b5da0;
+    border-color: #3b5da0;
+    cursor: pointer;
+}
+.btn-facebook:focus {
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn-vk {
+    color: #fff;
+    background-color: #4C67A1;
+    width: 20px;
+    text-align: center;
+    border-radius: 3px;
+    padding: 0;
+    line-height: normal;
+}
+
+.btn-vk:hover, btn-vk:focus{
+    background-color: #5181b8;
+    border-color:#5181b8;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.btn-linkedin {
+    color: #fff;
+    background-color: #007bb6;
+    width: 20px!important;
+    margin: 0 !important;
+    border-radius: 3px;
+    padding: 0;
+    font-size: 13px;
+    line-height: normal;
+    height: 20px!important;
+}
+
+.btn-linkedin:hover {
+    color: #fff;
+    background-color: #007bb6;
+    border-color: #007bb6;
+    cursor: pointer;
+}
+.btn-linkedin:focus {
+    color: #fff;
+    cursor: pointer;
+}
+.btn-google {
+    color: #fff;
+    background-color: #dd4b39;
+    width: 20px!important;
+    margin: 0 !important;
+    border-radius: 3px;
+    padding: 0;
+    font-size: 13px;
+    line-height: normal;
+    height: 20px!important;
+}
+
+
+.btn-google:hover {
+    color: #fff;
+    background-color: #dd4b39;
+    border-color: #dd4b39;
+    cursor: pointer;
+}
+.btn-google:focus {
+    color: #fff;
+    cursor: pointer;
+}
+
+#ok_shareWidget {
+    width: 20px;
+    float: left;
+}
+#ok_shareWidget:hover, #ok_shareWidget:focus{
+    cursor: pointer;
+}
+
+.size-20 .like-button #mm-like-logo {
+    width: 20px;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+
 }

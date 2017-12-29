@@ -14,7 +14,7 @@
         {% if materials %}
         {% set ind = 1 %}
         {% for material in materials %}
-        <div class="col-md-6 container-fluid">
+        <div class="col-md-4 container-fluid">
             <div class="row text-center">
                 <img src="/files/banner_materials/small_thumb/{{ material.image.getFilename() }}" class="az-picture-page-material-img"/><br/>
                 <span class="az-picture-page-type-img-text">{{ material.title }}</span>
@@ -25,7 +25,7 @@
                        data-title="{{ material.title }}" {% if ind == 1 %}checked{% endif %}/>
             </div>
         </div>
-        {% if ind is even %}
+        {% if ind % 3 == 0 %}
     </div>
     <div class="row">
         {% endif %}
