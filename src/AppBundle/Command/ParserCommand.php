@@ -150,7 +150,7 @@ class ParserCommand extends ContainerAwareCommand
             $image->setCreatedAt(new \DateTime())
                 ->setEntityName($picture::IMAGE_PATH);
             $this->em->persist($image);
-            $picture->setImageBanner($image);
+            $picture->setImage($image);
 
             $this->em->persist($picture);
         }

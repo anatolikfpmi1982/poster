@@ -12,10 +12,10 @@
     </div>
     <div class="row az-picture-page-sidebar-size-div-body az-picture-page-sidebar-type-div-select">
         {% set numPicture = 0 %}
-        {% if pictureMain.imageBanner is defined and pictureMain.imageBanner %}
+        {% if pictureMain.image is defined and pictureMain.image %}
             <div class="col-md-4 container-fluid">
                 <div class="row text-center">
-                    <img src="/files/pictures/small_thumb/{{ pictureMain.imageBanner.getFilename() }}" class="az-picture-page-type-img"/><br/>
+                    <img src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}" class="az-picture-page-type-img"/><br/>
                     <span class="az-picture-page-type-img-text">Баннер</span>
                 </div>
                 <div class="row text-center az-picture-page-material-radio-div">

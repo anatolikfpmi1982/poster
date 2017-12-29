@@ -18,8 +18,8 @@
             <div class="col-md-6">Автор: <a href="{{ author_link }}">{{ pictureMain.author.name }}</a></div>
             <div class="col-md-6">Артикул: {{ pictureMain.code }}</div>
         </div>
-        {% if pictureMain.imageBanner and pictureMain.imageBanner.getFilename() %}
-            {% set img = '/files/pictures/thumb/' ~ pictureMain.imageBanner.getFilename() %}
+        {% if pictureMain.image and pictureMain.image.getFilename() %}
+            {% set img = '/files/pictures/thumb/' ~ pictureMain.image.getFilename() %}
         {% else %}
             {% set img = asset('bundles/app/images/default_picture.jpg') %}
         {% endif %}

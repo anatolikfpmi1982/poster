@@ -134,7 +134,7 @@ class Picture implements ImageInterface
     /**
      * @var Image
      * @ORM\OneToOne(targetEntity="Image", fetch="EXTRA_LAZY", cascade={"persist"})
-     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="image_banner_id", referencedColumnName="id")
      */
     private $image;
 

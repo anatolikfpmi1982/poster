@@ -59,7 +59,7 @@ class PictureAdmin extends AbstractAdmin
             ->with('Main')
             ->add('name', null, ['required' => false, 'label' => 'Имя файла'])
             ->add('categories', null, ['required' => false, 'label' => 'Категории'])
-            ->add('imageBanner', 'sonata_type_admin', ['required' => true, 'label' => 'Изображение'])
+            ->add('image', 'sonata_type_admin', ['required' => true, 'label' => 'Изображение'])
 //            ->add('imageModule', 'sonata_type_admin', ['required' => true, 'label' => 'Изображение-модульное'])
 //            ->add('imageFrame', 'sonata_type_admin', ['required' => true, 'label' => 'Изображение-рама'])
             ->add('id', null, ['required' => false, 'label' => 'ID', 'disabled' =>true])
@@ -96,7 +96,7 @@ class PictureAdmin extends AbstractAdmin
         $listMapper
             ->add('id', null, ['label' => 'ID'])
             ->add('code', null, ['label' => 'Артикул'])
-            ->add('imageBanner', null,
+            ->add('image', null,
                 ['label' => 'Изображение', 'template' => 'AppBundle:Admin:pictures_list_image.html.twig'])
             ->add('name', null, ['label' => 'Имя файла', 'editable' => true])
             ->add('title', null, ['label' => 'Название', 'editable' => true])
@@ -293,8 +293,8 @@ class PictureAdmin extends AbstractAdmin
     public function postPersist($picture)
     {
         if($picture instanceof Picture) {
-            if(!$picture->getName() && $picture->getImageBanner() instanceof Image)  {
-                $picture->setName( $picture->getImageBanner()->getName() );
+            if(!$picture->getName() && $picture->getImage() instanceof Image)  {
+                $picture->setName( $picture->getImage()->getName() );
             }
             $this->em->persist($picture);
             $this->em->flush();
@@ -321,8 +321,8 @@ class PictureAdmin extends AbstractAdmin
     public function postUpdate($picture)
     {
         if($picture instanceof Picture) {
-            if(!$picture->getName() && $picture->getImageBanner() instanceof Image) {
-                $picture->setName( $picture->getImageBanner()->getName() );
+            if(!$picture->getName() && $picture->getImage() instanceof Image) {
+                $picture->setName( $picture->getImage()->getName() );
                 $this->em->persist($picture);
                 $this->em->flush();
             }
@@ -336,7 +336,7 @@ class PictureAdmin extends AbstractAdmin
      */
     public function preRemove($picture){
         if($picture instanceof Picture) {
-            $this->imageManagement->deleteImages($picture->getImageBanner());
+            $this->imageManagement->deleteImages($picture->getImage());
         }
     }
 
