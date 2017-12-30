@@ -134,30 +134,9 @@ class Picture implements ImageInterface
     /**
      * @var Image
      * @ORM\OneToOne(targetEntity="Image", fetch="EXTRA_LAZY", cascade={"persist"})
-     * @ORM\JoinColumn(name="image_banner_id", referencedColumnName="id")
-     */
-    private $image;
-
-    /**
-     * @var Image
-     * @ORM\OneToOne(targetEntity="Image", fetch="EXTRA_LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
      */
-    private $imageBanner;
-
-    /**
-     * @var Image
-     * @ORM\OneToOne(targetEntity="Image", fetch="EXTRA_LAZY", cascade={"persist"})
-     * @ORM\JoinColumn(name="image_module_id", referencedColumnName="id")
-     */
-    private $imageModule;
-
-    /**
-     * @var Image
-     * @ORM\OneToOne(targetEntity="Image", fetch="EXTRA_LAZY", cascade={"persist"})
-     * @ORM\JoinColumn(name="image_frame_id", referencedColumnName="id")
-     */
-    private $imageFrame;
+    private $image;
 
     /**
      * @var Author
@@ -548,80 +527,6 @@ class Picture implements ImageInterface
         $this->popular = $popular;
 
         return $this;
-    }
-
-
-
-    /**
-     * Set imageBanner
-     *
-     * @param Image $imageBanner
-     *
-     * @return Picture
-     */
-    public function setImageBanner(Image $imageBanner = null)
-    {
-        $this->imageBanner = $imageBanner;
-
-        return $this;
-    }
-
-    /**
-     * Get imageBanner
-     *
-     * @return Image
-     */
-    public function getImageBanner()
-    {
-        return $this->imageBanner;
-    }
-
-    /**
-     * Set imageModule
-     *
-     * @param Image $imageModule
-     *
-     * @return Picture
-     */
-    public function setImageModule(Image $imageModule = null)
-    {
-        $this->imageModule = $imageModule;
-
-        return $this;
-    }
-
-    /**
-     * Get imageModule
-     *
-     * @return Image
-     */
-    public function getImageModule()
-    {
-        return $this->imageModule;
-    }
-
-    /**
-     * Set imageFrame
-     *
-     * @param Image $imageFrame
-     *
-     * @return Picture
-     */
-    public function setImageFrame(Image $imageFrame = null)
-    {
-        $this->imageFrame = $imageFrame;
-
-        return $this;
-    }
-
-    /**
-     * Get imageFrame
-     *
-     * @return Image
-     */
-    public function getImageFrame()
-    {
-        return $this->imageFrame;
     }
 
     /**
