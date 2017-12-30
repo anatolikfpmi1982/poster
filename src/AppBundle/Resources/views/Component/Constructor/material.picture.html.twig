@@ -27,7 +27,9 @@
             <div class="row text-center az-picture-page-material-radio-div">
                 <input type="radio" class="btn az-picture-page-constructor-material-picture-radio" value="{{ material.title }}" title="az-picture-page-material-picture"
                        name="az-picture-page-material-picture"
-                       data-title="{{ material.title }}" {% if ind == 1 %}checked{% endif %}/>
+                       data-title="{{ material.title }}"
+                       data-id="{{ material.id }}"
+                       {% if ind == 1 %}checked{% endif %}/>
             </div>
         </div>
         {% if ind % 3 == 0 %}
