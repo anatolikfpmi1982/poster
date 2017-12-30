@@ -9,10 +9,16 @@
                     {% set img = asset('bundles/app/images/material_default.png') %}
                 {% endif %}
                 <div>
-                    <img src="{{ img }}" class="az-picture-page-constructor-picture-module-type-img" data-title="{{ moduleType.name }}"/>
+                    <img src="{{ img }}" class="az-picture-page-constructor-picture-module-type-img"
+                         data-title="{{ moduleType.name }}"
+                         data-ratio="{{ moduleType.ratio }}"
+                         data-code="{{ moduleType.formula }}"
+                    />
                 </div>
             {% endfor %}
             <input type="hidden" name="az-picture-constructor-module-selected" id="az-picture-constructor-module-selected" value="{{ moduleTypes[0].name }}">
+            <input type="hidden" name="az-picture-constructor-module-ratio-selected" id="az-picture-constructor-module-ratio-selected" value="{{ moduleTypes[0].ratio }}">
+            <input type="hidden" name="az-picture-constructor-module-code-selected" id="az-picture-constructor-module-code-selected" value="{{ moduleTypes[0].formula }}">
         {% else %}
             У нас пока отсутствуют шаблоны для данного вида картин.
         {% endif %}
