@@ -43,22 +43,6 @@ define(function (require, exports, module) {
             return false;
         });
 
-        // Picture cell
-        // picture cell defer picture
-        $("button.btn_az-main-popular_defer").click(function (event) {
-            event.stopImmediatePropagation();
-            var $this = $(this);
-            var id = $this.attr('data-id');
-            $.ajax({
-                url: "/ajax/picture/defer",
-                data: {'id': id}
-            }).done(function () {
-                $this.text("Отложено");
-                $this.prop('disabled', true);
-            });
-            return false;
-        });
-
         // Reviews page
         // add review
         $("#add_review").submit(function (event) {
@@ -137,6 +121,36 @@ define(function (require, exports, module) {
                 $('div.children-subcategory-' + parent).show();
                 $('div.children-subsubcategory-' + id).show();
             }
+            return false;
+        });
+
+        // picture cell defer button
+        $("button.defer-bnt").click(function (event) {
+            event.stopImmediatePropagation();
+            var $this = $(this);
+            var id = $this.attr('data-id');
+            $.ajax({
+                url: "/ajax/picture/defer",
+                data: {'id': id}
+            }).done(function () {
+                $this.text("Отложено");
+                $this.prop('disabled', true);
+            });
+            return false;
+        });
+
+        // picture page defer button
+        $("button.picture_defer-bnt").click(function (event) {
+            event.stopImmediatePropagation();
+            var $this = $(this);
+            var id = $this.attr('data-id');
+            $.ajax({
+                url: "/ajax/picture/defer",
+                data: {'id': id}
+            }).done(function () {
+                $("button.picture_defer-bnt").text("Отложено");
+                $("button.picture_defer-bnt").prop('disabled', true);
+            });
             return false;
         });
 

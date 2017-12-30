@@ -47,7 +47,7 @@ class SessionManagement {
         $session = $this->container->get( 'session' );
         if ( $deferred = $session->get( 'deferred' ) ) {
             if ( !in_array( $id, $deferred, false ) ) {
-                array_shift($deferred, $id);
+                $deferred[] = $id;
             }
         } else {
             $deferred = [ $id ];
