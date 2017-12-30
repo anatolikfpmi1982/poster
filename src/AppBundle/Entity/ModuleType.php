@@ -89,6 +89,12 @@ class ModuleType implements ImageInterface
      */
     private $isActive;
 
+    /**
+     * @var string
+     * @ORM\Column(name="formula", type="string", length=1000, nullable=true)
+     */
+    private $formula;
+
 
     /**
      * @return string
@@ -282,5 +288,23 @@ class ModuleType implements ImageInterface
     public function getImageLink()
     {
         return '/files/' . $this->image->getEntityName() . '/' . $this->image->getFilename();
+    }
+
+    /**
+     * @return string
+     */
+    public function getFormula() {
+        return $this->formula;
+    }
+
+    /**
+     * @param string $formula
+     *
+     * @return ModuleType
+     */
+    public function setFormula( $formula ) {
+        $this->formula = $formula;
+
+        return $this;
     }
 }

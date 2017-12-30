@@ -1142,29 +1142,70 @@ footer {
 }
 
 /**galleries paint**/
-
+.owl-carousel .owl-stage-outer {
+    width: 83%;
+    margin: 15px auto;
+    border: 1px solid #e6e6e6;
+    height: 100px;
+}
 .owl-theme .owl-nav {
     position: absolute;
     top: 0;
-    width: 50%;
+    width: 100%;
     opacity: 1;
     filter: alpha(opacity=0);
     height: 100%;
     cursor: pointer;
     z-index: 800;
 }
+.owl-carousel .owl-item {
+    border-left: 1px solid #e6e6e6;
+}
 
+
+
+.owl-carousel .owl-item:first-child {
+    border-left: none;
+}
+
+.owl-theme .owl-nav .disabled {
+    opacity: 1;
+
+}
+.owl-theme .owl-nav [class*="owl-"] {
+    margin: 5px 0 0 5px;
+    padding: 4px 0;
+}
 .owl-prev {
     display: block;
     color: #fff;
-    left: 10px;
+    left: 0;
     position: absolute;
-    margin-top: 1px;
     margin-left: -8px;
-    background: url('../images/prev.png') 5% 50% no-repeat rgba(0, 120, 201, 0.7) !important;
+    background: url('../images/prev-gall.png') 50% 50% no-repeat rgba(196, 193, 193, 1) !important;
     opacity: 1;
+    width: 54px;
+    height: 100px;
+    border-radius: inherit;
 }
 
+
+.owl-next {
+    background: url('../images/next-gall.png') 50% 50% no-repeat   rgba(196, 193, 193, 1) !important;
+    display: block;
+    color: #fff;
+    right: 25px;
+    position: absolute;
+    margin-top: 0px;
+    margin-left: -8px;
+    opacity: 1;
+    width: 54px;
+    height: 100px;
+    border-radius: inherit;}
+
+.owl-theme .owl-nav [class*="owl-"]:hover {
+    background-color:  rgba(168, 168, 168, 1) !important;
+}
 .az-picture-page-sidebar-price-btn-div-left {
     padding-left: 0;
 }

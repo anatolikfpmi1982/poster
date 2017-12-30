@@ -12,6 +12,13 @@ define(function (require, exports, module) {
         $("#owl-example").owlCarousel({
             items: 6,
             dots: false,
+            nav: true,
+            navText: ["", ""]
+        });
+
+        $("#owl-template").owlCarousel({
+            items: 5,
+            dots: false,
             nav: true
         });
 
@@ -66,7 +73,7 @@ define(function (require, exports, module) {
                     'review': $('#add_review_description').val()
                 }
             }).done(function (data) {
-                if(data['result'])
+                if (data['result'])
                     alert('Спасибо! Отзыв отправлен на модерацию!');
                 else
                     alert('Возникли проблемы при отправке отзыва.');
