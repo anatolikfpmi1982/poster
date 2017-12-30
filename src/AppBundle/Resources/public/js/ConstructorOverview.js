@@ -19,10 +19,10 @@ var ConstructorOverview = new function () {
         this.size = $("select.az-picture-page-sidebar-size-select").val();
         var material = $("input.az-picture-page-constructor-material-radio:checked"),
             material_picture = $("input.az-picture-page-constructor-material-picture-radio:checked");
-        this.material = this.type == 'Баннер' ?
+        this.material = this.type != 'В раме' ?
             material.val() :
             material_picture.val();
-        this.material_id = this.type == 'Баннер' ?
+        this.material_id = this.type != 'В раме' ?
             material.data('id') :
             material_picture.data('id');
         var thickness = $("input.z-picture-page-thickness:checked");
@@ -117,8 +117,8 @@ var ConstructorOverview = new function () {
             case 'Панно':
                 thickness_div.show();
                 thickness_picture_div.hide();
-                banner_material_div.hide();
-                picture_material_div.show();
+                banner_material_div.show();
+                picture_material_div.hide();
                 picture_paspartu_div.hide();
                 template_div.show();
                 break;
@@ -135,10 +135,19 @@ var ConstructorOverview = new function () {
                 price = 0;
                 break;
             case 'Панно':
-                price = 0;
+                price = this.calculatePanel();
                 break;
         }
         $('span.az-picture-page-sidebar-price-value').html(price);
+    };
+
+    this.calculatePanel = function () {
+        var average_price = this.calculateBannerSquare(),
+            banner_add_price = $('input#constructor_banner_' + this.material_id + '_additional_price').val(),
+            panel_ratio = $('input#az-picture-constructor-module-ratio-selected').val(),
+            panel_code = $('input#az-picture-constructor-module-code-selected').val();
+        var num = panel_code.split(':');
+        return this.square * average_price * this.thickness_ratio + parseInt(banner_add_price) + parseInt(num.length) * parseInt(panel_ratio);
     };
 
     this.calculateBanner = function () {
