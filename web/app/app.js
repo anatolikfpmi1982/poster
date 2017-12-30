@@ -53,10 +53,10 @@ define(function (require, exports, module) {
                 url: "/ajax/review/add",
                 method: 'POST',
                 data: {
-                    'name': $('#add_review_name').val(),
-                    'email': $('#add_review_email').val(),
-                    'city': $('#add_review_city').val(),
-                    'review': $('#add_review_description').val()
+                    'name': $('#az-add_review_name').val(),
+                    'email': $('#az-add_review_email').val(),
+                    'city': $('#az-add_review_city').val(),
+                    'review': $('#az-add_review_description').val()
                 }
             }).done(function (data) {
                 if (data['result'])
