@@ -2,11 +2,14 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Image;
+use AppBundle\Entity\Picture;
 use AppBundle\Entity\Settings;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * Class PicturesController
@@ -18,10 +21,15 @@ class PicturesController extends FrontController {
      * @Route("/picture/{id}", name="picture")
      *
      * @return Response
+     * @throws BadRequestHttpException
      */
     public function showAction( $id ) {
         $em      = $this->get( 'doctrine.orm.entity_manager' );
+        /** @var Picture $picture */
         $picture = $em->getRepository( 'AppBundle:Picture' )->find( $id );
+        if(!$picture instanceof Picture) {
+            throw new BadRequestHttpException('Картина не найдена.');
+        }
 
         $this->blocks   = [ 'CategoryMenu' => 1, 'Reviews' => 2, 'MainMenu' => 3, 'BreadCrumb' => 4];
         $this->pageSlug = $id;
@@ -31,7 +39,17 @@ class PicturesController extends FrontController {
 
         $this->get( 'app.session_manager' )->addLastVisitedItem( $picture->getId() );
 
-        $this->data['pictureMain']     = $picture;
+        $this->data['pictureMain'] = $picture;
+        if($picture->getImage() instanceof Image) {
+            $imgFile = $picture->getImage()->getBaseFile();
+            $size = getimagesize($imgFile);
+            $this->data['pictureBaseWidth'] = $size[0];
+            $this->data['pictureBaseHeight'] = $size[1];
+            $imgFileThumb = $picture->getImage()->getSmallThumbBaseFile();
+            $size = getimagesize($imgFileThumb);
+            $this->data['pictureSmallWidth'] = $size[0];
+            $this->data['pictureSmallHeight'] = $size[1];
+        }
         $this->data['pictureSize'] = $em->getRepository( 'AppBundle:PictureSize' )->findBy( [ 'isActive' => true ], [ 'width' => 'ASC' ] );
         $this->data['materials']   = $em->getRepository( 'AppBundle:BannerMaterial' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
         $this->data['pictureMaterials']   = $em->getRepository( 'AppBundle:FrameMaterial' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );

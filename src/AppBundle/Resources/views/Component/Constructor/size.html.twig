@@ -14,13 +14,16 @@
         <select class="btn az-picture-page-sidebar-size-select" name="picture-size" id="az-picture-page-constructor-size-select" title="">
             {#<option value="color">Цветопроба</option>#}
             <option value="own_size">Свой размер</option>
-            {% if pictureSize %}
-                {% set size_default = 1 %}
-                {% for size in pictureSize %}
-                    <option value="{{ size.width }}x{{ size.height }}" {% if size_default == 1 %}selected{% endif %}>{{ size.width }}x{{ size.height }}</option>
-                    {% set size_default = size_default + 1 %}
-                {% endfor %}
-            {% endif %}
+            {% set size_default = 1 %}
+            {% for i in range(10, 200, 10) %}
+                {% if pictureBaseWidth >= pictureBaseHeight %}
+                    {% set koeff = (pictureBaseWidth/pictureBaseHeight) %}
+                    <option value="{{ (koeff*i)|round }}x{{ i }}" {% if size_default == 1 %}selected{% endif %}>{{ (koeff*i)|round }}см x {{ i }}см</option>
+                {% else %}
+                    {% set koeff = (pictureBaseHeight/pictureBaseWidth) %}
+                    <option value="{{ i }}x{{ (koeff*i)|round }}" {% if size_default == 1 %}selected{% endif %}>{{ i }}см x {{ (koeff*i)|round }}см</option>
+                {% endif %}
+            {% endfor %}
         </select>
     </div>
 </div>

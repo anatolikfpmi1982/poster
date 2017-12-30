@@ -1153,6 +1153,7 @@ footer {
     border: 1px solid #e6e6e6;
     height: 100px;
 }
+
 .owl-theme .owl-nav {
     position: absolute;
     top: 0;
@@ -1163,11 +1164,10 @@ footer {
     cursor: pointer;
     z-index: 800;
 }
+
 .owl-carousel .owl-item {
     border-left: 1px solid #e6e6e6;
 }
-
-
 
 .owl-carousel .owl-item:first-child {
     border-left: none;
@@ -1177,10 +1177,12 @@ footer {
     opacity: 1;
 
 }
+
 .owl-theme .owl-nav [class*="owl-"] {
     margin: 5px 0 0 5px;
     padding: 4px 0;
 }
+
 .owl-prev {
     display: block;
     color: #fff;
@@ -1194,9 +1196,8 @@ footer {
     border-radius: inherit;
 }
 
-
 .owl-next {
-    background: url('../images/next-gall.png') 50% 50% no-repeat   rgba(196, 193, 193, 1) !important;
+    background: url('../images/next-gall.png') 50% 50% no-repeat rgba(196, 193, 193, 1) !important;
     display: block;
     color: #fff;
     right: 25px;
@@ -1206,10 +1207,11 @@ footer {
     opacity: 1;
     width: 54px;
     height: 100px;
-    border-radius: inherit;}
+    border-radius: inherit;
+}
 
 .owl-theme .owl-nav [class*="owl-"]:hover {
-    background-color:  rgba(168, 168, 168, 1) !important;
+    background-color: rgba(168, 168, 168, 1) !important;
 }
 
 
@@ -1762,4 +1764,13 @@ footer {
     border: 1px solid #e6e6e6;
     cursor: pointer;
     margin-left: 1px;
+}
+
+.az-picture-page-sidebar-type-div-frame-border {
+    border: 3px solid #000000;
+}
+
+.az-picture-page-sidebar-type-div-frame-mat {
+    background-color: #eeeeee;
+    padding-top: 3px;
 }

@@ -45,7 +45,7 @@ var ConstructorOverview = new function () {
                 picture_paspartu_div.hide();
                 template_div.hide();
                 break;
-            case 'Картина':
+            case 'В раме':
                 thickness_div.hide();
                 thickness_picture_div.show();
                 banner_material_div.hide();
@@ -53,7 +53,7 @@ var ConstructorOverview = new function () {
                 picture_paspartu_div.show();
                 template_div.hide();
                 break;
-            case 'Модульная картина':
+            case 'Панно':
                 thickness_div.hide();
                 thickness_picture_div.hide();
                 banner_material_div.hide();
@@ -66,12 +66,16 @@ var ConstructorOverview = new function () {
 
     this.showPrice = function () {
         var price = 0;
-        if (this.type == 'Баннер') {
-            price = this.calculateBanner();
-        } else if (this.type == 'Картина') {
-
-        } else if (this.type == 'Модульная картина') {
-
+        switch (this.type) {
+            case 'Баннер':
+                price = this.calculateBanner();
+                break;
+            case 'В раме':
+                price = 0;
+                break;
+            case 'Панно':
+                price = 0;
+                break;
         }
         $('span.az-picture-page-sidebar-price-value').html(price);
     };
