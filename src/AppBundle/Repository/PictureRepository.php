@@ -28,6 +28,21 @@ class PictureRepository extends EntityRepository {
     }
 
     /**
+     * * Get query builder for active pictures by category id
+     *
+     * @param array $ids
+     * @return QueryBuilder
+     */
+    public function getActivePicturesForDeferred( $ids ) {
+        return $this->createQueryBuilder( 'p' )
+            ->innerJoin( 'p.categories', 'c' )// Inner Join with categories
+            ->innerJoin( 'p.form', 'f' )// Inner Join with picture forms
+            ->andWhere( 'p.isActive = true' )
+            ->where( 'p.id IN (:ids)' )
+            ->setParameter( 'ids', $ids );
+    }
+
+    /**
      * Get query builder for active pictures by author slug
      *
      * @param string $slug

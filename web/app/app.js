@@ -172,7 +172,7 @@ define(function (require, exports, module) {
             var $this = $(this);
             var id = $this.attr('data-id');
             $.ajax({
-                url: "/ajax/picture/defer",
+                url: "/ajax/picture/defer/add",
                 data: {'id': id}
             }).done(function () {
                 $this.text("Отложено");
@@ -187,11 +187,26 @@ define(function (require, exports, module) {
             var $this = $(this);
             var id = $this.attr('data-id');
             $.ajax({
-                url: "/ajax/picture/defer",
+                url: "/ajax/picture/defer/add",
                 data: {'id': id}
             }).done(function () {
                 $("button.picture_defer-bnt").text("Отложено");
                 $("button.picture_defer-bnt").prop('disabled', true);
+            });
+            return false;
+        });
+
+        // picture page defer delete button
+        $("button.delete-defer-bnt").click(function (event) {
+            event.stopImmediatePropagation();
+            var $this = $(this);
+            var id = $this.attr('data-id');
+            $.ajax({
+                url: "/ajax/picture/defer/delete",
+                data: {'id': id}
+            }).done(function () {
+                $this.text("Удалено");
+                $this.prop('disabled', true);
             });
             return false;
         });
