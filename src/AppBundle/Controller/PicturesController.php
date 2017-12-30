@@ -67,21 +67,4 @@ class PicturesController extends FrontController {
         // parameters to template
         return $this->render( 'AppBundle:Pictures:show.html.twig', $this->data );
     }
-
-    /**
-     * @Route("/ajax/picture/defer", name="picture_defer")
-     *
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function deferAction(Request $request) {
-        $id = $request->query->get('id');
-
-        $this->get( 'app.session_manager' )->addDeferredItem( (int)$id );
-
-        // parameters to template
-        return new JsonResponse(array('result' => 'success'));
-    }
-
 }

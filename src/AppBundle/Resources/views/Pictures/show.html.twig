@@ -71,7 +71,9 @@
         <input type="hidden" name="constructor_banner_additional_price" id="constructor_banner_additional_price" value="{{ banner_add_price }}">
     </div>
     <div class="col-md-3 container-fluid">
-        <div class="row az-picture-page-constructor-block">Отложенные блок</div>
+        <div class="row az-picture-page-constructor-block">
+            {% include('AppBundle:Component:Constructor/deferred.html.twig') %}
+        </div>
         <div class="row az-picture-page-constructor-block">
             {% include('AppBundle:Component:Constructor/price.html.twig') %}
         </div>

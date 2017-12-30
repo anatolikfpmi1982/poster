@@ -13,20 +13,25 @@ class SessionManagement {
     private $container;
 
     /**
+     * @var object
+     */
+    private $session;
+
+    /**
      * SessionManagement constructor.
      *
      * @param ContainerInterface $container
      */
     public function __construct( ContainerInterface $container ) {
         $this->container = $container;
+        $this->session = $session = $this->container->get( 'session' );
     }
 
     /**
      * @param int $id
      */
     public function addLastVisitedItem( $id ) {
-        $session = $this->container->get( 'session' );
-        if ( $lastVisited = $session->get( 'lastVisited' ) ) {
+        if ( $lastVisited = $this->session->get( 'lastVisited' ) ) {
             if ( count( $lastVisited ) >= 5 ) {
                 array_pop( $lastVisited );
             }
@@ -37,22 +42,38 @@ class SessionManagement {
         } else {
             $lastVisited = [ $id ];
         }
-        $session->set( 'lastVisited', $lastVisited );
+        $this->session->set( 'lastVisited', $lastVisited );
     }
 
     /**
+     * Add deferred picture id to session
+     *
      * @param int $id
      */
     public function addDeferredItem( $id ) {
-        $session = $this->container->get( 'session' );
-        if ( $deferred = $session->get( 'deferred' ) ) {
+        if ( $deferred = $this->session->get( 'deferred' ) ) {
             if ( !in_array( $id, $deferred, false ) ) {
                 $deferred[] = $id;
             }
         } else {
             $deferred = [ $id ];
         }
-        $session->set( 'deferred', $deferred );
+        $this->session->set( 'deferred', $deferred );
+    }
+
+    /**
+     * Delete deferred picture id from session
+     *
+     * @param int $id
+     */
+    public function deleteDeferredItem( $id ) {
+        if ( $deferred = $this->session->get( 'deferred' ) ) {
+            if ( ($index = array_search( $id, $deferred, false )) !== null ) {
+                unset($deferred[$index]);
+            }
+
+            $this->session->set( 'deferred', $deferred );
+        }
     }
 
     /**
