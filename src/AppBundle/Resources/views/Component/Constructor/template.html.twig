@@ -12,6 +12,7 @@
                     <img src="{{ img }}" class="az-picture-page-constructor-picture-module-type-img"/>
                 </div>
             {% endfor %}
+            <input type="hidden" name="az-picture-constructor-module-selected" id="az-picture-constructor-module-selected" value="{{ moduleTypes[0].name }}">
         {% else %}
             У нас пока отсутствуют шаблоны для данного вида картин.
         {% endif %}

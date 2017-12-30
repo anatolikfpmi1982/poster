@@ -73,9 +73,14 @@ define(function (require, exports, module) {
             setShowBoard();
         });
 
-        // Picture page
         // picture page constructor material
         $("input.az-picture-page-constructor-material-radio").click(function (event) {
+            event.stopImmediatePropagation();
+            setShowBoard();
+        });
+
+        // picture page constructor material
+        $("input.az-picture-page-constructor-material-picture-radio").click(function (event) {
             event.stopImmediatePropagation();
             setShowBoard();
         });
@@ -90,6 +95,18 @@ define(function (require, exports, module) {
         // Picture page
         // picture page constructor size
         $("select.az-picture-page-sidebar-size-select").change(function (event) {
+            event.stopImmediatePropagation();
+            setShowBoard();
+        });
+
+        // picture page constructor mat type
+        $("select.az-picture-page-mat-type-select").change(function (event) {
+            event.stopImmediatePropagation();
+            setShowBoard();
+        });
+
+        // picture page constructor mat size
+        $("select.az-picture-page-mat-size-select").change(function (event) {
             event.stopImmediatePropagation();
             setShowBoard();
         });

@@ -15,7 +15,7 @@
         {% set ind = 1 %}
         {% for material in pictureMaterials %}
         {% if material.image is defined and material.image %}
-            {% set img = '/files/banner_materials/small_thumb/' ~ material.image.getFilename() %}
+            {% set img = '/files/frame_materials/small_thumb/' ~ material.image.getFilename() %}
         {% else %}
             {% set img = asset('bundles/app/images/material_default.png') %}
         {% endif %}
@@ -25,8 +25,8 @@
                 <span class="az-picture-page-type-img-text">{{ material.title }}</span>
             </div>
             <div class="row text-center az-picture-page-material-radio-div">
-                <input type="radio" class="btn az-picture-page-constructor-material-picture-radio" value="{{ material.title }}" title="az-picture-page-material"
-                       name="az-picture-page-material"
+                <input type="radio" class="btn az-picture-page-constructor-material-picture-radio" value="{{ material.title }}" title="az-picture-page-material-picture"
+                       name="az-picture-page-material-picture"
                        data-title="{{ material.title }}" {% if ind == 1 %}checked{% endif %}/>
             </div>
         </div>

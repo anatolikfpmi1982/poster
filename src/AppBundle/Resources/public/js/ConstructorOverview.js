@@ -4,6 +4,11 @@ var ConstructorOverview = new function () {
     this.material = "";
     this.thickness = "";
     this.color = "";
+    this.frame = "";
+    this.mat_type = "";
+    this.mat_size = "";
+    this.mat_color = "";
+    this.module = "";
 
     this.thickness_ratio = 0;
     this.square = 0;
@@ -18,14 +23,64 @@ var ConstructorOverview = new function () {
         this.thickness = thickness.val();
         this.thickness_ratio = thickness.data('ratio');
         this.color = '';
+        this.frame = $("#az-picture-constructor-frame-selected").val();
+        this.mat_color = $("#az-picture-constructor-frame-color-selected").val();
+        this.mat_type = $("#az-picture-page-mat-type-select").val();
+        this.mat_size = $("#az-picture-page-constructor-mat-size-select").val();
+        this.module = $("#az-picture-constructor-module-selected").val();
     };
 
     this.show = function () {
+        this.preShowBuild();
         $('#az-constructor-choose-type').html(this.type);
         $('#az-constructor-choose-size').html(this.size);
         $('#az-constructor-choose-material').html(this.material);
         $('#az-constructor-choose-thickness').html(this.thickness);
         $('#az-constructor-choose-color').html(this.color);
+        $('#az-constructor-choose-frame').html(this.frame);
+        $('#az-constructor-choose-mat-type').html(this.mat_type);
+        $('#az-constructor-choose-mat-size').html(this.mat_size + ' см');
+        $('#az-constructor-choose-mat-color').html(this.mat_color);
+        $('#az-constructor-choose-module').html(this.module);
+    };
+
+    this.preShowBuild = function () {
+        var subframe = $('div.az-picture-page-sidebar-choose-subframe'),
+            subframe_color = $('div.az-picture-page-sidebar-choose-subframe-color'),
+            frame = $('div.az-picture-page-sidebar-choose-frame'),
+            mat_type = $('div.az-picture-page-sidebar-choose-mat-type'),
+            mat_size = $('div.az-picture-page-sidebar-choose-mat-size'),
+            module = $('div.az-picture-page-sidebar-choose-module'),
+            mat_color = $('div.az-picture-page-sidebar-choose-mat-color');
+        switch (this.type) {
+            case 'Баннер':
+                subframe.show();
+                subframe_color.show();
+                frame.hide();
+                mat_type.hide();
+                mat_size.hide();
+                mat_color.hide();
+                module.hide();
+                break;
+            case 'В раме':
+                subframe.hide();
+                subframe_color.hide();
+                frame.show();
+                mat_type.show();
+                mat_size.show();
+                mat_color.show();
+                module.hide();
+                break;
+            case 'Панно':
+                subframe.show();
+                subframe_color.show();
+                frame.hide();
+                mat_type.hide();
+                mat_size.hide();
+                mat_color.hide();
+                module.show();
+                break;
+        }
     };
 
     this.buildConstructor = function () {
@@ -54,7 +109,7 @@ var ConstructorOverview = new function () {
                 template_div.hide();
                 break;
             case 'Панно':
-                thickness_div.hide();
+                thickness_div.show();
                 thickness_picture_div.hide();
                 banner_material_div.hide();
                 picture_material_div.show();
