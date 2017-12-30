@@ -2,6 +2,7 @@ var ConstructorOverview = new function () {
     this.type = "";
     this.size = "";
     this.material = "";
+    this.material_id = 0;
     this.thickness = "";
     this.color = "";
     this.frame = "";
@@ -16,9 +17,14 @@ var ConstructorOverview = new function () {
     this.init = function () {
         this.type = $("input.az-picture-page-constructor-type-radio:checked").data('title');
         this.size = $("select.az-picture-page-sidebar-size-select").val();
+        var material = $("input.az-picture-page-constructor-material-radio:checked"),
+            material_picture = $("input.az-picture-page-constructor-material-picture-radio:checked");
         this.material = this.type == 'Баннер' ?
-            $("input.az-picture-page-constructor-material-radio:checked").val() :
-            $("input.az-picture-page-constructor-material-picture-radio:checked").val();
+            material.val() :
+            material_picture.val();
+        this.material_id = this.type == 'Баннер' ?
+            material.data('id') :
+            material_picture.data('id');
         var thickness = $("input.z-picture-page-thickness:checked");
         this.thickness = thickness.val();
         this.thickness_ratio = thickness.data('ratio');
@@ -137,17 +143,17 @@ var ConstructorOverview = new function () {
 
     this.calculateBanner = function () {
         var average_price = this.calculateBannerSquare(),
-            banner_add_price = $("input#constructor_banner_additional_price").val();
+            banner_add_price = $('input#constructor_banner_' + this.material_id + '_additional_price').val();
 
         return this.square * average_price * this.thickness_ratio + parseInt(banner_add_price);
     };
 
     this.calculateBannerSquare = function () {
-        var minSquare = $('#constructor_banner_min_square').val(),
-            maxSquare = $('#constructor_banner_max_square').val(),
-            minPrice = $('#constructor_banner_min_price').val(),
-            maxPrice = $('#constructor_banner_max_price').val(),
-            square = 0, final_price = 0;
+        var minSquare = $('#constructor_banner_' + this.material_id + '_min_square').val(),
+            maxSquare = $('#constructor_banner_' + this.material_id + '_max_square').val(),
+            minPrice = $('#constructor_banner_' + this.material_id + '_min_price').val(),
+            maxPrice = $('#constructor_banner_' + this.material_id + '_max_price').val(),
+            final_price = 0;
 
         if (this.size) {
             var size = this.size.split('x');

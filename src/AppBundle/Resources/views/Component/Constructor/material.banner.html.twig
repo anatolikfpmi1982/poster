@@ -22,9 +22,23 @@
             <div class="row text-center az-picture-page-material-radio-div">
                 <input type="radio" class="btn az-picture-page-constructor-material-radio" value="{{ material.title }}" title="az-picture-page-material"
                        name="az-picture-page-material"
-                       data-title="{{ material.title }}" {% if ind == 1 %}checked{% endif %}/>
+                       data-title="{{ material.title }}"
+                       data-id="{{ material.id }}"
+                       {% if ind == 1 %}checked{% endif %}/>
             </div>
         </div>
+
+        <input type="hidden" name="constructor_banner_{{ material.id }}_min_square" id="constructor_banner_{{ material.id }}_min_square"
+               value="{{ material.minArea }}">
+        <input type="hidden" name="constructor_banner_{{ material.id }}_max_square" id="constructor_banner_{{ material.id }}_max_square"
+               value="{{ material.maxArea }}">
+        <input type="hidden" name="constructor_banner_{{ material.id }}_min_price" id="constructor_banner_{{ material.id }}_min_price"
+               value="{{ material.minPrice }}">
+        <input type="hidden" name="constructor_banner_{{ material.id }}_max_price" id="constructor_banner_{{ material.id }}_max_price"
+               value="{{ material.maxPrice }}">
+        <input type="hidden" name="constructor_banner_{{ material.id }}_additional_price" id="constructor_banner_{{ material.id }}_additional_price"
+               value="{{ material.price }}">
+
         {% if ind % 3 == 0 %}
     </div>
     <div class="row">
