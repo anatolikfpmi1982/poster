@@ -9,7 +9,7 @@
                     {% set img = asset('bundles/app/images/material_default.png') %}
                 {% endif %}
                 <div>
-                    <img src="{{ img }}" class="az-picture-page-constructor-picture-module-type-img"/>
+                    <img src="{{ img }}" class="az-picture-page-constructor-picture-module-type-img" data-title="{{ moduleType.name }}"/>
                 </div>
             {% endfor %}
             <input type="hidden" name="az-picture-constructor-module-selected" id="az-picture-constructor-module-selected" value="{{ moduleTypes[0].name }}">

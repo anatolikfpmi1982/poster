@@ -14,6 +14,7 @@ define(function (require, exports, module) {
             dots: false,
             nav: true,
             navText: ["", ""]
+            //navText: [$('.frame-slider-next'), $('.frame-slider-prev')]
         });
 
         $("#owl-template").owlCarousel({
@@ -73,13 +74,34 @@ define(function (require, exports, module) {
             setShowBoard();
         });
 
+        // picture page constructor frame
+        $("img.az-picture-page-constructor-picture-thickness-img").click(function (event) {
+            event.stopImmediatePropagation();
+            $('#az-picture-constructor-frame-selected').val($(this).data('title'));
+            setShowBoard();
+        });
+
+        // picture page constructor module
+        $("img.az-picture-page-constructor-picture-module-type-img").click(function (event) {
+            event.stopImmediatePropagation();
+            $('#az-picture-constructor-module-selected').val($(this).data('title'));
+            setShowBoard();
+        });
+
+        // picture page constructor frame color
+        $("li.az-picture-page-constructor-frame-color-item").click(function (event) {
+            event.stopImmediatePropagation();
+            $('#az-picture-constructor-frame-color-selected').val($(this).data('name'));
+            setShowBoard();
+        });
+
         // picture page constructor material
         $("input.az-picture-page-constructor-material-radio").click(function (event) {
             event.stopImmediatePropagation();
             setShowBoard();
         });
 
-        // picture page constructor material
+        // picture page constructor material picture
         $("input.az-picture-page-constructor-material-picture-radio").click(function (event) {
             event.stopImmediatePropagation();
             setShowBoard();
