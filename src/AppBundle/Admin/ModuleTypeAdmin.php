@@ -48,6 +48,7 @@ class ModuleTypeAdmin extends AbstractAdmin
             ->add('name', null, ['required' => true, 'label' => 'Название'])
             ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент', 'empty_data' => '1', 'attr' => ['placeholder' => 1]])
             ->add('serviceName', null, ['required' => true, 'label' => 'Сервисное имя (не изменять без необходимости)'])
+            ->add('formula', null, ['required' => true, 'label' => 'Код'])
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
             ->end();
     }
@@ -61,10 +62,9 @@ class ModuleTypeAdmin extends AbstractAdmin
             ->add('image', null,
                 ['label' => 'Изображение', 'template' => 'AppBundle:Admin:list_image.html.twig'])
             ->add('name', null, ['editable'=> true, 'label' => 'Название'])
+            ->add('formula', null, ['editable'=> true, 'label' => 'Код'])
             ->add('ratio', null, ['editable' => true, 'label' => 'Коэффициент',
                 'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
-//            ->add('createdAt', null, ['label' => 'Создано'])
-//            ->add('updatedAt', null, ['label' => 'Обновлено'])
             ->add('isActive', null, ['editable' => true, 'label' => 'Показывать'])
             ->add(
                 '_action',

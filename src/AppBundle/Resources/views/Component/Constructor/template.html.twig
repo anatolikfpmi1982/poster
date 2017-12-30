@@ -1,1 +1,18 @@
-template constructor
+<div class="row">
+    <div class="col-md-12 owl-carousel owl-theme" id="owl-template">
+        {% if moduleTypes is defined and moduleTypes %}
+            {% for moduleType in moduleTypes %}
+                {% if moduleType.image is defined and moduleType.image %}
+                    {% set img = '/files/module_types/small_thumb/' ~ moduleType.image.getFilename() %}
+                {% else %}
+                    {% set img = asset('bundles/app/images/material_default.png') %}
+                {% endif %}
+                <div>
+                    <img src="{{ img }}" class="az-picture-page-constructor-picture-module-type-img"/>
+                </div>
+            {% endfor %}
+        {% else %}
+            У нас пока отсутствуют шаблоны для данного вида картин.
+        {% endif %}
+    </div>
+</div>
