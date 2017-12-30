@@ -114,7 +114,7 @@ body{
     color: #fd1200;
     border-left: 4px solid #fd1200;
     border-bottom: 1px solid #fd1200;
-    font-weight: bolder;
+
 }
 
 .az-sidebar-subcategory-item:hover, .az-sidebar-subcategory-item:active {
@@ -683,10 +683,11 @@ body {
 }
 
 .navbar-brand, .navbar-nav > li > a {
-    color: #000000 !important;
     text-shadow: none;
-    font-size: 17px;
+    font-size: 14px;
     vertical-align: middle;
+    text-transform: uppercase;
+    color: #333;
 
 }
 
