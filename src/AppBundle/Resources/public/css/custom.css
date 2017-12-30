@@ -1209,6 +1209,15 @@ footer {
     background-color: rgba(168, 168, 168, 1) !important;
 }
 
+
+
+/**gall= modul**/
+
+.az-title-modul {
+    font-size: 12px;
+    color: #595959;
+    margin: 5px 0;
+}
 .az-picture-page-sidebar-price-btn-div-left {
     padding-left: 0;
 }
