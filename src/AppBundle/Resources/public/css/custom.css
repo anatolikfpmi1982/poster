@@ -1,8 +1,9 @@
 
-body{
+body {
 
     font-family: 'PT Sans', sans-serif;
 }
+
 .navbar {
     margin-bottom: 7px;
 }
@@ -1154,6 +1155,7 @@ footer {
     border: 1px solid #e6e6e6;
     height: 100px;
 }
+
 .owl-theme .owl-nav {
     position: absolute;
     top: 0;
@@ -1162,13 +1164,12 @@ footer {
     filter: alpha(opacity=0);
     height: 100%;
     cursor: pointer;
-    z-index: 800;
+    z-index: -1;
 }
+
 .owl-carousel .owl-item {
     border-left: 1px solid #e6e6e6;
 }
-
-
 
 .owl-carousel .owl-item:first-child {
     border-left: none;
@@ -1178,10 +1179,17 @@ footer {
     opacity: 1;
 
 }
+
 .owl-theme .owl-nav [class*="owl-"] {
     margin: 5px 0 0 5px;
     padding: 4px 0;
 }
+
+.owl-theme .owl-nav .owl-prev {
+    margin: 5px 0 0 -6px;
+    padding: 4px 0;
+}
+
 .owl-prev {
     display: block;
     color: #fff;
@@ -1195,9 +1203,8 @@ footer {
     border-radius: inherit;
 }
 
-
 .owl-next {
-    background: url('../images/next-gall.png') 50% 50% no-repeat   rgba(196, 193, 193, 1) !important;
+    background: url('../images/next-gall.png') 50% 50% no-repeat rgba(196, 193, 193, 1) !important;
     display: block;
     color: #fff;
     right: 25px;
@@ -1207,13 +1214,12 @@ footer {
     opacity: 1;
     width: 54px;
     height: 100px;
-    border-radius: inherit;}
-
-.owl-theme .owl-nav [class*="owl-"]:hover {
-    background-color:  rgba(168, 168, 168, 1) !important;
+    border-radius: inherit;
 }
 
-
+.owl-theme .owl-nav [class*="owl-"]:hover {
+    background-color: rgba(168, 168, 168, 1) !important;
+}
 
 /**gall-modul**/
 
@@ -1222,6 +1228,7 @@ footer {
     color: #595959;
     margin: 5px 0;
 }
+
 .az-picture-page-sidebar-price-btn-div-left {
     padding-left: 0;
 }
@@ -1425,6 +1432,7 @@ footer {
     padding-left: 0;
     padding-right: 0;
 }
+
 /**rewiews**/
 
 .az-reviews {
@@ -1571,16 +1579,16 @@ footer {
     margin: 15px 0;
 }
 
-
 .az-add-review-container {
     margin: 20px 0;
 }
+
 .az-add_review_name, .az-add_review_email, .az-add_review_city,
-.az-add_review_description{
+.az-add_review_description {
     font-weight: normal;
     font-size: 13px;
     line-height: 15px;
-    margin-top:10px;
+    margin-top: 10px;
 }
 
 #add_review label {
@@ -1590,14 +1598,14 @@ footer {
 #az-add_review_description {
     width: 100%;
     height: 130px;
-    color:#333;
+    color: #333;
 }
 
 #az-add_review_city, #az-add_review_email, #az-add_review_name {
     width: 100%;
-    border:1px solid #989898;
-    color:#333;}
-
+    border: 1px solid #989898;
+    color: #333;
+}
 
 .az-picture-page-type-img-text {
     font-size: 10px;
