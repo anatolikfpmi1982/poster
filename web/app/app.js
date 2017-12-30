@@ -12,7 +12,8 @@ define(function (require, exports, module) {
         $("#owl-example").owlCarousel({
             items: 6,
             dots: false,
-            nav: true
+            nav: true,
+            navText: ["", ""]
         });
 
         // Category page
