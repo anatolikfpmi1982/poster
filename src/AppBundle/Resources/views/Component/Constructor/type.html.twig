@@ -23,33 +23,26 @@
                            title="az-picture-page-type" name="az-picture-page-type" checked/>
                 </div>
             </div>
-            {% set numPicture = numPicture + 1 %}
-        {% endif %}
-        {% if pictureMain.image is defined and pictureMain.image %}
             <div class="col-md-4 container-fluid">
                 <div class="row text-center">
                     <img src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}" class="az-picture-page-type-img"/><br/>
-                    <span class="az-picture-page-type-img-text">Картина</span>
+                    <span class="az-picture-page-type-img-text">В раме</span>
                 </div>
                 <div class="row text-center az-picture-page-material-radio-div">
-                    <input type="radio" class="btn az-picture-page-constructor-type-radio" data-title="Картина" value="2"
+                    <input type="radio" class="btn az-picture-page-constructor-type-radio" data-title="В раме" value="2"
                            title="az-picture-page-type" name="az-picture-page-type"/>
                 </div>
             </div>
-            {% set numPicture = numPicture + 1 %}
-        {% endif %}
-        {% if pictureMain.imageModule is defined and pictureMain.imageModule %}
             <div class="col-md-4 container-fluid">
                 <div class="row text-center">
-                    <img src="/files/pictures/small_thumb/{{ pictureMain.imageModule.getFilename() }}" class="az-picture-page-type-img"/><br/>
-                    <span class="az-picture-page-type-img-text">Модульная картина</span>
+                    <img src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}" class="az-picture-page-type-img"/><br/>
+                    <span class="az-picture-page-type-img-text">Панно</span>
                 </div>
                 <div class="row text-center az-picture-page-material-radio-div">
-                    <input type="radio" class="btn az-picture-page-constructor-type-radio" data-title="Модульная картина" value="3" title="az-picture-page-type"
+                    <input type="radio" class="btn az-picture-page-constructor-type-radio" data-title="Панно" value="3" title="az-picture-page-type"
                            name="az-picture-page-type"/>
                 </div>
             </div>
-            {% set numPicture = numPicture + 1 %}
         {% endif %}
     </div>
 </div>
