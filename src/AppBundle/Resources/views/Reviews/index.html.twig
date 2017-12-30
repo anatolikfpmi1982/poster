@@ -37,27 +37,32 @@
             </div>
         </div>
     </div>
-    <p>
-        Добавить новый отзыв
-    </p>
-    <form id="add_review">
-        <div>
-            <label for="add_review_name">Ф.И.О.</label>
-            <input id="add_review_name" name="add_review_name" required />
-        </div>
-        <div>
-            <label for="add_review_email">Email</label>
-            <input id="add_review_email" name="add_review_email" required />
-        </div>
-        <div>
-            <label for="add_review_city">Город</label>
-            <input id="add_review_city" name="add_review_city" />
-        </div>
-        <div>
-            <label for="add_review_description">Отзыв</label>
-            <textarea id="add_review_description" name="add_review_description"
+        <div class="row az-page-main-section-div">
+    <div class="col-md-12 container-fluid">
+        <h2>Оставьте свой отзыв</h2>
+
+        <span class="az-rewievs-comment"> Ваш отзыв будет добавлен на страницу только после проверки модератором</span>
+        <div class="row az-add-review-container">
+
+                <form id="add_review">
+                    <div class="col-md-6">
+                  <div><label class="az-add_review_name" for="name">Ф.И.О.</label>
+            <input id="az-add_review_name" name="add_review_name" required />
+           </div>
+              <div><label class="az-add_review_email" for="email">Email</label>
+            <input id="az-add_review_email" name="add_review_email" required />
+              </div>
+               <div>
+            <label class="az-add_review_city" for="city">Город</label>
+            <input id="az-add_review_city" name="add_review_city" />
+               </div>
+           </div>
+           <div class="col-md-6">
+            <label class="az-add_review_description" for="description">Отзыв</label>
+            <textarea id="az-add_review_description" name="az-add_review_description"
                       placeholder="Введите текст отзыва" required></textarea>
-        </div>
-        <button type="submit">Отправить</button>
-    </form>
-{% endblock %}
+               <button class="btn btn-bg az-header-feedback-btn" type="submit">Отправить</button>
+           </div>
+
+    </form></div></div></div>
+        {% endblock %}
