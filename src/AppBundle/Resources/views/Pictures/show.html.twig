@@ -62,6 +62,8 @@
             {% set banner_max_price = 0 %}
             {% set banner_add_price = 0 %}
         {% endif %}
+        <input type="hidden" name="constructor_picture_width" id="constructor_picture_width" value="{{ pictureBaseWidth }}">
+        <input type="hidden" name="constructor_picture_height" id="constructor_picture_height" value="{{ pictureBaseHeight }}">
         <input type="hidden" name="constructor_banner_min_square" id="constructor_banner_min_square" value="{{ banner_min_square }}">
         <input type="hidden" name="constructor_banner_max_square" id="constructor_banner_max_square" value="{{ banner_max_square }}">
         <input type="hidden" name="constructor_banner_min_price" id="constructor_banner_min_price" value="{{ banner_min_price }}">

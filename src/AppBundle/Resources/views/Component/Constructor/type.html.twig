@@ -13,36 +13,64 @@
     <div class="row az-picture-page-sidebar-size-div-body az-picture-page-sidebar-type-div-select">
         {% set numPicture = 0 %}
         {% if pictureMain.image is defined and pictureMain.image %}
-            <div class="col-md-4 container-fluid">
-                <div class="row text-center">
-                    <img src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}" class="az-picture-page-type-img"/><br/>
-                    <span class="az-picture-page-type-img-text">Баннер</span>
+        <div class="col-md-4 container-fluid">
+            <div class="row text-center">
+                <img src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}" class="az-picture-page-type-img"/>
+                <br/>
+                <span class="az-picture-page-type-img-text">Баннер</span>
+            </div>
+            <div class="row text-center az-picture-page-material-radio-div">
+                <input type="radio" class="btn az-picture-page-constructor-type-radio" data-title="Баннер" value="1"
+                       title="az-picture-page-type" name="az-picture-page-type" checked/>
+            </div>
+        </div>
+        <div class="col-md-4 container-fluid">
+            <div class="row text-center">
+                <div class=" text-center az-picture-page-sidebar-type-div-frame-border"
+                     style="width: {{ pictureSmallWidth + 10 }}px;height: {{ pictureSmallHeight + 13 }}px;">
+                    <div class=" text-center az-picture-page-sidebar-type-div-frame-mat"
+                         style="width: {{ pictureSmallWidth + 4 }}px;height: {{ pictureSmallHeight + 7 }}px;">
+                        <img src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}" class=" text-center az-picture-page-type-img"/>
+                    </div>
                 </div>
-                <div class="row text-center az-picture-page-material-radio-div">
-                    <input type="radio" class="btn az-picture-page-constructor-type-radio" data-title="Баннер" value="1"
-                           title="az-picture-page-type" name="az-picture-page-type" checked/>
+                <span class="az-picture-page-type-img-text">В раме</span>
+            </div>
+            <div class="row text-center az-picture-page-material-radio-div">
+                <input type="radio" class="btn az-picture-page-constructor-type-radio" data-title="В раме" value="2"
+                       title="az-picture-page-type" name="az-picture-page-type"/>
+            </div>
+        </div>
+        <div class="col-md-4 container-fluid">
+            <div class="row text-center">
+                <div class="col-12 container-fluid">
+                    {#<div class="row" style="height: {{ pictureSmallHeight }}px;">#}
+                    {#{% set partWidth = (pictureSmallWidth * 0.3)|round %}#}
+                    {#<div class="col-md-12">#}
+                    {#<img src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}" class="az-picture-page-type-img"#}
+                    {#style="position: absolute;clip: rect(0, {{ partWidth }}px, {{ pictureSmallHeight }}px, 0);"/>&nbsp;#}
+                    {#<img src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}" class="az-picture-page-type-img"#}
+                    {#style="position: absolute;clip: rect(0,#}
+                    {#{{ partWidth*2 }}px, {{ pictureSmallHeight }}px, {{ partWidth }}px);height: {{ (pictureSmallHeight*0.8)|round }}px;"/>&nbsp;#}
+                    {#<img src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}" class="az-picture-page-type-img"#}
+                    {#style="position: absolute;clip: rect(0, {{ pictureSmallWidth }}px, {{ pictureSmallHeight }}px, {{ partWidth*2 }}px);"/>#}
+                    {#</div>#}
+                    {#</div>#}
+                    <div class="row text-center">
+                        <img src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}" class="az-picture-page-type-img"/>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="az-picture-page-type-img-text">Панно</span>
+                        </div>
+                    </div>
+                    <div class="row text-center az-picture-page-material-radio-div">
+                        <input type="radio" class="btn az-picture-page-constructor-type-radio" data-title="Панно" value="3" title="az-picture-page-type"
+                               name="az-picture-page-type"/>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4 container-fluid">
-                <div class="row text-center">
-                    <img src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}" class="az-picture-page-type-img"/><br/>
-                    <span class="az-picture-page-type-img-text">В раме</span>
-                </div>
-                <div class="row text-center az-picture-page-material-radio-div">
-                    <input type="radio" class="btn az-picture-page-constructor-type-radio" data-title="В раме" value="2"
-                           title="az-picture-page-type" name="az-picture-page-type"/>
-                </div>
-            </div>
-            <div class="col-md-4 container-fluid">
-                <div class="row text-center">
-                    <img src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}" class="az-picture-page-type-img"/><br/>
-                    <span class="az-picture-page-type-img-text">Панно</span>
-                </div>
-                <div class="row text-center az-picture-page-material-radio-div">
-                    <input type="radio" class="btn az-picture-page-constructor-type-radio" data-title="Панно" value="3" title="az-picture-page-type"
-                           name="az-picture-page-type"/>
-                </div>
-            </div>
+
+        </div>
         {% endif %}
     </div>
 </div>
