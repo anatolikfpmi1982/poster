@@ -8,10 +8,14 @@
                     {% set img = asset('bundles/app/images/material_default.png') %}
                 {% endif %}
                 <div class="item">
-                    <img src="{{ img }}" class="az-picture-page-constructor-picture-thickness-img" data-title="{{ thickness.title }}"/>
+                    <img src="{{ img }}" class="az-picture-page-constructor-picture-thickness-img"
+                         data-title="{{ thickness.title }}"
+                         data-ratio="{{ thickness.ratio }}"
+                    />
                 </div>
             {% endfor %}
             <input type="hidden" name="az-picture-constructor-frame-selected" id="az-picture-constructor-frame-selected" value="{{ pictureThicknesses[0].title }}">
+            <input type="hidden" name="az-picture-constructor-frame-ratio-selected" id="az-picture-constructor-frame-ratio-selected" value="{{ pictureThicknesses[0].ratio }}">
         {% else %}
             У нас пока отсутствуют рамы для данного вида картин.
         {% endif %}

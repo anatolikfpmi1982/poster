@@ -78,6 +78,7 @@ define(function (require, exports, module) {
         $("img.az-picture-page-constructor-picture-thickness-img").click(function (event) {
             event.stopImmediatePropagation();
             $('#az-picture-constructor-frame-selected').val($(this).data('title'));
+            $('#az-picture-constructor-frame-ratio-selected').val($(this).data('ratio'));
             setShowBoard();
         });
 

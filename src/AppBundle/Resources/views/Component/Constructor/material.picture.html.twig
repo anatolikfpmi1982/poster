@@ -32,6 +32,16 @@
                        {% if ind == 1 %}checked{% endif %}/>
             </div>
         </div>
+        <input type="hidden" name="constructor_pic_{{ material.id }}_min_square" id="constructor_pic_{{ material.id }}_min_square"
+               value="{{ material.minArea }}">
+        <input type="hidden" name="constructor_pic_{{ material.id }}_max_square" id="constructor_pic_{{ material.id }}_max_square"
+               value="{{ material.maxArea }}">
+        <input type="hidden" name="constructor_pic_{{ material.id }}_min_price" id="constructor_pic_{{ material.id }}_min_price"
+               value="{{ material.minPrice }}">
+        <input type="hidden" name="constructor_pic_{{ material.id }}_max_price" id="constructor_pic_{{ material.id }}_max_price"
+               value="{{ material.maxPrice }}">
+        <input type="hidden" name="constructor_pic_{{ material.id }}_additional_price" id="constructor_pic_{{ material.id }}_additional_price"
+               value="{{ material.price }}">
         {% if ind % 3 == 0 %}
     </div>
     <div class="row">

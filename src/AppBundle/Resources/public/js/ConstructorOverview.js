@@ -13,6 +13,7 @@ var ConstructorOverview = new function () {
 
     this.thickness_ratio = 0;
     this.square = 0;
+    this.perimeter = 0;
 
     this.init = function () {
         this.type = $("input.az-picture-page-constructor-type-radio:checked").data('title');
@@ -132,7 +133,7 @@ var ConstructorOverview = new function () {
                 price = this.calculateBanner();
                 break;
             case 'В раме':
-                price = 0;
+                price = this.calculatePicture();
                 break;
             case 'Панно':
                 price = this.calculatePanel();
@@ -142,7 +143,7 @@ var ConstructorOverview = new function () {
     };
 
     this.calculatePanel = function () {
-        var average_price = this.calculateBannerSquare(),
+        var average_price = this.calculateSquare(),
             banner_add_price = $('input#constructor_banner_' + this.material_id + '_additional_price').val(),
             panel_ratio = $('input#az-picture-constructor-module-ratio-selected').val(),
             panel_code = $('input#az-picture-constructor-module-code-selected').val();
@@ -151,23 +152,51 @@ var ConstructorOverview = new function () {
     };
 
     this.calculateBanner = function () {
-        var average_price = this.calculateBannerSquare(),
+        var average_price = this.calculateSquare(),
             banner_add_price = $('input#constructor_banner_' + this.material_id + '_additional_price').val();
 
         return this.square * average_price * this.thickness_ratio + parseInt(banner_add_price);
     };
 
-    this.calculateBannerSquare = function () {
-        var minSquare = $('#constructor_banner_' + this.material_id + '_min_square').val(),
-            maxSquare = $('#constructor_banner_' + this.material_id + '_max_square').val(),
-            minPrice = $('#constructor_banner_' + this.material_id + '_min_price').val(),
-            maxPrice = $('#constructor_banner_' + this.material_id + '_max_price').val(),
+    this.calculatePicture = function () {
+        var average_price = this.calculateSquare(),
+            add_price = $('input#constructor_pic_' + this.material_id + '_additional_price').val(),
+            frame_ratio = $('#az-picture-constructor-frame-ratio-selected').val();
+
+        return this.square * average_price * frame_ratio + parseInt(add_price) + (this.perimeter * this.calculateFrameSquare());
+    };
+
+    this.calculateSquare = function () {
+        var type = this.type != this.type != 'В раме' ? 'banner' : 'pic';
+        var minSquare = $('#constructor_' + type + '_' + this.material_id + '_min_square').val(),
+            maxSquare = $('#constructor_' + type + '_' + this.material_id + '_max_square').val(),
+            minPrice = $('#constructor_' + type + '_' + this.material_id + '_min_price').val(),
+            maxPrice = $('#constructor_' + type + '_' + this.material_id + '_max_price').val(),
             final_price = 0;
 
         if (this.size) {
             var size = this.size.split('x');
             this.square = size[0] * size[1];
+            this.perimeter = size[0] * 2 + 2 * size[1];
         }
+
+        if (this.square <= minSquare) {
+            final_price = maxPrice;
+        } else if (this.square >= maxSquare) {
+            final_price = minPrice;
+        } else {
+            final_price = (this.square - parseInt(minSquare)) * ((minPrice - maxPrice) / (maxSquare - minSquare)) + parseInt(maxPrice);
+            final_price = Math.ceil(final_price);
+        }
+        return final_price;
+    };
+
+    this.calculateFrameSquare = function () {
+        var minSquare = $('#constructor_min_square').val(),
+            maxSquare = $('#constructor_max_square').val(),
+            minPrice = $('#constructor_min_price').val(),
+            maxPrice = $('#constructor_max_price').val(),
+            final_price = 0;
 
         if (this.square <= minSquare) {
             final_price = maxPrice;
