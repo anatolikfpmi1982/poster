@@ -15,6 +15,12 @@ define(function (require, exports, module) {
             nav: true
         });
 
+        $("#owl-template").owlCarousel({
+            items: 5,
+            dots: false,
+            nav: true
+        });
+
         // Category page
         // category page filter radio button art|photo
         $("input.az-category-page-filter-radio").click(function (event) {
@@ -66,7 +72,7 @@ define(function (require, exports, module) {
                     'review': $('#add_review_description').val()
                 }
             }).done(function (data) {
-                if(data['result'])
+                if (data['result'])
                     alert('Спасибо! Отзыв отправлен на модерацию!');
                 else
                     alert('Возникли проблемы при отправке отзыва.');
