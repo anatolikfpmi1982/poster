@@ -1,0 +1,17 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}Страница контактов{% endblock %}
+
+{% block body %}
+    <div class="row az-page-main-section-div">
+        {% include('AppBundle:Component:Blocks/breadcrumb.html.twig') %}
+    </div>
+    <div class="row container-fluid az-page-main-section-div az-static-page-div">
+        <div class="col-md-12 container-fluid">
+            <div class="row page-title az-static-page-title">Контакты</div>
+            <div class="row az-static-page-content">
+                Текст
+            </div>
+        </div>
+    </div>
+{% endblock %}
