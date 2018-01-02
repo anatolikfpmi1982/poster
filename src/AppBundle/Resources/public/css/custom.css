@@ -1409,6 +1409,7 @@ footer {
     background-color: #fd1200;
     padding: 5px 5px;
     margin-top: 5px;
+    display: block;
 }
 
 .az-main-page-top-menu-div, .az-main-page-search {
@@ -1783,4 +1784,41 @@ footer {
 .az-static-page-content {
     padding: 0;
     margin: 20px auto;
+}
+
+/**add contacts**/
+
+.az-add_contacts-comment {
+    color: #595959;
+    font-style: italic;
+    font-size: 12px;
+    margin: 15px 0;
+}
+
+.az-add_contacts-container {
+    margin: 20px 0;
+}
+
+.az-add_contacts_name, .az-add_contacts_email, .az-add_contacts_city,
+.az-add_contacts_description {
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 15px;
+    margin-top: 10px;
+}
+
+#add_contacts label {
+    display: block;
+}
+
+#az-add_contacts_description {
+    width: 50%;
+    height: 130px;
+    color: #333;
+}
+
+#az-add_contacts_city, #az-add_contacts_email, #az-add_contacts_name {
+    width: 50%;
+    border: 1px solid #989898;
+    color: #333;
 }

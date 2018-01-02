@@ -10,8 +10,40 @@
         <div class="col-md-12 container-fluid">
             <div class="row page-title az-static-page-title">Контакты</div>
             <div class="row az-static-page-content">
-                Текст
+                Телефоны:
+
+                8 (029)-575-66-81 (MTС и viber)
+
+
+
+                e-mail: info@posternazakaz.by
+
+
+                Время работы:
+
+                1) онлайн-заказ на сайте Вы можете сделать круглосуточно, заполнив форму заказа. Мы обработаем его и Вам перезвоним для уточнения.
+
+                2) если у Вас есть сложности с оформлением заказа, либо есть уточняющие вопросы или необходима консультация дизайнера позвоните нам: 7 дней в неделю с 9.00 до 21.00.
+
+
             </div>
+            <div class="col-md-12 container-fluid">
+            <form id="add_contacts">
+                <div><label class="az-add_contacts_name" for="name">Ф.И.О.</label>
+                        <input id="az-add_contacts_name" name="add_review_name" required />
+                    </div>
+                    <div><label class="az-add_contacts_email" for="email">Email</label>
+                        <input id="az-add_contacts_email" name="add_review_email" required />
+                    </div>
+                    <div>
+                        <label class="az-add_contacts_city" for="city">Город</label>
+                        <input id="az-add_contacts_city" name="add_review_city" />
+                    </div>
+                 <label class="az-add_contacts_description" for="description">Сообщение</label>
+                    <textarea id="az-add_contacts_description" name="az-add_review_description"
+                              placeholder="Введите ваше сообщение" required></textarea>
+                    <button class="btn btn-bg az-header-feedback-btn" type="submit">Отправить</button>
+                            </form></div>
         </div>
     </div>
 {% endblock %}
