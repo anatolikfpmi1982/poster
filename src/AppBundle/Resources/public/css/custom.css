@@ -575,9 +575,9 @@ footer {
 .page-title {
     font-size: 40px;
     font-weight: 400;
-    padding: 15px 0;
+    padding: 15px 0 0 0;
     border-bottom: 1px solid #e6e6e6;
-    margin: 0 2px;
+    margin: 0 2px 20px 2px;
 
 }
 
@@ -615,7 +615,7 @@ body {
 }
 
 .az-logo-title-text-div {
-    margin: -20px 0 0 80px;
+    margin: -35px 0 0 80px;
     font-size: 10px;
 }
 
@@ -1773,4 +1773,14 @@ footer {
     border: 1px solid #e6e6e6;
     cursor: pointer;
     margin-left: 1px;
+}
+
+.az-static-page-div {
+    min-height: 822px;
+
+}
+
+.az-static-page-content {
+    padding: 0;
+    margin: 20px auto;
 }
