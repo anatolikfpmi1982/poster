@@ -80,6 +80,14 @@ body {
     padding: 0;
 }
 
+
+.navbar-default .navbar-nav >
+.active > a, .navbar-default .navbar-nav >
+.active > a:focus, .navbar-default .navbar-nav > .active > a:hover
+{
+    background-color: #fff;
+}
+
 .navbar-brand, .navbar-nav > li > a {
     color: #000000 !important;
     text-shadow: none;
@@ -617,7 +625,7 @@ body {
 }
 
 .az-logo-title-text-div {
-    margin: -20px 0 0 80px;
+    margin: -40px 0 0 80px;
     font-size: 10px;
 }
 
@@ -1523,7 +1531,7 @@ footer {
     font: 16px/16px 'arial', 'helvetica', 'sans-serif';
     color: #e4e4e4;
     display: block;
-    padding: 6px 10px 6px 9px;
+    padding: 6px 5px 6px 5px;
     text-align: center;
     background: #fff;
     text-decoration: none;
@@ -1860,6 +1868,7 @@ footer {
     display: block;
     color: #333;
     text-decoration: none;
+
 }
 
 .az-nextpage a {
@@ -1867,6 +1876,7 @@ footer {
     color: #333;
     text-decoration: none;
     height: 450px;
+
 }
 
 .az-nextpage:hover {
@@ -1877,6 +1887,10 @@ footer {
 }
 .az-nextpage:visited {
     display: block;
-    color: #333;
     text-decoration: none;
+}
+
+.pagination {
+    padding-right: 15px;
+    padding-left: 15px;
 }
