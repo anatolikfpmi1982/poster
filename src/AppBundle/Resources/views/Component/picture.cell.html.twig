@@ -21,7 +21,12 @@
             {% else %}
                 {% set author_url = '#' %}
             {% endif %}
-            <span class="az_author"> Автор:</span> <a href="{{ author_url }}"> {{ picture.author.name }}</a>
+            {% if picture.author is defined and picture.author and picture.author.name is defined and picture.author.name %}
+                {% set author_name = picture.author.name %}
+            {% else %}
+                {% set author_name = '-' %}
+            {% endif %}
+            <span class="az_author"> Автор:</span> <a href="{{ author_url }}"> {{ author_name }}</a>
         </div>
     </div>
     <div class="row">

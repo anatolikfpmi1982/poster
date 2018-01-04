@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Category3;
+use Doctrine\ORM\QueryBuilder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -24,10 +26,12 @@ class CategoriesController extends FrontController
     {
         $em = $this->get('doctrine.orm.entity_manager');
 
+        /** @var Category3 $category */
         $category = $em->getRepository('AppBundle:Category3')->findOneBySlug($slug);
         $category->count = count($category->getPictures());
 
-        $queryBuilder = $em->getRepository('AppBundle:Picture')->getActivePicturesFromCategory($category->getId());
+        /** @var QueryBuilder $queryBuilder */
+        $queryBuilder = $em->getRepository('AppBundle:Picture')->getActivePicturesFromCategory($category);
         $query = $queryBuilder->getQuery();
 
 

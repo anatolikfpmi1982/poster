@@ -83,7 +83,8 @@ class AdminController extends CoreController
                 'seo_description' => '',
                 'seo_title' => '',
                 'enable_call_back' => false,
-                'enable_sms' => false
+                'enable_sms' => false,
+                'contact_us_text' => ''
             ];
         }
 
@@ -104,6 +105,7 @@ class AdminController extends CoreController
             ->add('seo_keywords', TextAreaType::class, ['label' => 'SEO - Keywords', 'required' => false])
             ->add('seo_description', TextAreaType::class, ['label' => 'SEO - Description', 'required' => false])
             ->add('seo_title', TextType::class, ['label' => 'SEO - Title', 'required' => false])
+            ->add('contact_us_text', CKEditorType::class, ['label' => 'Текст над формой в "Свяжись с нами"', 'required' => false])
             ->add('enable_call_back', CheckboxType::class, ['label' => 'Использовать функцию "Заказать звонок"', 'required' => false])
             ->add('enable_sms', CheckboxType::class, ['label' => 'Отправлять SMS после заказа звонка', 'required' => false])
             ->add('save', SubmitType::class, array('label' => 'Сохранить'))

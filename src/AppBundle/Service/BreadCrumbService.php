@@ -60,11 +60,26 @@ class BreadCrumbService {
             case 'review':
                 $result = $this->buildReviewBreadCrumb();
                 break;
+            case 'contact_us':
+                $result = $this->buildContactBreadCrumb();
+                break;
             case 'search':
                 $result = $this->buildSearchBreadCrumb($param);
                 break;
         }
         return $result;
+    }
+
+    /**
+     * Get full contact bread crumb path.
+     *
+     * @return array
+     */
+    public function buildContactBreadCrumb() {
+        return [[
+            'title' => 'Свяжизь с нами',
+            'url' => $this->container->get('router')->generate('contact_us'),
+        ]];
     }
 
     /**
