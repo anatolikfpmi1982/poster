@@ -5,17 +5,12 @@ body {
 }
 
 .navbar {
-    margin-bottom: 7px;
+    margin-bottom: 0;
 }
 
 .navbar-default {
     background-image: none;
     background-color: #ffffff;
-}
-
-.az-logo-title-text-div {
-    margin: -20px 0 0 80px;
-    font-size: 10px;
 }
 
 .az-logo-title-img {
@@ -611,11 +606,11 @@ body {
 }
 
 .az-header-top {
-    padding: 20px 0 10px 20px;
+    padding: 20px 0 0 20px;
 }
 
 .az-logo-title-text-div {
-    margin: -35px 0 0 80px;
+    margin: -20px 0 0 80px;
     font-size: 10px;
 }
 
@@ -843,9 +838,9 @@ body {
 }
 
 .text-left_artik {
-    font-size: 11px;
+    font-size: 14px;
     text-align: left;
-    padding: 15px;
+    padding: 15px 0 15px 15px;
 }
 
 /**btn order**/
@@ -1830,4 +1825,8 @@ footer {
 .az-picture-page-sidebar-type-div-frame-mat {
     background-color: #e6e6e6;
     padding-top: 3px;
+}
+
+.az-page-category-main-section-div {
+    padding-top: 0;
 }
