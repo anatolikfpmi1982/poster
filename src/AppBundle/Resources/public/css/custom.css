@@ -1822,3 +1822,12 @@ footer {
     border: 1px solid #989898;
     color: #333;
 }
+
+.az-picture-page-sidebar-type-div-frame-border {
+    border: 3px solid #333;
+}
+
+.az-picture-page-sidebar-type-div-frame-mat {
+    background-color: #e6e6e6;
+    padding-top: 3px;
+}
