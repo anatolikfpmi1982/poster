@@ -1837,3 +1837,47 @@ footer {
 .az-page-category-main-section-div {
     padding-top: 0;
 }
+.az-category-next {
+    background-color:#f6f6f6 ;
+    border: none;
+    padding: 0;
+}
+.category-next {
+    display: inline-block;
+    padding: 0;
+
+}
+.az-category-next .az-main-popular-item-img-div{
+    margin: 0;
+}
+.glyphicon-menu-right::before {
+    display: block;
+    font-size: 95px;
+    font-weight: 400;
+}
+
+.az-nextpage {
+    display: block;
+    color: #333;
+    text-decoration: none;
+}
+
+.az-nextpage a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    height: 450px;
+}
+
+.az-nextpage:hover {
+    display: block;
+    color: #fd1200;
+    text-decoration: none;
+
+}
+.az-nextpage:visited {
+    display: block;
+    color: #333;
+    text-decoration: none;
+
+}
