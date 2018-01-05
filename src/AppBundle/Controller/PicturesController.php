@@ -6,8 +6,6 @@ use AppBundle\Entity\Image;
 use AppBundle\Entity\Picture;
 use AppBundle\Entity\Settings;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -45,10 +43,14 @@ class PicturesController extends FrontController {
             $size = getimagesize($imgFile);
             $this->data['pictureBaseWidth'] = $size[0];
             $this->data['pictureBaseHeight'] = $size[1];
-            $imgFileThumb = $picture->getImage()->getSmallThumbBaseFile();
-            $size = getimagesize($imgFileThumb);
+            $imgFileSmall = $picture->getImage()->getSmallThumbBaseFile();
+            $size = getimagesize($imgFileSmall);
             $this->data['pictureSmallWidth'] = $size[0];
             $this->data['pictureSmallHeight'] = $size[1];
+            $imgFileThumb = $picture->getImage()->getThumbBaseFile();
+            $size = getimagesize($imgFileThumb);
+            $this->data['pictureThumbWidth'] = $size[0];
+            $this->data['pictureThumbHeight'] = $size[1];
         }
         $this->data['pictureSize'] = $em->getRepository( 'AppBundle:PictureSize' )->findBy( [ 'isActive' => true ], [ 'width' => 'ASC' ] );
         $this->data['materials']   = $em->getRepository( 'AppBundle:BannerMaterial' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
