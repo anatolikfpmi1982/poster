@@ -2012,3 +2012,7 @@ button.close:focus, .close:hover {
     cursor: pointer;
     color: #fd1200;
 }
+
+.navbar-form {
+    padding: 10px;
+}
