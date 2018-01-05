@@ -53,14 +53,6 @@ body {
     font-size: 15px;
 }
 
-.btn-default {
-
-    background-color: #fd1200;
-    background-image: none !important;
-    border: 1px solid #fd1200;
-    color: #ffffff !important;
-    text-shadow: none !important;
-}
 
 .form-control {
     -webkit-box-shadow: none;
@@ -678,7 +670,6 @@ body {
     background-color: #fd1200;
     background-image: none !important;
     border: 1px solid #fd1200;
-    color: #ffffff !important;
     text-shadow: none !important;
 }
 
@@ -1421,7 +1412,13 @@ footer {
     margin-top: 5px;
     display: block;
 }
+.az-header-feedback-btn-form {
+    display: none;
+}
 
+.az-header-feedback-btn:hover .az-header-feedback-btn-form {
+    display: block;
+}
 .az-main-page-top-menu-div, .az-main-page-search {
     padding-right: 0;
 }
@@ -1893,4 +1890,50 @@ footer {
 .pagination {
     padding-right: 15px;
     padding-left: 15px;
+}
+
+/**modal feedback**/
+button.close {
+    background-color:#fd1200;
+    color: #FFF;
+    text-shadow: none;
+    opacity: 1;
+    padding: 0 5px;
+}
+
+button.close:focus, .close:hover {
+    background-color:#fff;
+    color: #fd1200;
+}
+
+.btn-default:focus, .btn-default:hover{
+    background-color:#fff !important;
+    color: #fd1200 !important;
+    box-shadow: none;
+    border: 1px solid #fd1200;
+}
+.modal-dialog {
+    width: 450px;
+    margin: 0 auto;
+    font-weight: 400;
+}
+.az-feedback-modal{
+
+    text-align: left;
+    border-radius: 5px;
+}
+
+.modal-header {
+    padding: 0;
+    border: 1px solid #e6e6e6;
+}
+
+.form-line h3 {
+    margin: 5px 0;
+    text-align: left;
+}
+
+.form-group label{
+    font-weight: 400;
+    margin-bottom: 0;
 }
