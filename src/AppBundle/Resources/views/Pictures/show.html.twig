@@ -15,7 +15,12 @@
             {% else %}
                 {% set author_link = '#' %}
             {% endif %}
-            <div class="col-md-6">Автор: <a href="{{ author_link }}">{{ pictureMain.author.name }}</a></div>
+            {% if pictureMain.author is defined and pictureMain.author and pictureMain.author.name is defined and pictureMain.author.name %}
+                {% set author_name = pictureMain.author.name %}
+            {% else %}
+                {% set author_name = '-' %}
+            {% endif %}
+            <div class="col-md-6">Автор: <a href="{{ author_link }}">{{ author_name }}</a></div>
             <div class="col-md-6">Артикул: {{ pictureMain.code }}</div>
         </div>
         {% if pictureMain.image and pictureMain.image.getFilename() %}
@@ -24,8 +29,35 @@
             {% set img = asset('bundles/app/images/default_picture.jpg') %}
         {% endif %}
         <div class="row text-center">
-            <div class="col-md-12">
-                <img src="{{ img }}" class="az-picture-page-constructor-main-img"/>
+            <div class="col-md-6 thumb text-center">
+                <div class="az-picture-constructor-container">
+                    <div style="left:0px;
+                            top:0px;
+                            width:{{ pictureThumbWidth }}px;
+                            height:{{ pictureThumbHeight }}px;
+                            background-image:url('{{ img }}');
+                            background-size:{{ pictureThumbWidth }}px 500px;
+                            background-position:0px 0px" class="module">
+                        <div class="edge edger the_last" style="
+                                width:5px;
+                                background-image:url('{{ img }}');
+                                background-size:{{ pictureThumbWidth }}px 500px;
+                                background-position:5px 0px;
+                                right:0;
+                                box-shadow:rgba(0, 0, 0, 0.4) -3px 0px 3px;
+                                -webkit-transform:rotateY(180deg) skewY(-45deg);
+                                -webkit-transform-origin:right;
+                                transform:rotateY(180deg) skewY(-45deg);
+                                transform-origin:right"></div>
+                        <div style="height:5px;
+                                background-image:url('{{ img }}');
+                                background-size:{{ pictureThumbWidth }}px 500px;
+                                bottom:-5px;
+                                box-shadow:rgba(0, 0, 0, 0.4) 0px 3px 3px;
+                                background-position:-0px -{{ pictureThumbHeight }}px"
+                             class="edge edgeb "></div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row text-center az-picture-page-slider-material-div">

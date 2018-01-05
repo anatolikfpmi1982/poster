@@ -66,25 +66,23 @@ body {
     -webkit-box-shadow: none;
     box-shadow: none;
     -webkit-transition: none;
-    height:30px;
+    height: 30px;
 
 }
+
 .navbar-form {
-    margin-top:0;
+    margin-top: 0;
 
 }
-
 
 /**menu**/
 .navbar-collapse {
     padding: 0;
 }
 
-
 .navbar-default .navbar-nav >
 .active > a, .navbar-default .navbar-nav >
-.active > a:focus, .navbar-default .navbar-nav > .active > a:hover
-{
+.active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
     background-color: #fff;
 }
 
@@ -1845,19 +1843,23 @@ footer {
 .az-page-category-main-section-div {
     padding-top: 0;
 }
+
 .az-category-next {
-    background-color:#f6f6f6 ;
+    background-color: #f6f6f6;
     border: none;
     padding: 0;
 }
+
 .category-next {
     display: inline-block;
     padding: 0;
 
 }
-.az-category-next .az-main-popular-item-img-div{
+
+.az-category-next .az-main-popular-item-img-div {
     margin: 0;
 }
+
 .glyphicon-menu-right::before {
     display: block;
     font-size: 95px;
@@ -1885,6 +1887,7 @@ footer {
     text-decoration: none;
 
 }
+
 .az-nextpage:visited {
     display: block;
     text-decoration: none;
@@ -1893,4 +1896,62 @@ footer {
 .pagination {
     padding-right: 15px;
     padding-left: 15px;
+}
+
+.module::after {
+    border-radius: 3px 0 0;
+    box-shadow: 2px 2px 3px rgba(255, 255, 255, 0.5) inset;
+    content: "";
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.module {
+    border-radius: 3px 0 0;
+    position: absolute;
+}
+
+.module .edge.edger.the_last::after {
+    background: rgba(0, 0, 0, 0) linear-gradient(to right, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.2) 100%) repeat scroll 0 0;
+}
+
+.module .edge::after {
+    content: "";
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.module .edge.edger {
+    height: 100%;
+    top: 0;
+    transform: skewY(45deg);
+    transform-origin: right center 0;
+}
+
+.module .edge {
+    position: absolute;
+}
+
+.module .edge.edgeb:not(.the_last)::after {
+    background: rgba(0, 0, 0, 0) linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.2) 100%) repeat scroll 0 0;
+}
+
+.module .edge.edgeb {
+    left: 0;
+    transform: skewX(45deg);
+    transform-origin: center top 0;
+    width: 100%;
+}
+
+.az-picture-constructor-container {
+    position: relative;
+    display: block;
 }
