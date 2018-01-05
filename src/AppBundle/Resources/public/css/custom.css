@@ -1998,3 +1998,17 @@ button.close:focus, .close:hover {
     position: relative;
     display: block;
 }
+
+/**az-download**/
+
+.az-header-download{
+    text-decoration: none;
+    cursor: pointer;
+    color: #333;
+}
+
+.az-header-download:hover{
+    text-decoration: none;
+    cursor: pointer;
+    color: #fd1200;
+}

@@ -35,13 +35,52 @@
                              title="{% trans %}download{% endtrans %}"/>
                     </div>
                     <div class="col-md-9 container az-header-download-div">
-                        Загрузить свое <br/>изображение.
+                        <a class="az-header-download" data-toggle="modal" data-target="#myModal">Загрузить изображения</a>
+                        <!-- Form download -->
+                        <div id="myModal" class="modal fade" role="dialog">
+                            <div class="modal-dialog az-feedback-modal">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">+</button>
+                                        <form>
+                                            <div class="col-md-12 form-line">
+                                                <h3>Загрузка своего фото</h3>
+                                                <div class="form-group">
+                                                    Вы можете загрузить свое фото и сделать из него постер любого размера и в любом оформлении.
+                                                    Загрузка фото может занять продолжительное время, обязательно дождитесь окончания процесса!</div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile">Выбрать файл </label>
+                                                    <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                                                    <small id="fileHelp" class="form-text text-muted"></small>
+                                                </div>
+
+
+                                                <div class="form-group">
+
+                                                    <button type="button" class="btn btn-default submit">Загрузить</button>
+
+                                                </div>
+                                                <div class="form-group">
+                                                Формат загружаемого файла jpeg, gif или png, максимальный размер 50 Mb.
+                                                Загруженная Вами фотография будет удалена автоматически через две недели после оформления заказа, либо через две недели после загрузки, если Вы так и не оформите заказ.</div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
             <div class="col-md-2 container-fluid text-right">
                 <div class="row text-right">
-                    <div class="col-md-3">&nbsp;</div>
+                    <div class="col-md-3"></div>
                     <div class="col-md-3 az-main-page-header-top-cells az-main-page-header-icon-cell">
                         <img src="{{ asset('bundles/app/images/basket.png') }}" class="az-basket-title-img" title="{% trans %}basket{% endtrans %}"/>
                     </div>
