@@ -49,6 +49,7 @@ class CategoryNewAdmin extends AbstractAdmin
             ->add('seoDescription', null, ['required' => false, 'label' => 'SEO - Description'])
             ->add('seoKeywords', null, ['required' => false, 'label' => 'SEO - Keywords'])
             ->add('slug', null, ['required' => false, 'label' => 'Алиас'])
+            ->add('weight', null, ['required' => false, 'label' => 'Вес', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
             ->add('parent_category', null, ['required' => false, 'label' => 'Родительская категория'])
             ->add('tags', null, ['required' => false, 'label' => 'Теги'])
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
@@ -77,6 +78,7 @@ class CategoryNewAdmin extends AbstractAdmin
             ->add('parent_category', 'choice', ['label' => 'Родительская категория', 'editable' => true,
                 'class' => 'Appbundle\Entity\Category3', 'choices' => $categoriesChoices, 'sortable' => true,
                 'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'parent_category']]])
+            ->add('weight', null, ['label' => 'Вес', 'editable' => true])
             ->add('tags', null, ['label' => 'Теги'])
             ->add('isActive', null, ['label' => 'Показывать', 'editable' => true])
             ->add(

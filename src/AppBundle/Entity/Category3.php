@@ -129,6 +129,14 @@ class Category3 implements ImageInterface
      */
     private $slug;
 
+
+    /**
+     * @var integer
+     * @ORM\Column(name="weight", type="integer")
+     */
+    private $weight;
+
+
     /**
      * Feature constructor.
      */
@@ -508,5 +516,24 @@ class Category3 implements ImageInterface
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getWeight()
+    {
+        return $this->weight;
+    }
+
+    /**
+     * @param integer $weight
+     * @return Category3
+     */
+    public function setWeight($weight)
+    {
+        $this->weight = $weight;
+
+        return $this;
     }
 }
