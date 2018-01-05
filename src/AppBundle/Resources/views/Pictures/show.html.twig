@@ -15,7 +15,12 @@
             {% else %}
                 {% set author_link = '#' %}
             {% endif %}
-            <div class="col-md-6">Автор: <a href="{{ author_link }}">{{ pictureMain.author.name }}</a></div>
+            {% if pictureMain.author is defined and pictureMain.author and pictureMain.author.name is defined and pictureMain.author.name %}
+                {% set author_name = pictureMain.author.name %}
+            {% else %}
+                {% set author_name = '-' %}
+            {% endif %}
+            <div class="col-md-6">Автор: <a href="{{ author_link }}">{{ author_name }}</a></div>
             <div class="col-md-6">Артикул: {{ pictureMain.code }}</div>
         </div>
         {% if pictureMain.image and pictureMain.image.getFilename() %}
@@ -24,8 +29,35 @@
             {% set img = asset('bundles/app/images/default_picture.jpg') %}
         {% endif %}
         <div class="row text-center">
-            <div class="col-md-12">
-                <img src="{{ img }}" class="az-picture-page-constructor-main-img"/>
+            <div class="col-md-6 thumb text-center">
+                <div class="az-picture-constructor-container">
+                    <div style="left:0px;
+                            top:0px;
+                            width:{{ pictureThumbWidth }}px;
+                            height:{{ pictureThumbHeight }}px;
+                            background-image:url('{{ img }}');
+                            background-size:{{ pictureThumbWidth }}px 500px;
+                            background-position:0px 0px" class="module">
+                        <div class="edge edger the_last" style="
+                                width:5px;
+                                background-image:url('{{ img }}');
+                                background-size:{{ pictureThumbWidth }}px 500px;
+                                background-position:5px 0px;
+                                right:0;
+                                box-shadow:rgba(0, 0, 0, 0.4) -3px 0px 3px;
+                                -webkit-transform:rotateY(180deg) skewY(-45deg);
+                                -webkit-transform-origin:right;
+                                transform:rotateY(180deg) skewY(-45deg);
+                                transform-origin:right"></div>
+                        <div style="height:5px;
+                                background-image:url('{{ img }}');
+                                background-size:{{ pictureThumbWidth }}px 500px;
+                                bottom:-5px;
+                                box-shadow:rgba(0, 0, 0, 0.4) 0px 3px 3px;
+                                background-position:-0px -{{ pictureThumbHeight }}px"
+                             class="edge edgeb "></div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row text-center az-picture-page-slider-material-div">
@@ -33,42 +65,46 @@
                 {% include('AppBundle:Component:Constructor/slider.html.twig') %}
             </div>
         </div>
-        <div class="row text-center az-picture-page-slider-paspartu-div">
-            <div class="col-md-2 container-fluid">
-                {% include('AppBundle:Component:Constructor/type.paspartu.html.twig') %}
-            </div>
-            <div class="col-md-3 container-fluid">
-                {% include('AppBundle:Component:Constructor/size.paspartu.html.twig') %}
-            </div>
-            <div class="col-md-7 container-fluid">
-                {% include('AppBundle:Component:Constructor/color.frame.html.twig') %}
-            </div>
-        </div>
+        {#<div class="row text-center az-picture-page-slider-paspartu-div">#}
+        {#<div class="col-md-2 container-fluid">#}
+        {#{% include('AppBundle:Component:Constructor/type.paspartu.html.twig') %}#}
+        {#</div>#}
+        {#<div class="col-md-3 container-fluid">#}
+        {#{% include('AppBundle:Component:Constructor/size.paspartu.html.twig') %}#}
+        {#</div>#}
+        {#<div class="col-md-7 container-fluid">#}
+        {#{% include('AppBundle:Component:Constructor/color.frame.html.twig') %}#}
+        {#</div>#}
+        {#</div>#}
         <div class="row text-center az-picture-page-constructor-template-div">
             <div class="col-md-12">
                 {% include('AppBundle:Component:Constructor/template.html.twig') %}
             </div>
         </div>
         {% if frameSettings is defined and frameSettings %}
-            {% set banner_min_square = frameSettings.minArea %}
-            {% set banner_max_square = frameSettings.maxArea %}
-            {% set banner_min_price = frameSettings.minPrice %}
-            {% set banner_max_price = frameSettings.maxPrice %}
-            {% set banner_add_price = frameSettings.price %}
+            {% set min_square = frameSettings.minArea %}
+            {% set max_square = frameSettings.maxArea %}
+            {% set min_price = frameSettings.minPrice %}
+            {% set max_price = frameSettings.maxPrice %}
+            {% set add_price = frameSettings.price %}
         {% else %}
-            {% set banner_min_square = 0 %}
-            {% set banner_max_square = 0 %}
-            {% set banner_min_price = 0 %}
-            {% set banner_max_price = 0 %}
-            {% set banner_add_price = 0 %}
+            {% set min_square = 0 %}
+            {% set max_square = 0 %}
+            {% set min_price = 0 %}
+            {% set max_price = 0 %}
+            {% set add_price = 0 %}
         {% endif %}
         <input type="hidden" name="constructor_picture_width" id="constructor_picture_width" value="{{ pictureBaseWidth }}">
         <input type="hidden" name="constructor_picture_height" id="constructor_picture_height" value="{{ pictureBaseHeight }}">
+
+        <input type="hidden" name="constructor_min_square" id="constructor_min_square" value="{{ min_square }}">
+        <input type="hidden" name="constructor_max_square" id="constructor_max_square" value="{{ max_square }}">
+        <input type="hidden" name="constructor_min_price" id="constructor_min_price" value="{{ min_price }}">
+        <input type="hidden" name="constructor_max_price" id="constructor_max_price" value="{{ max_price }}">
+        <input type="hidden" name="constructor_additional_price" id="constructor_additional_price" value="{{ add_price }}">
     </div>
     <div class="col-md-3 container-fluid">
-        <div class="row az-picture-page-constructor-block">
-            {% include('AppBundle:Component:Constructor/deferred.html.twig') %}
-        </div>
+        <div class="row az-picture-page-constructor-block">Отложенные блок</div>
         <div class="row az-picture-page-constructor-block">
             {% include('AppBundle:Component:Constructor/price.html.twig') %}
         </div>
@@ -107,7 +143,7 @@
             <div class="soc-share"><a href="http://vk.com/share.php?url=_URL_&title=_TITLE_&description=_DESCRIPTION_&image=_URL_TO_IMAGE_" class="btn btn-vk">
                     <i class="fa fa-vk fa-lg vk"></i></a></div>
             <div class="soc-share"><a class="btn  btn-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;source=http%3A%2F%2Fartzakaz.by%2F">
-                    <span class="fa fa-linkedin"></span></a></span>             </div>
+                    <span class="fa fa-linkedin"></span></a></div>
             <div class="soc-share"><a class="btn  btn-google" href="https://plus.google.com/share?url=http%3A%2F%2Fartzakaz.by%2F">
                     <span class="fa fa-google"></span></a></div>
 

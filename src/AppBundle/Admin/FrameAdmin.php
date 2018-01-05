@@ -107,6 +107,7 @@ class FrameAdmin extends AbstractAdmin
             ->add('images', null,
                 ['required' => true, 'label' => 'Изображение', 'template' => 'AppBundle:Admin:frame_list_image.html.twig'])
             ->add('title', null, ['editable'=> true, 'label' => 'Артикул'])
+            ->add('ratio', null, ['editable'=> true, 'label' => 'Коэфф.'])
             ->add('height', null, ['editable' => true, 'label' => 'Высота',
                 'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
             ->add('width', null, ['editable' => true, 'label' => 'Ширина',
@@ -117,8 +118,6 @@ class FrameAdmin extends AbstractAdmin
             ->add('material', 'choice', ['editable' => true, 'label' => 'Материал','editable' => true,
                 'class' => 'Appbundle\Entity\FrameMaterial', 'choices' => $materialsChoices, 'sortable' => true,
                 'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'material']]])
-//            ->add('createdAt', null, ['label' => 'Создано'])
-//            ->add('updatedAt', null, ['label' => 'Обновлено'])
             ->add('isActive', null, ['editable' => true, 'label' => 'Показывать'])
             ->add(
                 '_action',

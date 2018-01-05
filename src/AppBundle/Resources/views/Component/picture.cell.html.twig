@@ -11,7 +11,12 @@
     </div>
     <div class="row">
         <div class="az-main-popular-item-header-category">
-            <a href="{{ path('picture', {'id': picture.id}) }}">"{{ picture.title }}"</a>
+            {% if picture.title|length > 58 %}
+                {% set picture_title = picture.title|slice(0, 55) ~ '...' %}
+            {% else %}
+                {% set picture_title = picture.title %}
+            {% endif %}
+            <a href="{{ path('picture', {'id': picture.id}) }}">"{{ picture_title }}"</a>
         </div>
     </div>
     <div class="row">
@@ -21,7 +26,12 @@
             {% else %}
                 {% set author_url = '#' %}
             {% endif %}
-            <span class="az_author"> Автор:</span> <a href="{{ author_url }}"> {{ picture.author.name }}</a>
+            {% if picture.author is defined and picture.author and picture.author.name is defined and picture.author.name %}
+                {% set author_name = picture.author.name %}
+            {% else %}
+                {% set author_name = '-' %}
+            {% endif %}
+            <span class="az_author"> Автор:</span> <a href="{{ author_url }}"> {{ author_name }}</a>
         </div>
     </div>
     <div class="row">
@@ -40,7 +50,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 az_btn_order text-left">
-                    <button class="btn_az-main-popular_order">Выбрать <br/>тип картины,<br/> размер, цену, <br/>заказать</button>
+                    <button class="btn_az-main-popular_order">Выбрать <br/>тип картины,<br/> размер, цена, <br/>заказать</button>
                 </div>
 
             </div>

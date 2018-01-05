@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Category3;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
@@ -15,16 +16,18 @@ class PictureRepository extends EntityRepository {
     /**
      * * Get query builder for active pictures by category id
      *
-     * @param integer $id
+     * @param Category3 $category
      * @return QueryBuilder
      */
-    public function getActivePicturesFromCategory( $id ) {
-        return $this->createQueryBuilder( 'p' )
-                    ->innerJoin( 'p.categories', 'c' )// Inner Join with categories
+    public function getActivePicturesFromCategory( $category ) {
+
+        $categoryIds = $this->getCategoryChildren($category);
+        $categoryIds[] = $category->getId();
+        $qb = $this->createQueryBuilder( 'p' );
+        return $qb->innerJoin( 'p.categories', 'c' )// Inner Join with categories
                     ->innerJoin( 'p.form', 'f' )// Inner Join with picture forms
-                    ->where( 'c.id = :category' )
-                    ->andWhere( 'p.isActive = true' )
-                    ->setParameter( 'category', $id );
+                    ->where( $qb->expr()->in('c.id', $categoryIds) )
+                    ->andWhere( 'p.isActive = true' );
     }
 
     /**
@@ -68,7 +71,7 @@ class PictureRepository extends EntityRepository {
             ->innerJoin( 'p.author', 'a' )// Inner Join with author
             ->innerJoin( 'p.form', 'f' )// Inner Join with picture form
             ->where( 'p.isActive = true' )
-            ->andWhere("(a.name = :search OR p.title = :search OR p.code = :search)")
+            ->andWhere('(a.name = :search OR p.title = :search OR p.code = :search)')
             ->setParameter( 'search', $searchString);
     }
 
@@ -123,5 +126,29 @@ class PictureRepository extends EntityRepository {
         }
 
         return [ ];
+    }
+
+    /**
+     * Get children ids for category.
+     *
+     * @param Category3 $category
+     *
+     * @return array
+     */
+    protected function getCategoryChildren($category) {
+        $categoryIds = [];
+        if($category instanceof Category3) {
+            $children = $category->getChildren();
+            if(count($children) > 0) {
+                foreach($children as $_category) {
+                    /** @var Category3 $_category */
+                    $categoryIds[] = $_category->getId();
+                    if($_category->getChildren()) {
+                        $categoryIds = array_merge($categoryIds, $this->getCategoryChildren($_category));
+                    }
+                }
+            }
+        }
+        return $categoryIds;
     }
 }

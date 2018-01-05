@@ -78,6 +78,7 @@ define(function (require, exports, module) {
         $("img.az-picture-page-constructor-picture-thickness-img").click(function (event) {
             event.stopImmediatePropagation();
             $('#az-picture-constructor-frame-selected').val($(this).data('title'));
+            $('#az-picture-constructor-frame-ratio-selected').val($(this).data('ratio'));
             setShowBoard();
         });
 
@@ -85,6 +86,8 @@ define(function (require, exports, module) {
         $("img.az-picture-page-constructor-picture-module-type-img").click(function (event) {
             event.stopImmediatePropagation();
             $('#az-picture-constructor-module-selected').val($(this).data('title'));
+            $('#az-picture-constructor-module-ratio-selected').val($(this).data('ratio'));
+            $('#az-picture-constructor-module-code-selected').val($(this).data('code'));
             setShowBoard();
         });
 
