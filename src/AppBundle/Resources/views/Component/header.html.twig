@@ -29,6 +29,7 @@
                 </div>
             </div>
             <div class="col-md-2 container-fluid az-header-top">
+                {% if site_settings.enable_own_picture %}
                 <div class="row">
                     <div class="col-md-3">
                         <img src="{{ asset('bundles/app/images/download.png') }}" class="az-download-title-img az-basket-title-img"
@@ -38,6 +39,7 @@
                         Загрузить свое <br/>изображение.
                     </div>
                 </div>
+                {% endif %}
             </div>
             <div class="col-md-2 container-fluid text-right">
                 <div class="row text-right">
