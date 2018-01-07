@@ -50,6 +50,7 @@ class CategoriesController extends FrontController
         $this->data['pagination'] = $pagination;
         $category->setDescription($this->get('helper.textformater')->formatMoreText($category->getDescription()));
         $this->data['category'] = $category;
+        $this->data['mainCategoryId'] = $category->getId();
         $this->data['filters']['tpls'] = $em->getRepository('AppBundle:PictureForm')->findBy(['isActive' => true]);
 
         // parameters to template

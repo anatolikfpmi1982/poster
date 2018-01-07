@@ -34,13 +34,25 @@
             <span class="az_author"> Автор:</span> <a href="{{ author_url }}"> {{ author_name }}</a>
         </div>
     </div>
-    {% if picture.categories is defined and picture.categories %}
+    {% if mainCategoryId is defined and mainCategoryId %}
+        {% set limitCategory = 6 %}
+        {% set catId = mainCategoryId %}
+    {% else %}
+        {% set limitCategory = 5 %}
+        {% set catId = 0 %}
+    {% endif %}
+    {% if picture.categories is defined and picture.categories and picture.categories and (( catId > 0 and picture.categories|length > 1 ) or ( catId == 0 and picture
+    .categories|length > 0 )
+    ) %}
         <div class="row">
             <div class="az-main-popular-item-header-category">
                 <span class="az_author"> Категории:</span>
-                {% for cat in picture.categories|slice(0, 5) %}
-                    <a href="{{ path('category', {'slug': cat.slug}) }}"> {{ cat.title }}</a> {% if loop.last == false %},{% endif %}
+                {% for cat in picture.categories|slice(0, limitCategory) %}
+                    {% if cat.id != catId %}
+                        <a href="{{ path('category', {'slug': cat.slug}) }}"> {{ cat.title }}</a> {% if loop.last == false %},{% endif %}
+                    {% endif %}
                 {% endfor %}
+
             </div>
         </div>
     {% endif %}
