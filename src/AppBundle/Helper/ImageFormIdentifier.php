@@ -9,12 +9,12 @@ class ImageFormIdentifier {
     const SQUARE_FORM_NAME = 'square';
     const HORISONTAL_FORM_NAME = 'horisontal';
     const HORISONTAL_LONG_FORM_NAME = 'horisontal_long';
-    const VERTICAL_FORM_MAX_LIMIT = 0.95;
-    const SQUARE_FORM_MIN_LIMIT = 0.95;
-    const SQUARE_FORM_MAX_LIMIT = 1.05;
-    const HORISONTAL_FORM_MIN_LIMIT = 1.05;
-    const HORISONTAL_FORM_MAX_LIMIT = 1.3;
-    const HORISONTAL_LONG_FORM_MIN_LIMIT = 1.3;
+    const VERTICAL_FORM_MAX_LIMIT = 0.86;
+    const SQUARE_FORM_MIN_LIMIT = 0.86;
+    const SQUARE_FORM_MAX_LIMIT = 1.12;
+    const HORISONTAL_FORM_MIN_LIMIT = 1.12;
+    const HORISONTAL_FORM_MAX_LIMIT = 1.7;
+    const HORISONTAL_LONG_FORM_MIN_LIMIT = 1.7;
 
     /**
      * Function used to identify picture form.
