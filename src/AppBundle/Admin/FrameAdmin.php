@@ -147,45 +147,45 @@ class FrameAdmin extends AbstractAdmin
     }
 
     /**
-     * @param mixed $moduleType
+     * @param mixed $frame
      */
-    public function prePersist($moduleType)
+    public function prePersist($frame)
     {
-        if($moduleType instanceof Frame) {
-            $moduleType->setCreatedAt(new \DateTime());
-            $moduleType->setUpdatedAt(new \DateTime());
-            $this->manageEmbeddedImageAdmins($moduleType);
+        if($frame instanceof Frame) {
+            $frame->setCreatedAt(new \DateTime());
+            $frame->setUpdatedAt(new \DateTime());
+            $this->manageEmbeddedImageAdmins($frame);
         }
     }
 
     /**
-     * @param mixed $moduleType
+     * @param mixed $frame
      */
-    public function preUpdate($moduleType)
+    public function preUpdate($frame)
     {
-        if($moduleType instanceof Frame) {
-            $moduleType->setUpdatedAt(new \DateTime());
-            $this->manageEmbeddedImageAdmins($moduleType);
+        if($frame instanceof Frame) {
+            $frame->setUpdatedAt(new \DateTime());
+            $this->manageEmbeddedImageAdmins($frame);
         }
     }
 
     /**
-     * @param mixed $moduleType
+     * @param mixed $frame
      */
-    public function postUpdate($moduleType)
+    public function postUpdate($frame)
     {
-        if($moduleType instanceof Frame) {
+        if($frame instanceof Frame) {
             $this->imageManagement->cleanGarbageImages();
         }
     }
 
     /**
-     * @param mixed $moduleType
+     * @param mixed $frame
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function preRemove($moduleType){
-        if($moduleType instanceof Frame) {
-            $this->imageManagement->deleteImages($moduleType->getImages());
+    public function preRemove($frame){
+        if($frame instanceof Frame) {
+            $this->imageManagement->deleteImages($frame->getImages());
         }
     }
 

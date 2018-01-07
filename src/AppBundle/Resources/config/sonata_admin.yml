@@ -191,3 +191,12 @@ services:
             - AppBundle\Entity\PictureForm
             - 'SonataAdminBundle:CRUD'
             - '@app.image_manager'
+    app.admin.order:
+        class: AppBundle\Admin\OrderAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Заказы", label: "Заказы", show_in_dashboard: true}
+        arguments:
+             - ~
+             - AppBundle\Entity\Order
+             - 'SonataAdminBundle:CRUD'
+             - '@doctrine.orm.entity_manager'
