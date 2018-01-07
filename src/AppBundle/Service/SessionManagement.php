@@ -77,6 +77,47 @@ class SessionManagement {
     }
 
     /**
+     * Add picture to cart
+     *
+     * @param object $data
+     */
+    public function addToCart( $data ) {
+        if ( $cart = $this->session->get( 'cart' ) ) {
+            $cart[] = $data;
+        } else {
+            $cart = [ $data ];
+        }
+        $this->session->set( 'cart', $cart );
+    }
+
+    /**
+     * Delete picture from cart
+     *
+     * @param int $id
+     */
+    public function deleteFromCart( $id ) {
+        if ( $cart = $this->session->get( 'cart' ) ) {
+            foreach ($cart as $k => $v) {
+                if($v['id'] == $id) {
+                    unset($cart[$k]);
+                }
+            }
+
+            $this->session->set( 'cart', $cart );
+        }
+    }
+
+    /**
+     * Clean cart
+     */
+    public function cleanCart() {
+        if ( $cart = $this->session->get( 'cart' ) ) {
+            $this->session->set( 'cart', [] );
+        }
+    }
+
+
+    /**
      * @return mixed
      */
     public function getLastVisitedItems() {
@@ -88,5 +129,12 @@ class SessionManagement {
      */
     public function getDeferredItems() {
         return $this->container->get( 'session' )->get( 'deferred' );
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCart() {
+        return $this->container->get( 'session' )->get( 'cart' );
     }
 }

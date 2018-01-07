@@ -1,0 +1,51 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}Оформить заказ{% endblock %}
+
+{% block body %}
+    <div class="row az-page-main-section-div">
+        {% include('AppBundle:Component:Blocks/breadcrumb.html.twig') %}
+    </div>
+    <div class="row az-page-main-section-div">
+        <div class="col-md-12 container-fluid">
+            <div class="row page-title az-picture-page-title">Оформить заказ</div>
+            {% if cart %}
+                <div class="row az-category-page-pictures-div">
+                    <div class="row az-page-section-body az-page-main-popular container-fluid">
+                        <div class="row">
+                            {% for item in cart %}
+
+                            {% include('AppBundle:Component:picture.cell.cart.html.twig') %}
+                            {% if loop.index != 1 and loop.index % 3 == 0 %}
+                        </div>
+                        <div class="row">
+                            {% endif %}
+
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                {{ form_start(form) }}
+                {{ form_row(form._token) }}
+                {{ form_row(form.fullname) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.phone) }}
+                {{ form_row(form.city) }}
+                {{ form_row(form.address) }}
+                {{ form_row(form.address2) }}
+                {{ form_row(form.company) }}
+                {{ form_row(form.fax) }}
+                {{ form_row(form.comment) }}
+                {{ form_row(form.conditions) }}
+                {{ form_row(form.personal_data) }}
+                {#{{ form_row(form.save) }}#}
+                {{ form_end(form) }}
+            {% else %}
+                <div class="row az-category-page-pictures-div">
+                    У вас в корзине нет картин.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

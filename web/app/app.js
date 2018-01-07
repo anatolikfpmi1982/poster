@@ -197,6 +197,43 @@ define(function (require, exports, module) {
             return false;
         });
 
+        // picture page order button
+        $("button.picture_order-bnt").click(function (event) {
+            event.stopImmediatePropagation();
+            var $this = $(this),
+                id = $this.attr('data-id'),
+                price = $this.parent().parent().parent().find('.az-picture-page-sidebar-price-value').text(),
+                sizes = $("#az-picture-page-constructor-size-select").val(),
+                banner_material_id = $("input.az-picture-page-constructor-material-radio").attr("data-id"),
+                banner_material_value = $("input.az-picture-page-constructor-material-radio").val(),
+                underframe_id = $("input.z-picture-page-thickness").attr("data-ratio"),
+                underframe_value = $("input.z-picture-page-thickness").val(),
+                frame_material_id = $("input.az-picture-page-constructor-material-picture-radio").attr("data-id"),
+                frame_material_value = $("input.az-picture-page-constructor-material-picture-radio").val(),
+                type_id = $("input.az-picture-page-constructor-type-radio").val(),
+                type_value = $("input.az-picture-page-constructor-type-radio").attr('data-title');
+            $.ajax({
+                url: "/ajax/cart/add",
+                data: {
+                    'id': id,
+                    'price': price,
+                    'sizes': sizes,
+                    'banner_material_id': banner_material_id,
+                    'banner_material_value': banner_material_value,
+                    'underframe_id': underframe_id,
+                    'underframe_value': underframe_value,
+                    'frame_material_id': frame_material_id,
+                    'frame_material_value': frame_material_value,
+                    'type_id': type_id,
+                    'type_value': type_value
+                }
+            }).done(function () {
+                $("button.picture_order-bnt").text("В корзине");
+                $("button.picture_order-bnt").prop('disabled', true);
+            });
+            return false;
+        });
+
         // picture page defer delete button
         $("button.delete-defer-bnt").click(function (event) {
             event.stopImmediatePropagation();
@@ -204,6 +241,21 @@ define(function (require, exports, module) {
             var id = $this.attr('data-id');
             $.ajax({
                 url: "/ajax/picture/defer/delete",
+                data: {'id': id}
+            }).done(function () {
+                $this.text("Удалено");
+                $this.prop('disabled', true);
+            });
+            return false;
+        });
+
+        // picture page cart delete button
+        $("button.delete_order-bnt").click(function (event) {
+            event.stopImmediatePropagation();
+            var $this = $(this);
+            var id = $this.attr('data-id');
+            $.ajax({
+                url: "/ajax/cart/delete",
                 data: {'id': id}
             }).done(function () {
                 $this.text("Удалено");
