@@ -2,16 +2,16 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Order;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use AppBundle\Entity\Order;
 
 /**
  * Class OrdersController
@@ -51,6 +51,7 @@ class OrderController extends FrontController {
             }
         }
 
+        /** @var array $cart */
         $cart = $this->get( 'app.session_manager' )->getCart();
         if( $cart) {
             foreach($cart as $k => $v) {
@@ -61,9 +62,9 @@ class OrderController extends FrontController {
         }
 
         $this->blocks = [ 'CategoryMenu' => 1, 'Reviews' => 2 , 'MainMenu' => 3, 'BreadCrumb' => 4];
-        $this->menu = '/';
+        $this->menu = '/order';
         $this->pageSlug = '';
-        $this->pageType = 'deferred';
+        $this->pageType = 'order';
         $this->doBlocks();
         $this->data['cart'] = $cart;
         $this->data['form'] = $form->createView();

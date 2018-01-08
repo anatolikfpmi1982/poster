@@ -63,6 +63,9 @@ class BreadCrumbService {
             case 'contact_us':
                 $result = $this->buildContactBreadCrumb();
                 break;
+            case 'order':
+                $result = $this->buildOrderBreadCrumb();
+                break;
             case 'search':
                 $result = $this->buildSearchBreadCrumb($param);
                 break;
@@ -79,6 +82,18 @@ class BreadCrumbService {
         return [[
             'title' => 'Свяжизь с нами',
             'url' => $this->container->get('router')->generate('contact_us'),
+        ]];
+    }
+
+    /**
+     * Get full order bread crumb path.
+     *
+     * @return array
+     */
+    public function buildOrderBreadCrumb() {
+        return [[
+            'title' => 'Заказ',
+            'url' => $this->container->get('router')->generate('order'),
         ]];
     }
 

@@ -5,7 +5,8 @@
         {% set active_category_id = category.id %}
         {% if category.parentCategory is defined and category.parentCategory and category.parentCategory.id is defined and category.parentCategory.id %}
             {% set active_category_parent_id = category.parentCategory.id %}
-            {% if category.parentCategory.parentCategory is defined and category.parentCategory.parentCategory and category.parentCategory.parentCategory.id is defined and category.parentCategory.parentCategory.id %}
+            {% if category.parentCategory.parentCategory is defined and category.parentCategory.parentCategory and
+            category.parentCategory.parentCategory.id is defined and category.parentCategory.parentCategory.id %}
                 {% set active_category_parent_parent_id = category.parentCategory.parentCategory.id %}
             {% endif %}
         {% endif %}
@@ -15,7 +16,6 @@
     <input type="hidden" name="block_menu_active_category" id="block_menu_active_category" value="{{ active_category_id }}">
     <input type="hidden" name="block_menu_active_category_parent" id="block_menu_active_category_parent" value="{{ active_category_parent_id }}">
     <input type="hidden" name="block_menu_active_category_parent_parent" id="block_menu_active_category_parent_parent" value="{{ active_category_parent_parent_id }}">
-    {% set category_index = 1 %}
     {% for category in block %}
         <div class="col-md-12 container-fluid">
             {% if category.slug is defined and category.slug %}
@@ -23,7 +23,9 @@
             {% else %}
                 {% set category_slug = '#' %}
             {% endif %}
-            <div class="row az-sidebar-header az-sidebar-catalog-item-header" data-id="{{ category.id }}" data-url="{{ path('category', {'slug': category.slug}) }}">
+            <div class="row az-sidebar-header az-sidebar-catalog-item-header"
+                 data-id="{{ category.id }}"
+                 data-url="{{ path('category', {'slug': category.slug}) }}">
                 <div class="col-md-12">
                     <img src="{{ asset('bundles/app/images/catalog.png') }}" class="az-sidebar-block-img az-catalog-block-img" title="{{ category.title }}"/>
                     {{ category.title }}
@@ -31,7 +33,7 @@
             </div>
             {% if category.children is defined and category.children %}
                 <div class="row category-menu children-category-{{ category.id }}" id="children-category-{{ category.id }}"
-                     style="display: {% if category_index == 1 %}block{% else %}none{% endif %};">
+                     style="display:none;">
                     <div class="col-md-12 container-fluid">
                         {% for subcategory in category.children %}
                             {% if subcategory.slug is defined and subcategory.slug %}
@@ -42,7 +44,8 @@
                             <div class="row az-sidebar-subcategory-item" data-id="{{ subcategory.id }}" data-parent-id="{{ category.id }}"
                                  data-url="{{ path('category', {'slug': subcategory_slug}) }}">
                                 <div class="col-md-1 az-img-subcategory">
-                                    <img src="{{ asset('bundles/app/images/arrows.png') }}" class="az-sidebar-block-img az-catalog-block-img" title="{{ subcategory.title }}"/>
+                                    <img src="{{ asset('bundles/app/images/arrows.png') }}" class="az-sidebar-block-img az-catalog-block-img"
+                                         title="{{ subcategory.title }}"/>
                                 </div>
                                 <div class="col-md-11 container-fluid">
                                     {{ subcategory.title }}
@@ -73,7 +76,6 @@
                     </div>
                 </div>
             {% endif %}
-            {% set category_index = category_index + 1 %}
         </div>
     {% endfor %}
 </div>

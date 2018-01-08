@@ -132,9 +132,9 @@ class SessionManagement {
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getCart() {
-        return $this->container->get( 'session' )->get( 'cart' );
+        return (array)$this->container->get( 'session' )->get( 'cart' );
     }
 }
