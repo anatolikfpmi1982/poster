@@ -141,12 +141,19 @@ define(function (require, exports, module) {
         $("div.az-sidebar-catalog-item-header").click(function (event) {
             event.stopImmediatePropagation();
             var id = $(this).data('id'), active_id = $('#block_menu_active_category').val();
-            if (id !== active_id) {
+            if (id !== parseInt(active_id)) {
                 window.location.replace($(this).data('url'));
             } else {
+                var parent = $('div.children-category-' + id),
+                    isDisplay = parent.css('display');
                 $('div.category-menu').hide();
                 $('div.subcategory-menu').hide();
-                $('div.children-category-' + id).show();
+
+                if (isDisplay == 'none') {
+                    parent.show();
+                } else {
+                    parent.hide();
+                }
             }
             return false;
         });
@@ -155,14 +162,32 @@ define(function (require, exports, module) {
         $("div.az-sidebar-subcategory-item").click(function (event) {
             event.stopImmediatePropagation();
             var id = $(this).data('id'), parent = $(this).data('parent-id'), active_id = $('#block_menu_active_category').val();
-            if (id !== active_id) {
+            if (id !== parseInt(active_id)) {
                 window.location.replace($(this).data('url'));
             } else {
+                var category = $('div.children-category-' + parent),
+                    categorySub = $('div.children-subcategory-' + parent),
+                    isDisplay = categorySub.css('display');
                 $('div.category-menu').hide();
                 $('div.subcategory-menu').hide();
-                $('div.children-category-' + parent).show();
-                $('div.children-subcategory-' + parent).show();
-                $('div.children-subsubcategory-' + id).show();
+                category.show();
+                if (isDisplay == 'none') {
+                    categorySub.show();
+                    $('div.children-subsubcategory-' + id).show();
+                } else {
+                    categorySub.hide();
+                    $('div.children-subsubcategory-' + id).show();
+                }
+            }
+            return false;
+        });
+
+        // category menu main category event
+        $("div.az-sidebar-subsubcategory-item").click(function (event) {
+            event.stopImmediatePropagation();
+            var id = $(this).data('id'), active_id = $('#block_menu_active_category').val();
+            if (id !== parseInt(active_id)) {
+                window.location.replace($(this).data('url'));
             }
             return false;
         });
@@ -296,9 +321,9 @@ define(function (require, exports, module) {
     }
 
     function setActiveCategoryInMenu() {
-        var activeCategoryId = $('#block_menu_active_category').val(),
-            activeCategoryParentId = $('#block_menu_active_category_parent').val(),
-            activeCategoryParentParentId = $('#block_menu_active_category_parent_parent').val();
+        var activeCategoryId = parseInt($('#block_menu_active_category').val()),
+            activeCategoryParentId = parseInt($('#block_menu_active_category_parent').val()),
+            activeCategoryParentParentId = parseInt($('#block_menu_active_category_parent_parent').val());
         if (activeCategoryId != 0) {
             $('div.category-menu').hide();
             $('div.subcategory-menu').hide();
@@ -308,11 +333,6 @@ define(function (require, exports, module) {
                 $('div.children-subsubcategory-' + activeCategoryParentId).show();
             } else if (activeCategoryParentId != 0) {
                 $('div.children-category-' + activeCategoryParentId).show();
-                $('div.children-subcategory-' + activeCategoryParentId).show();
-                $('div.children-subsubcategory-' + activeCategoryId).show();
-            } else {
-                $('div.children-category-' + activeCategoryId).show();
-                $('div.children-subcategory-' + activeCategoryId).show();
             }
         }
         return false;
