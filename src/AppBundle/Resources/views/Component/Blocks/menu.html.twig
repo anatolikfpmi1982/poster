@@ -59,8 +59,9 @@
                                                     {% else %}
                                                         {% set subsubcategory_slug = '#' %}
                                                     {% endif %}
-                                                    <div class="row subcategory-menu az-sidebar-subcategory-item children-subsubcategory-{{ subcategory.id }}"
-                                                         data-url="{{ path('category', {'slug': subsubcategory_slug }) }}">
+                                                    <div class="row subcategory-menu az-sidebar-subsubcategory-item children-subsubcategory-{{ subcategory.id }}"
+                                                         data-url="{{ path('category', {'slug': subsubcategory_slug }) }}"
+                                                         data-id="{{ subsubcategory.id }}">
 
                                                         <div class="col-md-12">
                                                             {{ subsubcategory.title }}
