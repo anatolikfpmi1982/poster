@@ -49,6 +49,30 @@ var ConstructorOverview = new function () {
         $('#az-constructor-choose-mat-size').html(this.mat_size + ' см');
         $('#az-constructor-choose-mat-color').html(this.mat_color);
         $('#az-constructor-choose-module').html(this.module);
+        this.showMonitor();
+    };
+
+    this.showMonitor = function () {
+        var banner = $('div.az-picture-page-picture-main-banner-div'),
+            picture = $('div.az-picture-page-picture-main-picture-div'),
+            panel = $('div.az-picture-page-picture-main-panel-div');
+        switch (this.type) {
+            case 'Баннер':
+                banner.show();
+                picture.hide();
+                panel.hide();
+                break;
+            case 'В раме':
+                banner.hide();
+                picture.show();
+                panel.hide();
+                break;
+            case 'Панно':
+                banner.hide();
+                picture.hide();
+                panel.show();
+                break;
+        }
     };
 
     this.preShowBuild = function () {
