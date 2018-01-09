@@ -904,6 +904,7 @@ body {
     background-color: #ffffff;
     border: 1px solid #fd1200;
     color: #fd1200;
+    background-image: none;
 }
 
 button, input, optgroup, select, textarea {
@@ -2017,7 +2018,79 @@ button.close:focus, .close:hover {
     padding: 10px;
 }
 
-/**cart**/
 .az-order-cart {
     border: 1px solid #eee;
+    padding: 0px;
+    margin: 10px 10px 0 10px;
+}
+
+.az-order-cart-main{
+
+}
+
+.az-order-cart-item{
+    border-left: 1px solid #eee;
+    min-height: 250px;
+    padding: 20px 15px;
+    font-size: 12px;
+}
+
+.az-order-cart-item:first-child{
+    border-left: none;
+}
+.az-order-cart-item-img{
+
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    padding: 15px;
+    max-height: 180px;
+    max-width: 180px;
+}
+
+.delete_order-bnt {
+    font-size: 14px;
+    background-color: #fff;
+    color: #333;
+    box-shadow: none;
+    display: inline-block;
+    padding: 10px;
+    margin-bottom: 0;
+    font-weight: 400;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-color: #333;
+    border-radius: 3px;
+    text-transform: lowercase;
+    margin: 10px;
+    float: none;
+    left: 50%;
+}
+
+.az-order-cart-title {
+    padding-bottom: 15px;
+    font-size: 13px;
+}
+
+.btn-primary {
+    background-image: none;
+    text-shadow: none;
+    border: #fd1200;
+    box-shadow: none;
+}
+
+.btn-primary:focus, .btn-primary:hover {
+    background-position: 0;
+    background-repeat: no-repeat;
 }

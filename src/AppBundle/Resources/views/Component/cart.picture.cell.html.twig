@@ -14,7 +14,7 @@
             <div class="col-md-3 az-order-cart-item">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="{{ path('picture', {'id': item.id}) }}">"{{ item.picture.title }}"</a></div></div>
+                        <a  class="az-order-cart-title" href="{{ path('picture', {'id': item.id}) }}">"{{ item.picture.title }}" </a></div></div>
                 <div class="row">
                 <div class="col-md-12">Размер: {{ item.sizes }} см</div></div>
                 <div class="row">
@@ -46,14 +46,6 @@
                     </div>
 
     </div>
-<div class="row container-fluid">
 
-    <div class="col-md-6">
-        <button class="btn_az-main-popular_defer delete_order-bnt" data-id="{{ item.id }}">Изменить</button>
-    </div>
-<div class="col-md-6 text-center az-picture-page-sidebar-header-block az-picture-page-sidebar-price ">Стоимость заказа:
-    <span class="az-picture-page-sidebar-price-value">0</span> BYN
-</div>
-</div>
 
 
