@@ -27,17 +27,17 @@ class OrderController extends FrontController {
         $em = $this->get('doctrine.orm.entity_manager');
 
         $form = $this->createFormBuilder()
-            ->add('fullname', TextType::class, ['label' => 'Ф.И.О.', 'required' => true])
-            ->add('email', EmailType::class, ['label' => 'Email', 'required' => true])
-            ->add('phone', TextType::class, ['label' => 'Телефон', 'required' => true])
-            ->add('city', TextType::class, ['label' => 'Город', 'required' => true])
-            ->add('address', TextType::class, ['label' => 'Адрес', 'required' => true])
+            ->add('fullname', TextType::class, ['label' => 'Ф.И.О. *', 'required' => true])
+            ->add('email', EmailType::class, ['label' => 'Email *', 'required' => true])
+            ->add('phone', TextType::class, ['label' => 'Телефон *', 'required' => true])
+            ->add('city', TextType::class, ['label' => 'Город *', 'required' => true])
+            ->add('address', TextType::class, ['label' => 'Адрес *', 'required' => true])
             ->add('address2', TextType::class, ['label' => 'Адрес 2', 'required' => false])
             ->add('company', TextType::class, ['label' => 'Компания', 'required' => false])
             ->add('fax', TextType::class, ['label' => 'Факс', 'required' => false])
             ->add('comment', TextareaType::class, ['label' => 'Комментарий к заказу', 'required' => false])
-            ->add('conditions', CheckboxType::class, ['label' => 'Я соглашаюсь с данными условиями работы', 'required' => true])
-            ->add('personal_data', CheckboxType::class, ['label' => 'Согласен на обработку моих персональных данных', 'required' => true])
+            ->add('conditions', CheckboxType::class, ['label' => 'Я соглашаюсь с данными условиями работы *', 'required' => true])
+            ->add('personal_data', CheckboxType::class, ['label' => 'Согласен на обработку моих персональных данных *', 'required' => true])
             ->add('save', SubmitType::class, array('label' => 'Заказать'))
             ->getForm();
 
