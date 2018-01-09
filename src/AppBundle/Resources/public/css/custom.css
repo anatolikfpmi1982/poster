@@ -2016,3 +2016,8 @@ button.close:focus, .close:hover {
 .navbar-form {
     padding: 10px;
 }
+
+/**cart**/
+.az-order-cart {
+    border: 1px solid #eee;
+}
