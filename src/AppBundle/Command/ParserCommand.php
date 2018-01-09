@@ -72,7 +72,6 @@ class ParserCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->em = $this->getContainer()->get('doctrine.orm.entity_manager');
-
         $this->validateFiles();
 
         if($this->errors) {
@@ -121,6 +120,7 @@ class ParserCommand extends ContainerAwareCommand
             if(!$author) {
                 $author = new Author();
                 $author->setName(iconv('Windows-1251', 'Utf-8', $row[2]));
+                $author->setSlug($this->getContainer()->get('helper.slugcreator')->createSlug($author->getName()));
                 $author->setIsActive(true);
                 $this->em->persist($author);
                 $this->em->flush();
