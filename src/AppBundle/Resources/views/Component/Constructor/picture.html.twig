@@ -3,11 +3,11 @@
 {% else %}
     {% set img = asset('bundles/app/images/default_picture.jpg') %}
 {% endif %}
-<div class="row text-center az-picture-page-picture-main-banner-div">
+<div class="row text-center az-picture-page-picture-main-banner-div" style="height: {{ pictureThumbHeight + 60 }}px;">
     <div class="col-md-6 thumb text-center">
         <div class="az-picture-constructor-container">
-            <div style="left:0px;
-                    top:0px;
+            <div style="left:30px;
+                    top:30px;
                     width:{{ pictureThumbWidth }}px;
                     height:{{ pictureThumbHeight }}px;
                     background-image:url('{{ img }}');
@@ -35,12 +35,12 @@
         </div>
     </div>
 </div>
-<div class="row text-center az-picture-page-picture-main-picture-div">
+<div class="row text-center az-picture-page-picture-main-picture-div" style="display:none;">
     <div class="col-md-12">
         <img src="{{ img }}" class="az-picture-page-constructor-main-img"/>
     </div>
 </div>
-<div class="row text-center az-picture-page-picture-main-panel-div">
+<div class="row text-center az-picture-page-picture-main-panel-div" style="display:none;">
     <div class="col-md-12">
         <img src="{{ img }}" class="az-picture-page-constructor-main-img"/>
     </div>
