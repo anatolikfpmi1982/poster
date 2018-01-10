@@ -49,6 +49,30 @@ var ConstructorOverview = new function () {
         $('#az-constructor-choose-mat-size').html(this.mat_size + ' см');
         $('#az-constructor-choose-mat-color').html(this.mat_color);
         $('#az-constructor-choose-module').html(this.module);
+        this.showMonitor();
+    };
+
+    this.showMonitor = function () {
+        var banner = $('div.az-picture-page-picture-main-banner-div'),
+            picture = $('div.az-picture-page-picture-main-picture-div'),
+            panel = $('div.az-picture-page-picture-main-panel-div');
+        switch (this.type) {
+            case 'Баннер':
+                banner.show();
+                picture.hide();
+                panel.hide();
+                break;
+            case 'В раме':
+                banner.hide();
+                picture.show();
+                panel.hide();
+                break;
+            case 'Панно':
+                banner.hide();
+                picture.hide();
+                panel.show();
+                break;
+        }
     };
 
     this.preShowBuild = function () {
@@ -145,25 +169,38 @@ var ConstructorOverview = new function () {
     this.calculatePanel = function () {
         var average_price = this.calculateSquare(),
             banner_add_price = $('input#constructor_banner_' + this.material_id + '_additional_price').val(),
+            banner_add_ratio = $('input#constructor_banner_' + this.material_id + '_additional_ratio').val(),
             panel_ratio = $('input#az-picture-constructor-module-ratio-selected').val(),
-            panel_code = $('input#az-picture-constructor-module-code-selected').val();
+            panel_code = $('input#az-picture-constructor-module-code-selected').val(),
+            picture_price = $('#constructor_picture_price').val(),
+            picture_ratio = $('#constructor_picture_ratio').val();
+
         var num = panel_code.split(':');
-        return this.square * average_price * this.thickness_ratio + parseInt(banner_add_price) + parseInt(num.length) * parseInt(panel_ratio);
+        return (((this.square * average_price + parseInt(picture_price) + parseInt(num.length) * parseInt(panel_ratio)) * parseInt(picture_ratio) +
+        parseInt(banner_add_price)) * this.thickness_ratio * parseInt(banner_add_ratio)).toFixed(2);
     };
 
     this.calculateBanner = function () {
         var average_price = this.calculateSquare(),
-            banner_add_price = $('input#constructor_banner_' + this.material_id + '_additional_price').val();
+            banner_add_price = $('input#constructor_banner_' + this.material_id + '_additional_price').val(),
+            banner_add_ratio = $('input#constructor_banner_' + this.material_id + '_additional_ratio').val(),
+            picture_price = $('#constructor_picture_price').val(),
+            picture_ratio = $('#constructor_picture_ratio').val();
 
-        return this.square * average_price * this.thickness_ratio + parseInt(banner_add_price);
+        return (((this.square * average_price + parseInt(picture_price)) * parseInt(picture_ratio) + parseInt(banner_add_price)) *
+        this.thickness_ratio * parseInt(banner_add_ratio)).toFixed(2);
     };
 
     this.calculatePicture = function () {
         var average_price = this.calculateSquare(),
             add_price = $('input#constructor_pic_' + this.material_id + '_additional_price').val(),
-            frame_ratio = $('#az-picture-constructor-frame-ratio-selected').val();
+            add_ratio = $('input#constructor_pic_' + this.material_id + '_additional_ratio').val(),
+            frame_ratio = $('#az-picture-constructor-frame-ratio-selected').val(),
+            picture_price = $('#constructor_picture_price').val(),
+            picture_ratio = $('#constructor_picture_ratio').val();
 
-        return this.square * average_price * frame_ratio + parseInt(add_price) + (this.perimeter * this.calculateFrameSquare());
+        return (((this.square * average_price + parseInt(picture_price) + (this.perimeter * this.calculateFrameSquare())) * parseInt(picture_ratio) +
+        parseInt(add_price)) * frame_ratio * parseInt(add_ratio)).toFixed(2);
     };
 
     this.calculateSquare = function () {
@@ -176,8 +213,8 @@ var ConstructorOverview = new function () {
 
         if (this.size) {
             var size = this.size.split('x');
-            this.square = size[0] * size[1];
-            this.perimeter = size[0] * 2 + 2 * size[1];
+            this.square = size[0] * size[1] * 0.0001;
+            this.perimeter = size[0] * 0.02 + 0.02 * size[1];
         }
 
         if (this.square <= minSquare) {
@@ -186,7 +223,6 @@ var ConstructorOverview = new function () {
             final_price = minPrice;
         } else {
             final_price = (this.square - parseInt(minSquare)) * ((minPrice - maxPrice) / (maxSquare - minSquare)) + parseInt(maxPrice);
-            final_price = Math.ceil(final_price);
         }
         return final_price;
     };
