@@ -53,7 +53,6 @@ body {
     font-size: 15px;
 }
 
-
 .form-control {
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -84,15 +83,6 @@ body {
     font-size: 16px;
     vertical-align: middle;
 
-}
-
-.nav > li > a {
-    padding: 10px 25px 15px 0;
-}
-
-.nav > li > a > img {
-    padding: 0 10px 0 0;
-    vertical-align: text-bottom;
 }
 
 .navbar-nav > li:active {
@@ -1411,6 +1401,7 @@ footer {
     margin-top: 5px;
     display: block;
 }
+
 .az-header-feedback-btn-form {
     display: none;
 }
@@ -1418,6 +1409,7 @@ footer {
 .az-header-feedback-btn:hover .az-header-feedback-btn-form {
     display: block;
 }
+
 .az-main-page-top-menu-div, .az-main-page-search {
     padding-right: 0;
 }
@@ -1898,7 +1890,7 @@ footer {
 
 /**modal feedback**/
 button.close {
-    background-color:#fd1200;
+    background-color: #fd1200;
     color: #FFF;
     text-shadow: none;
     opacity: 1;
@@ -1906,22 +1898,24 @@ button.close {
 }
 
 button.close:focus, .close:hover {
-    background-color:#fff;
+    background-color: #fff;
     color: #fd1200;
 }
 
-.btn-default:focus, .btn-default:hover{
-    background-color:#fff !important;
+.btn-default:focus, .btn-default:hover {
+    background-color: #fff !important;
     color: #fd1200 !important;
     box-shadow: none;
     border: 1px solid #fd1200;
 }
+
 .modal-dialog {
     width: 400px;
     margin: 0 auto;
     font-weight: 400;
 }
-.az-feedback-modal{
+
+.az-feedback-modal {
 
     text-align: left;
     border-radius: 5px;
@@ -1937,7 +1931,7 @@ button.close:focus, .close:hover {
     text-align: left;
 }
 
-.form-group label{
+.form-group label {
     font-weight: 400;
     margin-bottom: 0;
 }
@@ -2002,13 +1996,13 @@ button.close:focus, .close:hover {
 
 /**az-download**/
 
-.az-header-download{
+.az-header-download {
     text-decoration: none;
     cursor: pointer;
     color: #333;
 }
 
-.az-header-download:hover{
+.az-header-download:hover {
     text-decoration: none;
     cursor: pointer;
     color: #fd1200;
@@ -2024,21 +2018,22 @@ button.close:focus, .close:hover {
     margin: 0 10px;
 }
 
-.az-order-cart-main{
+.az-order-cart-main {
 
 }
 
-.az-order-cart-item{
+.az-order-cart-item {
     border-left: 1px solid #eee;
     min-height: 250px;
     padding: 20px 15px;
     font-size: 12px;
 }
 
-.az-order-cart-item:first-child{
+.az-order-cart-item:first-child {
     border-left: none;
 }
-.az-order-cart-item-img{
+
+.az-order-cart-item-img {
 
     width: 100%;
     text-align: center;
