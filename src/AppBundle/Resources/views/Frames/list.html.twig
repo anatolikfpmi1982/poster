@@ -3,38 +3,56 @@
 {% block title %}Рамы{% endblock %}
 
 {% block body %}
-    <div class="count">
-        {{ pagination.getTotalItemCount }}
-    </div>
-    <table border="1">
-        <tr>
-            {# sorting of properties based on query components #}
-            <th>{{ knp_pagination_sortable(pagination, 'Id', 'f.id') }}</th>
-            <th></th>
-            <th{% if pagination.isSorted('f.title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Артикул', 'f.title') }}</th>
-            <th>{{ knp_pagination_sortable(pagination, 'Ширина', 'f.width') }}</th>
-            <th>{{ knp_pagination_sortable(pagination, 'Высота', 'f.height') }}</th>
-            <th>{{ knp_pagination_sortable(pagination, 'Материал', 'f.material') }}</th>
-        </tr>
 
-        {# table body #}
+<div class="row az-page-main-section-div">
+    {% include('AppBundle:Component:Blocks/breadcrumb.html.twig') %}
+</div>
+<div class="row az-page-main-section-div az-page-category-main-section-div">
+    <div class="col-md-12 container-fluid">
+        <div class="row page-title az-picture-page-title">Рамы</div>
+        <div class="row az-category-page-description-div">Мы изготавливаем постеры и картины на заказ, любого размера с любым оформлением. Вы сами решаете, какое изображение, какого размера, в каком багете и с какими цветовыми оттенками будет вашим постером или картиной картиной
+                    </div>
+        <div class="row az-category-page-filters-div">
+            филльтры
+        </div>
+
+
+    <div class="row az-page-main-section-frame">
+        <div class="col-md-12 container-fluid">
+<div class="row az-main-frames-page container-fluid">
         {% for frame in pagination %}
-            <tr {% if loop.index is odd %}class="color"{% endif %}>
-                <td>{{ frame.id }}</td>
-                <td>
-                    <a href="{{ path('frame', { id: frame.id }) }}">
-                        <img src="/files/frames/mini_thumb/{{ frame.images[0].getFilename() }}" class="admin-preview" />
-                    </a>
-                </td>
-                <td>{{ frame.title }}</td>
-                <td>{{ frame.width }}</td>
-                <td>{{ frame.height }}</td>
-                <td>{{ frame.material }}</td>
-            </tr>
-        {% endfor %}
-    </table>
+            <div class="col-md-2 az-main-frames-div">
+            <div class="row">
+                <div class="col-md-12 az-main-frames-div-img">
+
+                        <img  src="/files/frames/mini_thumb/{{ frame.images[0].getFilename() }}" class="az-main-frames-img" />
+
+                </div></div>
+            <div class="col-md-2 az-main-frames-div-header ">
+                <div class="row">
+                    <div class="col-md-12  ">{{ frame.title }}</div></div>
+
+                <div class="row">
+                    <div class="col-md-12 az-main-frames-material">{{ frame.width }} X {{ frame.height }}</div></div>
+
+
+                                        <div class="row">
+
+
+                                            <div class="col-md-12 az-main-frames-material">{{ frame.material }}</div></div></div></div>
+
+            {% if loop.index != 1 and loop.index % 6 == 0 %}
+        </div>
+        <div class="row az-main-frames-page container-fluid ">
+            {% endif %}
+                                {% endfor %}
+        </div>
     {# display navigation #}
-    <div class="navigation">
-        {{ knp_pagination_render(pagination) }}
+
+        </div></div>
     </div>
-{% endblock %}
+    <div class="row az-pagination-block az-category-page-pagination-div">
+        <div class="pagination">
+    {{ knp_pagination_render(pagination) }}
+        </div></div>
+    {% endblock %}
