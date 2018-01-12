@@ -11,12 +11,12 @@
                     width:{{ pictureThumbWidth }}px;
                     height:{{ pictureThumbHeight }}px;
                     background-image:url('{{ img }}');
-                    background-size:{{ pictureThumbWidth }}px 500px;
+                    background-size:{{ pictureThumbWidth }}px {{ pictureThumbHeight }}px;
                     background-position:0px 0px" class="module">
                 <div class="edge edger the_last" style="
                         width:5px;
                         background-image:url('{{ img }}');
-                        background-size:{{ pictureThumbWidth }}px 500px;
+                        background-size:{{ pictureThumbWidth }}px {{ pictureThumbHeight }}px;
                         background-position:5px 0px;
                         right:0;
                         box-shadow:rgba(0, 0, 0, 0.4) -3px 0px 3px;
@@ -26,11 +26,11 @@
                         transform-origin:right"></div>
                 <div style="height:5px;
                         background-image:url('{{ img }}');
-                        background-size:{{ pictureThumbWidth }}px 500px;
-                        bottom:-5px;
-                        box-shadow:rgba(0, 0, 0, 0.4) 0px 3px 3px;
-                        background-position:-0px -{{ pictureThumbHeight }}px"
-                     class="edge edgeb "></div>
+                        background-size:{{ pictureThumbWidth }}px {{ pictureThumbHeight }}px;
+                        bottom:0;
+                        box-shadow:rgba(0, 0, 0, 0.4) 0 3px 3px;
+                        background-position:0px 5px"
+                     class="edge edgeb"></div>
             </div>
         </div>
     </div>
@@ -40,8 +40,7 @@
         <img src="{{ img }}" class="az-picture-page-constructor-main-img"/>
     </div>
 </div>
+<input type="hidden" name="input-az-picture-page-panel-img" id="input-az-picture-page-panel-img" value="{{ img }}">
 <div class="row text-center az-picture-page-picture-main-panel-div" style="display:none;">
-    <div class="col-md-12">
-        <img src="{{ img }}" class="az-picture-page-constructor-main-img"/>
-    </div>
+    <div class="col-md-12 az-picture-page-panel-img"></div>
 </div>

@@ -1984,8 +1984,8 @@ button.close:focus, .close:hover {
 
 .module .edge.edgeb {
     left: 0;
-    transform: skewX(45deg);
-    transform-origin: center top 0;
+    transform: scale(1, -1) skewY(180deg) skewX(135deg);
+    transform-origin: center bottom 0;
     width: 100%;
 }
 

@@ -72,6 +72,7 @@ define(function (require, exports, module) {
         $("input.az-picture-page-constructor-type-radio").click(function (event) {
             event.stopImmediatePropagation();
             setShowBoard();
+
         });
 
         // picture page constructor frame

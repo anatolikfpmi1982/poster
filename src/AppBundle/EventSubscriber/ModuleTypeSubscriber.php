@@ -57,6 +57,8 @@ class ModuleTypeSubscriber
             $this->container->get('helper.imageresizer')
                 ->copyImage($image->getOriginFile(), $image->getBasePath(), $image->getFilename());
             $this->container->get('helper.imageresizer')
+                ->resizeImage($image->getOriginFile(), $image->getMiniThumbBasePath(), $image::THUMB_MINI_IMAGE_HEIGHT, $image::THUMB_MINI_IMAGE_WIDTH);
+            $this->container->get('helper.imageresizer')
                 ->resizeImage($image->getOriginFile(), $image->getSmallThumbBasePath(), $image::THUMB_SMALL_IMAGE_HEIGHT, $image::THUMB_SMALL_IMAGE_WIDTH);
             unlink($image->getOriginFile());
         }

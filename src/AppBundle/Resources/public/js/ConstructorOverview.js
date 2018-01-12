@@ -70,9 +70,27 @@ var ConstructorOverview = new function () {
             case 'Панно':
                 banner.hide();
                 picture.hide();
+                this.showPanelMonitor();
                 panel.show();
                 break;
         }
+    };
+
+    this.showPanelMonitor = function () {
+        var imgPath = $('#input-az-picture-page-panel-img').val(),
+            monitor = $('div.az-picture-page-panel-img');
+
+
+        var img = $('<img id="dynamic" class="az-picture-page-constructor-main-img">'); //Equivalent: $(document.createElement('img'))
+        img.attr('src', imgPath);
+        img.appendTo(monitor);
+    };
+
+    this.getPanelInfo = function () {
+        var panel_code = $('input#az-picture-constructor-module-code-selected').val(),
+            panelObject = {};
+
+        return panelObject;
     };
 
     this.preShowBuild = function () {
