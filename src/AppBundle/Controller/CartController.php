@@ -24,7 +24,8 @@ class CartController extends FrontController {
      */
     public function addToCartAction(Request $request) {
         $data = [
-            'id' => $request->query->get('id'),
+            'id' => uniqid(),
+            'picture_id' => $request->query->get('id'),
             'price' => $request->query->get('price'),
             'sizes' => $request->query->get('sizes'),
             'banner_material_id' => $request->query->get('banner_material_id'),
@@ -50,10 +51,10 @@ class CartController extends FrontController {
      *
      * @return Response
      */
-    public function deleteDeferAction(Request $request) {
+    public function deleteFromCartAction(Request $request) {
         $id = $request->query->get('id');
 
-        $this->get( 'app.session_manager' )->deleteFromCart( (int)$id );
+        $this->get( 'app.session_manager' )->deleteFromCart( $id );
 
         // parameters to template
         return new JsonResponse(array('result' => 'success'));

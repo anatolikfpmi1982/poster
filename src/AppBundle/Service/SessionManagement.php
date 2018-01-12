@@ -82,13 +82,24 @@ class SessionManagement {
      * @param object $data
      */
     public function addToCart( $data ) {
-        if ( $cart = $this->session->get( 'cart' ) ) {
-            $cart[] = $data;
-        } else {
-            $cart = [ $data ];
-        }
+        $cart = $this->session->get( 'cart' );
+        $cart[$data['id']] = $data;
+
         $this->session->set( 'cart', $cart );
     }
+
+    /**
+     * Get picture from cart
+     *
+     * @param string $id
+     * @return array
+     **/
+    public function getFromCart( $id ) {
+        $cart = $this->session->get( 'cart' );
+
+        return !empty($cart[$id]) ? $cart[$id] : null;
+    }
+
 
     /**
      * Delete picture from cart
@@ -97,11 +108,7 @@ class SessionManagement {
      */
     public function deleteFromCart( $id ) {
         if ( $cart = $this->session->get( 'cart' ) ) {
-            foreach ($cart as $k => $v) {
-                if($v['id'] == $id) {
-                    unset($cart[$k]);
-                }
-            }
+            unset($cart[$id]);
 
             $this->session->set( 'cart', $cart );
         }

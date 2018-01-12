@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Image;
 use AppBundle\Entity\Picture;
 use AppBundle\Entity\Settings;
+use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -15,18 +16,24 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class PicturesController extends FrontController {
     /**
      * @param int $id
+     * @param Request $request
      *
      * @Route("/picture/{id}", name="picture")
      *
      * @return Response
      * @throws BadRequestHttpException
      */
-    public function showAction( $id ) {
+    public function showAction( $id, Request $request ) {
         $em      = $this->get( 'doctrine.orm.entity_manager' );
         /** @var Picture $picture */
         $picture = $em->getRepository( 'AppBundle:Picture' )->find( $id );
         if(!$picture instanceof Picture) {
             throw new BadRequestHttpException('Картина не найдена.');
+        }
+
+        $cartItem = [];
+        if($request->get('cart_id')) {
+            $cartItem = $this->get( 'app.session_manager' )->getFromCart($request->get('cart_id'));
         }
 
         $this->pageSlug = $id;

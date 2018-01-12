@@ -52,10 +52,12 @@ class OrderController extends FrontController {
         }
 
         /** @var array $cart */
+        $totalPrice = 0;
         $cart = $this->get( 'app.session_manager' )->getCart();
         if( $cart) {
             foreach($cart as $k => $v) {
-                $cart[$k]['picture'] = $em->getRepository('AppBundle:Picture')->findOneBy(['isActive' => true, 'id' => $v['id']]);
+                $cart[$k]['picture'] = $em->getRepository('AppBundle:Picture')->findOneBy(['isActive' => true, 'id' => $v['picture_id']]);
+                $totalPrice += (float)$v['price'];
             }
         } else {
             $cart = [];
@@ -68,6 +70,7 @@ class OrderController extends FrontController {
         $this->doBlocks();
         $this->data['cart'] = $cart;
         $this->data['form'] = $form->createView();
+        $this->data['total_price'] = $totalPrice;
 
         // parameters to template
         return $this->render('AppBundle:Cart:cart.html.twig', $this->data);

@@ -308,7 +308,8 @@ define(function (require, exports, module) {
                 $this.text("Удалено");
                 $this.prop('disabled', true);
             });
-            return false;
+
+            location.reload();
         });
 
         setActiveCategoryInMenu();
