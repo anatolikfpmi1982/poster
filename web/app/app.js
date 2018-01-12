@@ -230,6 +230,20 @@ define(function (require, exports, module) {
             return false;
         });
 
+        // callback form
+        $("#callback").submit(function (event) {
+            event.stopImmediatePropagation();
+            var $this = $(this);
+            $.ajax({
+                url: "/ajax/call/add",
+                data: $this.serialize()
+            }).done(function () {
+                $('#myModal1').hide();
+                $('.modal-backdrop').hide();
+            });
+            return false;
+        });
+
         // picture page order button
         $("button.picture_order-bnt").click(function (event) {
             event.stopImmediatePropagation();
