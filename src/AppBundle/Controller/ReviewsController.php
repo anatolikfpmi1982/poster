@@ -4,8 +4,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Review;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class ReviewsController
@@ -16,6 +16,9 @@ class ReviewsController extends FrontController {
 
     /**
      * @Route("/reviews", name="reviews")
+     *
+     * @throws \LogicException
+     *
      */
     public function indexAction( Request $request ) {
         $em           = $this->get( 'doctrine.orm.entity_manager' );
@@ -29,7 +32,6 @@ class ReviewsController extends FrontController {
             self::PAGE_LIMIT/*limit per page*/
         );
 
-        $this->blocks   = [ 'CategoryMenu' => 1, 'Reviews' => 2, 'MainMenu' => 3, 'BreadCrumb' => 4 ];
         $this->menu     = '/reviews';
         $this->pageType = 'review';
         $this->doBlocks();

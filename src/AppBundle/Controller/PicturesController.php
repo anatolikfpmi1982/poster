@@ -29,7 +29,6 @@ class PicturesController extends FrontController {
             throw new BadRequestHttpException('Картина не найдена.');
         }
 
-        $this->blocks   = [ 'CategoryMenu' => 1, 'Reviews' => 2, 'MainMenu' => 3, 'BreadCrumb' => 4];
         $this->pageSlug = $id;
         $this->pageType = 'picture';
         $this->id = $id;

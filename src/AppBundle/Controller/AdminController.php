@@ -107,6 +107,8 @@ class AdminController extends CoreController
             ->add('seo_description', TextAreaType::class, ['label' => 'SEO - Description', 'required' => false])
             ->add('seo_title', TextType::class, ['label' => 'SEO - Title', 'required' => false])
             ->add('contact_us_text', CKEditorType::class, ['label' => 'Текст над формой в "Свяжись с нами"', 'required' => false])
+            ->add('frame_page_text', CKEditorType::class, ['label' => 'Текст на странице Рам', 'required' => false])
+            ->add('block_todo_text', CKEditorType::class, ['label' => 'Текст в блоке "Не можете найти?"', 'required' => false])
             ->add('enable_own_picture', CheckboxType::class, ['label' => 'Использовать функцию "Загрузить картину"', 'required' => false])
             ->add('enable_call_back', CheckboxType::class, ['label' => 'Использовать функцию "Заказать звонок"', 'required' => false])
             ->add('enable_sms', CheckboxType::class, ['label' => 'Отправлять SMS после заказа звонка', 'required' => false])

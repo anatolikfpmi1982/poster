@@ -17,7 +17,6 @@ class ContactController extends FrontController {
      */
     public function indexAction( Request $request ) {
 
-        $this->blocks   = [ 'CategoryMenu' => 1, 'Reviews' => 2, 'MainMenu' => 3, 'BreadCrumb' => 4 ];
         $this->menu     = '/contact_us';
         $this->pageType = 'contact_us';
         $this->doBlocks();

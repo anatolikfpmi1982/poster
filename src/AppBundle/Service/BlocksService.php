@@ -53,7 +53,6 @@ class BlocksService {
      * @return array
      */
     public function getCategoriesBlock() {
-//        return $this->em->getRepository( 'AppBundle:Category3' )->getRoot();
         return $this->em->getRepository( 'AppBundle:Category3' )->getCatalogMenu();
     }
 

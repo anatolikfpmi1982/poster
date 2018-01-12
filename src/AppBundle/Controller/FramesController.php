@@ -2,49 +2,64 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Entity\Frame;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class FramesController
  */
-class FramesController extends Controller
+class FramesController extends FrontController
 {
+    const PAGE_LIMIT = 5;
+
     /**
      * @Route("/frames", name="frames")
+     *
+     * @throws \LogicException
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function listAction(Request $request)
     {
-        $em = $this->get('doctrine.orm.entity_manager');
-
-        $queryBuilder = $em->getRepository('AppBundle:Frame')->createQueryBuilder('f')->where('f.isActive = true');
-        $query = $queryBuilder->getQuery();
+        $this->menu = '/frames';
+        $this->pageSlug = '';
+        $this->pageType = 'frames';
+        $this->doBlocks();
 
         $paginator  = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
+        $query = $this->em->getRepository('AppBundle:Frame')->getFrameList();
+        $this->data['pagination'] = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
-            5/*limit per page*/
+            self::PAGE_LIMIT/*limit per page*/
         );
 
         // parameters to template
-        return $this->render('AppBundle:Frames:list.html.twig', array('pagination' => $pagination));
+        return $this->render('AppBundle:Frames:list.html.twig', $this->data);
     }
 
     /**
      *
      * @Route("/frame/{id}", name="frame")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showAction($id)
     {
-        $em = $this->get('doctrine.orm.entity_manager');
-        $frame = $em->getRepository('AppBundle:Frame')->find($id);
+        $this->menu = '/frame/'. (int)$id;
+        $this->pageSlug = $id;
+        $this->pageType = 'frame';
+        $this->doBlocks();
 
-        $frame->setDescription($this->get('helper.textformater')->formatMoreText($frame->getDescription()));
+        $frame = $this->em->getRepository('AppBundle:Frame')->find($id);
+        if($frame instanceof Frame) {
+            $frame->setDescription( $this->get( 'helper.textformater' )->formatMoreText( $frame->getDescription() ) );
+        }
+        $this->data['frame'] = $frame;
 
         // parameters to template
-        return $this->render('AppBundle:Frames:show.html.twig', array('frame' => $frame));
+        return $this->render('AppBundle:Frames:show.html.twig', $this->data);
     }
 
 

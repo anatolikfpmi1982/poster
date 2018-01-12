@@ -10,49 +10,54 @@
 <div class="row az-page-main-section-div az-page-category-main-section-div">
     <div class="col-md-12 container-fluid">
         <div class="row page-title az-picture-page-title">Рамы</div>
-        <div class="row az-category-page-description-div">Мы изготавливаем постеры и картины на заказ, любого размера с любым оформлением. Вы сами решаете, какое изображение, какого размера, в каком багете и с какими цветовыми оттенками будет вашим постером или картиной картиной
-                    </div>
+        <div class="row az-category-page-description-div">
+            {% if site_settings is defined and site_settings and site_settings.frame_page_text is defined and site_settings.frame_page_text %}
+                {{ site_settings.frame_page_text|raw }}
+            {% endif %}
+        </div>
         <div class="row az-category-page-filters-div">
             филльтры
         </div>
-
-
-    <div class="row az-page-main-section-frame">
-        <div class="col-md-12 container-fluid">
-<div class="row az-main-frames-page container-fluid">
-        {% for frame in pagination %}
-            <div class="col-md-2 az-main-frames-div">
-            <div class="row">
-                <div class="col-md-12 az-main-frames-div-img">
-
-                        <img  src="/files/frames/mini_thumb/{{ frame.images[0].getFilename() }}" class="az-main-frames-img" />
-
-                </div></div>
-            <div class="col-md-2 az-main-frames-div-header ">
-                <div class="row">
-                    <div class="col-md-12  ">{{ frame.title }}</div></div>
-
-                <div class="row">
-                    <div class="col-md-12 az-main-frames-material">{{ frame.width }} X {{ frame.height }}</div></div>
-
-
-                                        <div class="row">
-
-
-                                            <div class="col-md-12 az-main-frames-material">{{ frame.material }}</div></div></div></div>
-
-            {% if loop.index != 1 and loop.index % 6 == 0 %}
+        <div class="row az-page-main-section-frame">
+            <div class="col-md-12 container-fluid">
+                <div class="row az-main-frames-page container-fluid">
+                    {% for frame in pagination %}
+                    {% if frame.images is defined and frame.images and frame.images[0] is defined and frame.images[0] %}
+                        {% set img = '/files/frames/mini_thumb/' ~ frame.images[0].getFilename() %}
+                    {% else %}
+                        {% set img = asset('bundles/app/images/material_default.png') %}
+                    {% endif %}
+                    <div class="col-md-2 az-main-frames-div az-frames-page-div-item"
+                         data-url="{{ path('frame', {'id': frame.id}) }}">
+                        <div class="row">
+                            <div class="col-md-12 az-main-frames-div-img">
+                                <img src="{{ img }}" class="az-main-frames-img"/>
+                            </div>
+                        </div>
+                        <div class="col-md-2 az-main-frames-div-header ">
+                            <div class="row">
+                                <div class="col-md-12  ">{{ frame.title }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 az-main-frames-material">{{ frame.width }} X {{ frame.height }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 az-main-frames-material">{{ frame.material }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if loop.index != 1 and loop.index % 6 == 0 %}
+                </div>
+                <div class="row az-main-frames-page container-fluid ">
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
         </div>
-        <div class="row az-main-frames-page container-fluid ">
-            {% endif %}
-                                {% endfor %}
-        </div>
-    {# display navigation #}
-
-        </div></div>
     </div>
     <div class="row az-pagination-block az-category-page-pagination-div">
         <div class="pagination">
-    {{ knp_pagination_render(pagination) }}
-        </div></div>
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </div>
     {% endblock %}
