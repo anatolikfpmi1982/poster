@@ -5,6 +5,8 @@
                 {% include('AppBundle:Component:Blocks/reviews.html.twig') %}
             {% elseif key == 'CategoryMenu' %}
                 {% include('AppBundle:Component:Blocks/menu.html.twig') %}
+            {% elseif key == 'ToDo' %}
+                {% include('AppBundle:Component:Blocks/todo.html.twig') %}
             {% endif %}
         {% endif %}
     {% endfor %}

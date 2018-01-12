@@ -38,6 +38,13 @@ define(function (require, exports, module) {
             return false;
         });
 
+        // frames page redirect to frame page
+        $("div.az-frames-page-div-item").click(function (event) {
+            event.stopImmediatePropagation();
+            window.location.replace($(this).data('url'));
+            return false;
+        });
+
         // category page filter clear
         $("button.az-category-page-filter-clear-btn").click(function (event) {
             event.stopImmediatePropagation();
@@ -72,6 +79,7 @@ define(function (require, exports, module) {
         $("input.az-picture-page-constructor-type-radio").click(function (event) {
             event.stopImmediatePropagation();
             setShowBoard();
+
         });
 
         // picture page constructor frame

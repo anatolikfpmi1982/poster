@@ -38,6 +38,8 @@
                value="{{ material.maxPrice }}">
         <input type="hidden" name="constructor_banner_{{ material.id }}_additional_price" id="constructor_banner_{{ material.id }}_additional_price"
                value="{{ material.price }}">
+        <input type="hidden" name="constructor_banner_{{ material.id }}_additional_ratio" id="constructor_banner_{{ material.id }}_additional_ratio"
+               value="{{ material.ratio }}">
 
         {% if ind % 3 == 0 %}
     </div>

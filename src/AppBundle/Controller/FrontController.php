@@ -2,6 +2,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Settings;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
@@ -17,7 +18,7 @@ class FrontController extends Controller {
     /**
      * @var array
      */
-    protected $blocks = [ ];
+    protected $blocks = [ 'CategoryMenu' => 1, 'ToDo' => 2, 'Reviews' => 3, 'MainMenu' => 4, 'BreadCrumb' => 5 ];
 
     /**
      * @var string
@@ -40,9 +41,15 @@ class FrontController extends Controller {
     protected $id;
 
     /**
+     * @var EntityManager
+     */
+    protected $em;
+
+    /**
      *
      */
     public function doBlocks() {
+        $this->em = $this->get( 'doctrine.orm.entity_manager' );
         if ( $this->blocks && count( $this->blocks ) > 0 ) {
             asort( $this->blocks );
             foreach ( $this->blocks as $block => $order ) {
@@ -62,7 +69,7 @@ class FrontController extends Controller {
      * @return array
      */
     protected function getSiteSettings() {
-        $_siteSettings = $this->get( 'doctrine.orm.entity_manager' )->getRepository( 'AppBundle:Settings' )->findOneByName('site_settings');
+        $_siteSettings = $this->em->getRepository( 'AppBundle:Settings' )->findOneByName('site_settings');
         $siteSettings = [];
         if($_siteSettings instanceof Settings) {
             $siteSettings = unserialize($_siteSettings->getSettings());
@@ -77,7 +84,7 @@ class FrontController extends Controller {
      * @return array
      */
     protected function getHelpSettings() {
-        $_helpSettings = $this->get( 'doctrine.orm.entity_manager' )->getRepository( 'AppBundle:Settings' )->findOneByName('help_settings');
+        $_helpSettings = $this->em->getRepository( 'AppBundle:Settings' )->findOneByName('help_settings');
         $helpSettings = [];
         if($_helpSettings instanceof Settings) {
             $helpSettings = unserialize($_helpSettings->getSettings());
@@ -95,15 +102,22 @@ class FrontController extends Controller {
     /**
      * @return array
      */
+    protected function getToDoBlock() {
+        return ['show' => 1];
+    }
+
+    /**
+     * @return array
+     */
     protected function getReviewsBlock() {
-        return $this->get( 'doctrine.orm.entity_manager' )->getRepository( 'AppBundle:Review' )->getLatestReviews();
+        return $this->em->getRepository( 'AppBundle:Review' )->getLatestReviews();
     }
 
     /**
      * @return array
      */
     protected function getPopularBlock() {
-        return $this->get( 'doctrine.orm.entity_manager' )->getRepository( 'AppBundle:Popular' )->findBy( [ ] );
+        return $this->em->getRepository( 'AppBundle:Popular' )->findBy( [ ] );
     }
 
     /**
@@ -117,7 +131,7 @@ class FrontController extends Controller {
      * @return array
      */
     protected function getSimilarBlock() {
-        return $this->get( 'doctrine.orm.entity_manager' )->getRepository( 'AppBundle:Picture' )->getActiveSimilar($this->id);
+        return $this->em->getRepository( 'AppBundle:Picture' )->getActiveSimilar($this->id);
     }
 
     /**
@@ -133,7 +147,7 @@ class FrontController extends Controller {
     protected function getLastVisitedBlock() {
         $lastVisited = $this->get('app.session_manager')->getLastVisitedItems();
         if($lastVisited) {
-            $lastVisited = $this->get( 'doctrine.orm.entity_manager' )->getRepository('AppBundle:Picture')->findLastVisited($lastVisited);
+            $lastVisited = $this->em->getRepository('AppBundle:Picture')->findLastVisited($lastVisited);
         }
 
         return $lastVisited;
@@ -145,7 +159,7 @@ class FrontController extends Controller {
     protected function getDeferredBlock() {
         $deferred = $this->get('app.session_manager')->getDeferredItems();
         if($deferred) {
-            $deferred = $this->get( 'doctrine.orm.entity_manager' )->getRepository('AppBundle:Picture')->findDeferred($deferred);
+            $deferred = $this->em->getRepository('AppBundle:Picture')->findDeferred($deferred);
         }
 
         return $deferred;

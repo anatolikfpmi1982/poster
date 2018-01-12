@@ -2,9 +2,6 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Image;
-use AppBundle\Entity\Picture;
-use AppBundle\Entity\Settings;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,7 +35,6 @@ class DeferredController extends FrontController {
             self::PAGE_LIMIT/*limit per page*/
         );
 
-        $this->blocks = [ 'CategoryMenu' => 1, 'Reviews' => 2 , 'MainMenu' => 3, 'BreadCrumb' => 4];
         $this->menu = '/';
         $this->pageSlug = '';
         $this->pageType = 'deferred';

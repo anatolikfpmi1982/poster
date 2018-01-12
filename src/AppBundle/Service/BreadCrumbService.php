@@ -3,6 +3,7 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\Author;
 use AppBundle\Entity\Category3;
+use AppBundle\Entity\Frame;
 use AppBundle\Entity\Page;
 use AppBundle\Entity\Picture;
 use Doctrine\ORM\EntityManager;
@@ -66,11 +67,48 @@ class BreadCrumbService {
             case 'order':
                 $result = $this->buildOrderBreadCrumb();
                 break;
+            case 'frames':
+                $result = $this->buildFramesBreadCrumb();
+                break;
+            case 'frame':
+                $result = $this->buildFrameBreadCrumb($param);
+                break;
             case 'search':
                 $result = $this->buildSearchBreadCrumb($param);
                 break;
         }
         return $result;
+    }
+
+    /**
+     * Get full frame page bread crumb path.
+     *
+     * @param string $id
+     *
+     * @return array
+     */
+    public function buildFrameBreadCrumb( $id ) {
+        $frame = $this->em->getRepository( 'AppBundle:Frame' )->findOneBy( [ 'id' => $id, 'isActive' => true ] );
+        $result = [];
+        if($frame instanceof Frame) {
+            $result = [[
+                'title' => $frame->getTitle(),
+                'url' => $this->container->get('router')->generate('frame', array('id' => $frame->getId())),
+            ]];
+        }
+        return $result;
+    }
+
+    /**
+     * Get full contact bread crumb path.
+     *
+     * @return array
+     */
+    public function buildFramesBreadCrumb() {
+        return [[
+            'title' => 'Рамы',
+            'url' => $this->container->get('router')->generate('frames'),
+        ]];
     }
 
     /**

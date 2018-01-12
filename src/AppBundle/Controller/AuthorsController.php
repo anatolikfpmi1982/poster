@@ -36,7 +36,7 @@ class AuthorsController extends FrontController
             self::PAGE_LIMIT/*limit per page*/
         );
 
-        $this->blocks = [ 'CategoryMenu' => 1, 'Reviews' => 2 , 'MainMenu' => 3, 'BreadCrumb' => 4, 'LastVisited' => 5 ];
+        $this->blocks['LastVisited'] = 6;
         $this->menu = '/';
         $this->pageSlug = $slug;
         $this->pageType = 'author';

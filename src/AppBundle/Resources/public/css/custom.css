@@ -53,7 +53,6 @@ body {
     font-size: 15px;
 }
 
-
 .form-control {
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -84,15 +83,6 @@ body {
     font-size: 16px;
     vertical-align: middle;
 
-}
-
-.nav > li > a {
-    padding: 10px 25px 15px 0;
-}
-
-.nav > li > a > img {
-    padding: 0 10px 0 0;
-    vertical-align: text-bottom;
 }
 
 .navbar-nav > li:active {
@@ -1411,6 +1401,7 @@ footer {
     margin-top: 5px;
     display: block;
 }
+
 .az-header-feedback-btn-form {
     display: none;
 }
@@ -1418,6 +1409,7 @@ footer {
 .az-header-feedback-btn:hover .az-header-feedback-btn-form {
     display: block;
 }
+
 .az-main-page-top-menu-div, .az-main-page-search {
     padding-right: 0;
 }
@@ -1898,7 +1890,7 @@ footer {
 
 /**modal feedback**/
 button.close {
-    background-color:#fd1200;
+    background-color: #fd1200;
     color: #FFF;
     text-shadow: none;
     opacity: 1;
@@ -1906,22 +1898,24 @@ button.close {
 }
 
 button.close:focus, .close:hover {
-    background-color:#fff;
+    background-color: #fff;
     color: #fd1200;
 }
 
-.btn-default:focus, .btn-default:hover{
-    background-color:#fff !important;
+.btn-default:focus, .btn-default:hover {
+    background-color: #fff !important;
     color: #fd1200 !important;
     box-shadow: none;
     border: 1px solid #fd1200;
 }
+
 .modal-dialog {
     width: 400px;
     margin: 0 auto;
     font-weight: 400;
 }
-.az-feedback-modal{
+
+.az-feedback-modal {
 
     text-align: left;
     border-radius: 5px;
@@ -1937,7 +1931,7 @@ button.close:focus, .close:hover {
     text-align: left;
 }
 
-.form-group label{
+.form-group label {
     font-weight: 400;
     margin-bottom: 0;
 }
@@ -1990,8 +1984,8 @@ button.close:focus, .close:hover {
 
 .module .edge.edgeb {
     left: 0;
-    transform: skewX(45deg);
-    transform-origin: center top 0;
+    transform: scale(1, -1) skewY(180deg) skewX(135deg);
+    transform-origin: center bottom 0;
     width: 100%;
 }
 
@@ -2002,13 +1996,13 @@ button.close:focus, .close:hover {
 
 /**az-download**/
 
-.az-header-download{
+.az-header-download {
     text-decoration: none;
     cursor: pointer;
     color: #333;
 }
 
-.az-header-download:hover{
+.az-header-download:hover {
     text-decoration: none;
     cursor: pointer;
     color: #fd1200;
@@ -2024,21 +2018,22 @@ button.close:focus, .close:hover {
     margin: 0 10px;
 }
 
-.az-order-cart-main{
+.az-order-cart-main {
 
 }
 
-.az-order-cart-item{
+.az-order-cart-item {
     border-left: 1px solid #eee;
     min-height: 250px;
     padding: 20px 15px;
     font-size: 12px;
 }
 
-.az-order-cart-item:first-child{
+.az-order-cart-item:first-child {
     border-left: none;
 }
-.az-order-cart-item-img{
+
+.az-order-cart-item-img {
 
     width: 100%;
     text-align: center;
@@ -2055,7 +2050,6 @@ button.close:focus, .close:hover {
     box-shadow: none;
     display: inline-block;
     padding: 10px;
-    margin-bottom: 0;
     font-weight: 400;
     line-height: 1;
     text-align: center;
@@ -2094,3 +2088,73 @@ button.close:focus, .close:hover {
     background-position: 0;
     background-repeat: no-repeat;
 }
+/**frames**/
+
+.az-page-main-section-frame{
+    margin: 10px -10px;
+    padding: 0;
+}
+
+.az-main-frames-page {
+    margin:0;
+    padding: 0;
+}
+.az-main-frames-div {
+    float: left;
+    position: relative;
+    border-right: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+    border-top: 1px solid #e6e6e6;
+    text-decoration: none;
+    font: 11px/18px 'arial','helvetica','sans-serif';
+    padding: 0;
+}
+.az-main-frames-div:hover {
+    float: left;
+    position: relative;
+    border-left: 1px solid #fd1200;
+    border-right: 1px solid #fd1200;
+    border-bottom: 1px solid #fd1200;
+    border-top: 1px solid #fd1200;
+    text-decoration: none;
+    font: 11px/18px 'arial','helvetica','sans-serif';
+}
+
+.az-main-frames-div:first-child {
+    border-left: 1px solid #e6e6e6;
+
+}.az-main-frames-div:first-child:hover   {
+     border-left: 1px solid #fd1200;
+ }
+.az-main-frames-div-img {
+    text-align: center;
+    float: none;
+    display: flex;
+    padding: 0;
+    margin: 10px auto;
+    height: 100px;
+
+}
+
+.az-main-frames-img {
+    max-height: 100px;
+    max-width: 100px;
+    margin: 0 auto;
+    height: 120px;
+}
+.az-main-frames-div-header{
+    border-top: 1px solid #e6e6e6;
+    width: 100%;
+    padding: 10px ;
+    text-transform: lowercase;
+    margin: 0px;
+}
+
+.az-main-frames-material{
+    width: 100%;
+    text-transform: lowercase;
+    margin:0 10px;
+    padding: 0 3px;
+}
+
+

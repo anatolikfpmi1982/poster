@@ -29,7 +29,6 @@ class PicturesController extends FrontController {
             throw new BadRequestHttpException('Картина не найдена.');
         }
 
-        $this->blocks   = [ 'CategoryMenu' => 1, 'Reviews' => 2, 'MainMenu' => 3, 'BreadCrumb' => 4];
         $this->pageSlug = $id;
         $this->pageType = 'picture';
         $this->id = $id;
@@ -59,7 +58,7 @@ class PicturesController extends FrontController {
         $this->data['thicknesses'] = $em->getRepository( 'AppBundle:Underframe' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
         $this->data['pictureThicknesses'] = $em->getRepository( 'AppBundle:Frame' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
         $this->data['mats'] = $em->getRepository( 'AppBundle:Mat' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
-        $_frameSettings = $this->get( 'doctrine.orm.entity_manager' )->getRepository( 'AppBundle:Settings' )->findOneByName('frame_settings');
+        $_frameSettings = $em->getRepository( 'AppBundle:Settings' )->findOneByName('frame_settings');
         $frameSettings = [];
         if($_frameSettings instanceof Settings) {
             $frameSettings = unserialize($_frameSettings->getSettings());
