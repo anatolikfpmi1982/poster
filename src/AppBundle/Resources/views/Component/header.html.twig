@@ -156,7 +156,7 @@
             </button>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            {% if site_blocks and site_blocks.MainMenu %}
+            {% if site_blocks is defined and site_blocks and site_blocks.MainMenu %}
                 <ul class="nav navbar-nav">
                     {% for menu in site_blocks.MainMenu %}
                         <li {% if menu.target == active_menu %}class="active"{% endif %}>
