@@ -503,7 +503,11 @@ footer {
         right: 4px
     }
 }
+/**constructor**/
 
+.az-constructor-block {
+    margin-top: 10px;
+}
 .az-picture-page-constructor-block:first-child {
     border-top: 1px solid #e6e6e6;
 }
@@ -731,7 +735,7 @@ body {
 /**slider**/
 
 .az-sidebar-popular {
-    margin: 45px 0 45px 0;
+    margin: 25px 0 30px 0;
 }
 
 .az-sidebar-popular-item-header {
@@ -2134,6 +2138,7 @@ button.close:focus, .close:hover {
     border-top: 1px solid #fd1200;
     text-decoration: none;
     font: 11px/18px 'arial','helvetica','sans-serif';
+    cursor: pointer;
 }
 
 .az-main-frames-div:first-child {
@@ -2240,7 +2245,7 @@ button.close:focus, .close:hover {
 /**block-link stock**/
 .az-sidebar-link-stock {
     border: 1px #fd1200 dashed;
-    padding: 20px;
+    padding:10px;
     background-color: #fff;
     color: #333;
     text-transform: none;
@@ -2248,9 +2253,19 @@ button.close:focus, .close:hover {
 }
 .az-sidebar-link-stock:hover {
     border: 1px #333 dashed;
-    padding: 20px;
     background-color: #fff;
     color: #fd1200;
     text-transform: none;
     text-align: center;
+}
+.az-sidebar-link-stock-div{
+    margin: 15px 0;
+}
+.az-btn-delayed-image {
+    border: 1px solid #fd1200;
+    background-color: #fff;
+    border-radius: inherit;
+    color:#333;
+    margin: 5px 0;
+    text-transform: none;
 }

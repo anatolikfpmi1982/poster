@@ -70,8 +70,10 @@
         <input type="hidden" name="constructor_picture_price" id="constructor_picture_price" value="{{ pictureMain.price }}">
         <input type="hidden" name="constructor_picture_ratio" id="constructor_picture_ratio" value="{{ pictureMain.ratio }}">
     </div>
-    <div class="col-md-3 container-fluid">
-        <div class="row az-picture-page-constructor-block">Отложенные блок</div>
+    <div class="col-md-3 container-fluid az-constructor-block">
+        <div class="row az-picture-page-constructor-block">
+            <div class="col-md-12"><button class="btn az-btn-delayed-image defer-bnt">Отложенные</button></div>
+        </div>
         <div class="row az-picture-page-constructor-block">
             {% include('AppBundle:Component:Constructor/price.html.twig') %}
         </div>
