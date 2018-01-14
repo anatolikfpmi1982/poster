@@ -3,13 +3,74 @@
 {% block title %}Рама{% endblock %}
 
 {% block body %}
-    <div>
-        <p>Рама {{ frame.title }}</p>
-        <p>Цвет {{ frame.color }}</p>
-        <p>Материал {{ frame.material }}</p>
-        <p>Ширина {{ frame.width }}</p>
-        <p>Высота {{ frame.height }}</p>
-    </div>
-    {% set images = frame.images %}
-    {% block images_list %} {% include 'AppBundle::Images/list.block.html.twig' %} {% endblock %}
-{% endblock %}
+
+
+<div class="row az-page-main-section-div">
+    {% include('AppBundle:Component:Blocks/breadcrumb.html.twig') %}
+</div>
+<div class="row az-page-main-section-div">
+    <div class="col-md-12 container-fluid">
+        <div class="row page-title az-picture-page-title">Рама {{ frame.title }} </div>
+        <div class="row az-picture-page-author-articul-div">
+            {% if pictureMain.author is defined and pictureMain.author and pictureMain.author.slug is defined and pictureMain.author.slug %}
+                {% set author_link = path('author', {'slug': pictureMain.author.slug }) %}
+            {% else %}
+                {% set author_link = '#' %}
+            {% endif %}
+            {% if pictureMain.author is defined and pictureMain.author and pictureMain.author.name is defined and pictureMain.author.name %}
+                {% set author_name = pictureMain.author.name %}
+            {% else %}
+                {% set author_name = '-' %}
+            {% endif %}
+            <div class="col-md-2">  {{ frame.width }}X {{ frame.height }}</div>
+            <div class="col-md-10"> {{ frame.material }}</div>
+        </div>
+
+
+        <div class="row az-page-main-section-div az-frames-slide">
+            <div class="col-md-5"><div class="cycle-overlay custom"></div><div class="cycle-prev"></div></div>
+            <div class="col-md-2">
+                <div class="cycle-slideshow"
+                     data-cycle-fx=scrollHorz
+                     data-cycle-timeout=0
+                     data-cycle-pager="#adv-custom-pager"
+                     data-cycle-pager-template="<a  class='az-frames-slide-thumb'  href='#'><img src='{{ '{{' }}src{{ '}}' }}' width=79 height=79></a>"
+                >
+                    <!-- empty element for overlay -->
+
+                    {#<div class="cycle-overlay custom"></div>#}
+
+
+                    {% if frame.images is defined and frame.images %}
+                        {% for image in frame.images %}
+                            {% if image.getFilename() %}
+                                {% set img = '/files/frames/mini_thumb/' ~ image.getFilename() %}
+                            {% else %}
+                                {% set img = asset('bundles/app/images/material_default.png') %}
+                            {% endif %}
+                            <img src="{{ img }}"/>
+                        {% endfor %}
+                    {% endif %}
+
+                </div>
+            </div>
+            <div class="col-md-5"><div class="cycle-next"></div></div>
+        </div>
+        <div class="row az-frames-main">
+            <div id=adv-custom-pager class="center external"></div>
+        </div>
+        <div class="row">
+            <!--{% set images = frame.images %}
+                {% block images_list %} {% include 'AppBundle::Images/list.block.html.twig' %}-->
+
+            <div class="col-md-12 az-frame-slide-about">
+                <p>Рама {{ frame.title }}</p>
+                <p>Артикул {{ frame.id }}</p>
+                <p>Цвет {{ frame.color }}</p>
+                <p>Материал {{ frame.material }}</p>
+                <p>Ширина {{ frame.width }}</p>
+                <p>Высота {{ frame.height }}</p>
+            </div>
+        </div>
+        {% endblock %}
+        {% endblock %}

@@ -308,12 +308,10 @@ footer {
     margin: 10px auto;
     padding: 0;
     position: relative;
-    background: url(http://malsup.github.com/images/spinner.gif) 50% 50% no-repeat;
-
 }
 
 /* slideshow images (for most of the demos, these are the actual "slides") */
-.cycle-slideshow img {
+.az-main-slider  .cycle-slide {
     position: absolute;
     top: 0;
     left: 0;
@@ -978,8 +976,6 @@ footer {
     margin: 10px auto;
     padding: 0;
     position: relative;
-    background: url(http://malsup.github.com/images/spinner.gif) 50% 50% no-repeat;
-
 }
 
 /* slideshow images (for most of the demos, these are the actual "slides") */
@@ -987,7 +983,6 @@ footer {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
     padding: 0;
     display: block;
 }
@@ -2158,3 +2153,65 @@ button.close:focus, .close:hover {
 }
 
 
+.az-frames-slide .cycle-slide {
+    max-width: 99%;
+    left:300px;
+    margin:20px auto;
+    text-align: center;
+    width: 300px;}
+
+#adv-custom-pager {
+    width: 500px;
+}
+
+.az-frames-div-slides {
+    vertical-align: middle;
+    display: inline-block;
+    width: 600px;
+    height: 360px;
+    text-align: center;
+}
+
+.az-frames-slide-thumb{
+    float: left;
+    position: relative;
+    margin: 20px 0px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #e6e6e6;
+}
+
+.az-frame-slide-about{
+    display: block;
+    margin-top: 20px;
+}
+
+.az-frames-slide .cycle-slideshow img {
+    width:100%;
+    height: auto;
+}
+
+.az-frames-slide .cycle-prev {
+    width: 35px;
+    height: 50px;
+    background: url('../images/prev.png') 50% 50% no-repeat #eee;
+    margin-top:50px;
+}
+.az-frames-slide .cycle-next {
+    width: 35px;
+    height: 50px;
+    background: url('../images/next.png') 50% 50% no-repeat #eee;
+    margin-top:50px;
+}
+.az-picture-page-author-articul-div .col-md-2 {
+    border-right: 1px solid #e6e6e6;
+}
+
+.az-frames-main{
+    padding: 10px;
+    margin: 0 10px;
+}
+.az-frames-slide{
+    border: none;
+    height: 200px;
+}
