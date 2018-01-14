@@ -9,6 +9,8 @@ define(function (require, exports, module) {
     $(document).ready(function () {
         init();
 
+        $('#az-page-main-popular-div').show();
+
         $("#owl-example").owlCarousel({
             items: 6,
             dots: false,

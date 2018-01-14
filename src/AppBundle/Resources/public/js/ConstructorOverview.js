@@ -78,18 +78,38 @@ var ConstructorOverview = new function () {
 
     this.showPanelMonitor = function () {
         var imgPath = $('#input-az-picture-page-panel-img').val(),
-            monitor = $('div.az-picture-page-panel-img');
+            monitor = $('div.az-picture-page-panel-img'),
+            picWidth = $('#input-az-picture-page-img-thumb-width').val(),
+            picHeight = $('#input-az-picture-page-img-thumb-height').val();
+        monitor.html('');
+        var settings = this.getPanelInfo(), padding_left = 10;
+        $('.az-picture-page-picture-main-panel-div').css('height', parseInt(picHeight) + 60 + 'px');
+        Object.keys(settings).map(function (objectKey, index) {
+            var value = settings[objectKey], newDivString = '<div></div>';
+            var divMain = $(newDivString);
+            divMain.addClass('module');
+            divMain.css('left', 30 + padding_left * index);
+            divMain.css('top', 30);
+            divMain.css('width', parseInt(picWidth) + 'px');
+            divMain.css('height', parseInt(picHeight) + 'px');
+            divMain.css('background-image', 'url(' + imgPath + ')');
+            divMain.css('background-size', picWidth + 'px ' + picHeight + 'px');
+            divMain.css('background-position', '0px 0px');
+            divMain.appendTo(monitor);
 
+        });
 
-        var img = $('<img id="dynamic" class="az-picture-page-constructor-main-img">'); //Equivalent: $(document.createElement('img'))
-        img.attr('src', imgPath);
-        img.appendTo(monitor);
     };
 
     this.getPanelInfo = function () {
         var panel_code = $('input#az-picture-constructor-module-code-selected').val(),
-            panelObject = {};
-
+            panelObject = {}, panelArray = panel_code.split(':');
+        panelArray.forEach(function (el, index) {
+            var data = el.split('-');
+            panelObject[index] = {};
+            panelObject[index]['width'] = data[0];
+            panelObject[index]['height'] = data[1];
+        });
         return panelObject;
     };
 
