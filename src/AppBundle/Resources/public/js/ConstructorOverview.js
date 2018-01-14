@@ -14,6 +14,7 @@ var ConstructorOverview = new function () {
     this.thickness_ratio = 0;
     this.square = 0;
     this.perimeter = 0;
+    this.panelNumber = 0;
 
     this.init = function () {
         this.type = $("input.az-picture-page-constructor-type-radio:checked").data('title');
@@ -79,23 +80,62 @@ var ConstructorOverview = new function () {
     this.showPanelMonitor = function () {
         var imgPath = $('#input-az-picture-page-panel-img').val(),
             monitor = $('div.az-picture-page-panel-img'),
-            picWidth = $('#input-az-picture-page-img-thumb-width').val(),
-            picHeight = $('#input-az-picture-page-img-thumb-height').val();
+            picWidth = parseInt($('#input-az-picture-page-img-thumb-width').val()),
+            picHeight = parseInt($('#input-az-picture-page-img-thumb-height').val()),
+            deviation = 0;
         monitor.html('');
-        var settings = this.getPanelInfo(), padding_left = 10;
-        $('.az-picture-page-picture-main-panel-div').css('height', parseInt(picHeight) + 60 + 'px');
+        var settings = this.getPanelInfo(),
+            padding_left = 20,
+            right_width = 5,
+            panelNumber = this.panelNumber,
+            deviationRight = 0 - right_width;
+        $('.az-picture-page-picture-main-panel-div').css('height', picHeight + 60 + 'px');
+
         Object.keys(settings).map(function (objectKey, index) {
             var value = settings[objectKey], newDivString = '<div></div>';
+            console.log(value);
+
+            var newWidth = Math.round((value.width * picWidth ) / 100);
+            var newHeight = Math.round((value.height * picHeight ) / 100);
+
             var divMain = $(newDivString);
             divMain.addClass('module');
-            divMain.css('left', 30 + padding_left * index);
+            divMain.css('left', 30 + padding_left * index + newWidth * index);
             divMain.css('top', 30);
-            divMain.css('width', parseInt(picWidth) + 'px');
-            divMain.css('height', parseInt(picHeight) + 'px');
+            divMain.css('width', newWidth + 'px');
+            divMain.css('height', newHeight + 'px');
             divMain.css('background-image', 'url(' + imgPath + ')');
-            divMain.css('background-size', picWidth + 'px ' + picHeight + 'px');
-            divMain.css('background-position', '0px 0px');
+            divMain.css('background-size', picWidth + 'px ' + newHeight + 'px');
+            divMain.css('background-position', deviation + 'px 0px');
+
+            deviationRight = deviationRight + newWidth;
+
+            var divRight = $(newDivString);
+            divRight.addClass('edge edger the_last');
+            divRight.css('width', right_width + 'px');
+            divRight.css('background-image', 'url(' + imgPath + ')');
+            divRight.css('background-size', picWidth + 'px ' + newHeight + 'px');
+            divRight.css('background-position', '-' + deviationRight + 'px 0px');
+            divRight.css('right', '0');
+            divRight.css('box-shadow', 'rgba(0, 0, 0, 0.4) -3px 0px 3px');
+            divRight.css('-webkit-transform', 'rotateY(180deg) skewY(-45deg)');
+            divRight.css('-webkit-transform-origin', 'right');
+            divRight.css('transform', 'rotateY(180deg) skewY(-45deg)');
+            divRight.css('transform-origin', 'right');
+            divRight.appendTo(divMain);
+
+            var divDown = $(newDivString);
+            divDown.addClass('edge edgeb');
+            divDown.css('height', right_width + 'px');
+            divDown.css('background-image', 'url(' + imgPath + ')');
+            divDown.css('background-size', picWidth + 'px ' + newHeight + 'px');
+            divDown.css('bottom', '0');
+            divDown.css('box-shadow', 'rgba(0, 0, 0, 0.4) 0 3px 3px');
+            divDown.css('background-position', '-' + deviationRight + 'px 5px');
+            divDown.appendTo(divMain);
+
             divMain.appendTo(monitor);
+            deviation = deviation - newWidth;
 
         });
 
@@ -103,13 +143,16 @@ var ConstructorOverview = new function () {
 
     this.getPanelInfo = function () {
         var panel_code = $('input#az-picture-constructor-module-code-selected').val(),
-            panelObject = {}, panelArray = panel_code.split(':');
+            panelObject = {}, panelArray = panel_code.split(':'), count = 0;
         panelArray.forEach(function (el, index) {
             var data = el.split('-');
             panelObject[index] = {};
             panelObject[index]['width'] = data[0];
             panelObject[index]['height'] = data[1];
+            panelObject[index]['up'] = data[2];
+            count++;
         });
+        this.panelNumber = count;
         return panelObject;
     };
 

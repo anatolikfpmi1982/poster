@@ -63,7 +63,6 @@ class OrderController extends FrontController {
             $cart = [];
         }
 
-        $this->blocks = [ 'CategoryMenu' => 1, 'Reviews' => 2 , 'MainMenu' => 3, 'BreadCrumb' => 4];
         $this->menu = '/order';
         $this->pageSlug = '';
         $this->pageType = 'order';
