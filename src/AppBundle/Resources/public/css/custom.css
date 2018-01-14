@@ -2257,6 +2257,7 @@ button.close:focus, .close:hover {
     color: #fd1200;
     text-transform: none;
     text-align: center;
+    padding:10px;
 }
 .az-sidebar-link-stock-div{
     margin: 15px 0;
