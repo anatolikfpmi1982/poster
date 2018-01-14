@@ -26,6 +26,13 @@ define(function (require, exports, module) {
             navText: ["", ""]
         });
 
+        $("#owl-frame").owlCarousel({
+            items: 1,
+            dots: false,
+            nav: true,
+            navText: ["", ""]
+        });
+
         // Category page
         // category page filter radio button art|photo
         $("input.az-category-page-filter-radio").click(function (event) {

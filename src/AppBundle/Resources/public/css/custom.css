@@ -117,8 +117,29 @@ body {
 div[class*="children-subsubcategory-"] {
     border: none;
     background-color: #ffffff;
-    margin-left: 30px;
+    margin-left: 0px;
     color: #333;
+    font-size: 12px;
+    font-weight: 400;
+    background: url("../images/child_menu.png") no-repeat;
+    line-height: 20px;
+    padding: 0 10px;
+}
+div[class*="children-subsubcategory-"] .active {
+    border: none;
+    background-color: #ffffff;
+    color: #fd1200;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+    padding: 0 10px;
+    margin: 0 5px;
+}
+div[class*="children-subsubcategory-"]:hover {
+    border: none;
+    background-color: #ffffff;
+    margin-left: 0px;
+    color: #fd1200;
     font-size: 12px;
     font-weight: 400;
     background: url("../images/child_menu.png") no-repeat;
@@ -308,12 +329,10 @@ footer {
     margin: 10px auto;
     padding: 0;
     position: relative;
-    background: url(http://malsup.github.com/images/spinner.gif) 50% 50% no-repeat;
-
 }
 
 /* slideshow images (for most of the demos, these are the actual "slides") */
-.cycle-slideshow img {
+.az-main-slider  .cycle-slide {
     position: absolute;
     top: 0;
     left: 0;
@@ -484,7 +503,11 @@ footer {
         right: 4px
     }
 }
+/**constructor**/
 
+.az-constructor-block {
+    margin-top: 10px;
+}
 .az-picture-page-constructor-block:first-child {
     border-top: 1px solid #e6e6e6;
 }
@@ -712,7 +735,7 @@ body {
 /**slider**/
 
 .az-sidebar-popular {
-    margin: 45px 0 45px 0;
+    margin: 25px 0 30px 0;
 }
 
 .az-sidebar-popular-item-header {
@@ -978,8 +1001,6 @@ footer {
     margin: 10px auto;
     padding: 0;
     position: relative;
-    background: url(http://malsup.github.com/images/spinner.gif) 50% 50% no-repeat;
-
 }
 
 /* slideshow images (for most of the demos, these are the actual "slides") */
@@ -987,7 +1008,6 @@ footer {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
     padding: 0;
     display: block;
 }
@@ -1984,8 +2004,8 @@ button.close:focus, .close:hover {
 
 .module .edge.edgeb {
     left: 0;
-    transform: scale(1, -1) skewY(180deg) skewX(135deg);
-    transform-origin: center bottom 0;
+    transform: skewX(45deg);
+    transform-origin: center top 0;
     width: 100%;
 }
 
@@ -2088,19 +2108,17 @@ button.close:focus, .close:hover {
     background-position: 0;
     background-repeat: no-repeat;
 }
-
 /**frames**/
 
-.az-page-main-section-frame {
+.az-page-main-section-frame{
     margin: 10px -10px;
     padding: 0;
 }
 
 .az-main-frames-page {
-    margin: 0;
+    margin:0;
     padding: 0;
 }
-
 .az-main-frames-div {
     float: left;
     position: relative;
@@ -2108,10 +2126,9 @@ button.close:focus, .close:hover {
     border-bottom: 1px solid #e6e6e6;
     border-top: 1px solid #e6e6e6;
     text-decoration: none;
-    font: 11px/18px 'arial', 'helvetica', 'sans-serif';
+    font: 11px/18px 'arial','helvetica','sans-serif';
     padding: 0;
 }
-
 .az-main-frames-div:hover {
     float: left;
     position: relative;
@@ -2120,18 +2137,16 @@ button.close:focus, .close:hover {
     border-bottom: 1px solid #fd1200;
     border-top: 1px solid #fd1200;
     text-decoration: none;
-    font: 11px/18px 'arial', 'helvetica', 'sans-serif';
+    font: 11px/18px 'arial','helvetica','sans-serif';
+    cursor: pointer;
 }
 
 .az-main-frames-div:first-child {
     border-left: 1px solid #e6e6e6;
 
-}
-
-.az-main-frames-div:first-child:hover {
-    border-left: 1px solid #fd1200;
-}
-
+}.az-main-frames-div:first-child:hover   {
+     border-left: 1px solid #fd1200;
+ }
 .az-main-frames-div-img {
     text-align: center;
     float: none;
@@ -2148,24 +2163,110 @@ button.close:focus, .close:hover {
     margin: 0 auto;
     height: 120px;
 }
-
-.az-main-frames-div-header {
+.az-main-frames-div-header{
     border-top: 1px solid #e6e6e6;
     width: 100%;
-    padding: 10px;
+    padding: 10px ;
     text-transform: lowercase;
     margin: 0px;
 }
 
-.az-main-frames-material {
+.az-main-frames-material{
     width: 100%;
     text-transform: lowercase;
-    margin: 0 10px;
+    margin:0 10px;
     padding: 0 3px;
 }
 
-.az-frames-page-div-item:hover {
-    cursor: pointer;
+
+.az-frames-slide .cycle-slide {
+    max-width: 99%;
+    left:300px;
+    margin:20px auto;
+    text-align: center;
+    width: 300px;}
+
+#adv-custom-pager {
+    width: 500px;
 }
 
+.az-frames-div-slides {
+    vertical-align: middle;
+    display: inline-block;
+    width: 600px;
+    height: 360px;
+    text-align: center;
+}
 
+.az-frames-slide-thumb{
+    float: left;
+    position: relative;
+    margin: 20px 0px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #e6e6e6;
+}
+
+.az-frame-slide-about{
+    display: block;
+    margin-top: 20px;
+}
+
+.az-frames-slide .cycle-slideshow img {
+    width:100%;
+    height: auto;
+}
+
+.az-frames-slide .cycle-prev {
+    width: 35px;
+    height: 50px;
+    background: url('../images/prev.png') 50% 50% no-repeat #eee;
+    margin-top:50px;
+}
+.az-frames-slide .cycle-next {
+    width: 35px;
+    height: 50px;
+    background: url('../images/next.png') 50% 50% no-repeat #eee;
+    margin-top:50px;
+}
+.az-picture-page-author-articul-div .col-md-2 {
+    border-right: 1px solid #e6e6e6;
+}
+
+.az-frames-main{
+    padding: 10px;
+    margin: 0 10px;
+}
+.az-frames-slide{
+    border: none;
+    height: 200px;
+}
+
+/**block-link stock**/
+.az-sidebar-link-stock {
+    border: 1px #fd1200 dashed;
+    padding:10px;
+    background-color: #fff;
+    color: #333;
+    text-transform: none;
+    text-align: center;
+}
+.az-sidebar-link-stock:hover {
+    border: 1px #333 dashed;
+    background-color: #fff;
+    color: #fd1200;
+    text-transform: none;
+    text-align: center;
+    padding:10px;
+}
+.az-sidebar-link-stock-div{
+    margin: 15px 0;
+}
+.az-btn-delayed-image {
+    border: 1px solid #fd1200;
+    background-color: #fff;
+    border-radius: inherit;
+    color:#333;
+    margin: 5px 0;
+    text-transform: none;
+}
