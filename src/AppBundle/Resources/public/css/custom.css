@@ -125,6 +125,27 @@ div[class*="children-subsubcategory-"] {
     line-height: 20px;
     padding: 0 10px;
 }
+div[class*="children-subsubcategory-"] .active {
+    border: none;
+    background-color: #ffffff;
+    color: #fd1200;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+    padding: 0 10px;
+    margin: 0 5px;
+}
+div[class*="children-subsubcategory-"]:hover {
+    border: none;
+    background-color: #ffffff;
+    margin-left: 0px;
+    color: #fd1200;
+    font-size: 12px;
+    font-weight: 400;
+    background: url("../images/child_menu.png") no-repeat;
+    line-height: 20px;
+    padding: 0 10px;
+}
 
 .children-subsubcategory:active {
     line-height: 20px;
@@ -2214,4 +2235,22 @@ button.close:focus, .close:hover {
 .az-frames-slide{
     border: none;
     height: 200px;
+}
+
+/**block-link stock**/
+.az-sidebar-link-stock {
+    border: 1px #fd1200 dashed;
+    padding: 20px;
+    background-color: #fff;
+    color: #333;
+    text-transform: none;
+    text-align: center;
+}
+.az-sidebar-link-stock:hover {
+    border: 1px #333 dashed;
+    padding: 20px;
+    background-color: #fff;
+    color: #fd1200;
+    text-transform: none;
+    text-align: center;
 }
