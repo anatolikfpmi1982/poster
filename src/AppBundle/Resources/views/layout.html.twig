@@ -7,6 +7,8 @@
         {% set site_favicon = asset('favicon.ico') %}
     {% endif %}
     <link rel="icon" sizes="16x16" href="{{ site_favicon }}"/>
+    {{ site_settings.metrics_yandex|raw }}
+    {{ site_settings.metrics_google|raw }}
     {#<link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">#}
     {#<link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap-theme.min.css') }}">#}
 {% endblock %}

@@ -85,7 +85,9 @@ class AdminController extends CoreController
                 'enable_own_picture' => false,
                 'enable_call_back' => false,
                 'enable_sms' => false,
-                'contact_us_text' => ''
+                'contact_us_text' => '',
+                'from_email' => '',
+                'to_email' => ''
             ];
         }
 
@@ -109,6 +111,8 @@ class AdminController extends CoreController
             ->add('contact_us_text', CKEditorType::class, ['label' => 'Текст над формой в "Свяжись с нами"', 'required' => false])
             ->add('frame_page_text', CKEditorType::class, ['label' => 'Текст на странице Рам', 'required' => false])
             ->add('block_todo_text', CKEditorType::class, ['label' => 'Текст в блоке "Не можете найти?"', 'required' => false])
+            ->add('from_email', TextType::class, ['label' => 'Email для отправки', 'required' => false])
+            ->add('to_email', TextType::class, ['label' => 'Email для получения', 'required' => false])
             ->add('enable_own_picture', CheckboxType::class, ['label' => 'Использовать функцию "Загрузить картину"', 'required' => false])
             ->add('enable_call_back', CheckboxType::class, ['label' => 'Использовать функцию "Заказать звонок"', 'required' => false])
             ->add('enable_sms', CheckboxType::class, ['label' => 'Отправлять SMS после заказа звонка', 'required' => false])

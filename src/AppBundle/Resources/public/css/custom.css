@@ -2043,7 +2043,7 @@ button.close:focus, .close:hover {
     max-width: 180px;
 }
 
-.delete_order-bnt {
+.delete_order-bnt, .edit_order-bnt {
     font-size: 14px;
     background-color: #fff;
     color: #333;

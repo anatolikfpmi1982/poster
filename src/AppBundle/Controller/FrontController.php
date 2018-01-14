@@ -69,6 +69,7 @@ class FrontController extends Controller {
      * @return array
      */
     protected function getSiteSettings() {
+        $this->em = $this->get( 'doctrine.orm.entity_manager' );
         $_siteSettings = $this->em->getRepository( 'AppBundle:Settings' )->findOneByName('site_settings');
         $siteSettings = [];
         if($_siteSettings instanceof Settings) {
@@ -84,6 +85,7 @@ class FrontController extends Controller {
      * @return array
      */
     protected function getHelpSettings() {
+        $this->em = $this->get( 'doctrine.orm.entity_manager' );
         $_helpSettings = $this->em->getRepository( 'AppBundle:Settings' )->findOneByName('help_settings');
         $helpSettings = [];
         if($_helpSettings instanceof Settings) {

@@ -71,6 +71,8 @@ class ParserCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        set_time_limit(0);
+
         $this->em = $this->getContainer()->get('doctrine.orm.entity_manager');
         $this->validateFiles();
 
