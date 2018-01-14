@@ -117,7 +117,7 @@ body {
 div[class*="children-subsubcategory-"] {
     border: none;
     background-color: #ffffff;
-    margin-left: 30px;
+    margin-left: 0px;
     color: #333;
     font-size: 12px;
     font-weight: 400;
@@ -1984,8 +1984,8 @@ button.close:focus, .close:hover {
 
 .module .edge.edgeb {
     left: 0;
-    transform: scale(1, -1) skewY(180deg) skewX(135deg);
-    transform-origin: center bottom 0;
+    transform: skewX(45deg);
+    transform-origin: center top 0;
     width: 100%;
 }
 
@@ -2043,7 +2043,7 @@ button.close:focus, .close:hover {
     max-width: 180px;
 }
 
-.delete_order-bnt, .edit_order-bnt {
+.delete_order-bnt {
     font-size: 14px;
     background-color: #fff;
     color: #333;
@@ -2088,19 +2088,17 @@ button.close:focus, .close:hover {
     background-position: 0;
     background-repeat: no-repeat;
 }
-
 /**frames**/
 
-.az-page-main-section-frame {
+.az-page-main-section-frame{
     margin: 10px -10px;
     padding: 0;
 }
 
 .az-main-frames-page {
-    margin: 0;
+    margin:0;
     padding: 0;
 }
-
 .az-main-frames-div {
     float: left;
     position: relative;
@@ -2108,10 +2106,9 @@ button.close:focus, .close:hover {
     border-bottom: 1px solid #e6e6e6;
     border-top: 1px solid #e6e6e6;
     text-decoration: none;
-    font: 11px/18px 'arial', 'helvetica', 'sans-serif';
+    font: 11px/18px 'arial','helvetica','sans-serif';
     padding: 0;
 }
-
 .az-main-frames-div:hover {
     float: left;
     position: relative;
@@ -2120,18 +2117,15 @@ button.close:focus, .close:hover {
     border-bottom: 1px solid #fd1200;
     border-top: 1px solid #fd1200;
     text-decoration: none;
-    font: 11px/18px 'arial', 'helvetica', 'sans-serif';
+    font: 11px/18px 'arial','helvetica','sans-serif';
 }
 
 .az-main-frames-div:first-child {
     border-left: 1px solid #e6e6e6;
 
-}
-
-.az-main-frames-div:first-child:hover {
-    border-left: 1px solid #fd1200;
-}
-
+}.az-main-frames-div:first-child:hover   {
+     border-left: 1px solid #fd1200;
+ }
 .az-main-frames-div-img {
     text-align: center;
     float: none;
@@ -2148,24 +2142,19 @@ button.close:focus, .close:hover {
     margin: 0 auto;
     height: 120px;
 }
-
-.az-main-frames-div-header {
+.az-main-frames-div-header{
     border-top: 1px solid #e6e6e6;
     width: 100%;
-    padding: 10px;
+    padding: 10px ;
     text-transform: lowercase;
     margin: 0px;
 }
 
-.az-main-frames-material {
+.az-main-frames-material{
     width: 100%;
     text-transform: lowercase;
-    margin: 0 10px;
+    margin:0 10px;
     padding: 0 3px;
-}
-
-.az-frames-page-div-item:hover {
-    cursor: pointer;
 }
 
 
