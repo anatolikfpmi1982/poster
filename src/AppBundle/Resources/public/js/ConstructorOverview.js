@@ -16,6 +16,12 @@ var ConstructorOverview = new function () {
     this.perimeter = 0;
     this.panelNumber = 0;
 
+    // constructor panel
+    this.padding_left = 20;
+    this.right_width = 5;
+    this.top_deviation = 40;
+    this.left_deviation = 40;
+
     this.init = function () {
         this.type = $("input.az-picture-page-constructor-type-radio:checked").data('title');
         this.size = $("select.az-picture-page-sidebar-size-select").val();
@@ -84,24 +90,28 @@ var ConstructorOverview = new function () {
             picHeight = parseInt($('#input-az-picture-page-img-thumb-height').val()),
             deviation = 0;
         monitor.html('');
+
         var settings = this.getPanelInfo(),
-            padding_left = 20,
-            right_width = 5,
-            panelNumber = this.panelNumber,
-            deviationRight = 0 - right_width;
-        $('.az-picture-page-picture-main-panel-div').css('height', picHeight + 60 + 'px');
+            right_width = this.right_width,
+            padding_left = this.padding_left,
+            top_deviation = this.top_deviation,
+            left_deviation = this.left_deviation,
+            deviationRight = 0 - right_width,
+            screen_height = (picHeight + (2 * top_deviation));
+        $('.az-picture-page-picture-main-panel-div').css('height', screen_height + 'px');
 
         Object.keys(settings).map(function (objectKey, index) {
             var value = settings[objectKey], newDivString = '<div></div>';
             console.log(value);
 
-            var newWidth = Math.round((value.width * picWidth ) / 100);
-            var newHeight = Math.round((value.height * picHeight ) / 100);
+            var newWidth = Math.round((value.width * picWidth ) / 100),
+                newHeight = Math.round((value.height * picHeight ) / 100),
+                top_indentation = top_deviation + (value.up > 0 ? Math.round((value.up * screen_height ) / 100) : 0);
 
             var divMain = $(newDivString);
             divMain.addClass('module');
-            divMain.css('left', 30 + padding_left * index + newWidth * index);
-            divMain.css('top', 30);
+            divMain.css('left', left_deviation + padding_left * index + newWidth * index);
+            divMain.css('top', top_indentation);
             divMain.css('width', newWidth + 'px');
             divMain.css('height', newHeight + 'px');
             divMain.css('background-image', 'url(' + imgPath + ')');
@@ -113,6 +123,7 @@ var ConstructorOverview = new function () {
             var divRight = $(newDivString);
             divRight.addClass('edge edger the_last');
             divRight.css('width', right_width + 'px');
+            divRight.css('height', (newHeight - right_width) + 'px');
             divRight.css('background-image', 'url(' + imgPath + ')');
             divRight.css('background-size', picWidth + 'px ' + newHeight + 'px');
             divRight.css('background-position', '-' + deviationRight + 'px 0px');

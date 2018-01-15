@@ -125,6 +125,7 @@ div[class*="children-subsubcategory-"] {
     line-height: 20px;
     padding: 0 10px;
 }
+
 div[class*="children-subsubcategory-"] .active {
     border: none;
     background-color: #ffffff;
@@ -135,6 +136,7 @@ div[class*="children-subsubcategory-"] .active {
     padding: 0 10px;
     margin: 0 5px;
 }
+
 div[class*="children-subsubcategory-"]:hover {
     border: none;
     background-color: #ffffff;
@@ -332,7 +334,7 @@ footer {
 }
 
 /* slideshow images (for most of the demos, these are the actual "slides") */
-.az-main-slider  .cycle-slide {
+.az-main-slider .cycle-slide {
     position: absolute;
     top: 0;
     left: 0;
@@ -503,11 +505,13 @@ footer {
         right: 4px
     }
 }
+
 /**constructor**/
 
 .az-constructor-block {
     margin-top: 10px;
 }
+
 .az-picture-page-constructor-block:first-child {
     border-top: 1px solid #e6e6e6;
 }
@@ -788,7 +792,7 @@ body {
 .btn_az-main-popular_order {
     font-size: 14px;
     background-color: #fd1200;
-    color: #fffff;
+    color: #ffffff;
     box-shadow: none;
     display: inline-block;
     padding: 10px 15px;
@@ -877,7 +881,7 @@ body {
     float: left;
     font-size: 14px;
     background-color: #fd1200;
-    color: #fffff;
+    color: #ffffff;
     box-shadow: none;
     display: inline-block;
     padding: 15px 20px;
@@ -907,7 +911,7 @@ body {
 
 .btn {
     background-color: #fd1200;
-    color: #fffff;
+    color: #ffffff;
     padding: 5px 20px;
     text-transform: lowercase;
     font-size: 13px;
@@ -1704,7 +1708,7 @@ footer {
     line-height: normal;
 }
 
-.btn-vk:hover, btn-vk:focus {
+.btn-vk:hover, .btn-vk:focus {
     background-color: #5181b8;
     border-color: #5181b8;
     color: #ffffff;
@@ -2108,22 +2112,25 @@ button.close:focus, .close:hover {
     background-position: 0;
     background-repeat: no-repeat;
 }
+
 /**frames**/
-.carousel-control.left, .carousel-control.right{
+.carousel-control.left, .carousel-control.right {
     font-size: 50px;
     color: #eee;
     background-image: none;
     top: 50%;
     z-index: 5;
     display: inline-block;
-    text-shadow: none;}
+    text-shadow: none;
+}
 
 .carousel-control .fa-angle-right, .carousel-control .fa-angle-left {
     position: absolute;
     z-index: 5;
     display: inline-block;
 }
-.carousel-control .fa-angle-left{
+
+.carousel-control .fa-angle-left {
     left: 50%;
     width: 38px;
     height: 38px;
@@ -2132,7 +2139,8 @@ button.close:focus, .close:hover {
     color: #eee;
 
 }
-.carousel-control .fa-angle-right{
+
+.carousel-control .fa-angle-right {
     right: 50%;
     width: 38px;
     height: 38px;
@@ -2143,21 +2151,24 @@ button.close:focus, .close:hover {
 }
 
 .carousel-control .fa-angle-left:hover, .carousel-control .fa-angle-right:hover {
-    color:#fd1200 ;
+    color: #fd1200;
 }
+
 .carousel-control {
     opacity: 1;
     filter: alpha(opacity=100);
 }
-.az-page-main-section-frame{
+
+.az-page-main-section-frame {
     margin: 10px -10px;
     padding: 0;
 }
 
 .az-main-frames-page {
-    margin:0;
+    margin: 0;
     padding: 0;
 }
+
 .az-main-frames-div {
     float: left;
     position: relative;
@@ -2165,9 +2176,10 @@ button.close:focus, .close:hover {
     border-bottom: 1px solid #e6e6e6;
     border-top: 1px solid #e6e6e6;
     text-decoration: none;
-    font: 11px/18px 'arial','helvetica','sans-serif';
+    font: 11px/18px 'arial', 'helvetica', 'sans-serif';
     padding: 0;
 }
+
 .az-main-frames-div:hover {
     float: left;
     position: relative;
@@ -2176,16 +2188,19 @@ button.close:focus, .close:hover {
     border-bottom: 1px solid #fd1200;
     border-top: 1px solid #fd1200;
     text-decoration: none;
-    font: 11px/18px 'arial','helvetica','sans-serif';
+    font: 11px/18px 'arial', 'helvetica', 'sans-serif';
     cursor: pointer;
 }
 
 .az-main-frames-div:first-child {
     border-left: 1px solid #e6e6e6;
 
-}.az-main-frames-div:first-child:hover   {
-     border-left: 1px solid #fd1200;
- }
+}
+
+.az-main-frames-div:first-child:hover {
+    border-left: 1px solid #fd1200;
+}
+
 .az-main-frames-div-img {
     text-align: center;
     float: none;
@@ -2202,28 +2217,29 @@ button.close:focus, .close:hover {
     margin: 0 auto;
     height: 120px;
 }
-.az-main-frames-div-header{
+
+.az-main-frames-div-header {
     border-top: 1px solid #e6e6e6;
     width: 100%;
-    padding: 10px ;
+    padding: 10px;
     text-transform: lowercase;
     margin: 0;
 }
 
-.az-main-frames-material{
+.az-main-frames-material {
     width: 100%;
     text-transform: lowercase;
-    margin:0 10px;
+    margin: 0 10px;
     padding: 0 3px;
 }
 
-
 .az-frames-slide .cycle-slide {
     max-width: 99%;
-    left:300px;
-    margin:20px auto;
+    left: 300px;
+    margin: 20px auto;
     text-align: center;
-    width: 300px;}
+    width: 300px;
+}
 
 #adv-custom-pager {
     width: 500px;
@@ -2237,7 +2253,7 @@ button.close:focus, .close:hover {
     text-align: center;
 }
 
-.az-frames-slide-thumb{
+.az-frames-slide-thumb {
     float: left;
     position: relative;
     margin: 20px 0;
@@ -2246,13 +2262,13 @@ button.close:focus, .close:hover {
     border: 1px solid #e6e6e6;
 }
 
-.az-frame-slide-about{
+.az-frame-slide-about {
     display: block;
     margin: 20px;
 }
 
 .az-frames-slide .cycle-slideshow img {
-    width:100%;
+    width: 100%;
     height: auto;
 }
 
@@ -2260,23 +2276,26 @@ button.close:focus, .close:hover {
     width: 35px;
     height: 50px;
     background: url('../images/prev.png') 50% 50% no-repeat #eee;
-    margin-top:50px;
+    margin-top: 50px;
 }
+
 .az-frames-slide .cycle-next {
     width: 35px;
     height: 50px;
     background: url('../images/next.png') 50% 50% no-repeat #eee;
-    margin-top:50px;
+    margin-top: 50px;
 }
+
 .az-picture-page-author-articul-div .col-md-2 {
     border-right: 1px solid #e6e6e6;
 }
 
-.az-frames-main{
+.az-frames-main {
     padding: 10px;
     margin: 0 10px;
 }
-.az-frames-slide{
+
+.az-frames-slide {
     border: none;
     height: 200px;
 }
@@ -2284,28 +2303,31 @@ button.close:focus, .close:hover {
 /**block-link stock**/
 .az-sidebar-link-stock {
     border: 1px #fd1200 dashed;
-    padding:10px;
+    padding: 10px;
     background-color: #fff;
     color: #333;
     text-transform: none;
     text-align: center;
 }
+
 .az-sidebar-link-stock:hover {
     border: 1px #333 dashed;
     background-color: #fff;
     color: #fd1200;
     text-transform: none;
     text-align: center;
-    padding:10px;
+    padding: 10px;
 }
-.az-sidebar-link-stock-div{
+
+.az-sidebar-link-stock-div {
     margin: 15px 0;
 }
+
 .az-btn-delayed-image {
     border: 1px solid #fd1200;
     background-color: #fff;
     border-radius: inherit;
-    color:#333;
+    color: #333;
     margin: 5px 0;
     text-transform: none;
 }

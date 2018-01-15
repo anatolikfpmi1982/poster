@@ -28,18 +28,21 @@
 
 
         <div class="row az-page-main-section-div az-frames-slide">
-            <div class="col-md-5"><div class="cycle-overlay custom"></div>
+            <div class="col-md-5">
+                <div class="cycle-overlay custom"></div>
 
-                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" id="prev-slider" data-slide="prev">
                     <i class="fa fa-angle-left"></i>
                 </a>
 
-                </div>
+            </div>
             <div class="col-md-2">
                 <div class="cycle-slideshow"
                      data-cycle-fx=scrollHorz
                      data-cycle-timeout=0
                      data-cycle-pager="#adv-custom-pager"
+                     data-cycle-prev="#prev-slider"
+                     data-cycle-next="#next-slider"
                      data-cycle-pager-template="<a  class='az-frames-slide-thumb'  href='#'><img src='{{ '{{' }}src{{ '}}' }}' width=79 height=79></a>"
                 >
                     <!-- empty element for overlay -->
@@ -60,32 +63,32 @@
 
                 </div>
             </div>
-            <div class="col-md-5"><a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <div class="col-md-5"><a class="right carousel-control" href="#carousel-example-generic" id="next-slider" role="button" data-slide="next">
                     <i class="fa fa-angle-right"></i><span class="sr-only">Next</span>
                 </a></div>
-            </div>
         </div>
-        <div class="row az-frames-main">
-            <div id=adv-custom-pager class="center external"></div>
-        </div>
-        <div class="row">
-            <!--{% set images = frame.images %}
+    </div>
+    <div class="row az-frames-main">
+        <div id=adv-custom-pager class="center external"></div>
+    </div>
+    <div class="row">
+        <!--{% set images = frame.images %}
                 {% block images_list %} {% include 'AppBundle::Images/list.block.html.twig' %}-->
 
-            <div class="col-md-12 az-frame-slide-about">
-                <p>Рама {{ frame.title }}</p>
-                <p>Артикул {{ frame.id }}</p>
-                <p>Цвет {{ frame.color }}</p>
-                <p>Материал {{ frame.material }}</p>
-                <p>Ширина {{ frame.width }}</p>
-                <p>Высота {{ frame.height }}</p>
-            </div>
+        <div class="col-md-12 az-frame-slide-about">
+            <p>Рама {{ frame.title }}</p>
+            <p>Артикул {{ frame.id }}</p>
+            <p>Цвет {{ frame.color }}</p>
+            <p>Материал {{ frame.material }}</p>
+            <p>Ширина {{ frame.width }}</p>
+            <p>Высота {{ frame.height }}</p>
         </div>
-        <div class="row az-visited-block az-category-page-visited-div">
-            {% include('AppBundle:Component:Blocks/last.visited.html.twig') %}
-        </div>
-        <div class="row az-visited-block az-category-page-visited-div">
-            {% include('AppBundle:Component:Blocks/deferred.html.twig') %}
-        </div>
-        {% endblock %}
-        {% endblock %}
+    </div>
+    <div class="row az-visited-block az-category-page-visited-div">
+        {% include('AppBundle:Component:Blocks/last.visited.html.twig') %}
+    </div>
+    <div class="row az-visited-block az-category-page-visited-div">
+        {% include('AppBundle:Component:Blocks/deferred.html.twig') %}
+    </div>
+    {% endblock %}
+    {% endblock %}
