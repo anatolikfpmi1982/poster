@@ -47,7 +47,7 @@
                                     <img src="{{ asset('bundles/app/images/arrows.png') }}" class="az-sidebar-block-img az-catalog-block-img"
                                          title="{{ subcategory.title }}"/>
                                 </div>
-                                <div class="col-md-11 container-fluid">
+                                <div class="col-md-11 container-fluid az-sidebar-subcategory-first">
                                     {{ subcategory.title }}
                                     {% if subcategory.children is defined and subcategory.children %}
                                         <div class="row category-menu children-subcategory-{{ category.id }}" id="children-subcategory-{{ subcategory.id }}"

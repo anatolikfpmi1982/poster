@@ -105,9 +105,12 @@ body {
     color: #fd1200;
     border-left: 4px solid #fd1200;
     border-bottom: 1px solid #fd1200;
+}
+.az-sidebar-subcategory-first {
+    margin: 0;
+    padding: 0;
 
 }
-
 .az-sidebar-subcategory-item:hover, .az-sidebar-subcategory-item:active {
     cursor: pointer;
     color: #fd1200;
@@ -123,7 +126,7 @@ div[class*="children-subsubcategory-"] {
     font-weight: 400;
     background: url("../images/child_menu.png") no-repeat;
     line-height: 20px;
-    padding: 0 10px;
+    padding: 0 3px;
 }
 
 div[class*="children-subsubcategory-"] .active {
@@ -133,7 +136,7 @@ div[class*="children-subsubcategory-"] .active {
     font-size: 12px;
     font-weight: 400;
     line-height: 20px;
-    padding: 0 10px;
+    padding: 0 3px;
     margin: 0 5px;
 }
 
@@ -146,7 +149,7 @@ div[class*="children-subsubcategory-"]:hover {
     font-weight: 400;
     background: url("../images/child_menu.png") no-repeat;
     line-height: 20px;
-    padding: 0 10px;
+    padding: 0 3px;
 }
 
 .children-subsubcategory:active {
