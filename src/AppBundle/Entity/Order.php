@@ -157,6 +157,13 @@ class Order
     private $frameColor;
 
     /**
+     * @var Frame
+     * @ORM\ManyToOne(targetEntity="Frame")
+     * @ORM\JoinColumn(name="frame_id", referencedColumnName="id")
+     */
+    private $frame;
+
+    /**
      * @var ModuleType
      * @ORM\ManyToOne(targetEntity="ModuleType")
      * @ORM\JoinColumn(name="module_type_id", referencedColumnName="id")
@@ -724,5 +731,29 @@ class Order
     public function getPrice()
     {
         return $this->price;
+    }
+
+    /**
+     * Set frame
+     *
+     * @param \AppBundle\Entity\Frame $frame
+     *
+     * @return Order
+     */
+    public function setFrame(\AppBundle\Entity\Frame $frame = null)
+    {
+        $this->frame = $frame;
+
+        return $this;
+    }
+
+    /**
+     * Get frame
+     *
+     * @return \AppBundle\Entity\Frame
+     */
+    public function getFrame()
+    {
+        return $this->frame;
     }
 }

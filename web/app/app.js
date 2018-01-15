@@ -266,8 +266,12 @@ define(function (require, exports, module) {
                 underframe_value = $("input.z-picture-page-thickness").val(),
                 frame_material_id = $("input.az-picture-page-constructor-material-picture-radio").attr("data-id"),
                 frame_material_value = $("input.az-picture-page-constructor-material-picture-radio").val(),
-                type_id = $("input.az-picture-page-constructor-type-radio").val(),
-                type_value = $("input.az-picture-page-constructor-type-radio").attr('data-title');
+                frame_id = 1,
+                frame_value = '1',
+                module_type_id = 1,
+                module_type_value = '1',
+                type_id = $("input.az-picture-page-constructor-type-radio:checked").data('type'),
+                type_value = $("input.az-picture-page-constructor-type-radio:checked").data('title');
             $.ajax({
                 url: "/ajax/cart/add",
                 data: {
@@ -280,6 +284,10 @@ define(function (require, exports, module) {
                     'underframe_value': underframe_value,
                     'frame_material_id': frame_material_id,
                     'frame_material_value': frame_material_value,
+                    'frame_id': frame_id,
+                    'frame_value': frame_value,
+                    'module_type_id': module_type_id,
+                    'module_type_value': module_type_value,
                     'type_id': type_id,
                     'type_value': type_value
                 }
