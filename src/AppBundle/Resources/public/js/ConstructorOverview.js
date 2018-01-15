@@ -14,6 +14,15 @@ var ConstructorOverview = new function () {
     this.thickness_ratio = 0;
     this.square = 0;
     this.perimeter = 0;
+    this.panelNumber = 0;
+
+    // constructor panel
+    this.padding_left = 20;
+    this.padding_top = 10;
+    this.right_width = 5;
+    this.top_deviation = 40;
+    this.left_deviation = 40;
+    this.panel_type = 'horizontal';
 
     this.init = function () {
         this.type = $("input.az-picture-page-constructor-type-radio:checked").data('title');
@@ -79,37 +88,124 @@ var ConstructorOverview = new function () {
     this.showPanelMonitor = function () {
         var imgPath = $('#input-az-picture-page-panel-img').val(),
             monitor = $('div.az-picture-page-panel-img'),
-            picWidth = $('#input-az-picture-page-img-thumb-width').val(),
-            picHeight = $('#input-az-picture-page-img-thumb-height').val();
+            picWidth = parseInt($('#input-az-picture-page-img-thumb-width').val()),
+            picHeight = parseInt($('#input-az-picture-page-img-thumb-height').val()),
+            deviation = 0,
+            deviation_top = 0;
         monitor.html('');
-        var settings = this.getPanelInfo(), padding_left = 10;
-        $('.az-picture-page-picture-main-panel-div').css('height', parseInt(picHeight) + 60 + 'px');
+
+        var settings = this.getPanelInfo(),
+            right_width = this.right_width,
+            padding_left = this.padding_left,
+            padding_top = this.padding_top,
+            top_deviation = this.top_deviation,
+            left_deviation = this.left_deviation,
+            panel_type = this.panel_type,
+            deviationRight = 0 - right_width,
+            screen_height = panel_type == 'horizontal' ?
+                (picHeight + (2 * top_deviation) ) :
+                (picHeight + (2 * top_deviation) + this.panelNumber * top_deviation ),
+            mainLeft = 0,
+            mainTop = top_deviation;
+
         Object.keys(settings).map(function (objectKey, index) {
-            var value = settings[objectKey], newDivString = '<div></div>';
+            var value = settings[objectKey],
+                newDivString = '<div></div>',
+                newWidth = Math.round((value.width * picWidth ) / 100),
+                newHeight = Math.round((value.height * picHeight ) / 100);
+            console.log(value);
+
+            switch (panel_type) {
+                case 'vertical':
+                    mainLeft = left_deviation;
+                    break;
+                case 'square':
+                    mainLeft = left_deviation;
+                    break;
+                case 'horizontal':
+                default:
+                    mainLeft = left_deviation + padding_left * index + newWidth * index;
+                    mainTop = top_deviation + (value.up > 0 ? Math.round((value.up * screen_height ) / 100) : 0);
+                    deviationRight = deviationRight + newWidth;
+                    break;
+            }
+
             var divMain = $(newDivString);
             divMain.addClass('module');
-            divMain.css('left', 30 + padding_left * index);
-            divMain.css('top', 30);
-            divMain.css('width', parseInt(picWidth) + 'px');
-            divMain.css('height', parseInt(picHeight) + 'px');
+            divMain.css('left', mainLeft);
+            divMain.css('top', mainTop);
+            divMain.css('width', newWidth + 'px');
+            divMain.css('height', newHeight + 'px');
             divMain.css('background-image', 'url(' + imgPath + ')');
             divMain.css('background-size', picWidth + 'px ' + picHeight + 'px');
-            divMain.css('background-position', '0px 0px');
+            divMain.css('background-position', deviation + 'px ' + deviation_top + 'px');
+
+
+            var divRight = $(newDivString);
+            divRight.addClass('edge edger the_last');
+            divRight.css('width', right_width + 'px');
+            divRight.css('height', (newHeight - right_width) + 'px');
+            divRight.css('background-image', 'url(' + imgPath + ')');
+            divRight.css('background-size', picWidth + 'px ' + picHeight + 'px');
+            divRight.css('background-position', '-' + deviationRight + 'px ' + deviation_top + 'px');
+            divRight.css('right', '0');
+            divRight.css('box-shadow', 'rgba(0, 0, 0, 0.4) -3px 0px 3px');
+            divRight.css('-webkit-transform', 'rotateY(180deg) skewY(-45deg)');
+            divRight.css('-webkit-transform-origin', 'right');
+            divRight.css('transform', 'rotateY(180deg) skewY(-45deg)');
+            divRight.css('transform-origin', 'right');
+            divRight.appendTo(divMain);
+
+            var divDown = $(newDivString);
+            divDown.addClass('edge edgeb');
+            divDown.css('height', right_width + 'px');
+            divDown.css('background-image', 'url(' + imgPath + ')');
+            divDown.css('background-size', picWidth + 'px ' + picHeight + 'px');
+            divDown.css('bottom', '0');
+            divDown.css('box-shadow', 'rgba(0, 0, 0, 0.4) 0 3px 3px');
+            divDown.css('background-position', '-' + deviationRight + 'px 5px');
+            divDown.appendTo(divMain);
+
             divMain.appendTo(monitor);
 
+            switch (panel_type) {
+                case 'vertical':
+                    deviation_top = deviation_top - newHeight;
+                    mainTop = mainTop + newHeight + padding_top;
+                    break;
+                case 'square':
+                    deviation_top = deviation_top - newHeight;
+                    break;
+                case 'horizontal':
+                default:
+                    deviation = deviation - newWidth;
+                    break;
+            }
+
         });
+
+        $('.az-picture-page-picture-main-panel-div').css('height', screen_height + 'px');
 
     };
 
     this.getPanelInfo = function () {
         var panel_code = $('input#az-picture-constructor-module-code-selected').val(),
-            panelObject = {}, panelArray = panel_code.split(':');
+            panelObject = {},
+            typeArr = panel_code.split('|'),
+            panelArray = typeArr[1] != undefined ? typeArr[1].split(':') : typeArr[0].split(':'),
+            count = 0;
+
+        this.panel_type = typeArr[1] != undefined ? typeArr[0] : 'horizontal';
+
         panelArray.forEach(function (el, index) {
             var data = el.split('-');
             panelObject[index] = {};
             panelObject[index]['width'] = data[0];
             panelObject[index]['height'] = data[1];
+            panelObject[index]['up'] = data[2];
+            count++;
         });
+        this.panelNumber = count;
         return panelObject;
     };
 

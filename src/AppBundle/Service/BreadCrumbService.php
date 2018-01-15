@@ -91,10 +91,12 @@ class BreadCrumbService {
         $frame = $this->em->getRepository( 'AppBundle:Frame' )->findOneBy( [ 'id' => $id, 'isActive' => true ] );
         $result = [];
         if($frame instanceof Frame) {
+
             $result = [[
                 'title' => $frame->getTitle(),
                 'url' => $this->container->get('router')->generate('frame', array('id' => $frame->getId())),
             ]];
+            $result = array_merge($result, $this->buildFramesBreadCrumb());
         }
         return $result;
     }
