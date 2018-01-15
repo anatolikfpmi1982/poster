@@ -313,7 +313,8 @@ define(function (require, exports, module) {
                 $this.text("Удалено");
                 $this.prop('disabled', true);
             });
-            return false;
+
+            location.reload();
         });
 
         // picture page cart delete button
