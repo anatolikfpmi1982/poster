@@ -56,7 +56,6 @@ class OrderController extends FrontController {
         $cart = $this->get( 'app.session_manager' )->getCart();
         if( $cart) {
             foreach($cart as $k => $v) {
-                var_dump($v);
                 $cart[$k]['picture'] = $em->getRepository('AppBundle:Picture')->findOneBy(['isActive' => true, 'id' => $v['picture_id']]);
                 $totalPrice += (float)$v['price'];
             }

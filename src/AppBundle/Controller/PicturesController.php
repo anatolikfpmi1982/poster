@@ -72,6 +72,7 @@ class PicturesController extends FrontController {
         }
         $this->data['frameSettings'] = $frameSettings;
         $this->data['cart_item'] = $cartItem;
+        $this->data['cart_id'] = $request->get('cart_id');
 
         // parameters to template
         return $this->render( 'AppBundle:Pictures:show.html.twig', $this->data );
