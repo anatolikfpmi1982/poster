@@ -28,7 +28,13 @@
 
 
         <div class="row az-page-main-section-div az-frames-slide">
-            <div class="col-md-5"><div class="cycle-overlay custom"></div><div class="cycle-prev"></div></div>
+            <div class="col-md-5"><div class="cycle-overlay custom"></div>
+
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+
+                </div>
             <div class="col-md-2">
                 <div class="cycle-slideshow"
                      data-cycle-fx=scrollHorz
@@ -54,7 +60,10 @@
 
                 </div>
             </div>
-            <div class="col-md-5"><div class="cycle-next"></div></div>
+            <div class="col-md-5"><a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <i class="fa fa-angle-right"></i><span class="sr-only">Next</span>
+                </a></div>
+            </div>
         </div>
         <div class="row az-frames-main">
             <div id=adv-custom-pager class="center external"></div>
@@ -71,6 +80,12 @@
                 <p>Ширина {{ frame.width }}</p>
                 <p>Высота {{ frame.height }}</p>
             </div>
+        </div>
+        <div class="row az-visited-block az-category-page-visited-div">
+            {% include('AppBundle:Component:Blocks/last.visited.html.twig') %}
+        </div>
+        <div class="row az-visited-block az-category-page-visited-div">
+            {% include('AppBundle:Component:Blocks/deferred.html.twig') %}
         </div>
         {% endblock %}
         {% endblock %}
