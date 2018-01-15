@@ -20,7 +20,7 @@
             </div>
             <div class="row text-center az-picture-page-material-radio-div">
                 <input type="radio" class="btn z-picture-page-thickness" value="{{ thickness.depth }} см" title="az-picture-page-thickness"
-                       data-ratio="{{ thickness.ratio }}" name="az-picture-page-thickness" {% if ind == 1 %}checked{% endif %}/>
+                       data-ratio="{{ thickness.ratio }}" name="az-picture-page-thickness" data-id="{{ thickness.id }}" {% if ind == 1 %}checked{% endif %}/>
             </div>
         </div>
         {% if ind is even %}

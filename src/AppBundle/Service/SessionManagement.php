@@ -100,6 +100,16 @@ class SessionManagement {
         return !empty($cart[$id]) ? $cart[$id] : null;
     }
 
+    /**
+     * Get cart count
+     *
+     * @return integer
+     **/
+    public function getCartCount() {
+        $cart = $this->session->get( 'cart' );
+
+        return !empty($cart) ? count($cart) : 0;
+    }
 
     /**
      * Delete picture from cart

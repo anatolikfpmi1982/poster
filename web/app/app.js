@@ -96,6 +96,7 @@ define(function (require, exports, module) {
             event.stopImmediatePropagation();
             $('#az-picture-constructor-frame-selected').val($(this).data('title'));
             $('#az-picture-constructor-frame-ratio-selected').val($(this).data('ratio'));
+            $('#az-picture-constructor-frame-id-selected').val($(this).data('id'));
             setShowBoard();
         });
 
@@ -103,6 +104,7 @@ define(function (require, exports, module) {
         $("img.az-picture-page-constructor-picture-module-type-img").click(function (event) {
             event.stopImmediatePropagation();
             $('#az-picture-constructor-module-selected').val($(this).data('title'));
+            $('#az-picture-constructor-module-id-selected').val($(this).data('id'));
             $('#az-picture-constructor-module-ratio-selected').val($(this).data('ratio'));
             $('#az-picture-constructor-module-code-selected').val($(this).data('code'));
             setShowBoard();
@@ -257,21 +259,27 @@ define(function (require, exports, module) {
         $("button.picture_order-bnt").click(function (event) {
             event.stopImmediatePropagation();
             var $this = $(this),
-                id = $this.attr('data-id'),
+                id = $this.data('id'),
+                cart_id = $this.data('cart-id'),
                 price = $this.parent().parent().parent().find('.az-picture-page-sidebar-price-value').text(),
                 sizes = $("#az-picture-page-constructor-size-select").val(),
-                banner_material_id = $("input.az-picture-page-constructor-material-radio").attr("data-id"),
-                banner_material_value = $("input.az-picture-page-constructor-material-radio").val(),
-                underframe_id = $("input.z-picture-page-thickness").attr("data-ratio"),
-                underframe_value = $("input.z-picture-page-thickness").val(),
-                frame_material_id = $("input.az-picture-page-constructor-material-picture-radio").attr("data-id"),
-                frame_material_value = $("input.az-picture-page-constructor-material-picture-radio").val(),
-                type_id = $("input.az-picture-page-constructor-type-radio").val(),
-                type_value = $("input.az-picture-page-constructor-type-radio").attr('data-title');
+                banner_material_id = $("input.az-picture-page-constructor-material-radio:checked").data("id"),
+                banner_material_value = $("input.az-picture-page-constructor-material-radio:checked").data('title'),
+                underframe_id = $("input.z-picture-page-thickness:checked").data("id"),
+                underframe_value = $("input.z-picture-page-thickness:checked").val(),
+                frame_material_id = $("input.az-picture-page-constructor-material-picture-radio:checked").data("id"),
+                frame_material_value = $("input.az-picture-page-constructor-material-picture-radio:checked").data('title'),
+                frame_id = $("#az-picture-constructor-frame-id-selected").val(),
+                frame_value = $("#az-picture-constructor-frame-selected").val(),
+                module_type_id = $('#az-picture-constructor-module-id-selected').val(),
+                module_type_value = $('#az-picture-constructor-module-selected').val(),
+                type_id = $("input.az-picture-page-constructor-type-radio:checked").data('type'),
+                type_value = $("input.az-picture-page-constructor-type-radio:checked").data('title');
             $.ajax({
                 url: "/ajax/cart/add",
                 data: {
                     'id': id,
+                    'cart_id': cart_id,
                     'price': price,
                     'sizes': sizes,
                     'banner_material_id': banner_material_id,
@@ -280,12 +288,17 @@ define(function (require, exports, module) {
                     'underframe_value': underframe_value,
                     'frame_material_id': frame_material_id,
                     'frame_material_value': frame_material_value,
+                    'frame_id': frame_id,
+                    'frame_value': frame_value,
+                    'module_type_id': module_type_id,
+                    'module_type_value': module_type_value,
                     'type_id': type_id,
                     'type_value': type_value
                 }
             }).done(function () {
                 $("button.picture_order-bnt").text("В корзине");
                 $("button.picture_order-bnt").prop('disabled', true);
+                location.href = '/order';
             });
             return false;
         });
@@ -302,7 +315,8 @@ define(function (require, exports, module) {
                 $this.text("Удалено");
                 $this.prop('disabled', true);
             });
-            return false;
+
+            location.reload();
         });
 
         // picture page cart delete button
@@ -323,6 +337,7 @@ define(function (require, exports, module) {
 
         setActiveCategoryInMenu();
         setShowBoard();
+        setCartCount();
     });
 
     function onBefore(e, opts, outgoing, incoming, forward) {
@@ -342,6 +357,15 @@ define(function (require, exports, module) {
         ConstructorOverview.buildConstructor();
         ConstructorOverview.showPrice();
         ConstructorOverview.show();
+    }
+
+    function setCartCount() {
+        $.ajax({
+            url: "/ajax/cart/count"
+        }).done(function (data) {
+            $(".az-header-basket-count").text(data.count);
+        });
+        return false;
     }
 
     function constructorUpdate() {
