@@ -2248,7 +2248,7 @@ button.close:focus, .close:hover {
 
 .az-frame-slide-about{
     display: block;
-    margin-top: 20px;
+    margin: 20px;
 }
 
 .az-frames-slide .cycle-slideshow img {
