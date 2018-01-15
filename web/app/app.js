@@ -257,21 +257,27 @@ define(function (require, exports, module) {
         $("button.picture_order-bnt").click(function (event) {
             event.stopImmediatePropagation();
             var $this = $(this),
-                id = $this.attr('data-id'),
+                id = $this.data('id'),
+                cart_id = $this.data('cart-id'),
                 price = $this.parent().parent().parent().find('.az-picture-page-sidebar-price-value').text(),
                 sizes = $("#az-picture-page-constructor-size-select").val(),
-                banner_material_id = $("input.az-picture-page-constructor-material-radio").attr("data-id"),
-                banner_material_value = $("input.az-picture-page-constructor-material-radio").val(),
-                underframe_id = $("input.z-picture-page-thickness").attr("data-ratio"),
-                underframe_value = $("input.z-picture-page-thickness").val(),
-                frame_material_id = $("input.az-picture-page-constructor-material-picture-radio").attr("data-id"),
-                frame_material_value = $("input.az-picture-page-constructor-material-picture-radio").val(),
-                type_id = $("input.az-picture-page-constructor-type-radio").val(),
-                type_value = $("input.az-picture-page-constructor-type-radio").attr('data-title');
+                banner_material_id = $("input.az-picture-page-constructor-material-radio:checked").data("id"),
+                banner_material_value = $("input.az-picture-page-constructor-material-radio:checked").data('title'),
+                underframe_id = $("input.z-picture-page-thickness:checked").data("id"),
+                underframe_value = $("input.z-picture-page-thickness:checked").val(),
+                frame_material_id = $("input.az-picture-page-constructor-material-picture-radio:checked").data("id"),
+                frame_material_value = $("input.az-picture-page-constructor-material-picture-radio:checked").data('title'),
+                frame_id = 1,
+                frame_value = '1',
+                module_type_id = 1,
+                module_type_value = '1',
+                type_id = $("input.az-picture-page-constructor-type-radio:checked").data('type'),
+                type_value = $("input.az-picture-page-constructor-type-radio:checked").data('title');
             $.ajax({
                 url: "/ajax/cart/add",
                 data: {
                     'id': id,
+                    'cart_id': cart_id,
                     'price': price,
                     'sizes': sizes,
                     'banner_material_id': banner_material_id,
@@ -280,6 +286,10 @@ define(function (require, exports, module) {
                     'underframe_value': underframe_value,
                     'frame_material_id': frame_material_id,
                     'frame_material_value': frame_material_value,
+                    'frame_id': frame_id,
+                    'frame_value': frame_value,
+                    'module_type_id': module_type_id,
+                    'module_type_value': module_type_value,
                     'type_id': type_id,
                     'type_value': type_value
                 }

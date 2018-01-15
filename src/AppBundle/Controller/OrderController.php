@@ -79,26 +79,57 @@ class OrderController extends FrontController {
         $em = $this->get('doctrine.orm.entity_manager');
         $data = $form->getData();
 
-        $record = new Order();
-        $record->setFullname($data['fullname']);
-        $record->setEmail($data['email']);
-        $record->setPhone($data['phone']);
-        $record->setCity($data['city']);
-        $record->setAddress($data['address']);
-        $record->setAddress2($data['address2']);
-        $record->setCompany($data['company']);
-        $record->setFax($data['fax']);
-        $record->setComment($data['comment']);
-        $record->setCreatedAt(new \DateTime());
-        $record->setUpdatedAt(new \DateTime());
-        $record->setIsActive(false);
+        $cart = $this->get( 'app.session_manager' )->getCart();
+        if(!empty($cart)) {
+            foreach ($cart as $v) {
+                $record = new Order();
+                $record->setFullname($data['fullname']);
+                $record->setEmail($data['email']);
+                $record->setPhone($data['phone']);
+                $record->setCity($data['city']);
+                $record->setAddress($data['address']);
+                $record->setAddress2($data['address2']);
+                $record->setCompany($data['company']);
+                $record->setFax($data['fax']);
+                $record->setComment($data['comment']);
+                $record->setCreatedAt(new \DateTime());
+                $record->setUpdatedAt(new \DateTime());
+                $record->setIsActive(false);
 
-        $record->setHeight(22);
-        $record->setWidth(22);
-        $record->setPrice(222);
+                $sizes = explode('x', $v['sizes']);
+                $record->setHeight($sizes[0]);
+                $record->setWidth($sizes[1]);
+                $record->setPrice($v['price']);
+                $record->setType($v['type_id']);
 
-        $em->persist($record);
-        $em->flush();
+                if($v['type_id'] == 'banner') {
+                    $bannerMaterial = $em->getRepository('AppBundle:BannerMaterial')->findOneBy(['id' => $v['banner_material_id']]);
+                    $record->setBannerMaterial($bannerMaterial);
+
+                    $underframe = $em->getRepository('AppBundle:Underframe')->findOneBy(['id' => $v['underframe_id']]);
+                    $record->setUnderframe($underframe);
+                } elseif($v['type_id'] == 'frame') {
+                    $frame = $em->getRepository('AppBundle:Frame')->findOneBy(['id' => 1]);
+                    $record->setFrame($frame);
+
+                    $frameMaterial = $em->getRepository('AppBundle:FrameMaterial')->findOneBy(['id' => $v['frame_material_id']]);
+                    $record->setFrameMaterial($frameMaterial);
+                } elseif($v['type_id'] == 'module') {
+                    $bannerMaterial = $em->getRepository('AppBundle:BannerMaterial')->findOneBy(['id' => $v['banner_material_id']]);
+                    $record->setBannerMaterial($bannerMaterial);
+
+                    $underframe = $em->getRepository('AppBundle:Underframe')->findOneBy(['id' => $v['underframe_id']]);
+                    $record->setUnderframe($underframe);
+
+                    $moduleType = $em->getRepository('AppBundle:ModuleType')->findOneBy(['id' => $v['module_type_id']]);
+                    $record->setModuleType($moduleType);
+                }
+
+                $em->persist($record);
+            }
+            $em->flush();
+        }
+
 
         $this->get( 'app.session_manager' )->cleanCart();
     }
