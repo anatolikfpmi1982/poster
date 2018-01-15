@@ -11,11 +11,13 @@
                     <img src="{{ img }}" class="az-picture-page-constructor-picture-thickness-img"
                          data-title="{{ thickness.title }}"
                          data-ratio="{{ thickness.ratio }}"
+                         data-id="{{ thickness.id }}"
                     />
                 </div>
             {% endfor %}
             <input type="hidden" name="az-picture-constructor-frame-selected" id="az-picture-constructor-frame-selected" value="{{ pictureThicknesses[0].title }}">
             <input type="hidden" name="az-picture-constructor-frame-ratio-selected" id="az-picture-constructor-frame-ratio-selected" value="{{ pictureThicknesses[0].ratio }}">
+            <input type="hidden" name="az-picture-constructor-frame-id-selected" id="az-picture-constructor-frame-id-selected" value="{{ pictureThicknesses[0].id }}">
         {% else %}
             У нас пока отсутствуют рамы для данного вида картин.
         {% endif %}
