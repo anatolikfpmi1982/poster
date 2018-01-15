@@ -31,12 +31,14 @@
             <div class="col-md-2 container-fluid az-header-top">
                 {% if site_settings.enable_own_picture is defined and site_settings.enable_own_picture %}
                     <div class="row">
+                        <div class="col-md-12 az-header-download" data-toggle="modal" data-target="#myModal">
+                            <div class="row">
                         <div class="col-md-3">
                             <img src="{{ asset('bundles/app/images/download.png') }}" class="az-download-title-img az-basket-title-img"
                                  title="{% trans %}download{% endtrans %}"/>
                         </div>
                         <div class="col-md-9 container az-header-download-div">
-                            <a class="az-header-download" data-toggle="modal" data-target="#myModal">Загрузить изображения</a>
+                            Загрузить изображения</div></div></div></div>
                             <!-- Form download -->
                             <div id="myModal" class="modal fade" role="dialog">
                                 <div class="modal-dialog az-feedback-modal">
@@ -53,18 +55,18 @@
                                                         Загрузка фото может занять продолжительное время, обязательно дождитесь окончания процесса!
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="exampleInputFile">Выбрать файл </label>
-                                                        <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                                                        <label  class="az-form-choose-file" for="exampleInputFile">Выберете файл на компьютере</label>
+                                                        <input class="az-form-download-file" type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
                                                         <small id="fileHelp" class="form-text text-muted"></small>
                                                     </div>
 
 
-                                                    <div class="form-group">
+                                                    <div class="form-group az-form-btn-download">
 
                                                         <button type="button" class="btn btn-default submit">Загрузить</button>
 
                                                     </div>
-                                                    <div class="form-group az-comment">
+                                                    <div class="form-group az-comment-bottom">
                                                         Формат загружаемого файла <span style="color: #fd1200">jpeg, gif или png</span> , максимальный размер <span style="color: #fd1200">50 Mb</span>.
                                                         Загруженная Вами фотография будет удалена автоматически через две недели после оформления заказа, либо через две недели
                                                         после загрузки, если Вы так и не оформите заказ.
@@ -77,12 +79,9 @@
 
                                 </div>
 
-                            </div>
 
-                        </div>
-                    </div>
                 {% endif %}
-            </div>
+                            </div></div>
             <div class="col-md-2 container-fluid text-right">
                 <div class="row text-right">
                     <div class="col-md-3"></div>

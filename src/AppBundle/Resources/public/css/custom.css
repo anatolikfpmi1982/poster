@@ -2032,8 +2032,39 @@ button.close:focus, .close:hover {
     color: #fd1200;
 }
 
+.az-comment{
+    font-style: italic;
+    font-size: 12px;
+    text-align: justify;
+}
+.az-comment-bottom{
+    font-style: italic;
+    font-size: 10px;
+    text-align: justify;
+    color: #696969;
+}
+
+.az-form-choose-file {
+    display: block;
+    border: 1px solid #eee;
+    color:#696969;
+    width: 70%;
+    float:left;
+}
+
+.az-form-download-file {
+    float: left;
+    position: relative;
+    width: 20%;
+}
+.az-form-btn-download {
+    display: block;
+    width: 100%;
+    margin-top:10px;
+}
 .navbar-form {
     padding: 10px;
+
 }
 
 .az-order-cart {
