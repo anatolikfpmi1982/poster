@@ -60,4 +60,10 @@
             {{ knp_pagination_render(pagination) }}
         </div>
     </div>
+    <div class="row az-visited-block az-category-page-visited-div">
+        {% include('AppBundle:Component:Blocks/last.visited.html.twig') %}
+    </div>
+    <div class="row az-visited-block az-category-page-visited-div">
+        {% include('AppBundle:Component:Blocks/deferred.html.twig') %}
+    </div>
     {% endblock %}
