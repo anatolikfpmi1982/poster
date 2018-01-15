@@ -296,6 +296,7 @@ define(function (require, exports, module) {
             }).done(function () {
                 $("button.picture_order-bnt").text("В корзине");
                 $("button.picture_order-bnt").prop('disabled', true);
+                location.href = '/order';
             });
             return false;
         });
@@ -333,6 +334,7 @@ define(function (require, exports, module) {
 
         setActiveCategoryInMenu();
         setShowBoard();
+        setCartCount();
     });
 
     function onBefore(e, opts, outgoing, incoming, forward) {
@@ -352,6 +354,16 @@ define(function (require, exports, module) {
         ConstructorOverview.buildConstructor();
         ConstructorOverview.showPrice();
         ConstructorOverview.show();
+    }
+
+    function setCartCount() {
+        $.ajax({
+            url: "/ajax/cart/count"
+        }).done(function (data) {
+            console.log(data);
+            $(".az-header-basket-count").text(data.count);
+        });
+        return false;
     }
 
     function constructorUpdate() {
