@@ -64,4 +64,17 @@ class CartController extends FrontController {
         return new JsonResponse(array('result' => 'success'));
     }
 
+    /**
+     * @Route("/ajax/cart/count", name="cart_count")
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function getCartCountAction(Request $request) {
+        $count = $this->get( 'app.session_manager' )->getCartCount();
+
+        // parameters to template
+        return new JsonResponse(array('result' => 'success', 'count' => $count));
+    }
 }

@@ -2366,3 +2366,29 @@ button.close:focus, .close:hover {
     text-transform: none;
 }
 
+/**cartsmall-header**/
+.az-ordersmall-cart{
+    border: 1px solid #e6e6e6;
+    margin: 10px;
+
+}
+.az-ordersmall-cart-modal{
+    font-size: 11px;
+}
+
+.btn-group-xs > .btn, .btn-xs {
+    background-color: #ffffff;
+    border: 1px solid #fd1200;
+    color: #fd1200;
+    background-image: none;
+    text-transform: lowercase;
+}
+
+.btn-group-xs > .btn, .btn-xs:hover{
+    background-color: #ffffff;
+    border: 1px solid #333;
+    color: #333;
+    background-image: none;
+    text-transform: lowercase;
+}
+

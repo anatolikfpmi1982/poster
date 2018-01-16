@@ -96,6 +96,7 @@ define(function (require, exports, module) {
             event.stopImmediatePropagation();
             $('#az-picture-constructor-frame-selected').val($(this).data('title'));
             $('#az-picture-constructor-frame-ratio-selected').val($(this).data('ratio'));
+            $('#az-picture-constructor-frame-id-selected').val($(this).data('id'));
             setShowBoard();
         });
 
@@ -103,6 +104,7 @@ define(function (require, exports, module) {
         $("img.az-picture-page-constructor-picture-module-type-img").click(function (event) {
             event.stopImmediatePropagation();
             $('#az-picture-constructor-module-selected').val($(this).data('title'));
+            $('#az-picture-constructor-module-id-selected').val($(this).data('id'));
             $('#az-picture-constructor-module-ratio-selected').val($(this).data('ratio'));
             $('#az-picture-constructor-module-code-selected').val($(this).data('code'));
             setShowBoard();
@@ -267,10 +269,10 @@ define(function (require, exports, module) {
                 underframe_value = $("input.z-picture-page-thickness:checked").val(),
                 frame_material_id = $("input.az-picture-page-constructor-material-picture-radio:checked").data("id"),
                 frame_material_value = $("input.az-picture-page-constructor-material-picture-radio:checked").data('title'),
-                frame_id = 1,
-                frame_value = '1',
-                module_type_id = 1,
-                module_type_value = '1',
+                frame_id = $("#az-picture-constructor-frame-id-selected").val(),
+                frame_value = $("#az-picture-constructor-frame-selected").val(),
+                module_type_id = $('#az-picture-constructor-module-id-selected').val(),
+                module_type_value = $('#az-picture-constructor-module-selected').val(),
                 type_id = $("input.az-picture-page-constructor-type-radio:checked").data('type'),
                 type_value = $("input.az-picture-page-constructor-type-radio:checked").data('title');
             $.ajax({
@@ -296,6 +298,7 @@ define(function (require, exports, module) {
             }).done(function () {
                 $("button.picture_order-bnt").text("В корзине");
                 $("button.picture_order-bnt").prop('disabled', true);
+                location.href = '/order';
             });
             return false;
         });
@@ -312,7 +315,8 @@ define(function (require, exports, module) {
                 $this.text("Удалено");
                 $this.prop('disabled', true);
             });
-            return false;
+
+            location.reload();
         });
 
         // picture page cart delete button
@@ -333,6 +337,7 @@ define(function (require, exports, module) {
 
         setActiveCategoryInMenu();
         setShowBoard();
+        setCartCount();
     });
 
     function onBefore(e, opts, outgoing, incoming, forward) {
@@ -352,6 +357,15 @@ define(function (require, exports, module) {
         ConstructorOverview.buildConstructor();
         ConstructorOverview.showPrice();
         ConstructorOverview.show();
+    }
+
+    function setCartCount() {
+        $.ajax({
+            url: "/ajax/cart/count"
+        }).done(function (data) {
+            $(".az-header-basket-count").text(data.count);
+        });
+        return false;
     }
 
     function constructorUpdate() {

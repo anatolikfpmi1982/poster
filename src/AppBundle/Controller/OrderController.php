@@ -109,7 +109,7 @@ class OrderController extends FrontController {
                     $underframe = $em->getRepository('AppBundle:Underframe')->findOneBy(['id' => $v['underframe_id']]);
                     $record->setUnderframe($underframe);
                 } elseif($v['type_id'] == 'frame') {
-                    $frame = $em->getRepository('AppBundle:Frame')->findOneBy(['id' => 1]);
+                    $frame = $em->getRepository('AppBundle:Frame')->findOneBy(['id' => $v['frame_id']]);
                     $record->setFrame($frame);
 
                     $frameMaterial = $em->getRepository('AppBundle:FrameMaterial')->findOneBy(['id' => $v['frame_material_id']]);

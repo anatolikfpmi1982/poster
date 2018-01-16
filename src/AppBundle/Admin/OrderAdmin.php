@@ -66,6 +66,7 @@ class OrderAdmin extends AbstractAdmin
             ->add('height', null, ['required' => false, 'label' => 'Высота', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
             ->add('width', null, ['required' => false, 'label' => 'Ширина', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
             ->add('price', null, ['required' => false, 'label' => 'Цена', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
+            ->add('frame', null, array('label' => 'Рама'))
             ->add('frameMaterial', null, array('label' => 'Материал картины в раме'))
             ->add('picture', null, array('label' => 'Картина'))
             ->add('bannerMaterial', null, array('label' => 'Материал баннера'))

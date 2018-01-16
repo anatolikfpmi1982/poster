@@ -82,20 +82,71 @@
 
                 {% endif %}
                             </div></div>
+
+            <!-- Basket -->
             <div class="col-md-2 container-fluid text-right">
                 <div class="row text-right">
                     <div class="col-md-3"></div>
                     <div class="col-md-3 az-main-page-header-top-cells az-main-page-header-icon-cell">
                         <img src="{{ asset('bundles/app/images/basket.png') }}" class="az-basket-title-img" title="{% trans %}basket{% endtrans %}"/>
                     </div>
-                    <div class="col-md-6 container text-left az-main-page-header-top-cells az-header-basket-div">
+                    <div class="col-md-6 container text-left az-main-page-header-top-cells az-header-basket-div" >
                         <div class="row az-header-basket-container az-header-basket-text">
-                            <div class="col-md-12">Корзина</div>
+                            <div class="col-md-12 az-header-download" data-toggle="modal" data-target="#myModal2" >Корзина</div>
+
+                                    <!-- Form basket -->
+                                    <div id="myModal2" class="modal fade" role="dialog">
+                                        <div class="modal-dialog az-ordersmall-cart-modal">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">X</button>
+                                            <form id="callback">
+                                                <div class="col-md-12 form-line">
+                                                    <h4>Моя корзина</h4>
+                                                    <div class="form-group ">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                Товаров 1
+                                                                на сумму:  руб.</div>
+                                                            <div class="col-md-6">
+                                                            <button class="btn btn-sm" data-id="">Удалить из корзины</button>
+                                                            </div></div></div>
+                                                    <div class="form-group">
+                                                        <div class="row az-ordersmall-cart">
+                                                            <div class="col-md-3">
+                                                                <a  class="az-order-cart-title" href=""> Картина</a>
+                                                            </div>
+                                                            <div class="col-md-5">Название </br>
+                                                                Цена
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <button class="btn-xs" data-id="">Удалить</button>
+                                                            </div>
+
+                                                        </div></div>
+
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-md-12">Оформление заказа
+                                                            </div></div>
+
+                                                </div>
+
+                                                    </div></form>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
                         </div>
                         <div class="row az-header-basket-container az-header-basket-count-text">
                             <div class="col-md-12">Товаров: <span class="az-header-basket-count">0</span></div>
                         </div>
-                    </div>
+                           </div>
                 </div>
                 <div class="row az-header-address-container az-header-feedback-btn-div">
                     <div class="col-md-12">
