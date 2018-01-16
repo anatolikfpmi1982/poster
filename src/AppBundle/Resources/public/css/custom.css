@@ -2194,7 +2194,7 @@ button.close:focus, .close:hover {
 }
 
 .az-page-main-section-frame {
-    margin: 10px -10px 20px -10px;
+    margin: 10px -10px;
     padding: 0;
 }
 
@@ -2391,4 +2391,6 @@ button.close:focus, .close:hover {
     background-image: none;
     text-transform: lowercase;
 }
-
+.pagination {
+    margin: 10px 0;
+}
