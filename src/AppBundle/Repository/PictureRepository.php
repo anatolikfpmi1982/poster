@@ -71,8 +71,9 @@ class PictureRepository extends EntityRepository {
             ->innerJoin( 'p.author', 'a' )// Inner Join with author
             ->innerJoin( 'p.form', 'f' )// Inner Join with picture form
             ->where( 'p.isActive = true' )
-            ->andWhere('(a.name = :search OR p.title = :search OR p.code = :search)')
-            ->setParameter( 'search', $searchString);
+            ->andWhere('(a.name LIKE :search_like OR p.title LIKE :search_like OR p.code = :search)')
+            ->setParameter( 'search', $searchString)
+            ->setParameter( 'search_like', '%' . $searchString . '%');
     }
 
     /**
