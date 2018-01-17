@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class CategoriesController extends FrontController
 {
-    const PAGE_LIMIT = 5;
+    const PAGE_LIMIT = 20;
 
     /**
      * @param string $slug
@@ -20,18 +20,25 @@ class CategoriesController extends FrontController
      *
      * @Route("/category/{slug}", name="category")
      *
+     * @throws \LogicException
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showAction($slug, Request $request)
     {
-        $em = $this->get('doctrine.orm.entity_manager');
+        $this->blocks = array_merge($this->blocks, ['LastVisited' => 6, 'Deferred' => 7]);
+        $this->menu = '/';
+        $this->pageSlug = $slug;
+        $this->pageType = 'category';
+        $this->doBlocks();
+
 
         /** @var Category3 $category */
-        $category = $em->getRepository('AppBundle:Category3')->findOneBySlug($slug);
+        $category = $this->em->getRepository('AppBundle:Category3')->findOneBySlug($slug);
         $category->count = count($category->getPictures());
 
         /** @var QueryBuilder $queryBuilder */
-        $queryBuilder = $em->getRepository('AppBundle:Picture')->getActivePicturesFromCategory($category);
+        $queryBuilder = $this->em->getRepository('AppBundle:Picture')->getActivePicturesFromCategory($category);
         $query = $queryBuilder->getQuery();
 
 
@@ -42,16 +49,12 @@ class CategoriesController extends FrontController
             self::PAGE_LIMIT/*limit per page*/
         );
 
-        $this->blocks = array_merge($this->blocks, ['LastVisited' => 6, 'Deferred' => 7]);
-        $this->menu = '/';
-        $this->pageSlug = $slug;
-        $this->pageType = 'category';
-        $this->doBlocks();
+
         $this->data['pagination'] = $pagination;
         $category->setDescription($this->get('helper.textformater')->formatMoreText($category->getDescription()));
         $this->data['category'] = $category;
         $this->data['mainCategoryId'] = $category->getId();
-        $this->data['filters']['tpls'] = $em->getRepository('AppBundle:PictureForm')->findBy(['isActive' => true]);
+        $this->data['filters']['tpls'] = $this->em->getRepository('AppBundle:PictureForm')->findBy(['isActive' => true]);
 
         // parameters to template
         return $this->render('AppBundle:Categories:show.html.twig', $this->data);

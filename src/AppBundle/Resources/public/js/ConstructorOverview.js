@@ -105,7 +105,7 @@ var ConstructorOverview = new function () {
             screen_height = panel_type == 'horizontal' ?
                 (picHeight + (2 * top_deviation) ) :
                 (picHeight + (2 * top_deviation) + this.panelNumber * top_deviation ),
-            mainLeft = 0,
+            mainLeft = left_deviation,
             mainTop = top_deviation;
 
         Object.keys(settings).map(function (objectKey, index) {
@@ -117,14 +117,11 @@ var ConstructorOverview = new function () {
 
             switch (panel_type) {
                 case 'vertical':
-                    mainLeft = left_deviation;
                     break;
                 case 'square':
-                    mainLeft = left_deviation;
                     break;
                 case 'horizontal':
                 default:
-                    mainLeft = left_deviation + padding_left * index + newWidth * index;
                     mainTop = top_deviation + (value.up > 0 ? Math.round((value.up * screen_height ) / 100) : 0);
                     deviationRight = deviationRight + newWidth;
                     break;
@@ -139,7 +136,6 @@ var ConstructorOverview = new function () {
             divMain.css('background-image', 'url(' + imgPath + ')');
             divMain.css('background-size', picWidth + 'px ' + picHeight + 'px');
             divMain.css('background-position', deviation + 'px ' + deviation_top + 'px');
-
 
             var divRight = $(newDivString);
             divRight.addClass('edge edger the_last');
@@ -178,6 +174,7 @@ var ConstructorOverview = new function () {
                     break;
                 case 'horizontal':
                 default:
+                    mainLeft = mainLeft + padding_left + newWidth;
                     deviation = deviation - newWidth;
                     break;
             }
