@@ -1339,6 +1339,11 @@ footer {
     font-size: 9px;
 }
 
+.az-picture-page-hint-modal-div{
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    text-align: justify;
+    padding: 15px;}
+
 .az-picture-page-sidebar-size-div-left {
     /*padding-left: 0;*/
 }
@@ -1349,6 +1354,7 @@ footer {
 
 .az-picture-page-sidebar-div-right {
     padding-top: 10px;
+    text-align: right;
 }
 
 .az-picture-page-material-radio-div {
@@ -2018,7 +2024,6 @@ button.close:focus, .close:hover {
 
 .modal-header {
     padding: 0;
-    border: 1px solid #e6e6e6;
 }
 
 .form-line h3 {
