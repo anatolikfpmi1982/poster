@@ -11,6 +11,8 @@ define(function (require, exports, module) {
     $(document).ready(function () {
         init();
 
+        var files;
+
         $('#az-page-main-popular-div').show();
 
         $("#owl-example").owlCarousel({
@@ -349,6 +351,45 @@ define(function (require, exports, module) {
             });
 
             location.reload();
+        });
+
+        $('input[type=file]').change(function(){
+            files = this.files;
+        });
+
+        //upload file
+        $('.az-form-btn-download button').click(function( event ){
+            event.stopPropagation();
+            event.preventDefault();
+
+            var data = new FormData();
+            $.each( files, function( key, value ){
+                data.append( key, value );
+            });
+
+            $.ajax({
+                url: '/app_dev.php/ajax/picture/upload',
+                type: 'POST',
+                data: data,
+                cache: false,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                success: function( respond, textStatus, jqXHR ){
+                    // if( typeof respond.error === 'undefined' ){
+                    //     var files_path = respond.files;
+                    //     var html = '';
+                    //     $.each( files_path, function( key, val ){ html += val +'<br>'; } )
+                    //     $('.ajax-respond').html( html );
+                    // }
+                    // else{
+                    //     console.log('ОШИБКИ ОТВЕТА сервера: ' + respond.error );
+                    // }
+                },
+                error: function( jqXHR, textStatus, errorThrown ){
+                    console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+                }
+            });
         });
 
         setActiveCategoryInMenu();
