@@ -4,6 +4,8 @@ define(function (require, exports, module) {
 
     function init() {
         var test = require('test');
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
     }
 
     $(document).ready(function () {
@@ -232,6 +234,13 @@ define(function (require, exports, module) {
             return false;
         });
 
+        $('#myBtn').click(function(event){
+            event.stopImmediatePropagation();
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+            return false;
+        });
+
         // picture page defer button
         $("button.picture_defer-bnt").click(function (event) {
             event.stopImmediatePropagation();
@@ -400,4 +409,15 @@ define(function (require, exports, module) {
         return false;
     }
 
+
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("myBtn").style.display = "block";
+        } else {
+            document.getElementById("myBtn").style.display = "none";
+        }
+    }
+
 });
+
