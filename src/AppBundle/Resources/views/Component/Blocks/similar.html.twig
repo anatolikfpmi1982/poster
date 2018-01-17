@@ -5,7 +5,7 @@
             {% if pictureMain.similar is defined and pictureMain.similar %}
             {% for picture in pictureMain.similar %}
             {% include('AppBundle:Component:picture.cell.html.twig') %}
-            {% if loop.index != 0 and (loop.index + 1) % 3 == 0 %}
+            {% if loop.index != 0 and (loop.index + 1) % 6 == 0 %}
         </div>
         <div class="row">
             {% endif %}
