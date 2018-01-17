@@ -86,7 +86,7 @@ class Underframe implements ImageInterface
 
     public function __toString()
     {
-        return (string)$this->id;
+        return (string)$this->depth;
     }
 
     /**

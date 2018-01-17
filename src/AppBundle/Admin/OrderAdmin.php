@@ -12,6 +12,8 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\AdminType;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 /**
@@ -54,6 +56,8 @@ class OrderAdmin extends AbstractAdmin
     {
         $formMapper
             ->with('Main')
+            ->add('picture', 'sonata_type_admin', array('label' => 'Картина', 'disabled' => true))
+            ->add('type', 'choice', array('label' => 'Тип картины', 'choices' => ['banner' => 'Баннер', 'frame' => 'В раме', 'module' => 'Панно']))
             ->add('fullname', null, ['required' => true, 'label' => 'Ф.И.О.'])
             ->add('email', EmailType::class, ['required' => true, 'label' => 'Email'])
             ->add('phone', null, ['required' => true, 'label' => 'Телефон'])
@@ -66,7 +70,6 @@ class OrderAdmin extends AbstractAdmin
             ->add('price', null, ['required' => false, 'label' => 'Цена', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
             ->add('frame', null, array('label' => 'Рама'))
             ->add('frameMaterial', null, array('label' => 'Материал картины в раме'))
-            ->add('picture', null, array('label' => 'Картина'))
             ->add('bannerMaterial', null, array('label' => 'Материал баннера'))
             ->add('underframe', null, array('label' => 'Подрамник'))
             ->add('frameColor', null, array('label' => 'Цвет рамы'))
@@ -105,7 +108,10 @@ class OrderAdmin extends AbstractAdmin
                 ['label' => 'Изображение', 'template' => 'AppBundle:Admin:order_list_image.html.twig'])
             ->add('picture.code', null, ['editable'=> false, 'label' => 'Артикул'])
             ->add('picture.title', null, ['editable'=> false, 'label' => 'Название'])
-            ->add('type', null, ['editable'=> false, 'label' => 'Тип изделия'])
+            ->add('type', null, ['editable' => false, 'label' => 'Тип',
+                'template' => 'AppBundle:Admin:order_list_type.html.twig'])
+            ->add('bannerMaterial', null, ['editable'=> false, 'label' => 'Материал баннера'])
+            ->add('frameMaterial', null, ['editable'=> false, 'label' => 'Материал рамы'])
             ->add('fullname', null, ['editable'=> true, 'label' => 'Ф.И.О.'])
             ->add('email', null, ['editable'=> true, 'label' => 'Email'])
             ->add('phone', null, ['editable'=> true, 'label' => 'Телефон'])
