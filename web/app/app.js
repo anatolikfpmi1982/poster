@@ -241,6 +241,7 @@ define(function (require, exports, module) {
                 url: "/ajax/picture/defer/add",
                 data: {'id': id}
             }).done(function () {
+                $("button.az-btn-delayed-image span").text($("button.az-btn-delayed-image span").text() + 1);
                 $("button.picture_defer-bnt").text("Отложено");
                 $("button.picture_defer-bnt").prop('disabled', true);
             });
@@ -320,9 +321,9 @@ define(function (require, exports, module) {
             }).done(function () {
                 $this.text("Удалено");
                 $this.prop('disabled', true);
-            });
 
-            location.reload();
+                location.reload();
+            });
         });
 
         // picture page cart delete button
@@ -344,6 +345,7 @@ define(function (require, exports, module) {
         setActiveCategoryInMenu();
         setShowBoard();
         setCartCount();
+        setDeferredCount();
     });
 
     function onBefore(e, opts, outgoing, incoming, forward) {
@@ -370,6 +372,15 @@ define(function (require, exports, module) {
             url: "/ajax/cart/count"
         }).done(function (data) {
             $(".az-header-basket-count").text(data.count);
+        });
+        return false;
+    }
+
+    function setDeferredCount() {
+        $.ajax({
+            url: "/ajax/picture/defer/count"
+        }).done(function (data) {
+            $("button.az-btn-delayed-image span").text(data.count);
         });
         return false;
     }
