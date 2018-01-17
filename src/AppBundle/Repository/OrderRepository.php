@@ -11,5 +11,14 @@ use Doctrine\ORM\EntityRepository;
  * repository methods below.
  */
 class OrderRepository extends EntityRepository {
+    public function getLastOrderId() {
+        $result = $this->createQueryBuilder( 'o' )
+            ->select('o.groupId AS last_id')
+            ->groupBy('o.groupId')
+            ->orderBy('last_id', 'DESC')
+            ->getQuery()
+            ->getResult();
 
+        return !empty($result[0]['last_id']) ? $result[0]['last_id'] : 0;
+    }
 }

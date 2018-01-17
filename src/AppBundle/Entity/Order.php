@@ -25,6 +25,13 @@ class Order
     private $id;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="group_id", type="integer", nullable=true)
+     */
+    private $groupId = 0;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="fullname", type="string")
@@ -62,23 +69,9 @@ class Order
     /**
      * @var string
      *
-     * @ORM\Column(name="address2", type="string", nullable=true)
-     */
-    private $address2;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="company", type="string", nullable=true)
      */
     private $company;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="fax", type="string", nullable=true)
-     */
-    private $fax;
 
     /**
      * @var string
@@ -105,7 +98,13 @@ class Order
      * @var boolean
      * @ORM\Column(name="is_active", type="boolean", nullable=false)
      */
-    private $isActive;
+    private $isActive = false;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="is_done", type="boolean", nullable=false)
+     */
+    private $isDone = false;
 
     /**
      * @var integer
@@ -268,6 +267,35 @@ class Order
     }
 
     /**
+     * Get isDone
+     *
+     * @return boolean
+     */
+    public function getIsDone()
+    {
+        return $this->isDone;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isIsDone()
+    {
+        return $this->isDone;
+    }
+
+    /**
+     * @param boolean $isDone
+     * @return Order
+     */
+    public function setIsDone($isDone)
+    {
+        $this->isDone = $isDone;
+
+        return $this;
+    }
+
+    /**
      * Get isActive
      *
      * @return boolean
@@ -398,30 +426,6 @@ class Order
     }
 
     /**
-     * Set address2
-     *
-     * @param string $address2
-     *
-     * @return Order
-     */
-    public function setAddress2($address2)
-    {
-        $this->address2 = $address2;
-
-        return $this;
-    }
-
-    /**
-     * Get address2
-     *
-     * @return string
-     */
-    public function getAddress2()
-    {
-        return $this->address2;
-    }
-
-    /**
      * Set company
      *
      * @param string $company
@@ -443,30 +447,6 @@ class Order
     public function getCompany()
     {
         return $this->company;
-    }
-
-    /**
-     * Set fax
-     *
-     * @param string $fax
-     *
-     * @return Order
-     */
-    public function setFax($fax)
-    {
-        $this->fax = $fax;
-
-        return $this;
-    }
-
-    /**
-     * Get fax
-     *
-     * @return string
-     */
-    public function getFax()
-    {
-        return $this->fax;
     }
 
     /**
@@ -755,5 +735,29 @@ class Order
     public function getFrame()
     {
         return $this->frame;
+    }
+
+    /**
+     * Set groupId
+     *
+     * @param integer $groupId
+     *
+     * @return Order
+     */
+    public function setGroupId($groupId)
+    {
+        $this->groupId = $groupId;
+
+        return $this;
+    }
+
+    /**
+     * Get groupId
+     *
+     * @return integer
+     */
+    public function getGroupId()
+    {
+        return $this->groupId;
     }
 }

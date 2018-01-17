@@ -59,9 +59,7 @@ class OrderAdmin extends AbstractAdmin
             ->add('phone', null, ['required' => true, 'label' => 'Телефон'])
             ->add('city', null, ['required' => true, 'label' => 'Город'])
             ->add('address', null, ['required' => true, 'label' => 'Адрес'])
-            ->add('address2', null, ['required' => false, 'label' => 'Адрес 2'])
             ->add('company', null, ['required' => false, 'label' => 'Компания'])
-            ->add('fax', null, ['required' => false, 'label' => 'Факс'])
             ->add('comment', null, ['required' => false, 'label' => 'Комментарий к заказу'])
             ->add('height', null, ['required' => false, 'label' => 'Высота', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
             ->add('width', null, ['required' => false, 'label' => 'Ширина', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
@@ -73,7 +71,8 @@ class OrderAdmin extends AbstractAdmin
             ->add('underframe', null, array('label' => 'Подрамник'))
             ->add('frameColor', null, array('label' => 'Цвет рамы'))
             ->add('moduleType', null, array('label' => 'Тип модульности'))
-            ->add('isActive', null, ['required' => false, 'label' => 'Выполнено'])
+            ->add('isActive', null, ['required' => false, 'label' => 'Взято в работу'])
+            ->add('isDone', null, ['required' => false, 'label' => 'Выполнено'])
             ->end();
     }
 
@@ -101,14 +100,18 @@ class OrderAdmin extends AbstractAdmin
             ->add('id', null, ['required' => true, 'label' => 'ID'])
 //            ->add('images', null,
 //                ['required' => true, 'label' => 'Изображение', 'template' => 'AppBundle:Admin:frame_list_image.html.twig'])
+            ->add('groupId', null, ['editable'=> false, 'label' => 'Заказ'])
+            ->add('picture.image', null,
+                ['label' => 'Изображение', 'template' => 'AppBundle:Admin:order_list_image.html.twig'])
+            ->add('picture.code', null, ['editable'=> false, 'label' => 'Артикул'])
+            ->add('picture.title', null, ['editable'=> false, 'label' => 'Название'])
+            ->add('type', null, ['editable'=> false, 'label' => 'Тип изделия'])
             ->add('fullname', null, ['editable'=> true, 'label' => 'Ф.И.О.'])
             ->add('email', null, ['editable'=> true, 'label' => 'Email'])
             ->add('phone', null, ['editable'=> true, 'label' => 'Телефон'])
             ->add('city', null, ['editable'=> true, 'label' => 'Город'])
             ->add('address', null, ['editable'=> true, 'label' => 'Адрес'])
-            ->add('address2', null, ['editable'=> true, 'label' => 'Адрес 2'])
             ->add('company', null, ['editable'=> true, 'label' => 'Компания'])
-            ->add('fax', null, ['editable'=> true, 'label' => 'Факс'])
             ->add('height', null, ['editable'=> true, 'label' => 'Высота'])
             ->add('width', null, ['editable'=> true, 'label' => 'Ширина'])
             ->add('price', null, ['editable' => true, 'label' => 'Цена',
@@ -123,7 +126,9 @@ class OrderAdmin extends AbstractAdmin
 //            ->add('frameMaterial', 'choice', ['editable' => true, 'label' => 'Материал картины в раме','editable' => true,
 //                'class' => 'Appbundle\Entity\BannerMaterial', 'choices' => $bannerMaterialsChoices, 'sortable' => true,
 //                'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'material']]])
-            ->add('isActive', null, ['editable' => true, 'label' => 'Выполнено'])
+            ->add('isActive', null, ['editable' => true, 'label' => 'Взято в работу'])
+            ->add('isDone', null, ['editable' => true, 'label' => 'Выполнено'])
+            ->add('createdAt', null, ['label' => 'Дата заказа'])
             ->add(
                 '_action',
                 'actions',
@@ -133,7 +138,8 @@ class OrderAdmin extends AbstractAdmin
                         'delete' => [],
                     ],
                 ]
-            );
+            )
+            ->add('picture.note', null, ['editable' => false, 'label' => 'Примечание']);
     }
 
     /**
@@ -142,12 +148,14 @@ class OrderAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+            ->add('groupId', null, ['label' => 'Номер заказа'])
 //            ->add('title', null, ['label' => 'Артикул'])
 //            ->add('width', null, ['label' => 'Ширина'])
 //            ->add('height', null, ['label' => 'Высота'])
 //            ->add('color', null, ['label' => 'Цвет'])
 //            ->add('material', null, ['label' => 'Материал'])
-            ->add('isActive', null, ['label' => 'Выполнено'])
+            ->add('isActive', null, ['label' => 'Взято в работу'])
+            ->add('isDone', null, ['label' => 'Выполнено'])
         ;
     }
 

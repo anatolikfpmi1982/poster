@@ -32,12 +32,9 @@ class OrderController extends FrontController {
             ->add('phone', TextType::class, ['label' => 'Телефон *', 'required' => true])
             ->add('city', TextType::class, ['label' => 'Город *', 'required' => true])
             ->add('address', TextType::class, ['label' => 'Адрес *', 'required' => true])
-            ->add('address2', TextType::class, ['label' => 'Адрес 2', 'required' => false])
             ->add('company', TextType::class, ['label' => 'Компания', 'required' => false])
-            ->add('fax', TextType::class, ['label' => 'Факс', 'required' => false])
             ->add('comment', TextareaType::class, ['label' => 'Комментарий к заказу', 'required' => false])
             ->add('conditions', CheckboxType::class, ['label' => 'Я соглашаюсь с данными условиями работы *', 'required' => true])
-            ->add('personal_data', CheckboxType::class, ['label' => 'Согласен на обработку моих персональных данных *', 'required' => true])
             ->add('save', SubmitType::class, array('label' => 'Заказать'))
             ->getForm();
 
@@ -46,6 +43,8 @@ class OrderController extends FrontController {
 
             if ( $form->isValid() ) {
                 $this->saveForm( $form );
+
+                return $this->redirect($this->generateUrl('order_done'));
             } else {
                 throw new BadRequestHttpException($form->getErrors());
             }
@@ -81,26 +80,27 @@ class OrderController extends FrontController {
 
         $cart = $this->get( 'app.session_manager' )->getCart();
         if(!empty($cart)) {
+            $orderId = $em->getRepository('AppBundle:Order')->getLastOrderId();
             foreach ($cart as $v) {
                 $record = new Order();
+                $record->setGroupId($orderId + 1);
                 $record->setFullname($data['fullname']);
                 $record->setEmail($data['email']);
                 $record->setPhone($data['phone']);
                 $record->setCity($data['city']);
                 $record->setAddress($data['address']);
-                $record->setAddress2($data['address2']);
                 $record->setCompany($data['company']);
-                $record->setFax($data['fax']);
                 $record->setComment($data['comment']);
                 $record->setCreatedAt(new \DateTime());
                 $record->setUpdatedAt(new \DateTime());
-                $record->setIsActive(false);
 
                 $sizes = explode('x', $v['sizes']);
                 $record->setHeight($sizes[0]);
                 $record->setWidth($sizes[1]);
                 $record->setPrice($v['price']);
                 $record->setType($v['type_id']);
+                $picture = $em->getRepository('AppBundle:Picture')->findOneBy(['id' => $v['picture_id']]);
+                $record->setPicture($picture);
 
                 if($v['type_id'] == 'banner') {
                     $bannerMaterial = $em->getRepository('AppBundle:BannerMaterial')->findOneBy(['id' => $v['banner_material_id']]);
@@ -132,5 +132,19 @@ class OrderController extends FrontController {
 
 
         $this->get( 'app.session_manager' )->cleanCart();
+    }
+
+    /**
+     * @Route("/order/done", name="order_done")
+     *
+     * @return Response
+     */
+    function doneAction() {
+        $this->menu = '/order';
+        $this->pageSlug = '';
+        $this->pageType = 'order';
+        $this->doBlocks();
+
+        return $this->render('AppBundle:Cart:done.html.twig', $this->data);
     }
 }

@@ -1378,7 +1378,7 @@ footer {
 
 .az-visited-block {
     border: none;
-    margin: 30px 10px 15px 10px;
+    margin: 20px 10px 15px 10px;
 
 }
 
@@ -2391,4 +2391,6 @@ button.close:focus, .close:hover {
     background-image: none;
     text-transform: lowercase;
 }
-
+.pagination {
+    margin: 10px 0;
+}
