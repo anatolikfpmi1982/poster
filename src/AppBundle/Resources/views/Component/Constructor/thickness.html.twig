@@ -14,14 +14,15 @@
         {% if thicknesses %}
         {% set ind = 1 %}
         {% for thickness in thicknesses %}
-        <div class="col-md-6 container-fluid">
+        <div class="col-md-4 container-fluid">
             <div class="row text-center">
+                <div class="col-md-12">
                 <img src="/files/underframes/small_thumb/{{ thickness.image.getFilename() }}" class="az-picture-page-material-img"/>
-            </div>
+            </div></div>
             <div class="row text-center az-picture-page-material-radio-div">
-                <input type="radio" class="btn z-picture-page-thickness" value="{{ thickness.depth }} см" title="az-picture-page-thickness"
+                <div class="col-md-12"><input type="radio" class="btn z-picture-page-thickness" value="{{ thickness.depth }} см" title="az-picture-page-thickness"
                        data-ratio="{{ thickness.ratio }}" name="az-picture-page-thickness" data-id="{{ thickness.id }}" {% if ind == 1 %}checked{% endif %}/>
-            </div>
+                </div></div>
         </div>
         {% if ind is even %}
     </div>

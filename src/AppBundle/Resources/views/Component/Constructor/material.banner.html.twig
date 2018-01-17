@@ -16,16 +16,18 @@
         {% for material in materials %}
         <div class="col-md-4 container-fluid">
             <div class="row text-center">
+                <div class="col-md-12">
                 <img src="/files/banner_materials/small_thumb/{{ material.image.getFilename() }}" class="az-picture-page-material-img"/><br/>
                 <span class="az-picture-page-type-img-text">{{ material.title }}</span>
-            </div>
+            </div></div>
             <div class="row text-center az-picture-page-material-radio-div">
+                <div class="col-md-12">
                 <input type="radio" class="btn az-picture-page-constructor-material-radio" value="{{ material.title }}" title="az-picture-page-material"
                        name="az-picture-page-material"
                        data-title="{{ material.title }}"
                        data-id="{{ material.id }}"
                        {% if ind == 1 %}checked{% endif %}/>
-            </div>
+                </div></div>
         </div>
 
         <input type="hidden" name="constructor_banner_{{ material.id }}_min_square" id="constructor_banner_{{ material.id }}_min_square"
