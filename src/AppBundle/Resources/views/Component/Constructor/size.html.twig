@@ -12,7 +12,6 @@
     </div>
     <div class="row az-picture-page-sidebar-size-div-body az-picture-page-sidebar-size-div-select">
         <select class="btn az-picture-page-sidebar-size-select" name="picture-size" id="az-picture-page-constructor-size-select" title="">
-            {#<option value="color">Цветопроба</option>#}
             <option value="own_size">Свой размер</option>
             {% set size_default = 1 %}
             {% for i in range(10, 200, 10) %}
@@ -25,5 +24,8 @@
                 {% endif %}
             {% endfor %}
         </select>
+    </div>
+    <div class="row" id="az-picture-page-sidebar-size-panel-div" style="display: none;">
+        <div class="col-12 container-fluid az-picture-page-sidebar-size-panel-div-content" id="az-picture-page-sidebar-size-panel-div-content"></div>
     </div>
 </div>

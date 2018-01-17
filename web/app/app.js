@@ -15,22 +15,28 @@ define(function (require, exports, module) {
             items: 6,
             dots: false,
             nav: true,
-            navText: ["", ""]
-            //navText: [$('.frame-slider-next'), $('.frame-slider-prev')]
+            navText: ["", ""],
+            scrollPerPage: true,
+            lazyLoad: true,
+            slideBy: 6
         });
 
         $("#owl-template").owlCarousel({
             items: 5,
             dots: false,
             nav: true,
-            navText: ["", ""]
+            navText: ["", ""],
+            scrollPerPage: true,
+            lazyLoad: true,
+            slideBy: 5
         });
 
         $("#owl-frame").owlCarousel({
             items: 1,
             dots: false,
             nav: true,
-            navText: ["", ""]
+            navText: ["", ""],
+            lazyLoad: true
         });
 
         // Category page

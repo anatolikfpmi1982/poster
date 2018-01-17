@@ -23,6 +23,7 @@ var ConstructorOverview = new function () {
     this.top_deviation = 40;
     this.left_deviation = 40;
     this.panel_type = 'horizontal';
+    this.panelSizes = [];
 
     this.init = function () {
         this.type = $("input.az-picture-page-constructor-type-radio:checked").data('title');
@@ -105,8 +106,10 @@ var ConstructorOverview = new function () {
             screen_height = panel_type == 'horizontal' ?
                 (picHeight + (2 * top_deviation) ) :
                 (picHeight + (2 * top_deviation) + this.panelNumber * top_deviation ),
-            mainLeft = 0,
-            mainTop = top_deviation;
+            mainLeft = left_deviation,
+            mainTop = top_deviation,
+            panelSizes = [],
+            size = this.size.split('x');
 
         Object.keys(settings).map(function (objectKey, index) {
             var value = settings[objectKey],
@@ -117,14 +120,11 @@ var ConstructorOverview = new function () {
 
             switch (panel_type) {
                 case 'vertical':
-                    mainLeft = left_deviation;
                     break;
                 case 'square':
-                    mainLeft = left_deviation;
                     break;
                 case 'horizontal':
                 default:
-                    mainLeft = left_deviation + padding_left * index + newWidth * index;
                     mainTop = top_deviation + (value.up > 0 ? Math.round((value.up * screen_height ) / 100) : 0);
                     deviationRight = deviationRight + newWidth;
                     break;
@@ -139,7 +139,6 @@ var ConstructorOverview = new function () {
             divMain.css('background-image', 'url(' + imgPath + ')');
             divMain.css('background-size', picWidth + 'px ' + picHeight + 'px');
             divMain.css('background-position', deviation + 'px ' + deviation_top + 'px');
-
 
             var divRight = $(newDivString);
             divRight.addClass('edge edger the_last');
@@ -178,12 +177,15 @@ var ConstructorOverview = new function () {
                     break;
                 case 'horizontal':
                 default:
+                    mainLeft = mainLeft + padding_left + newWidth;
                     deviation = deviation - newWidth;
                     break;
             }
 
+            panelSizes[index] = Math.round((value.width * size[0] ) / 100) + 'x' + Math.round((value.width * size[1] ) / 100);
         });
-
+        this.panelSizes = panelSizes;
+        this.showPanelSizes();
         $('.az-picture-page-picture-main-panel-div').css('height', screen_height + 'px');
 
     };
@@ -209,6 +211,20 @@ var ConstructorOverview = new function () {
         return panelObject;
     };
 
+    this.showPanelSizes = function () {
+        var contentEl = $('div#az-picture-page-sidebar-size-panel-div-content'),
+            mainEl = '', subEl = '';
+        contentEl.html('<div class="row"><div class="col-12 az-picture-page-sidebar-size-panel-div-content-item">Размеры модулей</div></div>');
+        this.panelSizes.forEach(function (element, index, array) {
+            mainEl = $('<div class="row"></div>');
+            subEl = $('<div class="col-12 az-picture-page-sidebar-size-panel-div-content-item"></div>');
+            subEl.html((index + 1) + '. ' + element + ' см');
+            subEl.appendTo(mainEl);
+
+            mainEl.appendTo(contentEl);
+        });
+    };
+
     this.preShowBuild = function () {
         var subframe = $('div.az-picture-page-sidebar-choose-subframe'),
             subframe_color = $('div.az-picture-page-sidebar-choose-subframe-color'),
@@ -216,6 +232,7 @@ var ConstructorOverview = new function () {
             mat_type = $('div.az-picture-page-sidebar-choose-mat-type'),
             mat_size = $('div.az-picture-page-sidebar-choose-mat-size'),
             module = $('div.az-picture-page-sidebar-choose-module'),
+            panel_sizes = $('div#az-picture-page-sidebar-size-panel-div'),
             mat_color = $('div.az-picture-page-sidebar-choose-mat-color');
         switch (this.type) {
             case 'Баннер':
@@ -226,6 +243,7 @@ var ConstructorOverview = new function () {
                 mat_size.hide();
                 mat_color.hide();
                 module.hide();
+                panel_sizes.hide();
                 break;
             case 'В раме':
                 subframe.hide();
@@ -235,6 +253,7 @@ var ConstructorOverview = new function () {
                 mat_size.show();
                 mat_color.show();
                 module.hide();
+                panel_sizes.hide();
                 break;
             case 'Панно':
                 subframe.show();
@@ -244,6 +263,7 @@ var ConstructorOverview = new function () {
                 mat_size.hide();
                 mat_color.hide();
                 module.show();
+                panel_sizes.show();
                 break;
         }
     };
