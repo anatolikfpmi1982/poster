@@ -3,13 +3,30 @@
         <div class="col-md-4 text-left az-picture-page-sidebar-header-block az-picture-page-sidebar-choose-div-left">
             <label data-for="picture-size">Вы выбрали: </label>
         </div>
-        <div class="col-md-8 text-right az-picture-page-sidebar-div-right">
-            <button class="btn az-picture-page-sidebar-size-btn az-picture-page-hint">Подробнее ?</button>
-            {% if help_settings is defined and help_settings and help_settings.chooseHelp is defined and help_settings.chooseHelp %}
-                <div class="hidden">{{ help_settings.chooseHelp|raw }}</div>
-            {% endif %}
+        <div class="col-md-8 az-picture-page-sidebar-div-right">
+            <button class="btn az-picture-page-sidebar-size-btn az-picture-page-hint" data-toggle="modal" data-target="#myModalchoose" >Подробнее ?</button>
+
+            <!-- HTML-код модального окна -->
+            <div id="myModalchoose" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content az-picture-page-hint-modal-div ">
+                        <!-- Заголовок модального окна -->
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Вы выбрали</h4>
+                        </div>
+                        <!-- Основное содержимое модального окна -->
+                        <div class="modal-body">
+                            {% if help_settings is defined and help_settings and help_settings.chooseHelp is defined and help_settings.chooseHelp %}
+                                {{ help_settings.chooseHelp|raw }}</div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+
     <div class="row az-picture-page-sidebar-size-div-body az-picture-page-sidebar-choose-div-select">
         <div class="col-md-12 container-fluid">
             <div class="row">
