@@ -149,6 +149,13 @@ class SessionManagement {
     }
 
     /**
+     * @return mixed
+     */
+    public function getDeferredCount() {
+        return !empty($this->container->get( 'session' )->get( 'deferred' )) ? count($this->container->get( 'session' )->get( 'deferred' )) : '';
+    }
+
+    /**
      * @return array
      */
     public function getCart() {
