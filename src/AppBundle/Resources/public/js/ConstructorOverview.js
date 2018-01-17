@@ -23,6 +23,7 @@ var ConstructorOverview = new function () {
     this.top_deviation = 40;
     this.left_deviation = 40;
     this.panel_type = 'horizontal';
+    this.panelSizes = [];
 
     this.init = function () {
         this.type = $("input.az-picture-page-constructor-type-radio:checked").data('title');
@@ -106,7 +107,9 @@ var ConstructorOverview = new function () {
                 (picHeight + (2 * top_deviation) ) :
                 (picHeight + (2 * top_deviation) + this.panelNumber * top_deviation ),
             mainLeft = left_deviation,
-            mainTop = top_deviation;
+            mainTop = top_deviation,
+            panelSizes = [],
+            size = this.size.split('x');
 
         Object.keys(settings).map(function (objectKey, index) {
             var value = settings[objectKey],
@@ -179,8 +182,10 @@ var ConstructorOverview = new function () {
                     break;
             }
 
+            panelSizes[index] = Math.round((value.width * size[0] ) / 100) + 'x' + Math.round((value.width * size[1] ) / 100);
         });
-
+        this.panelSizes = panelSizes;
+        this.showPanelSizes();
         $('.az-picture-page-picture-main-panel-div').css('height', screen_height + 'px');
 
     };
@@ -206,6 +211,20 @@ var ConstructorOverview = new function () {
         return panelObject;
     };
 
+    this.showPanelSizes = function () {
+        var contentEl = $('div#az-picture-page-sidebar-size-panel-div-content'),
+            mainEl = '', subEl = '';
+        contentEl.html('<div class="row"><div class="col-12 az-picture-page-sidebar-size-panel-div-content-item">Размеры модулей</div></div>');
+        this.panelSizes.forEach(function (element, index, array) {
+            mainEl = $('<div class="row"></div>');
+            subEl = $('<div class="col-12 az-picture-page-sidebar-size-panel-div-content-item"></div>');
+            subEl.html((index + 1) + '. ' + element + ' см');
+            subEl.appendTo(mainEl);
+
+            mainEl.appendTo(contentEl);
+        });
+    };
+
     this.preShowBuild = function () {
         var subframe = $('div.az-picture-page-sidebar-choose-subframe'),
             subframe_color = $('div.az-picture-page-sidebar-choose-subframe-color'),
@@ -213,6 +232,7 @@ var ConstructorOverview = new function () {
             mat_type = $('div.az-picture-page-sidebar-choose-mat-type'),
             mat_size = $('div.az-picture-page-sidebar-choose-mat-size'),
             module = $('div.az-picture-page-sidebar-choose-module'),
+            panel_sizes = $('div#az-picture-page-sidebar-size-panel-div'),
             mat_color = $('div.az-picture-page-sidebar-choose-mat-color');
         switch (this.type) {
             case 'Баннер':
@@ -223,6 +243,7 @@ var ConstructorOverview = new function () {
                 mat_size.hide();
                 mat_color.hide();
                 module.hide();
+                panel_sizes.hide();
                 break;
             case 'В раме':
                 subframe.hide();
@@ -232,6 +253,7 @@ var ConstructorOverview = new function () {
                 mat_size.show();
                 mat_color.show();
                 module.hide();
+                panel_sizes.hide();
                 break;
             case 'Панно':
                 subframe.show();
@@ -241,6 +263,7 @@ var ConstructorOverview = new function () {
                 mat_size.hide();
                 mat_color.hide();
                 module.show();
+                panel_sizes.show();
                 break;
         }
     };
