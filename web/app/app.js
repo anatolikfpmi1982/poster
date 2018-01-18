@@ -4,10 +4,14 @@ define(function (require, exports, module) {
 
     function init() {
         var test = require('test');
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
     }
 
     $(document).ready(function () {
         init();
+
+        var files;
 
         $('#az-page-main-popular-div').show();
 
@@ -232,6 +236,13 @@ define(function (require, exports, module) {
             return false;
         });
 
+        $('#myBtn').click(function(event){
+            event.stopImmediatePropagation();
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+            return false;
+        });
+
         // picture page defer button
         $("button.picture_defer-bnt").click(function (event) {
             event.stopImmediatePropagation();
@@ -241,6 +252,7 @@ define(function (require, exports, module) {
                 url: "/ajax/picture/defer/add",
                 data: {'id': id}
             }).done(function () {
+                $("button.az-btn-delayed-image span").text($("button.az-btn-delayed-image span").text() + 1);
                 $("button.picture_defer-bnt").text("Отложено");
                 $("button.picture_defer-bnt").prop('disabled', true);
             });
@@ -320,9 +332,9 @@ define(function (require, exports, module) {
             }).done(function () {
                 $this.text("Удалено");
                 $this.prop('disabled', true);
-            });
 
-            location.reload();
+                location.reload();
+            });
         });
 
         // picture page cart delete button
@@ -341,9 +353,49 @@ define(function (require, exports, module) {
             location.reload();
         });
 
+        $('input[type=file]').change(function(){
+            files = this.files;
+        });
+
+        //upload file
+        $('.az-form-btn-download button').click(function( event ){
+            event.stopPropagation();
+            event.preventDefault();
+
+            var data = new FormData();
+            $.each( files, function( key, value ){
+                data.append( key, value );
+            });
+
+            $.ajax({
+                url: '/app_dev.php/ajax/picture/upload',
+                type: 'POST',
+                data: data,
+                cache: false,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                success: function( respond, textStatus, jqXHR ){
+                    // if( typeof respond.error === 'undefined' ){
+                    //     var files_path = respond.files;
+                    //     var html = '';
+                    //     $.each( files_path, function( key, val ){ html += val +'<br>'; } )
+                    //     $('.ajax-respond').html( html );
+                    // }
+                    // else{
+                    //     console.log('ОШИБКИ ОТВЕТА сервера: ' + respond.error );
+                    // }
+                },
+                error: function( jqXHR, textStatus, errorThrown ){
+                    console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+                }
+            });
+        });
+
         setActiveCategoryInMenu();
         setShowBoard();
         setCartCount();
+        setDeferredCount();
     });
 
     function onBefore(e, opts, outgoing, incoming, forward) {
@@ -374,6 +426,15 @@ define(function (require, exports, module) {
         return false;
     }
 
+    function setDeferredCount() {
+        $.ajax({
+            url: "/ajax/picture/defer/count"
+        }).done(function (data) {
+            $("button.az-btn-delayed-image span").text(data.count);
+        });
+        return false;
+    }
+
     function constructorUpdate() {
 
     }
@@ -400,4 +461,15 @@ define(function (require, exports, module) {
         return false;
     }
 
+
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("myBtn").style.display = "block";
+        } else {
+            document.getElementById("myBtn").style.display = "none";
+        }
+    }
+
 });
+

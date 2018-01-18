@@ -3,11 +3,28 @@
         <div class="col-md-4 text-left az-picture-page-sidebar-header-block az-picture-page-sidebar-material-div-left">
             <label data-for="picture-size">Материал: </label>
         </div>
-        <div class="col-md-8 text-right az-picture-page-sidebar-div-right">
-            <button class="btn az-picture-page-sidebar-size-btn az-picture-page-hint">Подробнее ?</button>
-            {% if help_settings is defined and help_settings and help_settings.materialHelp is defined and help_settings.materialHelp %}
-                <div class="hidden">{{ help_settings.materialHelp|raw }}</div>
-            {% endif %}
+        <div class="col-md-8 az-picture-page-sidebar-div-right">
+            <button class="btn az-picture-page-sidebar-size-btn az-picture-page-hint" data-toggle="modal" data-target="#myModabanner" >Подробнее ?</button>
+
+            <!-- HTML-код модального окна -->
+            <div id="myModabanner" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content az-picture-page-hint-modal-div ">
+                        <!-- Заголовок модального окна -->
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Материал</h4>
+                        </div>
+                        <!-- Основное содержимое модального окна -->
+                        <div class="modal-body">
+                            {% if help_settings is defined and help_settings and help_settings.materialHelp is defined and help_settings.materialHelp %}
+                                <div>{{ help_settings.materialHelp|raw }}</div>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row az-picture-page-sidebar-size-div-body az-picture-page-sidebar-material-div-select">
@@ -16,16 +33,18 @@
         {% for material in materials %}
         <div class="col-md-4 container-fluid">
             <div class="row text-center">
+                <div class="col-md-12">
                 <img src="/files/banner_materials/small_thumb/{{ material.image.getFilename() }}" class="az-picture-page-material-img"/><br/>
                 <span class="az-picture-page-type-img-text">{{ material.title }}</span>
-            </div>
+            </div></div>
             <div class="row text-center az-picture-page-material-radio-div">
+                <div class="col-md-12">
                 <input type="radio" class="btn az-picture-page-constructor-material-radio" value="{{ material.title }}" title="az-picture-page-material"
                        name="az-picture-page-material"
                        data-title="{{ material.title }}"
                        data-id="{{ material.id }}"
                        {% if ind == 1 %}checked{% endif %}/>
-            </div>
+                </div></div>
         </div>
 
         <input type="hidden" name="constructor_banner_{{ material.id }}_min_square" id="constructor_banner_{{ material.id }}_min_square"

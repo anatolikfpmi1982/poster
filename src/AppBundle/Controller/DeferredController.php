@@ -77,4 +77,16 @@ class DeferredController extends FrontController {
         return new JsonResponse(array('result' => 'success'));
     }
 
+    /**
+     * @Route("/ajax/picture/defer/count", name="picture_defer_count")
+     *
+     * @return Response
+     */
+    public function deferCountAction() {
+        $count = $this->get( 'app.session_manager' )->getDeferredCount();
+
+        // parameters to template
+        return new JsonResponse(array('result' => 'success', 'count' => $count));
+    }
+
 }

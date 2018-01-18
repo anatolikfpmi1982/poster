@@ -177,9 +177,9 @@ class Order
     private $picture;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="type", type="integer", nullable=true)
+     * @ORM\Column(name="type", type="string", nullable=true)
      */
     private $type;
 

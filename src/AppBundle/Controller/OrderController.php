@@ -99,6 +99,7 @@ class OrderController extends FrontController {
                 $record->setWidth($sizes[1]);
                 $record->setPrice($v['price']);
                 $record->setType($v['type_id']);
+
                 $picture = $em->getRepository('AppBundle:Picture')->findOneBy(['id' => $v['picture_id']]);
                 $record->setPicture($picture);
 

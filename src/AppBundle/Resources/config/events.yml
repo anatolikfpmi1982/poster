@@ -13,6 +13,13 @@ services:
         tags:
             - { name: doctrine.event_listener, event: postUpdate }
             - { name: doctrine.event_listener, event: postPersist }
+    app.own_picture_event_listener:
+        class: AppBundle\EventSubscriber\OwnPictureSubscriber
+        arguments:
+            - '@service_container'
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate }
+            - { name: doctrine.event_listener, event: postPersist }
     app.underframe_event_listener:
         class: AppBundle\EventSubscriber\UnderframeSubscriber
         arguments:

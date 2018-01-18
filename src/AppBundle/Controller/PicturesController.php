@@ -5,10 +5,12 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Image;
 use AppBundle\Entity\Picture;
 use AppBundle\Entity\Settings;
+use AppBundle\Entity\OwnPicture;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Class PicturesController
@@ -76,5 +78,38 @@ class PicturesController extends FrontController {
 
         // parameters to template
         return $this->render( 'AppBundle:Pictures:show.html.twig', $this->data );
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @Route("/ajax/picture/upload", name="picture_upload")
+     *
+     * @return JsonResponse
+     */
+    public function uploadAction( Request $request ) {
+        $em = $this->get( 'doctrine.orm.entity_manager' );
+
+        $uploadedFile = $request->files->all()[0];
+
+        $picture = new OwnPicture();
+
+        $picture->setName($uploadedFile->getClientOriginalName());
+        $picture->setCreatedAt(new \DateTime());
+        $picture->setUpdatedAt(new \DateTime());
+
+        $image = new Image();
+        $image->setFile($uploadedFile);
+        $image->upload();
+        $image->setCreatedAt(new \DateTime())
+            ->setEntityName($picture::IMAGE_PATH);
+        $em->persist($image);
+        $picture->setImage($image);
+
+        $em->persist($picture);
+        $em->flush();
+
+        // parameters to template
+        return new JsonResponse(array('result' => 'success', 'count' => 1));
     }
 }
