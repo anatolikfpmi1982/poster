@@ -3,29 +3,26 @@
         <div class="col-md-4 text-left az-picture-page-sidebar-header-block az-picture-page-sidebar-thickness-div-left">
             <label data-for="picture-size">Толщина подрамника: </label>
         </div>
-                   <div class="col-md-8 az-picture-page-sidebar-div-right">
-                <button class="btn az-picture-page-sidebar-size-btn az-picture-page-hint" data-toggle="modal" data-target="#myModalthick" >Подробнее ?</button>
+        <div class="col-md-8 az-picture-page-sidebar-div-right">
+            <button class="btn az-picture-page-sidebar-size-btn az-picture-page-hint" data-toggle="modal" data-target="#myModalthick">Подробнее ?</button>
 
-                <!-- HTML-код модального окна -->
-                <div id="myModalthick" class="modal fade">
-                    <div class="modal-dialog">
-                        <div class="modal-content az-picture-page-hint-modal-div ">
-                            <!-- Заголовок модального окна -->
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                <h4 class="modal-title">Толщина подрамника</h4>
-                            </div>
-                            <!-- Основное содержимое модального окна -->
-                            <div class="modal-body">
-                                {% if help_settings is defined and help_settings and help_settings.underframeHelp is defined and help_settings.underframeHelp %}
-                                    <div class="hidden">{{ help_settings.underframeHelp|raw }}</div>
-                                {% endif %}
-                            </div>
-
+            <div id="myModalthick" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content az-picture-page-hint-modal-div ">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Толщина подрамника</h4>
                         </div>
+                        <div class="modal-body">
+                            {% if help_settings is defined and help_settings and help_settings.underframeHelp is defined and help_settings.underframeHelp %}
+                                <div>{{ help_settings.underframeHelp|raw }}</div>
+                            {% endif %}
+                        </div>
+
                     </div>
                 </div>
             </div>
+        </div>
 
     </div>
     <div class="row az-picture-page-sidebar-size-div-body az-picture-page-sidebar-thickness-div-select">
@@ -35,12 +32,19 @@
         <div class="col-md-4 container-fluid">
             <div class="row text-center">
                 <div class="col-md-12">
-                <img src="/files/underframes/small_thumb/{{ thickness.image.getFilename() }}" class="az-picture-page-material-img"/>
-            </div></div>
+                    <img src="/files/underframes/small_thumb/{{ thickness.image.getFilename() }}" class="az-picture-page-material-img"/>
+                </div>
+            </div>
             <div class="row text-center az-picture-page-material-radio-div">
-                <div class="col-md-12"><input type="radio" class="btn z-picture-page-thickness" value="{{ thickness.depth }} см" title="az-picture-page-thickness"
-                       data-ratio="{{ thickness.ratio }}" name="az-picture-page-thickness" data-id="{{ thickness.id }}" {% if ind == 1 %}checked{% endif %}/>
-                </div></div>
+                <div class="col-md-12">
+                    <input type="radio" class="btn z-picture-page-thickness"
+                           value="{{ thickness.depth }} см"
+                           title="az-picture-page-thickness"
+                           data-ratio="{{ thickness.ratio }}"
+                           name="az-picture-page-thickness"
+                           data-id="{{ thickness.id }}" {% if ind == 1 %}checked{% endif %}/>
+                </div>
+            </div>
         </div>
         {% if ind is even %}
     </div>
