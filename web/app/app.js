@@ -18,7 +18,7 @@ define(function (require, exports, module) {
             navText: ["", ""],
             scrollPerPage: true,
             lazyLoad: true,
-            slideBy: 6
+            slideBy: 5
         });
 
         $("#owl-template").owlCarousel({
@@ -28,7 +28,7 @@ define(function (require, exports, module) {
             navText: ["", ""],
             scrollPerPage: true,
             lazyLoad: true,
-            slideBy: 5
+            slideBy: 4
         });
 
         $("#owl-frame").owlCarousel({
