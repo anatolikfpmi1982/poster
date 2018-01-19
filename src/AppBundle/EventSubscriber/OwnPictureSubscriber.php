@@ -66,7 +66,6 @@ class OwnPictureSubscriber
                 ->resizeImage($image->getOriginFile(), $image->getBasePath(), $picture::IMAGE_HEIGHT, $picture::IMAGE_WIDTH);
             $this->container->get('helper.imageresizer')
                 ->resizeImage($image->getOriginFile(), $image->getSmallThumbBasePath(), $image::THUMB_SMALL_IMAGE_HEIGHT, $image::THUMB_SMALL_IMAGE_WIDTH);
-            unlink($image->getOriginFile());
         }
     }
 }
