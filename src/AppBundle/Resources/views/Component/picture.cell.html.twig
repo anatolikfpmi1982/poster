@@ -62,7 +62,13 @@
                 <div class="col-md-6 text-right container-fluid az_btn_postpone">
                     <div class="row">
                         <div class="col-md-12">
-                            <button class="btn_az-main-popular_defer defer-bnt" data-id="{{ picture.id }}">Отложить</button>
+                            {% if deferredItems is defined and  deferredItems and picture.id in deferredItems %}
+                                <a href="{{ path('deferred') }}" class="btn_az-main-popular_defer">Отложено</a>
+                            {% else %}
+                                <button class="btn_az-main-popular_defer defer-bnt" data-id="{{ picture.id }}">
+                                    Отложить
+                                </button>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="row az-main-popular-item-header-buttons">

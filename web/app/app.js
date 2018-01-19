@@ -339,11 +339,20 @@ define(function (require, exports, module) {
             $.ajax({
                 url: "/ajax/picture/defer/delete",
                 data: {'id': id}
-            }).done(function () {
-                $this.text("Удалено");
-                $this.prop('disabled', true);
+            }).done(function (data) {
+                if (data != undefined && data && data.result != undefined && data.result == 1) {
+                    $this.text("Удалено");
+                    $this.prop('disabled', true);
+                    showInnerMessage('success', 'Успешно удалили из отложенных картину с ID ' + id);
 
-                location.reload();
+                    window.setTimeout(function () {
+                        location.reload();
+                    }, 3000);
+
+                } else {
+                    showInnerMessage('error', 'Произошли технические неполатки. Попробуйте еще раз через пару минут.');
+                }
+
             });
         });
 
@@ -484,6 +493,38 @@ define(function (require, exports, module) {
         } else {
             document.getElementById("myBtn").style.display = "none";
         }
+    }
+
+    function showInnerMessage(type, message) {
+        var messageBlock = $('div.message-inner-div'),
+            type_info = '',
+            typeClass = '';
+        if (message != undefined && message) {
+            switch (type) {
+                case 'success':
+                    type_info = 'Успешно!';
+                    typeClass = 'alert-success';
+                    break;
+                case 'error':
+                    type_info = 'Ошибка!';
+                    typeClass = 'alert-danger';
+                    break;
+                case 'info':
+                    type_info = 'Инфо!';
+                    typeClass = 'alert-info';
+                    break;
+            }
+
+            $('#message-inner-div-type').html(type_info);
+            $('#message-inner-div-info').html(message);
+            messageBlock.removeClass('hidden').addClass(typeClass).show();
+
+            window.setTimeout(function () {
+                messageBlock.addClass('hidden').removeClass(typeClass).hide();
+            }, 5000);
+        }
+
+
     }
 
 });

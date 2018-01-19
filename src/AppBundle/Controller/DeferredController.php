@@ -75,7 +75,7 @@ class DeferredController extends FrontController {
         $this->get( 'app.session_manager' )->deleteDeferredItem( $id );
 
         // parameters to template
-        return new JsonResponse(array('result' => 'success'));
+        return new JsonResponse(['result' => 1]);
     }
 
     /**
@@ -86,7 +86,7 @@ class DeferredController extends FrontController {
     public function deferCountAction() {
         $count = $this->get( 'app.session_manager' )->getDeferredCount();
         // parameters to template
-        return new JsonResponse(array('result' => 'success', 'count' => $count));
+        return new JsonResponse(['result' => 'success', 'count' => $count]);
     }
 
 }
