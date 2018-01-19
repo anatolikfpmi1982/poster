@@ -62,6 +62,13 @@ services:
         tags:
             - { name: doctrine.event_listener, event: postUpdate }
             - { name: doctrine.event_listener, event: postPersist }
+    app.order_event_listener:
+        class: AppBundle\EventSubscriber\OrderSubscriber
+        arguments:
+            - '@service_container'
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate }
+            - { name: doctrine.event_listener, event: postPersist }
     app.picture_form_event_listener:
         class: AppBundle\EventSubscriber\PictureFormSubscriber
         arguments:

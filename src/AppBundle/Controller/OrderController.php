@@ -104,8 +104,13 @@ class OrderController extends FrontController {
                 $record->setPrice($v['price']);
                 $record->setType($v['type_id']);
 
-                $picture = $em->getRepository('AppBundle:Picture')->findOneBy(['id' => $v['picture_id']]);
-                $record->setPicture($picture);
+                if($v['own_picture_id']) {
+                    $picture = $em->getRepository('AppBundle:OwnPicture')->findOneBy(['id' => $v['own_picture_id']]);
+                    $record->setOwnPicture($picture);
+                } else {
+                    $picture = $em->getRepository('AppBundle:Picture')->findOneBy(['id' => $v['picture_id']]);
+                    $record->setPicture($picture);
+                }
 
                 if($v['type_id'] == 'banner') {
                     $bannerMaterial = $em->getRepository('AppBundle:BannerMaterial')->findOneBy(['id' => $v['banner_material_id']]);

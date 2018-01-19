@@ -170,6 +170,13 @@ class Order
     private $moduleType;
 
     /**
+     * @var OwnPicture
+     * @ORM\ManyToOne(targetEntity="OwnPicture")
+     * @ORM\JoinColumn(name="own_picture_id", referencedColumnName="id")
+     */
+    private $ownPicture;
+
+    /**
      * @var Picture
      * @ORM\ManyToOne(targetEntity="Picture")
      * @ORM\JoinColumn(name="picture_id", referencedColumnName="id")
@@ -759,5 +766,29 @@ class Order
     public function getGroupId()
     {
         return $this->groupId;
+    }
+
+    /**
+     * Set ownPicture
+     *
+     * @param \AppBundle\Entity\OwnPicture $ownPicture
+     *
+     * @return Order
+     */
+    public function setOwnPicture(\AppBundle\Entity\OwnPicture $ownPicture = null)
+    {
+        $this->ownPicture = $ownPicture;
+
+        return $this;
+    }
+
+    /**
+     * Get ownPicture
+     *
+     * @return \AppBundle\Entity\OwnPicture
+     */
+    public function getOwnPicture()
+    {
+        return $this->ownPicture;
     }
 }

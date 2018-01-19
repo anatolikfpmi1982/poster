@@ -108,6 +108,16 @@ services:
             - 'AppBundle:PicturesCRUD'
             - '@app.image_manager'
             - '@doctrine.orm.entity_manager'
+    app.admin.own_picture:
+        class: AppBundle\Admin\OwnPictureAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Картины", label: "Загруженные картины", show_in_dashboard: false }
+        arguments:
+            - ~
+            - AppBundle\Entity\OwnPicture
+            - 'SonataAdminBundle:CRUD'
+            - '@app.image_manager'
+            - '@doctrine.orm.entity_manager'
     app.admin.picturesize:
         class: AppBundle\Admin\PictureSizeAdmin
         tags:
