@@ -150,7 +150,7 @@ services:
         arguments:
             - ~
             - AppBundle\Entity\Category3
-            - 'SonataAdminBundle:CRUD'
+            - 'AppBundle:CategoriesCRUD'
             - '@doctrine.orm.entity_manager'
     app.admin.image:
         class: AppBundle\Admin\ImageAdmin
