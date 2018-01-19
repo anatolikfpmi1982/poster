@@ -194,21 +194,19 @@ class AdminController extends CoreController
             $data = [
                 'typeHelp' => '',
                 'sizeHelp' => '',
-                'materialHelp' => '',
+                'materialBannerHelp' => '',
+                'materialPictureHelp' => '',
                 'underframeHelp' => '',
                 'chooseHelp' => '',
-                'matHelp' => '',
-                'matSizeHelp' => '',
             ];
         }
 
         $form = $this->createFormBuilder()
             ->add('typeHelp', CKEditorType::class, ['label' => 'Тип картины', 'required' => false])
             ->add('sizeHelp', CKEditorType::class, ['label' => 'Размер картины', 'required' => false])
-            ->add('materialHelp', CKEditorType::class, ['label' => 'Материал', 'required' => false])
+            ->add('materialBannerHelp', CKEditorType::class, ['label' => 'Материал баннера', 'required' => false])
+            ->add('materialPictureHelp', CKEditorType::class, ['label' => 'Материал картины', 'required' => false])
             ->add('underframeHelp', CKEditorType::class, ['label' => 'Подрамник', 'required' => false])
-            ->add('matHelp', CKEditorType::class, ['label' => 'Тип паспарту', 'required' => false])
-            ->add('matSizeHelp', CKEditorType::class, ['label' => 'Размер паспарту', 'required' => false])
             ->add('chooseHelp', CKEditorType::class, ['label' => 'Выбрано', 'required' => false])
             ->add('save', SubmitType::class, array('label' => 'Сохранить'))
             ->getForm();

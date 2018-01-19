@@ -5,7 +5,9 @@ define(function (require, exports, module) {
     function init() {
         var test = require('test');
         // When the user scrolls down 20px from the top of the document, show the button
-        window.onscroll = function() {scrollFunction()};
+        window.onscroll = function () {
+            scrollFunction()
+        };
     }
 
     $(document).ready(function () {
@@ -22,7 +24,7 @@ define(function (require, exports, module) {
             navText: ["", ""],
             scrollPerPage: true,
             lazyLoad: true,
-            slideBy: 6
+            slideBy: 5
         });
 
         $("#owl-template").owlCarousel({
@@ -32,7 +34,7 @@ define(function (require, exports, module) {
             navText: ["", ""],
             scrollPerPage: true,
             lazyLoad: true,
-            slideBy: 5
+            slideBy: 4
         });
 
         $("#owl-frame").owlCarousel({
@@ -236,7 +238,7 @@ define(function (require, exports, module) {
             return false;
         });
 
-        $('#myBtn').click(function(event){
+        $('#myBtn').click(function (event) {
             event.stopImmediatePropagation();
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
@@ -251,10 +253,18 @@ define(function (require, exports, module) {
             $.ajax({
                 url: "/ajax/picture/defer/add",
                 data: {'id': id}
-            }).done(function () {
-                $("button.az-btn-delayed-image span").text($("button.az-btn-delayed-image span").text() + 1);
-                $("button.picture_defer-bnt").text("Отложено");
-                $("button.picture_defer-bnt").prop('disabled', true);
+            }).done(function (data) {
+                var defferedBlock = $('#az-picture-page-sidebar-deffered-div'),
+                    defferedSpan = $("button.az-btn-delayed-image span#az-picture-page-sidebar-deffered-div-count"),
+                    defferedBtn = $("button.picture_defer-bnt");
+                if (data != undefined && data && data.result != undefined && data.result) {
+                    defferedSpan.text(parseInt(data.count));
+                    defferedBtn.text("Отложено").prop('disabled', true);
+                    defferedBlock.removeClass('hidden').show();
+                } else {
+                    defferedBlock.addClass('hidden').hide();
+                }
+
             });
             return false;
         });
@@ -331,15 +341,23 @@ define(function (require, exports, module) {
             $.ajax({
                 url: "/ajax/picture/defer/delete",
                 data: {'id': id}
-            }).done(function () {
-                $this.text("Удалено");
-                $this.prop('disabled', true);
+            }).done(function (data) {
+                if (data != undefined && data && data.result != undefined && data.result == 1) {
+                    $this.text("Удалено");
+                    $this.prop('disabled', true);
+                    showInnerMessage('success', 'Успешно удалили из отложенных картину с ID ' + id);
 
-                location.reload();
+                    window.setTimeout(function () {
+                        location.reload();
+                    }, 3000);
+
+                } else {
+                    showInnerMessage('error', 'Произошли технические неполатки. Попробуйте еще раз через пару минут.');
+                }
+
             });
         });
 
-        // my files page delete button
         $("button.delete-myfiles-bnt").click(function (event) {
             event.stopImmediatePropagation();
             var $this = $(this);
@@ -371,18 +389,18 @@ define(function (require, exports, module) {
             location.reload();
         });
 
-        $('input[type=file]').change(function(){
+        $('input[type=file]').change(function () {
             files = this.files;
         });
 
         //upload file
-        $('.az-form-btn-download button').click(function( event ){
+        $('.az-form-btn-download button').click(function (event) {
             event.stopPropagation();
             event.preventDefault();
 
             var data = new FormData();
-            $.each( files, function( key, value ){
-                data.append( key, value );
+            $.each(files, function (key, value) {
+                data.append(key, value);
             });
 
             $.ajax({
@@ -396,8 +414,8 @@ define(function (require, exports, module) {
                 success: function( respond, textStatus, jqXHR ){
                     location.href = '/myfiles';
                 },
-                error: function( jqXHR, textStatus, errorThrown ){
-                    console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log('ОШИБКИ AJAX запроса: ' + textStatus);
                 }
             });
         });
@@ -441,7 +459,13 @@ define(function (require, exports, module) {
         $.ajax({
             url: "/ajax/picture/defer/count"
         }).done(function (data) {
-            $("button.az-btn-delayed-image span").text(data.count);
+            var defferedBlock = $('#az-picture-page-sidebar-deffered-div');
+            if (data != undefined && data && data.count != undefined && data.count > 0) {
+                $("button.az-btn-delayed-image span").text(data.count);
+                defferedBlock.removeClass('hidden').show();
+            } else {
+                defferedBlock.addClass('hidden').hide();
+            }
         });
         return false;
     }
@@ -482,13 +506,44 @@ define(function (require, exports, module) {
     }
 
 
-
     function scrollFunction() {
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
             document.getElementById("myBtn").style.display = "block";
         } else {
             document.getElementById("myBtn").style.display = "none";
         }
+    }
+
+    function showInnerMessage(type, message) {
+        var messageBlock = $('div.message-inner-div'),
+            type_info = '',
+            typeClass = '';
+        if (message != undefined && message) {
+            switch (type) {
+                case 'success':
+                    type_info = 'Успешно!';
+                    typeClass = 'alert-success';
+                    break;
+                case 'error':
+                    type_info = 'Ошибка!';
+                    typeClass = 'alert-danger';
+                    break;
+                case 'info':
+                    type_info = 'Инфо!';
+                    typeClass = 'alert-info';
+                    break;
+            }
+
+            $('#message-inner-div-type').html(type_info);
+            $('#message-inner-div-info').html(message);
+            messageBlock.removeClass('hidden').addClass(typeClass).show();
+
+            window.setTimeout(function () {
+                messageBlock.addClass('hidden').removeClass(typeClass).hide();
+            }, 5000);
+        }
+
+
     }
 
 });

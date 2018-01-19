@@ -53,6 +53,7 @@ class CategoriesController extends FrontController
         $this->data['pagination'] = $pagination;
         $category->setDescription($this->get('helper.textformater')->formatMoreText($category->getDescription()));
         $this->data['category'] = $category;
+        $this->data['deferredItems'] = $this->get( 'app.session_manager' )->getDeferredItems();
         $this->data['mainCategoryId'] = $category->getId();
         $this->data['filters']['tpls'] = $this->em->getRepository('AppBundle:PictureForm')->findBy(['isActive' => true]);
 
