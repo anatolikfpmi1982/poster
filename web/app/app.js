@@ -365,11 +365,19 @@ define(function (require, exports, module) {
             $.ajax({
                 url: "/ajax/myfiles/delete",
                 data: {'id': id}
-            }).done(function () {
-                $this.text("Удалено");
-                $this.prop('disabled', true);
+            }).done(function (data) {
+                if (data != undefined && data && data.result != undefined && data.result == 1) {
+                    $this.text("Удалено");
+                    $this.prop('disabled', true);
 
-                location.reload();
+                    showInnerMessage('success', 'Успешно удалили загруженную картину');
+
+                    window.setTimeout(function () {
+                        location.reload();
+                    }, 3000);
+                } else {
+                    showInnerMessage('error', 'Произошли технические неполатки. Попробуйте еще раз через пару минут.');
+                }
             });
         });
 
@@ -415,6 +423,7 @@ define(function (require, exports, module) {
                     location.href = '/myfiles';
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
+                    showInnerMessage('error', 'Произошли технические неполатки. Попробуйте еще раз через пару минут.');
                     console.log('ОШИБКИ AJAX запроса: ' + textStatus);
                 }
             });
@@ -474,7 +483,13 @@ define(function (require, exports, module) {
         $.ajax({
             url: "/ajax/myfiles/count"
         }).done(function (data) {
-            $("button.az-btn-myfiles-image span").text(data.count);
+            var myfilesBlock = $('#az-picture-page-sidebar-myfiles-div');
+            if (data != undefined && data && data.count != undefined && data.count > 0) {
+                $("button.az-btn-myfiles-image span").text(data.count);
+                myfilesBlock.removeClass('hidden').show();
+            } else {
+                myfilesBlock.addClass('hidden').hide();
+            }
         });
         return false;
     }

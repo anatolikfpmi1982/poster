@@ -9,10 +9,6 @@
 <div class="row az-page-main-section-div">
     <div class="col-md-9 container-fluid">
         <div class="row page-title az-picture-page-title">Загруженная картина</div>
-        <div class="row az-picture-page-author-articul-div">
-            <div class="col-md-6"></div>
-            <div class="col-md-6"></div>
-        </div>
         {% include('AppBundle:Component:Constructor/picture.html.twig') %}
         <div class="row text-center az-picture-page-slider-material-div">
             <div class="col-md-12">
@@ -61,8 +57,19 @@
         <input type="hidden" name="constructor_picture_ratio" id="constructor_picture_ratio" value="1">
     </div>
     <div class="col-md-3 container-fluid az-constructor-block">
-        <div class="row az-picture-page-constructor-block">
-            <div class="col-md-12"><a href="/deferred"><button class="btn az-btn-delayed-image">Отложенные  <span></span></button></a></div>
+        <div class="row az-picture-page-constructor-block hidden" id="az-picture-page-sidebar-deffered-div">
+            <div class="col-md-12">
+                <a href="{{ path('deferred') }}">
+                    <button class="btn az-btn-delayed-image">Отложенные <span id="az-picture-page-sidebar-deffered-div-count">0</span></button>
+                </a>
+            </div>
+        </div>
+        <div class="row az-picture-page-constructor-block hidden" id="az-picture-page-sidebar-myfiles-div">
+            <div class="col-md-12">
+                <a href="{{ path('my_files') }}">
+                    <button class="btn az-btn-myfiles-image">Мои файлы  <span id="az-picture-page-sidebar-myfiles-div-count">0</span></button>
+                </a>
+            </div>
         </div>
         <div class="row az-picture-page-constructor-block">
             {% include('AppBundle:Component:Constructor/price.html.twig') %}

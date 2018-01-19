@@ -15,16 +15,16 @@ use AppBundle\Entity\Image;
  * Class DeferredController
  */
 class MyFilesController extends FrontController {
+    const PAGE_LIMIT = 5;
+
     /**
-     * @param integer $id
-     * @param Request $request
-     *
      * @Route("/myfile/{id}", name="my_file_page")
      *
+     * @param integer $id
      * @return Response
      * @throws BadRequestHttpException
      */
-    public function showAction( $id, Request $request )
+    public function showAction( $id )
     {
         $em = $this->get('doctrine.orm.entity_manager');
 
@@ -40,7 +40,7 @@ class MyFilesController extends FrontController {
         }
 
         $this->pageSlug = $pictureId;
-        $this->pageType = 'picture';
+        $this->pageType = 'my_file';
         $this->id = $pictureId;
         $this->doBlocks();
 
@@ -80,13 +80,11 @@ class MyFilesController extends FrontController {
         return $this->render('AppBundle:Pictures:upload.html.twig', $this->data);
     }
 
-    const PAGE_LIMIT = 5;
-
     /**
      * @Route("/myfiles", name="my_files")
      *
+     * @param Request $request
      * @return Response
-     * @throws BadRequestHttpException
      */
     public function listAction(Request $request) {
         $em = $this->get('doctrine.orm.entity_manager');
@@ -103,7 +101,6 @@ class MyFilesController extends FrontController {
             self::PAGE_LIMIT/*limit per page*/
         );
 
-        $this->menu = '/';
         $this->pageSlug = '';
         $this->pageType = 'my_files';
         $this->doBlocks();
@@ -145,7 +142,7 @@ class MyFilesController extends FrontController {
         $this->get( 'app.session_manager' )->addMyFile($picture->getId());
 
         // parameters to template
-        return new JsonResponse(['result' => 'success']);
+        return new JsonResponse(['result' => 1]);
     }
 
     /**
@@ -161,11 +158,11 @@ class MyFilesController extends FrontController {
         $this->get( 'app.session_manager' )->deleteFromMyFiles( (int)$id );
 
         // parameters to template
-        return new JsonResponse(array('result' => 'success'));
+        return new JsonResponse(array('result' => 1));
     }
 
     /**
-     * @Route("/ajax/myfiles/count", name="myfiles_count")
+     * @Route("/ajax/myfiles/count", name="my_files_count")
      *
      * @return Response
      */
@@ -173,6 +170,6 @@ class MyFilesController extends FrontController {
         $count = $this->get( 'app.session_manager' )->getMyFilesCount();
 
         // parameters to template
-        return new JsonResponse(array('result' => 'success', 'count' => $count));
+        return new JsonResponse(array('result' => 1, 'count' => $count));
     }
 }
