@@ -161,4 +161,76 @@ class SessionManagement {
     public function getCart() {
         return (array)$this->container->get( 'session' )->get( 'cart' );
     }
+
+    /**
+     * Set own picture
+     *
+     * @param integer $id
+     */
+    public function addMyFile( $id ) {
+        $myFiles = $this->session->get( 'my_files' );
+        $myFiles[] = $id;
+
+        $this->session->set( 'my_files', $myFiles );
+    }
+
+    /**
+     * Get own picture
+     *
+     * @param integer $id
+     * @return null|integer
+     */
+    public function getMyFilesItem( $id ) {
+        $this->session->get( 'my_files' );
+
+        foreach($this->session->get( 'my_files' ) as $k => $v) {
+            if($v == $id) {
+                return $v;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Get my files
+     *
+     * @return null|array
+     */
+    public function getMyFiles() {
+        return $this->session->get( 'my_files' );
+    }
+
+    /**
+     * Get my files count
+     *
+     * @return null|array
+     */
+    public function getMyFilesCount() {
+        return !empty($this->session->get( 'my_files' )) ? count($this->session->get( 'my_files' )) : '';
+    }
+
+    /**
+     * Delete my file
+     *
+     * @param int $id
+     */
+    public function deleteFromMyFiles( $id ) {
+        if ( $myFiles = $this->session->get( 'my_files' ) ) {
+            foreach ($myFiles as $k => $v) {
+                if($v == $id) {
+                    unset($myFiles[$k]);
+                }
+            }
+
+            $this->session->set( 'my_files', $myFiles );
+        }
+    }
+
+    /**
+     * Clear my files
+     */
+    public function clearMyFiles() {
+        $this->session->set( 'my_files', null );
+    }
 }

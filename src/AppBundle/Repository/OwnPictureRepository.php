@@ -11,4 +11,9 @@ use Doctrine\ORM\EntityRepository;
  * repository methods below.
  */
 class OwnPictureRepository extends EntityRepository {
+    public function getOwnPicturesForMyFiles( $ids ) {
+        return $this->createQueryBuilder( 'o' )
+            ->where( 'o.id IN (:ids)' )
+            ->setParameter( 'ids', $ids );
+    }
 }

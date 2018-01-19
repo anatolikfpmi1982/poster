@@ -1,6 +1,6 @@
 {% extends "AppBundle::layout.html.twig" %}
 
-{% block title %}Картина "{{ pictureMain.title }}" {% endblock %}
+{% block title %}Загруженная картина{% endblock %}
 
 {% block body %}
 <div class="row az-page-main-section-div">
@@ -8,20 +8,10 @@
 </div>
 <div class="row az-page-main-section-div">
     <div class="col-md-9 container-fluid">
-        <div class="row page-title az-picture-page-title">Картина "{{ pictureMain.title }}"</div>
+        <div class="row page-title az-picture-page-title">Загруженная картина</div>
         <div class="row az-picture-page-author-articul-div">
-            {% if pictureMain.author is defined and pictureMain.author and pictureMain.author.slug is defined and pictureMain.author.slug %}
-                {% set author_link = path('author', {'slug': pictureMain.author.slug }) %}
-            {% else %}
-                {% set author_link = '#' %}
-            {% endif %}
-            {% if pictureMain.author is defined and pictureMain.author and pictureMain.author.name is defined and pictureMain.author.name %}
-                {% set author_name = pictureMain.author.name %}
-            {% else %}
-                {% set author_name = '-' %}
-            {% endif %}
-            <div class="col-md-6">Автор: <a href="{{ author_link }}">{{ author_name }}</a></div>
-            <div class="col-md-6">Артикул: {{ pictureMain.code }}</div>
+            <div class="col-md-6"></div>
+            <div class="col-md-6"></div>
         </div>
         {% include('AppBundle:Component:Constructor/picture.html.twig') %}
         <div class="row text-center az-picture-page-slider-material-div">
@@ -67,13 +57,12 @@
         <input type="hidden" name="constructor_max_price" id="constructor_max_price" value="{{ max_price }}">
         <input type="hidden" name="constructor_additional_price" id="constructor_additional_price" value="{{ add_price }}">
 
-        <input type="hidden" name="constructor_picture_price" id="constructor_picture_price" value="{{ pictureMain.price }}">
-        <input type="hidden" name="constructor_picture_ratio" id="constructor_picture_ratio" value="{{ pictureMain.ratio }}">
+        <input type="hidden" name="constructor_picture_price" id="constructor_picture_price" value="0">
+        <input type="hidden" name="constructor_picture_ratio" id="constructor_picture_ratio" value="1">
     </div>
     <div class="col-md-3 container-fluid az-constructor-block">
         <div class="row az-picture-page-constructor-block">
             <div class="col-md-12"><a href="/deferred"><button class="btn az-btn-delayed-image">Отложенные  <span></span></button></a></div>
-            <div class="col-md-12"><a href="/myfiles"><button class="btn az-btn-myfiles-image">Мои файлы  <span></span></button></a></div>
         </div>
         <div class="row az-picture-page-constructor-block">
             {% include('AppBundle:Component:Constructor/price.html.twig') %}

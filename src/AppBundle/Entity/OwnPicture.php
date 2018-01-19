@@ -22,7 +22,7 @@ class OwnPicture implements ImageInterface
     /**
      * Image sub folder
      */
-    const IMAGE_PATH = 'own_pictures';
+    const IMAGE_PATH = 'pictures';
 
     /**
      * @var int

@@ -2,7 +2,7 @@
 namespace AppBundle\EventSubscriber;
 
 use AppBundle\Entity\Image;
-use AppBundle\Entity\Picture;
+use AppBundle\Entity\OwnPicture;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

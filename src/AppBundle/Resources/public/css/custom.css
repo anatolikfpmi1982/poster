@@ -2430,7 +2430,7 @@ button.close:focus, .close:hover {
     margin: 15px 0;
 }
 
-.az-btn-delayed-image {
+.az-btn-delayed-image, .az-btn-myfiles-image {
     border: 1px solid #fd1200;
     background-color: #fff;
     border-radius: inherit;

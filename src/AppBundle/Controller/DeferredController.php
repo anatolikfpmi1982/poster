@@ -20,7 +20,7 @@ class DeferredController extends FrontController {
      * @return Response
      * @throws BadRequestHttpException
      */
-    public function showAction(Request $request) {
+    public function listAction(Request $request) {
         $em = $this->get('doctrine.orm.entity_manager');
 
         $ids = $this->get( 'app.session_manager' )->getDeferredItems();

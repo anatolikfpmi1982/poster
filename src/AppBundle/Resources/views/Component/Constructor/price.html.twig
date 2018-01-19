@@ -4,12 +4,15 @@
     </div>
     <div class="row az-picture-page-sidebar-size-div-body">
         <div class="col-md-6 text-left az-picture-page-sidebar-price-btn-div-left">
-            <button class="btn az-picture-page-sidebar-price-btn picture_order-bnt" data-id="{{ pictureMain.id }}" data-cart-id="{% if cart_id  %}{{ cart_id }}{% endif %}">
+            <button class="btn az-picture-page-sidebar-price-btn picture_order-bnt" data-own-id="{% if ownPicture %}{{ pictureMain.id }}{% endif %}"
+                    data-id="{% if not ownPicture %}{{ pictureMain.id }}{% endif %}" data-cart-id="{% if cart_id  %}{{ cart_id }}{% endif %}">
                 {% if cart_id %}Редактировать{% else %}Заказать{% endif %}
             </button>
         </div>
+        {% if not ownPicture %}
         <div class="col-md-6 text-right az-picture-page-sidebar-price-btn-div-right">
             <button class="btn az-picture-page-sidebar-price-btn picture_defer-bnt" data-id="{{ pictureMain.id }}">Отложить</button>
         </div>
+        {% endif %}
     </div>
 </div>

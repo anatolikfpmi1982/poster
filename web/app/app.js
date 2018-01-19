@@ -278,6 +278,7 @@ define(function (require, exports, module) {
             event.stopImmediatePropagation();
             var $this = $(this),
                 id = $this.data('id'),
+                own_picture_id = $this.data('own-id'),
                 cart_id = $this.data('cart-id'),
                 price = $this.parent().parent().parent().find('.az-picture-page-sidebar-price-value').text(),
                 sizes = $("#az-picture-page-constructor-size-select").val(),
@@ -297,6 +298,7 @@ define(function (require, exports, module) {
                 url: "/ajax/cart/add",
                 data: {
                     'id': id,
+                    'own_picture_id': own_picture_id,
                     'cart_id': cart_id,
                     'price': price,
                     'sizes': sizes,
@@ -328,6 +330,22 @@ define(function (require, exports, module) {
             var id = $this.attr('data-id');
             $.ajax({
                 url: "/ajax/picture/defer/delete",
+                data: {'id': id}
+            }).done(function () {
+                $this.text("Удалено");
+                $this.prop('disabled', true);
+
+                location.reload();
+            });
+        });
+
+        // my files page delete button
+        $("button.delete-myfiles-bnt").click(function (event) {
+            event.stopImmediatePropagation();
+            var $this = $(this);
+            var id = $this.attr('data-id');
+            $.ajax({
+                url: "/ajax/myfiles/delete",
                 data: {'id': id}
             }).done(function () {
                 $this.text("Удалено");
@@ -376,15 +394,7 @@ define(function (require, exports, module) {
                 processData: false,
                 contentType: false,
                 success: function( respond, textStatus, jqXHR ){
-                    // if( typeof respond.error === 'undefined' ){
-                    //     var files_path = respond.files;
-                    //     var html = '';
-                    //     $.each( files_path, function( key, val ){ html += val +'<br>'; } )
-                    //     $('.ajax-respond').html( html );
-                    // }
-                    // else{
-                    //     console.log('ОШИБКИ ОТВЕТА сервера: ' + respond.error );
-                    // }
+                    location.href = '/myfiles';
                 },
                 error: function( jqXHR, textStatus, errorThrown ){
                     console.log('ОШИБКИ AJAX запроса: ' + textStatus );
@@ -396,6 +406,7 @@ define(function (require, exports, module) {
         setShowBoard();
         setCartCount();
         setDeferredCount();
+        setMyFilesCount();
     });
 
     function onBefore(e, opts, outgoing, incoming, forward) {
@@ -431,6 +442,15 @@ define(function (require, exports, module) {
             url: "/ajax/picture/defer/count"
         }).done(function (data) {
             $("button.az-btn-delayed-image span").text(data.count);
+        });
+        return false;
+    }
+
+    function setMyFilesCount() {
+        $.ajax({
+            url: "/ajax/myfiles/count"
+        }).done(function (data) {
+            $("button.az-btn-myfiles-image span").text(data.count);
         });
         return false;
     }
