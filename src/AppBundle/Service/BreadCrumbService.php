@@ -76,8 +76,23 @@ class BreadCrumbService {
             case 'search':
                 $result = $this->buildSearchBreadCrumb($param);
                 break;
+            case 'deferred':
+                $result = $this->buildDeferredBreadCrumb();
+                break;
         }
         return $result;
+    }
+
+    /**
+     * Get full deferred bread crumb path.
+     *
+     * @return array
+     */
+    public function buildDeferredBreadCrumb() {
+        return [[
+            'title' => 'Отложенные',
+            'url' => $this->container->get('router')->generate('deferred'),
+        ]];
     }
 
     /**

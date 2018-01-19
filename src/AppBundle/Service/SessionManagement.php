@@ -24,7 +24,7 @@ class SessionManagement {
      */
     public function __construct( ContainerInterface $container ) {
         $this->container = $container;
-        $this->session = $session = $this->container->get( 'session' );
+        $this->session   = $session = $this->container->get( 'session' );
     }
 
     /**
@@ -52,7 +52,7 @@ class SessionManagement {
      */
     public function addDeferredItem( $id ) {
         if ( $deferred = $this->session->get( 'deferred' ) ) {
-            if ( !in_array( $id, $deferred, false ) ) {
+            if ( $id && ! in_array( $id, $deferred, false ) ) {
                 $deferred[] = $id;
             }
         } else {
@@ -68,8 +68,8 @@ class SessionManagement {
      */
     public function deleteDeferredItem( $id ) {
         if ( $deferred = $this->session->get( 'deferred' ) ) {
-            if ( ($index = array_search( $id, $deferred, false )) !== null ) {
-                unset($deferred[$index]);
+            if ( ( $index = array_search( $id, $deferred, false ) ) !== null && $id ) {
+                unset( $deferred[ $index ] );
             }
 
             $this->session->set( 'deferred', $deferred );
@@ -82,8 +82,8 @@ class SessionManagement {
      * @param object $data
      */
     public function addToCart( $data ) {
-        $cart = $this->session->get( 'cart' );
-        $cart[$data['id']] = $data;
+        $cart                = $this->session->get( 'cart' );
+        $cart[ $data['id'] ] = $data;
 
         $this->session->set( 'cart', $cart );
     }
@@ -92,12 +92,13 @@ class SessionManagement {
      * Get picture from cart
      *
      * @param string $id
+     *
      * @return array
      **/
     public function getFromCart( $id ) {
         $cart = $this->session->get( 'cart' );
 
-        return !empty($cart[$id]) ? $cart[$id] : null;
+        return ! empty( $cart[ $id ] ) ? $cart[ $id ] : null;
     }
 
     /**
@@ -108,7 +109,7 @@ class SessionManagement {
     public function getCartCount() {
         $cart = $this->session->get( 'cart' );
 
-        return !empty($cart) ? count($cart) : 0;
+        return ! empty( $cart ) ? count( $cart ) : 0;
     }
 
     /**
@@ -118,7 +119,7 @@ class SessionManagement {
      */
     public function deleteFromCart( $id ) {
         if ( $cart = $this->session->get( 'cart' ) ) {
-            unset($cart[$id]);
+            unset( $cart[ $id ] );
 
             $this->session->set( 'cart', $cart );
         }
@@ -129,7 +130,7 @@ class SessionManagement {
      */
     public function cleanCart() {
         if ( $cart = $this->session->get( 'cart' ) ) {
-            $this->session->set( 'cart', [] );
+            $this->session->set( 'cart', [ ] );
         }
     }
 
@@ -152,13 +153,14 @@ class SessionManagement {
      * @return mixed
      */
     public function getDeferredCount() {
-        return !empty($this->container->get( 'session' )->get( 'deferred' )) ? count($this->container->get( 'session' )->get( 'deferred' )) : '';
+        $deferred = $this->container->get( 'session' )->get( 'deferred' );
+        return ! empty( $deferred ) ? count( $deferred ) : '';
     }
 
     /**
      * @return array
      */
     public function getCart() {
-        return (array)$this->container->get( 'session' )->get( 'cart' );
+        return (array) $this->container->get( 'session' )->get( 'cart' );
     }
 }

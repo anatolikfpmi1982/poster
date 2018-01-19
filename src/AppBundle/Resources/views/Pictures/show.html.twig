@@ -71,8 +71,11 @@
         <input type="hidden" name="constructor_picture_ratio" id="constructor_picture_ratio" value="{{ pictureMain.ratio }}">
     </div>
     <div class="col-md-3 container-fluid az-constructor-block">
-        <div class="row az-picture-page-constructor-block">
-            <div class="col-md-12"><a href="/deferred"><button class="btn az-btn-delayed-image">Отложенные  <span></span></button></a></div>
+        <div class="row az-picture-page-constructor-block hidden" id="az-picture-page-sidebar-deffered-div">
+            <div class="col-md-12">
+                <a href="{{ path('deferred') }}">
+                    <button class="btn az-btn-delayed-image">Отложенные <span id="az-picture-page-sidebar-deffered-div-count">0</span></button>
+                </a></div>
         </div>
         <div class="row az-picture-page-constructor-block">
             {% include('AppBundle:Component:Constructor/price.html.twig') %}
@@ -99,13 +102,15 @@
             {% include('AppBundle:Component:Constructor/price.html.twig') %}
         </div>
         <div class="row az-picture-page-constructor-block">
-            <div class="soc-share"><a href="https://twitter.com/share?url=http://www.artzakaz.by/twitter-button/"
-                                      title="Twitter" class="btn btn-twitter btn-lg"><i class="fa fa-twitter fa-fw"></i> </a></div>
-
-            <div class="soc-share"><a
-                        href="https://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://www.artzakaz.by&p[images][0]=&p[title]=Title%20Goes%20Here&p[summary]=Description%20goes%20here!"
-                        target="_blank"
-                        onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250'); return false">
+            <div class="soc-share">
+                <a href="https://twitter.com/share?url=http://www.artzakaz.by/twitter-button/"
+                   title="Twitter" class="btn btn-twitter btn-lg"><i class="fa fa-twitter fa-fw"></i></a>
+            </div>
+            <div class="soc-share">
+                <a href="https://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://www.artzakaz
+                .by&p[images][0]=&p[title]=Title%20Goes%20Here&p[summary]=Description%20goes%20here!"
+                   target="_blank"
+                   onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250'); return false">
                     <button style="width: 32px; margin-top:10px;" type="button" class="btn btn-facebook btn-lg"><i class="fa fa-facebook fa-2"></i></button>
                 </a>
             </div>
@@ -140,8 +145,8 @@
     </div>
     {% include('AppBundle:Component:Blocks/similar.html.twig') %}
     <div class="row az-visited-block az-category-page-visited-div">
-    {% include('AppBundle:Component:Blocks/last.visited.html.twig') %}
-</div>
+        {% include('AppBundle:Component:Blocks/last.visited.html.twig') %}
+    </div>
     <div class="row az-visited-block az-category-page-visited-div">
         {% include('AppBundle:Component:Blocks/deferred.html.twig') %}
     </div>

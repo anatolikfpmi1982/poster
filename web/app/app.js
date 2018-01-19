@@ -5,7 +5,9 @@ define(function (require, exports, module) {
     function init() {
         var test = require('test');
         // When the user scrolls down 20px from the top of the document, show the button
-        window.onscroll = function() {scrollFunction()};
+        window.onscroll = function () {
+            scrollFunction()
+        };
     }
 
     $(document).ready(function () {
@@ -236,7 +238,7 @@ define(function (require, exports, module) {
             return false;
         });
 
-        $('#myBtn').click(function(event){
+        $('#myBtn').click(function (event) {
             event.stopImmediatePropagation();
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
@@ -251,10 +253,18 @@ define(function (require, exports, module) {
             $.ajax({
                 url: "/ajax/picture/defer/add",
                 data: {'id': id}
-            }).done(function () {
-                $("button.az-btn-delayed-image span").text($("button.az-btn-delayed-image span").text() + 1);
-                $("button.picture_defer-bnt").text("Отложено");
-                $("button.picture_defer-bnt").prop('disabled', true);
+            }).done(function (data) {
+                var defferedBlock = $('#az-picture-page-sidebar-deffered-div'),
+                    defferedSpan = $("button.az-btn-delayed-image span#az-picture-page-sidebar-deffered-div-count"),
+                    defferedBtn = $("button.picture_defer-bnt");
+                if (data != undefined && data && data.result != undefined && data.result) {
+                    defferedSpan.text(parseInt(data.count));
+                    defferedBtn.text("Отложено").prop('disabled', true);
+                    defferedBlock.removeClass('hidden').show();
+                } else {
+                    defferedBlock.addClass('hidden').hide();
+                }
+
             });
             return false;
         });
@@ -353,18 +363,18 @@ define(function (require, exports, module) {
             location.reload();
         });
 
-        $('input[type=file]').change(function(){
+        $('input[type=file]').change(function () {
             files = this.files;
         });
 
         //upload file
-        $('.az-form-btn-download button').click(function( event ){
+        $('.az-form-btn-download button').click(function (event) {
             event.stopPropagation();
             event.preventDefault();
 
             var data = new FormData();
-            $.each( files, function( key, value ){
-                data.append( key, value );
+            $.each(files, function (key, value) {
+                data.append(key, value);
             });
 
             $.ajax({
@@ -375,7 +385,7 @@ define(function (require, exports, module) {
                 dataType: 'json',
                 processData: false,
                 contentType: false,
-                success: function( respond, textStatus, jqXHR ){
+                success: function (respond, textStatus, jqXHR) {
                     // if( typeof respond.error === 'undefined' ){
                     //     var files_path = respond.files;
                     //     var html = '';
@@ -386,8 +396,8 @@ define(function (require, exports, module) {
                     //     console.log('ОШИБКИ ОТВЕТА сервера: ' + respond.error );
                     // }
                 },
-                error: function( jqXHR, textStatus, errorThrown ){
-                    console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log('ОШИБКИ AJAX запроса: ' + textStatus);
                 }
             });
         });
@@ -430,7 +440,13 @@ define(function (require, exports, module) {
         $.ajax({
             url: "/ajax/picture/defer/count"
         }).done(function (data) {
-            $("button.az-btn-delayed-image span").text(data.count);
+            var defferedBlock = $('#az-picture-page-sidebar-deffered-div');
+            if (data != undefined && data && data.count != undefined && data.count > 0) {
+                $("button.az-btn-delayed-image span").text(data.count);
+                defferedBlock.removeClass('hidden').show();
+            } else {
+                defferedBlock.addClass('hidden').hide();
+            }
         });
         return false;
     }
@@ -460,7 +476,6 @@ define(function (require, exports, module) {
         }
         return false;
     }
-
 
 
     function scrollFunction() {

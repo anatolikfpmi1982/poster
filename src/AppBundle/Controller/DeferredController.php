@@ -19,13 +19,16 @@ class DeferredController extends FrontController {
      *
      * @return Response
      * @throws BadRequestHttpException
+     * @throws \LogicException
      */
     public function showAction(Request $request) {
-        $em = $this->get('doctrine.orm.entity_manager');
+        $this->menu = '/deferred';
+        $this->pageSlug = '';
+        $this->pageType = 'deferred';
+        $this->doBlocks();
 
         $ids = $this->get( 'app.session_manager' )->getDeferredItems();
-
-        $queryBuilder = $em->getRepository('AppBundle:Picture')->getActivePicturesForDeferred($ids);
+        $queryBuilder = $this->em->getRepository('AppBundle:Picture')->getActivePicturesForDeferred($ids);
         $query = $queryBuilder->getQuery();
 
         $paginator  = $this->get('knp_paginator');
@@ -34,11 +37,6 @@ class DeferredController extends FrontController {
             $request->query->getInt('page', 1)/*page number*/,
             self::PAGE_LIMIT/*limit per page*/
         );
-
-        $this->menu = '/';
-        $this->pageSlug = '';
-        $this->pageType = 'deferred';
-        $this->doBlocks();
         $this->data['pagination'] = $pagination;
 
         // parameters to template
@@ -50,15 +48,17 @@ class DeferredController extends FrontController {
      *
      * @param Request $request
      *
+     * @throws \InvalidArgumentException
+     *
      * @return Response
      */
     public function addDeferAction(Request $request) {
         $id = $request->query->get('id');
 
         $this->get( 'app.session_manager' )->addDeferredItem( (int)$id );
-
+        $count = $this->get( 'app.session_manager' )->getDeferredCount();
         // parameters to template
-        return new JsonResponse(array('result' => 'success'));
+        return new JsonResponse(['result' => 1, 'count' => $count]);
     }
 
     /**
@@ -66,12 +66,13 @@ class DeferredController extends FrontController {
      *
      * @param Request $request
      *
+     * @throws \InvalidArgumentException
+     *
      * @return Response
      */
     public function deleteDeferAction(Request $request) {
-        $id = $request->query->get('id');
-
-        $this->get( 'app.session_manager' )->deleteDeferredItem( (int)$id );
+        $id = (int)$request->query->get('id');
+        $this->get( 'app.session_manager' )->deleteDeferredItem( $id );
 
         // parameters to template
         return new JsonResponse(array('result' => 'success'));
@@ -84,7 +85,6 @@ class DeferredController extends FrontController {
      */
     public function deferCountAction() {
         $count = $this->get( 'app.session_manager' )->getDeferredCount();
-
         // parameters to template
         return new JsonResponse(array('result' => 'success', 'count' => $count));
     }
