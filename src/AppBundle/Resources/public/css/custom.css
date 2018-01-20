@@ -572,11 +572,17 @@ footer {
 .az-picture-page-sidebar-type-div-select .col-md-4:hover {
     border: 1px solid #fd1200;
     cursor: pointer;
+    height: 130px;
+    padding-top: 3px;
+
 }
 
 .az-picture-page-sidebar-type-div-select .col-md-4.active {
     border: 1px solid #fd1200;
     cursor: pointer;
+    height: 130px;
+    padding-top: 3px;
+
 }
 
 .az-picture-page-sidebar-type-div-frame-mat img {
@@ -742,7 +748,7 @@ body {
 
 /** header contacts**/
 .az-header-address-div {
-    padding-left: 60px;
+    padding: 0 30px 0 60px;
 }
 
 .az-header-address-container {
