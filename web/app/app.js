@@ -113,12 +113,6 @@ define(function (require, exports, module) {
             setShowBoard();
         });
 
-        // picture page constructor material
-        //$("input.az-picture-page-constructor-material-radio").click(function (event) {
-        //    event.stopImmediatePropagation();
-        //    setShowBoard();
-        //});
-
         // picture page constructor frame
         $("img.az-picture-page-constructor-picture-thickness-img").click(function (event) {
             event.stopImmediatePropagation();
