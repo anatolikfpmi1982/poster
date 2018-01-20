@@ -1,0 +1,68 @@
+{% if pagination.params is defined and pagination.params %}
+    {% if pagination.params.sort is defined and pagination.params.sort %}
+        {% set sort_field = pagination.params.sort %}
+    {% else %}
+        {% set sort_field = 'f.title' %}
+    {% endif %}
+    {% if pagination.params.direction is defined and pagination.params.direction %}
+        {% set sort_direction = pagination.params.direction %}
+    {% else %}
+        {% set sort_direction = 'DESC' %}
+    {% endif %}
+
+    {% if pagination.params.filterField is defined and pagination.params.filterField %}
+        {% set filter_field = pagination.params.filterField %}
+    {% else %}
+        {% set filter_field = '' %}
+    {% endif %}
+    {% if pagination.params.filterValue is defined and pagination.params.filterValue %}
+        {% set filter_value = pagination.params.filterValue %}
+    {% else %}
+        {% set filter_value = '' %}
+    {% endif %}
+{% endif %}
+<div class="col-md-1 text-center az-picture-page-constructor-block container-fluid">
+    <div class="row az-category-page-filter az-category-page-filter-photo">
+        {% set title_direction = 'DESC' %}
+        {% if sort_field == 'f.title' %}
+            {% if sort_direction == 'DESC' %}{% set title_direction = 'ASC' %}{% endif %}
+        {% endif %}
+        <a href="{{ app.request.pathinfo }}?sort=f.title&direction={{ title_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Артикул <span
+                    class="glyphicon glyphicon-chevron-{% if title_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
+    </div>
+</div>
+<div class="col-md-1 text-center az-picture-page-constructor-block container-fluid">
+    <div class="row az-category-page-filter az-category-page-filter-photo">
+        {% set width_direction = 'DESC' %}
+        {% if sort_field == 'f.width' %}
+            {% if sort_direction == 'DESC' %}{% set width_direction = 'ASC' %}{% endif %}
+        {% endif %}
+        <a href="{{ app.request.pathinfo }}?sort=f.width&direction={{ width_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Ширина <span
+                    class="glyphicon
+        glyphicon-chevron-{% if width_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
+    </div>
+</div>
+<div class="col-md-1 text-center az-picture-page-constructor-block container-fluid">
+    <div class="row az-category-page-filter az-category-page-filter-photo">
+        {% set height_direction = 'DESC' %}
+        {% if sort_field == 'f.height' %}
+            {% if sort_direction == 'DESC' %}{% set height_direction = 'ASC' %}{% endif %}
+        {% endif %}
+        <a href="{{ app.request.pathinfo }}?sort=f.height&direction={{ height_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Высота <span
+                    class="glyphicon
+        glyphicon-chevron-{% if height_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
+    </div>
+</div>
+
+<div class="col-md-2 text-center az-picture-page-constructor-block container-fluid">
+    <div class="row az-category-page-filter az-category-page-filter-photo">
+        {% set material_direction = 'DESC' %}
+        {% if sort_field == 'm.title' %}
+            {% if sort_direction == 'DESC' %}{% set material_direction = 'ASC' %}{% endif %}
+        {% endif %}
+        <a href="{{ app.request.pathinfo }}?sort=m.title&direction={{ material_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Материал <span
+                    class="glyphicon
+        glyphicon-chevron-{% if material_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
+    </div>
+</div>
+
