@@ -86,3 +86,26 @@
         {% endif %}
     </div>
 </div>
+{% if pictureMain.form is defined and pictureMain.form and pictureMain.form.serviceName %}
+    <style>
+        {% if pictureMain.form.serviceName == 'rectangle vertical' %}
+        .az-picture-page-sidebar-type-div-select .col-md-4 {
+            height: 130px;
+        }
+
+        .az-picture-page-type-div-img {
+            height: 80px;
+        }
+
+        {% else %}
+        .az-picture-page-sidebar-type-div-select .col-md-4 {
+            height: 100px;
+        }
+
+        .az-picture-page-type-div-img {
+            height: 50px;
+        }
+
+        {% endif %}
+    </style>
+{% endif %}

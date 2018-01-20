@@ -29,16 +29,21 @@
         {% if thicknesses %}
         {% set ind = 1 %}
         {% for thickness in thicknesses %}
-        <div class="col-md-4 container-fluid">
+        <div class="col-md-4 container-fluid az-picture-page-sidebar-thickness-block-selector {% if ind == 1 %}active{% endif %}"
+             data-id="{{ thickness.id }}">
+            <div class="row">
+                <div class="col-md-12 text-center az-picture-page-material-banner-div-img">
+                    <img src="/files/underframes/small_thumb/{{ thickness.image.getFilename() }}" class="az-picture-page-thickness-img"/>
+                </div>
+            </div>
             <div class="row text-center">
                 <div class="col-md-12">
-                    <img src="/files/underframes/small_thumb/{{ thickness.image.getFilename() }}" class="az-picture-page-material-img"/>
                     <span class="az-picture-page-type-img-text">{{ thickness.depth }}</span>
                 </div>
             </div>
             <div class="row text-center az-picture-page-material-radio-div">
                 <div class="col-md-12">
-                    <input type="radio" class="btn z-picture-page-thickness"
+                    <input type="radio" class="btn az-picture-page-thickness"
                            value="{{ thickness.depth }} см"
                            title="az-picture-page-thickness"
                            data-ratio="{{ thickness.ratio }}"

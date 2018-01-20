@@ -323,6 +323,7 @@ footer {
 .az-sidebar-header:hover {
     background-color: #c22439;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .cycle-slideshow, .cycle-slideshow * {
@@ -612,10 +613,6 @@ footer {
 
 }
 
-.az-picture-page-sidebar-thickness-div-select img {
-    width: 90%;
-}
-
 .az-picture-page-sidebar-thickness-div-select .col-md-4 {
     height: 100px;
     padding: 4px 5px;
@@ -629,7 +626,7 @@ footer {
 
 }
 
-.az-picture-page-sidebar-thickness-div-select .col-md-4:active {
+.az-picture-page-sidebar-thickness-div-select .col-md-4.active {
     border: 1px solid #fd1200;
     cursor: pointer;
     padding-top: 3px;
@@ -654,6 +651,10 @@ footer {
 
 .az-picture-page-material-banner-img {
     width: 100%;
+    padding: 2px;
+}
+
+.az-picture-page-thickness-img {
     padding: 2px;
 }
 
@@ -728,7 +729,7 @@ body {
 }
 
 .az-header-top {
-    padding: 20px 0 0 20px;
+    padding: 20px 0 0 10px;
 }
 
 .az-logo-title-text-div {
@@ -747,7 +748,7 @@ body {
 
 /** header contacts**/
 .az-header-address-div {
-    padding-left: 25px;
+    padding: 0 30px 0 60px;
 }
 
 .az-header-address-container {
@@ -766,9 +767,10 @@ body {
 
 /** basket**/
 
-.az-header-basket-count-text {
+.az-header-basket-count-text .col-md-12 {
     color: #b4b4b4;
-    font-size: 13px;
+    font-size: 12px;
+    padding: 0 5px;
 }
 
 /**search**/
@@ -1519,7 +1521,9 @@ footer {
 .az-main-page-header-top-cells {
     margin-top: 20px;
 }
-
+.az-main-page-header-icon-cell {
+    padding: 0;
+}
 .az-basket-title-img {
     width: 40px;
     height: 40px;
@@ -1608,7 +1612,6 @@ footer {
     padding-left: 15px;
     border-right: 1px solid #e6e6e6;
     display: inline-block;
-    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALAQMAAACTYuVlAAAABlBMVEUwrSMwrSMGiLPTAAAAAXRSTlMAQObYZgAAABJJREFUeF5j4GNAoP8PIAhZEABkXgYOXW/zqwAAAABJRU5ErkJggg==') no-repeat 0% 60%;
 }
 
 .az-rewiews-date {
@@ -2121,6 +2124,11 @@ button.close:focus, .close:hover {
     text-decoration: none;
     cursor: pointer;
     color: #333;
+    padding: 0 0 0 5px;
+}
+
+.az-header-download-icon{
+    padding: 0;
 }
 
 .az-header-download:hover {
