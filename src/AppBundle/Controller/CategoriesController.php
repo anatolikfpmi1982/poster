@@ -41,6 +41,10 @@ class CategoriesController extends FrontController
         $queryBuilder = $this->em->getRepository('AppBundle:Picture')->getActivePicturesFromCategory($category);
         $query = $queryBuilder->getQuery();
 
+        //add multiple popularity
+        if($request->query->get('sort') == 'p.popularity') {
+            $_GET['sort'] = 'p.isTop+p.popularity';
+        }
 
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
