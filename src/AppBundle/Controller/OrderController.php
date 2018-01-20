@@ -55,7 +55,11 @@ class OrderController extends FrontController {
         $cart = $this->get( 'app.session_manager' )->getCart();
         if( $cart) {
             foreach($cart as $k => $v) {
-                $cart[$k]['picture'] = $em->getRepository('AppBundle:Picture')->findOneBy(['isActive' => true, 'id' => $v['picture_id']]);
+                if(!empty($v['picture_id'])) {
+                    $cart[$k]['picture'] = $em->getRepository('AppBundle:Picture')->findOneBy(['isActive' => true, 'id' => $v['picture_id']]);
+                } else {
+                    $cart[$k]['own_picture'] = $em->getRepository('AppBundle:OwnPicture')->findOneBy(['id' => $v['own_picture_id']]);
+                }
                 $totalPrice += (float)$v['price'];
             }
         } else {
@@ -100,8 +104,13 @@ class OrderController extends FrontController {
                 $record->setPrice($v['price']);
                 $record->setType($v['type_id']);
 
-                $picture = $em->getRepository('AppBundle:Picture')->findOneBy(['id' => $v['picture_id']]);
-                $record->setPicture($picture);
+                if($v['own_picture_id']) {
+                    $picture = $em->getRepository('AppBundle:OwnPicture')->findOneBy(['id' => $v['own_picture_id']]);
+                    $record->setOwnPicture($picture);
+                } else {
+                    $picture = $em->getRepository('AppBundle:Picture')->findOneBy(['id' => $v['picture_id']]);
+                    $record->setPicture($picture);
+                }
 
                 if($v['type_id'] == 'banner') {
                     $bannerMaterial = $em->getRepository('AppBundle:BannerMaterial')->findOneBy(['id' => $v['banner_material_id']]);

@@ -192,7 +192,7 @@ class Picture implements ImageInterface
      *
      * @ORM\Column(name="popularity", type="integer", nullable=true, options={"default" : 0})
      */
-    private $popularity;
+    private $popularity = 0;
 
     /**
      * Picture constructor.

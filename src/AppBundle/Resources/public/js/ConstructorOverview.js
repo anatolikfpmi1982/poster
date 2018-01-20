@@ -14,9 +14,10 @@ var ConstructorOverview = new function () {
     this.thickness_ratio = 0;
     this.square = 0;
     this.perimeter = 0;
-    this.panelNumber = 0;
 
     // constructor panel
+    this.panelNumber = 0;
+    this.panelNumberVertical = 0;
     this.padding_left = 20;
     this.padding_top = 10;
     this.right_width = 5;
@@ -24,6 +25,10 @@ var ConstructorOverview = new function () {
     this.left_deviation = 40;
     this.panel_type = 'horizontal';
     this.panelSizes = [];
+    this.panelActiveBlockNum = 0;
+    this.panelSettings = {};
+    this.panelMainLeft = this.left_deviation;
+    this.panelWidthForMultiVertical = 0;
 
     this.init = function () {
         this.type = $("input.az-picture-page-constructor-type-radio:checked").data('title');
@@ -80,64 +85,134 @@ var ConstructorOverview = new function () {
             case 'Панно':
                 banner.hide();
                 picture.hide();
-                this.showPanelMonitor();
+                this.getPanelInfo();
+                this.buildPanelMonitor();
                 panel.show();
                 break;
         }
     };
 
-    this.showPanelMonitor = function () {
+    this.buildPanelMonitor = function () {
+        var settings = this.panelSettings,
+            that = this,
+            monitor = $('div.az-picture-page-panel-img');
+
+        monitor.html('');
+        this.panelMainLeft = this.left_deviation;
+        this.panelSizes = [];
+        that.panelActiveBlockNum = 0;
+        Object.keys(settings).map(function (objectKey, index) {
+            var value = settings[objectKey];
+            that.showPanelMonitor(value.type, value.data, index);
+            if (that.panel_type == 'multi' && value.type == 'vertical') {
+                that.panelMainLeft = that.panelMainLeft + that.padding_left + that.panelWidthForMultiVertical;
+            }
+        });
+        this.showPanelSizes();
+    };
+
+    this.showPanelMonitor = function (type, settings, mainIndex) {
+
         var imgPath = $('#input-az-picture-page-panel-img').val(),
-            monitor = $('div.az-picture-page-panel-img'),
             picWidth = parseInt($('#input-az-picture-page-img-thumb-width').val()),
             picHeight = parseInt($('#input-az-picture-page-img-thumb-height').val()),
             deviation = 0,
-            deviation_top = 0;
-        monitor.html('');
-
-        var settings = this.getPanelInfo(),
-            right_width = this.right_width,
+            deviation_top = 0,
+            monitor = $('div.az-picture-page-panel-img');
+        var right_width = this.right_width,
             padding_left = this.padding_left,
             padding_top = this.padding_top,
             top_deviation = this.top_deviation,
-            left_deviation = this.left_deviation,
-            panel_type = this.panel_type,
-            deviationRight = 0 - right_width,
+            panel_type = type,
+            deviationRight = 0 - this.right_width,
             screen_height = panel_type == 'horizontal' ?
                 (picHeight + (2 * top_deviation) ) :
-                (picHeight + (2 * top_deviation) + this.panelNumber * top_deviation ),
-            mainLeft = left_deviation,
+                (picHeight + (2 * top_deviation) + this.panelNumberVertical * top_deviation ),
             mainTop = top_deviation,
-            panelSizes = [],
-            size = this.size.split('x');
+            size = this.size.split('x'),
+            that = this;
 
         Object.keys(settings).map(function (objectKey, index) {
+            that.panelActiveBlockNum++;
             var value = settings[objectKey],
                 newDivString = '<div></div>',
                 newWidth = Math.round((value.width * picWidth ) / 100),
-                newHeight = Math.round((value.height * picHeight ) / 100);
-            console.log(value);
+                newHeight = Math.round((value.height * picHeight ) / 100),
+                showWidth = 0,
+                showHeight = 0,
+                ind = 0;
 
             switch (panel_type) {
                 case 'vertical':
-                    break;
-                case 'square':
+                    if (that.panel_type != 'multi') {
+                        showHeight = Math.round((value.width * picHeight ) / 100);
+                        newHeight = Math.round((value.height * showHeight ) / 100);
+                    } else {
+                        showHeight = picHeight;
+                        newHeight = Math.round((value.height * showHeight ) / 100);
+                    }
+                    showWidth = picWidth;
+                    ind = index;
+                    deviation_top = 0;
+                    while (ind > 0) {
+                        if (settings[ind - 1] != undefined) {
+                            deviation_top = deviation_top - Math.round((settings[ind - 1].height * showHeight ) / 100);
+                        }
+                        ind--;
+                    }
                     break;
                 case 'horizontal':
                 default:
+                    showWidth = Math.round((value.height * picWidth ) / 100);
+                    newWidth = Math.round((value.width * showWidth ) / 100);
+                    showHeight = newHeight;
                     mainTop = top_deviation + (value.up > 0 ? Math.round((value.up * screen_height ) / 100) : 0);
-                    deviationRight = deviationRight + newWidth;
+                    ind = index;
+                    deviation = 0;
+                    deviationRight = 0;
+                    while (ind > 0) {
+                        if (settings[ind - 1] != undefined) {
+                            deviation = deviation - Math.round((settings[ind - 1].width * showWidth ) / 100);
+                            deviationRight = deviationRight + Math.round((settings[ind - 1].width * showWidth ) / 100);
+                        }
+                        ind--;
+                    }
                     break;
             }
 
+            if (that.panel_type == 'multi') {
+                deviation = 0;
+                deviationRight = 0;
+                ind = mainIndex;
+                var cause = '';
+                while (ind > 0) {
+                    cause = that.panelSettings[ind - 1] != undefined;
+                    cause = cause && that.panelSettings[ind - 1]['data'] != undefined;
+                    cause = cause && that.panelSettings[ind - 1]['type'] != undefined;
+                    if (cause) {
+                        if (that.panelSettings[ind - 1]['type'] == 'vertical' && that.panelSettings[ind - 1]['data'][0] != undefined) {
+                            deviation = deviation - Math.round((that.panelSettings[ind - 1]['data'][0].width * showWidth ) / 100);
+                            deviationRight = deviationRight + Math.round((that.panelSettings[ind - 1]['data'][0].width * showWidth ) / 100);
+                        } else {
+                            Object.keys(that.panelSettings[ind - 1]['data']).map(function (key, index) {
+                                deviation = deviation - Math.round((that.panelSettings[ind - 1]['data'][key].width * showWidth ) / 100);
+                                deviationRight = deviationRight + Math.round((that.panelSettings[ind - 1]['data'][key].width * showWidth ) / 100);
+                            });
+                        }
+
+                    }
+                    ind--;
+                }
+            }
+
             var divMain = $(newDivString);
-            divMain.addClass('module');
-            divMain.css('left', mainLeft);
+            divMain.addClass('module').addClass('constructor-block' + that.panelActiveBlockNum);
+            divMain.css('left', that.panelMainLeft);
             divMain.css('top', mainTop);
             divMain.css('width', newWidth + 'px');
             divMain.css('height', newHeight + 'px');
             divMain.css('background-image', 'url(' + imgPath + ')');
-            divMain.css('background-size', picWidth + 'px ' + picHeight + 'px');
+            divMain.css('background-size', showWidth + 'px ' + showHeight + 'px');
             divMain.css('background-position', deviation + 'px ' + deviation_top + 'px');
 
             var divRight = $(newDivString);
@@ -145,7 +220,7 @@ var ConstructorOverview = new function () {
             divRight.css('width', right_width + 'px');
             divRight.css('height', (newHeight - right_width) + 'px');
             divRight.css('background-image', 'url(' + imgPath + ')');
-            divRight.css('background-size', picWidth + 'px ' + picHeight + 'px');
+            divRight.css('background-size', showWidth + 'px ' + showHeight + 'px');
             divRight.css('background-position', '-' + deviationRight + 'px ' + deviation_top + 'px');
             divRight.css('right', '0');
             divRight.css('box-shadow', 'rgba(0, 0, 0, 0.4) -3px 0px 3px');
@@ -159,7 +234,7 @@ var ConstructorOverview = new function () {
             divDown.addClass('edge edgeb');
             divDown.css('height', right_width + 'px');
             divDown.css('background-image', 'url(' + imgPath + ')');
-            divDown.css('background-size', picWidth + 'px ' + picHeight + 'px');
+            divDown.css('background-size', showWidth + 'px ' + showHeight + 'px');
             divDown.css('bottom', '0');
             divDown.css('box-shadow', 'rgba(0, 0, 0, 0.4) 0 3px 3px');
             divDown.css('background-position', '-' + deviationRight + 'px 5px');
@@ -169,23 +244,20 @@ var ConstructorOverview = new function () {
 
             switch (panel_type) {
                 case 'vertical':
-                    deviation_top = deviation_top - newHeight;
                     mainTop = mainTop + newHeight + padding_top;
-                    break;
-                case 'square':
-                    deviation_top = deviation_top - newHeight;
+                    if (that.panel_type == 'multi') {
+                        that.panelWidthForMultiVertical = newWidth;
+                    }
                     break;
                 case 'horizontal':
                 default:
-                    mainLeft = mainLeft + padding_left + newWidth;
-                    deviation = deviation - newWidth;
+                    that.panelMainLeft = that.panelMainLeft + padding_left + newWidth;
                     break;
             }
 
-            panelSizes[index] = Math.round((value.width * size[0] ) / 100) + 'x' + Math.round((value.width * size[1] ) / 100);
+            that.panelSizes[that.panelActiveBlockNum] = Math.round((value.width * size[0] ) / 100) + 'x' + Math.round((value.height * size[1] ) / 100);
         });
-        this.panelSizes = panelSizes;
-        this.showPanelSizes();
+
         $('.az-picture-page-picture-main-panel-div').css('height', screen_height + 'px');
 
     };
@@ -194,21 +266,49 @@ var ConstructorOverview = new function () {
         var panel_code = $('input#az-picture-constructor-module-code-selected').val(),
             panelObject = {},
             typeArr = panel_code.split('|'),
-            panelArray = typeArr[1] != undefined ? typeArr[1].split(':') : typeArr[0].split(':'),
-            count = 0;
+            panelArray = [],
+            count = 0,
+            that = this;
+        this.panelNumberVertical = 0;
+        this.panelNumber = 0;
 
-        this.panel_type = typeArr[1] != undefined ? typeArr[0] : 'horizontal';
+        this.panel_type = typeArr[0];
+        typeArr.shift();
+        var str = typeArr.join('|');
+        var panelBlocks = str.split(';');
 
-        panelArray.forEach(function (el, index) {
-            var data = el.split('-');
-            panelObject[index] = {};
-            panelObject[index]['width'] = data[0];
-            panelObject[index]['height'] = data[1];
-            panelObject[index]['up'] = data[2];
-            count++;
+        panelBlocks.forEach(function (el, indexMain) {
+            var element = el.replace(new RegExp('{', 'g'), '');
+            element = element.replace(new RegExp('}', 'g'), '');
+            var types = element.split('|'),
+                numVerticalElements = 0;
+
+            panelObject[indexMain] = {};
+            panelObject[indexMain]['type'] = types[0];
+            panelObject[indexMain]['data'] = {};
+
+            panelArray = types[1].split(':');
+            panelArray.forEach(function (el, index) {
+                var data = el.split('-');
+                panelObject[indexMain]['data'][index] = {};
+                panelObject[indexMain]['data'][index]['width'] = data[0];
+                panelObject[indexMain]['data'][index]['height'] = data[1];
+                panelObject[indexMain]['data'][index]['up'] = data[2];
+                count++;
+                that.panelNumber++;
+                if (panelObject[indexMain]['type'] == 'vertical') {
+                    numVerticalElements++;
+                }
+            });
+
+            if (panelObject[indexMain]['type'] == 'vertical' && that.panel_type == 'multi'
+                && that.panelNumberVertical < numVerticalElements) {
+                that.panelNumberVertical = numVerticalElements;
+            } else if (panelObject[indexMain]['type'] == 'vertical' && that.panel_type == 'single') {
+                that.panelNumberVertical = numVerticalElements;
+            }
         });
-        this.panelNumber = count;
-        return panelObject;
+        this.panelSettings = panelObject;
     };
 
     this.showPanelSizes = function () {
@@ -218,7 +318,7 @@ var ConstructorOverview = new function () {
         this.panelSizes.forEach(function (element, index, array) {
             mainEl = $('<div class="row"></div>');
             subEl = $('<div class="col-12 az-picture-page-sidebar-size-panel-div-content-item"></div>');
-            subEl.html((index + 1) + '. ' + element + ' см');
+            subEl.html(index + '. ' + element + ' см');
             subEl.appendTo(mainEl);
 
             mainEl.appendTo(contentEl);

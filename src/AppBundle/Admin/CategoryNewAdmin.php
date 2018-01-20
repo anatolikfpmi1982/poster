@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Doctrine\ORM\EntityManager;
 
@@ -105,6 +106,11 @@ class CategoryNewAdmin extends AbstractAdmin
             ->add('tags', null, ['label' => 'Тег'])
             ->add('isActive', null, ['label' => 'Показывать'])
         ;
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->add('generate', $this->getRouterIdParameter().'/generate');
     }
 
     /**

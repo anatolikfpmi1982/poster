@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityRepository;
 class ReviewRepository extends EntityRepository {
 
     const LATEST_OFFSET = 0;
-    const LATEST_LIMIT = 10;
+    const LATEST_LIMIT = 5;
 
     /**
      * @return array

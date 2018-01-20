@@ -2,14 +2,14 @@
 namespace AppBundle\EventSubscriber;
 
 use AppBundle\Entity\Image;
-use AppBundle\Entity\Picture;
+use AppBundle\Entity\OwnPicture;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class PictureSubscriber
+ * Class OwnPictureSubscriber
  */
-class PictureSubscriber
+class OwnPictureSubscriber
 {
     /**
      * @var ContainerInterface
@@ -31,17 +31,10 @@ class PictureSubscriber
     public function postPersist(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-        if($entity instanceof Picture) {
+        if($entity instanceof OwnPicture) {
             if($image = $entity->getImage()) {
-                $form = $this->container->get('helper.imageformidentifier')->identify($entity->getImage());
-                if($formEntity = $this->container->get('doctrine.orm.entity_manager')->getRepository('AppBundle:PictureForm')->findOneBy(['serviceName' => $form])) {
-                    $entity->setForm($formEntity);
-                }
-
                 $this->createResize($entity, $image);
             }
-            $entity->generateCode();
-            $entity->setSlug($this->container->get('helper.slugcreator')->createSlug($entity->getTitle()));
         }
     }
 
@@ -51,19 +44,18 @@ class PictureSubscriber
     public function postUpdate(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-        if($entity instanceof Picture) {
+        if($entity instanceof OwnPicture) {
             if($image = $entity->getImage()) {
                 $this->createResize($entity, $image);
             }
-            $entity->setSlug($this->container->get('helper.slugcreator')->createSlug($entity->getTitle()));
         }
     }
 
     /**
-     * @param Picture $picture
+     * @param OwnPicture $picture
      * @param Image $image
      */
-    private function createResize(Picture $picture, Image $image) {
+    private function createResize(OwnPicture $picture, Image $image) {
 
         if($image->getOriginFile() && file_exists($image->getOriginFile())) {
             $this->container->get('helper.imageresizer')
@@ -73,8 +65,7 @@ class PictureSubscriber
             $this->container->get('helper.imageresizer')
                 ->resizeImage($image->getOriginFile(), $image->getBasePath(), $picture::IMAGE_HEIGHT, $picture::IMAGE_WIDTH);
             $this->container->get('helper.imageresizer')
-                ->resizeImage($image->getOriginFile(), $image->getSmallThumbBasePath(), $picture::THUMB_SMALL_IMAGE_HEIGHT, $picture::THUMB_SMALL_IMAGE_WIDTH);
-            unlink($image->getOriginFile());
+                ->resizeImage($image->getOriginFile(), $image->getSmallThumbBasePath(), $image::THUMB_SMALL_IMAGE_HEIGHT, $image::THUMB_SMALL_IMAGE_WIDTH);
         }
     }
 }

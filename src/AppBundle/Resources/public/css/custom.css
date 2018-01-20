@@ -106,11 +106,13 @@ body {
     border-left: 4px solid #fd1200;
     border-bottom: 1px solid #fd1200;
 }
+
 .az-sidebar-subcategory-first {
     margin: 0;
     padding: 0;
 
 }
+
 .az-sidebar-subcategory-item:hover, .az-sidebar-subcategory-item:active {
     cursor: pointer;
     color: #fd1200;
@@ -556,30 +558,33 @@ footer {
     font-size: 12px;
 
 }
+
 .az-picture-page-sidebar-type-div-select .col-md-4 {
     padding-bottom: 0;
-    padding-left:  0;
+    padding-left: 0;
     padding-right: 0;
     text-align: center;
-    height: 120px;
+    height: 130px;
     padding-top: 3px;
 }
-.az-picture-page-sidebar-type-div-select .col-md-4:hover{
+
+.az-picture-page-sidebar-type-div-select .col-md-4:hover {
     border: 1px solid #fd1200;
     cursor: pointer;
-    height: 120px;
+    height: 130px;
     padding-top: 3px;
 
 }
-.az-picture-page-sidebar-type-div-select .col-md-4:active{
+
+.az-picture-page-sidebar-type-div-select .col-md-4.active {
     border: 1px solid #fd1200;
     cursor: pointer;
-    height: 120px;
+    height: 130px;
     padding-top: 3px;
 
 }
 
-.az-picture-page-sidebar-type-div-frame-mat img{
+.az-picture-page-sidebar-type-div-frame-mat img {
     border: 3px #333 solid;
     background-color: #F5F3CD;
     margin: 0 auto;
@@ -593,14 +598,14 @@ footer {
     height: 100px;
     padding-top: 4px;
 }
-.az-picture-page-sidebar-material-div-select .col-md-4:hover{
+
+.az-picture-page-sidebar-material-div-select .col-md-4:hover {
     border: 1px solid #fd1200;
     cursor: pointer;
     padding-top: 3px;
 }
 
-
-.az-picture-page-sidebar-material-div-select .col-md-4:active{
+.az-picture-page-sidebar-material-div-select .col-md-4.active {
     border: 1px solid #fd1200;
     cursor: pointer;
     padding-top: 3px;
@@ -610,23 +615,26 @@ footer {
 .az-picture-page-sidebar-thickness-div-select img {
     width: 90%;
 }
+
 .az-picture-page-sidebar-thickness-div-select .col-md-4 {
     height: 100px;
     padding: 4px 5px;
 
 }
 
-.az-picture-page-sidebar-thickness-div-select .col-md-4:hover{
+.az-picture-page-sidebar-thickness-div-select .col-md-4:hover {
     border: 1px solid #fd1200;
     cursor: pointer;
     padding: 4px 5px;
 
 }
-.az-picture-page-sidebar-thickness-div-select .col-md-4:active{
+
+.az-picture-page-sidebar-thickness-div-select .col-md-4:active {
     border: 1px solid #fd1200;
     cursor: pointer;
     padding-top: 3px;
 }
+
 .az-picture-page-sidebar-price {
     font-size: 30px;
 }
@@ -638,12 +646,25 @@ footer {
 .az-picture-page-sidebar-size-div-body {
     padding: 5px;
 }
-.az-picture-page-type-img{
+
+.az-picture-page-type-img {
     width: 90%;
-    padding: 6px;
+    padding: 2px;
 }
+
+.az-picture-page-material-banner-img {
+    width: 100%;
+    padding: 2px;
+}
+
 .az-picture-page-type-div-img {
-    height: 70px;
+    height: 80px;
+}
+
+.az-picture-page-material-banner-div-img {
+    height: 40px;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .btn.az-picture-page-sidebar-size-select, .btn.az-picture-page-mat-type-select, .btn.az-picture-page-mat-size-select {
@@ -1339,10 +1360,11 @@ footer {
     font-size: 9px;
 }
 
-.az-picture-page-hint-modal-div{
+.az-picture-page-hint-modal-div {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     text-align: justify;
-    padding: 15px;}
+    padding: 15px;
+}
 
 .az-picture-page-sidebar-size-div-left {
     /*padding-left: 0;*/
@@ -1930,7 +1952,6 @@ footer {
     color: #333;
 }
 
-
 .az-page-category-main-section-div {
     padding-top: 0;
 }
@@ -2108,12 +2129,13 @@ button.close:focus, .close:hover {
     color: #fd1200;
 }
 
-.az-comment{
+.az-comment {
     font-style: italic;
     font-size: 12px;
     text-align: justify;
 }
-.az-comment-bottom{
+
+.az-comment-bottom {
     font-style: italic;
     font-size: 10px;
     text-align: justify;
@@ -2123,9 +2145,9 @@ button.close:focus, .close:hover {
 .az-form-choose-file {
     display: block;
     border: 1px solid #eee;
-    color:#696969;
+    color: #696969;
     width: 70%;
-    float:left;
+    float: left;
 }
 
 .az-form-download-file {
@@ -2133,11 +2155,13 @@ button.close:focus, .close:hover {
     position: relative;
     width: 20%;
 }
+
 .az-form-btn-download {
     display: block;
     width: 100%;
-    margin-top:10px;
+    margin-top: 10px;
 }
+
 .navbar-form {
     padding: 10px;
 
@@ -2290,6 +2314,7 @@ button.close:focus, .close:hover {
 .az-main-frames-div:hover {
     float: left;
     position: relative;
+    border: 1px solid #fd1200;
     border-left: 1px solid #fd1200;
     border-right: 1px solid #fd1200;
     border-bottom: 1px solid #fd1200;
@@ -2430,7 +2455,7 @@ button.close:focus, .close:hover {
     margin: 15px 0;
 }
 
-.az-btn-delayed-image {
+.az-btn-delayed-image, .az-btn-myfiles-image {
     border: 1px solid #fd1200;
     background-color: #fff;
     border-radius: inherit;
@@ -2440,12 +2465,13 @@ button.close:focus, .close:hover {
 }
 
 /**cartsmall-header**/
-.az-ordersmall-cart{
+.az-ordersmall-cart {
     border: 1px solid #e6e6e6;
     margin: 10px;
 
 }
-.az-ordersmall-cart-modal{
+
+.az-ordersmall-cart-modal {
     font-size: 11px;
 }
 
@@ -2457,13 +2483,14 @@ button.close:focus, .close:hover {
     text-transform: lowercase;
 }
 
-.btn-group-xs > .btn, .btn-xs:hover{
+.btn-group-xs > .btn, .btn-xs:hover {
     background-color: #ffffff;
     border: 1px solid #333;
     color: #333;
     background-image: none;
     text-transform: lowercase;
 }
+
 .pagination {
     margin: 10px 0;
 }
@@ -2485,4 +2512,13 @@ button.close:focus, .close:hover {
 
 #myBtn:hover {
     background-color: #555;
+}
+
+.az-picture-page-sidebar-size-panel-div-content-item {
+    padding-left: 10px;
+    font-size: 10px;
+}
+
+.nounderline {
+    text-decoration: none;
 }

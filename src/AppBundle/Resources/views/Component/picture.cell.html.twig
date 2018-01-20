@@ -41,8 +41,8 @@
         {% set limitCategory = 5 %}
         {% set catId = 0 %}
     {% endif %}
-    {% if picture.categories is defined and picture.categories and picture.categories and (( catId > 0 and picture.categories|length > 1 ) or ( catId == 0 and picture
-    .categories|length > 0 )
+    {% if picture.categories is defined and picture.categories and picture.categories and (( catId > 0 and picture.categories|length > 1 ) or
+    ( catId == 0 and picture.categories|length > 0 )
     ) %}
         <div class="row">
             <div class="az-main-popular-item-header-category">
@@ -62,7 +62,13 @@
                 <div class="col-md-6 text-right container-fluid az_btn_postpone">
                     <div class="row">
                         <div class="col-md-12">
-                            <button class="btn_az-main-popular_defer defer-bnt" data-id="{{ picture.id }}">Отложить</button>
+                            {% if deferredItems is defined and  deferredItems and picture.id in deferredItems %}
+                                <a href="{{ path('deferred') }}" class="btn_az-main-popular_defer">Отложено</a>
+                            {% else %}
+                                <button class="btn_az-main-popular_defer defer-bnt" data-id="{{ picture.id }}">
+                                    Отложить
+                                </button>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="row az-main-popular-item-header-buttons">
@@ -72,7 +78,8 @@
                     </div>
                 </div>
                 <div class="col-md-6 az_btn_order text-left">
-                    <button class="btn_az-main-popular_order">Выбрать <br/>тип картины,<br/> размер, цена, <br/>заказать</button>
+                    <a href="{{ path('picture', {'id': picture.id}) }}"
+                       class="btn_az-main-popular_order">Выбрать <br/>тип картины,<br/> размер, цена, <br/>заказать</a>
                 </div>
 
             </div>

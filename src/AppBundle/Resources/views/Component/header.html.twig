@@ -30,92 +30,113 @@
             </div>
             <div class="col-md-2 container-fluid az-header-top">
                 {% if site_settings.enable_own_picture is defined and site_settings.enable_own_picture %}
-                    <div class="row">
-                        <div class="col-md-12 az-header-download" data-toggle="modal" data-target="#myModal">
-                            <div class="row">
-                        <div class="col-md-3">
-                            <img src="{{ asset('bundles/app/images/download.png') }}" class="az-download-title-img az-basket-title-img"
-                                 title="{% trans %}download{% endtrans %}"/>
+                <div class="row">
+                    <div class="col-md-12 az-header-download" data-toggle="modal" data-target="#myModal">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img src="{{ asset('bundles/app/images/download.png') }}"
+                                     class="az-download-title-img az-basket-title-img"
+                                     title="{% trans %}download{% endtrans %}"/>
+                            </div>
+                            <div class="col-md-9 container az-header-download-div">
+                                Загрузить изображения
+                            </div>
                         </div>
-                        <div class="col-md-9 container az-header-download-div">
-                            Загрузить изображения</div></div></div></div>
-                            <!-- Form download -->
-                            <div id="myModal" class="modal fade" role="dialog">
-                                <div class="modal-dialog az-feedback-modal">
+                    </div>
+                </div>
+                <!-- Form download -->
+                <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog az-feedback-modal">
 
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">+</button>
-                                            <form>
-                                                <div class="col-md-12 form-line">
-                                                    <h3>Загрузка своего фото</h3>
-                                                    <div class="form-group az-comment">
-                                                        Вы можете загрузить свое фото и сделать из него постер любого размера и в любом оформлении.
-                                                        Загрузка фото может занять продолжительное время, обязательно дождитесь окончания процесса!
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label  class="az-form-choose-file" for="exampleInputFile">Выберете файл на компьютере</label>
-                                                        <input class="az-form-download-file" type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-                                                        <small id="fileHelp" class="form-text text-muted"></small>
-                                                    </div>
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">+</button>
+                                <form>
+                                    <div class="col-md-12 form-line">
+                                        <h3>Загрузка своего фото</h3>
+                                        <div class="form-group az-comment">
+                                            Вы можете загрузить свое фото и сделать из него постер любого размера и в
+                                            любом оформлении.
+                                            Загрузка фото может занять продолжительное время, обязательно дождитесь
+                                            окончания процесса!
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="az-form-choose-file" for="exampleInputFile">Выберете файл на
+                                                компьютере</label>
+                                            <input class="az-form-download-file" type="file" class="form-control-file"
+                                                   accept="image/*" aria-describedby="fileHelp">
+                                            <small id="fileHelp" class="form-text text-muted"></small>
+                                        </div>
 
 
-                                                    <div class="form-group az-form-btn-download">
+                                        <div class="form-group az-form-btn-download">
 
-                                                        <button type="button" class="btn btn-default submit">Загрузить</button>
-
-                                                    </div>
-                                                    <div class="form-group az-comment-bottom">
-                                                        Формат загружаемого файла <span style="color: #fd1200">jpeg, gif или png</span> , максимальный размер <span style="color: #fd1200">50 Mb</span>.
-                                                        Загруженная Вами фотография будет удалена автоматически через две недели после оформления заказа, либо через две недели
-                                                        после загрузки, если Вы так и не оформите заказ.
-                                                    </div>
-                                                </div>
-                                            </form>
+                                            <button type="button" class="btn btn-default submit">Загрузить</button>
 
                                         </div>
+                                        <div class="form-group az-comment-bottom">
+                                            Формат загружаемого файла <span
+                                                    style="color: #fd1200">jpeg, gif или png</span> , максимальный
+                                            размер <span style="color: #fd1200">50 Mb</span>.
+                                            Загруженная Вами фотография будет удалена автоматически через две недели
+                                            после оформления заказа, либо через две недели
+                                            после загрузки, если Вы так и не оформите заказ.
+                                        </div>
                                     </div>
+                                </form>
 
-                                </div>
+                            </div>
+                        </div>
+
+                    </div>
 
 
-                {% endif %}
-                            </div></div>
+                    {% endif %}
+                </div>
+            </div>
 
             <!-- Basket -->
             <div class="col-md-2 container-fluid text-right">
                 <div class="row text-right">
                     <div class="col-md-3"></div>
                     <div class="col-md-3 az-main-page-header-top-cells az-main-page-header-icon-cell">
-                        <img src="{{ asset('bundles/app/images/basket.png') }}" class="az-basket-title-img" title="{% trans %}basket{% endtrans %}"/>
+                        <img src="{{ asset('bundles/app/images/basket.png') }}" class="az-basket-title-img"
+                             title="{% trans %}basket{% endtrans %}"/>
                     </div>
-                    <div class="col-md-6 container text-left az-main-page-header-top-cells az-header-basket-div" >
+                    <div class="col-md-6 container text-left az-main-page-header-top-cells az-header-basket-div">
                         <div class="row az-header-basket-container az-header-basket-text">
-                            <div class="col-md-12 az-header-download" data-toggle="modal" data-target="#myModal2" >Корзина</div>
+                            <div class="col-md-12 az-header-download" data-toggle="modal" data-target="#myModal2">
+                                Корзина
+                            </div>
 
-                                    <!-- Form basket -->
-                                    <div id="myModal2" class="modal fade" role="dialog">
-                                        <div class="modal-dialog az-ordersmall-cart-modal">
+                            <!-- Form basket -->
+                            <div id="myModal2" class="modal fade" role="dialog">
+                                <div class="modal-dialog az-ordersmall-cart-modal">
                                     <!-- Modal content-->
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal">X</button>
-                                            <form id="callback">
+                                            <form id="cart">
                                                 <div class="col-md-12 form-line">
                                                     <h4>Моя корзина</h4>
                                                     <div class="form-group ">
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 Товаров 1
-                                                                на сумму:  руб.</div>
+                                                                на сумму: руб.
+                                                            </div>
                                                             <div class="col-md-6">
-                                                            <button class="btn btn-sm" data-id="">Удалить из корзины</button>
-                                                            </div></div></div>
+                                                                <button class="btn btn-sm" data-id="">Удалить из
+                                                                    корзины
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div class="form-group">
                                                         <div class="row az-ordersmall-cart">
                                                             <div class="col-md-3">
-                                                                <a  class="az-order-cart-title" href=""> Картина</a>
+                                                                <a class="az-order-cart-title" href=""> Картина</a>
                                                             </div>
                                                             <div class="col-md-5">Название </br>
                                                                 Цена
@@ -124,16 +145,19 @@
                                                                 <button class="btn-xs" data-id="">Удалить</button>
                                                             </div>
 
-                                                        </div></div>
+                                                        </div>
+                                                    </div>
 
                                                     <div class="form-group">
                                                         <div class="row">
                                                             <div class="col-md-12">Оформление заказа
-                                                            </div></div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
 
                                                 </div>
-
-                                                    </div></form>
+                                            </form>
 
                                         </div>
                                     </div>
@@ -146,11 +170,13 @@
                         <div class="row az-header-basket-container az-header-basket-count-text">
                             <div class="col-md-12">Товаров: <span class="az-header-basket-count">0</span></div>
                         </div>
-                           </div>
+                    </div>
                 </div>
                 <div class="row az-header-address-container az-header-feedback-btn-div">
                     <div class="col-md-12">
-                        <button class="btn btn-bg az-header-feedback-btn" data-toggle="modal" data-target="#myModal1">Обратный звонок</button>
+                        <button class="btn btn-bg az-header-feedback-btn" data-toggle="modal" data-target="#myModal1">
+                            Обратный звонок
+                        </button>
                         <!-- Form itself -->
                         <div id="myModal1" class="modal fade" role="dialog">
                             <div class="modal-dialog az-feedback-modal">
@@ -158,25 +184,30 @@
                                 <!-- Modal content-->
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">X</button>
+                                        <button type="button" class="close" data-dismiss="modal">х</button>
                                         <form id="callback">
                                             <div class="col-md-12 form-line">
                                                 <h3>Заказать звонок</h3>
                                                 <div class="form-group ">
-                                                    Нет времени или возможности позвонить? Оставьте свой номер телефона и наш менеджер свяжется с вами в течение 15 минут
+                                                    Нет времени или возможности позвонить? Оставьте свой номер телефона
+                                                    и наш менеджер свяжется с вами в течение 15 минут
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="full_name">Имя*:</label>
-                                                    <input type="text" class="form-control" name="fullname" placeholder="">
+                                                    <input type="text" class="form-control" name="fullname"
+                                                           placeholder="">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="telephone">Контактный телефон*:</label>
-                                                    <input type="tel" class="form-control" name="telephone" placeholder=" ">
+                                                    <input type="tel" class="form-control" name="telephone"
+                                                           placeholder=" ">
                                                 </div>
                                                 <div class="form-group">
 
-                                                    <button type="submit" class="btn btn-default submit"> Заказать звонок</button>
+                                                    <button type="submit" class="btn btn-default submit"> Заказать
+                                                        звонок
+                                                    </button>
 
                                                 </div>
                                             </div>
@@ -187,10 +218,38 @@
                                 </div>
 
                             </div>
-
                         </div>
-
-
+                        <div id="successCallbackForm" class="modal fade" style="display: none;">
+                            <div class="modal-dialog">
+                                <div class="modal-content az-picture-page-hint-modal-div ">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            ×
+                                        </button>
+                                        <h4 class="modal-title">Обратный звонок</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div>Мы перезвоним вам в ближайшее время, Спасибо!</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="errorCallbackForm" class="modal fade" style="display: none;">
+                            <div class="modal-dialog">
+                                <div class="modal-content az-picture-page-hint-modal-div ">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            ×
+                                        </button>
+                                        <h4 class="modal-title">Обратный звонок</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div>Произошли технические неполатки. Попробуйте еще раз через пару минут.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -198,7 +257,8 @@
     </div>
     <div class="container-fluid az-main-page-top-menu-div">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -225,7 +285,8 @@
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Поиск" name="query" id="srch-term">
                         <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i>
+                            </button>
                         </div>
                     </div>
                 </form>

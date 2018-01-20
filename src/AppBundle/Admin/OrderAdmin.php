@@ -1,19 +1,12 @@
 <?php
 namespace AppBundle\Admin;
 
-use AppBundle\Entity\Frame;
-use AppBundle\Entity\Image;
-use AppBundle\Service\ImageManagement;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\DBAL\Types\FloatType;
+use AppBundle\Entity\Order;
 use Doctrine\ORM\EntityManager;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\AdminType;
-use Sonata\AdminBundle\Form\Type\ModelType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 /**
@@ -21,11 +14,6 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
  */
 class OrderAdmin extends AbstractAdmin
 {
-    /**
-     * @var ImageManagement
-     */
-    protected $imageManagement;
-
     /**
      * @var EntityManager
      */
@@ -54,9 +42,21 @@ class OrderAdmin extends AbstractAdmin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $subject = $this->getSubject();
+        if($subject->getPicture()) {
+            $formMapper
+                ->with('Main')
+                ->add('picture', 'sonata_type_admin', array('label' => 'Картина', 'disabled' => true))
+                ->end();
+        } else {
+            $formMapper
+                ->with('Main')
+                ->add('ownPicture', 'sonata_type_admin', array('label' => 'Загруженная картина', 'disabled' => true))
+                ->end();
+        }
+
         $formMapper
             ->with('Main')
-            ->add('picture', 'sonata_type_admin', array('label' => 'Картина', 'disabled' => true))
             ->add('type', 'choice', array('label' => 'Тип картины', 'choices' => ['banner' => 'Баннер', 'frame' => 'В раме', 'module' => 'Панно']))
             ->add('fullname', null, ['required' => true, 'label' => 'Ф.И.О.'])
             ->add('email', EmailType::class, ['required' => true, 'label' => 'Email'])
@@ -84,28 +84,13 @@ class OrderAdmin extends AbstractAdmin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
-//        $frameMaterialsChoices = [];
-//        $frameMaterials = $this->em->getRepository('AppBundle\Entity\FrameMaterial')->findBy(['isActive' => true]);
-//        if($frameMaterials) {
-//            foreach ($frameMaterials as $v) {
-//                $frameMaterialsChoices[$v->getId()] = (string)$v;
-//            }
-//        }
-//        $bannerMaterialsChoices = [];
-//        $bannerMaterials = $this->em->getRepository('AppBundle\Entity\BannerMaterial')->findBy(['isActive' => true]);
-//        if($bannerMaterials) {
-//            foreach ($bannerMaterials as $v) {
-//                $bannerMaterialsChoices[$v->getId()] = (string)$v;
-//            }
-//        }
-
         $listMapper
             ->add('id', null, ['required' => true, 'label' => 'ID'])
-//            ->add('images', null,
-//                ['required' => true, 'label' => 'Изображение', 'template' => 'AppBundle:Admin:frame_list_image.html.twig'])
             ->add('groupId', null, ['editable'=> false, 'label' => 'Заказ'])
             ->add('picture.image', null,
                 ['label' => 'Изображение', 'template' => 'AppBundle:Admin:order_list_image.html.twig'])
+            ->add('ownPicture.image', null,
+                ['label' => 'Своё изображение', 'template' => 'AppBundle:Admin:order_list_own_image.html.twig'])
             ->add('picture.code', null, ['editable'=> false, 'label' => 'Артикул'])
             ->add('picture.title', null, ['editable'=> false, 'label' => 'Название'])
             ->add('type', null, ['editable' => false, 'label' => 'Тип',
@@ -122,16 +107,6 @@ class OrderAdmin extends AbstractAdmin
             ->add('width', null, ['editable'=> true, 'label' => 'Ширина'])
             ->add('price', null, ['editable' => true, 'label' => 'Цена',
                 'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
-//            ->add('height', null, ['editable' => true, 'label' => 'Высота',
-//                'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
-//            ->add('width', null, ['editable' => true, 'label' => 'Ширина',
-//                'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
-//            ->add('bannerMaterial', 'choice', ['editable' => true, 'label' => 'Материал баннера','editable' => true,
-//                'class' => 'Appbundle\Entity\BannerMaterial', 'choices' => $bannerMaterialsChoices, 'sortable' => true,
-//                'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'bannerMaterial']]])
-//            ->add('frameMaterial', 'choice', ['editable' => true, 'label' => 'Материал картины в раме','editable' => true,
-//                'class' => 'Appbundle\Entity\BannerMaterial', 'choices' => $bannerMaterialsChoices, 'sortable' => true,
-//                'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'material']]])
             ->add('isActive', null, ['editable' => true, 'label' => 'Взято в работу'])
             ->add('isDone', null, ['editable' => true, 'label' => 'Выполнено'])
             ->add('createdAt', null, ['label' => 'Дата заказа'])
@@ -173,6 +148,7 @@ class OrderAdmin extends AbstractAdmin
         if($order instanceof Order) {
             $order->setCreatedAt(new \DateTime());
             $order->setUpdatedAt(new \DateTime());
+            $this->clearEntities($order);
         }
     }
 
@@ -183,6 +159,31 @@ class OrderAdmin extends AbstractAdmin
     {
         if($order instanceof Order) {
             $order->setUpdatedAt(new \DateTime());
+            $this->clearEntities($order);
         }
+    }
+
+    /**
+     * Delete entities dependencies
+     *
+     * @param Order $order
+     * @return Order
+     */
+    private function clearEntities(Order $order) {
+        if($order->getType() == 'banner') {
+            $order->setFrame(null);
+            $order->setFrameMaterial(null);
+            $order->setModuleType(null);
+        } elseif($order->getType() == 'frame') {
+            $order->setBannerMaterial(null);
+            $order->setUnderframe(null);
+            $order->setModuleType(null);
+        } elseif($order->getType() == 'module') {
+            $order->setFrame(null);
+            $order->setFrameMaterial(null);
+            $order->setModuleType(null);
+        }
+
+        return $order;
     }
 }

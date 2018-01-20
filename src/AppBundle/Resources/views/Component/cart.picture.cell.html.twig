@@ -1,20 +1,30 @@
 {#{{ dump(item) }}#}
 {% if item.picture.image and item.picture.image.getFilename() %}
     {% set img = '/files/pictures/thumb/' ~ item.picture.image.getFilename() %}
+{% elseif item.own_picture.image and item.own_picture.image.getFilename() %}
+    {% set img = '/files/pictures/thumb/' ~ item.own_picture.image.getFilename() %}
 {% else %}
     {% set img = asset('bundles/app/images/default_picture.jpg') %}
 {% endif %}
 <div class="row az-order-cart container-fluid">
 
     <div class="col-md-3 text-center az-order-cart-item az-cart-img-cell">
-
+        {% if not item.own_picture %}
             <a href="{{ path('picture', {'id': item.picture_id}) }}"><img src="{{ img }}" class="az-order-cart-item-img"></a>
+        {% else %}
+            <img src="{{ img }}" class="az-order-cart-item-img">
+        {% endif %}
         </div>
 
             <div class="col-md-3 az-order-cart-item">
                 <div class="row">
                     <div class="col-md-12">
-                        <a  class="az-order-cart-title" href="{{ path('picture', {'id': item.picture_id}) }}">"{{ item.picture.title }}" </a></div></div>
+                        {% if item.own_picture %}
+                            Загруженная картина
+                        {% else %}
+                            <a  class="az-order-cart-title" href="{{ path('picture', {'id': item.picture_id}) }}">"{{ item.picture.title }}" </a>
+                        {% endif %}
+                    </div></div>
                 <div class="row">
                     <div class="col-md-12">Размер: {{ item.sizes }} см</div>
                 </div>

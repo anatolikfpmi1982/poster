@@ -54,6 +54,13 @@ class Frame implements ImageInterface
     private $description;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="note", type="text")
+     */
+    private $note;
+
+    /**
      * @var float
      * @ORM\Column(name="height", type="float")
      *
@@ -488,5 +495,29 @@ class Frame implements ImageInterface
             return '/files/' . $this->images[0]->getEntityName() . '/mini_thumb/' . $this->images[0]->getFilename();
         }
 
+    }
+
+    /**
+     * Set note
+     *
+     * @param string $note
+     *
+     * @return Frame
+     */
+    public function setNote($note)
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
+    /**
+     * Get note
+     *
+     * @return string
+     */
+    public function getNote()
+    {
+        return $this->note;
     }
 }

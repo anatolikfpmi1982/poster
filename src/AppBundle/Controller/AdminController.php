@@ -84,7 +84,7 @@ class AdminController extends CoreController
                 'seo_title' => '',
                 'enable_own_picture' => false,
                 'enable_call_back' => false,
-                'enable_sms' => false,
+                'enable_reviews' => false,
                 'contact_us_text' => '',
                 'from_email' => '',
                 'to_email' => ''
@@ -115,7 +115,7 @@ class AdminController extends CoreController
             ->add('to_email', TextType::class, ['label' => 'Email для получения', 'required' => false])
             ->add('enable_own_picture', CheckboxType::class, ['label' => 'Использовать функцию "Загрузить картину"', 'required' => false])
             ->add('enable_call_back', CheckboxType::class, ['label' => 'Использовать функцию "Заказать звонок"', 'required' => false])
-            ->add('enable_sms', CheckboxType::class, ['label' => 'Отправлять SMS после заказа звонка', 'required' => false])
+            ->add('enable_reviews', CheckboxType::class, ['label' => 'Показывать блок "Отзывы"', 'required' => false])
             ->add('save', SubmitType::class, array('label' => 'Сохранить'))
             ->getForm();
 
@@ -194,21 +194,19 @@ class AdminController extends CoreController
             $data = [
                 'typeHelp' => '',
                 'sizeHelp' => '',
-                'materialHelp' => '',
+                'materialBannerHelp' => '',
+                'materialPictureHelp' => '',
                 'underframeHelp' => '',
                 'chooseHelp' => '',
-                'matHelp' => '',
-                'matSizeHelp' => '',
             ];
         }
 
         $form = $this->createFormBuilder()
             ->add('typeHelp', CKEditorType::class, ['label' => 'Тип картины', 'required' => false])
             ->add('sizeHelp', CKEditorType::class, ['label' => 'Размер картины', 'required' => false])
-            ->add('materialHelp', CKEditorType::class, ['label' => 'Материал', 'required' => false])
+            ->add('materialBannerHelp', CKEditorType::class, ['label' => 'Материал баннера', 'required' => false])
+            ->add('materialPictureHelp', CKEditorType::class, ['label' => 'Материал картины', 'required' => false])
             ->add('underframeHelp', CKEditorType::class, ['label' => 'Подрамник', 'required' => false])
-            ->add('matHelp', CKEditorType::class, ['label' => 'Тип паспарту', 'required' => false])
-            ->add('matSizeHelp', CKEditorType::class, ['label' => 'Размер паспарту', 'required' => false])
             ->add('chooseHelp', CKEditorType::class, ['label' => 'Выбрано', 'required' => false])
             ->add('save', SubmitType::class, array('label' => 'Сохранить'))
             ->getForm();
@@ -233,7 +231,7 @@ class AdminController extends CoreController
     private function saveForm($form) {
         $data = $form->getData();
         $data['enable_call_back'] = (boolean)$data['enable_call_back'];
-        $data['enable_sms'] = (boolean)$data['enable_sms'];
+        $data['enable_reviews'] = (boolean)$data['enable_reviews'];
         $data['enable_own_picture'] = (boolean)$data['enable_own_picture'];
 
         if($data['logo']) {

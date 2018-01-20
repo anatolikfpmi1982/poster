@@ -5,10 +5,12 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Image;
 use AppBundle\Entity\Picture;
 use AppBundle\Entity\Settings;
+use AppBundle\Entity\OwnPicture;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Class PicturesController
@@ -29,6 +31,10 @@ class PicturesController extends FrontController {
         $picture = $em->getRepository( 'AppBundle:Picture' )->find( $id );
         if(!$picture instanceof Picture) {
             throw new BadRequestHttpException('Картина не найдена.');
+        } else {
+            $picture->setPopularity($picture->getPopularity() + 1);
+            $em->persist($picture);
+            $em->flush();
         }
 
         $cartItem = [];

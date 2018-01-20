@@ -1,0 +1,12 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    <div>
+        {% if object.ownPicture is defined and object.ownPicture.image is defined and object.ownPicture.image != null %}
+            <img src="/files/{{ object.ownPicture.image.getEntityName() }}/mini_thumb/{{ object.ownPicture.image.getFilename() }}" class="admin-preview"/><br>
+            <a href="/files/origin/{{ object.ownPicture.image.getFilename() }}" download>Скачать</a>
+        {% else %}
+            <span>No picture</span>
+        {% endif %}
+    </div>
+{% endblock %}

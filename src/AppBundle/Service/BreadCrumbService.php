@@ -76,7 +76,55 @@ class BreadCrumbService {
             case 'search':
                 $result = $this->buildSearchBreadCrumb($param);
                 break;
+            case 'deferred':
+                $result = $this->buildDeferredBreadCrumb();
+                break;
+            case 'my_files':
+                $result = $this->buildMyFilesBreadCrumb();
+                break;
+            case 'my_file':
+                $result = $this->buildMyFileBreadCrumb();
+                break;
         }
+        return $result;
+    }
+
+    /**
+     * Get full deferred bread crumb path.
+     *
+     * @return array
+     */
+    public function buildDeferredBreadCrumb() {
+        return [[
+            'title' => 'Отложенные',
+            'url' => $this->container->get('router')->generate('deferred'),
+        ]];
+    }
+
+    /**
+     * Get full my files bread crumb path.
+     *
+     * @return array
+     */
+    public function buildMyFilesBreadCrumb() {
+        return [[
+            'title' => 'Мои файлы',
+            'url' => $this->container->get('router')->generate('my_files'),
+        ]];
+    }
+
+    /**
+     * Get full my file bread crumb path.
+     *
+     * @return array
+     */
+    public function buildMyFileBreadCrumb() {
+        $result = [[
+            'title' => 'Заказанная картина',
+            'url' => '',
+        ]];
+        $result = array_merge($result, $this->buildMyFilesBreadCrumb());
+
         return $result;
     }
 

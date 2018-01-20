@@ -1,6 +1,6 @@
 {% extends "AppBundle::layout.html.twig" %}
 
-{% block title %}Картина "{{ pictureMain.title }}" {% endblock %}
+{% block title %}Загруженная картина{% endblock %}
 
 {% block body %}
 <div class="row az-page-main-section-div">
@@ -8,21 +8,7 @@
 </div>
 <div class="row az-page-main-section-div">
     <div class="col-md-9 container-fluid">
-        <div class="row page-title az-picture-page-title">Картина "{{ pictureMain.title }}"</div>
-        <div class="row az-picture-page-author-articul-div">
-            {% if pictureMain.author is defined and pictureMain.author and pictureMain.author.slug is defined and pictureMain.author.slug %}
-                {% set author_link = path('author', {'slug': pictureMain.author.slug }) %}
-            {% else %}
-                {% set author_link = '#' %}
-            {% endif %}
-            {% if pictureMain.author is defined and pictureMain.author and pictureMain.author.name is defined and pictureMain.author.name %}
-                {% set author_name = pictureMain.author.name %}
-            {% else %}
-                {% set author_name = '-' %}
-            {% endif %}
-            <div class="col-md-6">Автор: <a href="{{ author_link }}">{{ author_name }}</a></div>
-            <div class="col-md-6">Артикул: {{ pictureMain.code }}</div>
-        </div>
+        <div class="row page-title az-picture-page-title">Загруженная картина</div>
         {% include('AppBundle:Component:Constructor/picture.html.twig') %}
         <div class="row text-center az-picture-page-slider-material-div">
             <div class="col-md-12">
@@ -67,8 +53,8 @@
         <input type="hidden" name="constructor_max_price" id="constructor_max_price" value="{{ max_price }}">
         <input type="hidden" name="constructor_additional_price" id="constructor_additional_price" value="{{ add_price }}">
 
-        <input type="hidden" name="constructor_picture_price" id="constructor_picture_price" value="{{ pictureMain.price }}">
-        <input type="hidden" name="constructor_picture_ratio" id="constructor_picture_ratio" value="{{ pictureMain.ratio }}">
+        <input type="hidden" name="constructor_picture_price" id="constructor_picture_price" value="0">
+        <input type="hidden" name="constructor_picture_ratio" id="constructor_picture_ratio" value="1">
     </div>
     <div class="col-md-3 container-fluid az-constructor-block">
         <div class="row az-picture-page-constructor-block hidden" id="az-picture-page-sidebar-deffered-div">
@@ -110,15 +96,13 @@
             {% include('AppBundle:Component:Constructor/price.html.twig') %}
         </div>
         <div class="row az-picture-page-constructor-block">
-            <div class="soc-share">
-                <a href="https://twitter.com/share?url=http://www.artzakaz.by/twitter-button/"
-                   title="Twitter" class="btn btn-twitter btn-lg"><i class="fa fa-twitter fa-fw"></i></a>
-            </div>
-            <div class="soc-share">
-                <a href="https://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://www.artzakaz
-                .by&p[images][0]=&p[title]=Title%20Goes%20Here&p[summary]=Description%20goes%20here!"
-                   target="_blank"
-                   onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250'); return false">
+            <div class="soc-share"><a href="https://twitter.com/share?url=http://www.artzakaz.by/twitter-button/"
+                                      title="Twitter" class="btn btn-twitter btn-lg"><i class="fa fa-twitter fa-fw"></i> </a></div>
+
+            <div class="soc-share"><a
+                        href="https://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://www.artzakaz.by&p[images][0]=&p[title]=Title%20Goes%20Here&p[summary]=Description%20goes%20here!"
+                        target="_blank"
+                        onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250'); return false">
                     <button style="width: 32px; margin-top:10px;" type="button" class="btn btn-facebook btn-lg"><i class="fa fa-facebook fa-2"></i></button>
                 </a>
             </div>
@@ -153,8 +137,8 @@
     </div>
     {% include('AppBundle:Component:Blocks/similar.html.twig') %}
     <div class="row az-visited-block az-category-page-visited-div">
-        {% include('AppBundle:Component:Blocks/last.visited.html.twig') %}
-    </div>
+    {% include('AppBundle:Component:Blocks/last.visited.html.twig') %}
+</div>
     <div class="row az-visited-block az-category-page-visited-div">
         {% include('AppBundle:Component:Blocks/deferred.html.twig') %}
     </div>

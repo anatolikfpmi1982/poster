@@ -25,6 +25,7 @@ class CartController extends FrontController {
     public function addToCartAction(Request $request) {
         $data = [
             'id' => $request->query->get('cart_id') ? $request->query->get('cart_id') : uniqid(),
+            'own_picture_id' => $request->query->get('own_picture_id'),
             'picture_id' => $request->query->get('id'),
             'price' => $request->query->get('price'),
             'sizes' => $request->query->get('sizes'),

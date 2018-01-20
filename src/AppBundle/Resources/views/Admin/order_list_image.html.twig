@@ -2,7 +2,7 @@
 
 {% block field %}
     <div>
-        {% if object.picture.image != null %}
+        {% if object.picture is defined and object.picture.image is defined and object.picture.image != null %}
             <img src="/files/{{ object.picture.image.getEntityName() }}/mini_thumb/{{ object.picture.image.getFilename() }}" class="admin-preview"/><br>
         {% else %}
             <span>No picture</span>

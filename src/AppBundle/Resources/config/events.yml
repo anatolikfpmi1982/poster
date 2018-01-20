@@ -13,6 +13,13 @@ services:
         tags:
             - { name: doctrine.event_listener, event: postUpdate }
             - { name: doctrine.event_listener, event: postPersist }
+    app.own_picture_event_listener:
+        class: AppBundle\EventSubscriber\OwnPictureSubscriber
+        arguments:
+            - '@service_container'
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate }
+            - { name: doctrine.event_listener, event: postPersist }
     app.underframe_event_listener:
         class: AppBundle\EventSubscriber\UnderframeSubscriber
         arguments:
@@ -50,6 +57,13 @@ services:
             - { name: doctrine.event_listener, event: postPersist }
     app.main_menu_event_listener:
         class: AppBundle\EventSubscriber\MainMenuSubscriber
+        arguments:
+            - '@service_container'
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate }
+            - { name: doctrine.event_listener, event: postPersist }
+    app.order_event_listener:
+        class: AppBundle\EventSubscriber\OrderSubscriber
         arguments:
             - '@service_container'
         tags:
