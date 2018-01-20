@@ -729,7 +729,7 @@ body {
 }
 
 .az-header-top {
-    padding: 20px 0 0 20px;
+    padding: 20px 0 0 10px;
 }
 
 .az-logo-title-text-div {
@@ -748,7 +748,7 @@ body {
 
 /** header contacts**/
 .az-header-address-div {
-    padding-left: 25px;
+    padding-left: 60px;
 }
 
 .az-header-address-container {
@@ -767,9 +767,10 @@ body {
 
 /** basket**/
 
-.az-header-basket-count-text {
+.az-header-basket-count-text .col-md-12 {
     color: #b4b4b4;
-    font-size: 13px;
+    font-size: 12px;
+    padding: 0 5px;
 }
 
 /**search**/
@@ -1520,7 +1521,9 @@ footer {
 .az-main-page-header-top-cells {
     margin-top: 20px;
 }
-
+.az-main-page-header-icon-cell {
+    padding: 0;
+}
 .az-basket-title-img {
     width: 40px;
     height: 40px;
@@ -2121,6 +2124,11 @@ button.close:focus, .close:hover {
     text-decoration: none;
     cursor: pointer;
     color: #333;
+    padding: 0 0 0 5px;
+}
+
+.az-header-download-icon{
+    padding: 0;
 }
 
 .az-header-download:hover {
