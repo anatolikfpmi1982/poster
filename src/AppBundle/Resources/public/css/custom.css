@@ -323,6 +323,7 @@ footer {
 .az-sidebar-header:hover {
     background-color: #c22439;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .cycle-slideshow, .cycle-slideshow * {
@@ -1602,7 +1603,6 @@ footer {
     padding-left: 15px;
     border-right: 1px solid #e6e6e6;
     display: inline-block;
-    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALAQMAAACTYuVlAAAABlBMVEUwrSMwrSMGiLPTAAAAAXRSTlMAQObYZgAAABJJREFUeF5j4GNAoP8PIAhZEABkXgYOXW/zqwAAAABJRU5ErkJggg==') no-repeat 0% 60%;
 }
 
 .az-rewiews-date {
