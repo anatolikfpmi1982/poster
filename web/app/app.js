@@ -97,11 +97,27 @@ define(function (require, exports, module) {
 
         // Picture page
         // picture page constructor type
-        $("input.az-picture-page-constructor-type-radio").click(function (event) {
+        $("div.az-picture-page-sidebar-type-block-selector").click(function (event) {
             event.stopImmediatePropagation();
+            $('div.az-picture-page-sidebar-type-block-selector').removeClass('active');
+            $(this).addClass('active');
+            $('input[name="az-picture-page-type"][data-type="' + $(this).data('type') + '"]').prop('checked', true);
             setShowBoard();
-
         });
+
+        $("div.az-picture-page-sidebar-material-banner-block-selector").click(function (event) {
+            event.stopImmediatePropagation();
+            $('div.az-picture-page-sidebar-material-banner-block-selector').removeClass('active');
+            $(this).addClass('active');
+            $('input[name="az-picture-page-material"][data-title="' + $(this).data('title') + '"]').prop('checked', true);
+            setShowBoard();
+        });
+
+        // picture page constructor material
+        //$("input.az-picture-page-constructor-material-radio").click(function (event) {
+        //    event.stopImmediatePropagation();
+        //    setShowBoard();
+        //});
 
         // picture page constructor frame
         $("img.az-picture-page-constructor-picture-thickness-img").click(function (event) {
@@ -126,12 +142,6 @@ define(function (require, exports, module) {
         $("li.az-picture-page-constructor-frame-color-item").click(function (event) {
             event.stopImmediatePropagation();
             $('#az-picture-constructor-frame-color-selected').val($(this).data('name'));
-            setShowBoard();
-        });
-
-        // picture page constructor material
-        $("input.az-picture-page-constructor-material-radio").click(function (event) {
-            event.stopImmediatePropagation();
             setShowBoard();
         });
 
@@ -424,7 +434,7 @@ define(function (require, exports, module) {
                 dataType: 'json',
                 processData: false,
                 contentType: false,
-                success: function( respond, textStatus, jqXHR ){
+                success: function (respond, textStatus, jqXHR) {
                     location.href = '/myfiles';
                 },
                 error: function (jqXHR, textStatus, errorThrown) {

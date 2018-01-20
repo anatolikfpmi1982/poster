@@ -57,7 +57,8 @@ class BannerMaterialSubscriber
             $this->container->get('helper.imageresizer')
                 ->copyImage($image->getOriginFile(), $image->getBasePath(), $image->getFilename());
             $this->container->get('helper.imageresizer')
-                ->resizeImage($image->getOriginFile(), $image->getSmallThumbBasePath(), $image::THUMB_SMALL_IMAGE_HEIGHT, $image::THUMB_SMALL_IMAGE_WIDTH);
+                ->resizeImage($image->getOriginFile(), $image->getSmallThumbBasePath(),
+                    $material::THUMB_SMALL_BANNER_IMAGE_HEIGHT, $material::THUMB_SMALL_BANNER_IMAGE_WIDTH);
             unlink($image->getOriginFile());
         }
     }

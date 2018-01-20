@@ -41,4 +41,14 @@ interface ImageInterface {
      * Mini thumb image width
      */
     const THUMB_MAX_IMAGE_WIDTH = 800;
+
+    /**
+     * Small thumb image width
+     */
+    const THUMB_SMALL_IMAGE_HEIGHT = 80;
+
+    /**
+     * Small thumb image width
+     */
+    const THUMB_SMALL_IMAGE_WIDTH = 60;
 }

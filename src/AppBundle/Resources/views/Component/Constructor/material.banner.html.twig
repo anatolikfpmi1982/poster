@@ -27,10 +27,16 @@
         {% if materials %}
         {% set ind = 1 %}
         {% for material in materials %}
-        <div class="col-md-4 container-fluid">
+        <div class="col-md-4 container-fluid az-picture-page-sidebar-material-banner-block-selector {% if ind == 1 %}active{% endif %}"
+             data-title="{{ material.title }}"
+             data-id="{{ material.id }}">
+            <div class="row">
+                <div class="col-md-12 az-picture-page-material-banner-div-img">
+                    <img src="/files/banner_materials/small_thumb/{{ material.image.getFilename() }}" class="az-picture-page-material-banner-img"/>
+                </div>
+            </div>
             <div class="row text-center">
                 <div class="col-md-12">
-                    <img src="/files/banner_materials/small_thumb/{{ material.image.getFilename() }}" class="az-picture-page-material-img"/><br/>
                     <span class="az-picture-page-type-img-text">{{ material.title }}</span>
                 </div>
             </div>

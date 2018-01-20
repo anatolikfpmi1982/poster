@@ -27,25 +27,25 @@
     <div class="row az-picture-page-sidebar-size-div-body az-picture-page-sidebar-type-div-select">
         {% set numPicture = 0 %}
         {% if pictureMain.image is defined and pictureMain.image %}
-            <div class="col-md-4 container-fluid">
-                <div class="row text-center">
-                    <div class="col-md-12 az-picture-page-type-div-img">
+            <div class="col-md-4 container-fluid az-picture-page-sidebar-type-block-selector active" data-title="Баннер" data-value="1" data-type="banner">
+                <div class="row az-picture-page-type-div-img">
+                    <div class="col-md-12">
                         <img src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}" class="az-picture-page-type-img"/>
-                        <br/></div>
-                    <div class="row text-center">
-                        <div class="col-md-12">
-                            <span class="az-picture-page-type-img-text">Баннер</span>
-                        </div>
                     </div>
-                    <div class="row text-center az-picture-page-material-radio-div">
-                        <div class="col-md-12">
-                            <input type="radio" class="btn az-picture-page-constructor-type-radio" data-title="Баннер" value="1"
-                                   title="az-picture-page-type" data-type='banner' name="az-picture-page-type" checked/>
-                        </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-12">
+                        <span class="az-picture-page-type-img-text">Баннер</span>
+                    </div>
+                </div>
+                <div class="row text-center az-picture-page-material-radio-div">
+                    <div class="col-md-12">
+                        <input type="radio" class="btn az-picture-page-constructor-type-radio" data-title="Баннер" value="1"
+                               title="az-picture-page-type" data-type='banner' name="az-picture-page-type" checked/>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 container-fluid">
+            <div class="col-md-4 container-fluid az-picture-page-sidebar-type-block-selector" data-title="В раме" data-value="2" data-type="frame">
                 <div class="row text-center">
                     <div class="col-md-12 text-center az-picture-page-sidebar-type-div-frame-border">
                         <div class="text-center az-picture-page-sidebar-type-div-frame-mat az-picture-page-type-div-img">
@@ -62,21 +62,9 @@
                            title="az-picture-page-type" data-type='frame' name="az-picture-page-type"/>
                 </div>
             </div>
-            <div class="col-md-4 container-fluid">
+            <div class="col-md-4 container-fluid az-picture-page-sidebar-type-block-selector" data-title="Панно" data-value="3" data-type='module'>
                 <div class="row text-center">
                     <div class="col-12 container-fluid">
-                        {#<div class="row" style="height: {{ pictureSmallHeight }}px;">#}
-                        {#{% set partWidth = (pictureSmallWidth * 0.3)|round %}#}
-                        {#<div class="col-md-12">#}
-                        {#<img src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}" class="az-picture-page-type-img"#}
-                        {#style="position: absolute;clip: rect(0, {{ partWidth }}px, {{ pictureSmallHeight }}px, 0);"/>&nbsp;#}
-                        {#<img src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}" class="az-picture-page-type-img"#}
-                        {#style="position: absolute;clip: rect(0,#}
-                        {#{{ partWidth*2 }}px, {{ pictureSmallHeight }}px, {{ partWidth }}px);height: {{ (pictureSmallHeight*0.8)|round }}px;"/>&nbsp;#}
-                        {#<img src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}" class="az-picture-page-type-img"#}
-                        {#style="position: absolute;clip: rect(0, {{ pictureSmallWidth }}px, {{ pictureSmallHeight }}px, {{ partWidth*2 }}px);"/>#}
-                        {#</div>#}
-                        {#</div>#}
                         <div class="row text-center">
                             <div class="col-md-12 az-picture-page-type-div-img">
                                 <img src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}" class="az-picture-page-type-img"/>
