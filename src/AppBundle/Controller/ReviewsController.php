@@ -78,7 +78,7 @@ class ReviewsController extends FrontController {
         }
 
         // parameters to template
-        return new JsonResponse(array('result' => $result));
+        return new JsonResponse(['result' => 1]);
     }
 
 }

@@ -12,7 +12,10 @@
         <div class="row az-page-main-section-div">
 
         <div class="col-md-12 container-fluid">
-            <div class="row page-title az-picture-page-title">Отзывы</div>
+            <div class="row page-title az-picture-page-title">
+                Отзывы
+                <a href="#form"><button class="btn">Оставьте свой отзыв</button></a>
+            </div>
             {# rewiews body #}
             {% for article in pagination %}
 
@@ -20,7 +23,7 @@
                     <a name="review{{ article.id }}"></a>
                     <div class="col-md container-fluid">
                         <div class="row">
-                            <div class="col-md-6 az-reviews-name">{{ article.name }}</div>
+                            <div class="col-md-6 az-reviews-name">{{ article.name }} ({{ article.city }})</div>
                             <div class="col-md-6 az-rewiews-date">{{ article.createdAt | date('Y-m-d') }}</div>
                         </div>
                         <div class="row">
@@ -40,6 +43,7 @@
     </div>
         <div class="row az-page-main-section-div">
     <div class="col-md-12 container-fluid">
+        <a name="form"></a>
         <h2>Оставьте свой отзыв</h2>
 
         <span class="az-rewievs-comment"> Ваш отзыв будет добавлен на страницу только после проверки модератором</span>
@@ -64,6 +68,32 @@
                       placeholder="Введите текст отзыва" required></textarea>
                <button class="btn btn-bg az-header-feedback-btn" type="submit">Отправить</button>
            </div>
+                    <div id="successCallbackForm" class="modal fade" style="display: none;">
+                        <div class="modal-dialog">
+                            <div class="modal-content az-picture-page-hint-modal-div ">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title">Обратный звонок</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div>Ваш отзыв отправлен, Спасибо!</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="errorCallbackForm" class="modal fade" style="display: none;">
+                        <div class="modal-dialog">
+                            <div class="modal-content az-picture-page-hint-modal-div ">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title">Обратный звонок</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div>Ваш отзыв отправлен, Спасибо!</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
     </form></div></div></div>
         {% endblock %}

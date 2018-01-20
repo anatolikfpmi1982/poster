@@ -87,10 +87,10 @@ define(function (require, exports, module) {
                     'review': $('#az-add_review_description').val()
                 }
             }).done(function (data) {
-                if (data['result'])
-                    alert('Спасибо! Отзыв отправлен на модерацию!');
-                else
-                    alert('Возникли проблемы при отправке отзыва.');
+                if (data != undefined && data && data.result != undefined && data.result) {
+                    $('#successCallbackForm').removeClass('hidden').modal('show');
+                } else
+                    $('#successCallbackForm').removeClass('hidden').modal('show');
             });
             return false;
         });
