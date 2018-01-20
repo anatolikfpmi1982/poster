@@ -41,7 +41,7 @@ var ConstructorOverview = new function () {
         this.material_id = this.type != 'В раме' ?
             material.data('id') :
             material_picture.data('id');
-        var thickness = $("input.z-picture-page-thickness:checked");
+        var thickness = $("input.az-picture-page-thickness:checked");
         this.thickness = thickness.val();
         this.thickness_ratio = thickness.data('ratio');
         this.color = '';
