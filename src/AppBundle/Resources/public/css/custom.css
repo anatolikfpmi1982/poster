@@ -2506,3 +2506,7 @@ button.close:focus, .close:hover {
     padding-left: 10px;
     font-size: 10px;
 }
+
+.nounderline {
+    text-decoration: none;
+}

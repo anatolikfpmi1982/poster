@@ -1,11 +1,13 @@
 <div class="row az-sidebar az-sidebar-popular container-fluid">
-    <div class="row az-sidebar-header az-sidebar-popular-item-header">
-        <img src="{{ asset('bundles/app/images/review_left.png') }}" class="az-sidebar-block-img az-review-block-img" title="{% trans %}review icon{% endtrans %}"/>
-        Отзывы клиентов
-    </div>
+    <a href="{{ path('reviews') }}">
+        <div class="row az-sidebar-header az-sidebar-popular-item-header">
+            <img src="{{ asset('bundles/app/images/review_left.png') }}" class="az-sidebar-block-img az-review-block-img" title="{% trans %}review icon{% endtrans %}"/>
+            Отзывы клиентов
+        </div>
+    </a>
     {% for review in block %}
         <div class="row az-sidebar-popular-item container-fluid">
-            <div class="row az-sidebar-popular-item-name">{{ review.name }} ({{ review.city }})</div>
+            <div class="row az-sidebar-popular-item-name"><a href="{{ path('reviews') }}#review{{ review.id }}">{{ review.name }} ({{ review.city }})</a></div>
             <div class="row az-sidebar-popular-item-date">{{ review.createdAt|date("d.m.Y") }}</div>
             <div class="row az-sidebar-popular-item-body">{{ review.review|escape }}</div>
         </div>
