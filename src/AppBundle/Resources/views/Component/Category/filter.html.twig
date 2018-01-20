@@ -44,7 +44,13 @@
 </div>
 <div class="col-md-2 text-center az-picture-page-constructor-block container-fluid">
     <div class="row az-category-page-filter az-category-page-filter-photo">
-        Популярность <span class="glyphicon glyphicon-chevron-down"></span>
+        {% set popularity_direction = 'DESC' %}
+        {% if sort_field == 'p.popularity' %}
+            {% if sort_direction == 'DESC' %}{% set popularity_direction = 'ASC' %}{% endif %}
+        {% endif %}
+        <a href="{{ app.request.pathinfo }}?sort=p.popularity&direction={{ popularity_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Популярность <span
+                    class="glyphicon
+        glyphicon-chevron-{% if popularity_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
     </div>
 </div>
 <div class="col-md-1 text-center az-picture-page-constructor-block container-fluid">
