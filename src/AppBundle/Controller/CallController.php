@@ -53,6 +53,6 @@ class CallController extends FrontController {
         }
 
         // parameters to template
-        return new JsonResponse(array('result' => 'success'));
+        return new JsonResponse(array('result' => 1));
     }
 }

@@ -88,9 +88,9 @@ define(function (require, exports, module) {
                 }
             }).done(function (data) {
                 if (data != undefined && data && data.result != undefined && data.result) {
-                    $('#successCallbackForm').removeClass('hidden').modal('show');
+                    $('#successReviewForm').removeClass('hidden').modal('show');
                 } else
-                    $('#successCallbackForm').removeClass('hidden').modal('show');
+                    $('#successReviewForm').removeClass('hidden').modal('show');
             });
             return false;
         });
@@ -276,9 +276,14 @@ define(function (require, exports, module) {
             $.ajax({
                 url: "/ajax/call/add",
                 data: $this.serialize()
-            }).done(function () {
-                $('#myModal1').hide();
-                $('.modal-backdrop').hide();
+            }).done(function (data) {
+                if (data != undefined && data && data.result != undefined && data.result == 1) {
+                    $('#myModal1').hide();
+                    $('.modal-backdrop').hide();
+                    $('#successCallbackForm').removeClass('hidden').modal('show');
+                } else {
+                    $('#errorCallbackForm').removeClass('hidden').modal('show');
+                }
             });
             return false;
         });
