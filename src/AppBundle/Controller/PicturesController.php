@@ -31,6 +31,10 @@ class PicturesController extends FrontController {
         $picture = $em->getRepository( 'AppBundle:Picture' )->find( $id );
         if(!$picture instanceof Picture) {
             throw new BadRequestHttpException('Картина не найдена.');
+        } else {
+            $picture->setPopularity($picture->getPopularity() + 1);
+            $em->persist($picture);
+            $em->flush();
         }
 
         $cartItem = [];
