@@ -50,7 +50,8 @@ class CategoriesController extends FrontController
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
-            self::PAGE_LIMIT/*limit per page*/
+            self::PAGE_LIMIT/*limit per page*/,
+            ['wrap-queries' => true, 'defaultSortFieldName' => 'cp.weight', 'defaultSortDirection' => 'desc']
         );
 
 

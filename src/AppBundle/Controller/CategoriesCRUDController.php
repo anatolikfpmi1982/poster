@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\CategoriesPictures;
 use Exception;
 use Sonata\AdminBundle\Controller\CRUDController as BaseController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -34,53 +35,60 @@ class CategoriesCRUDController extends BaseController
 
         $this->admin->checkAccess('edit', $object);
 
-//        $preResponse = $this->preDelete($request, $object);
-//        if ($preResponse !== null) {
-//            return $preResponse;
-//        }
+        $pictures = $object->getPictures();
+        foreach($pictures as $k => $v) {
+            $ids[] = $v->getId();
+        }
 
-//        if ($this->getRestMethod() == 'POST') {
-//            // check the csrf token
-//            $this->validateCsrfToken('sonata.edit');
-//
-//            $objectName = $this->admin->toString($object);
-//
-//            try {
-//                $this->admin->delete($object);
-//
-//                if ($this->isXmlHttpRequest()) {
-//                    return $this->renderJson(array('result' => 'ok'), 200, array());
-//                }
-//
-//                $this->addFlash(
-//                    'sonata_flash_success',
-//                    $this->trans(
-//                        'flash_delete_success',
-//                        array('%name%' => $this->escapeHtml($objectName)),
-//                        'SonataAdminBundle'
-//                    )
-//                );
-//            } catch (ModelManagerException $e) {
-//                $this->handleModelManagerException($e);
-//
-//                if ($this->isXmlHttpRequest()) {
-//                    return $this->renderJson(array('result' => 'error'), 200, array());
-//                }
-//
-//                $this->addFlash(
-//                    'sonata_flash_error',
-//                    $this->trans(
-//                        'flash_delete_error',
-//                        array('%name%' => $this->escapeHtml($objectName)),
-//                        'SonataAdminBundle'
-//                    )
-//                );
-//            }
-//
-//            return $this->redirectTo($object);
-//        }
+        shuffle($ids);
 
-        $this->addFlash('sonata_flash_success', 'Рандомизация выполнена успешно!');
+        $categoryPictures = $object->getCategoriesPictures();
+        foreach ($categoryPictures as $k => $v) {
+            if(in_array($v->getPicture()->getId(), $ids) ) {
+                $key = array_search($v->getPicture()->getId(), $ids);
+                $v->setWeight( $key + 1);
+                unset($ids[$key]);
+            } else {
+                $object->removeCategoriesPicture($v);
+            }
+        }
+
+        foreach ($pictures as $k => $v) {
+            if(in_array($v->getId(), $ids) ) {
+                $key = array_search($v->getId(), $ids);
+
+                $picture = new CategoriesPictures();
+                $picture->setCategory($object);
+                $picture->setPicture($v);
+                $picture->setWeight($key + 1);
+
+                $object->addCategoriesPicture($picture);
+            }
+        }
+
+        $this->admin->setSubject($object);
+        $objectId = $this->admin->getNormalizedIdentifier($object);
+        $existingObject = $this->admin->update($object);
+
+        try {
+            if ($this->isXmlHttpRequest()) {
+                return $this->renderJson(array(
+                    'result' => 'ok',
+                    'objectId' => $objectId,
+                    'objectName' => $this->escapeHtml($this->admin->toString($existingObject)),
+                ), 200, array());
+            }
+
+            $this->addFlash('sonata_flash_success', 'Рандомизация выполнена успешно!');
+        } catch (ModelManagerException $e) {
+            $this->handleModelManagerException($e);
+        } catch (LockException $e) {
+            $this->addFlash('sonata_flash_error', $this->trans('flash_lock_error', array(
+                '%name%' => $this->escapeHtml($this->admin->toString($existingObject)),
+                '%link_start%' => '<a href="'.$this->admin->generateObjectUrl('edit', $existingObject).'">',
+                '%link_end%' => '</a>',
+            ), 'SonataAdminBundle'));
+        }
 
         return new RedirectResponse($this->admin->generateUrl('list', ['filter' => $this->admin->getFilterParameters()]));
     }

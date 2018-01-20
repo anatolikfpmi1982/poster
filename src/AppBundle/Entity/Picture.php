@@ -147,7 +147,7 @@ class Picture implements ImageInterface
 
     /**
      * @var Popular
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Popular")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Popular", inversedBy="pictures")
      * @ORM\JoinColumn(name="popular_id", referencedColumnName="id")
      */
     private $popular;
@@ -195,12 +195,20 @@ class Picture implements ImageInterface
     private $popularity = 0;
 
     /**
+     * @var CategoriesPictures
+     *
+     * @ORM\OneToMany(targetEntity="CategoriesPictures", mappedBy="picture", cascade={"persist"})
+     */
+    protected $categoriesPictures;
+
+    /**
      * Picture constructor.
      */
     public function __construct() {
         $this->categories = new ArrayCollection();
         $this->similar = new ArrayCollection();
         $this->colors = new ArrayCollection();
+        $this->categoriesPictures = new ArrayCollection();
     }
 
     /**
@@ -732,5 +740,39 @@ class Picture implements ImageInterface
         $this->popularity = $popularity;
 
         return $this;
+    }
+
+    /**
+     * Add categoriesPicture
+     *
+     * @param CategoriesPictures $categoriesPicture
+     *
+     * @return Picture
+     */
+    public function addCategoriesPicture(CategoriesPictures $categoriesPicture)
+    {
+        $this->categoriesPictures[] = $categoriesPicture;
+
+        return $this;
+    }
+
+    /**
+     * Remove categoriesPicture
+     *
+     * @param CategoriesPictures $categoriesPicture
+     */
+    public function removeCategoriesPicture(CategoriesPictures $categoriesPicture)
+    {
+        $this->categoriesPictures->removeElement($categoriesPicture);
+    }
+
+    /**
+     * Get categoriesPictures
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategoriesPictures()
+    {
+        return $this->categoriesPictures;
     }
 }

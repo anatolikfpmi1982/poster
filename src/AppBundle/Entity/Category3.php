@@ -136,6 +136,13 @@ class Category3 implements ImageInterface
      */
     private $weight;
 
+    /**
+     * @var CategoriesPictures
+     *
+     * @ORM\OneToMany(targetEntity="CategoriesPictures", mappedBy="category", cascade={"persist"})
+     */
+    protected $categoriesPictures;
+
 
     /**
      * Feature constructor.
@@ -145,6 +152,7 @@ class Category3 implements ImageInterface
         $this->pictures = new ArrayCollection();
         $this->children = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->categoriesPictures = new ArrayCollection();
     }
 
     public function __toString()
@@ -535,5 +543,42 @@ class Category3 implements ImageInterface
         $this->weight = $weight;
 
         return $this;
+    }
+
+    /**
+     * Add categoriesPicture
+     *
+     * @param CategoriesPictures $categoriesPicture
+     *
+     * @return Category3
+     */
+    public function addCategoriesPicture(CategoriesPictures $categoriesPicture)
+    {
+        $this->categoriesPictures[] = $categoriesPicture;
+
+        return $this;
+    }
+
+    /**
+     * Remove categoriesPicture
+     *
+     * @param CategoriesPictures $categoriesPicture
+     * @return Category3
+     */
+    public function removeCategoriesPicture(CategoriesPictures $categoriesPicture)
+    {
+        $this->categoriesPictures->removeElement($categoriesPicture);
+
+        return $this;
+    }
+
+    /**
+     * Get categoriesPictures
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategoriesPictures()
+    {
+        return $this->categoriesPictures;
     }
 }
