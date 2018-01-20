@@ -572,17 +572,11 @@ footer {
 .az-picture-page-sidebar-type-div-select .col-md-4:hover {
     border: 1px solid #fd1200;
     cursor: pointer;
-    height: 130px;
-    padding-top: 3px;
-
 }
 
 .az-picture-page-sidebar-type-div-select .col-md-4.active {
     border: 1px solid #fd1200;
     cursor: pointer;
-    height: 130px;
-    padding-top: 3px;
-
 }
 
 .az-picture-page-sidebar-type-div-frame-mat img {
