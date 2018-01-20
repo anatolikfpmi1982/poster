@@ -57,6 +57,7 @@ class FrameAdmin extends AbstractAdmin
             ->with('Main')
             ->add('title', null, ['required' => true, 'label' => 'Артикул'])
             ->add('description', CKEditorType::class, ['required' => false, 'label' => 'Описание'])
+            ->add('note', null, ['required' => true, 'label' => 'Примечание'])
             ->add('height', null, ['required' => false, 'label' => 'Высота'])
             ->add('width', null, ['required' => false, 'label' => 'Ширина'])
             ->add('price', null, ['required' => false, 'label' => 'Цена', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
@@ -107,6 +108,7 @@ class FrameAdmin extends AbstractAdmin
             ->add('images', null,
                 ['required' => true, 'label' => 'Изображение', 'template' => 'AppBundle:Admin:frame_list_image.html.twig'])
             ->add('title', null, ['editable'=> true, 'label' => 'Артикул'])
+            ->add('note', null, ['editable'=> true, 'label' => 'Примечание'])
             ->add('ratio', null, ['editable'=> true, 'label' => 'Коэфф.'])
             ->add('height', null, ['editable' => true, 'label' => 'Высота',
                 'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
