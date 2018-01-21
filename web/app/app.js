@@ -394,19 +394,47 @@ define(function (require, exports, module) {
         });
 
         // picture page cart delete button
-        $("button.delete_order-bnt").click(function (event) {
+        $("button.delete_cart-btn").click(function (event) {
             event.stopImmediatePropagation();
             var $this = $(this);
             var id = $this.attr('data-id');
             $.ajax({
                 url: "/ajax/cart/delete",
                 data: {'id': id}
-            }).done(function () {
-                $this.text("Удалено");
-                $this.prop('disabled', true);
+            }).done(function (data) {
+                if (data != undefined && data && data.result != undefined && data.result == 1) {
+                    $this.text("Удалено");
+                    $this.prop('disabled', true);
+
+                    showInnerMessage('success', 'Успешно удалили картину из корзины');
+                    window.setTimeout(function () {
+                        location.reload();
+                    }, 3000);
+                } else {
+                    showInnerMessage('error', 'Произошли технические неполатки. Попробуйте еще раз через пару минут.');
+
+                }
             });
 
             location.reload();
+        });
+
+        // cart block clear button
+        $("button.clear_cart-btn").click(function (event) {
+            event.stopImmediatePropagation();
+            $.ajax({
+                url: "/ajax/cart/clear"
+            }).done(function (data) {
+                if (data != undefined && data && data.result != undefined && data.result == 1) {
+                    showInnerMessage('success', 'Успешно очистили корзину');
+
+                    window.setTimeout(function () {
+                        location.reload();
+                    }, 3000);
+                } else {
+                    showInnerMessage('error', 'Произошли технические неполатки. Попробуйте еще раз через пару минут.');
+                }
+            });
         });
 
         $('input[type=file]').change(function () {
