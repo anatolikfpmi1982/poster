@@ -73,7 +73,7 @@ class Underframe implements ImageInterface
     /**
      * @var Image
      * @ORM\OneToOne(targetEntity="Image", fetch="EAGER", cascade={"persist"})
-     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id", onDelete="CASCADE")
      *
      */
     private $image;

@@ -130,56 +130,56 @@ class Order
     /**
      * @var BannerMaterial
      * @ORM\ManyToOne(targetEntity="BannerMaterial")
-     * @ORM\JoinColumn(name="banner_material_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="banner_material_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $bannerMaterial;
 
     /**
      * @var FrameMaterial
      * @ORM\ManyToOne(targetEntity="FrameMaterial")
-     * @ORM\JoinColumn(name="frame_material_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="frame_material_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $frameMaterial;
 
     /**
      * @var Underframe
      * @ORM\ManyToOne(targetEntity="Underframe")
-     * @ORM\JoinColumn(name="underframe_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="underframe_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $underframe;
 
     /**
      * @var FrameColor
      * @ORM\ManyToOne(targetEntity="FrameColor")
-     * @ORM\JoinColumn(name="frame_color_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="frame_color_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $frameColor;
 
     /**
      * @var Frame
      * @ORM\ManyToOne(targetEntity="Frame")
-     * @ORM\JoinColumn(name="frame_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="frame_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $frame;
 
     /**
      * @var ModuleType
      * @ORM\ManyToOne(targetEntity="ModuleType")
-     * @ORM\JoinColumn(name="module_type_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="module_type_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $moduleType;
 
     /**
      * @var OwnPicture
      * @ORM\ManyToOne(targetEntity="OwnPicture")
-     * @ORM\JoinColumn(name="own_picture_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="own_picture_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $ownPicture;
 
     /**
      * @var Picture
      * @ORM\ManyToOne(targetEntity="Picture")
-     * @ORM\JoinColumn(name="picture_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="picture_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $picture;
 
