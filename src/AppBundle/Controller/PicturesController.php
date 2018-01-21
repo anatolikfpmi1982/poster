@@ -42,6 +42,7 @@ class PicturesController extends FrontController {
             $cartItem = $this->get( 'app.session_manager' )->getFromCart($request->get('cart_id'));
         }
 
+        $this->blocks = array_merge($this->blocks, ['LastVisited' => 6]);
         $this->pageSlug = $id;
         $this->pageType = 'picture';
         $this->id = $id;
