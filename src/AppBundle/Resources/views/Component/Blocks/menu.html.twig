@@ -16,6 +16,7 @@
     <input type="hidden" name="block_menu_active_category" id="block_menu_active_category" value="{{ active_category_id }}">
     <input type="hidden" name="block_menu_active_category_parent" id="block_menu_active_category_parent" value="{{ active_category_parent_id }}">
     <input type="hidden" name="block_menu_active_category_parent_parent" id="block_menu_active_category_parent_parent" value="{{ active_category_parent_parent_id }}">
+    {% set activeCategories = [active_category_id,active_category_parent_id, active_category_parent_parent_id ] %}
     {% for category in block %}
         <div class="col-md-12 container-fluid">
             {% if category.slug is defined and category.slug %}
@@ -33,7 +34,7 @@
             </div>
             {% if category.children is defined and category.children %}
                 <div class="row category-menu children-category-{{ category.id }}" id="children-category-{{ category.id }}"
-                     style="display:none;">
+                     style="display:{% if category.id in activeCategories %}block{% else %}none{% endif %};">
                     <div class="col-md-12 container-fluid">
                         {% for subcategory in category.children %}
                             {% if subcategory.slug is defined and subcategory.slug %}
@@ -51,7 +52,7 @@
                                     {{ subcategory.title }}
                                     {% if subcategory.children is defined and subcategory.children %}
                                         <div class="row category-menu children-subcategory-{{ category.id }}" id="children-subcategory-{{ subcategory.id }}"
-                                             style="display: none;">
+                                             style="display:{% if subcategory.id in activeCategories %}block{% else %}none{% endif %};">
                                             <div class="col-md-12 container-fluid">
                                                 {% for subsubcategory in subcategory.children %}
                                                     {% if subsubcategory.slug is defined and subsubcategory.slug %}

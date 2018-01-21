@@ -193,17 +193,17 @@ define(function (require, exports, module) {
             var id = $(this).data('id'), active_id = $('#block_menu_active_category').val();
             if (id !== parseInt(active_id)) {
                 window.location.replace($(this).data('url'));
-            } else {
-                var parent = $('div.children-category-' + id),
-                    isDisplay = parent.css('display');
-                $('div.category-menu').hide();
-                $('div.subcategory-menu').hide();
-
-                if (isDisplay == 'none') {
-                    parent.show();
-                } else {
-                    parent.hide();
-                }
+                //} else {
+                //    var parent = $('div.children-category-' + id),
+                //        isDisplay = parent.css('display');
+                //    $('div.category-menu').hide();
+                //    $('div.subcategory-menu').hide();
+                //
+                //    if (isDisplay == 'none') {
+                //        parent.show();
+                //    } else {
+                //        parent.hide();
+                //    }
             }
             return false;
         });
@@ -214,20 +214,20 @@ define(function (require, exports, module) {
             var id = $(this).data('id'), parent = $(this).data('parent-id'), active_id = $('#block_menu_active_category').val();
             if (id !== parseInt(active_id)) {
                 window.location.replace($(this).data('url'));
-            } else {
-                var category = $('div.children-category-' + parent),
-                    categorySub = $('div.children-subcategory-' + parent),
-                    isDisplay = categorySub.css('display');
-                $('div.category-menu').hide();
-                $('div.subcategory-menu').hide();
-                category.show();
-                if (isDisplay == 'none') {
-                    categorySub.show();
-                    $('div.children-subsubcategory-' + id).show();
-                } else {
-                    categorySub.hide();
-                    $('div.children-subsubcategory-' + id).show();
-                }
+                //} else {
+                //    var category = $('div.children-category-' + parent),
+                //        categorySub = $('div.children-subcategory-' + parent),
+                //        isDisplay = categorySub.css('display');
+                //    $('div.category-menu').hide();
+                //    $('div.subcategory-menu').hide();
+                //    category.show();
+                //    if (isDisplay == 'none') {
+                //        categorySub.show();
+                //        $('div.children-subsubcategory-' + id).show();
+                //    } else {
+                //        categorySub.hide();
+                //        $('div.children-subsubcategory-' + id).show();
+                //    }
             }
             return false;
         });
@@ -481,24 +481,11 @@ define(function (require, exports, module) {
             });
         });
 
-        setActiveCategoryInMenu();
         setShowBoard();
         setCartCount();
         setDeferredCount();
         setMyFilesCount();
     });
-
-    function onBefore(e, opts, outgoing, incoming, forward) {
-        console.log('In on before')
-    }
-
-    function setCostBoard() {
-
-    }
-
-    function setScreenBoard() {
-
-    }
 
     function setShowBoard() {
         var constructor = new ConstructorOverview();
@@ -546,33 +533,6 @@ define(function (require, exports, module) {
         });
         return false;
     }
-
-    function constructorUpdate() {
-
-    }
-
-    function constructorViewUpdate() {
-
-    }
-
-    function setActiveCategoryInMenu() {
-        var activeCategoryId = parseInt($('#block_menu_active_category').val()),
-            activeCategoryParentId = parseInt($('#block_menu_active_category_parent').val()),
-            activeCategoryParentParentId = parseInt($('#block_menu_active_category_parent_parent').val());
-        if (activeCategoryId != 0) {
-            $('div.category-menu').hide();
-            $('div.subcategory-menu').hide();
-            if (activeCategoryParentParentId != 0 && activeCategoryParentId != 0) {
-                $('div.children-category-' + activeCategoryParentParentId).show();
-                $('div.children-subcategory-' + activeCategoryParentParentId).show();
-                $('div.children-subsubcategory-' + activeCategoryParentId).show();
-            } else if (activeCategoryParentId != 0) {
-                $('div.children-category-' + activeCategoryParentId).show();
-            }
-        }
-        return false;
-    }
-
 
     function scrollFunction() {
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
