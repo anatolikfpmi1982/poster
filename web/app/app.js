@@ -607,6 +607,7 @@ define(function (require, exports, module) {
                 params['right_width'] = $(value).data('butt');
                 params['panel_max_width'] = $(value).data('max-width');
                 params['panel_max_height'] = $(value).data('max-height');
+                params['shadow'] = $(value).data('shadow');
                 constructor.init(params);
                 constructor.show();
             });
