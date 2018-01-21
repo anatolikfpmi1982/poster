@@ -134,21 +134,21 @@ class Picture implements ImageInterface
     /**
      * @var Image
      * @ORM\OneToOne(targetEntity="Image", fetch="EXTRA_LAZY", cascade={"persist"})
-     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $image;
 
     /**
      * @var Author
      * @ORM\ManyToOne(targetEntity="Author")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $author;
 
     /**
      * @var Popular
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Popular", inversedBy="pictures")
-     * @ORM\JoinColumn(name="popular_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="popular_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $popular;
 
@@ -183,7 +183,7 @@ class Picture implements ImageInterface
     /**
      * @var PictureForm
      * @ORM\ManyToOne(targetEntity="PictureForm")
-     * @ORM\JoinColumn(name="form_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="form_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $form;
 

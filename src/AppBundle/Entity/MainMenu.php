@@ -76,28 +76,28 @@ class MainMenu
     /**
      * @var Page
      * @ORM\OneToOne(targetEntity="Page")
-     * @ORM\JoinColumn(name="page_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="page_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $page;
 
     /**
      * @var Category3
      * @ORM\OneToOne(targetEntity="Category3")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $category;
 
     /**
      * @var Picture
      * @ORM\OneToOne(targetEntity="Picture")
-     * @ORM\JoinColumn(name="picture_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="picture_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $picture;
 
     /**
      * @var Image
      * @ORM\OneToOne(targetEntity="Image", fetch="EAGER", cascade={"persist"})
-     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id", onDelete="CASCADE")
      *
      */
     private $image;
