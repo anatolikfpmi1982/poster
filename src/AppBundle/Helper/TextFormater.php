@@ -15,7 +15,7 @@ class TextFormater {
         $strArray =  explode('<!--more-->', $text);
         if(count($strArray) >= 2) {
             $text = $strArray[0] . '</p>'
-                . '<a id="more_text" onclick="$(\'#more_more\').show();$(\'#more_text\').remove(); ">Подробнее...</a>'
+                . '<a id="more_text" onclick="$(\'#more_more\').show();$(\'#more_text\').remove(); "></a>'
                 . '<div id="more_more" style="display:none;"><p>' . $strArray[1] . '</div>';
         }
 
