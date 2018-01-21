@@ -38,26 +38,47 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository {
                 $inner = [
                     'id'    => $category->getId(),
                     'title' => $category->getTitle(),
-                    'slug'   => $category->getSlug(),
+                    'slug'  => $category->getSlug(),
                 ];
 
                 $parent1 = $category->getParentCategory();
-                $cause1 = $parent1 && $parent1->getId();
-                if ( $cause1 && !$parent1->getParentCategory()  ) {
-                    if ( ! array_key_exists( $category->getParentCategory()->getId(), $categories ) ) {
-                        $categories[ $category->getParentCategory()->getId() ]['children'] = [ ];
+                $cause1  = $parent1 instanceof Category3 && $parent1->isIsActive();
+                if ( $cause1 && ! $parent1->getParentCategory() ) {
+                    $parentId = $category->getParentCategory()->getId();
+                    if ( ! array_key_exists( $parentId, $categories ) ) {
+                        $categories[ $parentId ]['children'] = [ ];
                     }
-                    $categories[ $category->getParentCategory()->getId() ]['children'][ $category->getId() ] = $inner;
-                } else if ($cause1 && $parent1->getParentCategory() && $parent1->getParentCategory()->getId()){
-                    if ( ! array_key_exists( $parent1->getParentCategory()->getId(), $categories ) ) {
-                        $categories[ $parent1->getParentCategory()->getId() ]['children'] = [ ];
+
+                    $categories[ $parentId ]['children'][ $category->getId() ]['id']    = $category->getId();
+                    $categories[ $parentId ]['children'][ $category->getId() ]['title'] = $category->getTitle();
+                    $categories[ $parentId ]['children'][ $category->getId() ]['slug']  = $category->getSlug();
+
+                } else if ( $cause1 && $parent1->getParentCategory() instanceof Category3
+                            && $parent1->getParentCategory()->isIsActive() && $parent1->getParentCategory()->getParentCategory() === null
+                ) {
+                    $parentParentId = $parent1->getParentCategory()->getId();
+                    $parentId       = $category->getParentCategory()->getId();
+                    if ( ! array_key_exists( $parentParentId, $categories ) ) {
+                        $categories[ $parentParentId ]['children'] = [ ];
                     }
-                    if ( ! array_key_exists( $category->getParentCategory()->getId(), $categories[$parent1->getParentCategory()->getId()] ) ) {
-                        $categories[$parent1->getParentCategory()->getId()][ $category->getParentCategory()->getId() ]['children'] = [ ];
+                    if ( ! array_key_exists( 'children', $categories[ $parentParentId ] ) ||
+                         ! array_key_exists( $parentId, $categories[ $parentParentId ]['children'] )
+                    ) {
+                        $categories[ $parentParentId ]['children'][ $parentId ]['children'] = [ ];
                     }
-                    $categories[$parent1->getParentCategory()->getId()]['children'][ $category->getParentCategory()->getId() ]['children'][ $category->getId() ] = $inner;
-                } else {
-                    $categories[ $category->getId() ] = $inner;
+
+                    $categories[ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['id']    = $category->getId();
+                    $categories[ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['title'] = $category->getTitle();
+                    $categories[ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['slug']  = $category->getSlug();
+                } else if ( $parent1 === null ) {
+                    if ( array_key_exists( $category->getId(), $categories ) ) {
+                        $categories[ $category->getId() ]['id']    = $inner['id'];
+                        $categories[ $category->getId() ]['title'] = $inner['title'];
+                        $categories[ $category->getId() ]['slug']  = $inner['slug'];
+                    } else {
+                        $categories[ $category->getId() ] = $inner;
+                    }
+
                 }
             }
         }
