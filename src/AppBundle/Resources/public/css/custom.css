@@ -1812,8 +1812,7 @@ footer {
     border-width: 1px;
     border-style: solid;
     border-color: #00ACEE;
-    width: 20px;
-    padding: 0;
+    padding: 5px;
     margin: 0 0 0 3px;
     line-height: normal;
 }
@@ -1833,12 +1832,10 @@ footer {
 .btn-facebook {
     color: #fff;
     background-color: #4C67A1;
-    width: 20px !important;
-    margin: 0 !important;
     border-radius: 3px;
-    padding: 0;
+    padding: 4px 10px;
     font-size: 13px;
-    line-height: normal;
+
 }
 
 .btn-facebook:hover {
@@ -1856,11 +1853,10 @@ footer {
 .btn-vk {
     color: #fff;
     background-color: #4C67A1;
-    width: 20px;
     text-align: center;
     border-radius: 3px;
-    padding: 0;
-    line-height: normal;
+    padding: 4px 5px;
+
 }
 
 .btn-vk:hover, .btn-vk:focus {
@@ -1873,14 +1869,12 @@ footer {
 .btn-linkedin {
     color: #fff;
     background-color: #007bb6;
-    width: 20px !important;
     margin: 0 !important;
     border-radius: 3px;
-    padding: 0;
+    padding: 4px 7px;
     font-size: 13px;
-    line-height: normal;
-    height: 20px !important;
 }
+
 
 .btn-linkedin:hover {
     color: #fff;
@@ -1897,13 +1891,12 @@ footer {
 .btn-google {
     color: #fff;
     background-color: #dd4b39;
-    width: 20px !important;
     margin: 0 !important;
     border-radius: 3px;
-    padding: 0;
+    padding: 5px 10px;
     font-size: 13px;
     line-height: normal;
-    height: 20px !important;
+
 }
 
 .btn-google:hover {
