@@ -1389,6 +1389,29 @@ footer {
     margin: 5px;
 }
 
+.az-category-page-description-div #more_text {
+    margin: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    height: 10px;
+    width: 28px;
+    background: url(/bundles/app/images/more.png) no-repeat;
+    transition: background .3s ease 0s;
+    float: left;
+}
+
+
+.az-category-page-description-div #more_text:hover {
+    margin: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    height: 10px;
+    width: 28px;
+    background: url(/bundles/app/images/more_hover.png) no-repeat;
+    transition: background .3s ease 0s;
+}
 /**breadcrumb**/
 .breadcrumb {
     background-color: #ffffff;
