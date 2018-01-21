@@ -16,7 +16,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="col-md-4 container-fluid az-header-top">
+            <div class="col-md-{% if site_settings.enable_own_picture is defined and site_settings.enable_own_picture %}3{% else %}5{% endif %} container-fluid az-header-top">
                 <div class="row">
                     <div class="col-md-12 container az-header-address-div">
                         <div class="row az-header-address-container az-header-phone-number">
@@ -109,8 +109,9 @@
                         </div>
                     </div>
                 </div></div>
-            <div class="col-md-1 container-fluid az-header-top">
-                {% if site_settings.enable_own_picture is defined and site_settings.enable_own_picture %}
+            {% if site_settings.enable_own_picture is defined and site_settings.enable_own_picture %}
+            <div class="col-md-2 container-fluid az-header-top">
+
                 <div class="row">
                     <div class="col-md-12 az-header-download" data-toggle="modal" data-target="#myModal">
                         <div class="row">
@@ -173,9 +174,10 @@
                     </div>
 
 
-                    {% endif %}
+
                 </div>
-            </div>
+
+            </div> {% endif %}
 
             <!-- Basket -->
             <div class="col-md-2 container-fluid text-right">
