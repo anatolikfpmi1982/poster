@@ -3,6 +3,7 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * ReviewRepository
@@ -21,11 +22,21 @@ class ReviewRepository extends EntityRepository {
     public function getLatestReviews() {
         return $this->createQueryBuilder( 'review' )
                     ->where( 'review.isActive = :isActive' )
-                    ->orderBy( 'review.id', 'DESC' )
+                    ->orderBy( 'review.createdAt', 'DESC' )
                     ->setFirstResult( self::LATEST_OFFSET )
                     ->setMaxResults( self::LATEST_LIMIT )
                     ->setParameter( 'isActive', true )
                     ->getQuery()
                     ->getResult();
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    public function getActiveReviews() {
+        return $this->createQueryBuilder( 'review' )
+            ->where( 'review.isActive = :isActive' )
+            ->orderBy( 'review.createdAt', 'DESC' )
+            ->setParameter( 'isActive', true );
     }
 }
