@@ -63,6 +63,7 @@ class FrontController extends Controller {
         $this->data['active_menu'] = $this->menu;
         $this->data['site_settings'] = $this->getSiteSettings();
         $this->data['help_settings'] = $this->getHelpSettings();
+        $this->data['header_cart'] = $this->getCart();
     }
 
     /**
@@ -79,6 +80,26 @@ class FrontController extends Controller {
             $siteSettings['info_text'] = $this->get('helper.textformater')->formatMoreText($siteSettings['info_text']);
         }
         return $siteSettings;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getCart() {
+        $cart = $this->get( 'app.session_manager' )->getCart();
+        if( $cart) {
+            foreach($cart as $k => $v) {
+                if(!empty($v['picture_id'])) {
+                    $cart[$k]['picture'] = $this->em->getRepository('AppBundle:Picture')->findOneBy(['isActive' => true, 'id' => $v['picture_id']]);
+                } else {
+                    $cart[$k]['own_picture'] = $this->em->getRepository('AppBundle:OwnPicture')->findOneBy(['id' => $v['own_picture_id']]);
+                }
+            }
+        } else {
+            $cart = [];
+        }
+
+        return $cart;
     }
 
     /**

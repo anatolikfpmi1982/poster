@@ -199,42 +199,74 @@
                                     <!-- Modal content-->
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">X</button>
+                                            {% set header_total_price = 0 %}
+                                            {% set header_cart_count = 0 %}
+                                            {% if header_cart is defined and header_cart and header_cart|length > 0 %}
+                                                {% set header_cart_count = header_cart|length %}
+                                                {% for header_cart_item in header_cart %}
+                                                    {% set header_total_price = header_total_price + header_cart_item.price %}
+                                                {% endfor %}
+                                            {% endif %}
+                                            <button type="button" class="close" data-dismiss="modal">x</button>
                                             <form id="cart">
                                                 <div class="col-md-12 form-line">
                                                     <h4>Моя корзина</h4>
                                                     <div class="form-group ">
                                                         <div class="row">
                                                             <div class="col-md-6">
-                                                                Товаров 1
-                                                                на сумму: руб.
+                                                                Товаров {{ header_cart_count }}
+                                                                на сумму: {{ header_total_price }} руб.
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <button class="btn btn-sm" data-id="">Удалить из
-                                                                    корзины
+                                                                <button class="btn btn-sm clear_cart-btn">Очистить корзину
                                                                 </button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <div class="row az-ordersmall-cart">
-                                                            <div class="col-md-3">
-                                                                <a class="az-order-cart-title" href=""> Картина</a>
-                                                            </div>
-                                                            <div class="col-md-5">Название </br>
-                                                                Цена
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <button class="btn-xs" data-id="">Удалить</button>
-                                                            </div>
+                                                        {% if header_cart_count > 0 %}
+                                                            {% for cart_item in header_cart %}
+                                                            <div class="row az-ordersmall-cart">
+                                                                <div class="col-md-3">
+                                                                    <a class="az-order-cart-title"
+                                                                       href="{% if cart_item.picture is defined %}
+                                                                                {{ path('picture', {'id': cart_item.picture.id}) }}
+                                                                            {% else %}
+                                                                                {{ path('my_file_page', {'id': cart_item.own_picture.id}) }}
+                                                                            {% endif %}">
+                                                                        {% if cart_item.picture is defined %}
+                                                                            <img src="{{ '/files/pictures/small_thumb/' ~ cart_item.picture.image.getFilename() }}"/>
+                                                                        {% else %}
+                                                                            <img src="{{ '/files/pictures/small_thumb/' ~ cart_item.own_picture.image.getFilename() }}"/>
+                                                                        {% endif %}
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-md-5">
+                                                                    {% if cart_item.picture is defined %}
+                                                                        {{ cart_item.picture.title }}
+                                                                    {% else %}
+                                                                        Загруженная картина
+                                                                    {% endif %} </br>
+                                                                    {{ cart_item.price }}
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <button class="btn-xs delete_cart-btn" data-id="{{ cart_item.id }}">Удалить</button>
+                                                                </div>
 
-                                                        </div>
+                                                            </div>
+                                                            {% endfor %}
+                                                        {% else %}
+                                                            Ваша корзина пуста!
+                                                        {% endif %}
                                                     </div>
 
                                                     <div class="form-group">
                                                         <div class="row">
-                                                            <div class="col-md-12">Оформление заказа
+                                                            {% if header_cart_count > 0 %}
+                                                            <div class="col-md-12">
+                                                                <a href="{{ path( 'order' ) }}">Оформление заказа</a>
                                                             </div>
+                                                            {% endif %}
                                                         </div>
 
                                                     </div>

@@ -98,7 +98,7 @@ class SessionManagement {
     public function getFromCart( $id ) {
         $cart = $this->session->get( 'cart' );
 
-        return ! empty( $cart[ $id ] ) ? $cart[ $id ] : null;
+        return !empty( $cart[ $id ] ) ? $cart[ $id ] : null;
     }
 
     /**
@@ -234,5 +234,12 @@ class SessionManagement {
      */
     public function clearMyFiles() {
         $this->session->set( 'my_files', null );
+    }
+
+    /**
+     * Clear cart
+     */
+    public function clearCart() {
+        $this->session->set( 'cart', null );
     }
 }
