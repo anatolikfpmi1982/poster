@@ -29,9 +29,19 @@
         {% if pictureMain.image is defined and pictureMain.image %}
             <div class="col-md-4 container-fluid az-picture-page-sidebar-type-block-selector active" data-title="Баннер" data-value="1" data-type="banner">
                 <div class="row az-picture-page-type-div-img">
-                    <div class="col-md-12">
-                        <img src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}" class="az-picture-page-type-img"/>
-                    </div>
+                    {% set img = '/files/pictures/small_thumb/' ~ pictureMain.image.getFilename() %}
+                    {% set imgPath = pictureMain.image.getSmallThumbBaseFile() %}
+                    {% set imgSize = filesize(imgPath) %}
+                    <div class="col-md-12 show-constructor-img-lazy"
+                         data-src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}"
+                         data-id="21"
+                         data-type="Баннер"
+                         data-width={{ imgSize[0] - 12 }}
+                         data-height={{ imgSize[1] - 12 }}
+                         data-left=20
+                         data-top=2
+                         data-code="single|{horizontal|100-100-0}"
+                    ></div>
                 </div>
                 <div class="row text-center">
                     <div class="col-md-12">
@@ -66,9 +76,23 @@
                 <div class="row text-center">
                     <div class="col-12 container-fluid">
                         <div class="row text-center">
-                            <div class="col-md-12 az-picture-page-type-div-img">
-                                <img src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}" class="az-picture-page-type-img"/>
-                            </div>
+                            {% if moduleTypes is defined and moduleTypes and moduleTypes[0] is defined and moduleTypes[0] %}
+                                {% set pictureMainCode = moduleTypes[0].formula %}
+                            {% else %}
+                                {% set pictureMainCode = 'single|{horizontal|100-100-0}' %}
+                            {% endif %}
+                            <div class="col-md-12 az-picture-page-type-div-img show-constructor-img-lazy"
+                                 data-src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}"
+                                 data-id="21"
+                                 data-type="Панно"
+                                 data-width={{ imgSize[0] - 12 }}
+                                 data-height={{ imgSize[1] - 12 }}
+                                 data-left=16
+                                 data-top=2
+                                 data-pad-left=4
+                                 data-pad-top=4
+                                 data-code="{{ pictureMainCode }}"
+                            ></div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">

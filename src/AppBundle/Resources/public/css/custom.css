@@ -930,7 +930,12 @@ body {
     margin: 0 auto;
     padding: 15px;
     max-height: 246px;
+    height: 100%;
     max-width: 246px;
+}
+
+.az-main-popular-item-img:hover {
+    cursor: pointer;
 }
 
 .az-main-popular-item-header-type {
@@ -1521,9 +1526,11 @@ footer {
 .az-main-page-header-top-cells {
     margin-top: 20px;
 }
+
 .az-main-page-header-icon-cell {
     padding: 0;
 }
+
 .az-basket-title-img {
     width: 40px;
     height: 40px;
@@ -2127,7 +2134,7 @@ button.close:focus, .close:hover {
     padding: 0 0 0 5px;
 }
 
-.az-header-download-icon{
+.az-header-download-icon {
     padding: 0;
 }
 

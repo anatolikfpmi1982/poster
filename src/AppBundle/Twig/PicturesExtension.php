@@ -20,6 +20,7 @@ class PicturesExtension extends \Twig_Extension
         return array(
             new \Twig_SimpleFunction('getFrames', array($this, 'getFrames')),
             new \Twig_SimpleFunction('getSizes', array($this, 'getSizes')),
+            new \Twig_SimpleFunction('filesize', 'getimagesize'),
         );
     }
 

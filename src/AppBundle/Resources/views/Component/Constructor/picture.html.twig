@@ -3,37 +3,8 @@
 {% else %}
     {% set img = asset('bundles/app/images/default_picture.jpg') %}
 {% endif %}
-<div class="row text-center az-picture-page-picture-main-banner-div" style="height: {{ pictureThumbHeight + 60 }}px;">
-    <div class="col-md-6 thumb text-center">
-        <div class="az-picture-constructor-container">
-            <div style="left:30px;
-                    top:30px;
-                    width:{{ pictureThumbWidth }}px;
-                    height:{{ pictureThumbHeight }}px;
-                    background-image:url('{{ img }}');
-                    background-size:{{ pictureThumbWidth }}px {{ pictureThumbHeight }}px;
-                    background-position:0px 0px" class="module">
-                <div class="edge edger the_last" style="
-                        width:5px;
-                        background-image:url('{{ img }}');
-                        background-size:{{ pictureThumbWidth }}px {{ pictureThumbHeight }}px;
-                        background-position:5px 0px;
-                        right:0;
-                        box-shadow:rgba(0, 0, 0, 0.4) -3px 0px 3px;
-                        -webkit-transform:rotateY(180deg) skewY(-45deg);
-                        -webkit-transform-origin:right;
-                        transform:rotateY(180deg) skewY(-45deg);
-                        transform-origin:right"></div>
-                <div style="height:5px;
-                        background-image:url('{{ img }}');
-                        background-size:{{ pictureThumbWidth }}px {{ pictureThumbHeight }}px;
-                        bottom:0;
-                        box-shadow:rgba(0, 0, 0, 0.4) 0 3px 3px;
-                        background-position:0px 5px"
-                     class="edge edgeb"></div>
-            </div>
-        </div>
-    </div>
+<div class="row text-center az-picture-page-picture-main-banner-div">
+    <div class="col-md-12 az-picture-page-panel-img"></div>
 </div>
 <input type="hidden" name="input-az-picture-page-img-thumb-width" id="input-az-picture-page-img-thumb-width" value="{{ pictureThumbWidth }}">
 <input type="hidden" name="input-az-picture-page-img-thumb-height" id="input-az-picture-page-img-thumb-height" value="{{ pictureThumbHeight }}">
