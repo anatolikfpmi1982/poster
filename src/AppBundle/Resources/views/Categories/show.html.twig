@@ -49,7 +49,7 @@
                                 <div class="col-md-4 az-popular-item container az-category-next">
                                     <div class="row text-center az-main-popular-item-img-div">
                                         <div class="col-md-12 category-next">
-                                            <a class="az-nextpage" href=""><i class="glyphicon glyphicon-menu-right"></i><br/>Дальше</a>
+                                            <a class="az-nextpage" href="{{ path(pagination.getRoute(), pagination.getParams()|merge({'page': pagination.getCurrentPageNumber()+1})) }}"><i class="glyphicon glырyphicon-menu-right"></i><br/>Дальше</a>
                                         </div>
                                     </div>
                                 </div>
