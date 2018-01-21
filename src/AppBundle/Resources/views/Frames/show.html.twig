@@ -32,7 +32,7 @@
             {% else %}
                 {% set author_name = '-' %}
             {% endif %}
-            <div class="col-md-2">  {{ frame.width }}X {{ frame.height }}</div>
+            <div class="col-md-2">  {{ frame.width }} X {{ frame.height }} см</div>
             <div class="col-md-10"> {{ frame.material }}</div>
         </div>
 
@@ -63,7 +63,7 @@
                     {% if frame.images is defined and frame.images %}
                         {% for image in frame.images %}
                             {% if image.getFilename() %}
-                                {% set img = '/files/frames/mini_thumb/' ~ image.getFilename() %}
+                                {% set img = '/files/frames/thumb/' ~ image.getFilename() %}
                             {% else %}
                                 {% set img = asset('bundles/app/images/material_default.png') %}
                             {% endif %}
@@ -86,19 +86,16 @@
                 {% block images_list %} {% include 'AppBundle::Images/list.block.html.twig' %}-->
 
         <div class="col-md-12 az-frame-slide-about">
-            <p>Рама {{ frame.title }}</p>
-            <p>Артикул {{ frame.id }}</p>
-            <p>Цвет {{ frame.color }}</p>
-            <p>Материал {{ frame.material }}</p>
-            <p>Ширина {{ frame.width }}</p>
-            <p>Высота {{ frame.height }}</p>
+            <p>Рама "{{ frame.title }}"</p>
+            <p>Артикул: {{ frame.id }}</p>
+            <p>Цвет: {{ frame.color }}</p>
+            <p>Материал: {{ frame.material }}</p>
+            <p>Ширина: {{ frame.width }}</p>
+            <p>Высота: {{ frame.height }}</p>
         </div>
     </div>
     <div class="row az-visited-block az-category-page-visited-div">
         {% include('AppBundle:Component:Blocks/last.visited.html.twig') %}
-    </div>
-    <div class="row az-visited-block az-category-page-visited-div">
-        {% include('AppBundle:Component:Blocks/deferred.html.twig') %}
     </div>
     {% endblock %}
     {% endblock %}

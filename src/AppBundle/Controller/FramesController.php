@@ -22,6 +22,7 @@ class FramesController extends FrontController
      */
     public function listAction(Request $request)
     {
+        $this->blocks = array_merge($this->blocks, ['LastVisited' => 6]);
         $this->menu = '/frames';
         $this->pageSlug = '';
         $this->pageType = 'frames';
@@ -47,6 +48,7 @@ class FramesController extends FrontController
      */
     public function showAction($id)
     {
+        $this->blocks = array_merge($this->blocks, ['LastVisited' => 6]);
         $this->menu = '/frame/'. (int)$id;
         $this->pageSlug = $id;
         $this->pageType = 'frame';
