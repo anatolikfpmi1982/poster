@@ -1679,6 +1679,7 @@ footer {
     text-decoration: none;
     border: 2px solid #fd1200;
     float: left;
+
 }
 .next, .last {
     margin-right: 2px;
@@ -1694,7 +1695,6 @@ footer {
     text-align: center;
     background: #fff;
     text-decoration: none;
-    float: left;
     border: none;
 }
 
@@ -1712,7 +1712,8 @@ footer {
     text-align: center;
     background: #fff;
     text-decoration: none;
-    float: right;
+    float: left;
+
 }
 
 .current a, .page a {
