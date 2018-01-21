@@ -981,14 +981,13 @@ body {
 }
 
 .btn_az-main-popular_defer {
-    float: left;
+    margin: 0 auto 0 15px;
     font-size: 14px;
     background-color: #fd1200;
     color: #ffffff;
     box-shadow: none;
     display: inline-block;
-    padding: 15px 20px;
-    margin-bottom: 0;
+    padding: 10px 20px;
     font-weight: 400;
     line-height: 1.42857143;
     text-align: center;
@@ -1948,7 +1947,7 @@ footer {
 }
 
 .az-static-page-div {
-    min-height: 822px;
+    min-height: 780px;
 
 }
 
@@ -2243,7 +2242,7 @@ button.close:focus, .close:hover {
 
 .az-order-cart-item {
     border-left: 1px solid #eee;
-    min-height: 250px;
+    min-height: 200px;
     padding: 20px 15px;
     font-size: 12px;
 }
@@ -2264,13 +2263,8 @@ button.close:focus, .close:hover {
 
 .delete_order-bnt {
     font-size: 14px;
-    background-color: #fff;
-    color: #333;
     box-shadow: none;
     display: inline-block;
-    padding: 10px;
-    font-weight: 400;
-    line-height: 1;
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
@@ -2282,14 +2276,21 @@ button.close:focus, .close:hover {
     -ms-user-select: none;
     user-select: none;
     background-image: none;
-    border: 1px solid transparent;
-    border-color: #333;
-    border-radius: 3px;
     text-transform: lowercase;
-    margin: 10px;
-    float: none;
-    left: 50%;
+    margin: 10px auto;
+    background-color: #fd1200;
+    color: #ffffff;
+    padding: 10px 20px;
+    margin-bottom: 0;
+    font-weight: 400;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 5px;}
+
+.cart_cell {
+    margin: 10px auto;
 }
+
 
 .az-order-cart-title {
     padding-bottom: 15px;
