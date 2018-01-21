@@ -66,6 +66,12 @@ define(function (require, exports, module) {
             return false;
         });
 
+        $("div.az-main-popular-item-img").click(function (event) {
+            event.stopImmediatePropagation();
+            window.location.replace($(this).data('href'));
+            return false;
+        });
+
         // category page filter clear
         $("button.az-category-page-filter-clear-btn").click(function (event) {
             event.stopImmediatePropagation();
@@ -98,10 +104,16 @@ define(function (require, exports, module) {
         // Picture page
         // picture page constructor type
         $("div.az-picture-page-sidebar-type-block-selector").click(function (event) {
+            var formulaInput = $('input#az-picture-constructor-module-code-selected');
             event.stopImmediatePropagation();
             $('div.az-picture-page-sidebar-type-block-selector').removeClass('active');
             $(this).addClass('active');
             $('input[name="az-picture-page-type"][data-type="' + $(this).data('type') + '"]').prop('checked', true);
+            if ($("input.az-picture-page-constructor-type-radio:checked").data('title') == 'Баннер') {
+                formulaInput.val('single|{horizontal|100-100-0}');
+            } else {
+                formulaInput.val($('.az-picture-page-constructor-picture-module-type-img').first().data('code'));
+            }
             setShowBoard();
         });
 
@@ -489,10 +501,11 @@ define(function (require, exports, module) {
     }
 
     function setShowBoard() {
-        ConstructorOverview.init();
-        ConstructorOverview.buildConstructor();
-        ConstructorOverview.showPrice();
-        ConstructorOverview.show();
+        var constructor = new ConstructorOverview();
+        constructor.init();
+        constructor.buildConstructor();
+        constructor.showPrice();
+        constructor.show();
     }
 
     function setCartCount() {
@@ -601,5 +614,33 @@ define(function (require, exports, module) {
 
     }
 
+    function lazyLoad() {
+        var pictures = $('div.show-constructor-img-lazy'),
+            constructor;
+        if (pictures.length > 0) {
+            $.each(pictures, function (key, value) {
+                constructor = new ConstructorOverview();
+                constructor.debug = true;
+                var params = {};
+                params['type'] = $(value).data('type');
+                params['monitor'] = $(value);
+                params['imgPath'] = $(value).data('src');
+                params['picWidth'] = $(value).data('width');
+                params['picHeight'] = $(value).data('height');
+                params['left_deviation'] = $(value).data('left');
+                params['top_deviation'] = $(value).data('top');
+                params['formulaInput'] = $(value).data('code');
+                params['padding_left'] = $(value).data('pad-left');
+                params['padding_top'] = $(value).data('pad-top');
+                params['right_width'] = $(value).data('butt');
+                params['panel_max_width'] = $(value).data('max-width');
+                params['panel_max_height'] = $(value).data('max-height');
+                constructor.init(params);
+                constructor.show();
+            });
+        }
+    }
+
+    lazyLoad();
 });
 

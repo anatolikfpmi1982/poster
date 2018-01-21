@@ -852,6 +852,7 @@ body {
     font-size: 15px;
 }
 
+
 .az-sidebar-popular-item {
     margin: 10px;
 }
@@ -930,7 +931,12 @@ body {
     margin: 0 auto;
     padding: 15px;
     max-height: 246px;
+    height: 100%;
     max-width: 246px;
+}
+
+.az-main-popular-item-img:hover {
+    cursor: pointer;
 }
 
 .az-main-popular-item-header-type {
@@ -980,14 +986,13 @@ body {
 }
 
 .btn_az-main-popular_defer {
-    float: left;
+    margin: 0 auto 0 15px;
     font-size: 14px;
     background-color: #fd1200;
     color: #ffffff;
     box-shadow: none;
     display: inline-block;
-    padding: 15px 20px;
-    margin-bottom: 0;
+    padding: 10px 20px;
     font-weight: 400;
     line-height: 1.42857143;
     text-align: center;
@@ -1544,9 +1549,11 @@ footer {
 .az-main-page-header-top-cells {
     margin-top: 20px;
 }
+
 .az-main-page-header-icon-cell {
     padding: 0;
 }
+
 .az-basket-title-img {
     width: 40px;
     height: 40px;
@@ -1679,6 +1686,7 @@ footer {
     text-decoration: none;
     border: 2px solid #fd1200;
     float: left;
+
 }
 .next, .last {
     margin-right: 2px;
@@ -1694,7 +1702,6 @@ footer {
     text-align: center;
     background: #fff;
     text-decoration: none;
-    float: left;
     border: none;
 }
 
@@ -1712,7 +1719,8 @@ footer {
     text-align: center;
     background: #fff;
     text-decoration: none;
-    float: right;
+    float: left;
+
 }
 
 .current a, .page a {
@@ -1946,7 +1954,7 @@ footer {
 }
 
 .az-static-page-div {
-    min-height: 822px;
+    min-height: 780px;
 
 }
 
@@ -2073,7 +2081,7 @@ button.close:focus, .close:hover {
 
 .modal-dialog {
     width: 400px;
-    margin: 0 auto;
+    margin:  0 auto;
     font-weight: 400;
 }
 
@@ -2096,7 +2104,24 @@ button.close:focus, .close:hover {
     font-weight: 400;
     margin-bottom: 0;
 }
+.modal {
+    text-align: center;
+    padding: 0!important;
+}
 
+.modal:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -4px;
+}
+
+.modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
 .module::after {
     border-radius: 3px 0 0;
     box-shadow: 2px 2px 3px rgba(255, 255, 255, 0.5) inset;
@@ -2164,7 +2189,7 @@ button.close:focus, .close:hover {
     padding: 0 0 0 5px;
 }
 
-.az-header-download-icon{
+.az-header-download-icon {
     padding: 0;
 }
 
@@ -2224,7 +2249,7 @@ button.close:focus, .close:hover {
 
 .az-order-cart-item {
     border-left: 1px solid #eee;
-    min-height: 250px;
+    min-height: 200px;
     padding: 20px 15px;
     font-size: 12px;
 }
@@ -2245,13 +2270,8 @@ button.close:focus, .close:hover {
 
 .delete_order-bnt {
     font-size: 14px;
-    background-color: #fff;
-    color: #333;
     box-shadow: none;
     display: inline-block;
-    padding: 10px;
-    font-weight: 400;
-    line-height: 1;
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
@@ -2263,14 +2283,21 @@ button.close:focus, .close:hover {
     -ms-user-select: none;
     user-select: none;
     background-image: none;
-    border: 1px solid transparent;
-    border-color: #333;
-    border-radius: 3px;
     text-transform: lowercase;
-    margin: 10px;
-    float: none;
-    left: 50%;
+    margin: 10px auto;
+    background-color: #fd1200;
+    color: #ffffff;
+    padding: 10px 20px;
+    margin-bottom: 0;
+    font-weight: 400;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 5px;}
+
+.cart_cell {
+    margin: 10px auto;
 }
+
 
 .az-order-cart-title {
     padding-bottom: 15px;

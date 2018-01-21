@@ -1,4 +1,4 @@
-var ConstructorOverview = new function () {
+function ConstructorOverview() {
     this.type = "";
     this.size = "";
     this.material = "";
@@ -15,22 +15,59 @@ var ConstructorOverview = new function () {
     this.square = 0;
     this.perimeter = 0;
 
+    this.debug = false;
+
     // constructor panel
     this.panelNumber = 0;
     this.panelNumberVertical = 0;
-    this.padding_left = 20;
-    this.padding_top = 10;
-    this.right_width = 5;
-    this.top_deviation = 40;
-    this.left_deviation = 40;
+    this.padding_left = 0;
+    this.padding_top = 0;
+    this.right_width = 3;
+    this.top_deviation = 0;
+    this.left_deviation = 0;
     this.panel_type = 'horizontal';
     this.panelSizes = [];
     this.panelActiveBlockNum = 0;
     this.panelSettings = {};
     this.panelMainLeft = this.left_deviation;
     this.panelWidthForMultiVertical = 0;
+    this.panelTemplateDefault = 'single|{horizontal|100-100-0}';
+    this.monitor = '';
+    this.imgPath = '';
+    this.picWidth = 0;
+    this.picHeight = 0;
+    this.formulaInput = '';
+    this.maxWidth = 0;
+    this.maxHeight = 0;
 
-    this.init = function () {
+    this.init = function (params) {
+        if (params != undefined) {
+            this.type = params.type;
+            this.size = params.size;
+            this.material = params.material;
+            this.material_id = params.material_id;
+            this.thickness = params.thickness;
+            this.thickness_ratio = params.thickness_ratio;
+            this.frame = params.frame;
+            this.module = params.module;
+            this.monitor = params.monitor;
+            this.imgPath = params.imgPath;
+            this.picWidth = params.picWidth;
+            this.picHeight = params.picHeight;
+            this.formulaInput = params.formulaInput;
+            this.top_deviation = params.top_deviation != undefined ? params.top_deviation : this.top_deviation;
+            this.left_deviation = params.left_deviation != undefined ? params.left_deviation : this.left_deviation;
+            this.padding_left = params.padding_left != undefined ? params.padding_left : this.padding_left;
+            this.padding_top = params.padding_top != undefined ? params.padding_top : this.padding_top;
+            this.right_width = params.right_width != undefined ? params.right_width : this.right_width;
+            this.max_width = params.right_width != undefined ? params.panel_max_width : this.max_width;
+            this.max_height = params.right_width != undefined ? params.panel_max_height : this.max_height;
+        } else {
+            this.initDefault();
+        }
+    };
+
+    this.initDefault = function () {
         this.type = $("input.az-picture-page-constructor-type-radio:checked").data('title');
         this.size = $("select.az-picture-page-sidebar-size-select").val();
         var material = $("input.az-picture-page-constructor-material-radio:checked"),
@@ -50,6 +87,16 @@ var ConstructorOverview = new function () {
         this.mat_type = $("#az-picture-page-mat-type-select").val();
         this.mat_size = $("#az-picture-page-constructor-mat-size-select").val();
         this.module = $("#az-picture-constructor-module-selected").val();
+        this.monitor = $('div.az-picture-page-panel-img');
+        this.imgPath = $('#input-az-picture-page-panel-img').val();
+        this.picWidth = parseInt($('#input-az-picture-page-img-thumb-width').val());
+        this.picHeight = parseInt($('#input-az-picture-page-img-thumb-height').val());
+        this.formulaInput = $('input#az-picture-constructor-module-code-selected').val();
+        this.padding_left = 20;
+        this.padding_top = 10;
+        this.right_width = 5;
+        this.top_deviation = 40;
+        this.left_deviation = 40;
     };
 
     this.show = function () {
@@ -75,6 +122,9 @@ var ConstructorOverview = new function () {
             case 'Баннер':
                 banner.show();
                 picture.hide();
+                this.formulaInput = this.panelTemplateDefault;
+                this.getPanelInfo();
+                this.buildPanelMonitor();
                 panel.hide();
                 break;
             case 'В раме':
@@ -94,13 +144,14 @@ var ConstructorOverview = new function () {
 
     this.buildPanelMonitor = function () {
         var settings = this.panelSettings,
-            that = this,
-            monitor = $('div.az-picture-page-panel-img');
+            that = this;
 
-        monitor.html('');
+        this.calculateWidthAndHeight();
+        this.monitor.html('');
         this.panelMainLeft = this.left_deviation;
         this.panelSizes = [];
         that.panelActiveBlockNum = 0;
+
         Object.keys(settings).map(function (objectKey, index) {
             var value = settings[objectKey];
             that.showPanelMonitor(value.type, value.data, index);
@@ -111,14 +162,39 @@ var ConstructorOverview = new function () {
         this.showPanelSizes();
     };
 
+    this.calculateWidthAndHeight = function () {
+        if (this.max_width > 0 && this.max_height > 0) {
+            var isHeight = this.picHeight > this.picWidth;
+            if (isHeight) {
+                if (this.picHeight + this.right_width > this.max_height) {
+                    this.picWidth = Math.round((this.picWidth * (this.max_height - this.right_width)) / this.picHeight);
+                    this.picHeight = this.max_height - this.right_width;
+                } else {
+
+                }
+
+                this.left_deviation = Math.round((this.max_width - this.picWidth ) / 2);
+            } else {
+                if (this.picWidth + this.right_width > this.max_width) {
+                    this.picHeight = Math.round((this.picHeight * (this.max_width - this.right_width)) / this.picWidth);
+                    this.picWidth = this.max_width - this.right_width;
+                } else {
+
+                }
+
+                this.top_deviation = Math.round((this.max_height - this.picHeight ) / 2);
+            }
+        }
+    };
+
     this.showPanelMonitor = function (type, settings, mainIndex) {
 
-        var imgPath = $('#input-az-picture-page-panel-img').val(),
-            picWidth = parseInt($('#input-az-picture-page-img-thumb-width').val()),
-            picHeight = parseInt($('#input-az-picture-page-img-thumb-height').val()),
+        var imgPath = this.imgPath,
+            picWidth = this.picWidth,
+            picHeight = this.picHeight,
             deviation = 0,
-            deviation_top = 0,
-            monitor = $('div.az-picture-page-panel-img');
+            deviation_top = 0;
+
         var right_width = this.right_width,
             padding_left = this.padding_left,
             padding_top = this.padding_top,
@@ -129,7 +205,7 @@ var ConstructorOverview = new function () {
                 (picHeight + (2 * top_deviation) ) :
                 (picHeight + (2 * top_deviation) + this.panelNumberVertical * top_deviation ),
             mainTop = top_deviation,
-            size = this.size.split('x'),
+            size = this.size != undefined ? this.size.split('x') : [],
             that = this;
 
         Object.keys(settings).map(function (objectKey, index) {
@@ -205,6 +281,13 @@ var ConstructorOverview = new function () {
                 }
             }
 
+            if (that.debug) {
+                console.log('showWidth', showWidth + 'px');
+                console.log('showHeight', showHeight + 'px');
+                console.log('newWidth', newWidth + 'px');
+                console.log('newHeight', newHeight + 'px');
+            }
+
             var divMain = $(newDivString);
             divMain.addClass('module').addClass('constructor-block' + that.panelActiveBlockNum);
             divMain.css('left', that.panelMainLeft);
@@ -240,7 +323,7 @@ var ConstructorOverview = new function () {
             divDown.css('background-position', '-' + deviationRight + 'px 5px');
             divDown.appendTo(divMain);
 
-            divMain.appendTo(monitor);
+            divMain.appendTo(that.monitor);
 
             switch (panel_type) {
                 case 'vertical':
@@ -263,7 +346,7 @@ var ConstructorOverview = new function () {
     };
 
     this.getPanelInfo = function () {
-        var panel_code = $('input#az-picture-constructor-module-code-selected').val(),
+        var panel_code = this.formulaInput,
             panelObject = {},
             typeArr = panel_code.split('|'),
             panelArray = [],
@@ -309,6 +392,9 @@ var ConstructorOverview = new function () {
             }
         });
         this.panelSettings = panelObject;
+        if (this.debug) {
+            console.log('this.panelSettings', this.panelSettings);
+        }
     };
 
     this.showPanelSizes = function () {
@@ -425,7 +511,7 @@ var ConstructorOverview = new function () {
             banner_add_price = $('input#constructor_banner_' + this.material_id + '_additional_price').val(),
             banner_add_ratio = $('input#constructor_banner_' + this.material_id + '_additional_ratio').val(),
             panel_ratio = $('input#az-picture-constructor-module-ratio-selected').val(),
-            panel_code = $('input#az-picture-constructor-module-code-selected').val(),
+            panel_code = this.formulaInput,
             picture_price = $('#constructor_picture_price').val(),
             picture_ratio = $('#constructor_picture_ratio').val();
 
