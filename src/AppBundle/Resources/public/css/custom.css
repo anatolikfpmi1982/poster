@@ -613,10 +613,6 @@ footer {
 
 }
 
-.az-picture-page-sidebar-thickness-div-select img {
-    width: 90%;
-}
-
 .az-picture-page-sidebar-thickness-div-select .col-md-4 {
     height: 100px;
     padding: 4px 5px;
@@ -630,7 +626,7 @@ footer {
 
 }
 
-.az-picture-page-sidebar-thickness-div-select .col-md-4:active {
+.az-picture-page-sidebar-thickness-div-select .col-md-4.active {
     border: 1px solid #fd1200;
     cursor: pointer;
     padding-top: 3px;
@@ -655,6 +651,10 @@ footer {
 
 .az-picture-page-material-banner-img {
     width: 100%;
+    padding: 2px;
+}
+
+.az-picture-page-thickness-img {
     padding: 2px;
 }
 

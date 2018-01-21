@@ -26,6 +26,7 @@ class PictureRepository extends EntityRepository {
         $qb = $this->createQueryBuilder( 'p' );
         return $qb->innerJoin( 'p.categories', 'c' )// Inner Join with categories
                     ->innerJoin( 'p.form', 'f' )// Inner Join with picture forms
+                    ->leftJoin('p.categoriesPictures', 'cp')
                     ->where( $qb->expr()->in('c.id', $categoryIds) )
                     ->andWhere( 'p.isActive = true' );
     }

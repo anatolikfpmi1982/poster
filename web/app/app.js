@@ -113,6 +113,22 @@ define(function (require, exports, module) {
             setShowBoard();
         });
 
+        $("div.az-picture-page-sidebar-thickness-block-selector").click(function (event) {
+            event.stopImmediatePropagation();
+            $('div.az-picture-page-sidebar-thickness-block-selector').removeClass('active');
+            $(this).addClass('active');
+            $('input[name="az-picture-page-thickness"][data-id="' + $(this).data('id') + '"]').prop('checked', true);
+            setShowBoard();
+        });
+
+        $("div.az-picture-page-sidebar-material-picture-block-selector").click(function (event) {
+            event.stopImmediatePropagation();
+            $('div.az-picture-page-sidebar-material-picture-block-selector').removeClass('active');
+            $(this).addClass('active');
+            $('input[name="az-picture-page-constructor-material-picture-radio"][data-id="' + $(this).data('id') + '"]').prop('checked', true);
+            setShowBoard();
+        });
+
         // picture page constructor frame
         $("img.az-picture-page-constructor-picture-thickness-img").click(function (event) {
             event.stopImmediatePropagation();
@@ -136,19 +152,6 @@ define(function (require, exports, module) {
         $("li.az-picture-page-constructor-frame-color-item").click(function (event) {
             event.stopImmediatePropagation();
             $('#az-picture-constructor-frame-color-selected').val($(this).data('name'));
-            setShowBoard();
-        });
-
-        // picture page constructor material picture
-        $("input.az-picture-page-constructor-material-picture-radio").click(function (event) {
-            event.stopImmediatePropagation();
-            setShowBoard();
-        });
-
-        // Picture page
-        // picture page constructor thickness
-        $("input.z-picture-page-thickness").click(function (event) {
-            event.stopImmediatePropagation();
             setShowBoard();
         });
 
@@ -303,8 +306,8 @@ define(function (require, exports, module) {
                 sizes = $("#az-picture-page-constructor-size-select").val(),
                 banner_material_id = $("input.az-picture-page-constructor-material-radio:checked").data("id"),
                 banner_material_value = $("input.az-picture-page-constructor-material-radio:checked").data('title'),
-                underframe_id = $("input.z-picture-page-thickness:checked").data("id"),
-                underframe_value = $("input.z-picture-page-thickness:checked").val(),
+                underframe_id = $("input.az-picture-page-thickness:checked").data("id"),
+                underframe_value = $("input.az-picture-page-thickness:checked").val(),
                 frame_material_id = $("input.az-picture-page-constructor-material-picture-radio:checked").data("id"),
                 frame_material_value = $("input.az-picture-page-constructor-material-picture-radio:checked").data('title'),
                 frame_id = $("#az-picture-constructor-frame-id-selected").val(),
