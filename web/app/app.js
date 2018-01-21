@@ -464,7 +464,7 @@ define(function (require, exports, module) {
             });
 
             $.ajax({
-                url: '/app_dev.php/ajax/picture/upload',
+                url: '/ajax/picture/upload',
                 type: 'POST',
                 data: data,
                 cache: false,

@@ -22,7 +22,7 @@ class ReviewsController extends FrontController {
      */
     public function indexAction( Request $request ) {
         $em           = $this->get( 'doctrine.orm.entity_manager' );
-        $queryBuilder = $em->getRepository( 'AppBundle:Review' )->createQueryBuilder( 'r' )->where( 'r.isActive = true' );
+        $queryBuilder = $em->getRepository( 'AppBundle:Review' )->getActiveReviews();
         $query        = $queryBuilder->getQuery();
 
         $paginator  = $this->get( 'knp_paginator' );
