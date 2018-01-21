@@ -35,9 +35,22 @@ class CategoriesCRUDController extends BaseController
 
         $this->admin->checkAccess('edit', $object);
 
+        $ids = [];
         $pictures = $object->getPictures();
         foreach($pictures as $k => $v) {
             $ids[] = $v->getId();
+        }
+        $children = $object->getChildren();
+        if(count($children) > 0) {
+            foreach ($children as $k => $v) {
+                $cPictures = $v->getPictures();
+                foreach ($cPictures as $k2 => $v2) {
+                    if(!in_array($v2->getId(), $ids)) {
+                        $pictures[] = $v2;
+                        $ids[] = $v2->getId();
+                    }
+                }
+            }
         }
 
         shuffle($ids);

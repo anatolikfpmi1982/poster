@@ -9,7 +9,7 @@
 <div class="row az-order-cart container-fluid">
 
     <div class="col-md-3 text-center az-order-cart-item az-cart-img-cell">
-        {% if not item.own_picture %}
+        {% if item.own_picture is not defined or not item.own_picture %}
             <a href="{{ path('picture', {'id': item.picture_id}) }}"><img src="{{ img }}" class="az-order-cart-item-img"></a>
         {% else %}
             <img src="{{ img }}" class="az-order-cart-item-img">
@@ -19,7 +19,7 @@
             <div class="col-md-3 az-order-cart-item">
                 <div class="row">
                     <div class="col-md-12">
-                        {% if item.own_picture %}
+                        {% if item.own_picture is defined and item.own_picture %}
                             Загруженная картина
                         {% else %}
                             <a  class="az-order-cart-title" href="{{ path('picture', {'id': item.picture_id}) }}">"{{ item.picture.title }}" </a>
@@ -63,11 +63,11 @@
             <div class="row">
                 <div class="col-md-6 text-right container-fluid az_btn_postpone">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 cart_cell">
                             <button class="btn_az-main-popular_defer delete_order-bnt" data-id="{{ item.id }}">Удалить из корзины</button>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 cart_cell">
                                 <a class="btn_az-main-popular_defer edit_order-bnt" data-id="{{ item.id }}" href="{{ path('picture', {'id': item.picture_id, 'cart_id': item.id}) }}">
                                     Изменить
                                 </a>
