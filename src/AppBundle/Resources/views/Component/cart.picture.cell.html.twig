@@ -1,7 +1,7 @@
 {#{{ dump(item) }}#}
-{% if item.picture.image and item.picture.image.getFilename() %}
+{% if item.picture.image is defined and item.picture.image.getFilename() %}
     {% set img = '/files/pictures/thumb/' ~ item.picture.image.getFilename() %}
-{% elseif item.own_picture.image and item.own_picture.image.getFilename() %}
+{% elseif item.own_picture.image is defined and item.own_picture.image.getFilename() %}
     {% set img = '/files/pictures/thumb/' ~ item.own_picture.image.getFilename() %}
 {% else %}
     {% set img = asset('bundles/app/images/default_picture.jpg') %}
@@ -63,12 +63,17 @@
             <div class="row">
                 <div class="col-md-6 text-right container-fluid az_btn_postpone">
                     <div class="row">
-                        <div class="col-md-12 cart_cell">
-                            <button class="btn_az-main-popular_defer delete_order-bnt" data-id="{{ item.id }}">Удалить из корзины</button>
+                        <div class="col-md-12">
+                            <button class="btn_az-main-popular_defer delete_order-bnt delete_cart-btn" data-id="{{ item.id }}">Удалить из корзины</button>
                         </div>
                         <div class="row">
                             <div class="col-md-12 cart_cell">
-                                <a class="btn_az-main-popular_defer edit_order-bnt" data-id="{{ item.id }}" href="{{ path('picture', {'id': item.picture_id, 'cart_id': item.id}) }}">
+                                <a class="btn_az-main-popular_defer edit_order-bnt" data-id="{{ item.id }}"
+                                   href="{% if item.picture is defined %}
+                                            {{ path('picture', {'id': item.picture_id, 'cart_id': item.id}) }}
+                                            {% else %}
+                                            {{ path('my_file_page', {'id': item.own_picture_id, 'cart_id': item.id}) }}
+                                            {% endif %}">
                                     Изменить
                                 </a>
                             </div>

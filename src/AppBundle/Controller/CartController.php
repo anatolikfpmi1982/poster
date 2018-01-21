@@ -62,7 +62,19 @@ class CartController extends FrontController {
         $this->get( 'app.session_manager' )->deleteFromCart( $id );
 
         // parameters to template
-        return new JsonResponse(array('result' => 'success'));
+        return new JsonResponse(array('result' => 1));
+    }
+
+    /**
+     * @Route("/ajax/cart/clear", name="cart_clear")
+     *
+     * @return Response
+     */
+    public function clearCartAction() {
+        $this->get( 'app.session_manager' )->clearCart();
+
+        // parameters to template
+        return new JsonResponse(array('result' => 1));
     }
 
     /**
