@@ -24,19 +24,12 @@ class OrderController extends FrontController {
      * @throws BadRequestHttpException
      */
     public function showAction(Request $request) {
-        $em = $this->get('doctrine.orm.entity_manager');
+        $this->menu = '/order';
+        $this->pageSlug = '';
+        $this->pageType = 'order';
+        $this->doBlocks();
 
-        $form = $this->createFormBuilder()
-            ->add('fullname', TextType::class, ['label' => 'Ф.И.О. *', 'required' => true])
-            ->add('email', EmailType::class, ['label' => 'Email *', 'required' => true])
-            ->add('phone', TextType::class, ['label' => 'Телефон *', 'required' => true])
-            ->add('city', TextType::class, ['label' => 'Город *', 'required' => true])
-            ->add('address', TextType::class, ['label' => 'Адрес *', 'required' => true])
-            ->add('company', TextType::class, ['label' => 'Компания', 'required' => false])
-            ->add('comment', TextareaType::class, ['label' => 'Комментарий к заказу', 'required' => false])
-            ->add('conditions', CheckboxType::class, ['label' => 'Я соглашаюсь с данными условиями работы *', 'required' => true])
-            ->add('save', SubmitType::class, array('label' => 'Заказать'))
-            ->getForm();
+        $form = $this->getOrderForm();
 
         if($request->getMethod() === 'POST') {
             $form->handleRequest( $request );
@@ -56,9 +49,9 @@ class OrderController extends FrontController {
         if( $cart) {
             foreach($cart as $k => $v) {
                 if(!empty($v['picture_id'])) {
-                    $cart[$k]['picture'] = $em->getRepository('AppBundle:Picture')->findOneBy(['isActive' => true, 'id' => $v['picture_id']]);
+                    $cart[$k]['picture'] = $this->em->getRepository('AppBundle:Picture')->findOneBy(['isActive' => true, 'id' => $v['picture_id']]);
                 } else {
-                    $cart[$k]['own_picture'] = $em->getRepository('AppBundle:OwnPicture')->findOneBy(['id' => $v['own_picture_id']]);
+                    $cart[$k]['own_picture'] = $this->em->getRepository('AppBundle:OwnPicture')->findOneBy(['id' => $v['own_picture_id']]);
                 }
                 $totalPrice += (float)$v['price'];
             }
@@ -66,10 +59,7 @@ class OrderController extends FrontController {
             $cart = [];
         }
 
-        $this->menu = '/order';
-        $this->pageSlug = '';
-        $this->pageType = 'order';
-        $this->doBlocks();
+
         $this->data['cart'] = $cart;
         $this->data['form'] = $form->createView();
         $this->data['total_price'] = $totalPrice;
@@ -78,31 +68,47 @@ class OrderController extends FrontController {
         return $this->render('AppBundle:Cart:cart.html.twig', $this->data);
     }
 
+    /**
+     * @Route("/order/done", name="order_done")
+     *
+     * @return Response
+     */
+    public function doneAction() {
+        $this->menu = '/order';
+        $this->pageSlug = '';
+        $this->pageType = 'order';
+        $this->doBlocks();
+
+        return $this->render('AppBundle:Cart:done.html.twig', $this->data);
+    }
+
+    /**
+     * @param $form
+     */
     private function saveForm($form) {
         $em = $this->get('doctrine.orm.entity_manager');
         $data = $form->getData();
 
         $cart = $this->get( 'app.session_manager' )->getCart();
-        if(!empty($cart)) {
+        if($cart) {
             $orderId = $em->getRepository('AppBundle:Order')->getLastOrderId();
             foreach ($cart as $v) {
-                $record = new Order();
-                $record->setGroupId($orderId + 1);
-                $record->setFullname($data['fullname']);
-                $record->setEmail($data['email']);
-                $record->setPhone($data['phone']);
-                $record->setCity($data['city']);
-                $record->setAddress($data['address']);
-                $record->setCompany($data['company']);
-                $record->setComment($data['comment']);
-                $record->setCreatedAt(new \DateTime());
-                $record->setUpdatedAt(new \DateTime());
-
                 $sizes = explode('x', $v['sizes']);
-                $record->setHeight($sizes[0]);
-                $record->setWidth($sizes[1]);
-                $record->setPrice($v['price']);
-                $record->setType($v['type_id']);
+                $record = new Order();
+                $record->setGroupId($orderId + 1)
+                    ->setFullname($data['fullname'])
+                    ->setEmail($data['email'])
+                    ->setPhone($data['phone'])
+                    ->setCity($data['city'])
+                    ->setAddress($data['address'])
+                    ->setCompany($data['company'])
+                    ->setComment($data['comment'])
+                    ->setCreatedAt(new \DateTime())
+                    ->setUpdatedAt(new \DateTime())
+                    ->setHeight($sizes[0])
+                    ->setWidth($sizes[1])
+                    ->setPrice($v['price'])
+                    ->setType($v['type_id']);
 
                 if($v['own_picture_id']) {
                     $picture = $em->getRepository('AppBundle:OwnPicture')->findOneBy(['id' => $v['own_picture_id']]);
@@ -112,27 +118,31 @@ class OrderController extends FrontController {
                     $record->setPicture($picture);
                 }
 
-                if($v['type_id'] == 'banner') {
-                    $bannerMaterial = $em->getRepository('AppBundle:BannerMaterial')->findOneBy(['id' => $v['banner_material_id']]);
-                    $record->setBannerMaterial($bannerMaterial);
+                switch($v['type_id']){
+                    case 'banner':
+                        $bannerMaterial = $em->getRepository('AppBundle:BannerMaterial')->findOneBy(['id' => $v['banner_material_id']]);
+                        $record->setBannerMaterial($bannerMaterial);
 
-                    $underframe = $em->getRepository('AppBundle:Underframe')->findOneBy(['id' => $v['underframe_id']]);
-                    $record->setUnderframe($underframe);
-                } elseif($v['type_id'] == 'frame') {
-                    $frame = $em->getRepository('AppBundle:Frame')->findOneBy(['id' => $v['frame_id']]);
-                    $record->setFrame($frame);
+                        $underframe = $em->getRepository('AppBundle:Underframe')->findOneBy(['id' => $v['underframe_id']]);
+                        $record->setUnderframe($underframe);
+                        break;
+                    case 'frame':
+                        $frame = $em->getRepository('AppBundle:Frame')->findOneBy(['id' => $v['frame_id']]);
+                        $record->setFrame($frame);
 
-                    $frameMaterial = $em->getRepository('AppBundle:FrameMaterial')->findOneBy(['id' => $v['frame_material_id']]);
-                    $record->setFrameMaterial($frameMaterial);
-                } elseif($v['type_id'] == 'module') {
-                    $bannerMaterial = $em->getRepository('AppBundle:BannerMaterial')->findOneBy(['id' => $v['banner_material_id']]);
-                    $record->setBannerMaterial($bannerMaterial);
+                        $frameMaterial = $em->getRepository('AppBundle:FrameMaterial')->findOneBy(['id' => $v['frame_material_id']]);
+                        $record->setFrameMaterial($frameMaterial);
+                        break;
+                    case 'module':
+                        $bannerMaterial = $em->getRepository('AppBundle:BannerMaterial')->findOneBy(['id' => $v['banner_material_id']]);
+                        $record->setBannerMaterial($bannerMaterial);
 
-                    $underframe = $em->getRepository('AppBundle:Underframe')->findOneBy(['id' => $v['underframe_id']]);
-                    $record->setUnderframe($underframe);
+                        $underframe = $em->getRepository('AppBundle:Underframe')->findOneBy(['id' => $v['underframe_id']]);
+                        $record->setUnderframe($underframe);
 
-                    $moduleType = $em->getRepository('AppBundle:ModuleType')->findOneBy(['id' => $v['module_type_id']]);
-                    $record->setModuleType($moduleType);
+                        $moduleType = $em->getRepository('AppBundle:ModuleType')->findOneBy(['id' => $v['module_type_id']]);
+                        $record->setModuleType($moduleType);
+                        break;
                 }
 
                 $em->persist($record);
@@ -145,16 +155,19 @@ class OrderController extends FrontController {
     }
 
     /**
-     * @Route("/order/done", name="order_done")
-     *
-     * @return Response
+     * @return \Symfony\Component\Form\FormInterface
      */
-    function doneAction() {
-        $this->menu = '/order';
-        $this->pageSlug = '';
-        $this->pageType = 'order';
-        $this->doBlocks();
-
-        return $this->render('AppBundle:Cart:done.html.twig', $this->data);
+    protected function getOrderForm () {
+        return $this->createFormBuilder()
+                            ->add('fullname', TextType::class, ['label' => 'Ф.И.О. *', 'required' => true])
+                            ->add('email', EmailType::class, ['label' => 'Email *', 'required' => true])
+                            ->add('phone', TextType::class, ['label' => 'Телефон *', 'required' => true])
+                            ->add('city', TextType::class, ['label' => 'Город *', 'required' => true])
+                            ->add('address', TextType::class, ['label' => 'Адрес *', 'required' => true])
+                            ->add('company', TextType::class, ['label' => 'Компания', 'required' => false])
+                            ->add('comment', TextareaType::class, ['label' => 'Комментарий к заказу', 'required' => false])
+                            ->add('conditions', CheckboxType::class, ['label' => 'Я соглашаюсь с данными условиями работы *', 'required' => true])
+                            ->add('save', SubmitType::class, array('label' => 'Заказать'))
+                            ->getForm();
     }
 }

@@ -1876,7 +1876,6 @@ footer {
     font-size: 13px;
 }
 
-
 .btn-linkedin:hover {
     color: #fff;
     background-color: #007bb6;
@@ -2255,8 +2254,8 @@ button.close:focus, .close:hover {
 }
 
 .az-order-cart-item-img {
-
     width: 100%;
+    height: 165px;
     text-align: center;
     margin: 0 auto;
     padding: 15px;
