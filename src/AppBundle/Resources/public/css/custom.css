@@ -232,8 +232,16 @@ div[class*="children-subsubcategory-"]:hover {
     color: #ffffff;
     padding: 5px 20px;
 }
+a:-webkit-any-link {
+    text-decoration: none;
+}
 
-.btn.focus, .btn:focus, .btn:hover {
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus{
+    outline: none;
+    outline-offset: 0;
+    box-shadow: none;
+}
+.btn.focus, .btn:focus, .btn:hover .btn:visited {
     background-color: #ffffff;
     border: 1px solid #fd1200;
     color: #fd1200;
@@ -343,7 +351,6 @@ footer {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
     padding: 0;
     display: block;
 }
@@ -1010,12 +1017,6 @@ body {
     font-size: 13px;
 }
 
-.btn.focus, .btn:focus, .btn:hover {
-    background-color: #ffffff;
-    border: 1px solid #fd1200;
-    color: #fd1200;
-    background-image: none;
-}
 
 button, input, optgroup, select, textarea {
     color: #ffffff;
@@ -2579,4 +2580,13 @@ button.close:focus, .close:hover {
 
 .nounderline {
     text-decoration: none;
+}
+
+.owl-carousel .owl-item img {
+    cursor: pointer;
+}
+
+.owl-carousel .owl-item img:hover {
+    cursor: pointer;
+    border: 1px solid #fd1200;
 }
