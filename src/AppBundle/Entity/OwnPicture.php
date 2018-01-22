@@ -68,6 +68,13 @@ class OwnPicture implements ImageInterface
     private $image;
 
     /**
+     * @var PictureForm
+     * @ORM\ManyToOne(targetEntity="PictureForm")
+     * @ORM\JoinColumn(name="form_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $form;
+
+    /**
      * Return string entity name from admin.
      *
      * @return string
@@ -206,5 +213,29 @@ class OwnPicture implements ImageInterface
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set form
+     *
+     * @param PictureForm $form
+     *
+     * @return OwnPicture
+     */
+    public function setForm(PictureForm $form = null)
+    {
+        $this->form = $form;
+
+        return $this;
+    }
+
+    /**
+     * Get form
+     *
+     * @return PictureForm
+     */
+    public function getForm()
+    {
+        return $this->form;
     }
 }
