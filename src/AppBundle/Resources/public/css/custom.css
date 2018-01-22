@@ -37,6 +37,8 @@ body {
 
 }
 
+
+
 /** basket**/
 
 .az-header-basket-count-text {
@@ -748,7 +750,7 @@ body {
 
 /** header contacts**/
 .az-header-address-div {
-    padding: 0 30px 0 20px;
+    padding: 0 30px 0 40px;
 }
 
 .az-header-address-container {
@@ -851,6 +853,7 @@ body {
     text-transform: uppercase;
     font-size: 15px;
 }
+
 
 .az-sidebar-popular-item {
     margin: 10px;
@@ -1405,6 +1408,7 @@ footer {
     float: left;
 }
 
+
 .az-category-page-description-div #more_text:hover {
     margin: 5px;
     display: inline-block;
@@ -1415,7 +1419,6 @@ footer {
     background: url(/bundles/app/images/more_hover.png) no-repeat;
     transition: background .3s ease 0s;
 }
-
 /**breadcrumb**/
 .breadcrumb {
     background-color: #ffffff;
@@ -1669,7 +1672,6 @@ footer {
     border: 2px solid #e4e4e4;
     float: left;
 }
-
 .current {
     margin-right: 2px;
     transition: background .3s ease 0s;
@@ -1688,7 +1690,6 @@ footer {
     float: left;
 
 }
-
 .next, .last {
     margin-right: 2px;
     transition: background .3s ease 0s;
@@ -2075,7 +2076,7 @@ button.close:focus, .close:hover {
 
 .modal-dialog {
     width: 400px;
-    margin: 0 auto;
+    margin:  0 auto;
     font-weight: 400;
 }
 
@@ -2098,10 +2099,9 @@ button.close:focus, .close:hover {
     font-weight: 400;
     margin-bottom: 0;
 }
-
 .modal {
     text-align: center;
-    padding: 0 !important;
+    padding: 0!important;
 }
 
 .modal:before {
@@ -2117,7 +2117,6 @@ button.close:focus, .close:hover {
     text-align: left;
     vertical-align: middle;
 }
-
 .module::after {
     border-radius: 3px 0 0;
     box-shadow: 2px 2px 3px rgba(255, 255, 255, 0.5) inset;
@@ -2186,7 +2185,7 @@ button.close:focus, .close:hover {
 }
 
 .az-header-download-icon {
-    padding: 0;
+
 }
 
 .az-header-download:hover {
@@ -2194,7 +2193,9 @@ button.close:focus, .close:hover {
     cursor: pointer;
     color: #fd1200;
 }
-
+.az-header-download-div{
+    padding: 2px;
+}
 .az-comment {
     font-style: italic;
     font-size: 12px;
@@ -2288,12 +2289,12 @@ button.close:focus, .close:hover {
     font-weight: 400;
     line-height: 1.42857143;
     border: 1px solid transparent;
-    border-radius: 5px;
-}
+    border-radius: 5px;}
 
 .cart_cell {
     margin: 10px auto;
 }
+
 
 .az-order-cart-title {
     padding-bottom: 15px;
