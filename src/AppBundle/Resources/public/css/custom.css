@@ -234,8 +234,16 @@ div[class*="children-subsubcategory-"]:hover {
     color: #ffffff;
     padding: 5px 20px;
 }
+a:-webkit-any-link {
+    text-decoration: none;
+}
 
-.btn.focus, .btn:focus, .btn:hover {
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus{
+    outline: none;
+    outline-offset: 0;
+    box-shadow: none;
+}
+.btn.focus, .btn:focus, .btn:hover .btn:visited {
     background-color: #ffffff;
     border: 1px solid #fd1200;
     color: #fd1200;
@@ -1026,12 +1034,6 @@ body {
     font-size: 13px;
 }
 
-.btn.focus, .btn:focus, .btn:hover {
-    background-color: #ffffff;
-    border: 1px solid #fd1200;
-    color: #fd1200;
-    background-image: none;
-}
 
 button, input, optgroup, select, textarea {
     color: #ffffff;
