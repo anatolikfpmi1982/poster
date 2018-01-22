@@ -22,7 +22,7 @@
                      data-type="{% if item.type_id == 'banner' %}Баннер{% else %}Панно{% endif %}"
                      data-width={{ imgSize[0] }}
                      data-height={{ imgSize[1] }}
-                     data-left=15
+                     data-left={% if item.type_id == 'banner' %}0{% else %}15{% endif %}
                      data-top=20
                      data-pad-left=4
                      data-pad-top=4
@@ -52,7 +52,6 @@
                      data-code="{% if item.type_id == 'banner' %}single|{horizontal|100-100-0}{% else %}{{ item.module_formula }}{% endif %}"
                      data-max-width="{% if imgSize[1]>imgSize[0] %}200{% else %}170{% endif %}"
                      data-max-height="{% if imgSize[1]>imgSize[0] %}165{% else %}200{% endif %}"
-                     data-href="{{ path('picture', {'id': picture.id}) }}"
                 ></div>
             {% else %}
                 <img src="{{ img }}" class="az-order-cart-item-img">
