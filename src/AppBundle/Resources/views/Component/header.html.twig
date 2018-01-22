@@ -16,7 +16,12 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="col-md-{% if site_settings.enable_own_picture is defined and site_settings.enable_own_picture %}4{% else %}5{% endif %} container-fluid az-header-top">
+            {% set isEnableCall = site_settings.enable_call_back is defined and site_settings.enable_call_back %}
+            {% set isEnablePicture = site_settings.enable_own_picture is defined and site_settings.enable_own_picture %}
+            <div class="col-md-{% if not isEnableCall and not isEnablePicture %}7
+            {% elseif not isEnableCall and  isEnablePicture %}5
+            {% elseif isEnableCall and not isEnablePicture %}6
+            {% else %}4{% endif %} container-fluid az-header-top">
                 <div class="row">
                     <div class="col-md-12 container az-header-address-div">
                         <div class="row az-header-address-container az-header-phone-number">
@@ -28,157 +33,159 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-1 container-fluid az-header-top">
-                <div class="row az-header-address-container az-header-feedback-btn-div">
-                    <div class="col-md-12">
-                        <button class="btn btn-bg az-header-feedback-btn" data-toggle="modal" data-target="#myModal1">
-                            Обратный </br> звонок
-                        </button>
-                        <!-- Form itself -->
-                        <div id="myModal1" class="modal fade" role="dialog">
-                            <div class="modal-dialog az-feedback-modal">
+            {% if isEnableCall %}
+                <div class="col-md-1 container-fluid az-header-top">
+                    <div class="row az-header-address-container az-header-feedback-btn-div">
+                        <div class="col-md-12">
+                            <button class="btn btn-bg az-header-feedback-btn" data-toggle="modal" data-target="#myModal1">
+                                Обратный <br/> звонок
+                            </button>
+                            <!-- Form itself -->
+                            <div id="myModal1" class="modal fade" role="dialog">
+                                <div class="modal-dialog az-feedback-modal">
 
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">х</button>
-                                        <form id="callback">
-                                            <div class="col-md-12 form-line">
-                                                <h3>Заказать звонок</h3>
-                                                <div class="form-group ">
-                                                    Нет времени или возможности позвонить? Оставьте свой номер телефона
-                                                    и наш менеджер свяжется с вами в течение 15 минут
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="full_name">Имя*:</label>
-                                                    <input type="text" class="form-control" name="fullname"
-                                                           placeholder="">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">х</button>
+                                            <form id="callback">
+                                                <div class="col-md-12 form-line">
+                                                    <h3>Заказать звонок</h3>
+                                                    <div class="form-group ">
+                                                        Нет времени или возможности позвонить? Оставьте свой номер телефона
+                                                        и наш менеджер свяжется с вами в течение 15 минут
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="full_name">Имя*:</label>
+                                                        <input type="text" class="form-control" name="fullname"
+                                                               placeholder="">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="telephone">Контактный телефон*:</label>
+                                                        <input type="tel" class="form-control" name="telephone"
+                                                               placeholder=" ">
+                                                    </div>
+                                                    <div class="form-group">
+
+                                                        <button type="submit" class="btn btn-default submit"> Заказать
+                                                            звонок
+                                                        </button>
+
+                                                    </div>
                                                 </div>
 
-                                                <div class="form-group">
-                                                    <label for="telephone">Контактный телефон*:</label>
-                                                    <input type="tel" class="form-control" name="telephone"
-                                                           placeholder=" ">
-                                                </div>
-                                                <div class="form-group">
+                                            </form>
 
-                                                    <button type="submit" class="btn btn-default submit"> Заказать
-                                                        звонок
-                                                    </button>
+                                        </div>
+                                    </div>
 
-                                                </div>
+                                </div>
+                            </div>
+                            <div id="successCallbackForm" class="modal fade" style="display: none;">
+                                <div class="modal-dialog">
+                                    <div class="modal-content az-picture-page-hint-modal-div ">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                ×
+                                            </button>
+                                            <h4 class="modal-title">Обратный звонок</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div>Мы перезвоним вам в ближайшее время, Спасибо!</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="errorCallbackForm" class="modal fade" style="display: none;">
+                                <div class="modal-dialog">
+                                    <div class="modal-content az-picture-page-hint-modal-div ">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                ×
+                                            </button>
+                                            <h4 class="modal-title">Обратный звонок</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div>Произошли технические неполатки. Попробуйте еще раз через пару минут.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if isEnablePicture %}
+                <div class="col-md-2 container-fluid az-header-top">
+
+                    <div class="row">
+                        <div class="col-md-12 az-header-download" data-toggle="modal" data-target="#myModal">
+                            <div class="row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-3 az-header-download-icon">
+                                    <img src="{{ asset('bundles/app/images/download.png') }}"
+                                         class="az-download-title-img az-basket-title-img"
+                                         title="{% trans %}download{% endtrans %}"/>
+                                </div>
+                                <div class="col-md-6 container az-header-download-div">
+                                    Загрузить изображения
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Form download -->
+                    <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog az-feedback-modal">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">+</button>
+                                    <form>
+                                        <div class="col-md-12 form-line">
+                                            <h3>Загрузка своего фото</h3>
+                                            <div class="form-group az-comment">
+                                                Вы можете загрузить свое фото и сделать из него постер любого размера и в
+                                                любом оформлении.
+                                                Загрузка фото может занять продолжительное время, обязательно дождитесь
+                                                окончания процесса!
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="az-form-choose-file" for="exampleInputFile">Выберете файл на
+                                                    компьютере</label>
+                                                <input class="az-form-download-file" type="file" class="form-control-file"
+                                                       accept="image/*" aria-describedby="fileHelp">
+                                                <small id="fileHelp" class="form-text text-muted"></small>
                                             </div>
 
-                                        </form>
 
-                                    </div>
-                                </div>
+                                            <div class="form-group az-form-btn-download">
 
-                            </div>
-                        </div>
-                        <div id="successCallbackForm" class="modal fade" style="display: none;">
-                            <div class="modal-dialog">
-                                <div class="modal-content az-picture-page-hint-modal-div ">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                            ×
-                                        </button>
-                                        <h4 class="modal-title">Обратный звонок</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div>Мы перезвоним вам в ближайшее время, Спасибо!</div>
-                                    </div>
+                                                <button type="button" class="btn btn-default submit">Загрузить</button>
+
+                                            </div>
+                                            <div class="form-group az-comment-bottom">
+                                                Формат загружаемого файла <span
+                                                        style="color: #fd1200">jpeg, gif или png</span> , максимальный
+                                                размер <span style="color: #fd1200">50 Mb</span>.
+                                                Загруженная Вами фотография будет удалена автоматически через две недели
+                                                после оформления заказа, либо через две недели
+                                                после загрузки, если Вы так и не оформите заказ.
+                                            </div>
+                                        </div>
+                                    </form>
+
                                 </div>
                             </div>
+
                         </div>
-                        <div id="errorCallbackForm" class="modal fade" style="display: none;">
-                            <div class="modal-dialog">
-                                <div class="modal-content az-picture-page-hint-modal-div ">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                            ×
-                                        </button>
-                                        <h4 class="modal-title">Обратный звонок</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div>Произошли технические неполатки. Попробуйте еще раз через пару минут.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div></div>
-            {% if site_settings.enable_own_picture is defined and site_settings.enable_own_picture %}
-            <div class="col-md-2 container-fluid az-header-top">
 
-                <div class="row">
-                    <div class="col-md-12 az-header-download" data-toggle="modal" data-target="#myModal">
-                        <div class="row">
-                            <div class="col-md-3"></div>
-                            <div class="col-md-3 az-header-download-icon">
-                                <img src="{{ asset('bundles/app/images/download.png') }}"
-                                     class="az-download-title-img az-basket-title-img"
-                                     title="{% trans %}download{% endtrans %}"/>
-                            </div>
-                            <div class="col-md-6 container az-header-download-div">
-                                Загрузить изображения
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Form download -->
-                <div id="myModal" class="modal fade" role="dialog">
-                    <div class="modal-dialog az-feedback-modal">
-
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">+</button>
-                                <form>
-                                    <div class="col-md-12 form-line">
-                                        <h3>Загрузка своего фото</h3>
-                                        <div class="form-group az-comment">
-                                            Вы можете загрузить свое фото и сделать из него постер любого размера и в
-                                            любом оформлении.
-                                            Загрузка фото может занять продолжительное время, обязательно дождитесь
-                                            окончания процесса!
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="az-form-choose-file" for="exampleInputFile">Выберете файл на
-                                                компьютере</label>
-                                            <input class="az-form-download-file" type="file" class="form-control-file"
-                                                   accept="image/*" aria-describedby="fileHelp">
-                                            <small id="fileHelp" class="form-text text-muted"></small>
-                                        </div>
-
-
-                                        <div class="form-group az-form-btn-download">
-
-                                            <button type="button" class="btn btn-default submit">Загрузить</button>
-
-                                        </div>
-                                        <div class="form-group az-comment-bottom">
-                                            Формат загружаемого файла <span
-                                                    style="color: #fd1200">jpeg, gif или png</span> , максимальный
-                                            размер <span style="color: #fd1200">50 Mb</span>.
-                                            Загруженная Вами фотография будет удалена автоматически через две недели
-                                            после оформления заказа, либо через две недели
-                                            после загрузки, если Вы так и не оформите заказ.
-                                        </div>
-                                    </div>
-                                </form>
-
-                            </div>
-                        </div>
 
                     </div>
 
-
-
-                </div>
-
-            </div> {% endif %}
+                </div> {% endif %}
 
             <!-- Basket -->
             <div class="col-md-2 container-fluid text-right">
@@ -227,34 +234,34 @@
                                                     <div class="form-group">
                                                         {% if header_cart_count > 0 %}
                                                             {% for cart_item in header_cart %}
-                                                            <div class="row az-ordersmall-cart">
-                                                                <div class="col-md-3">
-                                                                    <a class="az-order-cart-title"
-                                                                       href="{% if cart_item.picture is defined %}
+                                                                <div class="row az-ordersmall-cart">
+                                                                    <div class="col-md-3">
+                                                                        <a class="az-order-cart-title"
+                                                                           href="{% if cart_item.picture is defined %}
                                                                                 {{ path('picture', {'id': cart_item.picture.id}) }}
                                                                             {% else %}
                                                                                 {{ path('my_file_page', {'id': cart_item.own_picture.id}) }}
                                                                             {% endif %}">
+                                                                            {% if cart_item.picture is defined %}
+                                                                                <img src="{{ '/files/pictures/small_thumb/' ~ cart_item.picture.image.getFilename() }}"/>
+                                                                            {% else %}
+                                                                                <img src="{{ '/files/pictures/small_thumb/' ~ cart_item.own_picture.image.getFilename() }}"/>
+                                                                            {% endif %}
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="col-md-5">
                                                                         {% if cart_item.picture is defined %}
-                                                                            <img src="{{ '/files/pictures/small_thumb/' ~ cart_item.picture.image.getFilename() }}"/>
+                                                                            {{ cart_item.picture.title }}
                                                                         {% else %}
-                                                                            <img src="{{ '/files/pictures/small_thumb/' ~ cart_item.own_picture.image.getFilename() }}"/>
-                                                                        {% endif %}
-                                                                    </a>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    {% if cart_item.picture is defined %}
-                                                                        {{ cart_item.picture.title }}
-                                                                    {% else %}
-                                                                        Загруженная картина
-                                                                    {% endif %} </br>
-                                                                    {{ cart_item.price }}
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <button class="btn-xs delete_cart-btn" data-id="{{ cart_item.id }}">Удалить</button>
-                                                                </div>
+                                                                            Загруженная картина
+                                                                        {% endif %} </br>
+                                                                        {{ cart_item.price }}
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <button class="btn-xs delete_cart-btn" data-id="{{ cart_item.id }}">Удалить</button>
+                                                                    </div>
 
-                                                            </div>
+                                                                </div>
                                                             {% endfor %}
                                                         {% else %}
                                                             Ваша корзина пуста!
@@ -264,9 +271,9 @@
                                                     <div class="form-group">
                                                         <div class="row">
                                                             {% if header_cart_count > 0 %}
-                                                            <div class="col-md-12">
-                                                                <a href="{{ path( 'order' ) }}">Оформление заказа</a>
-                                                            </div>
+                                                                <div class="col-md-12">
+                                                                    <a href="{{ path( 'order' ) }}">Оформление заказа</a>
+                                                                </div>
                                                             {% endif %}
                                                         </div>
 

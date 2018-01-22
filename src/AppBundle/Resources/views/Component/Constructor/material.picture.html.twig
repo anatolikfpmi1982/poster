@@ -26,6 +26,11 @@
     <div class="row az-picture-page-sidebar-size-div-body az-picture-page-sidebar-material-div-select">
         {% if pictureMaterials %}
         {% set ind = 1 %}
+        {% if cart_item.frame_material_id is defined and cart_item.frame_material_id %}
+            {% set active_material_id = cart_item.frame_material_id %}
+        {% else %}
+            {% set active_material_id = 0 %}
+        {% endif %}
         {% for material in pictureMaterials %}
         {% if material.image is defined and material.image %}
             {% set img = '/files/frame_materials/small_thumb/' ~ material.image.getFilename() %}
@@ -33,7 +38,8 @@
             {% set img = asset('bundles/app/images/material_default.png') %}
         {% endif %}
 
-        <div class="col-md-4 container-fluid az-picture-page-sidebar-material-picture-block-selector {% if ind == 1 %}active{% endif %}"
+        <div class="col-md-4 container-fluid az-picture-page-sidebar-material-picture-block-selector
+        {% if (active_material_id and active_material_id==material.id) or (not active_material_id and ind == 1) %}active{% endif %}"
              data-title="{{ material.title }}"
              data-id="{{ material.id }}">
             <div class="row">
@@ -54,26 +60,10 @@
                            name="az-picture-page-material-picture"
                            data-title="{{ material.title }}"
                            data-id="{{ material.id }}"
-                           {% if ind == 1 %}checked{% endif %}/>
+                           {% if (active_material_id and active_material_id==material.id) or (not active_material_id and ind == 1) %}checked{% endif %}/>
                 </div>
             </div>
         </div>
-
-        {#<div class="col-md-4 container-fluid">#}
-        {#<div class="row text-center">#}
-        {#<img src="{{ img }}" class="az-picture-page-material-img"/><br/>#}
-        {#<span class="az-picture-page-type-img-text">{{ material.title }}</span>#}
-        {#</div>#}
-        {#<div class="row text-center az-picture-page-material-radio-div">#}
-        {#<input type="radio" class="btn az-picture-page-constructor-material-picture-radio"#}
-        {#value="{{ material.title }}"#}
-        {#title="az-picture-page-material-picture"#}
-        {#name="az-picture-page-material-picture"#}
-        {#data-title="{{ material.title }}"#}
-        {#data-id="{{ material.id }}"#}
-        {#{% if ind == 1 %}checked{% endif %}/>#}
-        {#</div>#}
-        {#</div>#}
         <input type="hidden" name="constructor_pic_{{ material.id }}_min_square" id="constructor_pic_{{ material.id }}_min_square"
                value="{{ material.minArea }}">
         <input type="hidden" name="constructor_pic_{{ material.id }}_max_square" id="constructor_pic_{{ material.id }}_max_square"

@@ -45,10 +45,10 @@ interface ImageInterface {
     /**
      * Small thumb image width
      */
-    const THUMB_SMALL_IMAGE_HEIGHT = 80;
+    const THUMB_SMALL_IMAGE_HEIGHT = 130;
 
     /**
      * Small thumb image width
      */
-    const THUMB_SMALL_IMAGE_WIDTH = 60;
+    const THUMB_SMALL_IMAGE_WIDTH = 90;
 }

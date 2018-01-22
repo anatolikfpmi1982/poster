@@ -1,6 +1,9 @@
 <div class="row">
     <div class="col-md-12 owl-carousel owl-theme" id="owl-example">
         {% if pictureThicknesses is defined and pictureThicknesses %}
+            {% set frameId = 0 %}
+            {% set frameTitle = '' %}
+            {% set frameRatio = 0 %}
             {% for thickness in pictureThicknesses %}
                 {% if thickness.images is defined and thickness.images and thickness.images[0] is defined and thickness.images[0] %}
                     {% set img = '/files/frames/mini_thumb/' ~ thickness.images[0].getFilename() %}
@@ -13,13 +16,19 @@
                          data-ratio="{{ thickness.ratio }}"
                          data-id="{{ thickness.id }}"
                     />
+                    {% if (cart_item.frame_id is defined and cart_item.frame_id==thickness.id) or (cart_item.frame_id
+                    is not defined and loop.index == 1) %}
+                        {% set frameId = thickness.id %}
+                        {% set frameTitle = thickness.title %}
+                        {% set frameRatio = thickness.ratio %}
+                    {% endif %}
                 </div>
             {% endfor %}
-            <input type="hidden" name="az-picture-constructor-frame-selected" id="az-picture-constructor-frame-selected" value="{{ pictureThicknesses[0].title }}">
+            <input type="hidden" name="az-picture-constructor-frame-selected" id="az-picture-constructor-frame-selected" value="{{ frameTitle }}">
             <input type="hidden" name="az-picture-constructor-frame-ratio-selected" id="az-picture-constructor-frame-ratio-selected"
-                   value="{{ pictureThicknesses[0].ratio }}">
+                   value="{{ frameRatio }}">
             <input type="hidden" name="az-picture-constructor-frame-id-selected" id="az-picture-constructor-frame-id-selected"
-                   value="{{ pictureThicknesses[0].id }}">
+                   value="{{ frameId }}">
         {% else %}
             У нас пока отсутствуют рамы для данного вида картин.
         {% endif %}

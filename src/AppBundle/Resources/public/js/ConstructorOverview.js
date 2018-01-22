@@ -71,6 +71,7 @@ function ConstructorOverview() {
     };
 
     this.initDefault = function () {
+        var mainPanel = $('.az-picture-page-picture-main-panel-div');
         this.type = $("input.az-picture-page-constructor-type-radio:checked").data('title');
         this.size = $("select.az-picture-page-sidebar-size-select").val();
         var material = $("input.az-picture-page-constructor-material-radio:checked"),
@@ -100,6 +101,8 @@ function ConstructorOverview() {
         this.right_width = 5;
         this.top_deviation = 40;
         this.left_deviation = 40;
+        this.max_width = parseInt($('.az-picture-page-title').css('width'));
+        this.max_height = this.picHeight + (2 * this.top_deviation);
         this.shadow = 3;
     };
 
@@ -167,13 +170,6 @@ function ConstructorOverview() {
     };
 
     this.calculateWidthAndHeight = function () {
-        if (this.debug) {
-            console.log('this.picWidth', this.picWidth);
-            console.log('this.right_width', this.right_width);
-            console.log('this.picHeight', this.picHeight);
-            console.log('this.max_width', this.max_width);
-            console.log('this.max_height', this.max_height);
-        }
         if (this.max_width > 0 && this.max_height > 0) {
             var isHeight = this.picHeight > this.picWidth;
             if (isHeight) {
@@ -185,17 +181,18 @@ function ConstructorOverview() {
 
                 }
 
-                this.left_deviation = Math.round((this.max_width - this.picWidth ) / 2);
+                this.left_deviation = this.left_deviation + Math.round((this.max_width - this.picWidth ) / 2);
             } else {
                 var maxWidth = this.max_width - this.right_width - this.padding_left * (this.panelNumberHorizontal - 1);
+
                 if (this.picWidth > maxWidth) {
                     this.picHeight = Math.round((this.picHeight * maxWidth) / this.picWidth);
                     this.picWidth = maxWidth;
                 } else {
 
                 }
-
-                this.top_deviation = Math.round((this.max_height - this.picHeight ) / 2);
+                this.top_deviation = this.top_deviation + Math.round((this.max_height - this.picHeight ) / 2);
+                this.left_deviation = this.left_deviation + Math.round((maxWidth - this.picWidth ) / 2);
             }
         }
     };
@@ -214,9 +211,7 @@ function ConstructorOverview() {
             top_deviation = this.top_deviation,
             panel_type = type,
             deviationRight = 0 - this.right_width,
-            screen_height = panel_type == 'horizontal' ?
-                (picHeight + (2 * top_deviation) ) :
-                (picHeight + (2 * top_deviation) + this.panelNumberVertical * top_deviation ),
+            screen_height = picHeight + (2 * top_deviation),
             mainTop = top_deviation,
             size = this.size != undefined ? this.size.split('x') : [],
             that = this;
@@ -397,13 +392,14 @@ function ConstructorOverview() {
                     numVerticalElements++;
                 } else {
                     numHorizontalElements++;
+                    numVerticalElements = 1;
                 }
             });
 
             if (panelObject[indexMain]['type'] == 'vertical' && that.panel_type == 'multi'
                 && that.panelNumberVertical < numVerticalElements) {
                 that.panelNumberVertical = numVerticalElements;
-            } else if (panelObject[indexMain]['type'] == 'vertical' && that.panel_type == 'single') {
+            } else if (that.panel_type == 'single') {
                 that.panelNumberVertical = numVerticalElements;
             }
 
