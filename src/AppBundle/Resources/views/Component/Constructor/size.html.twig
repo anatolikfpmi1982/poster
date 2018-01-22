@@ -3,43 +3,53 @@
         <div class="col-md-4 text-left az-picture-page-sidebar-header-block az-picture-page-sidebar-size-div-left">
             <label data-for="picture-size">Размер: </label>
         </div>
-                    <div class="col-md-8 az-picture-page-sidebar-div-right">
-                <button class="btn az-picture-page-sidebar-size-btn az-picture-page-hint" data-toggle="modal" data-target="#myModalsize" >Подробнее ?</button>
+        <div class="col-md-8 az-picture-page-sidebar-div-right">
+            <button class="btn az-picture-page-sidebar-size-btn az-picture-page-hint" data-toggle="modal" data-target="#myModalsize">Подробнее ?</button>
 
-                <!-- HTML-код модального окна -->
-                <div id="myModalsize" class="modal fade">
-                    <div class="modal-dialog">
-                        <div class="modal-content az-picture-page-hint-modal-div ">
-                            <!-- Заголовок модального окна -->
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                <h4 class="modal-title">Размеры</h4>
-                            </div>
-                            <!-- Основное содержимое модального окна -->
-                            <div class="modal-body">
-                                {% if help_settings is defined and help_settings and help_settings.sizeHelp is defined and help_settings.sizeHelp %}
-                                    <div >{{ help_settings.sizeHelp }}</div>
-                                {% endif %}
+            <!-- HTML-код модального окна -->
+            <div id="myModalsize" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content az-picture-page-hint-modal-div ">
+                        <!-- Заголовок модального окна -->
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Размеры</h4>
+                        </div>
+                        <!-- Основное содержимое модального окна -->
+                        <div class="modal-body">
+                            {% if help_settings is defined and help_settings and help_settings.sizeHelp is defined and help_settings.sizeHelp %}
+                                <div>{{ help_settings.sizeHelp }}</div>
+                            {% endif %}
 
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
 
     </div>
     <div class="row az-picture-page-sidebar-size-div-body az-picture-page-sidebar-size-div-select">
         <select class="btn az-picture-page-sidebar-size-select" name="picture-size" id="az-picture-page-constructor-size-select" title="">
             <option value="own_size">Свой размер</option>
+            {% if cart_item.sizes is defined and cart_item.sizes %}
+                {% set active_sizes = cart_item.sizes %}
+            {% else %}
+                {% set active_sizes = '' %}
+            {% endif %}
             {% set size_default = 1 %}
             {% for i in range(10, 200, 10) %}
                 {% if pictureBaseWidth >= pictureBaseHeight %}
                     {% set koeff = (pictureBaseWidth/pictureBaseHeight) %}
-                    <option value="{{ (koeff*i)|round }}x{{ i }}" {% if size_default == 1 %}selected{% endif %}>{{ (koeff*i)|round }}см x {{ i }}см</option>
+                    <option value="{{ (koeff*i)|round }}x{{ i }}"
+                            {% if active_sizes == (koeff*i)|round~'x'~i or (not active_sizes and size_default == 1) %}selected{% endif %}>{{ (koeff*i)|round }}см x {{ i }}см
+                    </option>
                 {% else %}
                     {% set koeff = (pictureBaseHeight/pictureBaseWidth) %}
-                    <option value="{{ i }}x{{ (koeff*i)|round }}" {% if size_default == 1 %}selected{% endif %}>{{ i }}см x {{ (koeff*i)|round }}см</option>
+                    <option value="{{ i }}x{{ (koeff*i)|round }}"
+                            {% if active_sizes == i~'x'~(koeff*i)|round or (not active_sizes and size_default == 1) %}selected{% endif %}>{{ i }}см x {{ (koeff*i)
+                        |round }}см
+                    </option>
                 {% endif %}
             {% endfor %}
         </select>

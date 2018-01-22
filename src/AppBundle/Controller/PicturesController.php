@@ -5,12 +5,10 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Image;
 use AppBundle\Entity\Picture;
 use AppBundle\Entity\Settings;
-use AppBundle\Entity\OwnPicture;
-use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Class PicturesController
@@ -26,30 +24,28 @@ class PicturesController extends FrontController {
      * @throws BadRequestHttpException
      */
     public function showAction( $id, Request $request ) {
-        $em      = $this->get( 'doctrine.orm.entity_manager' );
+        $this->blocks = array_merge($this->blocks, ['LastVisited' => 6]);
+        $this->pageSlug = $id;
+        $this->pageType = 'picture';
+        $this->menu = '/picture';
+        $this->id = $id;
+        $this->doBlocks();
+
         /** @var Picture $picture */
-        $picture = $em->getRepository( 'AppBundle:Picture' )->find( $id );
+        $picture = $this->em->getRepository( 'AppBundle:Picture' )->find( $id );
         if(!$picture instanceof Picture) {
             throw new BadRequestHttpException('Картина не найдена.');
         } else {
             $picture->setPopularity($picture->getPopularity() + 1);
-            $em->persist($picture);
-            $em->flush();
+            $this->em->persist($picture);
+            $this->em->flush();
         }
 
         $cartItem = [];
         if($request->get('cart_id')) {
             $cartItem = $this->get( 'app.session_manager' )->getFromCart($request->get('cart_id'));
         }
-
-        $this->blocks = array_merge($this->blocks, ['LastVisited' => 6]);
-        $this->pageSlug = $id;
-        $this->pageType = 'picture';
-        $this->id = $id;
-        $this->doBlocks();
-
         $this->get( 'app.session_manager' )->addLastVisitedItem( $picture->getId() );
-
         $this->data['pictureMain'] = $picture;
         if($picture->getImage() instanceof Image) {
             $imgFile = $picture->getImage()->getBaseFile();
@@ -65,14 +61,14 @@ class PicturesController extends FrontController {
             $this->data['pictureThumbWidth'] = $size[0];
             $this->data['pictureThumbHeight'] = $size[1];
         }
-        $this->data['pictureSize'] = $em->getRepository( 'AppBundle:PictureSize' )->findBy( [ 'isActive' => true ], [ 'width' => 'ASC' ] );
-        $this->data['materials']   = $em->getRepository( 'AppBundle:BannerMaterial' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
-        $this->data['pictureMaterials']   = $em->getRepository( 'AppBundle:FrameMaterial' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
-        $this->data['moduleTypes'] = $em->getRepository( 'AppBundle:ModuleType' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
-        $this->data['thicknesses'] = $em->getRepository( 'AppBundle:Underframe' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
-        $this->data['pictureThicknesses'] = $em->getRepository( 'AppBundle:Frame' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
-        $this->data['mats'] = $em->getRepository( 'AppBundle:Mat' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
-        $_frameSettings = $em->getRepository( 'AppBundle:Settings' )->findOneByName('frame_settings');
+        $this->data['pictureSize'] = $this->em->getRepository( 'AppBundle:PictureSize' )->findBy( [ 'isActive' => true ], [ 'width' => 'ASC' ] );
+        $this->data['materials']   = $this->em->getRepository( 'AppBundle:BannerMaterial' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
+        $this->data['pictureMaterials']   = $this->em->getRepository( 'AppBundle:FrameMaterial' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
+        $this->data['moduleTypes'] = $this->em->getRepository( 'AppBundle:ModuleType' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
+        $this->data['thicknesses'] = $this->em->getRepository( 'AppBundle:Underframe' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
+        $this->data['pictureThicknesses'] = $this->em->getRepository( 'AppBundle:Frame' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
+        $this->data['mats'] = $this->em->getRepository( 'AppBundle:Mat' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
+        $_frameSettings = $this->em->getRepository( 'AppBundle:Settings' )->findOneByName('frame_settings');
         $frameSettings = [];
         if($_frameSettings instanceof Settings) {
             $frameSettings = unserialize($_frameSettings->getSettings());
