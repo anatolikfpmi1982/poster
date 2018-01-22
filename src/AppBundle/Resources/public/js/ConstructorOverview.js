@@ -421,16 +421,19 @@ function ConstructorOverview() {
 
     this.showPanelSizes = function () {
         var contentEl = $('div#az-picture-page-sidebar-size-panel-div-content'),
-            mainEl = '', subEl = '';
+            mainEl = '', subEl = '', subInputEl = '';
         contentEl.html('<div class="row"><div class="col-12 az-picture-page-sidebar-size-panel-div-content-item">Размеры модулей</div></div>');
+
         this.panelSizes.forEach(function (element, index, array) {
             mainEl = $('<div class="row"></div>');
             subEl = $('<div class="col-12 az-picture-page-sidebar-size-panel-div-content-item"></div>');
             subEl.html(index + '. ' + element + ' см');
             subEl.appendTo(mainEl);
-
             mainEl.appendTo(contentEl);
         });
+        subInputEl = $('<input type="hidden" id="az-picture-constructor-module-sizes-selected" name="az-picture-constructor-module-sizes-selected" />');
+        subInputEl.val(this.panelSizes.join('|'));
+        subInputEl.appendTo(contentEl);
     };
 
     this.preShowBuild = function () {
@@ -525,7 +528,7 @@ function ConstructorOverview() {
                 price = this.calculatePanel();
                 break;
         }
-        $('span.az-picture-page-sidebar-price-value').html(price);
+        $('span.az-picture-page-sidebar-price-value').html(price).data('price', price);
     };
 
     this.calculatePanel = function () {

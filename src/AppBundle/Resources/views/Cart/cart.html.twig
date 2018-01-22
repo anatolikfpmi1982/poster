@@ -22,61 +22,62 @@
             {% if cart %}
                 <div class="row az-category-page-pictures-div">
 
-            <div class="col-md-12 az-page-section-body az-page-main-popular container-fluid">
-                <div class="row">
-                    {% for item in cart %}
+                    <div class="col-md-12 az-page-section-body az-page-main-popular container-fluid">
+                        <div class="row">
+                            {% for item in cart %}
 
-                    {% include('AppBundle:Component:cart.picture.cell.html.twig') %}
-                    {% if loop.index != 1 and loop.index % 3 == 0 %}
-
-                    <div class="row">
-                        {% endif %}
-
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <div class="row container-fluid">
-
-                    <div class="col-md-6">
-                        <button class="btn_az-main-popular_defer delete_order-bnt delete_cart-btn" data-id="">Продолжить покупки</button>
-                    </div>
-                    <div class="col-md-6 text-center az-picture-page-sidebar-header-block az-picture-page-sidebar-price ">Стоимость заказа:
-                        <span>{{ total_price }}</span> BYN
-                    </div>
-                </div>
-                <div class="col-md-12 container-fluid">
-                    <h2>Оформление заказа</h2>
-
-                    <span class="az-rewievs-comment"> Пожалуйста, внесите свои данные в поля формы. Поля формы, отмеченные * обязательны для заполнения</span>
-                    <div class="row az-add-review-container">
-                        {{ form_start(form) }}
-                        <div class="col-md-6">
-                            {{ form_row(form._token) }}
-                            {{ form_row(form.fullname) }}
-                            {{ form_row(form.email) }}
-                            {{ form_row(form.phone) }}
-                        </div>
-                        <div class="col-md-6">{{ form_row(form.city) }}
-                            {{ form_row(form.address) }}
-                            {{ form_row(form.company) }}
+                            {% include('AppBundle:Component:cart.picture.cell.html.twig') %}
+                            {% if loop.index != 1 and loop.index % 3 == 0 %}
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
-                                {{ form_row(form.comment) }}
-                                {{ form_row(form.conditions) }}
-                                {{ form_row(form.save) }}
-                                {{ form_end(form) }}
-                                {% else %}</div>
+                            {% endif %}
+
+                            {% endfor %}
                         </div>
-                        <div class="row az-category-page-pictures-div">
-                            У вас в корзине нет картин.
+                    </div>
+
+                    <div class="row container-fluid">
+
+                        <div class="col-md-6">
+                            <button class="btn_az-main-popular_defer delete_order-bnt delete_cart-btn" data-id="">Продолжить покупки</button>
                         </div>
-                        {% endif %}
+                        <div class="col-md-6 text-center az-picture-page-sidebar-header-block az-picture-page-sidebar-price ">Стоимость заказа:
+                            <span>{{ total_price }}</span> BYN
+                        </div>
+                    </div>
+                    <div class="col-md-12 container-fluid">
+                        <h2>Оформление заказа</h2>
+
+                        <span class="az-rewievs-comment"> Пожалуйста, внесите свои данные в поля формы. Поля формы, отмеченные * обязательны для заполнения</span>
+                        <div class="row az-add-review-container">
+                            {{ form_start(form) }}
+                            <div class="col-md-6">
+                                {{ form_row(form._token) }}
+                                {{ form_row(form.fullname) }}
+                                {{ form_row(form.email) }}
+                                {{ form_row(form.phone) }}
+                            </div>
+                            <div class="col-md-6">{{ form_row(form.city) }}
+                                {{ form_row(form.address) }}
+                                {{ form_row(form.company) }}
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ form_row(form.comment) }}
+                                    {{ form_row(form.conditions) }}
+                                    {{ form_row(form.save) }}
+                                    {{ form_end(form) }}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% else %}
+                <div class="row az-category-page-pictures-div">
+                    У вас в корзине нет картин.
+                </div>
+            {% endif %}
         </div>
     </div>
-</div>
+    </div>
 {% endblock %}

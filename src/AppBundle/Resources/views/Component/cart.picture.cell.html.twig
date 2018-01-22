@@ -1,93 +1,152 @@
 {#{{ dump(item) }}#}
 {% if item.picture.image is defined and item.picture.image.getFilename() %}
     {% set img = '/files/pictures/thumb/' ~ item.picture.image.getFilename() %}
+    {% set imgPath = item.picture.image.getThumbBaseFile() %}
+    {% set imgSize = filesize(imgPath) %}
 {% elseif item.own_picture.image is defined and item.own_picture.image.getFilename() %}
     {% set img = '/files/pictures/thumb/' ~ item.own_picture.image.getFilename() %}
+    {% set imgPath = item.own_picture.image.getThumbBaseFile() %}
+    {% set imgSize = filesize(imgPath) %}
 {% else %}
     {% set img = asset('bundles/app/images/default_picture.jpg') %}
+    {% set imgSize = filesize(img) %}
 {% endif %}
 <div class="row az-order-cart container-fluid">
 
     <div class="col-md-3 text-center az-order-cart-item az-cart-img-cell">
         {% if item.own_picture is not defined or not item.own_picture %}
-            <a href="{{ path('picture', {'id': item.picture_id}) }}"><img src="{{ img }}" class="az-order-cart-item-img"></a>
-        {% else %}
-            <img src="{{ img }}" class="az-order-cart-item-img">
-        {% endif %}
-        </div>
+            {% if item.type_id != 'frame' %}
+                <div class="az-order-cart-item-img show-constructor-img-lazy"
+                     data-src="{{ img }}"
+                     data-id="{{ item.picture.id }}"
+                     data-type="{% if item.type_id == 'banner' %}Баннер{% else %}Панно{% endif %}"
+                     data-width={{ imgSize[0] }}
+                     data-height={{ imgSize[1] }}
+                     data-left=15
+                     data-top=20
+                     data-pad-left=4
+                     data-pad-top=4
+                     data-butt=5
+                     data-code="{% if item.type_id == 'banner' %}single|{horizontal|100-100-0}{% else %}{{ item.module_formula }}{% endif %}"
+                     data-max-width="{% if imgSize[1]>imgSize[0] %}200{% else %}170{% endif %}"
+                     data-max-height="{% if imgSize[1]>imgSize[0] %}165{% else %}200{% endif %}"
+                     data-href="{{ path('picture', {'id': item.picture.id}) }}"
+                ></div>
+            {% else %}
+                <a href="{{ path('picture', {'id': item.picture_id}) }}"><img src="{{ img }}" class="az-order-cart-item-img"></a>
+            {% endif %}
 
-            <div class="col-md-3 az-order-cart-item">
-                <div class="row">
-                    <div class="col-md-12">
-                        {% if item.own_picture is defined and item.own_picture %}
-                            Загруженная картина
-                        {% else %}
-                            <a  class="az-order-cart-title" href="{{ path('picture', {'id': item.picture_id}) }}">"{{ item.picture.title }}" </a>
-                        {% endif %}
-                    </div></div>
-                <div class="row">
-                    <div class="col-md-12">Размер: {{ item.sizes }} см</div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">Тип изделия: {{ item.type_value }}</div>
-                </div>
-                {% if item.type_id == 'frame' %}
-                    <div class="row">
-                        <div class="col-md-12">Рама: {{ item.frame_value }} </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">Материал: {{ item.frame_material_value }} </div>
-                    </div>
-                {% elseif item.type_id == 'banner' %}
-                    <div class="row">
-                        <div class="col-md-12">Материал: {{ item.banner_material_value }} </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">Толщина подрамника: {{ item.underframe_value }} </div>
-                    </div>
-                {% elseif item.type_id == 'module' %}
-                    <div class="row">
-                        <div class="col-md-12">Модуль: {{ item.module_type_value }} </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">Материал: {{ item.banner_material_value }} </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">Толщина подрамника: {{ item.underframe_value }} </div>
-                    </div>
+        {% else %}
+            {% if item.type_id != 'frame' %}
+                <div class="az-main-popular-item-img show-constructor-img-lazy"
+                     data-src="{{ img }}"
+                     data-id="{{ item.own_picture.id }}"
+                     data-type="{% if item.type_id == 'banner' %}Баннер{% else %}Панно{% endif %}"
+                     data-width={{ imgSize[0] }}
+                     data-height={{ imgSize[1] }}
+                     data-left=15
+                     data-top=20
+                     data-pad-left=4
+                     data-pad-top=4
+                     data-butt=5
+                     data-code="{% if item.type_id == 'banner' %}single|{horizontal|100-100-0}{% else %}{{ item.module_formula }}{% endif %}"
+                     data-max-width="{% if imgSize[1]>imgSize[0] %}200{% else %}170{% endif %}"
+                     data-max-height="{% if imgSize[1]>imgSize[0] %}165{% else %}200{% endif %}"
+                     data-href="{{ path('picture', {'id': picture.id}) }}"
+                ></div>
+            {% else %}
+                <img src="{{ img }}" class="az-order-cart-item-img">
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <div class="col-md-3 az-order-cart-item">
+        <div class="row">
+            <div class="col-md-12">
+                {% if item.own_picture is defined and item.own_picture %}
+                    Загруженная картина
+                {% else %}
+                    <a class="az-order-cart-title" href="{{ path('picture', {'id': item.picture_id}) }}">"{{ item.picture.title }}" </a>
                 {% endif %}
             </div>
-
-
-        <div class=" col-md-3 az-order-cart-item container-fluid">
+        </div>
+        <div class="row">
+            <div class="col-md-12">Размер:
+                {% if item.type_id != 'module' %}
+                    {{ item.sizes }} см
+                {% else %}
+                    {% set sizes = item.module_size|split('|') %}
+                    <br/>
+                    {% for size in sizes if size %}
+                        {{ size }} см<br/>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">Тип изделия: {{ item.type_value }}</div>
+        </div>
+        {% if item.type_id == 'frame' %}
             <div class="row">
-                <div class="col-md-6 text-right container-fluid az_btn_postpone">
+                <div class="col-md-12">Рама: {{ item.frame_value }} </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">Материал: {{ item.frame_material_value }} </div>
+            </div>
+        {% elseif item.type_id == 'banner' %}
+            <div class="row">
+                <div class="col-md-12">Материал: {{ item.banner_material_value }} </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">Толщина подрамника: {{ item.underframe_value }} </div>
+            </div>
+        {% elseif item.type_id == 'module' %}
+            <div class="row">
+                <div class="col-md-12">Модуль: {{ item.module_type_value }} </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">Материал: {{ item.banner_material_value }} </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">Толщина подрамника: {{ item.underframe_value }} </div>
+            </div>
+        {% endif %}
+    </div>
+
+
+    <div class=" col-md-3 az-order-cart-item container-fluid">
+        <div class="row">
+            <div class="col-md-6 text-right container-fluid az_btn_postpone">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="btn_az-main-popular_defer delete_order-bnt delete_cart-btn" data-id="{{ item.id }}">Удалить из корзины</button>
+                    </div>
                     <div class="row">
-                        <div class="col-md-12">
-                            <button class="btn_az-main-popular_defer delete_order-bnt delete_cart-btn" data-id="{{ item.id }}">Удалить из корзины</button>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 cart_cell">
-                                <a class="btn_az-main-popular_defer edit_order-bnt" data-id="{{ item.id }}"
-                                   href="{% if item.picture is defined %}
+                        <div class="col-md-12 cart_cell">
+                            <a class="btn_az-main-popular_defer edit_order-bnt" data-id="{{ item.id }}"
+                               href="{% if item.picture is defined %}
                                             {{ path('picture', {'id': item.picture_id, 'cart_id': item.id}) }}
                                             {% else %}
                                             {{ path('my_file_page', {'id': item.own_picture_id, 'cart_id': item.id}) }}
                                             {% endif %}">
-                                    Изменить
-                                </a>
-                            </div>
+                                Изменить
+                            </a>
                         </div>
-                    </div></div></div></div>
-        <div class="col-md-3 az-order-cart-item">
-                        <div class="row">
-                        <div class="col-md-12 text-left_artik">
-                            Цена: {{ item.price }} руб.
-                        </div></div>
-
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 az-order-cart-item">
+        <div class="row">
+            <div class="col-md-12 text-left_artik">
+                Цена: {{ item.price }} руб.
+            </div>
+        </div>
 
     </div>
+
+</div>
 
 
 

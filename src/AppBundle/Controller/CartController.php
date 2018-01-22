@@ -2,14 +2,10 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Image;
-use AppBundle\Entity\Picture;
-use AppBundle\Entity\Settings;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * Class CartController
@@ -24,7 +20,7 @@ class CartController extends FrontController {
      */
     public function addToCartAction(Request $request) {
         $data = [
-            'id' => $request->query->get('cart_id') ? $request->query->get('cart_id') : uniqid(),
+            'id' => $request->query->get('cart_id') ? $request->query->get('cart_id') : uniqid('cart_id', false),
             'own_picture_id' => $request->query->get('own_picture_id'),
             'picture_id' => $request->query->get('id'),
             'price' => $request->query->get('price'),
@@ -40,7 +36,9 @@ class CartController extends FrontController {
             'module_type_id' => $request->query->get('module_type_id'),
             'module_type_value' => $request->query->get('module_type_value'),
             'type_id' => $request->query->get('type_id'),
-            'type_value' => $request->query->get('type_value')
+            'type_value' => $request->query->get('type_value'),
+            'module_formula' => $request->query->get('module_formula'),
+            'module_size' => $request->query->get('module_size'),
         ];
 
         $this->get( 'app.session_manager' )->addToCart( $data );

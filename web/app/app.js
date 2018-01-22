@@ -309,25 +309,35 @@ define(function (require, exports, module) {
 
         // picture page order button
         $("button.picture_order-bnt").click(function (event) {
+            var materialDiv = $("input.az-picture-page-constructor-material-radio:checked"),
+                underframeDiv = $("input.az-picture-page-thickness:checked"),
+                materialPictureDiv = $("input.az-picture-page-constructor-material-picture-radio:checked"),
+                typeDiv = $("input.az-picture-page-constructor-type-radio:checked"),
+                btn = $("button.picture_order-bnt");
+
             event.stopImmediatePropagation();
             var $this = $(this),
                 id = $this.data('id'),
+                title = $this.data('title'),
+                titleOwn = $this.data('title-own'),
                 own_picture_id = $this.data('own-id'),
                 cart_id = $this.data('cart-id'),
-                price = $this.parent().parent().parent().find('.az-picture-page-sidebar-price-value').text(),
+                price = $('span.az-picture-page-sidebar-price-value').first().data('price'),
                 sizes = $("#az-picture-page-constructor-size-select").val(),
-                banner_material_id = $("input.az-picture-page-constructor-material-radio:checked").data("id"),
-                banner_material_value = $("input.az-picture-page-constructor-material-radio:checked").data('title'),
-                underframe_id = $("input.az-picture-page-thickness:checked").data("id"),
-                underframe_value = $("input.az-picture-page-thickness:checked").val(),
-                frame_material_id = $("input.az-picture-page-constructor-material-picture-radio:checked").data("id"),
-                frame_material_value = $("input.az-picture-page-constructor-material-picture-radio:checked").data('title'),
+                banner_material_id = materialDiv.data("id"),
+                banner_material_value = materialDiv.data('title'),
+                underframe_id = underframeDiv.data("id"),
+                underframe_value = underframeDiv.val(),
+                frame_material_id = materialPictureDiv.data("id"),
+                frame_material_value = materialPictureDiv.data('title'),
                 frame_id = $("#az-picture-constructor-frame-id-selected").val(),
                 frame_value = $("#az-picture-constructor-frame-selected").val(),
                 module_type_id = $('#az-picture-constructor-module-id-selected').val(),
                 module_type_value = $('#az-picture-constructor-module-selected').val(),
-                type_id = $("input.az-picture-page-constructor-type-radio:checked").data('type'),
-                type_value = $("input.az-picture-page-constructor-type-radio:checked").data('title');
+                module_formula = $('#az-picture-constructor-module-code-selected').val(),
+                module_size = $('#az-picture-constructor-module-sizes-selected').val(),
+                type_id = typeDiv.data('type'),
+                type_value = typeDiv.data('title');
             $.ajax({
                 url: "/ajax/cart/add",
                 data: {
@@ -346,13 +356,22 @@ define(function (require, exports, module) {
                     'frame_value': frame_value,
                     'module_type_id': module_type_id,
                     'module_type_value': module_type_value,
+                    'module_formula': module_formula,
+                    'module_size': module_size,
                     'type_id': type_id,
                     'type_value': type_value
                 }
             }).done(function () {
-                $("button.picture_order-bnt").text("В корзине");
-                $("button.picture_order-bnt").prop('disabled', true);
-                location.href = '/order';
+                btn.text("В корзине");
+                btn.prop('disabled', true);
+
+                showInnerMessage('success', 'Успешно добавили картину с названием "' + title + '" в корзину.');
+
+                window.setTimeout(function () {
+                    location.href = '/order';
+                }, 3000);
+
+
             });
             return false;
         });

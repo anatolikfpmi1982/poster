@@ -79,7 +79,7 @@ class SessionManagement {
     /**
      * Add picture to cart
      *
-     * @param object $data
+     * @param array $data
      */
     public function addToCart( $data ) {
         $cart                = $this->session->get( 'cart' );
