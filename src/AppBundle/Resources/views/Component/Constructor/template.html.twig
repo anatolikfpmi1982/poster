@@ -2,6 +2,10 @@
     <span class="az-title-modul">Тип модульности</span>
     <div class="col-md-12 owl-carousel owl-theme" id="owl-template">
         {% if moduleTypes is defined and moduleTypes %}
+            {% set moduleId = 0 %}
+            {% set moduleName = '' %}
+            {% set moduleRatio = 0 %}
+            {% set moduleFormula = '' %}
             {% for moduleType in moduleTypes %}
                 {% if moduleType.image is defined and moduleType.image %}
                     {% set img = '/files/module_types/mini_thumb/' ~ moduleType.image.getFilename() %}
@@ -15,16 +19,23 @@
                          data-ratio="{{ moduleType.ratio }}"
                          data-code="{{ moduleType.formula }}"
                     />
+                    {% if (cart_item.module_type_id is defined and cart_item.module_type_id==moduleType.id) or (cart_item.module_type_id
+                    is not defined and loop.index == 1) %}
+                        {% set moduleId = moduleType.id %}
+                        {% set moduleName = moduleType.name %}
+                        {% set moduleRatio = moduleType.ratio %}
+                        {% set moduleFormula = moduleType.formula %}
+                    {% endif %}
                 </div>
             {% endfor %}
             <input type="hidden" name="az-picture-constructor-module-selected"
-                   id="az-picture-constructor-module-selected" value="{{ moduleTypes[0].name }}">
+                   id="az-picture-constructor-module-selected" value="{{ moduleName }}">
             <input type="hidden" name="az-picture-constructor-module-id-selected"
-                   id="az-picture-constructor-module-id-selected" value="{{ moduleTypes[0].id }}">
+                   id="az-picture-constructor-module-id-selected" value="{{ moduleId }}">
             <input type="hidden" name="az-picture-constructor-module-ratio-selected"
-                   id="az-picture-constructor-module-ratio-selected" value="{{ moduleTypes[0].ratio }}">
+                   id="az-picture-constructor-module-ratio-selected" value="{{ moduleRatio }}">
             <input type="hidden" name="az-picture-constructor-module-code-selected"
-                   id="az-picture-constructor-module-code-selected" value="{{ moduleTypes[0].formula }}">
+                   id="az-picture-constructor-module-code-selected" value="{{ moduleFormula }}">
         {% else %}
             У нас пока отсутствуют шаблоны для данного вида картин.
         {% endif %}

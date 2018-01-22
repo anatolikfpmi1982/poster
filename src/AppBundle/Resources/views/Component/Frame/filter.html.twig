@@ -1,3 +1,7 @@
+{% set sort_field = 'f.title' %}
+{% set sort_direction = 'DESC' %}
+{% set filter_field = '' %}
+{% set filter_value = '' %}
 {% if pagination.params is defined and pagination.params %}
     {% if pagination.params.sort is defined and pagination.params.sort %}
         {% set sort_field = pagination.params.sort %}
@@ -24,7 +28,7 @@
 <div class="col-md-1 text-center az-picture-page-constructor-block container-fluid">
     <div class="row az-category-page-filter az-category-page-filter-photo">
         {% set title_direction = 'DESC' %}
-        {% if sort_field == 'f.title' %}
+        {% if sort_field is defined and sort_field == 'f.title' %}
             {% if sort_direction == 'DESC' %}{% set title_direction = 'ASC' %}{% endif %}
         {% endif %}
         <a href="{{ app.request.pathinfo }}?sort=f.title&direction={{ title_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Артикул <span

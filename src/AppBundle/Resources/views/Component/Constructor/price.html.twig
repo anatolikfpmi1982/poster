@@ -9,9 +9,9 @@
                     data-id="{% if ownPicture is not defined %}{{ pictureMain.id }}{% endif %}"
                     data-title="{% if ownPicture is not defined %}{{ pictureMain.title }}{% endif %}"
                     data-title-own="{% if ownPicture is defined %}Своя картина{% endif %}"
-                    data-cart-id="{% if cart_id %}{{ cart_id }}{% endif %}"
+                    data-cart-id="{% if cart_id is defined and cart_id %}{{ cart_id }}{% endif %}"
             >
-                {% if cart_id %}Редактировать{% else %}Заказать{% endif %}
+                {% if cart_id is defined and cart_id %}Редактировать{% else %}Заказать{% endif %}
             </button>
         </div>
         {% if ownPicture is not defined %}

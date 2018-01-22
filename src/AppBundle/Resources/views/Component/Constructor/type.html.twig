@@ -27,7 +27,9 @@
     <div class="row az-picture-page-sidebar-size-div-body az-picture-page-sidebar-type-div-select">
         {% set numPicture = 0 %}
         {% if pictureMain.image is defined and pictureMain.image %}
-        <div class="col-md-6 container-fluid az-picture-page-sidebar-type-block-selector active" data-title="Баннер" data-value="1" data-type="banner">
+        <div class="col-md-6 container-fluid az-picture-page-sidebar-type-block-selector
+        {% if cart_item.type_value is not defined or (cart_item.type_value is defined and cart_item.type_value=='Баннер') %}active{% endif %}" data-title="Баннер"
+             data-value="1" data-type="banner">
             <div class="row az-picture-page-type-div-img">
                 {% set img = '/files/pictures/small_thumb/' ~ pictureMain.image.getFilename() %}
                 {% set imgPath = pictureMain.image.getSmallThumbBaseFile() %}
@@ -39,7 +41,7 @@
                      data-type="Баннер"
                      data-width={{ imgSize[0] }}
                      data-height={{ imgSize[1] }}
-                     data-left=21
+                     data-left=22
                      data-top=2
                      data-pad-left=4
                      data-pad-top=4
@@ -58,11 +60,13 @@
             <div class="row text-center az-picture-page-material-radio-div">
                 <div class="col-md-12">
                     <input type="radio" class="btn az-picture-page-constructor-type-radio" data-title="Баннер" value="1"
-                           title="az-picture-page-type" data-type='banner' name="az-picture-page-type" checked/>
+                           title="az-picture-page-type" data-type='banner' name="az-picture-page-type"
+                           {% if cart_item.type_value is not defined or (cart_item.type_value is defined and cart_item.type_value=='Баннер') %}checked{% endif %}/>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 container-fluid az-picture-page-sidebar-type-block-selector" data-title="В раме" data-value="2" data-type="frame">
+        <div class="col-md-6 container-fluid az-picture-page-sidebar-type-block-selector
+        {% if cart_item.type_value is defined and cart_item.type_value=='В раме' %}active{% endif %}" data-title="В раме" data-value="2" data-type="frame">
             <div class="row text-center">
                 <div class="col-md-12 text-center az-picture-page-sidebar-type-div-frame-border">
                     <div class="text-center az-picture-page-sidebar-type-div-frame-mat az-picture-page-type-div-img">
@@ -76,12 +80,14 @@
             </div>
             <div class="row text-center az-picture-page-material-radio-div">
                 <input type="radio" class="btn az-picture-page-constructor-type-radio" data-title="В раме" value="2"
-                       title="az-picture-page-type" data-type='frame' name="az-picture-page-type"/>
+                       title="az-picture-page-type" data-type='frame' name="az-picture-page-type"
+                       {% if cart_item.type_value is defined and cart_item.type_value=='В раме' %}checked{% endif %}/>
             </div>
         </div>
     </div>
     <div class="row az-picture-page-sidebar-size-div-body az-picture-page-sidebar-type-div-select">
-        <div class="col-md-6 container-fluid az-picture-page-sidebar-type-block-selector" data-title="Панно" data-value="3" data-type='module'>
+        <div class="col-md-6 container-fluid az-picture-page-sidebar-type-block-selector
+        {% if cart_item.type_value is defined and cart_item.type_value=='Панно' %}active{% endif %}" data-title="Панно" data-value="3" data-type='module'>
             <div class="row text-center">
                 <div class="col-12 container-fluid">
                     <div class="row text-center">
@@ -96,7 +102,7 @@
                              data-type="Панно"
                              data-width={{ imgSize[0] - 12 }}
                              data-height={{ imgSize[1] - 12 }}
-                             data-left=20
+                             data-left=22
                              data-top=2
                              data-pad-left=4
                              data-pad-top=4
@@ -114,7 +120,8 @@
                     </div>
                     <div class="row text-center az-picture-page-material-radio-div">
                         <input type="radio" class="btn az-picture-page-constructor-type-radio" data-title="Панно" value="3" title="az-picture-page-type"
-                               data-type='module' name="az-picture-page-type"/>
+                               data-type='module' name="az-picture-page-type"
+                               {% if cart_item.type_value is defined and cart_item.type_value=='Панно' %}checked{% endif %}/>
                     </div>
                 </div>
             </div>
@@ -126,7 +133,7 @@
 {% if pictureMain.form is defined and pictureMain.form and pictureMain.form.serviceName %}
     <style>
         {% if pictureMain.form.serviceName == 'rectangle vertical' %}
-        .az-picture-page-sidebar-type-div-select .col-md-4 {
+        .az-picture-page-sidebar-type-div-select .col-md-6 {
             height: 130px;
         }
 
@@ -135,7 +142,7 @@
         }
 
         {% else %}
-        .az-picture-page-sidebar-type-div-select .col-md-4 {
+        .az-picture-page-sidebar-type-div-select .col-md-6 {
             height: 100px;
         }
 

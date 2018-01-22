@@ -28,8 +28,14 @@
     <div class="row az-picture-page-sidebar-size-div-body az-picture-page-sidebar-thickness-div-select">
         {% if thicknesses %}
         {% set ind = 1 %}
+        {% if cart_item.underframe_value is defined and cart_item.underframe_value %}
+            {% set active_underframe = cart_item.underframe_value %}
+        {% else %}
+            {% set active_underframe = '' %}
+        {% endif %}
         {% for thickness in thicknesses %}
-        <div class="col-md-4 container-fluid az-picture-page-sidebar-thickness-block-selector {% if ind == 1 %}active{% endif %}"
+        <div class="col-md-4 container-fluid az-picture-page-sidebar-thickness-block-selector
+        {% if active_underframe==thickness.depth~' см' or ( not active_underframe and ind == 1) %}active{% endif %}"
              data-id="{{ thickness.id }}">
             <div class="row">
                 <div class="col-md-12 text-center az-picture-page-material-banner-div-img">
@@ -48,7 +54,8 @@
                            title="az-picture-page-thickness"
                            data-ratio="{{ thickness.ratio }}"
                            name="az-picture-page-thickness"
-                           data-id="{{ thickness.id }}" {% if ind == 1 %}checked{% endif %}/>
+                           data-id="{{ thickness.id }}"
+                           {% if active_underframe==thickness.depth~' см' or ( not active_underframe and ind == 1) %}checked{% endif %}/>
                 </div>
             </div>
         </div>
