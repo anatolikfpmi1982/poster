@@ -60,6 +60,7 @@ class FrontController extends Controller {
             }
         }
 
+        $this->data['module_active'] = false;
         $this->data['active_menu'] = $this->menu;
         $this->data['site_settings'] = $this->getSiteSettings();
         $this->data['help_settings'] = $this->getHelpSettings();
