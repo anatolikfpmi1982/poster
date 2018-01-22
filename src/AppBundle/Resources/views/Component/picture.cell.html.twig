@@ -12,7 +12,7 @@
         <div class="col-md-12 az-main-popular-item-img show-constructor-img-lazy"
              data-src="{{ img }}"
              data-id="21"
-             data-type="Баннер"
+             data-type="{% if module_active %}Панно{% else %}Баннер{% endif %}"
              data-width={{ imgSize[0] }}
              data-height={{ imgSize[1] }}
              data-left=0
@@ -20,7 +20,7 @@
              data-pad-left=4
              data-pad-top=4
              data-butt=5
-             data-code="single|{horizontal|100-100-0}"
+             data-code="{% if module_active %}single|{horizontal|15-70-15:35-100-0:25-100-5:25-70-15}{% else %}single|{horizontal|100-100-0}{% endif %}"
              data-max-width="246"
              data-max-height="240"
              data-href="{{ path('picture', {'id': picture.id}) }}"
