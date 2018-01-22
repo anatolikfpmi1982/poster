@@ -33,6 +33,11 @@ class OwnPictureSubscriber
         $entity = $args->getEntity();
         if($entity instanceof OwnPicture) {
             if($image = $entity->getImage()) {
+                $form = $this->container->get('helper.imageformidentifier')->identify($entity->getImage());
+                if($formEntity = $this->container->get('doctrine.orm.entity_manager')->getRepository('AppBundle:PictureForm')->findOneBy(['serviceName' => $form])) {
+                    $entity->setForm($formEntity);
+                }
+
                 $this->createResize($entity, $image);
             }
         }

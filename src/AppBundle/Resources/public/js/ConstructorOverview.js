@@ -20,6 +20,7 @@ function ConstructorOverview() {
     // constructor panel
     this.panelNumber = 0;
     this.panelNumberVertical = 0;
+    this.panelNumberHorizontal = 0;
     this.padding_left = 0;
     this.padding_top = 0;
     this.right_width = 3;
@@ -39,6 +40,7 @@ function ConstructorOverview() {
     this.formulaInput = '';
     this.maxWidth = 0;
     this.maxHeight = 0;
+    this.shadow = 3;
 
     this.init = function (params) {
         if (params != undefined) {
@@ -60,8 +62,9 @@ function ConstructorOverview() {
             this.padding_left = params.padding_left != undefined ? params.padding_left : this.padding_left;
             this.padding_top = params.padding_top != undefined ? params.padding_top : this.padding_top;
             this.right_width = params.right_width != undefined ? params.right_width : this.right_width;
-            this.max_width = params.right_width != undefined ? params.panel_max_width : this.max_width;
-            this.max_height = params.right_width != undefined ? params.panel_max_height : this.max_height;
+            this.max_width = params.panel_max_width != undefined ? params.panel_max_width : this.max_width;
+            this.max_height = params.panel_max_height != undefined ? params.panel_max_height : this.max_height;
+            this.shadow = params.shadow != undefined ? params.shadow : this.shadow;
         } else {
             this.initDefault();
         }
@@ -97,6 +100,7 @@ function ConstructorOverview() {
         this.right_width = 5;
         this.top_deviation = 40;
         this.left_deviation = 40;
+        this.shadow = 3;
     };
 
     this.show = function () {
@@ -163,21 +167,30 @@ function ConstructorOverview() {
     };
 
     this.calculateWidthAndHeight = function () {
+        if (this.debug) {
+            console.log('this.picWidth', this.picWidth);
+            console.log('this.right_width', this.right_width);
+            console.log('this.picHeight', this.picHeight);
+            console.log('this.max_width', this.max_width);
+            console.log('this.max_height', this.max_height);
+        }
         if (this.max_width > 0 && this.max_height > 0) {
             var isHeight = this.picHeight > this.picWidth;
             if (isHeight) {
-                if (this.picHeight + this.right_width > this.max_height) {
-                    this.picWidth = Math.round((this.picWidth * (this.max_height - this.right_width)) / this.picHeight);
-                    this.picHeight = this.max_height - this.right_width;
+                var maxHeight = this.max_height - this.right_width - this.padding_top * (this.panelNumberVertical - 1);
+                if (this.picHeight > maxHeight) {
+                    this.picWidth = Math.round((this.picWidth * maxHeight) / this.picHeight);
+                    this.picHeight = maxHeight;
                 } else {
 
                 }
 
                 this.left_deviation = Math.round((this.max_width - this.picWidth ) / 2);
             } else {
-                if (this.picWidth + this.right_width > this.max_width) {
-                    this.picHeight = Math.round((this.picHeight * (this.max_width - this.right_width)) / this.picWidth);
-                    this.picWidth = this.max_width - this.right_width;
+                var maxWidth = this.max_width - this.right_width - this.padding_left * (this.panelNumberHorizontal - 1);
+                if (this.picWidth > maxWidth) {
+                    this.picHeight = Math.round((this.picHeight * maxWidth) / this.picWidth);
+                    this.picWidth = maxWidth;
                 } else {
 
                 }
@@ -306,7 +319,7 @@ function ConstructorOverview() {
             divRight.css('background-size', showWidth + 'px ' + showHeight + 'px');
             divRight.css('background-position', '-' + deviationRight + 'px ' + deviation_top + 'px');
             divRight.css('right', '0');
-            divRight.css('box-shadow', 'rgba(0, 0, 0, 0.4) -3px 0px 3px');
+            divRight.css('box-shadow', 'rgba(0, 0, 0, 0.4) -' + that.shadow + 'px 0px ' + that.shadow + 'px');
             divRight.css('-webkit-transform', 'rotateY(180deg) skewY(-45deg)');
             divRight.css('-webkit-transform-origin', 'right');
             divRight.css('transform', 'rotateY(180deg) skewY(-45deg)');
@@ -319,7 +332,7 @@ function ConstructorOverview() {
             divDown.css('background-image', 'url(' + imgPath + ')');
             divDown.css('background-size', showWidth + 'px ' + showHeight + 'px');
             divDown.css('bottom', '0');
-            divDown.css('box-shadow', 'rgba(0, 0, 0, 0.4) 0 3px 3px');
+            divDown.css('box-shadow', 'rgba(0, 0, 0, 0.4) 0 ' + that.shadow + 'px ' + that.shadow + 'px');
             divDown.css('background-position', '-' + deviationRight + 'px 5px');
             divDown.appendTo(divMain);
 
@@ -364,7 +377,8 @@ function ConstructorOverview() {
             var element = el.replace(new RegExp('{', 'g'), '');
             element = element.replace(new RegExp('}', 'g'), '');
             var types = element.split('|'),
-                numVerticalElements = 0;
+                numVerticalElements = 0,
+                numHorizontalElements = 0;
 
             panelObject[indexMain] = {};
             panelObject[indexMain]['type'] = types[0];
@@ -381,6 +395,8 @@ function ConstructorOverview() {
                 that.panelNumber++;
                 if (panelObject[indexMain]['type'] == 'vertical') {
                     numVerticalElements++;
+                } else {
+                    numHorizontalElements++;
                 }
             });
 
@@ -389,6 +405,12 @@ function ConstructorOverview() {
                 that.panelNumberVertical = numVerticalElements;
             } else if (panelObject[indexMain]['type'] == 'vertical' && that.panel_type == 'single') {
                 that.panelNumberVertical = numVerticalElements;
+            }
+
+            if (panelObject[indexMain]['type'] == 'vertical') {
+                that.panelNumberHorizontal++;
+            } else {
+                that.panelNumberHorizontal = that.panelNumberHorizontal + numHorizontalElements;
             }
         });
         this.panelSettings = panelObject;
@@ -584,6 +606,6 @@ function ConstructorOverview() {
         }
         return final_price;
     };
-};
+}
 
 

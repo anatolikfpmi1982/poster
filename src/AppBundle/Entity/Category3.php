@@ -97,7 +97,7 @@ class Category3 implements ImageInterface
     /**
      * Many Categories have One Category.
      * @ORM\ManyToOne(targetEntity="Category3", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_category", referencedColumnName="id")
+     * @ORM\JoinColumn(name="parent_category", referencedColumnName="id", onDelete="SET NULL")
      */
     private $parent_category;
 

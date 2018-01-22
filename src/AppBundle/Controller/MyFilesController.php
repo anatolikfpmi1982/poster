@@ -39,6 +39,7 @@ class MyFilesController extends FrontController {
             throw new BadRequestHttpException('Картина не найдена.');
         }
 
+        $this->blocks = array_merge($this->blocks, ['LastVisited' => 6]);
         $this->pageSlug = $pictureId;
         $this->pageType = 'my_file';
         $this->id = $pictureId;

@@ -5,7 +5,7 @@ namespace AppBundle\Helper;
 use AppBundle\Entity\Image;
 
 class ImageFormIdentifier {
-    const VERTICAL_FORM_NAME = 'vertical';
+    const VERTICAL_FORM_NAME = 'rectangle vertical';
     const SQUARE_FORM_NAME = 'square';
     const HORISONTAL_FORM_NAME = 'horisontal';
     const HORISONTAL_LONG_FORM_NAME = 'horisontal_long';

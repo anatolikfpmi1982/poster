@@ -63,9 +63,16 @@ class OwnPicture implements ImageInterface
     /**
      * @var Image
      * @ORM\OneToOne(targetEntity="Image", fetch="EXTRA_LAZY", cascade={"persist"})
-     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $image;
+
+    /**
+     * @var PictureForm
+     * @ORM\ManyToOne(targetEntity="PictureForm")
+     * @ORM\JoinColumn(name="form_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $form;
 
     /**
      * Return string entity name from admin.
@@ -206,5 +213,29 @@ class OwnPicture implements ImageInterface
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set form
+     *
+     * @param PictureForm $form
+     *
+     * @return OwnPicture
+     */
+    public function setForm(PictureForm $form = null)
+    {
+        $this->form = $form;
+
+        return $this;
+    }
+
+    /**
+     * Get form
+     *
+     * @return PictureForm
+     */
+    public function getForm()
+    {
+        return $this->form;
     }
 }

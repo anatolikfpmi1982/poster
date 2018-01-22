@@ -25,24 +25,16 @@ class CategoriesPictures
     /**
      * @ORM\Id()
      * @ORM\ManyToOne(targetEntity="Category3", inversedBy="categoriesPictures")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     protected $category;
 
     /**
      * @ORM\Id()
      * @ORM\ManyToOne(targetEntity="Picture", inversedBy="categoriesPictures")
-     * @ORM\JoinColumn(name="picture_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="picture_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     protected $picture;
-
-
-    /**
-     * Picture constructor.
-     */
-    public function __construct() {
-//        $this->categories = new ArrayCollection();
-    }
 
     /**
      * Return string entity name from admin.
