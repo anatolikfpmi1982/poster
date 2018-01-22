@@ -519,6 +519,11 @@ define(function (require, exports, module) {
             url: "/ajax/cart/count"
         }).done(function (data) {
             $(".az-header-basket-count").text(data.count);
+            if (data.count > 0) {
+                $('.az-basket-title-img').addClass('blink');
+            } else {
+                $('.az-basket-title-img').removeClass('blink');
+            }
         });
         return false;
     }

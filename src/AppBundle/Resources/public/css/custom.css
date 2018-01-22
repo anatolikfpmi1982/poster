@@ -232,15 +232,17 @@ div[class*="children-subsubcategory-"]:hover {
     color: #ffffff;
     padding: 5px 20px;
 }
+
 a:-webkit-any-link {
     text-decoration: none;
 }
 
-.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus{
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
     outline: none;
     outline-offset: 0;
     box-shadow: none;
 }
+
 .btn.focus, .btn:focus, .btn:hover .btn:visited {
     background-color: #ffffff;
     border: 1px solid #fd1200;
@@ -1016,7 +1018,6 @@ body {
     text-transform: lowercase;
     font-size: 13px;
 }
-
 
 button, input, optgroup, select, textarea {
     color: #ffffff;
@@ -2589,4 +2590,14 @@ button.close:focus, .close:hover {
 .owl-carousel .owl-item img:hover {
     cursor: pointer;
     border: 1px solid #fd1200;
+}
+
+.blink {
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0.0;
+    }
 }
