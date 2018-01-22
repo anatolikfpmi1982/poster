@@ -2431,6 +2431,11 @@ button.close:focus, .close:hover {
 
 }
 
+.az-main-frames-page-soc-share {
+    text-align: right;
+    float: right;
+}
+
 #adv-custom-pager {
     width: 500px;
 }
