@@ -13,10 +13,10 @@
             {% set identifier = category.id %}
         {% endif %}
         {% set visible = (module and module_active) or (not module and not module_active) %}
-        <div class="row az-sidebar-header az-sidebar-catalog-item-header"
+        <div class="row az-sidebar-header az-sidebar-catalog-item-header {% if visible and category.id == active_category_id %}active{% endif %}"
              data-id="{{ category.id }}"
              data-url="{{ path('category', options) }}">
-            <div class="col-md-12 {% if visible and category.id == active_category_id %}active{% endif %}">
+            <div class="col-md-12 ">
                 <img src="{{ asset('bundles/app/images/catalog.png') }}" class="az-sidebar-block-img az-catalog-block-img" title="{{ category.title }}"/>
                 {% if module %}Модульные картины{% else %}{{ category.title }}{% endif %}
             </div>
@@ -38,13 +38,11 @@
                             {% set options = {'slug': subcategory_slug} %}
                             {% set subidentifier = subcategory.id %}
                         {% endif %}
-                        <div class="row az-sidebar-subcategory-item" data-id="{{ subidentifier }}" data-parent-id="{{ identifier }}"
+                        <div class="row az-sidebar-subcategory-item"
+                             data-id="{{ subidentifier }}" data-parent-id="{{ identifier }}"
                              data-url="{{ path('category', options) }}">
-                            <div class="col-md-1 az-img-subcategory {% if visible and subcategory.id == active_category_id %}active{% endif %}">
-                                <img src="{{ asset('bundles/app/images/arrows.png') }}" class="az-sidebar-block-img az-catalog-block-img"
-                                     title="{{ subcategory.title }}"/>
-                            </div>
-                            <div class="col-md-11 container-fluid az-sidebar-subcategory-first">
+
+                            <div class="col-md-12 container-fluid az-sidebar-subcategory-first {% if visible and subcategory.id in activeCategories %}active_parent{% endif %}">
                                 {{ subcategory.title }}
                                 {% if subcategory.children is defined and subcategory.children %}
                                     <div class="row category-menu children-subcategory-{{ identifier }}" id="children-subcategory-{{ subidentifier }}"
@@ -63,11 +61,11 @@
                                                     {% set options = {'slug': subsubcategory_slug} %}
                                                     {% set subsubidentifier = subsubcategory.id %}
                                                 {% endif %}
-                                                <div class="row subcategory-menu az-sidebar-subsubcategory-item children-subsubcategory-{{ subidentifier }}"
+                                                <div class="row subcategory-menu az-sidebar-subsubcategory-item children-subsubcategory-{{ subidentifier }} {% if visible and subsubcategory.id == active_category_id %}active{% endif %}"
                                                      data-url="{{ path('category', {'slug': subsubcategory_slug }) }}"
                                                      data-id="{{ subsubidentifier }}">
 
-                                                    <div class="col-md-12 {% if visible and subsubcategory.id == active_category_id %}active{% endif %}">
+                                                    <div class="col-md-12">
                                                         {{ subsubcategory.title }}
                                                     </div>
                                                 </div>
