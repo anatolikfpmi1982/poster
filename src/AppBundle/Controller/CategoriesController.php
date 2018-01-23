@@ -61,6 +61,9 @@ class CategoriesController extends FrontController
         $this->data['deferredItems'] = $this->get( 'app.session_manager' )->getDeferredItems();
         $this->data['mainCategoryId'] = $category->getId();
         $this->data['filters']['tpls'] = $this->em->getRepository('AppBundle:PictureForm')->findBy(['isActive' => true]);
+        if($request->query->get('type') && $request->query->get('type') == 'module') {
+            $this->data['module_active'] = true;
+        };
 
         // parameters to template
         return $this->render('AppBundle:Categories:show.html.twig', $this->data);
