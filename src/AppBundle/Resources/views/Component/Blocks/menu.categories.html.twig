@@ -43,7 +43,7 @@
                              data-url="{{ path('category', options) }}">
 
                             <div class="col-md-12 container-fluid az-sidebar-subcategory-first {% if visible and subcategory.id in activeCategories %}active_parent{% endif %}">
-                                {{ subcategory.title }}
+                                <span class="az-subcat-span">{{ subcategory.title }}</span>
                                 {% if subcategory.children is defined and subcategory.children %}
                                     <div class="row category-menu children-subcategory-{{ identifier }}" id="children-subcategory-{{ subidentifier }}"
                                          style="display:{% if visible and subcategory.id in activeCategories %}block{% else %}none{% endif %};">
@@ -65,8 +65,8 @@
                                                      data-url="{{ path('category', {'slug': subsubcategory_slug }) }}"
                                                      data-id="{{ subsubidentifier }}">
 
-                                                    <div class="col-md-12">
-                                                        {{ subsubcategory.title }}
+                                                    <div class="col-md-12 az-subsubcategory-item-img">
+                                                        <span class="az-subsubcat-span">{{ subsubcategory.title }}</span>
                                                     </div>
                                                 </div>
                                             {% endfor %}

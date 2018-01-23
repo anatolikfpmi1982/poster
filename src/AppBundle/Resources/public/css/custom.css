@@ -112,11 +112,15 @@ body {
 .az-sidebar-subcategory-item .active_parent {
     background: #fff;
     color: #fd1200;
-    font-weight: bolder;
     border-top: #fd1200 solid 1px !important;
     border-bottom: #fd1200 solid 1px;
     margin: 0;
     padding: 0;
+}
+
+.az-sidebar-subcategory-item .active_parent:hover{
+    background: #535353;
+    border:#fd1200 solid 1px !important ;
 }
 .az-sidebar-subcategory-item.active {
     line-height: 26px;
@@ -129,11 +133,25 @@ body {
 
 div[class*="children-subcategory-"]{
     background: #fff;
-    margin-left: 15px;
-    margin-right: 15px;
+    margin-left: 0;
+    margin-right: 0;
+
+}
+.az-subcat-span {
+    padding: 0 10px 0 20px;
+}
+.az-subsubcat-span {
+    padding: 0 10px 0 30px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
 
 }
 
+.az-subsubcategory-item-img {
+    background: url("../images/child_menu.png") no-repeat 10% 5%;
+
+}
 .az-sidebar-subcategory-first {
     margin: 0;
     padding: 0;
@@ -152,7 +170,6 @@ div[class*="children-subsubcategory-"] {
     color: #333;
     font-size: 12px;
     font-weight: 400;
-    background: url("../images/child_menu.png") no-repeat;
     line-height: 20px;
     padding: 0 3px;
 }
@@ -176,7 +193,6 @@ div[class*="children-subsubcategory-"]:hover {
     color: #fd1200;
     font-size: 12px;
     font-weight: 400;
-    background: url("../images/child_menu.png") no-repeat;
     line-height: 20px;
 }
 
@@ -363,12 +379,13 @@ footer {
     border-bottom: 1px solid #fff;
     padding: 8px;
 }
-.az-sidebar-catalog-item-header .active {
+.az-sidebar-catalog-item-header:active {
     background-color: #535353;
     cursor: pointer;
     text-decoration: none;
     padding: 8px;
     color: #00a65a;
+    border: none;
 }
 .cycle-slideshow, .cycle-slideshow * {
     -webkit-box-sizing: border-box;
