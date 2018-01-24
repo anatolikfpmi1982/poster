@@ -39,12 +39,18 @@ class CategoriesController extends FrontController
 
         /** @var QueryBuilder $queryBuilder */
         $queryBuilder = $this->em->getRepository('AppBundle:Picture')->getActivePicturesFromCategory($category);
+
+        // hack for empty picture type filter
+        if($request->query->get('filterField') == 'p.type' && $request->query->get('filterValue') == '') {
+            $queryBuilder->andWhere('p.id = 0');
+        }
         $query = $queryBuilder->getQuery();
 
         //add multiple popularity
         if($request->query->get('sort') == 'p.popularity') {
             $_GET['sort'] = 'p.isTop+p.popularity';
         }
+
 
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(

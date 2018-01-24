@@ -83,28 +83,47 @@
         {% endif %}
     </div>
 </div>
-<div class="col-md-1 text-center az-picture-page-constructor-block container-fluid">
-    {% set photo_filter = false %}
-    {% if filter_field == 'p.type' and filter_value == 'false' %}
+{% if filter_field == 'p.type' %}
+    {% if filter_value == 'false' %}
         {% set photo_filter = true %}
+        {% set art_filter = false %}
+        {% set photo_val = '[]' %}
+        {% set art_val = '[true,false]' %}
+    {% elseif filter_value == 'true' %}
+        {% set photo_filter = false %}
+        {% set art_filter = true %}
+        {% set photo_val = '[true,false]' %}
+        {% set art_val = '[]' %}
+    {% elseif filter_value == '[true,false]' %}
+        {% set photo_filter = true %}
+        {% set art_filter = true %}
+        {% set photo_val = 'true' %}
+        {% set art_val = 'false' %}
+    {% else %}
+        {% set photo_filter = false %}
+        {% set art_filter = false %}
+        {% set photo_val = 'false' %}
+        {% set art_val = 'true' %}
     {% endif %}
+{% else %}
+    {% set photo_filter = true %}
+    {% set art_filter = true %}
+    {% set photo_val = 'true' %}
+    {% set art_val = 'false' %}
+{% endif %}
+<div class="col-md-1 text-center az-picture-page-constructor-block container-fluid">
     <div class="row az-category-page-filter az-category-page-filter-photo">
         <span class="az-category-page-filter-art-title">Фото</span>
-        <input type="radio" class="btn az-category-page-filter-radio" name="az-category-page-filter-photo" title="az-category-page-filter-photo" value="1"
-               data-filterurl="{{ app.request.pathinfo }}?sort={{ sort_field }}&direction={{ sort_direction }}&page={{ pagination.currentPageNumber }}&filterField=p.type&filterValue=false"
+        <input type="checkbox" class="btn az-category-page-filter-radio" name="az-category-page-filter-photo" title="az-category-page-filter-photo" value="1"
+               data-filterurl="{{ app.request.pathinfo }}?sort={{ sort_field }}&direction={{ sort_direction }}&page={{ pagination.currentPageNumber }}&filterField=p.type&filterValue={{ photo_val }}"
                {% if photo_filter %}checked{% endif %}>
     </div>
 </div>
 <div class="col-md-1 text-center az-picture-page-constructor-block container-fluid">
-    {% set art_filter = false %}
-    {% if filter_field == 'p.type' and filter_value == 'true' %}
-        {% set art_filter = true %}
-    {% endif %}
     <div class="row az-category-page-filter az-category-page-filter-photo">
         <span class="az-category-page-filter-art-title">Арт</span>
-        <input type="radio" class="btn az-category-page-filter-radio" name="az-category-page-filter-photo" title="az-category-page-filter-photo"
-               data-filterurl="{{ app.request.pathinfo }}?sort={{ sort_field }}&direction={{ sort_direction }}&page={{ pagination.currentPageNumber }}&filterField=p.type&filterValue=true"
+        <input type="checkbox" class="btn az-category-page-filter-radio" name="az-category-page-filter-photo" title="az-category-page-filter-photo"
+               data-filterurl="{{ app.request.pathinfo }}?sort={{ sort_field }}&direction={{ sort_direction }}&page={{ pagination.currentPageNumber }}&filterField=p.type&filterValue={{ art_val }}"
                value="1" {% if art_filter %}checked{% endif %}>
     </div>
 </div>
-
