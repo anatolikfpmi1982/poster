@@ -87,14 +87,14 @@
     {% if filter_value == 'false' %}
         {% set photo_filter = true %}
         {% set art_filter = false %}
-        {% set photo_val = '[]' %}
-        {% set art_val = '[true,false]' %}
+        {% set photo_val = '' %}
+        {% set art_val = 'true,false' %}
     {% elseif filter_value == 'true' %}
         {% set photo_filter = false %}
         {% set art_filter = true %}
-        {% set photo_val = '[true,false]' %}
-        {% set art_val = '[]' %}
-    {% elseif filter_value == '[true,false]' %}
+        {% set photo_val = 'true,false' %}
+        {% set art_val = '' %}
+    {% elseif filter_value == 'true,false' %}
         {% set photo_filter = true %}
         {% set art_filter = true %}
         {% set photo_val = 'true' %}
