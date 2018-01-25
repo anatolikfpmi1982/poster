@@ -20,12 +20,13 @@
              data-pad-left=4
              data-pad-top=4
              data-butt=5
-             data-code="{% if module_active %}single|{horizontal|15-70-15:35-100-0:25-100-5:25-70-15}{% else %}single|{horizontal|100-100-0}{% endif %}"
+             data-code="{% if module_active %}{{ module_formulas[i].formula }}{% else %}single|{horizontal|100-100-0}{% endif %}"
              data-max-width="246"
              data-max-height="240"
              data-href="{{ path('picture', {'id': picture.id}) }}"
         >
             {#<img src="{{ img }}" class="az-main-popular-item-img">#}
+            {#single|{horizontal|15-70-15:35-100-0:25-100-5:25-70-15}#}
 
         </div>
     </div>

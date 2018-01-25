@@ -84,6 +84,7 @@ class CategoriesController extends FrontController
         $this->data['filters']['tpls'] = $this->em->getRepository('AppBundle:PictureForm')->findBy(['isActive' => true]);
         if($request->query->get('type') && $request->query->get('type') == 'module') {
             $this->data['module_active'] = true;
+            $this->data['module_formulas'] = $this->em->getRepository('AppBundle:ModuleType')->findBy(['isActive' => true]);
         };
 
         // parameters to template
