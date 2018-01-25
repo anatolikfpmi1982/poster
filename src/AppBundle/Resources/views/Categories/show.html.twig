@@ -37,8 +37,13 @@
                 <div class="row az-category-page-pictures-div">
                     <div class="row az-page-section-body az-page-main-popular container-fluid">
                         <div class="row">
+                            {% set i = 0 %}
                             {% for picture in pagination %}
+                            {% if module_formulas is defined and i >= module_formulas|length %}
+                                {% set i = 0 %}
+                            {% endif %}
                             {% include('AppBundle:Component:picture.cell.html.twig') %}
+                            {% set i = i + 1 %}
                             {% if loop.index != 1 and loop.index % 3 == 0 %}
                         </div>
                         <div class="row">

@@ -44,6 +44,21 @@ class CategoriesController extends FrontController
         if($request->query->get('filterField') == 'p.type' && $request->query->get('filterValue') == '') {
             $queryBuilder->andWhere('p.id = 0');
         }
+
+        // hack for random pictures sorting
+        if($request->query->get('random') == 'true') {
+
+            if(!$request->query->get('page')) {
+                $randInt = rand(1, 999);
+                $this->get('session')->set('random-' . $slug, $randInt);
+            }
+            $randInt = $this->get('session')->get('random-' . $slug);
+            $queryBuilder->addSelect('RAND( ' . $randInt. ') as HIDDEN rnd');
+
+            $_GET['sort'] = 'rnd';
+            $_GET['direction'] = 'asc';
+        }
+
         $query = $queryBuilder->getQuery();
 
         //add multiple popularity
@@ -69,6 +84,7 @@ class CategoriesController extends FrontController
         $this->data['filters']['tpls'] = $this->em->getRepository('AppBundle:PictureForm')->findBy(['isActive' => true]);
         if($request->query->get('type') && $request->query->get('type') == 'module') {
             $this->data['module_active'] = true;
+            $this->data['module_formulas'] = $this->em->getRepository('AppBundle:ModuleType')->findBy(['isActive' => true]);
         };
 
         // parameters to template
