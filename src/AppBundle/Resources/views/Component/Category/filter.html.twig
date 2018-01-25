@@ -27,7 +27,7 @@
         {% if sort_field == 'p.title' %}
             {% if sort_direction == 'DESC' %}{% set title_direction = 'ASC' %}{% endif %}
         {% endif %}
-        <a href="{{ app.request.pathinfo }}?sort=p.title&direction={{ title_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Имя <span
+        <a  class="az-category-page-filter-name" href="{{ app.request.pathinfo }}?sort=p.title&direction={{ title_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Имя <span
                     class="glyphicon glyphicon-chevron-{% if title_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
     </div>
 </div>
@@ -37,7 +37,7 @@
         {% if sort_field == 'p.createdAt' %}
             {% if sort_direction == 'DESC' %}{% set date_direction = 'ASC' %}{% endif %}
         {% endif %}
-        <a href="{{ app.request.pathinfo }}?sort=p.createdAt&direction={{ date_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Дата <span
+        <a class="az-category-page-filter-name" href="{{ app.request.pathinfo }}?sort=p.createdAt&direction={{ date_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Дата <span
                     class="glyphicon
         glyphicon-chevron-{% if date_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
     </div>
@@ -48,7 +48,7 @@
         {% if sort_field == 'p.popularity' %}
             {% if sort_direction == 'DESC' %}{% set popularity_direction = 'ASC' %}{% endif %}
         {% endif %}
-        <a href="{{ app.request.pathinfo }}?sort=p.popularity&direction={{ popularity_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Популярность <span
+        <a class="az-category-page-filter-name" href="{{ app.request.pathinfo }}?sort=p.popularity&direction={{ popularity_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Популярность <span
                     class="glyphicon
         glyphicon-chevron-{% if popularity_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
     </div>
