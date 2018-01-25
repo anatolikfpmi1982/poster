@@ -79,6 +79,13 @@ define(function (require, exports, module) {
             return false;
         });
 
+        // category page filter random
+        $("button.az-category-page-filter-random-btn").click(function (event) {
+            event.stopImmediatePropagation();
+            window.location.replace($(this).data('filterurl'));
+            return false;
+        });
+
         // Reviews page
         // add review
         $("#add_review").submit(function (event) {

@@ -44,6 +44,21 @@ class CategoriesController extends FrontController
         if($request->query->get('filterField') == 'p.type' && $request->query->get('filterValue') == '') {
             $queryBuilder->andWhere('p.id = 0');
         }
+
+        // hack for random pictures sorting
+        if($request->query->get('random') == 'true') {
+
+            if(!$request->query->get('page')) {
+                $randInt = rand(1, 999);
+                $this->get('session')->set('random-' . $slug, $randInt);
+            }
+            $randInt = $this->get('session')->get('random-' . $slug);
+            $queryBuilder->addSelect('RAND( ' . $randInt. ') as HIDDEN rnd');
+
+            $_GET['sort'] = 'rnd';
+            $_GET['direction'] = 'asc';
+        }
+
         $query = $queryBuilder->getQuery();
 
         //add multiple popularity
