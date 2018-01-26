@@ -27,7 +27,7 @@ class CategoriesController extends FrontController
     public function showAction($slug, Request $request)
     {
         $this->blocks = array_merge($this->blocks, ['LastVisited' => 6, 'Deferred' => 7]);
-        $this->menu = '/';
+        $this->menu = '/category/' . $slug;
         $this->pageSlug = $slug;
         $this->pageType = 'category';
         $this->doBlocks();

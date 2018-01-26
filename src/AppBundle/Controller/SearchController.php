@@ -39,7 +39,7 @@ class SearchController extends FrontController
         );
 
         $this->blocks['LastVisited'] = 6;
-        $this->menu = '/';
+        $this->menu = '/search';
         $this->pageSlug = $searchString;
         $this->pageType = 'search';
         $this->doBlocks();

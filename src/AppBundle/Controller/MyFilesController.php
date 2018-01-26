@@ -42,6 +42,7 @@ class MyFilesController extends FrontController {
         $this->blocks = array_merge($this->blocks, ['LastVisited' => 6]);
         $this->pageSlug = $pictureId;
         $this->pageType = 'my_file';
+        $this->menu = '/my_file/' . $pictureId;
         $this->id = $pictureId;
         $this->doBlocks();
 
@@ -102,6 +103,7 @@ class MyFilesController extends FrontController {
             self::PAGE_LIMIT/*limit per page*/
         );
 
+        $this->menu = '/my_files';
         $this->pageSlug = '';
         $this->pageType = 'my_files';
         $this->doBlocks();

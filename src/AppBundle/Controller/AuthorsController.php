@@ -37,7 +37,7 @@ class AuthorsController extends FrontController
         );
 
         $this->blocks['LastVisited'] = 6;
-        $this->menu = '/';
+        $this->menu = '/author/' . $slug;
         $this->pageSlug = $slug;
         $this->pageType = 'author';
         $this->doBlocks();

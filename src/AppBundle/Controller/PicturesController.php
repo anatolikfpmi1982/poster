@@ -139,7 +139,7 @@ class PicturesController extends FrontController {
         $this->blocks = array_merge($this->blocks);
         $this->pageSlug = $id;
         $this->pageType = 'picture';
-        $this->menu = '/picture';
+        $this->menu = '/picture/' . $id;
         $this->id = $id;
         $this->doBlocks();
 
