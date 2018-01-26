@@ -26,6 +26,7 @@ class PageAdmin extends AbstractAdmin
             ->add('seoKeywords', null, ['required' => false, 'label' => 'SEO - Keywords'])
             ->add('slug', null, ['required' => false, 'label' => 'Алиас', 'attr' => ['name' => 'slug1']])
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
+            ->add('showTitle', null, ['required' => false, 'label' => 'Показывать заголовок'])
             ->end();
     }
 
