@@ -20,7 +20,15 @@
 </div>
 <div class="row az-page-main-section-div">
     <div class="col-md-12 container-fluid">
-        <div class="row page-title az-picture-page-title">Рама {{ frame.title }} </div>
+        <div class="row page-title az-picture-page-title">
+            <div class="col-md-9">  Рама {{ frame.title }} </div>
+            <div class="col-md-3"><div class="row az-picture-page-constructor-block hidden" id="az-picture-page-sidebar-deffered-div">
+                <div class="col-md-12">
+                    <a href="{{ path('deferred') }}">
+                        <button class="btn az-btn-delayed-image">Отложенные <span id="az-picture-page-sidebar-deffered-div-count">0</span></button>
+                    </a>
+                </div></div> </div>
+       </div>
         <div class="row az-picture-page-author-articul-div">
             {% if pictureMain.author is defined and pictureMain.author and pictureMain.author.slug is defined and pictureMain.author.slug %}
                 {% set author_link = path('author', {'slug': pictureMain.author.slug }) %}
