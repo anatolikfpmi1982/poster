@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class FramesController extends FrontController
 {
-    const PAGE_LIMIT = 5;
+    const PAGE_LIMIT = 6;
 
     /**
      * @Route("/frames", name="frames")

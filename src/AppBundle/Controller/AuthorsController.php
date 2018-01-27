@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class AuthorsController extends FrontController
 {
-    const PAGE_LIMIT = 16;
+    const PAGE_LIMIT = 20;
 
     /**
      * @param string $slug
@@ -37,7 +37,7 @@ class AuthorsController extends FrontController
         );
 
         $this->blocks['LastVisited'] = 6;
-        $this->menu = '/';
+        $this->menu = '/author/' . $slug;
         $this->pageSlug = $slug;
         $this->pageType = 'author';
         $this->doBlocks();

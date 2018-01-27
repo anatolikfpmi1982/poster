@@ -1,6 +1,15 @@
 <div class="row">
     <div class="col-md-12 owl-carousel owl-theme" id="owl-example">
         {% if pictureThicknesses is defined and pictureThicknesses %}
+            <div class="item">
+                <a href="{{ path('picture_frame', {'id': pictureMain.id}) }}">
+                    <img src="{{ asset('bundles/app/images/material_default.png') }}" class="az-picture-page-constructor-picture-thickness-img"
+                         data-title="Автоподбор"
+                         data-ratio="0"
+                         data-id="0"
+                    />
+                </a>
+            </div>
             {% set frameId = 0 %}
             {% set frameTitle = '' %}
             {% set frameRatio = 0 %}

@@ -27,7 +27,7 @@ class CategoriesController extends FrontController
     public function showAction($slug, Request $request)
     {
         $this->blocks = array_merge($this->blocks, ['LastVisited' => 6, 'Deferred' => 7]);
-        $this->menu = '/';
+        $this->menu = '/category/' . $slug;
         $this->pageSlug = $slug;
         $this->pageType = 'category';
         $this->doBlocks();
@@ -39,12 +39,33 @@ class CategoriesController extends FrontController
 
         /** @var QueryBuilder $queryBuilder */
         $queryBuilder = $this->em->getRepository('AppBundle:Picture')->getActivePicturesFromCategory($category);
+
+        // hack for empty picture type filter
+        if($request->query->get('filterField') == 'p.type' && $request->query->get('filterValue') == '') {
+            $queryBuilder->andWhere('p.id = 0');
+        }
+
+        // hack for random pictures sorting
+        if($request->query->get('random') == 'true') {
+
+            if(!$request->query->get('page')) {
+                $randInt = rand(1, 999);
+                $this->get('session')->set('random-' . $slug, $randInt);
+            }
+            $randInt = $this->get('session')->get('random-' . $slug);
+            $queryBuilder->addSelect('RAND( ' . $randInt. ') as HIDDEN rnd');
+
+            $_GET['sort'] = 'rnd';
+            $_GET['direction'] = 'asc';
+        }
+
         $query = $queryBuilder->getQuery();
 
         //add multiple popularity
         if($request->query->get('sort') === 'p.popularity') {
             $_GET['sort'] = 'p.isTop+p.popularity';
         }
+
 
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
@@ -63,7 +84,7 @@ class CategoriesController extends FrontController
         $this->data['filters']['tpls'] = $this->em->getRepository('AppBundle:PictureForm')->findBy(['isActive' => true]);
         if($request->query->get('type') && $request->query->get('type') === 'module') {
             $this->data['module_active'] = true;
-            $this->data['moduleTypes'] = $this->em->getRepository( 'AppBundle:ModuleType' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
+            $this->data['module_formulas'] = $this->em->getRepository('AppBundle:ModuleType')->findBy(['isActive' => true]);
         };
 
         // parameters to template

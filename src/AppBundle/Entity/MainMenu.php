@@ -405,13 +405,13 @@ class MainMenu
     {
         switch ($this->type) {
             case 'page':
-                return 'page/' . $this->page->getSlug();
+                return '/page/' . $this->page->getSlug();
             case 'category':
-                return 'category/' . $this->category->getSlug();
+                return '/category/' . $this->category->getSlug();
             case 'picture':
-                return 'picture/' . $this->picture->getSlug();
+                return '/picture/' . $this->picture->getId();
             case 'target':
-                return $this->target;
+                return strpos($this->target, '/') === 0 ? $this->target : '/' . $this->target;
             default:
                 return '';
         }

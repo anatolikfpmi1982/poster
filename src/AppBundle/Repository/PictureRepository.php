@@ -13,6 +13,8 @@ use Doctrine\ORM\QueryBuilder;
  * repository methods below.
  */
 class PictureRepository extends EntityRepository {
+    const SIMILAR_COUNT = 6;
+
     /**
      * * Get query builder for active pictures by category id
      *
@@ -124,7 +126,32 @@ class PictureRepository extends EntityRepository {
                          ->getResult();
 
         if ( count( $entities ) > 0 ) {
-            return $entities[0]->getSimilar();
+            if ( count( $entities[0]->getSimilar() ) < self::SIMILAR_COUNT && $entities[0]->getAuthor() ) {
+                foreach ($entities[0]->getSimilar() as $k => $v) {
+                    $ids[] = $v->getId();
+                }
+                $limit = self::SIMILAR_COUNT - count($entities[0]->getSimilar());
+                $entitiesAuthor = $this->createQueryBuilder( 'p' )
+                    ->innerJoin( 'p.author', 'a' )// Inner Join with author
+                    ->where( 'a.id = :author_id' )
+                    ->andWhere( 'p.isActive = true' )
+                    ->andWhere( 'p.id != :id' )
+                    ->andWhere( 'p.id NOT IN (:ids)' )
+                    ->setParameter( 'author_id', $entities[0]->getAuthor()->getId() )
+                    ->setParameter( 'id', $id )
+                    ->setParameter( 'ids', $ids )
+                    ->setFirstResult(0)
+                    ->setMaxResults($limit)
+                    ->getQuery()
+                    ->getResult();
+
+                foreach ($entities[0]->getSimilar() as $k => $v) {
+                    $entitiesAuthor[] = $v;
+                }
+                return $entitiesAuthor;
+            } else {
+                return $entities[0]->getSimilar();
+            }
         }
 
         return [ ];

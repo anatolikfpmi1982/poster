@@ -26,7 +26,16 @@
     </div>
     <div class="row az-page-main-section-div az-page-category-main-section-div">
         <div class="col-md-12 container-fluid">
-            <div class="row page-title az-picture-page-title">{{ category.title }}</div>
+            <div class="row page-title az-picture-page-title">
+                <div class="col-md-9"> {{ category.title }} ({{ category.pictures|length }})</div>
+            <div class="col-md-3">
+                <div class="row az-picture-page-constructor-block hidden" id="az-picture-page-sidebar-deffered-div">
+                    <div class="col-md-12">
+                        <a href="{{ path('deferred') }}">
+                            <button class="btn az-btn-delayed-image">Отложенные <span id="az-picture-page-sidebar-deffered-div-count">0</span></button>
+                        </a>
+                    </div>
+                </div></div> </div>
             <div class="row az-category-page-description-div">
                 {{ category.description|raw }}
             </div>
@@ -37,9 +46,13 @@
                 <div class="row az-category-page-pictures-div">
                     <div class="row az-page-section-body az-page-main-popular container-fluid">
                         <div class="row">
-                            {% set previousFormula = '' %}
+                            {% set i = 0 %}
                             {% for picture in pagination %}
+                            {% if module_formulas is defined and i >= module_formulas|length %}
+                                {% set i = 0 %}
+                            {% endif %}
                             {% include('AppBundle:Component:picture.cell.html.twig') %}
+                            {% set i = i + 1 %}
                             {% if loop.index != 1 and loop.index % 3 == 0 %}
                         </div>
                         <div class="row">

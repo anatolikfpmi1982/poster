@@ -85,6 +85,12 @@ class Page
 
     /**
      * @var boolean
+     * @ORM\Column(name="show_title", type="boolean", nullable=true, options={"default" : 0})
+     */
+    private $showTitle = true;
+
+    /**
+     * @var boolean
      * @ORM\Column(name="is_active", type="boolean", nullable=false)
      */
     private $isActive;
@@ -323,5 +329,29 @@ class Page
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Set showTitle
+     *
+     * @param boolean $showTitle
+     *
+     * @return Page
+     */
+    public function setShowTitle($showTitle)
+    {
+        $this->showTitle = $showTitle;
+
+        return $this;
+    }
+
+    /**
+     * Get showTitle
+     *
+     * @return boolean
+     */
+    public function getShowTitle()
+    {
+        return $this->showTitle;
     }
 }

@@ -24,7 +24,7 @@ class DeferredController extends FrontController {
     public function listAction(Request $request) {
         $this->menu = '/deferred';
         $this->pageSlug = '';
-        $this->pageType = 'deferred';
+        $this->pageType = '/deferred';
         $this->doBlocks();
         $em = $this->get('doctrine.orm.entity_manager');
 
