@@ -1,4 +1,4 @@
-{% if picture.image and picture.image.getFilename() %}
+{% if picture.image is defined and picture.image and picture.image.getFilename() %}
     {% set img = '/files/pictures/thumb/' ~ picture.image.getFilename() %}
     {% set imgPath = picture.image.getThumbBaseFile() %}
     {% set imgSize = filesize(imgPath) %}
@@ -7,20 +7,32 @@
     {% set imgPath = asset('bundles/app/images/default_picture.jpg') %}
     {% set imgSize = filesize(imgPath) %}
 {% endif %}
+{% set isModule = module_active is defined and module_active %}
+{% if isModule and moduleTypes is defined and moduleTypes and previousFormula is defined %}
+    {% set randomModuleFormula = random(moduleTypes).formula %}
+    {% if randomModuleFormula == previousFormula %}
+        {% set randomModuleFormula = random(moduleTypes).formula %}
+    {% endif %}
+    {% set previousFormula = randomModuleFormula %}
+{% elseif isModule and moduleTypes is not defined %}
+    {% set randomModuleFormula = 'single|{horizontal|15-70-15:35-100-0:25-100-5:25-70-15}' %}
+{% else %}
+    {% set randomModuleFormula = 'single|{horizontal|100-100-0}' %}
+{% endif %}
 <div class="col-md-4 az-popular-item container">
     <div class="row az-main-popular-item-img-div">
         <div class="col-md-12 az-main-popular-item-img show-constructor-img-lazy"
              data-src="{{ img }}"
-             data-id="21"
-             data-type="{% if module_active %}Панно{% else %}Баннер{% endif %}"
+             data-id="{{ picture.id }}"
+             data-type="{% if isModule %}Панно{% else %}Баннер{% endif %}"
              data-width={{ imgSize[0] }}
              data-height={{ imgSize[1] }}
              data-left=0
              data-top=2
-             data-pad-left=4
+             data-pad-left=14
              data-pad-top=4
              data-butt=5
-             data-code="{% if module_active %}single|{horizontal|15-70-15:35-100-0:25-100-5:25-70-15}{% else %}single|{horizontal|100-100-0}{% endif %}"
+             data-code="{{ randomModuleFormula }}"
              data-max-width="246"
              data-max-height="240"
              data-href="{{ path('picture', {'id': picture.id}) }}"
@@ -41,12 +53,13 @@
     </div>
     <div class="row">
         <div class="az-main-popular-item-header-category">
-            {% if picture.author is defined and picture.author and picture.author.slug is defined and picture.author.slug %}
+            {% set isPictureAuthor = picture.author is defined and picture.author %}
+            {% if isPictureAuthor and picture.author.slug is defined and picture.author.slug %}
                 {% set author_url = path('author', {'slug': picture.author.slug}) %}
             {% else %}
                 {% set author_url = '#' %}
             {% endif %}
-            {% if picture.author is defined and picture.author and picture.author.name is defined and picture.author.name %}
+            {% if isPictureAuthor and picture.author.name is defined and picture.author.name %}
                 {% set author_name = picture.author.name %}
             {% else %}
                 {% set author_name = '-' %}

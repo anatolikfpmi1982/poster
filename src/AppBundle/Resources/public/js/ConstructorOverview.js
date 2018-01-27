@@ -170,30 +170,65 @@ function ConstructorOverview() {
     };
 
     this.calculateWidthAndHeight = function () {
+        if (this.debug) {
+            console.log('START');
+            console.log('isHeight', this.picHeight > this.picWidth);
+            console.log('this.max_width', this.max_width);
+            console.log('this.max_height', this.max_height);
+            console.log('this.picHeight', this.picHeight);
+            console.log('this.picWidth', this.picWidth);
+            console.log('this.right_width', this.right_width);
+            console.log('this.padding_top', this.padding_top);
+            console.log('this.padding_left', this.padding_left);
+            console.log('this.left_deviation', this.left_deviation);
+            console.log('this.panelNumberVertical', this.panelNumberVertical);
+            console.log('this.panelNumberHorizontal', this.panelNumberHorizontal);
+        }
+
         if (this.max_width > 0 && this.max_height > 0) {
             var isHeight = this.picHeight > this.picWidth;
             if (isHeight) {
-                var maxHeight = this.max_height - this.right_width - this.padding_top * (this.panelNumberVertical - 1);
+                var maxHeight = this.max_height - 2 * this.top_deviation - (this.right_width + this.padding_top) * (this.panelNumberVertical - 1);
+                if (this.debug) {
+                    console.log('maxHeight', maxHeight);
+                    console.log('this.picHeight > maxHeight', this.picHeight > maxHeight);
+                }
                 if (this.picHeight > maxHeight) {
                     this.picWidth = Math.round((this.picWidth * maxHeight) / this.picHeight);
                     this.picHeight = maxHeight;
-                } else {
-
                 }
 
                 this.left_deviation = this.left_deviation + Math.round((this.max_width - this.picWidth ) / 2);
-            } else {
-                var maxWidth = this.max_width - this.right_width - this.padding_left * (this.panelNumberHorizontal - 1);
 
+                if (this.debug) {
+                    console.log('this.picWidth', this.picWidth);
+                    console.log('this.picHeight', this.picHeight);
+                    console.log('this.left_deviation', this.left_deviation);
+                }
+            } else {
+                var maxWidth = this.max_width - 2 * this.left_deviation - (this.right_width + this.padding_left) * (this.panelNumberHorizontal - 1);
+                if (this.debug) {
+                    console.log('maxWidth', maxWidth);
+                    console.log('this.picWidth > maxWidth', this.picWidth > maxWidth);
+                }
                 if (this.picWidth > maxWidth) {
                     this.picHeight = Math.round((this.picHeight * maxWidth) / this.picWidth);
                     this.picWidth = maxWidth;
-                } else {
-
                 }
                 this.top_deviation = this.top_deviation + Math.round((this.max_height - this.picHeight ) / 2);
-                this.left_deviation = this.left_deviation + Math.round((maxWidth - this.picWidth ) / 2);
+                this.left_deviation = this.left_deviation + Math.round((this.max_width - this.picWidth ) / 2);
+
+                if (this.debug) {
+                    console.log('this.picWidth', this.picWidth);
+                    console.log('this.picHeight', this.picHeight);
+                    console.log('this.left_deviation', this.left_deviation);
+                    console.log('this.top_deviation', this.top_deviation);
+                }
             }
+        }
+
+        if (this.debug) {
+            console.log('END');
         }
     };
 
