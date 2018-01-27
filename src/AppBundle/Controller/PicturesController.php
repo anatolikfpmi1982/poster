@@ -25,7 +25,7 @@ class PicturesController extends FrontController {
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function showAction( $id, Request $request ) {
-        $this->blocks = array_merge($this->blocks, ['LastVisited' => 6]);
+        $this->blocks = array_merge($this->blocks, ['LastVisited' => 6, 'Similar' => 7]);
         $this->pageSlug = $id;
         $this->pageType = 'picture';
         $this->menu = '/picture';
