@@ -41,12 +41,12 @@ class CategoriesController extends FrontController
         $queryBuilder = $this->em->getRepository('AppBundle:Picture')->getActivePicturesFromCategory($category);
 
         // hack for empty picture type filter
-        if($request->query->get('filterField') == 'p.type' && $request->query->get('filterValue') == '') {
+        if($request->query->get('filterField') === 'p.type' && $request->query->get('filterValue') == '') {
             $queryBuilder->andWhere('p.id = 0');
         }
 
         // hack for random pictures sorting
-        if($request->query->get('random') == 'true') {
+        if($request->query->get('random') === 'true') {
 
             if(!$request->query->get('page')) {
                 $randInt = rand(1, 999);
