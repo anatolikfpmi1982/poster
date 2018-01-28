@@ -71,9 +71,10 @@ body {
     padding: 0;
 }
 
-.navbar-default .navbar-nav>li>a {
+.navbar-default .navbar-nav > li > a {
     color: #333;
 }
+
 .navbar-default .navbar-nav >
 .active > a, .navbar-default .navbar-nav >
 .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
@@ -91,14 +92,12 @@ body {
 .navbar-nav > li:active {
     color: #fd1200;
 
-
 }
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > li > a:hover {
     background-image: none;
     color: #fd1200;
     box-shadow: none;
-
 
 }
 
@@ -108,9 +107,10 @@ body {
     color: #fff;
     background: #535353;
     padding: 0;
-    border-top:1px solid #5f5f5f;
+    border-top: 1px solid #5f5f5f;
 
 }
+
 az-sidebar-subcategory-item .active_parent {
     background: #fff;
     color: #fd1200;
@@ -120,10 +120,11 @@ az-sidebar-subcategory-item .active_parent {
     padding: 0;
 }
 
-.az-sidebar-subcategory-item .active_parent:hover{
+.az-sidebar-subcategory-item .active_parent:hover {
     background: #535353;
-    border-top:#fd1200 solid 1px !important ;
+    border-top: #fd1200 solid 1px !important;
 }
+
 .az-sidebar-subcategory-item.active {
     line-height: 26px;
     cursor: pointer;
@@ -133,15 +134,17 @@ az-sidebar-subcategory-item .active_parent {
     padding: 0 10px;
 }
 
-div[class*="children-subcategory-"]{
+div[class*="children-subcategory-"] {
     background: #fff;
     margin-left: 0;
     margin-right: 0;
 
 }
+
 .az-subcat-span {
     padding: 0 10px 0 20px;
 }
+
 .az-subsubcat-span {
     padding: 0 10px 0 30px;
     font-size: 12px;
@@ -198,7 +201,6 @@ div[class*="children-subsubcategory-"]:hover {
     font-weight: 400;
     line-height: 20px;
 }
-
 
 .children-subsubcategory:active {
     line-height: 20px;
@@ -377,7 +379,6 @@ footer {
     transition: .3s ease 0s, color .3s ease 0s;
     border-bottom: 1px solid #fff;
 
-
 }
 
 .az-sidebar-header:hover {
@@ -387,6 +388,7 @@ footer {
     border-bottom: 1px solid #fff;
     padding: 8px;
 }
+
 .az-sidebar-catalog-item-header:active {
     background-color: #535353;
     cursor: pointer;
@@ -880,6 +882,7 @@ body {
     background-color: #f8f8f8;
 
 }
+
 .az-sidebar {
     margin: 10px 0 10px;
     background-color: #FFFFFF;
@@ -975,7 +978,7 @@ body {
     /*width: 100%;*/
     text-align: center;
     margin: 0 auto;
-    padding: 15px;
+    padding: 0;
     max-height: 246px;
     height: 100%;
     max-width: 246px;
@@ -1495,11 +1498,11 @@ footer {
     height: 40px;
 }
 
-.az-filter-frame  .az-category-page-filter-photo {
+.az-filter-frame .az-category-page-filter-photo {
     vertical-align: middle;
     font-size: 12px;
     line-height: 50px;
-    height:50px;
+    height: 50px;
 
 }
 
@@ -1527,13 +1530,15 @@ footer {
     height: 50px;
 
 }
+
 .az-category-page-filter-photo a {
     color: #333;
     margin-top: 10px;
 }
+
 .az-category-page-filter-name:hover {
     color: #fd1200;
-    text-decoration:underline;
+    text-decoration: underline;
 }
 
 .az-category-page-filter-radio {
@@ -1551,8 +1556,9 @@ footer {
     font: 11px/31px 'arial', 'helvetica', 'sans-serif';
     padding: 0 5px;
 }
+
 .az-category-page-filter-random-btn:hover,
-.az-category-page-filter-random-btn:focus  {
+.az-category-page-filter-random-btn:focus {
     background-color: #fff;
     border: 1px solid #fd1200;
     color: #fd1200;
@@ -1578,6 +1584,7 @@ footer {
     border: none;
 
 }
+
 /**vizited block**/
 .az-visited-block .az-page-main-section-div {
     border-left: none;
@@ -2309,7 +2316,7 @@ button.close:focus, .close:hover {
 }
 
 .navbar-form {
-    padding: 0px 10px 5px 10px ;
+    padding: 0px 10px 5px 10px;
 
 }
 
@@ -2487,7 +2494,6 @@ button.close:focus, .close:hover {
     padding: 0;
     margin: 10px auto;
 
-
 }
 
 .az-main-frames-img {
@@ -2550,7 +2556,7 @@ button.close:focus, .close:hover {
 
 }
 
-.az-frames-slide-thumb img{
+.az-frames-slide-thumb img {
     max-width: 79px;
     max-height: 78px;
     padding: 2px;
@@ -2558,10 +2564,9 @@ button.close:focus, .close:hover {
 
 .az-frames-slide-thumb:hover,
 .az-frames-slide-thumb:active,
-.az-frames-slide-thumb:focus{
+.az-frames-slide-thumb:focus {
     border: 1px solid #fd1200;
 }
-
 
 .az-frame-slide-about {
     display: block;
@@ -2677,9 +2682,11 @@ button.close:focus, .close:hover {
 #myBtn:hover {
     background-color: #555;
 }
+
 .fa-arrow-up {
     font-size: 40px;
 }
+
 .az-picture-page-sidebar-size-panel-div-content-item {
     padding-left: 10px;
     font-size: 10px;
@@ -2698,7 +2705,7 @@ button.close:focus, .close:hover {
     border: 1px solid #fd1200;
 }
 
-.az-main-page-header-icon-cell .blink {
+.blink {
     animation: blinker 1s linear infinite;
 }
 

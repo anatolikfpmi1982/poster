@@ -41,6 +41,7 @@ function ConstructorOverview() {
     this.maxWidth = 0;
     this.maxHeight = 0;
     this.shadow = 3;
+    this.fill = false;
 
     this.init = function (params) {
         if (params != undefined) {
@@ -71,7 +72,6 @@ function ConstructorOverview() {
     };
 
     this.initDefault = function () {
-        var mainPanel = $('.az-picture-page-picture-main-panel-div');
         this.type = $("input.az-picture-page-constructor-type-radio:checked").data('title');
         this.size = $("select.az-picture-page-sidebar-size-select").val();
         var material = $("input.az-picture-page-constructor-material-radio:checked"),
@@ -100,8 +100,8 @@ function ConstructorOverview() {
         this.padding_top = 10;
         this.right_width = 5;
         this.top_deviation = 40;
-        this.left_deviation = 40;
-        this.max_width = parseInt($('.az-picture-page-title').css('width'));
+        this.left_deviation = 10;
+        this.max_width = parseInt($('.az-picture-page-constructor-global-div').css('width'));
         this.max_height = this.picHeight + (2 * this.top_deviation);
         this.shadow = 3;
     };
@@ -170,30 +170,61 @@ function ConstructorOverview() {
     };
 
     this.calculateWidthAndHeight = function () {
+        if (this.debug) {
+            console.log('START');
+            console.log('isHeight', this.picHeight > this.picWidth);
+            console.log('this.max_width', this.max_width);
+            console.log('this.max_height', this.max_height);
+            console.log('this.picHeight', this.picHeight);
+            console.log('this.picWidth', this.picWidth);
+            console.log('this.right_width', this.right_width);
+            console.log('this.padding_top', this.padding_top);
+            console.log('this.padding_left', this.padding_left);
+            console.log('this.left_deviation', this.left_deviation);
+            console.log('this.panelNumberVertical', this.panelNumberVertical);
+            console.log('this.panelNumberHorizontal', this.panelNumberHorizontal);
+        }
+
         if (this.max_width > 0 && this.max_height > 0) {
             var isHeight = this.picHeight > this.picWidth;
             if (isHeight) {
-                var maxHeight = this.max_height - this.right_width - this.padding_top * (this.panelNumberVertical - 1);
+                var maxHeight = this.max_height - 2 * this.top_deviation - (this.right_width + this.padding_top) * (this.panelNumberVertical - 1);
+                if (this.debug) {
+                    console.log('maxHeight', maxHeight);
+                    console.log('this.picHeight > maxHeight', this.picHeight > maxHeight);
+                }
                 if (this.picHeight > maxHeight) {
                     this.picWidth = Math.round((this.picWidth * maxHeight) / this.picHeight);
                     this.picHeight = maxHeight;
-                } else {
-
                 }
-
-                this.left_deviation = this.left_deviation + Math.round((this.max_width - this.picWidth ) / 2);
             } else {
-                var maxWidth = this.max_width - this.right_width - this.padding_left * (this.panelNumberHorizontal - 1);
-
+                var maxWidth = this.max_width - 2 * this.left_deviation - (this.padding_left + this.right_width + this.shadow) * (this.panelNumberHorizontal - 1);
+                if (this.debug) {
+                    console.log('maxWidth', maxWidth);
+                    console.log('this.picWidth > maxWidth', this.picWidth > maxWidth);
+                }
                 if (this.picWidth > maxWidth) {
                     this.picHeight = Math.round((this.picHeight * maxWidth) / this.picWidth);
                     this.picWidth = maxWidth;
-                } else {
-
                 }
-                this.top_deviation = this.top_deviation + Math.round((this.max_height - this.picHeight ) / 2);
-                this.left_deviation = this.left_deviation + Math.round((maxWidth - this.picWidth ) / 2);
+
             }
+
+            this.top_deviation = this.top_deviation + Math.round((this.max_height - this.picHeight -
+                    (this.right_width + this.padding_top) * (this.panelNumberVertical - 1) - this.shadow  ) / 2);
+            this.left_deviation = this.left_deviation + Math.round((this.max_width - this.picWidth -
+                    (this.right_width + this.padding_left + this.shadow) * (this.panelNumberHorizontal - 1) ) / 2);
+
+            if (this.debug) {
+                console.log('this.picWidth', this.picWidth);
+                console.log('this.picHeight', this.picHeight);
+                console.log('this.left_deviation', this.left_deviation);
+                console.log('this.top_deviation', this.top_deviation);
+            }
+        }
+
+        if (this.debug) {
+            console.log('END');
         }
     };
 
@@ -247,10 +278,11 @@ function ConstructorOverview() {
                     break;
                 case 'horizontal':
                 default:
-                    showWidth = Math.round((value.height * picWidth ) / 100);
+                    showWidth = picWidth;
                     newWidth = Math.round((value.width * showWidth ) / 100);
-                    showHeight = newHeight;
-                    mainTop = top_deviation + (value.up > 0 ? Math.round((value.up * screen_height ) / 100) : 0);
+                    showHeight = picHeight;
+                    mainTop = top_deviation + (value.up > 0 ? Math.round((value.up * picHeight ) / 100) : 0);
+                    deviation_top = -(value.up > 0 ? Math.round((value.up * picHeight ) / 100) : 0);
                     ind = index;
                     deviation = 0;
                     deviationRight = 0;
@@ -278,7 +310,7 @@ function ConstructorOverview() {
                             deviation = deviation - Math.round((that.panelSettings[ind - 1]['data'][0].width * showWidth ) / 100);
                             deviationRight = deviationRight + Math.round((that.panelSettings[ind - 1]['data'][0].width * showWidth ) / 100);
                         } else {
-                            Object.keys(that.panelSettings[ind - 1]['data']).map(function (key, index) {
+                            Object.keys(that.panelSettings[ind - 1]['data']).map(function (key) {
                                 deviation = deviation - Math.round((that.panelSettings[ind - 1]['data'][key].width * showWidth ) / 100);
                                 deviationRight = deviationRight + Math.round((that.panelSettings[ind - 1]['data'][key].width * showWidth ) / 100);
                             });
@@ -303,6 +335,7 @@ function ConstructorOverview() {
             divMain.css('width', newWidth + 'px');
             divMain.css('height', newHeight + 'px');
             divMain.css('background-image', 'url(' + imgPath + ')');
+            divMain.css('background-repeat', 'no-repeat');
             divMain.css('background-size', showWidth + 'px ' + showHeight + 'px');
             divMain.css('background-position', deviation + 'px ' + deviation_top + 'px');
 
@@ -417,17 +450,17 @@ function ConstructorOverview() {
 
     this.showPanelSizes = function () {
         var contentEl = $('div#az-picture-page-sidebar-size-panel-div-content'),
-            mainEl = '', subEl = '', subInputEl = '';
+            mainEl = '', subEl = '';
         contentEl.html('<div class="row"><div class="col-12 az-picture-page-sidebar-size-panel-div-content-item">Размеры модулей</div></div>');
 
-        this.panelSizes.forEach(function (element, index, array) {
+        this.panelSizes.forEach(function (element, index) {
             mainEl = $('<div class="row"></div>');
             subEl = $('<div class="col-12 az-picture-page-sidebar-size-panel-div-content-item"></div>');
             subEl.html(index + '. ' + element + ' см');
             subEl.appendTo(mainEl);
             mainEl.appendTo(contentEl);
         });
-        subInputEl = $('<input type="hidden" id="az-picture-constructor-module-sizes-selected" name="az-picture-constructor-module-sizes-selected" />');
+        var subInputEl = $('<input type="hidden" id="az-picture-constructor-module-sizes-selected" name="az-picture-constructor-module-sizes-selected" />');
         subInputEl.val(this.panelSizes.join('|'));
         subInputEl.appendTo(contentEl);
     };

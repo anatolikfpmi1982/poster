@@ -41,12 +41,12 @@ class CategoriesController extends FrontController
         $queryBuilder = $this->em->getRepository('AppBundle:Picture')->getActivePicturesFromCategory($category);
 
         // hack for empty picture type filter
-        if($request->query->get('filterField') == 'p.type' && $request->query->get('filterValue') == '') {
+        if($request->query->get('filterField') === 'p.type' && $request->query->get('filterValue') == '') {
             $queryBuilder->andWhere('p.id = 0');
         }
 
         // hack for random pictures sorting
-        if($request->query->get('random') == 'true') {
+        if($request->query->get('random') === 'true') {
 
             if(!$request->query->get('page')) {
                 $randInt = rand(1, 999);
@@ -62,7 +62,7 @@ class CategoriesController extends FrontController
         $query = $queryBuilder->getQuery();
 
         //add multiple popularity
-        if($request->query->get('sort') == 'p.popularity') {
+        if($request->query->get('sort') === 'p.popularity') {
             $_GET['sort'] = 'p.isTop+p.popularity';
         }
 
@@ -82,7 +82,7 @@ class CategoriesController extends FrontController
         $this->data['deferredItems'] = $this->get( 'app.session_manager' )->getDeferredItems();
         $this->data['mainCategoryId'] = $category->getId();
         $this->data['filters']['tpls'] = $this->em->getRepository('AppBundle:PictureForm')->findBy(['isActive' => true]);
-        if($request->query->get('type') && $request->query->get('type') == 'module') {
+        if($request->query->get('type') && $request->query->get('type') === 'module') {
             $this->data['module_active'] = true;
             $this->data['module_formulas'] = $this->em->getRepository('AppBundle:ModuleType')->findBy(['isActive' => true]);
         };

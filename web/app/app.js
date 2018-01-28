@@ -119,7 +119,7 @@ define(function (require, exports, module) {
             if ($("input.az-picture-page-constructor-type-radio:checked").data('title') == 'Баннер') {
                 formulaInput.val('single|{horizontal|100-100-0}');
             } else {
-                formulaInput.val($('.az-picture-page-constructor-picture-module-type-img').first().data('code'));
+                formulaInput.val($('.az-picture-page-constructor-picture-module-type-img:eq( 1 )').data('code'));
             }
             setShowBoard();
         });
@@ -511,10 +511,13 @@ define(function (require, exports, module) {
         setCartCount();
         setDeferredCount();
         setMyFilesCount();
+        $('.az-picture-page-constructor-picture-thickness-img').removeClass('hidden').show();
+        $('.az-picture-page-constructor-picture-module-type-img').removeClass('hidden').show();
     });
 
     function setShowBoard() {
         var constructor = new ConstructorOverview();
+        constructor.debug = true;
         constructor.init();
         constructor.buildConstructor();
         constructor.showPrice();
@@ -526,6 +529,11 @@ define(function (require, exports, module) {
             url: "/ajax/cart/count"
         }).done(function (data) {
             $(".az-header-basket-count").text(data.count);
+            if (data.count > 0) {
+                $('.az-basket-title-img').addClass('blink');
+            } else {
+                $('.az-basket-title-img').removeClass('blink');
+            }
         });
         return false;
     }
@@ -606,7 +614,7 @@ define(function (require, exports, module) {
         if (pictures.length > 0) {
             $.each(pictures, function (key, value) {
                 constructor = new ConstructorOverview();
-                constructor.debug = true;
+                //constructor.debug = true;
                 var params = {};
                 params['type'] = $(value).data('type');
                 params['monitor'] = $(value);

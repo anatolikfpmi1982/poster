@@ -30,16 +30,6 @@
                 </div></div> </div>
        </div>
         <div class="row az-picture-page-author-articul-div">
-            {% if pictureMain.author is defined and pictureMain.author and pictureMain.author.slug is defined and pictureMain.author.slug %}
-                {% set author_link = path('author', {'slug': pictureMain.author.slug }) %}
-            {% else %}
-                {% set author_link = '#' %}
-            {% endif %}
-            {% if pictureMain.author is defined and pictureMain.author and pictureMain.author.name is defined and pictureMain.author.name %}
-                {% set author_name = pictureMain.author.name %}
-            {% else %}
-                {% set author_name = '-' %}
-            {% endif %}
             <div class="col-md-2">  {{ frame.width }} X {{ frame.height }} см</div>
             <div class="col-md-10"> {{ frame.material }}</div>
         </div>
@@ -100,6 +90,12 @@
             <p>Материал: {{ frame.material }}</p>
             <p>Ширина: {{ frame.width }}</p>
             <p>Высота: {{ frame.height }}</p>
+            {% if frame.description %}
+            <p>
+                Описание:<br/>
+                {{ frame.description|raw }}
+            </p>
+            {% endif %}
         </div>
     </div>
     <div class="row az-visited-block az-category-page-visited-div">

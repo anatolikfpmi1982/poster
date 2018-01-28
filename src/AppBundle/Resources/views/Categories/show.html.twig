@@ -63,7 +63,9 @@
                                 <div class="col-md-4 az-popular-item container az-category-next">
                                     <div class="row text-center az-main-popular-item-img-div">
                                         <div class="col-md-12 category-next">
-                                            <a class="az-nextpage" href="{{ path(pagination.getRoute(), pagination.getParams()|merge({'page': pagination.getCurrentPageNumber()+1})) }}"><i class="glyphicon glyphicon-menu-right"></i><br/>Дальше</a>
+                                            <a class="az-nextpage"
+                                               href="{{ path(pagination.getRoute(), pagination.getParams()|merge({'page': pagination.getCurrentPageNumber()+1})) }}"><i
+                                                        class="glyphicon glyphicon-menu-right"></i><br/>Дальше</a>
                                         </div>
                                     </div>
                                 </div>
@@ -80,8 +82,9 @@
             {% endif %}
             <div class="row az-pagination-block az-category-page-pagination-div">
                 <div class="col-md-12">
-                {{ knp_pagination_render(pagination) }}
-            </div></div>
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div>
             <div class="row az-visited-block az-category-page-visited-div">
                 {% include('AppBundle:Component:Blocks/last.visited.html.twig') %}
             </div>
