@@ -2145,8 +2145,9 @@ button.close {
 }
 
 button.close:focus, .close:hover {
-    background-color: #fff;
     color: #fd1200;
+    background: none;
+    opacity: 1;
 }
 
 .btn-default:focus, .btn-default:hover {
@@ -2306,7 +2307,7 @@ button.close:focus, .close:hover {
 .az-form-download-file {
     float: left;
     position: relative;
-    width: 20%;
+
 }
 
 .az-form-btn-download {
@@ -2705,7 +2706,7 @@ button.close:focus, .close:hover {
     border: 1px solid #fd1200;
 }
 
-.blink {
+.az-main-page-header-icon-cell .blink {
     animation: blinker 1s linear infinite;
 }
 
