@@ -2614,14 +2614,6 @@ button.close:focus, .close:hover {
     text-align: center;
 }
 
-.az-sidebar-link-stock:hover {
-    border: 1px #333 dashed;
-    background-color: #fff;
-    color: #fd1200;
-    text-transform: none;
-    text-align: center;
-    padding: 10px;
-}
 
 .az-sidebar-link-stock-div {
     margin: 15px 0;
