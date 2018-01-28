@@ -2,6 +2,7 @@
 namespace AppBundle\Controller;
 error_reporting(E_ALL);
 use AppBundle\Entity\Settings;
+use Doctrine\DBAL\Types\FloatType;
 use Doctrine\ORM\EntityManager;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Controller\CoreController;
@@ -87,7 +88,8 @@ class AdminController extends CoreController
                 'enable_reviews' => false,
                 'contact_us_text' => '',
                 'from_email' => '',
-                'to_email' => ''
+                'to_email' => '',
+                'min_price' => ''
             ];
         }
 
@@ -116,6 +118,7 @@ class AdminController extends CoreController
             ->add('enable_own_picture', CheckboxType::class, ['label' => 'Использовать функцию "Загрузить картину"', 'required' => false])
             ->add('enable_call_back', CheckboxType::class, ['label' => 'Использовать функцию "Заказать звонок"', 'required' => false])
             ->add('enable_reviews', CheckboxType::class, ['label' => 'Показывать блок "Отзывы"', 'required' => false])
+            ->add('min_price', NumberType::class, ['label' => 'Минимальная цена', 'required' => false])
             ->add('save', SubmitType::class, array('label' => 'Сохранить'))
             ->getForm();
 

@@ -557,6 +557,9 @@ function ConstructorOverview() {
                 price = this.calculatePanel();
                 break;
         }
+        min_price = $('span.az-picture-page-sidebar-price-value').data('min-price');
+        price = price < min_price ? min_price.toFixed(2) : price;
+
         $('span.az-picture-page-sidebar-price-value').html(price).data('price', price);
     };
 
