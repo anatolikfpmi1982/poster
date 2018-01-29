@@ -48,6 +48,24 @@ class PictureSubscriber
     /**
      * @param LifecycleEventArgs $args
      */
+    public function preUpdate(LifecycleEventArgs $args)
+    {
+        $entity = $args->getEntity();
+        if($entity instanceof Picture) {
+            if($image = $entity->getImage() && file_exists($entity->getImage()->getOriginFile())) {
+                $form = $this->container->get('helper.imageformidentifier')->identify($entity->getImage());
+                if($formEntity = $this->container->get('doctrine.orm.entity_manager')->getRepository('AppBundle:PictureForm')->findOneBy(['serviceName' => $form])) {
+                    $entity->setForm($formEntity);
+                }
+            }
+
+            $entity->setSlug($this->container->get('helper.slugcreator')->createSlug($entity->getTitle()));
+        }
+    }
+
+    /**
+     * @param LifecycleEventArgs $args
+     */
     public function postUpdate(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
@@ -55,7 +73,6 @@ class PictureSubscriber
             if($image = $entity->getImage()) {
                 $this->createResize($entity, $image);
             }
-            $entity->setSlug($this->container->get('helper.slugcreator')->createSlug($entity->getTitle()));
         }
     }
 
