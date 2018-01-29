@@ -22,6 +22,8 @@
              data-cycle-timeout=2000
              data-cycle-overlay-template="
              <span class=az-slider-title>{{ '{{' }}title{{ '}}' }}</span><span class='az-slider-description'>{{ '{{' }}desc{{ '}}' }}</span>"
+             data-cycle-loader="true"
+                {#data-cycle-auto-height="true"#}
         >
             <!-- empty element for overlay -->
             <div class="cycle-overlay custom"></div>
@@ -32,7 +34,9 @@
                     <img src="/files/slider/max_thumb/{{ slider.image.filename }}"
                          data-date="{{ slider.createdAt|date('M, d') }}"
                          data-title="{{ slider.title }}"
-                         data-cycle-desc="{{ slider.text }}">
+                         data-cycle-desc="{{ slider.text }}"
+                         class="az-main-page-slider-img"
+                         style="display: none">
                 {% endfor %}
             {% endif %}
         </div>

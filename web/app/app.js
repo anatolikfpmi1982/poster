@@ -66,12 +66,6 @@ define(function (require, exports, module) {
             return false;
         });
 
-        $("div.az-main-popular-item-img").click(function (event) {
-            event.stopImmediatePropagation();
-            window.location.replace($(this).data('href'));
-            return false;
-        });
-
         // category page filter clear
         $("button.az-category-page-filter-clear-btn").click(function (event) {
             event.stopImmediatePropagation();
@@ -200,17 +194,6 @@ define(function (require, exports, module) {
             var id = $(this).data('id'), active_id = $('#block_menu_active_category').val();
             if (id !== parseInt(active_id)) {
                 window.location.replace($(this).data('url'));
-                //} else {
-                //    var parent = $('div.children-category-' + id),
-                //        isDisplay = parent.css('display');
-                //    $('div.category-menu').hide();
-                //    $('div.subcategory-menu').hide();
-                //
-                //    if (isDisplay == 'none') {
-                //        parent.show();
-                //    } else {
-                //        parent.hide();
-                //    }
             }
             return false;
         });
@@ -221,20 +204,6 @@ define(function (require, exports, module) {
             var id = $(this).data('id'), parent = $(this).data('parent-id'), active_id = $('#block_menu_active_category').val();
             if (id !== parseInt(active_id)) {
                 window.location.replace($(this).data('url'));
-                //} else {
-                //    var category = $('div.children-category-' + parent),
-                //        categorySub = $('div.children-subcategory-' + parent),
-                //        isDisplay = categorySub.css('display');
-                //    $('div.category-menu').hide();
-                //    $('div.subcategory-menu').hide();
-                //    category.show();
-                //    if (isDisplay == 'none') {
-                //        categorySub.show();
-                //        $('div.children-subsubcategory-' + id).show();
-                //    } else {
-                //        categorySub.hide();
-                //        $('div.children-subsubcategory-' + id).show();
-                //    }
             }
             return false;
         });
@@ -507,12 +476,40 @@ define(function (require, exports, module) {
             });
         });
 
+        $('div.pagination .page').click(function (event) {
+            event.stopPropagation();
+            event.preventDefault();
+            var href = $(this).find('a').attr("href");
+            window.location.replace(href);
+
+        }).hover(function () {
+            $(this).css("cursor", "pointer");
+        }, function () {
+            $(this).css("cursor", "none");
+        });
+
+        $('div.az-main-popular-item-img-div').click(function (event) {
+            event.stopPropagation();
+            event.preventDefault();
+            var href = $(this).find('a.az-nextpage').attr("href");
+            window.location.replace(href);
+
+        }).hover(function () {
+            $(this).css("cursor", "pointer");
+            $(this).find('a.az-nextpage').toggleClass("hovered");
+        }, function () {
+            $(this).css("cursor", "none");
+            $(this).find('a.az-nextpage').toggleClass("hovered");
+        });
+
         setShowBoard();
         setCartCount();
         setDeferredCount();
         setMyFilesCount();
         $('.az-picture-page-constructor-picture-thickness-img').removeClass('hidden').show();
         $('.az-picture-page-constructor-picture-module-type-img').removeClass('hidden').show();
+        $('.az-main-page-slider-img').removeClass('hidden').show();
+
     });
 
     function setShowBoard() {
@@ -630,7 +627,9 @@ define(function (require, exports, module) {
                 params['panel_max_width'] = $(value).data('max-width');
                 params['panel_max_height'] = $(value).data('max-height');
                 params['shadow'] = $(value).data('shadow');
-                params['fill'] = $(value).data('fill');
+                params['fill'] = $(value).data('fill-in');
+                params['href'] = $(value).data('href');
+                params['link'] = params['href'] ? true : false;
                 constructor.init(params);
                 constructor.show();
             });

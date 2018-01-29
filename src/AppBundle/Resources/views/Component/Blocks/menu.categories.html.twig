@@ -16,7 +16,8 @@
         {#{% set visible = (module and module_active) or (not module and not module_active) %}#}
         <div class="row az-sidebar-header az-sidebar-catalog-item-header {% if category.id == active_category_id %}active{% endif %}"
              data-id="{{ category.id }}"
-             data-url="{{ path('category', options) }}">
+             data-url="{{ path('category', options) }}"
+                {% if category.id in activeCategories %} style="border-bottom: none;" {% endif %}>
             <div class="col-md-12 ">
                 <img src="{{ asset('bundles/app/images/catalog.png') }}" class="az-sidebar-block-img az-catalog-block-img" title="{{ category.title }}"/>
                 {{ category.title }}
@@ -54,7 +55,7 @@
                                                 {% else %}
                                                     {% set subsubcategory_slug = '#' %}
                                                 {% endif %}
-                                                {% if module is defined and module%}
+                                                {% if module is defined and module %}
                                                     {% set options = {'slug': subsubcategory_slug, 'type': 'module'} %}
                                                 {% else %}
                                                     {% set options = {'slug': subsubcategory_slug} %}

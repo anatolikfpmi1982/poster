@@ -31,11 +31,12 @@
              data-top=2
              data-pad-left=14
              data-pad-top=4
-             data-butt=5
+             data-butt=6
              data-code="{% if module_active %}{{ module_formulas[i].formula }}{% else %}single|{horizontal|100-100-0}{% endif %}"
              data-max-width="246"
              data-max-height="240"
              data-href="{{ path('picture', {'id': picture.id}) }}"
+             data-fill-in="1"
         >
         </div>
     </div>
@@ -110,7 +111,7 @@
                 </div>
                 <div class="col-md-6 az_btn_order text-left">
                     <a href="{{ path('picture', {'id': picture.id}) }}"
-                       class="btn_az-main-popular_order">Выбрать <br/>тип картины,<br/> размер, цена, <br/>заказать</a>
+                       class="btn_az-main-popular_order">Выбрать <br/>тип картины,<br/> размер, цена, <br/>купить</a>
                 </div>
 
             </div>

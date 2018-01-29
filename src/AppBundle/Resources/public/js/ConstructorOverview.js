@@ -42,6 +42,8 @@ function ConstructorOverview() {
     this.maxHeight = 0;
     this.shadow = 3;
     this.fill = false;
+    this.isLink = false;
+    this.linkHref = '';
 
     this.init = function (params) {
         if (params != undefined) {
@@ -67,6 +69,8 @@ function ConstructorOverview() {
             this.max_height = params.panel_max_height != undefined ? params.panel_max_height : this.max_height;
             this.shadow = params.shadow != undefined ? params.shadow : this.shadow;
             this.fill = params.fill != undefined ? params.fill : this.fill;
+            this.isLink = params.link != undefined ? params.link : this.isLink;
+            this.linkHref = params.href != undefined ? params.href : this.linkHref;
         } else {
             this.initDefault();
         }
@@ -99,7 +103,7 @@ function ConstructorOverview() {
         this.formulaInput = $('input#az-picture-constructor-module-code-selected').val();
         this.padding_left = 20;
         this.padding_top = 10;
-        this.right_width = 5;
+        this.right_width = 6;
         this.top_deviation = 40;
         this.left_deviation = 10;
         this.max_width = parseInt($('.az-picture-page-constructor-global-div').css('width'));
@@ -417,8 +421,13 @@ function ConstructorOverview() {
             }
             divDown.css('background-position', deviation + 'px ' + (right_width - deviation_top) + 'px');
             divDown.appendTo(divMain);
-
-            divMain.appendTo(that.monitor);
+            if (!that.isLink) {
+                divMain.appendTo(that.monitor);
+            } else {
+                var aLink = $('<a href="' + that.linkHref + '"></a>');
+                divMain.appendTo(aLink);
+                aLink.appendTo(that.monitor);
+            }
 
             switch (panel_type) {
                 case 'vertical':

@@ -21,34 +21,39 @@
         {% set filter_value = '' %}
     {% endif %}
 {% endif %}
-<div class="col-md-1 text-center az-picture-page-constructor-block container-fluid">
+<div class="col-md-1 text-center az-picture-page-constructor-block container-fluid {% if sort_field == 'p.title' %}active{% endif %}">
     <div class="row az-category-page-filter az-category-page-filter-photo">
-        {% set title_direction = 'DESC' %}
-        {% if sort_field == 'p.title' %}
-            {% if sort_direction == 'DESC' %}{% set title_direction = 'ASC' %}{% endif %}
-        {% endif %}
-        <a  class="az-category-page-filter-name" href="{{ app.request.pathinfo }}?sort=p.title&direction={{ title_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Имя <span
-                    class="glyphicon glyphicon-chevron-{% if title_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
+        <div class="col-md-12">
+            {% set title_direction = 'DESC' %}
+            {% if sort_field == 'p.title' %}
+                {% if sort_direction == 'DESC' %}{% set title_direction = 'ASC' %}{% endif %}
+            {% endif %}
+            <a class="az-category-page-filter-name"
+               href="{{ app.request.pathinfo }}?sort=p.title&direction={{ title_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Имя <span
+                        class="glyphicon glyphicon-chevron-{% if title_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
+        </div>
     </div>
 </div>
-<div class="col-md-1 text-center az-picture-page-constructor-block container-fluid">
+<div class="col-md-1 text-center az-picture-page-constructor-block container-fluid {% if sort_field == 'p.createdAt' %}active{% endif %}">
     <div class="row az-category-page-filter az-category-page-filter-photo">
         {% set date_direction = 'DESC' %}
         {% if sort_field == 'p.createdAt' %}
             {% if sort_direction == 'DESC' %}{% set date_direction = 'ASC' %}{% endif %}
         {% endif %}
-        <a class="az-category-page-filter-name" href="{{ app.request.pathinfo }}?sort=p.createdAt&direction={{ date_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Дата <span
+        <a class="az-category-page-filter-name"
+           href="{{ app.request.pathinfo }}?sort=p.createdAt&direction={{ date_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Дата <span
                     class="glyphicon
         glyphicon-chevron-{% if date_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
     </div>
 </div>
-<div class="col-md-2 text-center az-picture-page-constructor-block container-fluid">
+<div class="col-md-2 text-center az-picture-page-constructor-block container-fluid {% if sort_field == 'p.popularity' %}active{% endif %}">
     <div class="row az-category-page-filter az-category-page-filter-photo">
         {% set popularity_direction = 'DESC' %}
         {% if sort_field == 'p.popularity' %}
             {% if sort_direction == 'DESC' %}{% set popularity_direction = 'ASC' %}{% endif %}
         {% endif %}
-        <a class="az-category-page-filter-name" href="{{ app.request.pathinfo }}?sort=p.popularity&direction={{ popularity_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Популярность <span
+        <a class="az-category-page-filter-name"
+           href="{{ app.request.pathinfo }}?sort=p.popularity&direction={{ popularity_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Популярность <span
                     class="glyphicon
         glyphicon-chevron-{% if popularity_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
     </div>
@@ -64,7 +69,7 @@
         </button>
     </div>
 </div>
-<div class="col-md-4 text-center az-picture-page-constructor-block container-fluid">
+<div class="col-md-4 text-center az-picture-page-constructor-block container-fluid {% if filter_field == 'f.id' %}active{% endif %}">
     <div class="row az-category-page-filter az-category-page-filter-photo">
         Вид формы:
         {% if filters is defined and filters and filters.tpls is defined and filters.tpls %}
@@ -106,7 +111,7 @@
     {% set photo_val = 'true' %}
     {% set art_val = 'false' %}
 {% endif %}
-<div class="col-md-1 text-center az-picture-page-constructor-block container-fluid">
+<div class="col-md-1 text-center az-picture-page-constructor-block container-fluid {% if photo_filter %}active{% endif %}">
     <div class="row az-category-page-filter az-category-page-filter-photo">
         <span class="az-category-page-filter-art-title">Фото</span>
         <input type="checkbox" class="btn az-category-page-filter-radio" name="az-category-page-filter-photo" title="az-category-page-filter-photo" value="1"
@@ -114,7 +119,7 @@
                {% if photo_filter %}checked{% endif %}>
     </div>
 </div>
-<div class="col-md-1 text-center az-picture-page-constructor-block container-fluid">
+<div class="col-md-1 text-center az-picture-page-constructor-block container-fluid {% if art_filter %}active{% endif %}">
     <div class="row az-category-page-filter az-category-page-filter-photo">
         <span class="az-category-page-filter-art-title">Арт</span>
         <input type="checkbox" class="btn az-category-page-filter-radio" name="az-category-page-filter-photo" title="az-category-page-filter-photo"
