@@ -19,6 +19,11 @@
 {% else %}
     {% set randomModuleFormula = 'single|{horizontal|100-100-0}' %}
 {% endif %}
+{% if module_active is defined and module_active %}
+    {% set picture_url = path('picture', {'id': picture.id, 'type': 'module'}) %}
+{% else %}
+    {% set picture_url = path('picture', {'id': picture.id}) %}
+{% endif %}
 <div class="col-md-4 az-popular-item container">
     <div class="row az-main-popular-item-img-div">
         <div class="col-md-12 az-main-popular-item-img show-constructor-img-lazy"
@@ -35,7 +40,7 @@
              data-code="{% if module_active %}{{ module_formulas[i].formula }}{% else %}single|{horizontal|100-100-0}{% endif %}"
              data-max-width="246"
              data-max-height="240"
-             data-href="{{ path('picture', {'id': picture.id}) }}"
+             data-href="{{ picture_url }}"
         >
         </div>
     </div>
@@ -46,7 +51,8 @@
             {% else %}
                 {% set picture_title = picture.title %}
             {% endif %}
-            <a href="{{ path('picture', {'id': picture.id}) }}">"{{ picture_title }}"</a>
+
+            <a href="{{ picture_url }}">"{{ picture_title }}"</a>
         </div>
     </div>
     <div class="row">
@@ -109,7 +115,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 az_btn_order text-left">
-                    <a href="{{ path('picture', {'id': picture.id}) }}"
+                    <a href="{{ picture_url }}"
                        class="btn_az-main-popular_order">Выбрать <br/>тип картины,<br/> размер, цена, <br/>заказать</a>
                 </div>
 
