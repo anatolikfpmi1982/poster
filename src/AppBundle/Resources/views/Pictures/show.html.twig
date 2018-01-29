@@ -38,6 +38,17 @@
                 {% include('AppBundle:Component:Constructor/template.html.twig') %}
             </div>
         </div>
+        {% if pictureMain.categories is defined and pictureMain.categories and pictureMain.categories|length > 0 %}
+            {% set limitCategory = 5 %}
+            <div class="row">
+                <div class="az-main-popular-item-header-category">
+                    <span class="az_author"> Категории:</span>
+                    {% for cat in pictureMain.categories|slice(0, limitCategory) %}
+                        <a href="{{ path('category', {'slug': cat.slug}) }}"> {{ cat.title }}</a> {% if loop.last == false %},{% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
         {% if frameSettings is defined and frameSettings %}
             {% set min_square = frameSettings.minArea %}
             {% set max_square = frameSettings.maxArea %}
