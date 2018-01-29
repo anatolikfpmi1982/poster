@@ -26,11 +26,13 @@
                      data-top=20
                      data-pad-left=4
                      data-pad-top=4
-                     data-butt=5
+                     data-butt=6
+                     date-fill-in=1
                      data-code="{% if item.type_id == 'banner' %}single|{horizontal|100-100-0}{% else %}{{ item.module_formula }}{% endif %}"
                      data-max-width="{% if imgSize[1]>imgSize[0] %}200{% else %}170{% endif %}"
                      data-max-height="{% if imgSize[1]>imgSize[0] %}165{% else %}200{% endif %}"
                      data-href="{{ path('picture', {'id': item.picture.id}) }}"
+
                 ></div>
             {% else %}
                 <a href="{{ path('picture', {'id': item.picture_id}) }}"><img src="{{ img }}" class="az-order-cart-item-img"></a>
@@ -48,10 +50,11 @@
                      data-top=20
                      data-pad-left=4
                      data-pad-top=4
-                     data-butt=5
+                     data-butt=6
                      data-code="{% if item.type_id == 'banner' %}single|{horizontal|100-100-0}{% else %}{{ item.module_formula }}{% endif %}"
                      data-max-width="{% if imgSize[1]>imgSize[0] %}200{% else %}170{% endif %}"
                      data-max-height="{% if imgSize[1]>imgSize[0] %}165{% else %}200{% endif %}"
+                     data-fill-in="1"
                 ></div>
             {% else %}
                 <img src="{{ img }}" class="az-order-cart-item-img">
