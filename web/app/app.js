@@ -374,11 +374,7 @@ define(function (require, exports, module) {
 
                 showInnerMessage('success', 'Успешно добавили картину с названием "' + title + '" в корзину.');
 
-                window.setTimeout(function () {
-                    location.href = '/order';
-                }, 3000);
-
-
+                location.href = '/order';
             });
             return false;
         });
