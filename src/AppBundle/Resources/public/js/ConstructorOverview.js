@@ -66,6 +66,7 @@ function ConstructorOverview() {
             this.max_width = params.panel_max_width != undefined ? params.panel_max_width : this.max_width;
             this.max_height = params.panel_max_height != undefined ? params.panel_max_height : this.max_height;
             this.shadow = params.shadow != undefined ? params.shadow : this.shadow;
+            this.fill = params.fill != undefined ? params.fill : this.fill;
         } else {
             this.initDefault();
         }
@@ -187,8 +188,9 @@ function ConstructorOverview() {
 
         if (this.max_width > 0 && this.max_height > 0) {
             var isHeight = this.picHeight > this.picWidth;
+            var maxHeight = this.max_height - 2 * this.top_deviation - (this.right_width + this.padding_top) * (this.panelNumberVertical - 1);
+            var maxWidth = this.max_width - 2 * this.left_deviation - (this.padding_left + this.right_width + this.shadow) * (this.panelNumberHorizontal - 1);
             if (isHeight) {
-                var maxHeight = this.max_height - 2 * this.top_deviation - (this.right_width + this.padding_top) * (this.panelNumberVertical - 1);
                 if (this.debug) {
                     console.log('maxHeight', maxHeight);
                     console.log('this.picHeight > maxHeight', this.picHeight > maxHeight);
@@ -198,16 +200,20 @@ function ConstructorOverview() {
                     this.picHeight = maxHeight;
                 }
             } else {
-                var maxWidth = this.max_width - 2 * this.left_deviation - (this.padding_left + this.right_width + this.shadow) * (this.panelNumberHorizontal - 1);
                 if (this.debug) {
                     console.log('maxWidth', maxWidth);
                     console.log('this.picWidth > maxWidth', this.picWidth > maxWidth);
                 }
-                if (this.picWidth > maxWidth) {
+                if (this.picWidth > maxWidth || this.fill) {
                     this.picHeight = Math.round((this.picHeight * maxWidth) / this.picWidth);
-                    this.picWidth = maxWidth;
-                }
+                    if (this.picHeight > maxHeight) {
+                        this.picWidth = Math.round((maxWidth * maxHeight) / this.picHeight);
+                        this.picHeight = maxHeight;
+                    } else {
+                        this.picWidth = maxWidth;
+                    }
 
+                }
             }
 
             this.top_deviation = this.top_deviation + Math.round((this.max_height - this.picHeight -
@@ -245,25 +251,37 @@ function ConstructorOverview() {
             screen_height = picHeight + (2 * top_deviation),
             mainTop = top_deviation,
             size = this.size != undefined ? this.size.split('x') : [],
-            that = this;
+            that = this, panelActiveInnerBlockNum = 0;
 
         Object.keys(settings).map(function (objectKey, index) {
             that.panelActiveBlockNum++;
+            if (index == 0) {
+                panelActiveInnerBlockNum = 1;
+            } else {
+                panelActiveInnerBlockNum++;
+            }
+
             var value = settings[objectKey],
                 newDivString = '<div></div>',
                 newWidth = Math.round((value.width * picWidth ) / 100),
                 newHeight = Math.round((value.height * picHeight ) / 100),
                 showWidth = 0,
                 showHeight = 0,
-                ind = 0;
+                ind = 0, heightVerticalPercent = 0;
 
             switch (panel_type) {
                 case 'vertical':
-                    if (that.panel_type != 'multi') {
-                        showHeight = Math.round((value.width * picHeight ) / 100);
-                        newHeight = Math.round((value.height * showHeight ) / 100);
+                    showHeight = picHeight;
+                    if (panelActiveInnerBlockNum == Object.keys(settings).length) {
+                        ind = index;
+                        newHeight = showHeight;
+                        while (ind >= 0) {
+                            if (settings[ind - 1] != undefined) {
+                                newHeight = newHeight - Math.round((settings[ind - 1].height * showHeight ) / 100);
+                            }
+                            ind--;
+                        }
                     } else {
-                        showHeight = picHeight;
                         newHeight = Math.round((value.height * showHeight ) / 100);
                     }
                     showWidth = picWidth;
@@ -272,33 +290,58 @@ function ConstructorOverview() {
                     while (ind > 0) {
                         if (settings[ind - 1] != undefined) {
                             deviation_top = deviation_top - Math.round((settings[ind - 1].height * showHeight ) / 100);
+                            heightVerticalPercent = heightVerticalPercent + parseInt(settings[ind - 1].height);
                         }
                         ind--;
                     }
+                    heightVerticalPercent = heightVerticalPercent + parseInt(value.height);
                     break;
                 case 'horizontal':
                 default:
                     showWidth = picWidth;
-                    newWidth = Math.round((value.width * showWidth ) / 100);
+                    if (panelActiveInnerBlockNum == that.panelNumberHorizontal) {
+                        ind = index;
+                        newWidth = showWidth;
+                        while (ind >= 0) {
+                            if (settings[ind - 1] != undefined) {
+                                newWidth = newWidth - Math.round((settings[ind - 1].width * showWidth ) / 100);
+                            }
+                            ind--;
+                        }
+
+                    } else {
+                        newWidth = Math.round((value.width * showWidth ) / 100);
+                    }
+
                     showHeight = picHeight;
                     mainTop = top_deviation + (value.up > 0 ? Math.round((value.up * picHeight ) / 100) : 0);
                     deviation_top = -(value.up > 0 ? Math.round((value.up * picHeight ) / 100) : 0);
+
                     ind = index;
                     deviation = 0;
-                    deviationRight = 0;
-                    while (ind > 0) {
+                    while (ind >= 0) {
                         if (settings[ind - 1] != undefined) {
                             deviation = deviation - Math.round((settings[ind - 1].width * showWidth ) / 100);
-                            deviationRight = deviationRight + Math.round((settings[ind - 1].width * showWidth ) / 100);
                         }
                         ind--;
                     }
                     break;
             }
 
+            ind = index;
+            deviationRight = right_width;
+            while (ind >= 0) {
+                if (settings[ind] != undefined) {
+                    deviationRight = deviationRight + picWidth - Math.round((settings[ind].width * showWidth ) / 100);
+                    if (panel_type == 'vertical') {
+                        ind = 0;
+                    }
+                }
+                ind--;
+            }
+
             if (that.panel_type == 'multi') {
                 deviation = 0;
-                deviationRight = 0;
                 ind = mainIndex;
                 var cause = '';
                 while (ind > 0) {
@@ -308,24 +351,16 @@ function ConstructorOverview() {
                     if (cause) {
                         if (that.panelSettings[ind - 1]['type'] == 'vertical' && that.panelSettings[ind - 1]['data'][0] != undefined) {
                             deviation = deviation - Math.round((that.panelSettings[ind - 1]['data'][0].width * showWidth ) / 100);
-                            deviationRight = deviationRight + Math.round((that.panelSettings[ind - 1]['data'][0].width * showWidth ) / 100);
+                            deviationRight = deviationRight - Math.round((that.panelSettings[ind - 1]['data'][0].width * showWidth ) / 100);
                         } else {
                             Object.keys(that.panelSettings[ind - 1]['data']).map(function (key) {
                                 deviation = deviation - Math.round((that.panelSettings[ind - 1]['data'][key].width * showWidth ) / 100);
-                                deviationRight = deviationRight + Math.round((that.panelSettings[ind - 1]['data'][key].width * showWidth ) / 100);
+                                deviationRight = deviationRight - Math.round((that.panelSettings[ind - 1]['data'][key].width * showWidth ) / 100);
                             });
                         }
-
                     }
                     ind--;
                 }
-            }
-
-            if (that.debug) {
-                console.log('showWidth', showWidth + 'px');
-                console.log('showHeight', showHeight + 'px');
-                console.log('newWidth', newWidth + 'px');
-                console.log('newHeight', newHeight + 'px');
             }
 
             var divMain = $(newDivString);
@@ -342,10 +377,10 @@ function ConstructorOverview() {
             var divRight = $(newDivString);
             divRight.addClass('edge edger the_last');
             divRight.css('width', right_width + 'px');
-            divRight.css('height', (newHeight - right_width) + 'px');
+            divRight.css('height', newHeight + 'px');
             divRight.css('background-image', 'url(' + imgPath + ')');
             divRight.css('background-size', showWidth + 'px ' + showHeight + 'px');
-            divRight.css('background-position', '-' + deviationRight + 'px ' + deviation_top + 'px');
+            divRight.css('background-position', deviationRight + 'px ' + deviation_top + 'px');
             divRight.css('right', '0');
             divRight.css('box-shadow', 'rgba(0, 0, 0, 0.4) -' + that.shadow + 'px 0px ' + that.shadow + 'px');
             divRight.css('-webkit-transform', 'rotateY(180deg) skewY(-45deg)');
@@ -359,9 +394,28 @@ function ConstructorOverview() {
             divDown.css('height', right_width + 'px');
             divDown.css('background-image', 'url(' + imgPath + ')');
             divDown.css('background-size', showWidth + 'px ' + showHeight + 'px');
-            divDown.css('bottom', '0');
-            divDown.css('box-shadow', 'rgba(0, 0, 0, 0.4) 0 ' + that.shadow + 'px ' + that.shadow + 'px');
-            divDown.css('background-position', '-' + deviationRight + 'px 5px');
+            divDown.css('bottom', '-' + 2 * right_width + 'px');
+            divDown.css('left', right_width + 'px');
+            divDown.css('box-shadow', 'rgba(0, 0, 0, 0.4) 0 ' + '-' + that.shadow + 'px ' + that.shadow + 'px');
+            if ((value.up > 0 && ((parseInt(value.up) + parseInt(value.height)) == 100) || (parseInt(value.up) + parseInt(value.height)) == 99)
+                || heightVerticalPercent == 100 || heightVerticalPercent == 99) {
+                deviation_top = 0;
+            } else if (value.up > 0 && (parseInt(value.up) + parseInt(value.height)) < 100) {
+                deviation_top = Math.round(((parseInt(value.up) + parseInt(value.height)) * picHeight ) / 100);
+            } else if (value.up <= 0 && parseInt(value.height) < 100 && (panel_type != 'vertical' ||
+                (panel_type == 'vertical' && panelActiveInnerBlockNum == 1))) {
+                deviation_top = picHeight - Math.round(((100 - parseInt(value.height)) * picHeight ) / 100);
+            } else if (value.up <= 0 && parseInt(value.height) < 100 && panel_type == 'vertical') {
+                ind = index;
+                deviation_top = 0;
+                while (ind > 0) {
+                    if (settings[ind - 1] != undefined) {
+                        deviation_top = deviation_top - Math.round((settings[ind - 1].height * showHeight ) / 100);
+                    }
+                    ind--;
+                }
+            }
+            divDown.css('background-position', deviation + 'px ' + (right_width - deviation_top) + 'px');
             divDown.appendTo(divMain);
 
             divMain.appendTo(that.monitor);

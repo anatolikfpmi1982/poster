@@ -2248,8 +2248,8 @@ button.close:focus, .close:hover {
 }
 
 .module .edge.edgeb {
-    left: 0;
-    transform: skewX(45deg);
+    transform: rotateX(180deg) skewX(-45deg);
+    /*transform: rotateX(180deg);*/
     transform-origin: center top 0;
     width: 100%;
 }
@@ -2618,7 +2618,6 @@ button.close:focus, .close:hover {
     text-transform: none;
     text-align: center;
 }
-
 
 .az-sidebar-link-stock-div {
     margin: 15px 0;

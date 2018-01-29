@@ -517,7 +517,7 @@ define(function (require, exports, module) {
 
     function setShowBoard() {
         var constructor = new ConstructorOverview();
-        constructor.debug = true;
+        //constructor.debug = true;
         constructor.init();
         constructor.buildConstructor();
         constructor.showPrice();
@@ -630,6 +630,7 @@ define(function (require, exports, module) {
                 params['panel_max_width'] = $(value).data('max-width');
                 params['panel_max_height'] = $(value).data('max-height');
                 params['shadow'] = $(value).data('shadow');
+                params['fill'] = $(value).data('fill');
                 constructor.init(params);
                 constructor.show();
             });
