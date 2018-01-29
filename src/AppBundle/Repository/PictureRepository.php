@@ -117,41 +117,54 @@ class PictureRepository extends EntityRepository {
      */
     public function getActiveSimilar( $id ) {
         $entities = $this->createQueryBuilder( 'p' )
-                         ->innerJoin( 'p.similar', 's' )// Inner Join with similar
+                         ->leftJoin( 'p.similar', 's' )// Inner Join with similar
                          ->where( 'p.id = :id' )
                          ->andWhere( 'p.isActive = true' )
-                         ->andWhere( 's.isActive = true' )
                          ->setParameter( 'id', $id )
                          ->getQuery()
                          ->getResult();
 
         if ( count( $entities ) > 0 ) {
-            if ( count( $entities[0]->getSimilar() ) < self::SIMILAR_COUNT && $entities[0]->getAuthor() ) {
-                foreach ($entities[0]->getSimilar() as $k => $v) {
+            $similar = $entities[0]->getSimilar();
+        } else {
+            $similar = [];
+        }
+
+        if ( count( $similar ) < self::SIMILAR_COUNT && $entities[0]->getAuthor() ) {
+            if (count( $similar ) > 0) {
+                foreach ($similar as $k => $v) {
                     $ids[] = $v->getId();
                 }
-                $limit = self::SIMILAR_COUNT - count($entities[0]->getSimilar());
-                $entitiesAuthor = $this->createQueryBuilder( 'p' )
-                    ->innerJoin( 'p.author', 'a' )// Inner Join with author
-                    ->where( 'a.id = :author_id' )
-                    ->andWhere( 'p.isActive = true' )
-                    ->andWhere( 'p.id != :id' )
-                    ->andWhere( 'p.id NOT IN (:ids)' )
-                    ->setParameter( 'author_id', $entities[0]->getAuthor()->getId() )
-                    ->setParameter( 'id', $id )
-                    ->setParameter( 'ids', $ids )
-                    ->setFirstResult(0)
-                    ->setMaxResults($limit)
-                    ->getQuery()
-                    ->getResult();
-
-                foreach ($entities[0]->getSimilar() as $k => $v) {
-                    $entitiesAuthor[] = $v;
-                }
-                return $entitiesAuthor;
             } else {
-                return $entities[0]->getSimilar();
+                $ids = [];
             }
+
+            $limit = self::SIMILAR_COUNT - count($similar);
+            $qb = $this->createQueryBuilder( 'p' )
+                ->innerJoin( 'p.author', 'a' )// Inner Join with author
+                ->where( 'a.id = :author_id' )
+                ->andWhere( 'p.isActive = true' )
+                ->andWhere( 'p.id != :id' )
+                ->setParameter( 'author_id', $entities[0]->getAuthor()->getId() )
+                ->setParameter( 'id', $id )
+                ->setFirstResult(0)
+                ->setMaxResults($limit);
+
+            if(!empty($ids)) {
+                $qb->andWhere( 'p.id NOT IN (:ids)' )
+                    ->setParameter( 'ids', $ids );
+            }
+
+            $entitiesAuthor = $qb->getQuery()
+                ->getResult();
+
+            foreach ($similar as $k => $v) {
+               $entitiesAuthor[] = $v;
+            }
+
+            return $entitiesAuthor;
+        } else {
+            return $similar;
         }
 
         return [ ];

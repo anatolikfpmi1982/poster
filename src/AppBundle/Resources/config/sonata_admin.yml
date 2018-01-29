@@ -121,7 +121,7 @@ services:
     app.admin.picturesize:
         class: AppBundle\Admin\PictureSizeAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Картины", label: "Размеры картин", show_in_dashboard: true }
+            - { name: sonata.admin, manager_type: orm, group: "Картины", label: "Размеры картин", show_in_dashboard: false }
         arguments:
             - ~
             - AppBundle\Entity\PictureSize
