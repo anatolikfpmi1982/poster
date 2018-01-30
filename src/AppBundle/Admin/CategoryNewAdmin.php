@@ -52,7 +52,7 @@ class CategoryNewAdmin extends AbstractAdmin
             ->add('slug', null, ['required' => false, 'label' => 'Алиас'])
             ->add('weight', null, ['required' => false, 'label' => 'Вес', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
             ->add('parent_category', null, ['required' => false, 'label' => 'Родительская категория'])
-            ->add('tags', null, ['required' => false, 'label' => 'Теги'])
+//            ->add('tags', null, ['required' => false, 'label' => 'Теги'])
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
             ->end();
     }
@@ -80,7 +80,7 @@ class CategoryNewAdmin extends AbstractAdmin
                 'class' => 'Appbundle\Entity\Category3', 'choices' => $categoriesChoices, 'sortable' => true,
                 'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'parent_category']]])
             ->add('weight', null, ['label' => 'Вес', 'editable' => true])
-            ->add('tags', null, ['label' => 'Теги'])
+//            ->add('tags', null, ['label' => 'Теги'])
             ->add('isActive', null, ['label' => 'Показывать', 'editable' => true])
             ->add(
                 '_action',
@@ -103,7 +103,7 @@ class CategoryNewAdmin extends AbstractAdmin
         $datagridMapper
             ->add('title', null, ['label' => 'Название'])
             ->add('parent_category', null, ['label' => 'Родительская категория'])
-            ->add('tags', null, ['label' => 'Тег'])
+//            ->add('tags', null, ['label' => 'Тег'])
             ->add('isActive', null, ['label' => 'Показывать'])
         ;
     }

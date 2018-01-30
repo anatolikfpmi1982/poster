@@ -1,7 +1,7 @@
 {% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
 
 {% block field %}
-    <div>
+    <div style="min-width: 150px;">
         {% if object.image != null %}
             <img src="/files/{{ object.image.getEntityName() }}/mini_thumb/{{ object.image.getFilename() }}" class="admin-preview"/><br>
         {% else %}

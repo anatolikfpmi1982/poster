@@ -95,6 +95,8 @@ class OrderAdmin extends AbstractAdmin
             ->add('picture.title', null, ['editable'=> false, 'label' => 'Название'])
             ->add('type', null, ['editable' => false, 'label' => 'Тип',
                 'template' => 'AppBundle:Admin:order_list_type.html.twig'])
+            ->add('frame', null, ['editable'=> false, 'label' => 'Рама'])
+            ->add('moduleType', null, ['editable'=> false, 'label' => 'Модульность'])
             ->add('bannerMaterial', null, ['editable'=> false, 'label' => 'Материал баннера'])
             ->add('frameMaterial', null, ['editable'=> false, 'label' => 'Материал рамы'])
             ->add('fullname', null, ['editable'=> true, 'label' => 'Ф.И.О.'])
@@ -102,14 +104,6 @@ class OrderAdmin extends AbstractAdmin
             ->add('phone', null, ['editable'=> true, 'label' => 'Телефон'])
             ->add('city', null, ['editable'=> true, 'label' => 'Город'])
             ->add('address', null, ['editable'=> true, 'label' => 'Адрес'])
-            ->add('company', null, ['editable'=> true, 'label' => 'Компания'])
-            ->add('height', null, ['editable'=> true, 'label' => 'Высота'])
-            ->add('width', null, ['editable'=> true, 'label' => 'Ширина'])
-            ->add('price', null, ['editable' => true, 'label' => 'Цена',
-                'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
-            ->add('isActive', null, ['editable' => true, 'label' => 'Взято в работу'])
-            ->add('isDone', null, ['editable' => true, 'label' => 'Выполнено'])
-            ->add('createdAt', null, ['label' => 'Дата заказа'])
             ->add(
                 '_action',
                 'actions',
@@ -120,6 +114,17 @@ class OrderAdmin extends AbstractAdmin
                     ],
                 ]
             )
+            ->add('height', null, ['editable'=> true, 'label' => 'Высота'])
+            ->add('width', null, ['editable'=> true, 'label' => 'Ширина'])
+            ->add('price', null, ['editable' => true, 'label' => 'Цена',
+                'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
+            ->add('isActive', null, ['editable' => true, 'label' => 'Взято в работу'])
+            ->add('isDone', null, ['editable' => true, 'label' => 'Выполнено'])
+            ->add('createdAt', null, ['label' => 'Дата заказа'])
+            ->add('company', null, ['editable'=> true, 'label' => 'Компания'])
+            ->add('comments', null, ['editable'=> true, 'label' => 'Комментарий к заказу'])
+            ->add('underframe', null, ['editable'=> true, 'label' => 'Толщина подрамника'])
+            ->add('frame.note', null, ['editable'=> true, 'label' => 'Рама примечание'])
             ->add('picture.note', null, ['editable' => false, 'label' => 'Примечание']);
     }
 
@@ -130,11 +135,27 @@ class OrderAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('groupId', null, ['label' => 'Номер заказа'])
-//            ->add('title', null, ['label' => 'Артикул'])
-//            ->add('width', null, ['label' => 'Ширина'])
-//            ->add('height', null, ['label' => 'Высота'])
-//            ->add('color', null, ['label' => 'Цвет'])
-//            ->add('material', null, ['label' => 'Материал'])
+            ->add('picture.code', null, ['label' => 'Артикул'])
+            ->add('picture.title', null, ['label' => 'Название'])
+            ->add('type', null, ['label' => 'Тип'])
+            ->add('frame', null, ['label' => 'Рама'])
+            ->add('moduleType', null, ['label' => 'Модульность'])
+            ->add('bannerMaterial', null, ['label' => 'Материал баннера'])
+            ->add('frameMaterial', null, ['label' => 'Материал рамы'])
+            ->add('fullname', null, ['label' => 'Ф.И.О.'])
+            ->add('email', null, ['label' => 'Email'])
+            ->add('phone', null, ['label' => 'Телефон'])
+            ->add('city', null, ['label' => 'Город'])
+            ->add('address', null, ['label' => 'Адрес'])
+            ->add('height', null, ['label' => 'Высота'])
+            ->add('width', null, ['label' => 'Ширина'])
+            ->add('price', null, ['label' => 'Цена'])
+            ->add('createdAt', 'doctrine_orm_date_range', ['label' => 'Дата заказа'])
+            ->add('company', null, ['label' => 'Компания'])
+            ->add('comment', null, ['label' => 'Комментарий к заказу'])
+            ->add('underframe', null, ['label' => 'Толщина подрамника'])
+            ->add('frame.note', null, ['label' => 'Рама примечание'])
+            ->add('picture.note', null, ['label' => 'Примечание'])
             ->add('isActive', null, ['label' => 'Взято в работу'])
             ->add('isDone', null, ['label' => 'Выполнено'])
         ;
