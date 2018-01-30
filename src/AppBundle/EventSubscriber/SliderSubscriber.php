@@ -9,8 +9,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Class SliderSubscriber
  */
-class SliderSubscriber
-{
+class SliderSubscriber {
     /**
      * @var ContainerInterface
      */
@@ -18,32 +17,30 @@ class SliderSubscriber
 
     /**
      * SliderSubscriber constructor.
+     *
      * @param ContainerInterface $container
      */
-    public function __construct(ContainerInterface $container)
-    {
+    public function __construct( ContainerInterface $container ) {
         $this->container = $container;
     }
 
     /**
      * @param LifecycleEventArgs $args
      */
-    public function postPersist(LifecycleEventArgs $args)
-    {
+    public function postPersist( LifecycleEventArgs $args ) {
         $entity = $args->getEntity();
-        if($entity instanceof SliderItem && $image = $entity->getImage()) {
-            $this->createResize($entity, $image);
+        if ( $entity instanceof SliderItem && $image = $entity->getImage() ) {
+            $this->createResize( $entity, $image );
         }
     }
 
     /**
      * @param LifecycleEventArgs $args
      */
-    public function postUpdate(LifecycleEventArgs $args)
-    {
+    public function postUpdate( LifecycleEventArgs $args ) {
         $entity = $args->getEntity();
-        if($entity instanceof SliderItem && $image = $entity->getImage()) {
-            $this->createResize($entity, $image);
+        if ( $entity instanceof SliderItem && $image = $entity->getImage() ) {
+            $this->createResize( $entity, $image );
         }
     }
 
@@ -51,20 +48,21 @@ class SliderSubscriber
      * @param SliderItem $slider
      * @param Image $image
      */
-    private function createResize(SliderItem $slider, Image $image) {
+    private function createResize( SliderItem $slider, Image $image ) {
 
-        if($image->getOriginFile() && file_exists($image->getOriginFile())) {
+        if ( $image->getOriginFile() && file_exists( $image->getOriginFile() ) ) {
+            $this->container->get( 'helper.imageresizer' )
+                            ->resizeImage( $image->getOriginFile(), $image->getThumbBasePath(), $slider::THUMB_IMAGE_HEIGHT, $slider::THUMB_IMAGE_WIDTH );
+            $this->container->get( 'helper.imageresizer' )
+                            ->resizeImage( $image->getOriginFile(), $image->getMaxThumbBasePath(), $slider::THUMB_MAX_IMAGE_HEIGHT,
+                                $slider::THUMB_MAX_IMAGE_WIDTH, true );
             $this->container->get('helper.imageresizer')
-                ->resizeImage($image->getOriginFile(), $image->getThumbBasePath(), $slider::THUMB_IMAGE_HEIGHT, $slider::THUMB_IMAGE_WIDTH);
+                            ->resizeImage($image->getOriginFile(), $image->getSmallThumbBasePath(),
+                                $image::THUMB_SMALL_IMAGE_HEIGHT, $image::THUMB_SMALL_IMAGE_WIDTH);
             $this->container->get('helper.imageresizer')
-                ->resizeImage($image->getOriginFile(), $image->getMiniThumbBasePath(), $slider::THUMB_MINI_IMAGE_HEIGHT, $slider::THUMB_MINI_IMAGE_WIDTH);
-            $this->container->get('helper.imageresizer')
-                            ->resizeImage($image->getOriginFile(), $image->getMaxThumbBasePath(), $slider::THUMB_MAX_IMAGE_HEIGHT, $slider::THUMB_MAX_IMAGE_WIDTH);
-            $this->container->get('helper.imageresizer')
-                ->resizeImage($image->getOriginFile(), $image->getBasePath(), $slider::IMAGE_HEIGHT, $slider::IMAGE_WIDTH);
-            $this->container->get('helper.imageresizer')
-                ->resizeImage($image->getOriginFile(), $image->getSmallThumbBasePath(), $image::THUMB_SMALL_IMAGE_HEIGHT, $image::THUMB_SMALL_IMAGE_WIDTH);
-            unlink($image->getOriginFile());
+                            ->resizeImage($image->getOriginFile(), $image->getMiniThumbBasePath(),
+                                $image::THUMB_MINI_IMAGE_HEIGHT, $image::THUMB_MINI_IMAGE_WIDTH);
+            unlink( $image->getOriginFile() );
         }
     }
 }

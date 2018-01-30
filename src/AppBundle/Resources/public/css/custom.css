@@ -2103,7 +2103,7 @@ footer {
 
 .az-nextpage {
     display: block;
-    color: #333;
+    color: #333333;
     text-decoration: none;
 
 }
@@ -2128,7 +2128,7 @@ footer {
 /**modal feedback**/
 button.close {
     background-color: #fd1200;
-    color: #FFF;
+    color: #FFFFFF;
     text-shadow: none;
     opacity: 1;
     padding: 0 5px;
@@ -2255,7 +2255,7 @@ button.close:focus, .close:hover {
 .az-header-download {
     text-decoration: none;
     cursor: pointer;
-    color: #333;
+    color: #333333;
     padding: 0 0 0 5px;
 }
 
@@ -2288,7 +2288,7 @@ button.close:focus, .close:hover {
 
 .az-form-choose-file {
     display: block;
-    border: 1px solid #eee;
+    border: 1px solid #eeeeee;
     color: #696969;
     width: 70%;
     float: left;
@@ -2312,7 +2312,7 @@ button.close:focus, .close:hover {
 }
 
 .az-order-cart {
-    border: 1px solid #eee;
+    border: 1px solid #eeeeee;
     padding: 0;
     margin: 0 10px;
 }
@@ -2322,7 +2322,7 @@ button.close:focus, .close:hover {
 }
 
 .az-order-cart-item {
-    border-left: 1px solid #eee;
+    border-left: 1px solid #eeeeee;
     min-height: 200px;
     padding: 20px 15px;
     font-size: 12px;
@@ -2412,7 +2412,7 @@ button.close:focus, .close:hover {
     height: 38px;
     margin-top: 150px;
     font-size: 50px;
-    color: #eee;
+    color: #eeeeee;
 
 }
 
@@ -2422,7 +2422,7 @@ button.close:focus, .close:hover {
     height: 38px;
     margin-top: 150px;
     font-size: 50px;
-    color: #eee;
+    color: #eeeeee;
 
 }
 
@@ -2576,14 +2576,14 @@ button.close:focus, .close:hover {
 .az-frames-slide .cycle-prev {
     width: 35px;
     height: 50px;
-    background: url('../images/prev.png') 50% 50% no-repeat #eee;
+    background: url('../images/prev.png') 50% 50% no-repeat #eeeeee;
     margin-top: 50px;
 }
 
 .az-frames-slide .cycle-next {
     width: 35px;
     height: 50px;
-    background: url('../images/next.png') 50% 50% no-repeat #eee;
+    background: url('../images/next.png') 50% 50% no-repeat #eeeeee;
     margin-top: 50px;
 }
 
@@ -2604,8 +2604,8 @@ button.close:focus, .close:hover {
 .az-sidebar-link-stock {
     border: 1px #fd1200 dashed;
     padding: 10px;
-    background-color: #fff;
-    color: #333;
+    background-color: #ffffff;
+    color: #333333;
     text-transform: none;
     text-align: center;
 }
@@ -2618,7 +2618,7 @@ button.close:focus, .close:hover {
     border: 1px solid #fd1200;
     background-color: #fff;
     border-radius: inherit;
-    color: #333;
+    color: #333333;
     margin: 5px 0;
     text-transform: none;
 }
@@ -2644,8 +2644,8 @@ button.close:focus, .close:hover {
 
 .btn-group-xs > .btn, .btn-xs:hover {
     background-color: #ffffff;
-    border: 1px solid #333;
-    color: #333;
+    border: 1px solid #333333;
+    color: #333333;
     background-image: none;
     text-transform: lowercase;
 }
@@ -2661,7 +2661,7 @@ button.close:focus, .close:hover {
     z-index: 99;
     border: none;
     outline: none;
-    background-color: red;
+    background-color: #fd1200;
     color: white;
     cursor: pointer;
     padding: 15px;
@@ -2670,7 +2670,7 @@ button.close:focus, .close:hover {
 }
 
 #myBtn:hover {
-    background-color: #555;
+    background-color: #555555;
 }
 
 .fa-arrow-up {

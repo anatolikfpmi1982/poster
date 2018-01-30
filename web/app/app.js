@@ -235,8 +235,7 @@ define(function (require, exports, module) {
 
         $('#myBtn').click(function (event) {
             event.stopImmediatePropagation();
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
+            $('html, body').animate({scrollTop: 0}, 'slow');
             return false;
         });
 
@@ -488,7 +487,7 @@ define(function (require, exports, module) {
             $(this).css("cursor", "none");
         });
 
-        $('div.az-main-popular-item-img-div').click(function (event) {
+        $('div.az-main-popular-item-img-div:has("div.category-next")').click(function (event) {
             event.stopPropagation();
             event.preventDefault();
             var href = $(this).find('a.az-nextpage').attr("href");
