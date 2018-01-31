@@ -209,7 +209,7 @@ class ParserCommand extends ContainerAwareCommand
         $categories = [];
         $categoriesEntities = $this->em->getRepository('AppBundle:Category3')->findBy([]);
         foreach ($categoriesEntities as $category) {
-            $categories[] = $category->getTitle();
+            $categories[] = mb_strtolower($category->getTitle(), 'UTF-8');
         }
 
         foreach ($rows as $key => $row) {
@@ -228,7 +228,7 @@ class ParserCommand extends ContainerAwareCommand
                 $rowCategories = explode(',', $cat);
 
                 foreach ($rowCategories as $category) {
-                    if(!in_array($category, $categories)) {
+                    if(!in_array(mb_strtolower($category, 'UTF-8'), $categories)) {
                         $this->errors[] = 'Категория ' . $category . ' файла ' . $name . ' отсутствует в базе данных!';
                     }
                 }

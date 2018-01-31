@@ -84,6 +84,46 @@ class OrderAdmin extends AbstractAdmin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
+        $bannerMaterialsChoices = [];
+        $materials = $this->em->getRepository('AppBundle\Entity\BannerMaterial')->findBy(['isActive' => true]);
+        if($materials) {
+            foreach ($materials as $v) {
+                $bannerMaterialsChoices[$v->getId()] = (string)$v;
+            }
+        }
+
+        $frameMaterialsChoices = [];
+        $materials = $this->em->getRepository('AppBundle\Entity\FrameMaterial')->findBy(['isActive' => true]);
+        if($materials) {
+            foreach ($materials as $v) {
+                $frameMaterialsChoices[$v->getId()] = (string)$v;
+            }
+        }
+
+        $frameChoices = [];
+        $materials = $this->em->getRepository('AppBundle\Entity\Frame')->findBy(['isActive' => true]);
+        if($materials) {
+            foreach ($materials as $v) {
+                $frameChoices[$v->getId()] = (string)$v;
+            }
+        }
+
+        $underframeChoices = [];
+        $materials = $this->em->getRepository('AppBundle\Entity\Underframe')->findBy(['isActive' => true]);
+        if($materials) {
+            foreach ($materials as $v) {
+                $underframeChoices[$v->getId()] = (string)$v;
+            }
+        }
+
+        $moduleTypeChoices = [];
+        $materials = $this->em->getRepository('AppBundle\Entity\ModuleType')->findBy(['isActive' => true]);
+        if($materials) {
+            foreach ($materials as $v) {
+                $moduleTypeChoices[$v->getId()] = (string)$v;
+            }
+        }
+
         $listMapper
             ->add('id', null, ['required' => true, 'label' => 'ID'])
             ->add('groupId', null, ['editable'=> false, 'label' => 'Заказ'])
@@ -95,21 +135,23 @@ class OrderAdmin extends AbstractAdmin
             ->add('picture.title', null, ['editable'=> false, 'label' => 'Название'])
             ->add('type', null, ['editable' => false, 'label' => 'Тип',
                 'template' => 'AppBundle:Admin:order_list_type.html.twig'])
-            ->add('bannerMaterial', null, ['editable'=> false, 'label' => 'Материал баннера'])
-            ->add('frameMaterial', null, ['editable'=> false, 'label' => 'Материал рамы'])
+            ->add('frame', 'choice', ['label' => 'Рама','editable' => true,
+                'class' => 'Appbundle\Entity\Frame', 'choices' => $frameChoices, 'sortable' => true,
+                'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'frame']]])
+            ->add('moduleType', 'choice', ['label' => 'Модульность','editable' => true,
+                'class' => 'Appbundle\Entity\ModuleType', 'choices' => $moduleTypeChoices, 'sortable' => true,
+                'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'moduleType']]])
+            ->add('bannerMaterial', 'choice', ['label' => 'Материал баннера','editable' => true,
+                'class' => 'Appbundle\Entity\BannerMaterial', 'choices' => $bannerMaterialsChoices, 'sortable' => true,
+                'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'bannerMaterial']]])
+            ->add('frameMaterial', 'choice', ['label' => 'Материал рамы','editable' => true,
+                'class' => 'Appbundle\Entity\FrameMaterial', 'choices' => $frameMaterialsChoices, 'sortable' => true,
+                'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'frameMaterial']]])
             ->add('fullname', null, ['editable'=> true, 'label' => 'Ф.И.О.'])
             ->add('email', null, ['editable'=> true, 'label' => 'Email'])
             ->add('phone', null, ['editable'=> true, 'label' => 'Телефон'])
             ->add('city', null, ['editable'=> true, 'label' => 'Город'])
             ->add('address', null, ['editable'=> true, 'label' => 'Адрес'])
-            ->add('company', null, ['editable'=> true, 'label' => 'Компания'])
-            ->add('height', null, ['editable'=> true, 'label' => 'Высота'])
-            ->add('width', null, ['editable'=> true, 'label' => 'Ширина'])
-            ->add('price', null, ['editable' => true, 'label' => 'Цена',
-                'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
-            ->add('isActive', null, ['editable' => true, 'label' => 'Взято в работу'])
-            ->add('isDone', null, ['editable' => true, 'label' => 'Выполнено'])
-            ->add('createdAt', null, ['label' => 'Дата заказа'])
             ->add(
                 '_action',
                 'actions',
@@ -120,6 +162,19 @@ class OrderAdmin extends AbstractAdmin
                     ],
                 ]
             )
+            ->add('height', null, ['editable'=> true, 'label' => 'Высота'])
+            ->add('width', null, ['editable'=> true, 'label' => 'Ширина'])
+            ->add('price', null, ['editable' => true, 'label' => 'Цена',
+                'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
+            ->add('isActive', null, ['editable' => true, 'label' => 'Взято в работу'])
+            ->add('isDone', null, ['editable' => true, 'label' => 'Выполнено'])
+            ->add('createdAt', null, ['label' => 'Дата заказа'])
+            ->add('company', null, ['editable'=> true, 'label' => 'Компания'])
+            ->add('comments', null, ['editable'=> true, 'label' => 'Комментарий к заказу'])
+            ->add('underframe', 'choice', ['label' => 'Толщина подрамника','editable' => true,
+                'class' => 'Appbundle\Entity\Underframe', 'choices' => $underframeChoices, 'sortable' => true,
+                'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'underframe']]])
+            ->add('frame.note', null, ['editable'=> false, 'label' => 'Рама примечание'])
             ->add('picture.note', null, ['editable' => false, 'label' => 'Примечание']);
     }
 
@@ -130,11 +185,27 @@ class OrderAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('groupId', null, ['label' => 'Номер заказа'])
-//            ->add('title', null, ['label' => 'Артикул'])
-//            ->add('width', null, ['label' => 'Ширина'])
-//            ->add('height', null, ['label' => 'Высота'])
-//            ->add('color', null, ['label' => 'Цвет'])
-//            ->add('material', null, ['label' => 'Материал'])
+            ->add('picture.code', null, ['label' => 'Артикул'])
+            ->add('picture.title', null, ['label' => 'Название'])
+            ->add('type', null, ['label' => 'Тип'])
+            ->add('frame', null, ['label' => 'Рама'])
+            ->add('moduleType', null, ['label' => 'Модульность'])
+            ->add('bannerMaterial', null, ['label' => 'Материал баннера'])
+            ->add('frameMaterial', null, ['label' => 'Материал рамы'])
+            ->add('fullname', null, ['label' => 'Ф.И.О.'])
+            ->add('email', null, ['label' => 'Email'])
+            ->add('phone', null, ['label' => 'Телефон'])
+            ->add('city', null, ['label' => 'Город'])
+            ->add('address', null, ['label' => 'Адрес'])
+            ->add('height', null, ['label' => 'Высота'])
+            ->add('width', null, ['label' => 'Ширина'])
+            ->add('price', null, ['label' => 'Цена'])
+            ->add('createdAt', 'doctrine_orm_date_range', ['label' => 'Дата заказа'])
+            ->add('company', null, ['label' => 'Компания'])
+            ->add('comment', null, ['label' => 'Комментарий к заказу'])
+            ->add('underframe', null, ['label' => 'Толщина подрамника'])
+            ->add('frame.note', null, ['label' => 'Рама примечание'])
+            ->add('picture.note', null, ['label' => 'Примечание'])
             ->add('isActive', null, ['label' => 'Взято в работу'])
             ->add('isDone', null, ['label' => 'Выполнено'])
         ;

@@ -31,7 +31,7 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository {
      */
     public function getCatalogMenu() {
         $categories   = [ ];
-        $dbCategories = $this->findBy( [ 'isActive' => true ], [ 'createdAt' => 'DESC' ] );
+        $dbCategories = $this->findBy( [ 'isActive' => true ], [ 'parent_category' => 'ASC', 'weight' => 'DESC' ] );
         if ( $dbCategories ) {
             foreach ( $dbCategories as $category ) {
                 /** @var Category3 $category */
