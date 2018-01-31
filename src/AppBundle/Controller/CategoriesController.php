@@ -12,8 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class CategoriesController extends FrontController
 {
-    const PAGE_LIMIT = 5;
-//    const PAGE_LIMIT = 20;
+    const PAGE_LIMIT = 20;
 
     /**
      * @param string $slug
