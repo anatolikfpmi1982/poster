@@ -175,39 +175,17 @@ function ConstructorOverview() {
     };
 
     this.calculateWidthAndHeight = function () {
-        if (this.debug) {
-            console.log('START');
-            console.log('isHeight', this.picHeight > this.picWidth);
-            console.log('this.max_width', this.max_width);
-            console.log('this.max_height', this.max_height);
-            console.log('this.picHeight', this.picHeight);
-            console.log('this.picWidth', this.picWidth);
-            console.log('this.right_width', this.right_width);
-            console.log('this.padding_top', this.padding_top);
-            console.log('this.padding_left', this.padding_left);
-            console.log('this.left_deviation', this.left_deviation);
-            console.log('this.panelNumberVertical', this.panelNumberVertical);
-            console.log('this.panelNumberHorizontal', this.panelNumberHorizontal);
-        }
 
         if (this.max_width > 0 && this.max_height > 0) {
             var isHeight = this.picHeight > this.picWidth;
             var maxHeight = this.max_height - 2 * this.top_deviation - (this.right_width + this.padding_top) * (this.panelNumberVertical - 1);
             var maxWidth = this.max_width - 2 * this.left_deviation - (this.padding_left + this.right_width + this.shadow) * (this.panelNumberHorizontal - 1);
             if (isHeight) {
-                if (this.debug) {
-                    console.log('maxHeight', maxHeight);
-                    console.log('this.picHeight > maxHeight', this.picHeight > maxHeight);
-                }
                 if (this.picHeight > maxHeight) {
                     this.picWidth = Math.round((this.picWidth * maxHeight) / this.picHeight);
                     this.picHeight = maxHeight;
                 }
             } else {
-                if (this.debug) {
-                    console.log('maxWidth', maxWidth);
-                    console.log('this.picWidth > maxWidth', this.picWidth > maxWidth);
-                }
                 if (this.picWidth > maxWidth || this.fill) {
                     this.picHeight = Math.round((this.picHeight * maxWidth) / this.picWidth);
                     if (this.picHeight > maxHeight) {
@@ -225,16 +203,6 @@ function ConstructorOverview() {
             this.left_deviation = this.left_deviation + Math.round((this.max_width - this.picWidth -
                     (this.right_width + this.padding_left + this.shadow) * (this.panelNumberHorizontal - 1) ) / 2);
 
-            if (this.debug) {
-                console.log('this.picWidth', this.picWidth);
-                console.log('this.picHeight', this.picHeight);
-                console.log('this.left_deviation', this.left_deviation);
-                console.log('this.top_deviation', this.top_deviation);
-            }
-        }
-
-        if (this.debug) {
-            console.log('END');
         }
     };
 
@@ -506,9 +474,6 @@ function ConstructorOverview() {
             }
         });
         this.panelSettings = panelObject;
-        if (this.debug) {
-            console.log('this.panelSettings', this.panelSettings);
-        }
     };
 
     this.showPanelSizes = function () {
@@ -608,7 +573,8 @@ function ConstructorOverview() {
     };
 
     this.showPrice = function () {
-        var price = 0;
+        var price = 0,
+            picturePriceDiv = $('span.az-picture-page-sidebar-price-value');
         switch (this.type) {
             case 'Баннер':
                 price = this.calculateBanner();
@@ -620,10 +586,10 @@ function ConstructorOverview() {
                 price = this.calculatePanel();
                 break;
         }
-        var min_price = $('span.az-picture-page-sidebar-price-value').data('min-price');
+        var min_price = picturePriceDiv.data('min-price');
         price = price < min_price ? min_price.toFixed(2) : price;
 
-        $('span.az-picture-page-sidebar-price-value').html(price).data('price', price);
+        picturePriceDiv.html(price).data('price', price);
     };
 
     this.calculatePanel = function () {
@@ -683,22 +649,6 @@ function ConstructorOverview() {
             final_price = minPrice;
         } else {
             final_price = (this.square - parseFloat(minSquare)) * ((minPrice - maxPrice) / (maxSquare - minSquare)) + parseFloat(maxPrice);
-        }
-        if (this.debug) {
-            console.log('this.square <= minSquare', this.square <= minSquare)
-            console.log('this.square >= maxSquare', this.square >= maxSquare)
-            console.log('this.square', this.square);
-            console.log('minSquare', parseFloat(minSquare));
-            console.log('(this.square - parseInt(minSquare))', (this.square - parseFloat(minSquare)));
-            console.log('minPrice', minPrice);
-            console.log('maxPrice', maxPrice);
-            console.log('maxSquare', maxSquare);
-            console.log('minSquare', minSquare);
-            console.log('(maxSquare - minSquare)', (maxSquare - minSquare));
-            console.log('(minPrice - maxPrice) / (maxSquare - minSquare)', (minPrice - maxPrice) / (maxSquare - minSquare));
-            console.log('(this.square - parseInt(minSquare)) * ((minPrice - maxPrice) / (maxSquare - minSquare))',
-                (this.square - parseFloat(minSquare)) * ((minPrice - maxPrice) / (maxSquare - minSquare)));
-            console.log('final', (this.square - parseFloat(minSquare)) * ((minPrice - maxPrice) / (maxSquare - minSquare)) + parseFloat(maxPrice))
         }
         return final_price;
     };
