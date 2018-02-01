@@ -1000,8 +1000,7 @@ body {
     color: #fd1200;
     padding-right: 15px;
     padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
+    margin: 15px auto 0 auto;
     height: 40px;
 }
 
@@ -1035,7 +1034,7 @@ body {
 }
 
 .btn_az-main-popular_defer {
-    margin: 0 auto 0 15px;
+    margin: 0 auto;
     font-size: 14px;
     background-color: #fd1200;
     color: #ffffff;

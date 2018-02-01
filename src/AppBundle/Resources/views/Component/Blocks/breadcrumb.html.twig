@@ -1,4 +1,5 @@
 <div class="row">
+    <div class="col-md-8">
     <nav class="breadcrumb">
         {% if site_blocks is defined and site_blocks and site_blocks.BreadCrumb is defined and site_blocks.BreadCrumb %}
             <a class="breadcrumb-item" href="/">Главная</a>
@@ -10,5 +11,20 @@
                 {% endif %}
             {% endfor %}
         {% endif %}
-    </nav>
+    </nav></div>
+    <div class="col-md-2">
+        <div class="row az-picture-page-constructor-block hidden" id="az-picture-page-sidebar-deffered-div">
+            <div class="col-md-12">
+                <a href="{{ path('deferred') }}">
+                    <button class="btn az-btn-delayed-image">Отложенные <span id="az-picture-page-sidebar-deffered-div-count">0</span></button>
+                </a>
+            </div></div></div>
+    <div class="col-md-2">
+        <div class="row az-picture-page-constructor-block hidden" id="az-picture-page-sidebar-myfiles-div">
+            <div class="col-md-12">
+                <a href="{{ path('my_files') }}">
+                    <button class="btn az-btn-myfiles-image">Мои файлы  <span id="az-picture-page-sidebar-myfiles-div-count">0</span></button>
+                </a>
+            </div></div>
+    </div>
 </div>
