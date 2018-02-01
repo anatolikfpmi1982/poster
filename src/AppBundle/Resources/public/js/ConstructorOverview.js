@@ -636,8 +636,8 @@ function ConstructorOverview() {
             picture_ratio = $('#constructor_picture_ratio').val();
 
         var num = panel_code.split(':');
-        return (((this.square * average_price + parseInt(picture_price) + parseInt(num.length) * parseInt(panel_ratio)) * parseInt(picture_ratio) +
-        parseInt(banner_add_price)) * this.thickness_ratio * parseInt(banner_add_ratio)).toFixed(2);
+        return (((this.square * average_price + parseFloat(picture_price) + parseFloat(num.length) * parseFloat(panel_ratio)) * parseFloat(picture_ratio) +
+        parseFloat(banner_add_price)) * this.thickness_ratio * parseFloat(banner_add_ratio)).toFixed(2);
     };
 
     this.calculateBanner = function () {
@@ -647,8 +647,8 @@ function ConstructorOverview() {
             picture_price = $('#constructor_picture_price').val(),
             picture_ratio = $('#constructor_picture_ratio').val();
 
-        return (((this.square * average_price + parseInt(picture_price)) * parseInt(picture_ratio) + parseInt(banner_add_price)) *
-        this.thickness_ratio * parseInt(banner_add_ratio)).toFixed(2);
+        return (((this.square * average_price + parseFloat(picture_price)) * parseFloat(picture_ratio) + parseFloat(banner_add_price)) *
+        this.thickness_ratio * parseFloat(banner_add_ratio)).toFixed(2);
     };
 
     this.calculatePicture = function () {
@@ -659,8 +659,8 @@ function ConstructorOverview() {
             picture_price = $('#constructor_picture_price').val(),
             picture_ratio = $('#constructor_picture_ratio').val();
 
-        return (((this.square * average_price + parseInt(picture_price) + (this.perimeter * this.calculateFrameSquare())) * parseInt(picture_ratio) +
-        parseInt(add_price)) * frame_ratio * parseInt(add_ratio)).toFixed(2);
+        return (((this.square * average_price + parseFloat(picture_price) + (this.perimeter * this.calculateFrameSquare())) * parseFloat(picture_ratio) +
+        parseFloat(add_price)) * frame_ratio * parseFloat(add_ratio)).toFixed(2);
     };
 
     this.calculateSquare = function () {
@@ -682,7 +682,23 @@ function ConstructorOverview() {
         } else if (this.square >= maxSquare) {
             final_price = minPrice;
         } else {
-            final_price = (this.square - parseInt(minSquare)) * ((minPrice - maxPrice) / (maxSquare - minSquare)) + parseInt(maxPrice);
+            final_price = (this.square - parseFloat(minSquare)) * ((minPrice - maxPrice) / (maxSquare - minSquare)) + parseFloat(maxPrice);
+        }
+        if (this.debug) {
+            console.log('this.square <= minSquare', this.square <= minSquare)
+            console.log('this.square >= maxSquare', this.square >= maxSquare)
+            console.log('this.square', this.square);
+            console.log('minSquare', parseFloat(minSquare));
+            console.log('(this.square - parseInt(minSquare))', (this.square - parseFloat(minSquare)));
+            console.log('minPrice', minPrice);
+            console.log('maxPrice', maxPrice);
+            console.log('maxSquare', maxSquare);
+            console.log('minSquare', minSquare);
+            console.log('(maxSquare - minSquare)', (maxSquare - minSquare));
+            console.log('(minPrice - maxPrice) / (maxSquare - minSquare)', (minPrice - maxPrice) / (maxSquare - minSquare));
+            console.log('(this.square - parseInt(minSquare)) * ((minPrice - maxPrice) / (maxSquare - minSquare))',
+                (this.square - parseFloat(minSquare)) * ((minPrice - maxPrice) / (maxSquare - minSquare)));
+            console.log('final', (this.square - parseFloat(minSquare)) * ((minPrice - maxPrice) / (maxSquare - minSquare)) + parseFloat(maxPrice))
         }
         return final_price;
     };
@@ -699,7 +715,7 @@ function ConstructorOverview() {
         } else if (this.square >= maxSquare) {
             final_price = minPrice;
         } else {
-            final_price = (this.square - parseInt(minSquare)) * ((minPrice - maxPrice) / (maxSquare - minSquare)) + parseInt(maxPrice);
+            final_price = (this.square - parseFloat(minSquare)) * ((minPrice - maxPrice) / (maxSquare - minSquare)) + parseFloat(maxPrice);
             final_price = Math.ceil(final_price);
         }
         return final_price;
