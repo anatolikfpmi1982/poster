@@ -603,7 +603,7 @@ footer {
     max-width: 160px;
     width: 80px;
     padding: 5px 5px;
-    font: 12px 'Open Sans', 'arial', 'helvetica', 'sans-serif';
+    font: 16px 'Open Sans', 'arial', 'helvetica', 'sans-serif';
     line-height: 1;
     text-transform: lowercase;
 }
@@ -672,7 +672,7 @@ footer {
 }
 
 .az-picture-page-sidebar-thickness-div-select .col-md-4 {
-    height: 100px;
+    height: 70px;
     padding: 4px 5px;
 
 }
@@ -2644,8 +2644,8 @@ button.close:focus, .close:hover {
 
 .btn-group-xs > .btn, .btn-xs:hover {
     background-color: #ffffff;
-    border: 1px solid #333;
-    color: #333;
+    border: 1px solid #333333;
+    color: #333333;
     background-image: none;
     text-transform: lowercase;
 }
@@ -2670,7 +2670,7 @@ button.close:focus, .close:hover {
 }
 
 #myBtn:hover {
-    background-color: #555;
+    background-color: #555555;
 }
 
 .fa-arrow-up {
@@ -2708,4 +2708,9 @@ button.close:focus, .close:hover {
 div.az-picture-page-constructor-block.active {
     /*border: 1px solid #fd1200;*/
     background-color: #f0f0f0;
+}
+
+.az-picture-page-sidebar-size-div-own-input {
+    width: 40px;
+    color: #333333;
 }

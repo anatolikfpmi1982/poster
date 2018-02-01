@@ -78,7 +78,9 @@ function ConstructorOverview() {
 
     this.initDefault = function () {
         this.type = $("input.az-picture-page-constructor-type-radio:checked").data('title');
-        this.size = $("select.az-picture-page-sidebar-size-select").val();
+        var sizeSelector = $("select.az-picture-page-sidebar-size-select");
+        this.size = sizeSelector.val() != 'own_size' ? sizeSelector.val() :
+        $('#own_width').val() + 'x' + $('#own_height').val();
         var material = $("input.az-picture-page-constructor-material-radio:checked"),
             material_picture = $("input.az-picture-page-constructor-material-picture-radio:checked");
         this.material = this.type != 'В раме' ?
@@ -587,7 +589,7 @@ function ConstructorOverview() {
                 break;
         }
         var min_price = picturePriceDiv.data('min-price');
-        price = price < min_price ? min_price.toFixed(2) : price;
+        price = price < min_price ? Math.round(min_price) : price;
 
         picturePriceDiv.html(price).data('price', price);
     };
@@ -602,8 +604,8 @@ function ConstructorOverview() {
             picture_ratio = $('#constructor_picture_ratio').val();
 
         var num = panel_code.split(':');
-        return (((this.square * average_price + parseFloat(picture_price) + parseFloat(num.length) * parseFloat(panel_ratio)) * parseFloat(picture_ratio) +
-        parseFloat(banner_add_price)) * this.thickness_ratio * parseFloat(banner_add_ratio)).toFixed(2);
+        return Math.round(((this.square * average_price + parseFloat(picture_price) + parseFloat(num.length) * parseFloat(panel_ratio)) *
+            parseFloat(picture_ratio) + parseFloat(banner_add_price)) * this.thickness_ratio * parseFloat(banner_add_ratio));
     };
 
     this.calculateBanner = function () {
@@ -613,8 +615,8 @@ function ConstructorOverview() {
             picture_price = $('#constructor_picture_price').val(),
             picture_ratio = $('#constructor_picture_ratio').val();
 
-        return (((this.square * average_price + parseFloat(picture_price)) * parseFloat(picture_ratio) + parseFloat(banner_add_price)) *
-        this.thickness_ratio * parseFloat(banner_add_ratio)).toFixed(2);
+        return Math.round(((this.square * average_price + parseFloat(picture_price)) * parseFloat(picture_ratio) + parseFloat(banner_add_price)) *
+            this.thickness_ratio * parseFloat(banner_add_ratio));
     };
 
     this.calculatePicture = function () {
@@ -625,8 +627,8 @@ function ConstructorOverview() {
             picture_price = $('#constructor_picture_price').val(),
             picture_ratio = $('#constructor_picture_ratio').val();
 
-        return (((this.square * average_price + parseFloat(picture_price) + (this.perimeter * this.calculateFrameSquare())) * parseFloat(picture_ratio) +
-        parseFloat(add_price)) * frame_ratio * parseFloat(add_ratio)).toFixed(2);
+        return Math.round(((this.square * average_price + parseFloat(picture_price) + (this.perimeter * this.calculateFrameSquare())) * parseFloat(picture_ratio) +
+            parseFloat(add_price)) * frame_ratio * parseFloat(add_ratio));
     };
 
     this.calculateSquare = function () {

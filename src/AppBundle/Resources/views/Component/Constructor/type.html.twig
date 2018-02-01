@@ -60,7 +60,7 @@
             </div>
             <div class="row text-center az-picture-page-material-radio-div">
                 <div class="col-md-12">
-                    <input type="radio" class="btn az-picture-page-constructor-type-radio" data-title="Баннер" value="1"
+                    <input type="radio" class="btn hidden az-picture-page-constructor-type-radio" data-title="Баннер" value="1"
                            title="az-picture-page-type" data-type='banner' name="az-picture-page-type"
                            {% if cart_item.type_value is not defined or (cart_item.type_value is defined and cart_item.type_value=='Баннер') %}checked{% endif %}/>
                 </div>
@@ -80,7 +80,7 @@
                 </div>
             </div>
             <div class="row text-center az-picture-page-material-radio-div">
-                <input type="radio" class="btn az-picture-page-constructor-type-radio" data-title="В раме" value="2"
+                <input type="radio" class="btn hidden az-picture-page-constructor-type-radio" data-title="В раме" value="2"
                        title="az-picture-page-type" data-type='frame' name="az-picture-page-type"
                        {% if cart_item.type_value is defined and cart_item.type_value=='В раме' %}checked{% endif %}/>
             </div>
@@ -117,11 +117,11 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <span class="az-picture-page-type-img-text">Панно</span>
+                            <span class="az-picture-page-type-img-text">Модульная</span>
                         </div>
                     </div>
                     <div class="row text-center az-picture-page-material-radio-div">
-                        <input type="radio" class="btn az-picture-page-constructor-type-radio" data-title="Панно" value="3" title="az-picture-page-type"
+                        <input type="radio" class="btn hidden az-picture-page-constructor-type-radio" data-title="Панно" value="3" title="az-picture-page-type"
                                data-type='module' name="az-picture-page-type"
                                {% if cart_item.type_value is defined and cart_item.type_value=='Панно' %}checked{% endif %}/>
                     </div>
@@ -134,22 +134,43 @@
 </div>
 {% if pictureMain.form is defined and pictureMain.form and pictureMain.form.serviceName %}
     <style>
-        {% if pictureMain.form.serviceName == 'rectangle vertical' %}
+        {% if pictureMain.form.serviceName in ['rectangle vertical'] %}
         .az-picture-page-sidebar-type-div-select .col-md-6 {
-            height: 130px;
+            height: 110px;
         }
 
         .az-picture-page-type-div-img {
             height: 80px;
         }
 
+        .az-picture-page-sidebar-type-div-frame-mat img {
+            width: 50%;
+        }
+
+        {% elseif pictureMain.form.serviceName in ['square'] %}
+        .az-picture-page-sidebar-type-div-select .col-md-6 {
+            height: 90px;
+        }
+
+        .az-picture-page-type-div-img {
+            height: 60px;
+        }
+
+        .az-picture-page-sidebar-type-div-frame-mat img {
+            width: 60%;
+        }
+
         {% else %}
         .az-picture-page-sidebar-type-div-select .col-md-6 {
-            height: 100px;
+            height: 80px;
         }
 
         .az-picture-page-type-div-img {
             height: 50px;
+        }
+
+        .az-picture-page-sidebar-type-div-frame-mat img {
+            width: 70%;
         }
 
         {% endif %}

@@ -80,28 +80,6 @@ define(function (require, exports, module) {
             return false;
         });
 
-        // Reviews page
-        // add review
-        $("#add_review").submit(function (event) {
-            event.stopImmediatePropagation();
-            $.ajax({
-                url: "/ajax/review/add",
-                method: 'POST',
-                data: {
-                    'name': $('#az-add_review_name').val(),
-                    'email': $('#az-add_review_email').val(),
-                    'city': $('#az-add_review_city').val(),
-                    'review': $('#az-add_review_description').val()
-                }
-            }).done(function (data) {
-                if (data != undefined && data && data.result != undefined && data.result) {
-                    $('#successReviewForm').removeClass('hidden').modal('show');
-                } else
-                    $('#successReviewForm').removeClass('hidden').modal('show');
-            });
-            return false;
-        });
-
         // Picture page
         // picture page constructor type
         $("div.az-picture-page-sidebar-type-block-selector").click(function (event) {
@@ -172,7 +150,24 @@ define(function (require, exports, module) {
         // picture page constructor size
         $("select.az-picture-page-sidebar-size-select").change(function (event) {
             event.stopImmediatePropagation();
+            if ($("select.az-picture-page-sidebar-size-select").val() == 'own_size') {
+                var size = $("select.az-picture-page-sidebar-size-select option:last").val();
+                size = size.split('x');
+                $('#own_width').val(size[0]);
+                $('#own_height').val(size[1]);
+                $('div.az-picture-page-sidebar-size-div-own-div').removeClass('hidden').show();
+            } else {
+                $('div.az-picture-page-sidebar-size-div-own-div').addClass('hidden').hide();
+            }
             setShowBoard();
+        });
+
+        $('#own_width').change(function (event) {
+            event.stopImmediatePropagation();
+            var width = parseInt($(this).val());
+            if (width > 0) {
+
+            }
         });
 
         // picture page constructor mat type
@@ -195,6 +190,28 @@ define(function (require, exports, module) {
             if (id !== parseInt(active_id)) {
                 window.location.replace($(this).data('url'));
             }
+            return false;
+        });
+
+        // Reviews page
+        // add review
+        $("#add_review").submit(function (event) {
+            event.stopImmediatePropagation();
+            $.ajax({
+                url: "/ajax/review/add",
+                method: 'POST',
+                data: {
+                    'name': $('#az-add_review_name').val(),
+                    'email': $('#az-add_review_email').val(),
+                    'city': $('#az-add_review_city').val(),
+                    'review': $('#az-add_review_description').val()
+                }
+            }).done(function (data) {
+                if (data != undefined && data && data.result != undefined && data.result) {
+                    $('#successReviewForm').removeClass('hidden').modal('show');
+                } else
+                    $('#successReviewForm').removeClass('hidden').modal('show');
+            });
             return false;
         });
 
