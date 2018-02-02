@@ -1641,6 +1641,11 @@ footer {
 
 .az-main-page-header-icon-cell {
     padding: 0;
+    cursor: pointer;
+}
+
+.az-main-page-header-icon-cell:hover {
+    cursor: pointer;
 }
 
 .az-basket-title-img {

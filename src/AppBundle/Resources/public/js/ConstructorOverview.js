@@ -366,6 +366,13 @@ function ConstructorOverview() {
                     }
                     ind--;
                 }
+
+                var compare = showWidth + deviation;
+                if (that.panelNumberHorizontal == (mainIndex + 1) && Math.round((settings[ind].width * showWidth ) / 100) != compare) {
+                    compare = Math.round((settings[ind].width * showWidth ) / 100) - compare;
+                    deviation = deviation + compare;
+                }
+
             }
 
             var divMain = $(newDivString);
