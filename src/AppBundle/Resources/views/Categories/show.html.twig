@@ -27,7 +27,7 @@
     <div class="row az-page-main-section-div az-page-category-main-section-div">
         <div class="col-md-12 container-fluid">
             <div class="row page-title az-picture-page-title">
-                <div class="col-md-12"> {{ category.title }} ({{ category.pictures|length }})</div>
+                <div class="col-md-12"> {{ category.title }} ({{ pagination.getTotalItemCount() }})</div>
 
             </div>
             <div class="row az-category-page-description-div">
