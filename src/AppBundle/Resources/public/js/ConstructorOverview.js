@@ -106,7 +106,7 @@ function ConstructorOverview() {
         this.padding_left = 20;
         this.padding_top = 10;
         this.right_width = 6;
-        this.top_deviation = 40;
+        this.top_deviation = 20;
         this.left_deviation = 10;
         this.max_width = parseInt($('.az-picture-page-constructor-global-div').css('width'));
         this.max_height = this.picHeight + (2 * this.top_deviation);
@@ -179,9 +179,19 @@ function ConstructorOverview() {
     this.calculateWidthAndHeight = function () {
 
         if (this.max_width > 0 && this.max_height > 0) {
+            if (this.debug) {
+                console.log('------------START-----------');
+                console.log('this.picWidth', this.picWidth);
+                console.log('this.picHeight', this.picHeight);
+                console.log('this.max_width', this.max_width);
+                console.log('this.max_height', this.max_height);
+            }
             var isHeight = this.picHeight > this.picWidth;
-            var maxHeight = this.max_height - 2 * this.top_deviation - (this.right_width + this.padding_top) * (this.panelNumberVertical - 1);
-            var maxWidth = this.max_width - 2 * this.left_deviation - (this.padding_left + this.right_width + this.shadow) * (this.panelNumberHorizontal - 1);
+
+            var maxHeight = this.max_height - 2 * this.top_deviation - (this.right_width + this.shadow) * this.panelNumberVertical -
+                this.padding_top * (this.panelNumberVertical - 1);
+            var maxWidth = this.max_width - 2 * this.left_deviation - (this.right_width + this.shadow) * this.panelNumberHorizontal -
+                (this.padding_left - this.right_width - this.shadow) * (this.panelNumberHorizontal - 1);
             if (isHeight) {
                 if (this.picHeight > maxHeight) {
                     this.picWidth = Math.round((this.picWidth * maxHeight) / this.picHeight);
@@ -198,12 +208,33 @@ function ConstructorOverview() {
                     }
 
                 }
+                if (this.debug) {
+                    console.log('this.top_deviation', this.top_deviation);
+                    console.log('this.left_deviation', this.left_deviation);
+                    console.log('maxHeight', maxHeight);
+                    console.log('maxWidth', maxWidth);
+                }
             }
 
-            this.top_deviation = this.top_deviation + Math.round((this.max_height - this.picHeight -
-                    (this.right_width + this.padding_top) * (this.panelNumberVertical - 1) - this.shadow  ) / 2);
-            this.left_deviation = this.left_deviation + Math.round((this.max_width - this.picWidth -
-                    (this.right_width + this.padding_left + this.shadow) * (this.panelNumberHorizontal - 1) ) / 2);
+            this.top_deviation = Math.round((this.max_height - this.picHeight -
+                (this.right_width + this.shadow ) * this.panelNumberVertical - this.padding_top * (this.panelNumberVertical - 1)  ) / 2);
+            this.left_deviation = Math.round((this.max_width - this.picWidth -
+                (this.right_width + this.shadow) * this.panelNumberHorizontal - (this.padding_left - this.right_width - this.shadow) *
+                (this.panelNumberHorizontal - 1) ) / 2);
+
+            if (this.debug) {
+                console.log('this.picWidth', this.picWidth);
+                console.log('this.picHeight', this.picHeight);
+                console.log('this.top_deviation', this.top_deviation);
+                console.log('this.right_width', this.right_width);
+                console.log('this.padding_top', this.padding_top);
+                console.log('this.panelNumberVertical', this.panelNumberVertical);
+                console.log('this.left_deviation', this.left_deviation);
+                console.log('this.padding_left', this.padding_left);
+                console.log('this.shadow', this.shadow);
+                console.log('this.panelNumberHorizontal', this.panelNumberHorizontal);
+                console.log('------------END-----------');
+            }
 
         }
     };
@@ -415,7 +446,17 @@ function ConstructorOverview() {
             that.panelSizes[that.panelActiveBlockNum] = Math.round((value.width * size[0] ) / 100) + 'x' + Math.round((value.height * size[1] ) / 100);
         });
 
-        $('.az-picture-page-picture-main-panel-div').css('height', screen_height + 'px');
+        switch (this.type) {
+            case 'Баннер':
+                $('.az-picture-page-picture-main-banner-div').css('height', screen_height + 'px');
+                break;
+            case 'В раме':
+                break;
+            case 'Панно':
+                $('.az-picture-page-picture-main-panel-div').css('height', screen_height + 'px');
+                break;
+        }
+
 
     };
 

@@ -162,12 +162,25 @@ define(function (require, exports, module) {
             setShowBoard();
         });
 
-        $('#own_width').change(function (event) {
-            event.stopImmediatePropagation();
+        $('#own_width').keyup(function () {
             var width = parseInt($(this).val());
             if (width > 0) {
+                var orWidth = parseInt($('#input-az-picture-page-img-thumb-width').val()),
+                    orHeight = parseInt($('#input-az-picture-page-img-thumb-height').val());
 
+                $('#own_height').val(Math.round((width * orHeight) / orWidth));
             }
+            setShowBoard();
+        });
+
+        $('#own_height').keyup(function () {
+            var height = parseInt($(this).val());
+            if (height > 0) {
+                var orWidth = parseInt($('#input-az-picture-page-img-thumb-width').val()),
+                    orHeight = parseInt($('#input-az-picture-page-img-thumb-height').val());
+                $('#own_width').val(Math.round((height * orWidth) / orHeight));
+            }
+            setShowBoard();
         });
 
         // picture page constructor mat type
@@ -315,7 +328,10 @@ define(function (require, exports, module) {
                 own_picture_id = $this.data('own-id'),
                 cart_id = $this.data('cart-id'),
                 price = $('span.az-picture-page-sidebar-price-value').first().data('price'),
-                sizes = $("#az-picture-page-constructor-size-select").val(),
+                sizeSelector = $("select.az-picture-page-sidebar-size-select"),
+                sizes = sizeSelector.val() != 'own_size' ? sizeSelector.val() :
+                $('#own_width').val() + 'x' + $('#own_height').val(),
+                isOwnSize = sizeSelector.val() != 'own_size' ? 0 : 1,
                 banner_material_id = materialDiv.data("id"),
                 banner_material_value = materialDiv.data('title'),
                 underframe_id = underframeDiv.data("id"),
@@ -338,6 +354,7 @@ define(function (require, exports, module) {
                     'cart_id': cart_id,
                     'price': price,
                     'sizes': sizes,
+                    'isOwnSize': isOwnSize,
                     'banner_material_id': banner_material_id,
                     'banner_material_value': banner_material_value,
                     'underframe_id': underframe_id,
@@ -526,7 +543,7 @@ define(function (require, exports, module) {
 
     function setShowBoard() {
         var constructor = new ConstructorOverview();
-        constructor.debug = true;
+        //constructor.debug = true;
         constructor.init();
         constructor.buildConstructor();
         constructor.showPrice();
@@ -608,6 +625,7 @@ define(function (require, exports, module) {
             $('#message-inner-div-type').html(type_info);
             $('#message-inner-div-info').html(message);
             messageBlock.removeClass('hidden').addClass(typeClass).show();
+            $('html,body').animate({scrollTop: messageBlock.offset().top}, 'slow');
 
             window.setTimeout(function () {
                 messageBlock.addClass('hidden').removeClass(typeClass).hide();

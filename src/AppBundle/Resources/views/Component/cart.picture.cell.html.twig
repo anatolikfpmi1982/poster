@@ -123,17 +123,17 @@
                     <div class="col-md-12">
                         <button class="btn_az-main-popular_defer delete_order-bnt delete_cart-btn" data-id="{{ item.id }}">Удалить из корзины</button>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12 cart_cell">
-                            <a class="btn_az-main-popular_defer edit_order-bnt" data-id="{{ item.id }}"
-                               href="{% if item.picture is defined %}
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center cart_cell">
+                        <a class="btn_az-main-popular_defer edit_order-bnt" data-id="{{ item.id }}"
+                           href="{% if item.picture is defined %}
                                             {{ path('picture', {'id': item.picture_id, 'cart_id': item.id}) }}
                                             {% else %}
                                             {{ path('my_file_page', {'id': item.own_picture_id, 'cart_id': item.id}) }}
                                             {% endif %}">
-                                Изменить
-                            </a>
-                        </div>
+                            Изменить
+                        </a>
                     </div>
                 </div>
             </div>

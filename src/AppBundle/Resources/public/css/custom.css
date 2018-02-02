@@ -599,9 +599,9 @@ footer {
 }
 
 .btn.az-picture-page-sidebar-price-btn {
-    min-width: 80px;
+    min-width: 90px;
     max-width: 160px;
-    width: 80px;
+    width: 90px;
     padding: 5px 5px;
     font: 16px 'Open Sans', 'arial', 'helvetica', 'sans-serif';
     line-height: 1;
@@ -626,7 +626,9 @@ footer {
 }
 
 .az-picture-page-sidebar-header-block {
-    padding: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-right: 10px;
     font-size: 12px;
 }
 
@@ -652,19 +654,17 @@ footer {
     padding: 3px;
 }
 
-.az-picture-page-sidebar-thickness-div-select.col-md-4 {
+.az-picture-page-sidebar-material-picture-block-selector,
+.az-picture-page-sidebar-material-banner-block-selector {
     text-align: center;
-    height: 100px;
+    height: 75px;
     padding-top: 4px;
 }
 
-.az-picture-page-sidebar-material-div-select .col-md-4:hover {
-    border: 1px solid #fd1200;
-    cursor: pointer;
-    padding-top: 3px;
-}
-
-.az-picture-page-sidebar-material-div-select .col-md-4.active {
+.az-picture-page-sidebar-material-banner-block-selector:hover,
+.az-picture-page-sidebar-material-banner-block-selector.active,
+.az-picture-page-sidebar-material-picture-block-selector:hover,
+.az-picture-page-sidebar-material-picture-block-selector.active {
     border: 1px solid #fd1200;
     cursor: pointer;
     padding-top: 3px;
@@ -708,7 +708,8 @@ footer {
 }
 
 .az-picture-page-material-banner-img {
-    width: 100%;
+    max-width: 100%;
+    height: 40px;
     padding: 2px;
 }
 
@@ -738,6 +739,14 @@ footer {
     background-color: #ffffff;
     border: 1px solid #adadad;
     color: #fd1200;
+}
+
+.btn.az-picture-page-sidebar-size-select option:checked {
+    color: #fd1200;
+}
+
+.btn.az-picture-page-sidebar-size-select option {
+    color: #0b0b0b;
 }
 
 .az-picture-page-sidebar-div-right {
@@ -1858,17 +1867,19 @@ footer {
 #az-add_review_description {
     width: 100%;
     height: 130px;
-    color: #333;
+    color: #333333;
 }
 
 #az-add_review_city, #az-add_review_email, #az-add_review_name {
     width: 100%;
     border: 1px solid #989898;
-    color: #333;
+    color: #333333;
 }
 
 .az-picture-page-type-img-text {
     font-size: 10px;
+    display: inline-block;
+    line-height: 10px;
 }
 
 .az-picture-page-slider-material {

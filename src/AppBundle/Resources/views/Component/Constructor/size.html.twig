@@ -31,12 +31,16 @@
     </div>
     <div class="row az-picture-page-sidebar-size-div-body az-picture-page-sidebar-size-div-select">
         <select class="btn az-picture-page-sidebar-size-select" name="picture-size" id="az-picture-page-constructor-size-select" title="">
-            <option value="own_size">Свой размер</option>
             {% if cart_item.sizes is defined and cart_item.sizes %}
                 {% set active_sizes = cart_item.sizes %}
+                {% set isOwnSize = cart_item.isOwnSize %}
+                {% set ownSizes = cart_item.sizes|split('x') %}
             {% else %}
                 {% set active_sizes = '' %}
+                {% set isOwnSize = false %}
+                {% set ownSizes = [] %}
             {% endif %}
+            <option value="own_size" {% if isOwnSize %}selected{% endif %}>Свой размер</option>
             {% set size_default = 1 %}
             {% for i in range(10, 200, 10) %}
                 {% if pictureBaseWidth >= pictureBaseHeight %}
@@ -54,14 +58,14 @@
             {% endfor %}
         </select>
     </div>
-    <div class="row hidden az-picture-page-sidebar-size-div-own-div">
+    <div class="row {% if not isOwnSize %}hidden{% endif %} az-picture-page-sidebar-size-div-own-div">
         <div class="col-md-3 col-md-offset-2">
-            <input type="text" name="own_width" id="own_width" value="333" maxlength="3"
+            <input type="text" name="own_width" id="own_width" value="{% if isOwnSize %}{{ ownSizes[0] }}{% endif %}" maxlength="3"
                    title="own_width" class="az-picture-page-sidebar-size-div-own-input">
         </div>
         <div class="col-md-1">x</div>
         <div class="col-md-3">
-            <input type="text" name="own_height" value="" id="own_height" maxlength="3"
+            <input type="text" name="own_height" value="{% if isOwnSize %}{{ ownSizes[1] }}{% endif %}" id="own_height" maxlength="3"
                    title="own_height" class="az-picture-page-sidebar-size-div-own-input">
         </div>
     </div>

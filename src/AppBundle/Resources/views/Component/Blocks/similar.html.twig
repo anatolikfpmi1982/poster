@@ -1,16 +1,14 @@
 <div class="row az-page-main-section-div container-fluid">
     <div class="row az-page-section-header az-page-main-popular-header">Похожие картины:</div>
-    <div class="row az-page-section-body az-page-main-popular container-fluid">
-        <div class="row">
-            {% if site_blocks is defined and site_blocks and site_blocks.Similar is defined and site_blocks.Similar %}
-            {% for picture in site_blocks.Similar %}
-            {% include('AppBundle:Component:picture.cell.html.twig') %}
-            {% if loop.index != 0 and (loop.index + 1) % 6 == 0 %}
-        </div>
-        <div class="row">
-            {% endif %}
-            {% endfor %}
-            {% endif %}
-        </div>
+    <div class="row az-page-section-body az-page-main-popular">
+        {% if site_blocks is defined and site_blocks and site_blocks.Similar is defined and site_blocks.Similar %}
+        {% for picture in site_blocks.Similar %}
+        {% include('AppBundle:Component:picture.cell.html.twig') %}
+        {% if loop.index != 0 and loop.index % 3 == 0 %}
+    </div>
+    <div class="row az-page-section-body az-page-main-popular">
+        {% endif %}
+        {% endfor %}
+        {% endif %}
     </div>
 </div>

@@ -25,6 +25,7 @@ class CartController extends FrontController {
             'picture_id' => $request->query->get('id'),
             'price' => $request->query->get('price'),
             'sizes' => $request->query->get('sizes'),
+            'isOwnSize' => $request->query->get('isOwnSize'),
             'banner_material_id' => $request->query->get('banner_material_id'),
             'banner_material_value' => $request->query->get('banner_material_value'),
             'underframe_id' => $request->query->get('underframe_id'),
