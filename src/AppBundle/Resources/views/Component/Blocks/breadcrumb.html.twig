@@ -1,30 +1,31 @@
 <div class="row">
     <div class="col-md-8">
-    <nav class="breadcrumb">
-        {% if site_blocks is defined and site_blocks and site_blocks.BreadCrumb is defined and site_blocks.BreadCrumb %}
-            <a class="breadcrumb-item" href="/">Главная</a>
-            {% for breadcrumb in site_blocks.BreadCrumb|reverse %}
-                {% if not loop.last %}
-                    <a class="breadcrumb-item" href="{{ breadcrumb.url }}">{{ breadcrumb.title }}</a>
-                {% else %}
-                    <span class="breadcrumb-item active">{{ breadcrumb.title }}</span>
-                {% endif %}
-            {% endfor %}
-        {% endif %}
-    </nav></div>
-    <div class="col-md-2">
-        <div class="row az-picture-page-constructor-block hidden" id="az-picture-page-sidebar-deffered-div">
-            <div class="col-md-12">
+        <nav class="breadcrumb">
+            {% if site_blocks is defined and site_blocks and site_blocks.BreadCrumb is defined and site_blocks.BreadCrumb %}
+                <a class="breadcrumb-item" href="/">Главная</a>
+                {% for breadcrumb in site_blocks.BreadCrumb|reverse %}
+                    {% if not loop.last %}
+                        <a class="breadcrumb-item" href="{{ breadcrumb.url }}">{{ breadcrumb.title }}</a>
+                    {% else %}
+                        <span class="breadcrumb-item active">{{ breadcrumb.title }}</span>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+        </nav>
+    </div>
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-6 hidden" id="az-picture-page-sidebar-deffered-div">
                 <a href="{{ path('deferred') }}">
-                    <button class="btn az-btn-delayed-image">Отложенные <span id="az-picture-page-sidebar-deffered-div-count">0</span></button>
+                    <button class="btn az-btn-delayed-image az-all-breadcrumb-buttons">Отложенные <span id="az-picture-page-sidebar-deffered-div-count">0</span></button>
                 </a>
-            </div></div></div>
-    <div class="col-md-2">
-        <div class="row az-picture-page-constructor-block hidden" id="az-picture-page-sidebar-myfiles-div">
-            <div class="col-md-12">
+            </div>
+            <div class="col-md-6 hidden" id="az-picture-page-sidebar-myfiles-div">
                 <a href="{{ path('my_files') }}">
-                    <button class="btn az-btn-myfiles-image">Мои файлы  <span id="az-picture-page-sidebar-myfiles-div-count">0</span></button>
+                    <button class="btn az-btn-myfiles-image az-all-breadcrumb-buttons">Мои файлы <span id="az-picture-page-sidebar-myfiles-div-count">0</span></button>
                 </a>
-            </div></div>
+            </div>
+        </div>
     </div>
 </div>

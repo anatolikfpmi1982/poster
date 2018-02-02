@@ -126,6 +126,8 @@ define(function (require, exports, module) {
             $('#az-picture-constructor-frame-selected').val($(this).data('title'));
             $('#az-picture-constructor-frame-ratio-selected').val($(this).data('ratio'));
             $('#az-picture-constructor-frame-id-selected').val($(this).data('id'));
+            $('img.az-picture-page-constructor-picture-thickness-img').removeClass('active');
+            $(this).addClass('active');
             setShowBoard();
         });
 
@@ -136,6 +138,8 @@ define(function (require, exports, module) {
             $('#az-picture-constructor-module-id-selected').val($(this).data('id'));
             $('#az-picture-constructor-module-ratio-selected').val($(this).data('ratio'));
             $('#az-picture-constructor-module-code-selected').val($(this).data('code'));
+            $('img.az-picture-page-constructor-picture-module-type-img').removeClass('active');
+            $(this).addClass('active');
             setShowBoard();
         });
 
@@ -256,9 +260,18 @@ define(function (require, exports, module) {
             $.ajax({
                 url: "/ajax/picture/defer/add",
                 data: {'id': id}
-            }).done(function () {
+            }).done(function (data) {
                 $this.text("Отложено");
                 $this.prop('disabled', true);
+                var deferredBlock = $('#az-picture-page-sidebar-deffered-div'),
+                    deferredSpan = $("button.az-btn-delayed-image span#az-picture-page-sidebar-deffered-div-count");
+                if (data != undefined && data && data.result != undefined && data.result) {
+                    deferredSpan.text(parseInt(data.count));
+                    $this.text("Отложено").prop('disabled', true);
+                    deferredBlock.removeClass('hidden').show();
+                } else {
+                    deferredBlock.addClass('hidden').hide();
+                }
             });
             return false;
         });

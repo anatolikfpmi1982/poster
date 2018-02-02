@@ -15,23 +15,22 @@
                 />
             </a>
             {% for moduleType in moduleTypes %}
-                {#{{ dump(cart_item.module_type_id is not defined) }}#}
-                {#{{ dump(loop.index) }}#}
                 {% if moduleType.image is defined and moduleType.image %}
                     {% set img = '/files/module_types/mini_thumb/' ~ moduleType.image.getFilename() %}
                 {% else %}
                     {% set img = asset('bundles/app/images/material_default.png') %}
                 {% endif %}
+                {% set isModuleTypeActive = (cart_item.module_type_id is defined and cart_item.module_type_id==moduleType.id) or
+                (cart_item.module_type_id is not defined and loop.index == 1) %}
                 <div>
-                    <img src="{{ img }}" class="hidden az-picture-page-constructor-picture-module-type-img"
+                    <img src="{{ img }}" class="hidden az-picture-page-constructor-picture-module-type-img {% if isModuleTypeActive %}active{% endif %}"
                          data-id="{{ moduleType.id }}"
                          data-title="{{ moduleType.name }}"
                          data-ratio="{{ moduleType.ratio }}"
                          data-code="{{ moduleType.formula }}"
                          data-dddd="{{ loop.index }}"
                     />
-                    {% if (cart_item.module_type_id is defined and cart_item.module_type_id==moduleType.id) or (cart_item.module_type_id is not defined and
-                    loop.index == 1) %}
+                    {% if isModuleTypeActive %}
                         {% set moduleId = moduleType.id %}
                         {% set moduleName = moduleType.name %}
                         {% set moduleRatio = moduleType.ratio %}

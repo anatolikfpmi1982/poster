@@ -2698,9 +2698,11 @@ button.close:focus, .close:hover {
 
 .owl-carousel .owl-item img {
     cursor: pointer;
+    height: 97px;
 }
 
-.owl-carousel .owl-item img:hover {
+.owl-carousel .owl-item img:hover,
+.owl-carousel .owl-item img.active {
     cursor: pointer;
     border: 1px solid #fd1200;
 }
@@ -2716,11 +2718,22 @@ button.close:focus, .close:hover {
 }
 
 div.az-picture-page-constructor-block.active {
-    /*border: 1px solid #fd1200;*/
     background-color: #f0f0f0;
 }
 
 .az-picture-page-sidebar-size-div-own-input {
     width: 40px;
     color: #333333;
+}
+
+.az-picture-constructor-frame-link-all {
+    margin-top: 20px;
+}
+
+.az-all-breadcrumb-buttons {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 110px;
 }
