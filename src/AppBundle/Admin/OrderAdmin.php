@@ -212,6 +212,13 @@ class OrderAdmin extends AbstractAdmin
     }
 
     /**
+     * Configure admin
+     */
+    public function configure() {
+        $this->setTemplate('list', 'AppBundle:Admin:list_javascript.html.twig');
+    }
+
+    /**
      * @param Order $order
      */
     public function prePersist($order)
