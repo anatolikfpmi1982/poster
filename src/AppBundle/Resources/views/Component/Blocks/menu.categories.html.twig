@@ -14,7 +14,7 @@
         {% endif %}
         {% set visible = (module and module_active) or (not module and not module_active) %}
         <div class="row az-sidebar-header az-sidebar-catalog-item-header {% if visible and category.id == active_category_id %}active{% endif %}"
-             data-id="{{ category.id }}"
+             data-id="{{ identifier }}"
              data-url="{{ path('category', options) }}">
             <div class="col-md-12 ">
                 <img src="{{ asset('bundles/app/images/catalog.png') }}" class="az-sidebar-block-img az-catalog-block-img" title="{{ category.title }}"/>
