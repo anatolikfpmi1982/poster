@@ -473,7 +473,7 @@ define(function (require, exports, module) {
                     showInnerMessage('success', 'Успешно удалили картину из корзины');
                     window.setTimeout(function () {
                         location.reload();
-                    }, 3000);
+                    }, 1000);
                 } else {
                     showInnerMessage('error', 'Произошли технические неполатки. Попробуйте еще раз через пару минут.');
 
@@ -657,7 +657,7 @@ define(function (require, exports, module) {
 
             window.setTimeout(function () {
                 messageBlock.addClass('hidden').removeClass(typeClass).hide();
-            }, 5000);
+            }, 3000);
         }
 
 
