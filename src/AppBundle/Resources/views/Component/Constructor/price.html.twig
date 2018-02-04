@@ -16,7 +16,7 @@
                     data-title-own="{% if ownPicture is defined %}Своя картина{% endif %}"
                     data-cart-id="{% if cart_id is defined and cart_id %}{{ cart_id }}{% endif %}"
             >
-                {% if cart_id is defined and cart_id %}Редактировать{% else %}Купить{% endif %}
+                {% if cart_id is defined and cart_id %}Сохранить{% else %}Купить{% endif %}
             </button>
         </div>
         {% if ownPicture is not defined %}

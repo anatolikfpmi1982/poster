@@ -1,13 +1,17 @@
+{% if app.request.attributes.get('_route') == 'picture' %}
+    {% set isPicturePage = true %}
+{% else %}
+    {% set isPicturePage = false %}
+{% endif %}
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-{% if not isPicturePage %}8{% else %}12{% endif %}">
         <nav class="breadcrumb">
             {% if site_blocks is defined and site_blocks and site_blocks.BreadCrumb is defined and site_blocks.BreadCrumb %}
                 <a class="breadcrumb-item" href="/">Главная</a>
                 {% for breadcrumb in site_blocks.BreadCrumb|reverse %}
-                    {% if breadcrumb.title|length > 64 %}
+                    {% set title = breadcrumb.title %}
+                    {% if not isPicturePage and breadcrumb.title|length > 64 %}
                         {% set title = breadcrumb.title|slice(0, 61) ~ '...' %}
-                    {% else %}
-                        {% set title = breadcrumb.title %}
                     {% endif %}
                     {% if not loop.last %}
                         <a class="breadcrumb-item" href="{{ breadcrumb.url }}">{{ title }}</a>
@@ -19,20 +23,22 @@
 
         </nav>
     </div>
-    <div class="col-md-4">
-        <div class="row">
-            <div class="col-md-6 hidden" id="az-picture-page-sidebar-deffered-div">
-                <a href="{{ path('deferred') }}">
-                    <button class="btn az-btn-delayed-image az-all-breadcrumb-buttons">Отложенные
-                        <span id="az-picture-page-sidebar-deffered-div-count">0</span></button>
-                </a>
-            </div>
-            <div class="col-md-6 hidden" id="az-picture-page-sidebar-myfiles-div">
-                <a href="{{ path('my_files') }}">
-                    <button class="btn az-btn-myfiles-image az-all-breadcrumb-buttons">Мои файлы
-                        <span id="az-picture-page-sidebar-myfiles-div-count">0</span></button>
-                </a>
+    {% if not isPicturePage %}
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-6 hidden" id="az-picture-page-sidebar-deffered-div">
+                    <a href="{{ path('deferred') }}">
+                        <button class="btn az-btn-delayed-image az-all-breadcrumb-buttons">Отложенные
+                            <span id="az-picture-page-sidebar-deffered-div-count">0</span></button>
+                    </a>
+                </div>
+                <div class="col-md-6 hidden" id="az-picture-page-sidebar-myfiles-div">
+                    <a href="{{ path('my_files') }}">
+                        <button class="btn az-btn-myfiles-image az-all-breadcrumb-buttons">Мои файлы
+                            <span id="az-picture-page-sidebar-myfiles-div-count">0</span></button>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
+    {% endif %}
 </div>
