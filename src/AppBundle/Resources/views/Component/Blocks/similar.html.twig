@@ -2,8 +2,13 @@
     <div class="row az-page-section-header az-page-main-popular-header">Похожие картины:</div>
     <div class="row az-page-section-body az-page-main-popular">
         {% if site_blocks is defined and site_blocks and site_blocks.Similar is defined and site_blocks.Similar %}
+        {% set i = 0 %}
         {% for picture in site_blocks.Similar %}
+        {% if module_formulas is defined and i >= module_formulas|length %}
+            {% set i = 0 %}
+        {% endif %}
         {% include('AppBundle:Component:picture.cell.html.twig') %}
+        {% set i = i + 1 %}
         {% if loop.index != 0 and loop.index % 3 == 0 %}
     </div>
     <div class="row az-page-section-body az-page-main-popular">
