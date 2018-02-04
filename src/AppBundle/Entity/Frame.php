@@ -49,16 +49,16 @@ class Frame implements ImageInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
-    private $description;
+    private $description = '';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="note", type="text")
+     * @ORM\Column(name="note", type="text", nullable=true)
      */
-    private $note;
+    private $note = '';
 
     /**
      * @var float
@@ -66,7 +66,7 @@ class Frame implements ImageInterface
      *
      * @JMS\Expose
      */
-    private $height;
+    private $height = 0;
 
     /**
      * @var float
@@ -74,7 +74,7 @@ class Frame implements ImageInterface
      *
      * @JMS\Expose
      */
-    private $width;
+    private $width = 0;
 
     /**
      * @var float
@@ -83,7 +83,7 @@ class Frame implements ImageInterface
      *
      * @JMS\Expose
      */
-    private $ratio;
+    private $ratio = 1;
 
     /**
      * @var float
@@ -92,7 +92,7 @@ class Frame implements ImageInterface
      *
      * @JMS\Expose
      */
-    private $price;
+    private $price = 0;
 
     /**
      * @var boolean
