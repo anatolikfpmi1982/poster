@@ -67,8 +67,8 @@
         <input type="hidden" name="constructor_max_price" id="constructor_max_price" value="{{ max_price }}">
         <input type="hidden" name="constructor_additional_price" id="constructor_additional_price" value="{{ add_price }}">
 
-        <input type="hidden" name="constructor_picture_price" id="constructor_picture_price" value="0">
-        <input type="hidden" name="constructor_picture_ratio" id="constructor_picture_ratio" value="1">
+        <input type="hidden" name="constructor_picture_price" id="constructor_picture_price" value="{{ pictureMain.price }}">
+        <input type="hidden" name="constructor_picture_ratio" id="constructor_picture_ratio" value="{{ pictureMain.ratio }}">
     </div>
     <div class="col-md-3 container-fluid az-constructor-block">
         <div class="row az-picture-page-constructor-block hidden" id="az-picture-page-sidebar-deffered-div">
@@ -81,7 +81,7 @@
         <div class="row az-picture-page-constructor-block hidden" id="az-picture-page-sidebar-myfiles-div">
             <div class="col-md-12">
                 <a href="{{ path('my_files') }}">
-                    <button class="btn az-btn-myfiles-image">Мои файлы  <span id="az-picture-page-sidebar-myfiles-div-count">0</span></button>
+                    <button class="btn az-btn-myfiles-image">Мои файлы <span id="az-picture-page-sidebar-myfiles-div-count">0</span></button>
                 </a>
             </div>
         </div>
@@ -110,14 +110,16 @@
             {% include('AppBundle:Component:Constructor/price.html.twig') %}
         </div>
         <div class="row az-picture-page-constructor-block">
-            <div class="soc-share"><a href="https://twitter.com/share?url=http://www.artzakaz.by/twitter-button/"
-                                      title="Twitter" class="btn btn-twitter btn-lg"><i class="fa fa-twitter fa-fw"></i> </a></div>
-
-            <div class="soc-share"><a
-                        href="https://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://www.artzakaz.by&p[images][0]=&p[title]=Title%20Goes%20Here&p[summary]=Description%20goes%20here!"
-                        target="_blank"
-                        onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250'); return false">
-                    <button style="width: 32px; margin-top:10px;" type="button" class="btn btn-facebook btn-lg"><i class="fa fa-facebook fa-2"></i></button>
+            <div class="soc-share">
+                <a href="https://twitter.com/share?url=http://www.artzakaz.by/twitter-button/"
+                   title="Twitter" class="btn btn-twitter btn-lg"><i class="fa fa-twitter fa-fw"></i></a>
+            </div>
+            <div class="soc-share">
+                <a href="https://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://www.artzakaz
+                .by&p[images][0]=&p[title]=Title%20Goes%20Here&p[summary]=Description%20goes%20here!"
+                   target="_blank"
+                   onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250'); return false">
+                    <button type="button" class="btn btn-facebook btn-lg"><i class="fa fa-facebook fa-2"></i></button>
                 </a>
             </div>
             <div class="soc-share"><a href="http://vk.com/share.php?url=_URL_&title=_TITLE_&description=_DESCRIPTION_&image=_URL_TO_IMAGE_" class="btn btn-vk">
@@ -129,6 +131,7 @@
 
             <div class="soc-share" id="ok_shareWidget">
 
+                <div id="ok_shareWidget"></div>
                 <script>
                     !function (d, id, did, st, title, description, image) {
                         var js = d.createElement("script");
@@ -144,7 +147,7 @@
                             }
                         };
                         d.documentElement.appendChild(js);
-                    }(document, "ok_shareWidget", "https://artzakaz.by", '{"sz":20,"st":"rounded","nc":1,"nt":1}', "", "", "");
+                    }(document, "ok_shareWidget", "https://artzakaz.by", '{"sz":30,"st":"rounded","nc":1,"nt":1}', "", "", "");
                 </script>
             </div>
         </div>
