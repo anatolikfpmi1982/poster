@@ -24,12 +24,26 @@
 {% else %}
     {% set picture_url = path('picture', {'id': picture.id}) %}
 {% endif %}
+
+{% if site_settings is defined and site_settings %}
+    {% if site_settings.enable_banner is defined and site_settings.enable_banner %}
+        {% set type_value = "Баннер" %}
+    {% elseif site_settings.enable_frame is defined and site_settings.enable_frame %}
+        {% set type_value = "В раме" %}
+    {% elseif site_settings.enable_module is defined and site_settings.enable_module %}
+        {% set type_value = "Модульная" %}
+    {% else %}
+        {% set type_value = "Баннер" %}
+    {% endif %}
+{% else %}
+    {% set type_value = "Баннер" %}
+{% endif %}
 <div class="col-md-4 az-popular-item container">
     <div class="row az-main-popular-item-img-div">
         <div class="col-md-12 az-main-popular-item-img show-constructor-img-lazy"
              data-src="{{ img }}"
              data-id="{{ picture.id }}"
-             data-type="{% if isModule %}Модульная{% else %}Баннер{% endif %}"
+             data-type="{{ type_value }}"
              data-width={{ imgSize[0] }}
              data-height={{ imgSize[1] }}
              data-left=2
@@ -37,11 +51,17 @@
              data-pad-left=14
              data-pad-top=4
              data-butt=6
-             data-code="{% if module_active %}{{ module_formulas[i].formula }}{% else %}single|{horizontal|100-100-0}{% endif %}"
+             data-butt-portrait=6
+             data-code="{% if module_active or type_value == "Модульная" %}{{ module_formulas[i].formula }}{% elseif type_value == 'В раме' %}{{ item.module_formula }}{% else %}single|{horizontal|100-100-0}{% endif %}"
              data-max-width="246"
              data-max-height="240"
-             data-href="{{ picture_url }}",
+             data-href="{{ picture_url }}"
              data-fill-in="1"
+             data-img-corner="{{ item.frame_material_corner }}"
+             data-img-side-t="{{ item.frame_material_side_t }}"
+             data-img-side-r="{{ item.frame_material_side_r }}"
+             data-img-side-b="{{ item.frame_material_side_b }}"
+             data-img-side-l="{{ item.frame_material_side_l }}"
         >
         </div>
     </div>

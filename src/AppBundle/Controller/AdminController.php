@@ -86,6 +86,9 @@ class AdminController extends CoreController
                 'enable_own_picture' => false,
                 'enable_call_back' => false,
                 'enable_reviews' => false,
+                'enable_banner' => true,
+                'enable_frame' => true,
+                'enable_module' => true,
                 'contact_us_text' => '',
                 'from_email' => '',
                 'to_email' => '',
@@ -118,6 +121,9 @@ class AdminController extends CoreController
             ->add('enable_own_picture', CheckboxType::class, ['label' => 'Использовать функцию "Загрузить картину"', 'required' => false])
             ->add('enable_call_back', CheckboxType::class, ['label' => 'Использовать функцию "Заказать звонок"', 'required' => false])
             ->add('enable_reviews', CheckboxType::class, ['label' => 'Показывать блок "Отзывы"', 'required' => false])
+            ->add('enable_banner', CheckboxType::class, ['label' => 'Показывать "Баннер" в конструкторе', 'required' => false])
+            ->add('enable_frame', CheckboxType::class, ['label' => 'Показывать "В раме" в конструкторе', 'required' => false])
+            ->add('enable_module', CheckboxType::class, ['label' => 'Показывать "Модульная" в конструкторе', 'required' => false])
             ->add('min_price', NumberType::class, ['label' => 'Минимальная цена', 'required' => false])
             ->add('save', SubmitType::class, array('label' => 'Сохранить'))
             ->getForm();
@@ -235,6 +241,9 @@ class AdminController extends CoreController
         $data = $form->getData();
         $data['enable_call_back'] = (boolean)$data['enable_call_back'];
         $data['enable_reviews'] = (boolean)$data['enable_reviews'];
+        $data['enable_banner'] = (boolean)$data['enable_banner'];
+        $data['enable_frame'] = (boolean)$data['enable_frame'];
+        $data['enable_module'] = (boolean)$data['enable_module'];
         $data['enable_own_picture'] = (boolean)$data['enable_own_picture'];
 
         if($data['logo']) {

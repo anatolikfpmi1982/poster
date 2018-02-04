@@ -66,6 +66,7 @@ class PicturesController extends FrontController {
         $this->data['materials']   = $this->em->getRepository( 'AppBundle:BannerMaterial' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
         $this->data['pictureMaterials']   = $this->em->getRepository( 'AppBundle:FrameMaterial' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
         $this->data['moduleTypes'] = $this->em->getRepository( 'AppBundle:ModuleType' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
+        $this->data['module_formulas'] = $this->em->getRepository('AppBundle:ModuleType')->findBy(['isActive' => true]);
         $this->data['thicknesses'] = $this->em->getRepository( 'AppBundle:Underframe' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
         $this->data['pictureThicknesses'] = $this->em->getRepository( 'AppBundle:Frame' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
         $this->data['mats'] = $this->em->getRepository( 'AppBundle:Mat' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
