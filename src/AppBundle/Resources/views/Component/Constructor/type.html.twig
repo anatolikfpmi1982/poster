@@ -71,7 +71,7 @@
         {% endif %}
         {% if site_settings is defined and site_settings and site_settings.enable_frame is defined and site_settings.enable_frame %}
         <div class="col-md-6 container-fluid az-picture-page-sidebar-type-block-selector
-        {% if cart_item.type_value is defined and cart_item.type_value=='В раме' %}active{% endif %}" data-title="В раме" data-value="2" data-type="frame">
+        {% if (cart_item.type_value is defined and cart_item.type_value=='В раме') or not site_settings.enable_banner %}active{% endif %}" data-title="В раме" data-value="2" data-type="frame">
             <div class="row az-picture-page-type-div-img">
                 <div class="col-md-12 az-picture-page-type-div-img show-constructor-img-lazy"
                      data-src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}"
@@ -100,7 +100,7 @@
                 <div class="col-md-12">
                     <input type="radio" class="btn hidden az-picture-page-constructor-type-radio" data-title="В раме" value="2"
                            title="az-picture-page-type" data-type='frame' name="az-picture-page-type"
-                           {% if cart_item.type_value is defined and cart_item.type_value=='В раме' %}checked{% endif %}/>
+                           {% if (cart_item.type_value is defined and cart_item.type_value=='В раме') or not site_settings.enable_banner %}checked{% endif %}/>
                 </div>
             </div>
 
@@ -128,7 +128,7 @@
     <div class="row az-picture-page-sidebar-size-div-body az-picture-page-sidebar-type-div-select">
         {% if site_settings is defined and site_settings and site_settings.enable_module is defined and site_settings.enable_module %}
         <div class="col-md-6 container-fluid az-picture-page-sidebar-type-block-selector
-        {% if cart_item.type_value is defined and cart_item.type_value=='Модульная' %}active{% endif %}" data-title="Модульная" data-value="3" data-type='module'>
+        {% if (cart_item.type_value is defined and cart_item.type_value=='Модульная') or (not site_settings.enable_banner and not site_settings.enable_frame) %}active{% endif %}" data-title="Модульная" data-value="3" data-type='module'>
             <div class="row text-center">
                 <div class="col-12 container-fluid">
                     <div class="row text-center">
@@ -164,7 +164,7 @@
                         <input type="radio" class="btn hidden az-picture-page-constructor-type-radio" data-title="Модульная"
                                value="3" title="az-picture-page-type"
                                data-type='module' name="az-picture-page-type"
-                               {% if cart_item.type_value is defined and cart_item.type_value=='Модульная' %}checked{% endif %}/>
+                               {% if (cart_item.type_value is defined and cart_item.type_value=='Модульная') or (not site_settings.enable_banner and not site_settings.enable_frame) %}checked{% endif %}/>
                     </div>
                 </div>
             </div>
