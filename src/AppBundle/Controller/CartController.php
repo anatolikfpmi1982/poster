@@ -32,6 +32,11 @@ class CartController extends FrontController {
             'underframe_value' => $request->query->get('underframe_value'),
             'frame_material_id' => $request->query->get('frame_material_id'),
             'frame_material_value' => $request->query->get('frame_material_value'),
+            'frame_material_corner' => $request->query->get('frame_material_corner'),
+            'frame_material_side_t' => $request->query->get('frame_material_side_t'),
+            'frame_material_side_r' => $request->query->get('frame_material_side_r'),
+            'frame_material_side_b' => $request->query->get('frame_material_side_b'),
+            'frame_material_side_l' => $request->query->get('frame_material_side_l'),
             'frame_id' => $request->query->get('frame_id'),
             'frame_value' => $request->query->get('frame_value'),
             'module_type_id' => $request->query->get('module_type_id'),
@@ -70,10 +75,11 @@ class CartController extends FrontController {
      * @return Response
      */
     public function clearCartAction() {
-        $this->get( 'app.session_manager' )->clearCart();
+        $this->get( 'app.session_manager' )->cleanCart();
+        $count = $this->get( 'app.session_manager' )->getCartCount();
 
         // parameters to template
-        return new JsonResponse(array('result' => 1));
+        return new JsonResponse(array('result' => 1, 'count' => $count));
     }
 
     /**

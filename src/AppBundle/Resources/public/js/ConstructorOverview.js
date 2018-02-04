@@ -24,6 +24,7 @@ function ConstructorOverview() {
     this.padding_left = 0;
     this.padding_top = 0;
     this.right_width = 3;
+    this.right_width_portrait = 20;
     this.top_deviation = 0;
     this.left_deviation = 0;
     this.panel_type = 'horizontal';
@@ -44,6 +45,11 @@ function ConstructorOverview() {
     this.fill = false;
     this.isLink = false;
     this.linkHref = '';
+    this.imgCorner = '';
+    this.imgSideT = '';
+    this.imgSideR = '';
+    this.imgSideB = '';
+    this.imgSideL = '';
 
     this.init = function (params) {
         if (params != undefined) {
@@ -65,12 +71,19 @@ function ConstructorOverview() {
             this.padding_left = params.padding_left != undefined ? params.padding_left : this.padding_left;
             this.padding_top = params.padding_top != undefined ? params.padding_top : this.padding_top;
             this.right_width = params.right_width != undefined ? params.right_width : this.right_width;
+            this.right_width_portrait = params.right_width_portrait != undefined ? params.right_width_portrait : this.right_width_portrait;
             this.max_width = params.panel_max_width != undefined ? params.panel_max_width : this.max_width;
             this.max_height = params.panel_max_height != undefined ? params.panel_max_height : this.max_height;
             this.shadow = params.shadow != undefined ? params.shadow : this.shadow;
             this.fill = params.fill != undefined ? params.fill : this.fill;
             this.isLink = params.link != undefined ? params.link : this.isLink;
             this.linkHref = params.href != undefined ? params.href : this.linkHref;
+            this.imgCorner = params.imgCorner != undefined ? params.imgCorner : $('#az-picture-constructor-frame-img-corner-selected').val();
+            this.imgSideT = params.imgSideT != undefined ? params.imgSideT : $('#az-picture-constructor-frame-img-side-t-selected').val();
+            this.imgSideR = params.imgSideR != undefined ? params.imgSideR : $('#az-picture-constructor-frame-img-side-r-selected').val();
+            this.imgSideB = params.imgSideB != undefined ? params.imgSideB : $('#az-picture-constructor-frame-img-side-b-selected').val();
+            this.imgSideL = params.imgSideL != undefined ? params.imgSideL : $('#az-picture-constructor-frame-img-side-l-selected').val();
+
         } else {
             this.initDefault();
         }
@@ -106,11 +119,17 @@ function ConstructorOverview() {
         this.padding_left = 20;
         this.padding_top = 10;
         this.right_width = 6;
+        this.right_width_portrait = 30;
         this.top_deviation = 20;
         this.left_deviation = 10;
         this.max_width = parseInt($('.az-picture-page-constructor-global-div').css('width'));
         this.max_height = this.picHeight + (2 * this.top_deviation);
         this.shadow = 3;
+        this.imgCorner = $('#az-picture-constructor-frame-img-corner-selected').val();
+        this.imgSideT = $('#az-picture-constructor-frame-img-side-t-selected').val();
+        this.imgSideR = $('#az-picture-constructor-frame-img-side-r-selected').val();
+        this.imgSideB = $('#az-picture-constructor-frame-img-side-b-selected').val();
+        this.imgSideL = $('#az-picture-constructor-frame-img-side-l-selected').val();
     };
 
     this.show = function () {
@@ -144,9 +163,10 @@ function ConstructorOverview() {
             case 'В раме':
                 banner.hide();
                 picture.show();
+                this.buildPortrait();
                 panel.hide();
                 break;
-            case 'Панно':
+            case 'Модульная':
                 banner.hide();
                 picture.hide();
                 this.getPanelInfo();
@@ -154,6 +174,144 @@ function ConstructorOverview() {
                 panel.show();
                 break;
         }
+    };
+
+    this.buildPortrait = function () {
+        this.calculateWidthAndHeightPortrait();
+
+        var newDivString = '<div></div>',
+            right_width = this.right_width_portrait;
+        var imgPath = this.imgPath,
+            picWidth = this.picWidth,
+            picHeight = this.picHeight,
+            top_deviation = this.top_deviation,
+            screen_height = picHeight + (2 * top_deviation) + 2 * right_width,
+            imgCorner = this.imgCorner,
+            imgSideT = this.imgSideT,
+            imgSideR = this.imgSideR,
+            imgSideB = this.imgSideB,
+            imgSideL = this.imgSideL;
+
+        this.monitor.html('');
+
+        var divMain = $(newDivString);
+        divMain.addClass('module').addClass('portrait-block');
+        divMain.css('left', this.left_deviation + right_width);
+        divMain.css('top', this.top_deviation + right_width);
+        divMain.css('width', picWidth + 'px');
+        divMain.css('height', picHeight + 'px');
+        divMain.css('background-image', 'url(' + imgPath + ')');
+        divMain.css('background-repeat', 'no-repeat');
+        divMain.css('background-size', picWidth + 'px ' + picHeight + 'px');
+        divMain.css('background-position', '0px 0px');
+        divMain.css('box-shadow', 'rgba(0, 0, 0, 0.4) ' + this.shadow + 'px ' + this.shadow + 'px ' + this.shadow + 'px');
+
+        var divCornerRT = $(newDivString);
+        divCornerRT.addClass('az-picture-page-portrait-frame-corner').addClass('az-picture-page-portrait-frame-corner-rt');
+        divCornerRT.css('right', '-' + right_width + 'px');
+        divCornerRT.css('top', '-' + right_width + 'px');
+        divCornerRT.css('width', right_width + 'px');
+        divCornerRT.css('height', right_width + 'px');
+        divCornerRT.css('background-image', 'url(' + imgCorner + ')');
+        divCornerRT.css('background-repeat', 'no-repeat');
+        divCornerRT.css('background-size', right_width + 'px ' + right_width + 'px');
+        divCornerRT.css('background-position', '0px 0px');
+        divCornerRT.css('transform', 'rotate(270deg)');
+        divCornerRT.appendTo(divMain);
+
+        var divCornerLT = $(newDivString);
+        divCornerLT.addClass('az-picture-page-portrait-frame-corner').addClass('az-picture-page-portrait-frame-corner-lt');
+        divCornerLT.css('left', '-' + right_width + 'px');
+        divCornerLT.css('top', '-' + right_width + 'px');
+        divCornerLT.css('width', right_width + 'px');
+        divCornerLT.css('height', right_width + 'px');
+        divCornerLT.css('background-image', 'url(' + imgCorner + ')');
+        divCornerLT.css('background-repeat', 'no-repeat');
+        divCornerLT.css('background-size', right_width + 'px ' + right_width + 'px');
+        divCornerLT.css('background-position', '0px 0px');
+        divCornerLT.css('transform', 'rotate(180deg)');
+        divCornerLT.appendTo(divMain);
+
+        var divCornerLB = $(newDivString);
+        divCornerLB.addClass('az-picture-page-portrait-frame-corner').addClass('az-picture-page-portrait-frame-corner-lb');
+        divCornerLB.css('left', '-' + right_width + 'px');
+        divCornerLB.css('bottom', '-' + right_width + 'px');
+        divCornerLB.css('width', right_width + 'px');
+        divCornerLB.css('height', right_width + 'px');
+        divCornerLB.css('background-image', 'url(' + imgCorner + ')');
+        divCornerLB.css('background-repeat', 'no-repeat');
+        divCornerLB.css('background-size', right_width + 'px ' + right_width + 'px');
+        divCornerLB.css('background-position', '0px 0px');
+        divCornerLB.css('transform', 'rotate(90deg)');
+        divCornerLB.appendTo(divMain);
+
+        var divCornerRB = $(newDivString);
+        divCornerRB.addClass('az-picture-page-portrait-frame-corner').addClass('az-picture-page-portrait-frame-corner-rb');
+        divCornerRB.css('right', '-' + right_width + 'px');
+        divCornerRB.css('bottom', '-' + right_width + 'px');
+        divCornerRB.css('width', right_width + 'px');
+        divCornerRB.css('height', right_width + 'px');
+        divCornerRB.css('background-image', 'url(' + imgCorner + ')');
+        divCornerRB.css('background-repeat', 'no-repeat');
+        divCornerRB.css('background-size', right_width + 'px ' + right_width + 'px');
+        divCornerRB.css('background-position', '0px 0px');
+        //divCornerRB.css('box-shadow', 'rgba(0, 0, 0, 0.4) ' + this.shadow + 'px ' + this.shadow + 'px ' + this.shadow + 'px');
+        divCornerRB.appendTo(divMain);
+
+        var divSideT = $(newDivString);
+        divSideT.addClass('az-picture-page-portrait-frame-side').addClass('az-picture-page-portrait-frame-side-t');
+        divSideT.css('left', 0);
+        divSideT.css('top', '-' + right_width + 'px');
+        divSideT.css('width', picWidth + 'px');
+        divSideT.css('height', right_width + 'px');
+        divSideT.css('background-image', 'url(' + imgSideT + ')');
+        divSideT.css('background-size', right_width + 'px ' + right_width + 'px');
+        divSideT.css('background-position', '0px 0px');
+        divSideT.appendTo(divMain);
+
+        var divSideB = $(newDivString);
+        divSideB.addClass('az-picture-page-portrait-frame-side').addClass('az-picture-page-portrait-frame-side-t');
+        divSideB.css('left', 0);
+        divSideB.css('bottom', '-' + right_width + 'px');
+        divSideB.css('width', picWidth + 'px');
+        divSideB.css('height', right_width + 'px');
+        divSideB.css('background-image', 'url(' + imgSideB + ')');
+        divSideB.css('background-size', right_width + 'px ' + right_width + 'px');
+        divSideB.css('background-position', '0px 0px');
+        //divSideB.css('box-shadow', 'rgba(0, 0, 0, 0.4) ' + this.shadow + 'px ' + this.shadow + 'px ' + this.shadow + 'px');
+        divSideB.appendTo(divMain);
+
+        var divSideR = $(newDivString);
+        divSideR.addClass('az-picture-page-portrait-frame-side').addClass('az-picture-page-portrait-frame-side-r');
+        divSideR.css('right', '-' + right_width + 'px');
+        divSideR.css('top', 0);
+        divSideR.css('width', right_width + 'px');
+        divSideR.css('height', picHeight + 'px');
+        divSideR.css('background-image', 'url(' + imgSideR + ')');
+        divSideR.css('background-size', right_width + 'px ' + right_width + 'px');
+        divSideR.css('background-position', '0px 0px');
+        //divSideR.css('box-shadow', 'rgba(0, 0, 0, 0.4) ' + this.shadow + 'px ' + this.shadow + 'px ' + this.shadow + 'px');
+        divSideR.appendTo(divMain);
+
+        var divSideL = $(newDivString);
+        divSideL.addClass('az-picture-page-portrait-frame-side').addClass('az-picture-page-portrait-frame-side-l');
+        divSideL.css('left', '-' + right_width + 'px');
+        divSideL.css('top', 0);
+        divSideL.css('width', right_width + 'px');
+        divSideL.css('height', picHeight + 'px');
+        divSideL.css('background-image', 'url(' + imgSideL + ')');
+        divSideL.css('background-size', right_width + 'px ' + right_width + 'px');
+        divSideL.css('background-position', '0px 0px');
+        divSideL.appendTo(divMain);
+
+        if (!this.isLink) {
+            divMain.appendTo(this.monitor);
+        } else {
+            var aLink = $('<a href="' + this.linkHref + '"></a>');
+            divMain.appendTo(aLink);
+            aLink.appendTo(this.monitor);
+        }
+        $('.az-picture-page-picture-main-picture-div').css('height', screen_height + 'px');
     };
 
     this.buildPanelMonitor = function () {
@@ -174,6 +332,65 @@ function ConstructorOverview() {
             }
         });
         this.showPanelSizes();
+    };
+
+    this.calculateWidthAndHeightPortrait = function () {
+
+        if (this.max_width > 0 && this.max_height > 0) {
+            if (this.debug) {
+                console.log('------------START P-----------');
+                console.log('this.picWidth', this.picWidth);
+                console.log('this.picHeight', this.picHeight);
+                console.log('this.max_width', this.max_width);
+                console.log('this.max_height', this.max_height);
+            }
+
+            var maxHeight = this.max_height - 2 * this.top_deviation - 2 * this.right_width_portrait - this.shadow;
+            var maxWidth = this.max_width - 2 * this.left_deviation - 2 * this.right_width_portrait - this.shadow;
+
+            if (this.picHeight > this.picWidth) {
+                if (this.picHeight > maxHeight) {
+                    this.picWidth = Math.round((this.picWidth * maxHeight) / this.picHeight);
+                    this.picHeight = maxHeight;
+                }
+            } else {
+                if (this.picWidth > maxWidth || this.fill) {
+                    this.picHeight = Math.round((this.picHeight * maxWidth) / this.picWidth);
+                    if (this.picHeight > maxHeight) {
+                        this.picWidth = Math.round((maxWidth * maxHeight) / this.picHeight);
+                        this.picHeight = maxHeight;
+                    } else {
+                        this.picWidth = maxWidth;
+                    }
+
+                }
+                if (this.debug) {
+                    console.log('this.top_deviation', this.top_deviation);
+                    console.log('this.left_deviation', this.left_deviation);
+                    console.log('this.right_width_portrait', this.right_width_portrait);
+                    console.log('maxHeight', maxHeight);
+                    console.log('maxWidth', maxWidth);
+                }
+            }
+
+            this.top_deviation = Math.round((this.max_height - this.picHeight - 2 * this.right_width_portrait - this.shadow  ) / 2);
+            this.left_deviation = Math.round((this.max_width - this.picWidth - 2 * this.right_width_portrait - this.shadow ) / 2);
+
+            if (this.debug) {
+                console.log('this.picWidth', this.picWidth);
+                console.log('this.picHeight', this.picHeight);
+                console.log('this.top_deviation', this.top_deviation);
+                console.log('this.right_width', this.right_width);
+                console.log('this.padding_top', this.padding_top);
+                console.log('this.panelNumberVertical', this.panelNumberVertical);
+                console.log('this.left_deviation', this.left_deviation);
+                console.log('this.padding_left', this.padding_left);
+                console.log('this.shadow', this.shadow);
+                console.log('this.panelNumberHorizontal', this.panelNumberHorizontal);
+                console.log('------------END-----------');
+            }
+
+        }
     };
 
     this.calculateWidthAndHeight = function () {
@@ -459,7 +676,7 @@ function ConstructorOverview() {
                 break;
             case 'В раме':
                 break;
-            case 'Панно':
+            case 'Модульная':
                 $('.az-picture-page-picture-main-panel-div').css('height', screen_height + 'px');
                 break;
         }
@@ -573,7 +790,7 @@ function ConstructorOverview() {
                 module.hide();
                 panel_sizes.hide();
                 break;
-            case 'Панно':
+            case 'Модульная':
                 subframe.show();
                 subframe_color.show();
                 frame.hide();
@@ -611,7 +828,7 @@ function ConstructorOverview() {
                 picture_paspartu_div.show();
                 template_div.hide();
                 break;
-            case 'Панно':
+            case 'Модульная':
                 thickness_div.show();
                 thickness_picture_div.hide();
                 banner_material_div.show();
@@ -632,7 +849,7 @@ function ConstructorOverview() {
             case 'В раме':
                 price = this.calculatePicture();
                 break;
-            case 'Панно':
+            case 'Модульная':
                 price = this.calculatePanel();
                 break;
         }

@@ -116,7 +116,7 @@ define(function (require, exports, module) {
             event.stopImmediatePropagation();
             $('div.az-picture-page-sidebar-material-picture-block-selector').removeClass('active');
             $(this).addClass('active');
-            $('input[name="az-picture-page-constructor-material-picture-radio"][data-id="' + $(this).data('id') + '"]').prop('checked', true);
+            $('input[name="az-picture-page-material-picture"][data-id="' + $(this).data('id') + '"]').prop('checked', true);
             setShowBoard();
         });
 
@@ -126,6 +126,11 @@ define(function (require, exports, module) {
             $('#az-picture-constructor-frame-selected').val($(this).data('title'));
             $('#az-picture-constructor-frame-ratio-selected').val($(this).data('ratio'));
             $('#az-picture-constructor-frame-id-selected').val($(this).data('id'));
+            $('#az-picture-constructor-frame-img-corner-selected').val($(this).data('img-corner'));
+            $('#az-picture-constructor-frame-img-side-t-selected').val($(this).data('img-side-t'));
+            $('#az-picture-constructor-frame-img-side-r-selected').val($(this).data('img-side-r'));
+            $('#az-picture-constructor-frame-img-side-b-selected').val($(this).data('img-side-b'));
+            $('#az-picture-constructor-frame-img-side-l-selected').val($(this).data('img-side-l'));
             $('img.az-picture-page-constructor-picture-thickness-img').removeClass('active');
             $(this).addClass('active');
             setShowBoard();
@@ -351,6 +356,11 @@ define(function (require, exports, module) {
                 underframe_value = underframeDiv.val(),
                 frame_material_id = materialPictureDiv.data("id"),
                 frame_material_value = materialPictureDiv.data('title'),
+                frame_material_corner = $("#az-picture-constructor-frame-img-corner-selected").val(),
+                frame_material_side_t = $("#az-picture-constructor-frame-img-side-t-selected").val(),
+                frame_material_side_r = $("#az-picture-constructor-frame-img-side-r-selected").val(),
+                frame_material_side_b = $("#az-picture-constructor-frame-img-side-b-selected").val(),
+                frame_material_side_l = $("#az-picture-constructor-frame-img-side-l-selected").val(),
                 frame_id = $("#az-picture-constructor-frame-id-selected").val(),
                 frame_value = $("#az-picture-constructor-frame-selected").val(),
                 module_type_id = $('#az-picture-constructor-module-id-selected').val(),
@@ -374,6 +384,11 @@ define(function (require, exports, module) {
                     'underframe_value': underframe_value,
                     'frame_material_id': frame_material_id,
                     'frame_material_value': frame_material_value,
+                    'frame_material_corner': frame_material_corner,
+                    'frame_material_side_t': frame_material_side_t,
+                    'frame_material_side_r': frame_material_side_r,
+                    'frame_material_side_b': frame_material_side_b,
+                    'frame_material_side_l': frame_material_side_l,
                     'frame_id': frame_id,
                     'frame_value': frame_value,
                     'module_type_id': module_type_id,
@@ -667,12 +682,18 @@ define(function (require, exports, module) {
                 params['padding_left'] = $(value).data('pad-left');
                 params['padding_top'] = $(value).data('pad-top');
                 params['right_width'] = $(value).data('butt');
+                params['right_width_portrait'] = $(value).data('butt-portrait');
                 params['panel_max_width'] = $(value).data('max-width');
                 params['panel_max_height'] = $(value).data('max-height');
                 params['shadow'] = $(value).data('shadow');
                 params['fill'] = $(value).data('fill-in');
                 params['href'] = $(value).data('href');
                 params['link'] = params['href'] ? true : false;
+                params['imgCorner'] = $(value).data('img-corner');
+                params['imgSideT'] = $(value).data('img-side-t');
+                params['imgSideR'] = $(value).data('img-side-r');
+                params['imgSideB'] = $(value).data('img-side-b');
+                params['imgSideL'] = $(value).data('img-side-l');
                 constructor.init(params);
                 constructor.show();
             });

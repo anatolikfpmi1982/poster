@@ -1,0 +1,119 @@
+{% set header_total_price = 0 %}
+{% set header_cart_count = 0 %}
+{% if header_cart is defined and header_cart and header_cart|length > 0 %}
+    {% set header_cart_count = header_cart|length %}
+    {% for header_cart_item in header_cart %}
+        {% set header_total_price = header_total_price + header_cart_item.price %}
+    {% endfor %}
+{% endif %}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+    <h4 class="modal-title">Моя корзина</h4>
+</div>
+
+<div class="modal-body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                Товаров: {{ header_cart_count }}<br/>
+                Сумма: {{ header_total_price }} руб.
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-sm clear_cart-btn">Очистить корзину</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {% if header_cart_count > 0 %}
+                    {% for cart_item in header_cart %}
+                        {% set picId = 0 %}
+                        {% set picPath = '' %}
+                        {% set picTitle = '' %}
+                        {% set picImgUrl = asset('bundles/app/images/default_picture.jpg') %}
+                        {% if cart_item.type_id == 'banner' %}
+                            {% set formula = 'single|{horizontal|100-100-0}' %}
+                        {% else %}
+                            {% set formula = cart_item.module_formula %}
+                        {% endif %}
+                        {% if cart_item.picture is defined and cart_item.picture %}
+                            {% set picId = cart_item.picture.id %}
+                            {% set picPath = path('picture', {'id': cart_item.picture.id}) %}
+                            {% set picImgUrl = '/files/pictures/small_thumb/' ~ cart_item.picture.image.getFilename() %}
+                            {% set picImgPath = cart_item.picture.image.getSmallThumbBaseFile() %}
+                            {% set picTitle = '"'~cart_item.picture.title~'"' %}
+                            {% set imgSize = filesize(picImgPath) %}
+                        {% elseif cart_item.own_picture is defined and cart_item.own_picture %}
+                            {% set picId = cart_item.own_picture.id %}
+                            {% set picPath = path('my_file_page', {'id': cart_item.own_picture.id}) %}
+                            {% set picImgUrl = '/files/pictures/small_thumb/' ~ cart_item.own_picture.image.getFilename() %}
+                            {% set picImgPath = cart_item.own_picture.image.getSmallThumbBaseFile() %}
+                            {% set picTitle = 'Загруженная картина' %}
+                            {% set imgSize = filesize(picImgPath) %}
+                        {% else %}
+                            {% set picImgPath = asset('bundles/app/images/default_picture.jpg') %}
+                            {% set imgSize = filesize(picImgPath) %}
+                        {% endif %}
+                        <div class="row az-ordersmall-cart">
+                            <div class="col-md-6 az-all-pages-cart-img-div">
+                                <div class="az-order-cart-item-img show-constructor-img-lazy"
+                                     data-src="{{ picImgUrl }}"
+                                     data-id="{{ picId }}"
+                                     data-type="{{ cart_item.type_value }}"
+                                     data-width={{ imgSize[0] }}
+                                     data-height={{ imgSize[1] }}
+                                     data-left=2
+                                     data-top=2
+                                     data-pad-left=4
+                                     data-pad-top=4
+                                     data-butt=2
+                                     data-butt-portrait=2
+                                     date-fill-in="1"
+                                     data-code="{{ formula }}"
+                                     data-max-width="132"
+                                     data-max-height="130"
+                                     data-href="{{ picPath }}"
+                                     data-img-corner="{{ cart_item.frame_material_corner }}"
+                                     data-img-side-t="{{ cart_item.frame_material_side_t }}"
+                                     data-img-side-r="{{ cart_item.frame_material_side_r }}"
+                                     data-img-side-b="{{ cart_item.frame_material_side_b }}"
+                                     data-img-side-l="{{ cart_item.frame_material_side_l }}"
+                                ></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    {% if picTitle|length > 84 %}
+                                        {% set title = picTitle|slice(0, 81) ~ '...' %}
+                                    {% else %}
+                                        {% set title = picTitle %}
+                                    {% endif %}
+                                    <div class="col-md-12 az-all-pages-cart-text">
+                                        {{ title }} <br/>
+                                        {{ cart_item.type_value }} <br/>
+                                        {{ cart_item.price }} руб.
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <button class="btn-xs delete_cart-btn" data-id="{{ cart_item.id }}">Удалить</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    Ваша корзина пуста!
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {% if header_cart_count > 0 %}
+                    <a href="{{ path( 'order' ) }}">Оформление заказа</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

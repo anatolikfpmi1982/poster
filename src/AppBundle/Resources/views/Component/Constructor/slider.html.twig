@@ -13,12 +13,38 @@
             {% set frameId = 0 %}
             {% set frameTitle = '' %}
             {% set frameRatio = 0 %}
+            {% set imgActiveSideT = '' %}
+            {% set imgActiveSideR = '' %}
+            {% set imgActiveSideB = '' %}
+            {% set imgActiveSideL = '' %}
+            {% set imgActiveCorner = '' %}
             {% for thickness in pictureThicknesses %}
                 {% if thickness.images is defined and thickness.images and thickness.images[0] is defined and thickness.images[0] %}
                     {% set img = '/files/frames/mini_thumb/' ~ thickness.images[0].getFilename() %}
                 {% else %}
                     {% set img = asset('bundles/app/images/material_default.png') %}
                 {% endif %}
+                {% set imgCorner = '' %}
+                {% set imgSideTop = '' %}
+                {% set imgSideRight = '' %}
+                {% set imgSideBottom = '' %}
+                {% set imgSideLeft = '' %}
+                {% if thickness.images|length > 0 %}
+                    {% for imgThick in thickness.images %}
+                        {% if loop.index == 2 %}
+                            {% set imgCorner = '/files/frames/' ~ imgThick.getFilename() %}
+                        {% elseif loop.index == 3 %}
+                            {% set imgSideTop = '/files/frames/' ~ imgThick.getFilename() %}
+                        {% elseif loop.index == 4 %}
+                            {% set imgSideRight = '/files/frames/' ~ imgThick.getFilename() %}
+                        {% elseif loop.index == 5 %}
+                            {% set imgSideBottom = '/files/frames/' ~ imgThick.getFilename() %}
+                        {% elseif loop.index == 6 %}
+                            {% set imgSideLeft = '/files/frames/' ~ imgThick.getFilename() %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
                 {% set isThicknessActive = (cart_item.frame_id is defined and cart_item.frame_id==thickness.id) or (cart_item.frame_id
                 is not defined and loop.index == 1) %}
                 <div class="item">
@@ -26,23 +52,44 @@
                          data-title="{{ thickness.title }}"
                          data-ratio="{{ thickness.ratio }}"
                          data-id="{{ thickness.id }}"
+                         data-img-corner="{{ imgCorner }}"
+                         data-img-side-t="{{ imgSideTop }}"
+                         data-img-side-r="{{ imgSideRight }}"
+                         data-img-side-b="{{ imgSideBottom }}"
+                         data-img-side-l="{{ imgSideLeft }}"
                     />
                     {% if isThicknessActive %}
                         {% set frameId = thickness.id %}
                         {% set frameTitle = thickness.title %}
                         {% set frameRatio = thickness.ratio %}
+                        {% set imgActiveCorner = imgCorner %}
+                        {% set imgActiveSideT = imgSideTop %}
+                        {% set imgActiveSideR = imgSideRight %}
+                        {% set imgActiveSideB = imgSideBottom %}
+                        {% set imgActiveSideL = imgSideLeft %}
+
                     {% endif %}
                 </div>
             {% endfor %}
-            <input type="hidden" name="az-picture-constructor-frame-selected" id="az-picture-constructor-frame-selected" value="{{ frameTitle }}">
-            <input type="hidden" name="az-picture-constructor-frame-ratio-selected" id="az-picture-constructor-frame-ratio-selected"
-                   value="{{ frameRatio }}">
-            <input type="hidden" name="az-picture-constructor-frame-id-selected" id="az-picture-constructor-frame-id-selected"
-                   value="{{ frameId }}">
         {% else %}
             У нас пока отсутствуют рамы для данного вида картин.
         {% endif %}
     </div>
+    <input type="hidden" name="az-picture-constructor-frame-selected" id="az-picture-constructor-frame-selected" value="{{ frameTitle }}">
+    <input type="hidden" name="az-picture-constructor-frame-ratio-selected" id="az-picture-constructor-frame-ratio-selected"
+           value="{{ frameRatio }}">
+    <input type="hidden" name="az-picture-constructor-frame-id-selected" id="az-picture-constructor-frame-id-selected"
+           value="{{ frameId }}">
+    <input type="hidden" name="az-picture-constructor-frame-img-corner-selected" id="az-picture-constructor-frame-img-corner-selected"
+           value="{{ imgActiveCorner }}">
+    <input type="hidden" name="az-picture-constructor-frame-img-side-t-selected" id="az-picture-constructor-frame-img-side-t-selected"
+           value="{{ imgActiveSideT }}">
+    <input type="hidden" name="az-picture-constructor-frame-img-side-r-selected" id="az-picture-constructor-frame-img-side-r-selected"
+           value="{{ imgActiveSideR }}">
+    <input type="hidden" name="az-picture-constructor-frame-img-side-b-selected" id="az-picture-constructor-frame-img-side-b-selected"
+           value="{{ imgActiveSideB }}">
+    <input type="hidden" name="az-picture-constructor-frame-img-side-l-selected" id="az-picture-constructor-frame-img-side-l-selected"
+           value="{{ imgActiveSideL }}">
 </div>
 <div class="row">
     <div class="col-md-12 text-right az-picture-constructor-frame-link-all">

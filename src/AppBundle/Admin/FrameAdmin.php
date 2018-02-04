@@ -63,8 +63,6 @@ class FrameAdmin extends AbstractAdmin
             ->add('price', null, ['required' => false, 'label' => 'Цена', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
             ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент', 'empty_data' => '1', 'attr' => ['placeholder' => 1]])
             ->add('useRatio', null, ['required' => false, 'label' => 'Использовать коэффициент'])
-//            ->add('color', 'choices', array('label' => 'Цвет',
-//                'choices' => ['Status1' => 'Alias1', 'Status2' => 'Alias2']))
             ->add('color', null, array('label' => 'Цвет'))
             ->add('material', null, array('label' => 'Материал'))
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])

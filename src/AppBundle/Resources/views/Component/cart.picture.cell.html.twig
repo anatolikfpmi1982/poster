@@ -1,71 +1,52 @@
-{#{{ dump(item) }}#}
+{% set isOwn = false %}
 {% if item.picture.image is defined and item.picture.image.getFilename() %}
     {% set img = '/files/pictures/thumb/' ~ item.picture.image.getFilename() %}
     {% set imgPath = item.picture.image.getThumbBaseFile() %}
     {% set imgSize = filesize(imgPath) %}
+    {% set picId = item.picture.id %}
 {% elseif item.own_picture.image is defined and item.own_picture.image.getFilename() %}
     {% set img = '/files/pictures/thumb/' ~ item.own_picture.image.getFilename() %}
     {% set imgPath = item.own_picture.image.getThumbBaseFile() %}
     {% set imgSize = filesize(imgPath) %}
+    {% set picId = item.own_picture.id %}
+    {% set isOwn = true %}
 {% else %}
     {% set img = asset('bundles/app/images/default_picture.jpg') %}
     {% set imgSize = filesize(img) %}
+    {% set picId = 0 %}
 {% endif %}
 <div class="row az-order-cart container-fluid">
 
     <div class="col-md-3 text-center az-order-cart-item az-cart-img-cell">
-        {% if item.own_picture is not defined or not item.own_picture %}
-            {% if item.type_id != 'frame' %}
-                <div class="az-order-cart-item-img show-constructor-img-lazy"
-                     data-src="{{ img }}"
-                     data-id="{{ item.picture.id }}"
-                     data-type="{% if item.type_id == 'banner' %}Баннер{% else %}Панно{% endif %}"
-                     data-width={{ imgSize[0] }}
-                     data-height={{ imgSize[1] }}
-                     data-left={% if item.type_id == 'banner' %}0{% else %}15{% endif %}
-                     data-top=20
-                     data-pad-left=4
-                     data-pad-top=4
-                     data-butt=6
-                     date-fill-in=1
-                     data-code="{% if item.type_id == 'banner' %}single|{horizontal|100-100-0}{% else %}{{ item.module_formula }}{% endif %}"
-                     data-max-width="{% if imgSize[1]>imgSize[0] %}200{% else %}170{% endif %}"
-                     data-max-height="{% if imgSize[1]>imgSize[0] %}165{% else %}200{% endif %}"
-                     data-href="{{ path('picture', {'id': item.picture.id}) }}"
-
-                ></div>
-            {% else %}
-                <a href="{{ path('picture', {'id': item.picture_id}) }}"><img src="{{ img }}" class="az-order-cart-item-img"></a>
-            {% endif %}
-
-        {% else %}
-            {% if item.type_id != 'frame' %}
-                <div class="az-main-popular-item-img show-constructor-img-lazy"
-                     data-src="{{ img }}"
-                     data-id="{{ item.own_picture.id }}"
-                     data-type="{% if item.type_id == 'banner' %}Баннер{% else %}Панно{% endif %}"
-                     data-width={{ imgSize[0] }}
-                     data-height={{ imgSize[1] }}
-                     data-left=15
-                     data-top=20
-                     data-pad-left=4
-                     data-pad-top=4
-                     data-butt=6
-                     data-code="{% if item.type_id == 'banner' %}single|{horizontal|100-100-0}{% else %}{{ item.module_formula }}{% endif %}"
-                     data-max-width="{% if imgSize[1]>imgSize[0] %}200{% else %}170{% endif %}"
-                     data-max-height="{% if imgSize[1]>imgSize[0] %}165{% else %}200{% endif %}"
-                     data-fill-in="1"
-                ></div>
-            {% else %}
-                <img src="{{ img }}" class="az-order-cart-item-img">
-            {% endif %}
-        {% endif %}
+        <div class="az-order-cart-item-img show-constructor-img-lazy"
+             data-src="{{ img }}"
+             data-id="{{ picId }}"
+             data-type="{{ item.type_value }}"
+             data-width={{ imgSize[0] }}
+             data-height={{ imgSize[1] }}
+             data-left=2
+             data-top=2
+             data-pad-left=4
+             data-pad-top=4
+             data-butt=6
+             data-butt-portrait=6
+             date-fill-in="1"
+             data-code="{% if item.type_id == 'banner' %}single|{horizontal|100-100-0}{% else %}{{ item.module_formula }}{% endif %}"
+             data-max-width="200"
+             data-max-height="200"
+                {% if not isOwn %}data-href="{{ path('picture', {'id': picId}) }}"{% endif %}
+             data-img-corner="{{ item.frame_material_corner }}"
+             data-img-side-t="{{ item.frame_material_side_t }}"
+             data-img-side-r="{{ item.frame_material_side_r }}"
+             data-img-side-b="{{ item.frame_material_side_b }}"
+             data-img-side-l="{{ item.frame_material_side_l }}"
+        ></div>
     </div>
 
     <div class="col-md-3 az-order-cart-item">
         <div class="row">
             <div class="col-md-12">
-                {% if item.own_picture is defined and item.own_picture %}
+                {% if isOwn %}
                     Загруженная картина
                 {% else %}
                     <a class="az-order-cart-title" href="{{ path('picture', {'id': item.picture_id}) }}">"{{ item.picture.title }}" </a>

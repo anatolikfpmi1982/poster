@@ -57,7 +57,7 @@ class OrderAdmin extends AbstractAdmin
 
         $formMapper
             ->with('Main')
-            ->add('type', 'choice', array('label' => 'Тип картины', 'choices' => ['banner' => 'Баннер', 'frame' => 'В раме', 'module' => 'Панно']))
+            ->add('type', 'choice', array('label' => 'Тип картины', 'choices' => ['banner' => 'Баннер', 'frame' => 'В раме', 'module' => 'Модульная']))
             ->add('fullname', null, ['required' => true, 'label' => 'Ф.И.О.'])
             ->add('email', EmailType::class, ['required' => true, 'label' => 'Email'])
             ->add('phone', null, ['required' => true, 'label' => 'Телефон'])

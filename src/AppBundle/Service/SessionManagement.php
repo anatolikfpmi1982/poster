@@ -235,11 +235,4 @@ class SessionManagement {
     public function clearMyFiles() {
         $this->session->set( 'my_files', null );
     }
-
-    /**
-     * Clear cart
-     */
-    public function clearCart() {
-        $this->session->set( 'cart', null );
-    }
 }

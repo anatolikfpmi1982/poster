@@ -2174,10 +2174,6 @@ button.close:focus, .close:hover {
     border-radius: 5px;
 }
 
-.modal-header {
-    padding: 0;
-}
-
 .form-line h3 {
     margin: 5px 0;
     text-align: left;
@@ -2741,4 +2737,49 @@ div.az-picture-page-constructor-block.active {
     padding-left: 10px;
     padding-right: 10px;
     width: 110px;
+}
+
+.az-picture-page-portrait-frame-corner {
+    position: absolute;
+    z-index: 2;
+}
+
+.az-picture-page-portrait-frame-corner-rt {
+    right: 0;
+    top: 0;
+}
+
+.az-picture-page-portrait-frame-corner-rb {
+    right: 0;
+    bottom: 0;
+}
+
+.az-picture-page-portrait-frame-corner-lt {
+    left: 0;
+    top: 0;
+}
+
+.az-picture-page-portrait-frame-corner-lb {
+    left: 0;
+    bottom: 0;
+}
+
+.az-picture-page-portrait-frame-side {
+    position: absolute;
+    z-index: 1;
+}
+
+.az-picture-page-portrait-frame-side-rt {
+    right: 0;
+    top: 0;
+}
+
+.az-all-pages-cart-img-div {
+    width: 132px;
+    height: 130px;
+    padding: 0;
+}
+
+.az-all-pages-cart-text {
+    padding: 10px;
 }
