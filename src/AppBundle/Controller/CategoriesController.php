@@ -40,11 +40,6 @@ class CategoriesController extends FrontController
         /** @var QueryBuilder $queryBuilder */
         $queryBuilder = $this->em->getRepository('AppBundle:Picture')->getActivePicturesFromCategory($category);
 
-        // hack for empty picture type filter
-        if($request->query->get('filterField') === 'p.type' && $request->query->get('filterValue') == '') {
-            $queryBuilder->andWhere('p.id = 0');
-        }
-
         // hack for random pictures sorting
         if($request->query->get('random') === 'true') {
 
@@ -61,18 +56,12 @@ class CategoriesController extends FrontController
 
         $query = $queryBuilder->getQuery();
 
-        //add multiple popularity
-        if($request->query->get('sort') === 'p.popularity') {
-            $_GET['sort'] = 'p.isTop+p.popularity';
-        }
-
-
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             self::PAGE_LIMIT/*limit per page*/,
-            ['wrap-queries' => true, 'defaultSortFieldName' => 'cp.weight', 'defaultSortDirection' => 'desc']
+            ['wrap-queries' => true, 'defaultSortFieldName' => 'p.isTop+cp.weight', 'defaultSortDirection' => 'desc']
         );
 
 
