@@ -66,18 +66,17 @@ class FrameAdmin extends AbstractAdmin
             ->add('color', null, array('label' => 'Цвет'))
             ->add('material', null, array('label' => 'Материал'))
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
-            ->add('images', 'sonata_type_collection', array(
+            ->add('images', 'sonata_type_collection', [
                 'by_reference' => true,
                 'label' => 'Изображения',
-                'type_options' => array('delete' => true),
+                'type_options' => ['delete' => true],
                 'cascade_validation' => true,
                 'btn_add' => 'Добавить изображение',
                 'required' => true
-            ),
-                array(
-                    'edit' => 'inline',
-                    'inline' => 'table'
-                ))
+                ],
+                [
+                    'edit' => 'inline'
+                ])
             ->end();
     }
 

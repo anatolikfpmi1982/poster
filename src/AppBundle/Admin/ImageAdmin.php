@@ -37,12 +37,31 @@ class ImageAdmin extends AbstractAdmin
             } else {
                 $img = null;
             }
-
             if($img !== null) {
                 /** @var Image $img */
-                $fileFieldOptions['help'] = '<img src="/files/'.$img->getEntityName().'/small_thumb/'.$img->getFilename().'" class="admin-preview" /><br>';
+                $fileFieldOptions['help'] = '<img src="/files/'.$img->getEntityName().'/small_thumb/'.$img->getFilename().'" class="admin-preview" />';
             }
 
+            switch (self::$imageIndex) {
+                case 1:
+                    $fileFieldOptions['help'] .= '<b>Основное изображение</b>';
+                    break;
+                case 2:
+                    $fileFieldOptions['help'] .= '<b>Угол - изображение</b>';
+                    break;
+                case 3:
+                    $fileFieldOptions['help'] .= '<b>Верхняя полоса - изображение</b>';
+                    break;
+                case 4:
+                    $fileFieldOptions['help'] .= '<b>Правая полоса - изображение</b>';
+                    break;
+                case 5:
+                    $fileFieldOptions['help'] .= '<b>Нижняя полоса - изображение</b>';
+                    break;
+                case 6:
+                    $fileFieldOptions['help'] .= '<b>Левая полоса - изображение</b>';
+                    break;
+            }
         } elseif ($subject instanceof Image) {
             // add a 'help' option containing the preview's img tag
             $fileFieldOptions['help'] = '<img src="/files/'.$subject->getEntityName().'/small_thumb/'.$subject->getFilename().'" class="admin-preview" /><br>';
