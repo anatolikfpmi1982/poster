@@ -58,26 +58,25 @@ class FrameAdmin extends AbstractAdmin
             ->add('title', null, ['required' => true, 'label' => 'Артикул'])
             ->add('description', CKEditorType::class, ['required' => false, 'label' => 'Описание'])
             ->add('note', null, ['required' => false, 'label' => 'Примечание'])
-            ->add('height', null, ['required' => false, 'label' => 'Высота'])
-            ->add('width', null, ['required' => false, 'label' => 'Ширина'])
+            ->add('height', null, ['required' => false, 'label' => 'Высота', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
+            ->add('width', null, ['required' => false, 'label' => 'Ширина', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
             ->add('price', null, ['required' => false, 'label' => 'Цена', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
             ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент', 'empty_data' => '1', 'attr' => ['placeholder' => 1]])
             ->add('useRatio', null, ['required' => false, 'label' => 'Использовать коэффициент'])
             ->add('color', null, array('label' => 'Цвет'))
             ->add('material', null, array('label' => 'Материал'))
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
-            ->add('images', 'sonata_type_collection', array(
+            ->add('images', 'sonata_type_collection', [
                 'by_reference' => true,
                 'label' => 'Изображения',
-                'type_options' => array('delete' => true),
+                'type_options' => ['delete' => true],
                 'cascade_validation' => true,
                 'btn_add' => 'Добавить изображение',
                 'required' => true
-            ),
-                array(
-                    'edit' => 'inline',
-                    'inline' => 'table'
-                ))
+                ],
+                [
+                    'edit' => 'inline'
+                ])
             ->end();
     }
 
