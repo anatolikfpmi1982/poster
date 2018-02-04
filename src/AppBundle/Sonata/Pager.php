@@ -7,6 +7,19 @@ class Pager extends SonataPager
 {
     public function computeNbResult()
     {
-        return $this->getPage()*$this->getMaxPerPage()+1;
+        $countQuery = clone $this->getQuery();
+
+        if (count($this->getParameters()) > 0) {
+            $countQuery->setParameters($this->getParameters());
+        }
+
+        $countQuery->select(sprintf(
+            'count(DISTINCT %s.%s) as cnt',
+            $countQuery->getRootAlias(),
+            current($this->getCountColumn())
+        ));
+
+        $result =  $countQuery->resetDQLPart('orderBy')->getQuery()->getScalarResult();
+        return count($result) == 1 ? $result[0]['cnt'] : count($result);
     }
 }
