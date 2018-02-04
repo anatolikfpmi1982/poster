@@ -19,12 +19,10 @@
     <div class="row az-page-main-section-div az-page-category-main-section-div">
         <div class="col-md-12 container-fluid">
             <div class="row page-title az-picture-page-title">
-                <div class="col-md-12">  Корзина </div>
-
-        </div>
+                <div class="col-md-12"> Корзина</div>
+            </div>
             {% if cart %}
                 <div class="row az-category-page-pictures-div">
-
                     <div class="col-md-12 az-page-section-body az-page-main-popular container-fluid">
                         <div class="row">
                             {% for item in cart %}
@@ -38,16 +36,18 @@
                             {% endfor %}
                         </div>
                     </div>
+                </div>
 
-                    <div class="row container-fluid">
+                <div class="row container-fluid">
 
-                        <div class="col-md-6">
-                            <button class="btn_az-main-popular_defer" onclick="window.history.back()">Продолжить покупки</button>
-                        </div>
-                        <div class="col-md-6 text-center az-picture-page-sidebar-header-block az-picture-page-sidebar-price ">Стоимость заказа:
-                            <span>{{ total_price }}</span> BYN
-                        </div>
+                    <div class="col-md-6">
+                        <a class="btn btn_az-main-popular_defer" onclick="javascript:window.history.back();return false;">Продолжить покупки</a>
                     </div>
+                    <div class="col-md-6 text-center az-picture-page-sidebar-header-block az-picture-page-sidebar-price ">Стоимость заказа:
+                        <span>{{ total_price }}</span> BYN
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-12 container-fluid">
                         <h2>Оформление заказа</h2>
 
@@ -64,22 +64,25 @@
                                 {{ form_row(form.address) }}
                                 {{ form_row(form.company) }}
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    {{ form_row(form.comment) }}
-                                    {{ form_row(form.conditions) }}
-                                    {{ form_row(form.save) }}
-                                    {{ form_end(form) }}
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{ form_row(form.comment) }}
+                                {{ form_row(form.conditions) }}
+                                {{ form_row(form.save) }}
+                                {{ form_end(form) }}
                             </div>
                         </div>
                     </div>
                 </div>
             {% else %}
                 <div class="row az-category-page-pictures-div">
-                    У вас в корзине нет картин.
+                    <div class="col-md-12">
+                        У вас в корзине нет картин.
+                    </div>
                 </div>
             {% endif %}
+
         </div>
     </div>
     </div>

@@ -39,16 +39,16 @@
                         {% endif %}
                         {% if cart_item.picture is defined and cart_item.picture %}
                             {% set picId = cart_item.picture.id %}
-                            {% set picPath = path('picture', {'id': cart_item.picture.id}) %}
-                            {% set picImgUrl = '/files/pictures/small_thumb/' ~ cart_item.picture.image.getFilename() %}
-                            {% set picImgPath = cart_item.picture.image.getSmallThumbBaseFile() %}
+                            {% set picPath = path('picture', {'id': cart_item.picture.id, 'cart_id': cart_item.id}) %}
+                            {% set picImgUrl = '/files/pictures/' ~ cart_item.picture.image.getFilename() %}
+                            {% set picImgPath = cart_item.picture.image.getBaseFile() %}
                             {% set picTitle = '"'~cart_item.picture.title~'"' %}
                             {% set imgSize = filesize(picImgPath) %}
                         {% elseif cart_item.own_picture is defined and cart_item.own_picture %}
                             {% set picId = cart_item.own_picture.id %}
-                            {% set picPath = path('my_file_page', {'id': cart_item.own_picture.id}) %}
-                            {% set picImgUrl = '/files/pictures/small_thumb/' ~ cart_item.own_picture.image.getFilename() %}
-                            {% set picImgPath = cart_item.own_picture.image.getSmallThumbBaseFile() %}
+                            {% set picPath = path('my_file_page', {'id': cart_item.own_picture.id, 'cart_id': cart_item.id}) %}
+                            {% set picImgUrl = '/files/pictures/' ~ cart_item.own_picture.image.getFilename() %}
+                            {% set picImgPath = cart_item.own_picture.image.getBaseFile() %}
                             {% set picTitle = 'Загруженная картина' %}
                             {% set imgSize = filesize(picImgPath) %}
                         {% else %}
