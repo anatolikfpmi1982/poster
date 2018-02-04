@@ -9,7 +9,9 @@ require.config({
         'bootstrap': '../bower_components/bootstrap/dist/js/bootstrap',
         'cycle2': '../bower_components/jquery.cycle2/index',
         'ConstructorOverview': '../bundles/app/js/ConstructorOverview',
-        'owl': '../bower_components/owl.carousel/dist/owl.carousel.min'
+        'owl': '../bower_components/owl.carousel/dist/owl.carousel.min',
+        //'elevatezoom': '../bower_components/elevatezoom/jquery.elevateZoom-2.2.3.min'
+        'elevatezoom': '../bower_components/elevatezoom/jquery.elevatezoom'
     },
     'shim': {
         'jsrender': {
@@ -34,6 +36,9 @@ require.config({
             'deps': ['jquery']
         },
         'owl': {
+            'deps': ['jquery']
+        },
+        'elevatezoom': {
             'deps': ['jquery']
         }
     },

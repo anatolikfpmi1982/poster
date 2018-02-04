@@ -5,4 +5,5 @@ define(function (require, exports, module) {
     require('bootstrap');
     require('cycle2');
     require('owl');
+    require('elevatezoom');
 });

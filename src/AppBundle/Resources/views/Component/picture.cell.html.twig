@@ -24,19 +24,15 @@
 {% else %}
     {% set picture_url = path('picture', {'id': picture.id}) %}
 {% endif %}
-
+{% set type_value = "Баннер" %}
 {% if site_settings is defined and site_settings %}
-    {% if site_settings.enable_banner is defined and site_settings.enable_banner %}
+    {% if site_settings.enable_banner is defined and site_settings.enable_banner and not isModule %}
         {% set type_value = "Баннер" %}
-    {% elseif site_settings.enable_frame is defined and site_settings.enable_frame %}
+    {% elseif site_settings.enable_frame is defined and site_settings.enable_frame and not isModule %}
         {% set type_value = "В раме" %}
     {% elseif site_settings.enable_module is defined and site_settings.enable_module %}
         {% set type_value = "Модульная" %}
-    {% else %}
-        {% set type_value = "Баннер" %}
     {% endif %}
-{% else %}
-    {% set type_value = "Баннер" %}
 {% endif %}
 <div class="col-md-4 az-popular-item container">
     <div class="row az-main-popular-item-img-div">
@@ -57,11 +53,11 @@
              data-max-height="240"
              data-href="{{ picture_url }}"
              data-fill-in="1"
-             data-img-corner="{{ item.frame_material_corner }}"
-             data-img-side-t="{{ item.frame_material_side_t }}"
-             data-img-side-r="{{ item.frame_material_side_r }}"
-             data-img-side-b="{{ item.frame_material_side_b }}"
-             data-img-side-l="{{ item.frame_material_side_l }}"
+             data-img-corner=""
+             data-img-side-t=""
+             data-img-side-r=""
+             data-img-side-b=""
+             data-img-side-l=""
         >
         </div>
     </div>
