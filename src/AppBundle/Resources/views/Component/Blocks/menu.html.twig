@@ -17,8 +17,8 @@
     <input type="hidden" name="block_menu_active_category_parent" id="block_menu_active_category_parent" value="{{ active_category_parent_id }}">
     <input type="hidden" name="block_menu_active_category_parent_parent" id="block_menu_active_category_parent_parent" value="{{ active_category_parent_parent_id }}">
     {% set activeCategories = [active_category_id,active_category_parent_id, active_category_parent_parent_id ] %}
-    {#{% set module = false %}#}
+    {% set module = false %}
     {% include('AppBundle:Component:Blocks/menu.categories.html.twig') %}
-    {#{% set module = true %}#}
-    {#{% include('AppBundle:Component:Blocks/menu.categories.html.twig') %}#}
+    {% set module = true %}
+    {% include('AppBundle:Component:Blocks/menu.categories.html.twig') %}
 </div>

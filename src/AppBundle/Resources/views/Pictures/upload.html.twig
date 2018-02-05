@@ -17,127 +17,141 @@
 {% block meta_description %}{{ description }}{% endblock %}
 
 {% block body %}
-    <div class="row az-page-main-section-div">
-        {% include('AppBundle:Component:Blocks/breadcrumb.html.twig') %}
-    </div>
-    <div class="row az-page-main-section-div">
-        <div class="col-md-9 container-fluid az-picture-page-constructor-global-div">
-            <div class="row page-title az-picture-page-title">Загруженная картина</div>
-            {% include('AppBundle:Component:Constructor/picture.html.twig') %}
-            <div class="row text-center az-picture-page-slider-material-div">
-                <div class="col-md-12">
-                    {% include('AppBundle:Component:Constructor/slider.html.twig') %}
-                </div>
+<div class="row az-page-main-section-div">
+    {% include('AppBundle:Component:Blocks/breadcrumb.html.twig') %}
+</div>
+<div class="row az-page-main-section-div">
+    <div class="col-md-9 container-fluid">
+        <div class="row page-title az-picture-page-title">Загруженная картина</div>
+        {% include('AppBundle:Component:Constructor/picture.html.twig') %}
+        <div class="row text-center az-picture-page-slider-material-div">
+            <div class="col-md-12">
+                {% include('AppBundle:Component:Constructor/slider.html.twig') %}
             </div>
-            <div class="row text-center az-picture-page-constructor-template-div">
-                <div class="col-md-12">
-                    {% include('AppBundle:Component:Constructor/template.html.twig') %}
-                </div>
-            </div>
-            {% if frameSettings is defined and frameSettings %}
-                {% set min_square = frameSettings.minArea %}
-                {% set max_square = frameSettings.maxArea %}
-                {% set min_price = frameSettings.minPrice %}
-                {% set max_price = frameSettings.maxPrice %}
-                {% set add_price = frameSettings.price %}
-            {% else %}
-                {% set min_square = 0 %}
-                {% set max_square = 0 %}
-                {% set min_price = 0 %}
-                {% set max_price = 0 %}
-                {% set add_price = 0 %}
-            {% endif %}
-            <input type="hidden" name="constructor_picture_width" id="constructor_picture_width" value="{{ pictureBaseWidth }}">
-            <input type="hidden" name="constructor_picture_height" id="constructor_picture_height" value="{{ pictureBaseHeight }}">
-
-            <input type="hidden" name="constructor_min_square" id="constructor_min_square" value="{{ min_square }}">
-            <input type="hidden" name="constructor_max_square" id="constructor_max_square" value="{{ max_square }}">
-            <input type="hidden" name="constructor_min_price" id="constructor_min_price" value="{{ min_price }}">
-            <input type="hidden" name="constructor_max_price" id="constructor_max_price" value="{{ max_price }}">
-            <input type="hidden" name="constructor_additional_price" id="constructor_additional_price" value="{{ add_price }}">
-
-            <input type="hidden" name="constructor_picture_price" id="constructor_picture_price" value="0">
-            <input type="hidden" name="constructor_picture_ratio" id="constructor_picture_ratio" value="1">
         </div>
-        <div class="col-md-3 container-fluid az-constructor-block">
-            <div class="row az-picture-page-constructor-block hidden" id="az-picture-page-sidebar-deffered-div">
-                <div class="col-md-12">
-                    <a href="{{ path('deferred') }}">
-                        <button class="btn az-btn-delayed-image">Отложенные <span id="az-picture-page-sidebar-deffered-div-count">0</span></button>
-                    </a>
-                </div>
+        {#<div class="row text-center az-picture-page-slider-paspartu-div">#}
+        {#<div class="col-md-2 container-fluid">#}
+        {#{% include('AppBundle:Component:Constructor/type.paspartu.html.twig') %}#}
+        {#</div>#}
+        {#<div class="col-md-3 container-fluid">#}
+        {#{% include('AppBundle:Component:Constructor/size.paspartu.html.twig') %}#}
+        {#</div>#}
+        {#<div class="col-md-7 container-fluid">#}
+        {#{% include('AppBundle:Component:Constructor/color.frame.html.twig') %}#}
+        {#</div>#}
+        {#</div>#}
+        <div class="row text-center az-picture-page-constructor-template-div">
+            <div class="col-md-12">
+                {% include('AppBundle:Component:Constructor/template.html.twig') %}
             </div>
-            <div class="row az-picture-page-constructor-block hidden" id="az-picture-page-sidebar-myfiles-div">
-                <div class="col-md-12">
-                    <a href="{{ path('my_files') }}">
-                        <button class="btn az-btn-myfiles-image">Мои файлы <span id="az-picture-page-sidebar-myfiles-div-count">0</span></button>
-                    </a>
-                </div>
-            </div>
-            <div class="row az-picture-page-constructor-block">
-                {% include('AppBundle:Component:Constructor/price.html.twig') %}
-            </div>
-            <div class="row az-picture-page-constructor-block">
-                {% include('AppBundle:Component:Constructor/type.html.twig') %}
-            </div>
-            <div class="row az-picture-page-constructor-block">
-                {% include('AppBundle:Component:Constructor/size.html.twig') %}
-            </div>
-            <div class="row az-picture-page-constructor-block">
-                {% include('AppBundle:Component:Constructor/material.banner.html.twig') %}
-            </div>
-            <div class="row az-picture-page-constructor-block">
-                {% include('AppBundle:Component:Constructor/material.picture.html.twig') %}
-            </div>
-            <div class="row az-picture-page-constructor-block">
-                {% include('AppBundle:Component:Constructor/thickness.html.twig') %}
-            </div>
-            <div class="row az-picture-page-constructor-block">
-                {% include('AppBundle:Component:Constructor/choose.html.twig') %}
-            </div>
-            <div class="row az-picture-page-constructor-block">
-                {% include('AppBundle:Component:Constructor/price.html.twig') %}
-            </div>
-            <div class="row az-picture-page-constructor-block">
-                <div class="soc-share"><a href="https://twitter.com/share?url=http://www.artzakaz.by/twitter-button/"
-                                          title="Twitter" class="btn btn-twitter btn-lg"><i class="fa fa-twitter fa-fw"></i> </a></div>
+        </div>
+        {% if frameSettings is defined and frameSettings %}
+            {% set min_square = frameSettings.minArea %}
+            {% set max_square = frameSettings.maxArea %}
+            {% set min_price = frameSettings.minPrice %}
+            {% set max_price = frameSettings.maxPrice %}
+            {% set add_price = frameSettings.price %}
+        {% else %}
+            {% set min_square = 0 %}
+            {% set max_square = 0 %}
+            {% set min_price = 0 %}
+            {% set max_price = 0 %}
+            {% set add_price = 0 %}
+        {% endif %}
+        <input type="hidden" name="constructor_picture_width" id="constructor_picture_width" value="{{ pictureBaseWidth }}">
+        <input type="hidden" name="constructor_picture_height" id="constructor_picture_height" value="{{ pictureBaseHeight }}">
 
-                <div class="soc-share"><a
-                            href="https://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://www.artzakaz.by&p[images][0]=&p[title]=Title%20Goes%20Here&p[summary]=Description%20goes%20here!"
-                            target="_blank"
-                            onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250'); return false">
-                        <button style="width: 32px; margin-top:10px;" type="button" class="btn btn-facebook btn-lg"><i class="fa fa-facebook fa-2"></i></button>
-                    </a>
-                </div>
-                <div class="soc-share"><a href="http://vk.com/share.php?url=_URL_&title=_TITLE_&description=_DESCRIPTION_&image=_URL_TO_IMAGE_" class="btn btn-vk">
-                        <i class="fa fa-vk fa-lg vk"></i></a></div>
-                <div class="soc-share"><a class="btn  btn-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;source=http%3A%2F%2Fartzakaz.by%2F">
-                        <span class="fa fa-linkedin"></span></a></div>
-                <div class="soc-share"><a class="btn  btn-google" href="https://plus.google.com/share?url=http%3A%2F%2Fartzakaz.by%2F">
-                        <span class="fa fa-google"></span></a></div>
+        <input type="hidden" name="constructor_min_square" id="constructor_min_square" value="{{ min_square }}">
+        <input type="hidden" name="constructor_max_square" id="constructor_max_square" value="{{ max_square }}">
+        <input type="hidden" name="constructor_min_price" id="constructor_min_price" value="{{ min_price }}">
+        <input type="hidden" name="constructor_max_price" id="constructor_max_price" value="{{ max_price }}">
+        <input type="hidden" name="constructor_additional_price" id="constructor_additional_price" value="{{ add_price }}">
 
-                <div class="soc-share" id="ok_shareWidget">
+        <input type="hidden" name="constructor_picture_price" id="constructor_picture_price" value="{{ pictureMain.price }}">
+        <input type="hidden" name="constructor_picture_ratio" id="constructor_picture_ratio" value="{{ pictureMain.ratio }}">
+    </div>
+    <div class="col-md-3 container-fluid az-constructor-block">
+        <div class="row az-picture-page-constructor-block hidden" id="az-picture-page-sidebar-deffered-div">
+            <div class="col-md-12">
+                <a href="{{ path('deferred') }}">
+                    <button class="btn az-btn-delayed-image">Отложенные <span id="az-picture-page-sidebar-deffered-div-count">0</span></button>
+                </a>
+            </div>
+        </div>
+        <div class="row az-picture-page-constructor-block hidden" id="az-picture-page-sidebar-myfiles-div">
+            <div class="col-md-12">
+                <a href="{{ path('my_files') }}">
+                    <button class="btn az-btn-myfiles-image">Мои файлы <span id="az-picture-page-sidebar-myfiles-div-count">0</span></button>
+                </a>
+            </div>
+        </div>
+        <div class="row az-picture-page-constructor-block">
+            {% include('AppBundle:Component:Constructor/price.html.twig') %}
+        </div>
+        <div class="row az-picture-page-constructor-block">
+            {% include('AppBundle:Component:Constructor/type.html.twig') %}
+        </div>
+        <div class="row az-picture-page-constructor-block">
+            {% include('AppBundle:Component:Constructor/size.html.twig') %}
+        </div>
+        <div class="row az-picture-page-constructor-block">
+            {% include('AppBundle:Component:Constructor/material.banner.html.twig') %}
+        </div>
+        <div class="row az-picture-page-constructor-block">
+            {% include('AppBundle:Component:Constructor/material.picture.html.twig') %}
+        </div>
+        <div class="row az-picture-page-constructor-block">
+            {% include('AppBundle:Component:Constructor/thickness.html.twig') %}
+        </div>
+        <div class="row az-picture-page-constructor-block">
+            {% include('AppBundle:Component:Constructor/choose.html.twig') %}
+        </div>
+        <div class="row az-picture-page-constructor-block">
+            {% include('AppBundle:Component:Constructor/price.html.twig') %}
+        </div>
+        <div class="row az-picture-page-constructor-block">
+            <div class="soc-share">
+                <a href="https://twitter.com/share?url=http://www.artzakaz.by/twitter-button/"
+                   title="Twitter" class="btn btn-twitter btn-lg"><i class="fa fa-twitter fa-fw"></i></a>
+            </div>
+            <div class="soc-share">
+                <a href="https://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://www.artzakaz
+                .by&p[images][0]=&p[title]=Title%20Goes%20Here&p[summary]=Description%20goes%20here!"
+                   target="_blank"
+                   onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250'); return false">
+                    <button type="button" class="btn btn-facebook btn-lg"><i class="fa fa-facebook fa-2"></i></button>
+                </a>
+            </div>
+            <div class="soc-share"><a href="http://vk.com/share.php?url=_URL_&title=_TITLE_&description=_DESCRIPTION_&image=_URL_TO_IMAGE_" class="btn btn-vk">
+                    <i class="fa fa-vk fa-lg vk"></i></a></div>
+            <div class="soc-share"><a class="btn  btn-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;source=http%3A%2F%2Fartzakaz.by%2F">
+                    <span class="fa fa-linkedin"></span></a></div>
+            <div class="soc-share"><a class="btn  btn-google" href="https://plus.google.com/share?url=http%3A%2F%2Fartzakaz.by%2F">
+                    <span class="fa fa-google"></span></a></div>
 
-                    <script>
-                        !function (d, id, did, st, title, description, image) {
-                            var js = d.createElement("script");
-                            js.src = "https://connect.ok.ru/connect.js";
-                            js.onload = js.onreadystatechange = function () {
-                                if (!this.readyState || this.readyState == "loaded" || this.readyState == "complete") {
-                                    if (!this.executed) {
-                                        this.executed = true;
-                                        setTimeout(function () {
-                                            OK.CONNECT.insertShareWidget(id, did, st, title, description, image);
-                                        }, 0);
-                                    }
+            <div class="soc-share" id="ok_shareWidget">
+
+                <div id="ok_shareWidget"></div>
+                <script>
+                    !function (d, id, did, st, title, description, image) {
+                        var js = d.createElement("script");
+                        js.src = "https://connect.ok.ru/connect.js";
+                        js.onload = js.onreadystatechange = function () {
+                            if (!this.readyState || this.readyState == "loaded" || this.readyState == "complete") {
+                                if (!this.executed) {
+                                    this.executed = true;
+                                    setTimeout(function () {
+                                        OK.CONNECT.insertShareWidget(id, did, st, title, description, image);
+                                    }, 0);
                                 }
-                            };
-                            d.documentElement.appendChild(js);
-                        }(document, "ok_shareWidget", "https://artzakaz.by", '{"sz":20,"st":"rounded","nc":1,"nt":1}', "", "", "");
-                    </script>
-                </div>
+                            }
+                        };
+                        d.documentElement.appendChild(js);
+                    }(document, "ok_shareWidget", "https://artzakaz.by", '{"sz":30,"st":"rounded","nc":1,"nt":1}', "", "", "");
+                </script>
             </div>
         </div>
     </div>
+</div>
 
-{% endblock %}
+    {% endblock %}
