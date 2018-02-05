@@ -462,6 +462,8 @@ function ConstructorOverview() {
     };
 
     this.showPanelMonitor = function (type, settings, mainIndex) {
+        $(".zoomContainer").remove();
+        $(".zoomWindowContainer").remove();
 
         var imgPath = this.imgPath,
             picWidth = this.picWidth,
@@ -662,13 +664,11 @@ function ConstructorOverview() {
             }
 
 
-            if (that.isConstructor) {
-
+            if (that.isConstructor && that.type == 'Баннер') {
                 divMain.data('zoom-image', that.imgBigPath);
                 var id = 'constructorActive' + (new Date()).getTime();
-                divMain.attr('id', id)
+                divMain.attr('id', id);
                 mainIdEl = id;
-
             }
 
             switch (panel_type) {
@@ -697,7 +697,8 @@ function ConstructorOverview() {
                 $('.az-picture-page-picture-main-panel-div').css('height', screen_height + 'px');
                 break;
         }
-        if (this.isConstructor) {
+
+        if (this.isConstructor && this.type == 'Баннер') {
             $('#' + mainIdEl).elevateZoom({
                 constrainType: "height",
                 constrainSize: 274,
@@ -706,7 +707,6 @@ function ConstructorOverview() {
                 zoomWindowPosition: mainIdEl,
                 cursor: 'pointer',
                 myid: '.az-picture-page-picture-main-banner-div div div'
-                //galleryActiveClass: "active"
             });
         }
 
