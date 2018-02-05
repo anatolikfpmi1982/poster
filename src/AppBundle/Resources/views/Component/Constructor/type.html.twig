@@ -37,8 +37,22 @@
     {% endfor %}
     {% set img = '/files/pictures/small_thumb/' ~ pictureMain.image.getFilename() %}
     {% set imgPath = pictureMain.image.getSmallThumbBaseFile() %}
-    {% set isImgFormExist = pictureMain.form is defined and pictureMain.form and pictureMain.form.serviceName %}
     {% set imgSize = filesize(imgPath) %}
+    {% set isImgFormExist = pictureMain.form is defined and pictureMain.form and pictureMain.form.serviceName %}
+    {% if not isImgFormExist %}
+        {% set sizeKoeff = (imgSize[1]/imgSize[0])|number_format(2, '.', ',') %}
+        {% if sizeKoeff >= 1 and sizeKoeff <= 1.1 %}
+            {% set pictureForm = 'square' %}
+        {% elseif sizeKoeff > 1.1 %}
+            {% set pictureForm = 'rectangle vertical' %}
+        {% else %}
+            {% set pictureForm = 'rectangle_horizontal' %}
+        {% endif %}
+        {% set isImgFormExist = true %}
+    {% else %}
+        {% set pictureForm = pictureMain.form.serviceName %}
+    {% endif %}
+
     <div class="row az-picture-page-sidebar-size-div-body az-picture-page-sidebar-type-div-select">
         {% set numPicture = 0 %}
         {% if pictureMain.image is defined and pictureMain.image %}
@@ -64,10 +78,11 @@
                          data-pad-top=4
                          data-butt=2
                          data-max-width=127
-                         data-max-height={% if isImgFormExist and pictureMain.form.serviceName == 'rectangle vertical' %}80{% else %}50{% endif %}
+                         data-max-height={% if isImgFormExist and pictureForm == 'rectangle vertical' %}80{% else %}50{% endif %}
                          data-code="single|{horizontal|100-100-0}"
                          data-shadow=1
                          data-fill-in="1"
+                         data-big-src="/files/pictures/normal/{{ pictureMain.image.getFilename() }}"
                     ></div>
                 </div>
                 <div class="row text-center">
@@ -106,7 +121,7 @@
                          data-butt=2
                          data-butt-portrait=3
                          data-max-width=127
-                         data-max-height={% if isImgFormExist and pictureMain.form.serviceName == 'rectangle vertical' %}80{% else %}50{% endif %}
+                         data-max-height={% if isImgFormExist and pictureForm == 'rectangle vertical' %}80{% else %}50{% endif %}
                          data-shadow=1
                          data-fill-in="1"
                     ></div>
@@ -157,7 +172,7 @@
                                  data-pad-top=4
                                  data-butt=2
                                  data-max-width=127
-                                 data-max-height={% if isImgFormExist and pictureMain.form.serviceName == 'rectangle vertical' %}80{% else %}50{% endif %}
+                                 data-max-height={% if isImgFormExist and pictureForm == 'rectangle vertical' %}80{% else %}50{% endif %}
                                  data-code="{{ pictureMainCode }}"
                                  data-shadow=1
                                  data-fill-in="1"
@@ -182,9 +197,9 @@
         {% endif %}
     </div>
 </div>
-{% if pictureMain.form is defined and pictureMain.form and pictureMain.form.serviceName %}
+{% if isImgFormExist %}
     <style>
-        {% if pictureMain.form.serviceName in ['rectangle vertical'] %}
+        {% if pictureForm in ['rectangle vertical'] %}
         .az-picture-page-sidebar-type-div-select .col-md-6 {
             height: 110px;
         }
@@ -197,7 +212,7 @@
             width: 50%;
         }
 
-        {% elseif pictureMain.form.serviceName in ['square'] %}
+        {% elseif pictureForm in ['square'] %}
         .az-picture-page-sidebar-type-div-select .col-md-6 {
             height: 90px;
         }

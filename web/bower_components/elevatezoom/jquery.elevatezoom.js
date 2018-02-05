@@ -15,7 +15,8 @@
 if (typeof Object.create !== 'function') {
     Object.create = function (obj) {
         function F() {
-        };
+        }
+
         F.prototype = obj;
         return new F();
     };
@@ -24,7 +25,6 @@ if (typeof Object.create !== 'function') {
 (function ($, window, document, undefined) {
     var ElevateZoom = {
         init: function (options, elem) {
-            console.log('in init')
             var self = this;
 
             self.elem = elem;
@@ -107,19 +107,13 @@ if (typeof Object.create !== 'function') {
             //get dimensions of the non zoomed image
             self.nzWidth = self.$elem.width();
             self.nzHeight = self.$elem.height();
-            console.log('self.nzWidth', self.nzWidth)
-            console.log('self.nzHeight', self.nzHeight)
 
             //get offset of the non zoomed image
-            self.nzOffset = self.$elem.offset();
+            self.nzOffset = $(self.options.myid).offset();
+
             //calculate the width ratio of the large/small image
             self.widthRatio = self.largeWidth / self.nzWidth;
             self.heightRatio = self.largeHeight / self.nzHeight;
-
-            console.log('self.nzOffset', self.nzOffset)
-            console.log('self.widthRatio', self.widthRatio)
-            console.log('self.heightRatio', self.heightRatio)
-            console.log('self.options.zoomType', self.options.zoomType)
 
 
 //				if window zoom        
@@ -149,7 +143,6 @@ if (typeof Object.create !== 'function') {
                     + ";background-repeat: no-repeat;"
                     + "position: absolute;";
             }
-            console.log('self.zoomWindowStyle', self.zoomWindowStyle)
 
             //lens style for window zoom
             if (self.options.zoomType == "window") {
@@ -185,9 +178,6 @@ if (typeof Object.create !== 'function') {
                     " solid black;background-repeat: no-repeat;position: absolute;";
             }
 
-            console.log('self.lensStyle', self.lensStyle)
-
-
             //tint style
             self.tintStyle = "display: block;"
                 + "position: absolute;"
@@ -211,7 +201,6 @@ if (typeof Object.create !== 'function') {
 
 
             }
-            console.log('self.lensStyle', self.lensStyle)
 
             //does not round in all browsers
             if (self.options.lensShape == "round") {
@@ -221,13 +210,10 @@ if (typeof Object.create !== 'function') {
                     + "border-bottom-right-radius: " + String(self.options.lensSize / 2 + self.options.borderSize) + "px;";
 
             }
-            console.log('self.options.lensShape', self.options.lensShape)
-            console.log('self.lensRound', self.lensRound)
             //create the div's                                                + ""
             //self.zoomContainer = $('<div/>').addClass('zoomContainer').css({"position":"relative", "height":self.nzHeight, "width":self.nzWidth});
-
             self.zoomContainer = $('<div class="zoomContainer" style="-webkit-transform: translateZ(0);position:absolute;left:' + self.nzOffset.left + 'px;top:' + self.nzOffset.top + 'px;height:' + self.nzHeight + 'px;width:' + self.nzWidth + 'px;"></div>');
-            console.log('self.zoomContainer', self.zoomContainer);
+
             $('body').append(self.zoomContainer);
 
 
@@ -236,16 +222,13 @@ if (typeof Object.create !== 'function') {
                 self.zoomContainer.css("overflow", "hidden");
             }
             if (self.options.zoomType != "inner") {
-                console.log('in zoomLenz')
                 self.zoomLens = $("<div class='zoomLens' style='" + self.lensStyle + self.lensRound + "'>&nbsp;</div>")
                     .appendTo(self.zoomContainer)
                     .click(function () {
-                        console.log('in zoomLenz click')
                         self.$elem.trigger('click');
                     });
             }
 
-            console.log('self.options.tint', self.options.tint)
             if (self.options.tint) {
                 self.tintContainer = $('<div/>').addClass('tintContainer');
                 self.zoomTint = $("<div class='zoomTint' style='" + self.tintStyle + "'></div>");
@@ -270,15 +253,14 @@ if (typeof Object.create !== 'function') {
 
             //create zoom window
             if (isNaN(self.options.zoomWindowPosition)) {
-                console.log('isNaN(self.options.zoomWindowPosition)', isNaN(self.options.zoomWindowPosition))
                 self.zoomWindow = $("<div style='z-index:999;left:" + (self.windowOffsetLeft) + "px;top:" + (self.windowOffsetTop) + "px;" + self.zoomWindowStyle + "' class='zoomWindow'>&nbsp;</div>")
                     .appendTo('body')
                     .click(function () {
                         self.$elem.trigger('click');
                     });
             } else {
-                console.log('else isNaN(self.options.zoomWindowPosition)', isNaN(self.options.zoomWindowPosition))
-                self.zoomWindow = $("<div style='z-index:999;left:" + (self.windowOffsetLeft) + "px;top:" + (self.windowOffsetTop) + "px;" + self.zoomWindowStyle + "' class='zoomWindow'>&nbsp;</div>")
+                self.zoomWindow = $("<div style='z-index:999;left:" + (self.windowOffsetLeft) + "px;top:" + (self.windowOffsetTop) + "px;" +
+                    self.zoomWindowStyle + "' class='zoomWindow'>&nbsp;</div>")
                     .appendTo(self.zoomContainer)
                     .click(function () {
                         self.$elem.trigger('click');
@@ -348,7 +330,6 @@ if (typeof Object.create !== 'function') {
             });
             if (self.options.showLens) {
                 self.zoomLens.bind('touchmove', function (e) {
-
                     e.preventDefault();
                     var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
                     self.setPosition(touch);
@@ -367,7 +348,6 @@ if (typeof Object.create !== 'function') {
             }
             //Needed to work in IE
             self.$elem.bind('mousemove', function (e) {
-                console.log('mo1')
                 //make sure on orientation change the setposition is not fired
                 if (self.lastX !== e.clientX || self.lastY !== e.clientY) {
                     self.setPosition(e);
@@ -378,7 +358,6 @@ if (typeof Object.create !== 'function') {
             });
 
             self.zoomContainer.bind('mousemove', function (e) {
-                console.log('mo2')
                 //make sure on orientation change the setposition is not fired
                 if (self.lastX !== e.clientX || self.lastY !== e.clientY) {
                     self.setPosition(e);
@@ -387,7 +366,6 @@ if (typeof Object.create !== 'function') {
                 self.lastY = e.clientY;
             });
             if (self.options.zoomType != "inner") {
-                console.log('mo3')
                 self.zoomLens.bind('mousemove', function (e) {
                     //make sure on orientation change the setposition is not fired
                     if (self.lastX !== e.clientX || self.lastY !== e.clientY) {
@@ -398,7 +376,6 @@ if (typeof Object.create !== 'function') {
                 });
             }
             if (self.options.tint) {
-                console.log('mo4')
                 self.zoomTint.bind('mousemove', function (e) {
                     //make sure on orientation change the setposition is not fired
                     if (self.lastX !== e.clientX || self.lastY !== e.clientY) {
@@ -410,7 +387,6 @@ if (typeof Object.create !== 'function') {
 
             }
             if (self.options.zoomType == "inner") {
-                console.log('mo5')
                 self.zoomWindow.bind('mousemove', function (e) {
                     //make sure on orientation change the setposition is not fired
                     if (self.lastX !== e.clientX || self.lastY !== e.clientY) {
@@ -425,9 +401,7 @@ if (typeof Object.create !== 'function') {
 
             //  lensFadeOut: 500,  zoomTintFadeIn
             self.zoomContainer.mouseenter(function () {
-                console.log('mo6')
                 if (self.options.zoomType == "inner") {
-                    console.log('mo6 inner')
                     if (self.options.zoomWindowFadeIn) {
                         self.zoomWindow.stop(true, true).fadeIn(self.options.zoomWindowFadeIn);
                     }
@@ -437,7 +411,6 @@ if (typeof Object.create !== 'function') {
 
                 }
                 if (self.options.zoomType == "window") {
-                    console.log('mo6 window')
                     if (self.options.zoomWindowFadeIn) {
                         self.zoomWindow.stop(true, true).fadeIn(self.options.zoomWindowFadeIn);
                     }
@@ -446,7 +419,6 @@ if (typeof Object.create !== 'function') {
                     }
 
                 }
-                console.log('mo6 self.options.showLens', self.options.showLens)
                 if (self.options.showLens) {
 
                     if (self.options.lensFadeIn) {
@@ -457,7 +429,6 @@ if (typeof Object.create !== 'function') {
                     }
 
                 }
-                console.log('mo6 self.options.tint', self.options.tint)
                 if (self.options.tint) {
 
                     if (self.options.zoomTintFadeIn) {
@@ -485,7 +456,6 @@ if (typeof Object.create !== 'function') {
             //end ove image
 
             self.$elem.mouseenter(function () {
-                console.log('mo7')
                 if (self.options.zoomType == "inner") {
                     if (self.options.zoomWindowFadeIn) {
                         self.zoomWindow.stop(true, true).fadeIn(self.options.zoomWindowFadeIn);
@@ -542,9 +512,7 @@ if (typeof Object.create !== 'function') {
             //end ove image
 
             if (self.options.zoomType != "inner") {
-
                 self.zoomLens.mouseenter(function () {
-                    console.log('mo8')
                     if (self.options.zoomType == "inner") {
                         if (self.options.zoomWindowFadeIn) {
 
@@ -587,7 +555,6 @@ if (typeof Object.create !== 'function') {
 
             if (self.options.tint) {
                 self.zoomTint.mouseenter(function () {
-                    console.log('mo9')
                     if (self.options.zoomType == "inner") {
                         self.zoomWindow.show();
                     }
@@ -612,7 +579,6 @@ if (typeof Object.create !== 'function') {
 
             if (self.options.zoomType == "inner") {
                 self.zoomWindow.mouseenter(function () {
-                    console.log('mo10')
                     if (self.options.zoomType == "inner") {
                         self.zoomWindow.show();
                     }
@@ -642,7 +608,6 @@ if (typeof Object.create !== 'function') {
         },
 
         setPosition: function (e) {
-
             var self = this;
 
 
@@ -650,7 +615,7 @@ if (typeof Object.create !== 'function') {
             //this can be caused by other on page elements
             self.nzHeight = self.$elem.height();
             self.nzWidth = self.$elem.width();
-            self.nzOffset = self.$elem.offset();
+            self.nzOffset = $(self.options.myid).offset();
 
             if (self.options.tint) {
                 self.zoomTint.css({top: 0});
@@ -676,10 +641,9 @@ if (typeof Object.create !== 'function') {
                 self.zoomLens.css({
                     width: String((self.options.zoomWindowWidth) / self.widthRatio) + 'px',
                     height: String((self.options.zoomWindowHeight) / self.heightRatio) + 'px'
-                })
+                });
 //					end responsive image change
             }
-
             //container fix
             self.zoomContainer.css({top: self.nzOffset.top});
             self.zoomContainer.css({left: self.nzOffset.left});
@@ -790,12 +754,11 @@ if (typeof Object.create !== 'function') {
         },
         setLensPostition: function (e) {
 
-
         },
         setWindowPostition: function (e) {
+
             //return obj.slice( 0, count );
             var self = this;
-
             if (!isNaN(self.options.zoomWindowPosition)) {
 
                 switch (self.options.zoomWindowPosition) {
@@ -904,7 +867,6 @@ if (typeof Object.create !== 'function') {
 
                 self.windowOffsetTop = self.externalContainerOffset.top;//DONE - 1
                 self.windowOffsetLeft = self.externalContainerOffset.left; //DONE 1, 2, 3, 4, 16
-
             }
             self.windowOffsetTop = self.windowOffsetTop + self.options.zoomWindowOffety;
             self.windowOffsetLeft = self.windowOffsetLeft + self.options.zoomWindowOffetx;
@@ -1026,7 +988,7 @@ if (typeof Object.create !== 'function') {
         },
         setTintPosition: function (e) {
             var self = this;
-            self.nzOffset = self.$elem.offset();
+            self.nzOffset = $(self.options.myid).offset();
             self.tintpos = String(((e.pageX - self.nzOffset.left) - (self.zoomLens.width() / 2)) * (-1));
             self.tintposy = String(((e.pageY - self.nzOffset.top) - self.zoomLens.height() / 2) * (-1));
             if (self.Etoppos) {
@@ -1062,8 +1024,6 @@ if (typeof Object.create !== 'function') {
 
         },
         swapAction: function (smallimage, largeimage) {
-
-
             var self = this;
 
             var newImg2 = new Image();
@@ -1088,7 +1048,6 @@ if (typeof Object.create !== 'function') {
             self.$elem.attr("src", smallimage);
         },
         doneCallback: function () {
-
             var self = this;
 
 
@@ -1101,7 +1060,7 @@ if (typeof Object.create !== 'function') {
                 self.zoomTint.css({height: self.$elem.height()});
 
             }
-            self.nzOffset = self.$elem.offset();
+            self.nzOffset = $(self.options.myid).offset();
             self.nzWidth = self.$elem.width();
             self.nzHeight = self.$elem.height();
             //   alert("THIS");
@@ -1186,7 +1145,6 @@ if (typeof Object.create !== 'function') {
     $.fn.elevateZoom = function (options) {
         return this.each(function () {
             var elevate = Object.create(ElevateZoom);
-            console.log('in main init')
             elevate.init(options, this);
 
             $.data(this, 'elevateZoom', elevate);
@@ -1228,6 +1186,7 @@ if (typeof Object.create !== 'function') {
         gallery: false,
         cursor: "default", // user should set to what they want the cursor as, if they have set a click function
         responsive: false,
+        myid: null,
         onComplete: $.noop,
         onZoomedImageLoaded: function () {
         }

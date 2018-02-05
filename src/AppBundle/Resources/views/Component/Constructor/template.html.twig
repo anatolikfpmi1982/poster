@@ -1,11 +1,12 @@
 <div class="row">
     <span class="az-title-modul">Тип модульности</span>
-    <div class="col-md-12 owl-carousel owl-theme" id="owl-template">
-        {% if moduleTypes is defined and moduleTypes %}
-            {% set moduleId = 0 %}
-            {% set moduleName = '' %}
-            {% set moduleRatio = 0 %}
-            {% set moduleFormula = '' %}
+    {% set moduleId = 0 %}
+    {% set moduleName = '' %}
+    {% set moduleRatio = 0 %}
+    {% set moduleFormula = '' %}
+    {% if moduleTypes is defined and moduleTypes %}
+        <div class="col-md-12 owl-carousel owl-theme" id="owl-template">
+
             <a href="{{ path('picture_module', {'id': pictureMain.id}) }}">
                 <img src="{{ asset('bundles/app/images/material_default.png') }}" class="hidden az-picture-page-constructor-picture-module-type-img"
                      data-id="0"
@@ -38,16 +39,18 @@
                     {% endif %}
                 </div>
             {% endfor %}
-            <input type="hidden" name="az-picture-constructor-module-selected"
-                   id="az-picture-constructor-module-selected" value="{{ moduleName }}">
-            <input type="hidden" name="az-picture-constructor-module-id-selected"
-                   id="az-picture-constructor-module-id-selected" value="{{ moduleId }}">
-            <input type="hidden" name="az-picture-constructor-module-ratio-selected"
-                   id="az-picture-constructor-module-ratio-selected" value="{{ moduleRatio }}">
-            <input type="hidden" name="az-picture-constructor-module-code-selected"
-                   id="az-picture-constructor-module-code-selected" value="{{ moduleFormula }}">
-        {% else %}
+        </div>
+    {% else %}
+        <div class="col-md-12">
             У нас пока отсутствуют шаблоны для данного вида картин.
-        {% endif %}
-    </div>
+        </div>
+    {% endif %}
+    <input type="hidden" name="az-picture-constructor-module-selected"
+           id="az-picture-constructor-module-selected" value="{{ moduleName }}">
+    <input type="hidden" name="az-picture-constructor-module-id-selected"
+           id="az-picture-constructor-module-id-selected" value="{{ moduleId }}">
+    <input type="hidden" name="az-picture-constructor-module-ratio-selected"
+           id="az-picture-constructor-module-ratio-selected" value="{{ moduleRatio }}">
+    <input type="hidden" name="az-picture-constructor-module-code-selected"
+           id="az-picture-constructor-module-code-selected" value="{{ moduleFormula }}">
 </div>

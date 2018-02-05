@@ -1,4 +1,5 @@
-{% if app.request.attributes.get('_route') == 'picture' %}
+{% set allowedPages = ['picture', 'my_file_page'] %}
+{% if app.request.attributes.get('_route') in allowedPages %}
     {% set isPicturePage = true %}
 {% else %}
     {% set isPicturePage = false %}
