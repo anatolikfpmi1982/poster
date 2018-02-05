@@ -79,6 +79,13 @@ class PicturesController extends FrontController {
         $this->data['cart_item'] = $cartItem;
         $this->data['cart_id'] = $request->get('cart_id');
 
+        if(!empty($picture->getCategories())) {
+            $this->data['category'] = $picture->getCategories()[0];
+        }
+        if($request->query->get('type') && $request->query->get('type') === 'module') {
+            $this->data['module_active'] = true;
+        };
+
         // parameters to template
         return $this->render( 'AppBundle:Pictures:show.html.twig', $this->data );
     }
