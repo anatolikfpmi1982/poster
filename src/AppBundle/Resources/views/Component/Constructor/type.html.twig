@@ -101,7 +101,7 @@
         {% endif %}
         {% if isPortraitType %}
             {% set isPortraitSelected = (cart_item.type_value is defined and cart_item.type_value=='В раме') %}
-            {% if isPortraitSelected or not isTypeSelected %}
+            {% if isPortraitSelected or (not isTypeSelected and not (cart_item.type_value is defined and cart_item.type_value=='Модульная'))%}
                 {% set isTypeSelected = true %}
                 {% set isPortraitSelected = true %}
             {% endif %}

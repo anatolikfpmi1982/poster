@@ -21,10 +21,11 @@ class MyFilesController extends FrontController {
      * @Route("/myfile/{id}", name="my_file_page")
      *
      * @param integer $id
+     * @param Request $request
      * @return Response
      * @throws BadRequestHttpException
      */
-    public function showAction( $id )
+    public function showAction( $id, Request $request )
     {
         $pictureId = $this->get('app.session_manager')->getMyFilesItem($id);
         $this->blocks = array_merge($this->blocks, ['LastVisited' => 6]);
@@ -44,12 +45,15 @@ class MyFilesController extends FrontController {
             throw new BadRequestHttpException('Картина не найдена.');
         }
 
-
+        $cartItem = [];
+        if($request->get('cart_id')) {
+            $cartItem = $this->get( 'app.session_manager' )->getFromCart($request->get('cart_id'));
+        }
 
         $this->get('app.session_manager')->addLastVisitedItem($picture->getId());
 
         $this->data['pictureMain'] = $picture;
-        if ($picture->getImage() instanceof Image) {
+        if($picture->getImage() instanceof Image) {
             $imgFile = $picture->getImage()->getBaseFile();
             $size = getimagesize($imgFile);
             $this->data['pictureBaseWidth'] = $size[0];
@@ -63,6 +67,7 @@ class MyFilesController extends FrontController {
             $this->data['pictureThumbWidth'] = $size[0];
             $this->data['pictureThumbHeight'] = $size[1];
         }
+
         $this->data['pictureSize'] = $this->em->getRepository('AppBundle:PictureSize')->findBy(['isActive' => true], ['width' => 'ASC']);
         $this->data['materials'] = $this->em->getRepository('AppBundle:BannerMaterial')->findBy(['isActive' => true], ['id' => 'ASC']);
         $this->data['pictureMaterials'] = $this->em->getRepository('AppBundle:FrameMaterial')->findBy(['isActive' => true], ['id' => 'ASC']);
@@ -77,6 +82,8 @@ class MyFilesController extends FrontController {
         }
         $this->data['frameSettings'] = $frameSettings;
         $this->data['ownPicture'] = true;
+        $this->data['cart_item'] = $cartItem;
+        $this->data['cart_id'] = $request->get('cart_id');
 
         // parameters to template
         return $this->render('AppBundle:Pictures:upload.html.twig', $this->data);
