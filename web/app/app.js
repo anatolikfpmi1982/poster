@@ -674,6 +674,7 @@ define(function (require, exports, module) {
                 params['type'] = $(value).data('type');
                 params['monitor'] = $(value);
                 params['imgPath'] = $(value).data('src');
+                params['imgBigPath'] = $(value).data('big-src');
                 params['picWidth'] = $(value).data('width');
                 params['picHeight'] = $(value).data('height');
                 params['left_deviation'] = $(value).data('left');

@@ -36,6 +36,7 @@ function ConstructorOverview() {
     this.panelTemplateDefault = 'single|{horizontal|100-100-0}';
     this.monitor = '';
     this.imgPath = '';
+    this.imgBigPath = '';
     this.picWidth = 0;
     this.picHeight = 0;
     this.formulaInput = '';
@@ -50,8 +51,10 @@ function ConstructorOverview() {
     this.imgSideR = '';
     this.imgSideB = '';
     this.imgSideL = '';
+    this.isConstructor = false;
 
     this.init = function (params) {
+
         if (params != undefined) {
             this.type = params.type;
             this.size = params.size;
@@ -63,6 +66,7 @@ function ConstructorOverview() {
             this.module = params.module;
             this.monitor = params.monitor;
             this.imgPath = params.imgPath;
+            this.imgBigPath = params.imgBigPath != undefined ? params.imgBigPath : $('#input-az-picture-page-panel-big-img').val();
             this.picWidth = params.picWidth;
             this.picHeight = params.picHeight;
             this.formulaInput = params.formulaInput;
@@ -113,6 +117,7 @@ function ConstructorOverview() {
         this.module = $("#az-picture-constructor-module-selected").val();
         this.monitor = $('div.az-picture-page-panel-img');
         this.imgPath = $('#input-az-picture-page-panel-img').val();
+        this.imgBigPath = $('#input-az-picture-page-panel-big-img').val();
         this.picWidth = parseInt($('#input-az-picture-page-img-thumb-width').val());
         this.picHeight = parseInt($('#input-az-picture-page-img-thumb-height').val());
         this.formulaInput = $('input#az-picture-constructor-module-code-selected').val();
@@ -130,6 +135,7 @@ function ConstructorOverview() {
         this.imgSideR = $('#az-picture-constructor-frame-img-side-r-selected').val();
         this.imgSideB = $('#az-picture-constructor-frame-img-side-b-selected').val();
         this.imgSideL = $('#az-picture-constructor-frame-img-side-l-selected').val();
+        this.isConstructor = true;
     };
 
     this.show = function () {
@@ -394,7 +400,6 @@ function ConstructorOverview() {
     };
 
     this.calculateWidthAndHeight = function () {
-
         if (this.max_width > 0 && this.max_height > 0) {
             if (this.debug) {
                 console.log('------------START-----------');
@@ -462,7 +467,8 @@ function ConstructorOverview() {
             picWidth = this.picWidth,
             picHeight = this.picHeight,
             deviation = 0,
-            deviation_top = 0;
+            deviation_top = 0,
+            mainIdEl = null;
 
         var right_width = this.right_width,
             padding_left = this.padding_left,
@@ -603,6 +609,7 @@ function ConstructorOverview() {
             divMain.css('background-size', showWidth + 'px ' + showHeight + 'px');
             divMain.css('background-position', deviation + 'px ' + deviation_top + 'px');
 
+
             var divRight = $(newDivString);
             divRight.addClass('edge edger the_last');
             divRight.css('width', right_width + 'px');
@@ -654,6 +661,16 @@ function ConstructorOverview() {
                 aLink.appendTo(that.monitor);
             }
 
+
+            if (that.isConstructor) {
+
+                divMain.data('zoom-image', that.imgBigPath);
+                var id = 'constructorActive' + (new Date()).getTime();
+                divMain.attr('id', id)
+                mainIdEl = id;
+
+            }
+
             switch (panel_type) {
                 case 'vertical':
                     mainTop = mainTop + newHeight + padding_top;
@@ -680,7 +697,18 @@ function ConstructorOverview() {
                 $('.az-picture-page-picture-main-panel-div').css('height', screen_height + 'px');
                 break;
         }
-
+        if (this.isConstructor) {
+            $('#' + mainIdEl).elevateZoom({
+                constrainType: "height",
+                constrainSize: 274,
+                zoomType: "lens",
+                containLensZoom: true,
+                zoomWindowPosition: mainIdEl,
+                cursor: 'pointer',
+                myid: '.az-picture-page-picture-main-banner-div div div'
+                //galleryActiveClass: "active"
+            });
+        }
 
     };
 

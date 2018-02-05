@@ -45,6 +45,8 @@ class Image
     const THUMB_MAX_IMAGE_HEIGHT = 600;
     const THUMB_MAX_IMAGE_WIDTH = 800;
 
+    const NORMAL_IMAGE_FOLDER = 'normal/';
+
     /**
      * @var integer
      * @ORM\Column(name="id", type="integer")
@@ -275,6 +277,11 @@ class Image
         if (file_exists($file)) {
             unlink($file);
         }
+
+        $file = $this->getNormalBaseFile();
+        if (file_exists($file)) {
+            unlink($file);
+        }
     }
 
     /**
@@ -365,6 +372,24 @@ class Image
     public function getMaxThumbBasePath()
     {
         return $this->getBasePath().self::THUMB_MAX_IMAGE_FOLDER;
+    }
+
+    /**
+     * Get normal img path
+     * @return string
+     */
+    public function getNormalBasePath()
+    {
+        return $this->getBasePath().self::NORMAL_IMAGE_FOLDER;
+    }
+
+    /**
+     * Get normal img file
+     * @return string
+     */
+    public function getNormalBaseFile()
+    {
+        return $this->getBasePath().self::NORMAL_IMAGE_FOLDER.$this->filename;
     }
 
     /**
