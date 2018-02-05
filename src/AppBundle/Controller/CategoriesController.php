@@ -54,6 +54,11 @@ class CategoriesController extends FrontController
             $_GET['direction'] = 'asc';
         }
 
+        // hack for pictures sorting
+        if(!empty($_GET['sort']) && $_GET['sort'] == 'p.isTop cp.weight') {
+            $_GET['sort'] = 'p.isTop+cp.weight';
+        }
+
         $query = $queryBuilder->getQuery();
 
         $paginator = $this->get('knp_paginator');
@@ -61,7 +66,7 @@ class CategoriesController extends FrontController
             $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             self::PAGE_LIMIT/*limit per page*/,
-            ['wrap-queries' => true, 'defaultSortFieldName' => 'p.isTop+cp.weight', 'defaultSortDirection' => 'desc']
+            ['wrap-queries' => true, 'defaultSortFieldName' => ['p.isTop','cp.weight'], 'defaultSortDirection' => 'desc']
         );
 
 
