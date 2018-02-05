@@ -1,4 +1,5 @@
 {% for category in block %}
+    {% if not module or (module and category.id == module_category_id) %}
     <div class="col-md-12 container-fluid">
         {% if category.slug is defined and category.slug %}
             {% set category_slug = category.slug %}
@@ -80,4 +81,5 @@
             </div>
         {% endif %}
     </div>
+    {% endif %}
 {% endfor %}
