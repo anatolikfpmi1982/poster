@@ -7,8 +7,8 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
 use Doctrine\ORM\EntityManager;
+use AppBundle\Service\ImageManagement;
 
 class MainMenuAdmin extends AbstractAdmin
 {
@@ -18,21 +18,29 @@ class MainMenuAdmin extends AbstractAdmin
     protected $em;
 
     /**
+     * @var ImageManagement
+     */
+    protected $imageManagement;
+
+    /**
      * Constructor
      *
      * @param string $code
      * @param string $class
      * @param string $baseControllerName
      * @param EntityManager $entityManager
+     * @param ImageManagement $imageManagement
      */
     public function __construct(
         $code,
         $class,
         $baseControllerName,
-        EntityManager $entityManager
+        EntityManager $entityManager,
+        ImageManagement $imageManagement
     ) {
         parent::__construct($code, $class, $baseControllerName);
         $this->em = $entityManager;
+        $this->imageManagement = $imageManagement;
     }
 
     /**
@@ -138,6 +146,16 @@ class MainMenuAdmin extends AbstractAdmin
             $menu = $this->clearEntities($menu);
             $menu->setUpdatedAt(new \DateTime());
             $this->manageEmbeddedImageAdmins($menu);
+        }
+    }
+
+    /**
+     * @param MainMenu $menu
+     */
+    public function postUpdate($menu)
+    {
+        if($menu instanceof MainMenu) {
+            $this->imageManagement->cleanGarbageImages();
         }
     }
 

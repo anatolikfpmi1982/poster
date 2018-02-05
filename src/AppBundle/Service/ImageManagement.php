@@ -49,7 +49,6 @@ AND id NOT IN (SELECT DISTINCT image_id FROM picture_forms)
 AND id NOT IN (SELECT DISTINCT image_id FROM pictures)', $rsm);
 
         $images = $query->getResult();
-
         if(count($images) > 0) {
             $this->deleteImages($images);
         }

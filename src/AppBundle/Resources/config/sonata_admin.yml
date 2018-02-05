@@ -78,6 +78,7 @@ services:
             - AppBundle\Entity\MainMenu
             - 'SonataAdminBundle:CRUD'
             - '@doctrine.orm.entity_manager'
+            - '@app.image_manager'
     app.admin.call:
         class: AppBundle\Admin\CallAdmin
         tags:

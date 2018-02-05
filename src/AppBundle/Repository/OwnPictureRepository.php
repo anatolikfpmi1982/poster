@@ -16,4 +16,14 @@ class OwnPictureRepository extends EntityRepository {
             ->where( 'o.id IN (:ids)' )
             ->setParameter( 'ids', $ids );
     }
+
+    public function getOwnPicturesForClean( $ids ) {
+        $q = $this->createQueryBuilder( 'o' );
+        if(!empty($ids)) {
+            $q->where( 'o.id NOT IN (:ids)' )
+                ->setParameter( 'ids', $ids );
+        }
+
+        return $q->getQuery()->getResult();
+    }
 }
