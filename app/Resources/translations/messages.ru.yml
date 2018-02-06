@@ -74,3 +74,12 @@ ROLE_APP_ADMIN_IMAGE_ADMIN: Администратор для изображен
 ROLE_APP_ADMIN_POPULAR_GUEST: Гость для популярных
 ROLE_APP_ADMIN_POPULAR_EDITOR: Редактор для популярных
 ROLE_APP_ADMIN_POPULAR_ADMIN: Администратор для популярных
+ROLE_APP_ADMIN_ORDER_GUEST: Гость для заказов
+ROLE_APP_ADMIN_ORDER_EDITOR: Редактор для заказов
+ROLE_APP_ADMIN_ORDER_ADMIN: Администратор для заказов
+ROLE_APP_ADMIN_PARSER_ERRORS_GUEST: Гость для ошибок парсера
+ROLE_APP_ADMIN_PARSER_ERRORS_EDITOR: Редактор для ошибок парсера
+ROLE_APP_ADMIN_PARSER_ERRORS_ADMIN: Администратор для ошибок парсера
+ROLE_APP_ADMIN_OWN_PICTURE_GUEST: Гость для загруженных картин
+ROLE_APP_ADMIN_OWN_PICTURE_EDITOR: Редактор для загруженных картин
+ROLE_APP_ADMIN_OWN_PICTURE_ADMIN: Администратор для загруженных картин
