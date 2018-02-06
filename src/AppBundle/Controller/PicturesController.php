@@ -77,13 +77,14 @@ class PicturesController extends FrontController {
         }
         $this->data['frameSettings'] = $frameSettings;
         $this->data['cart_item'] = $cartItem;
-        var_dump($this->data['cart_item']);
         $this->data['cart_id'] = $request->get('cart_id');
 
-        if(!empty($picture->getCategories())) {
+        if($picture->getCategories()) {
             $this->data['category'] = $picture->getCategories()[0];
         }
-        if($request->query->get('type') && $request->query->get('type') === 'module') {
+
+        $type = $request->query->get('type');
+        if($type === 'module') {
             $this->data['module_active'] = true;
         };
 

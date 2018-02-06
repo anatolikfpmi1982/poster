@@ -16,16 +16,16 @@
 <div class="modal-body">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-6">
                 Товаров: {{ header_cart_count }}<br/>
                 Сумма: {{ header_total_price }} руб.
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-6">
                 <button class="btn btn-sm clear_cart-btn">Очистить корзину</button>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12">
                 {% if header_cart_count > 0 %}
                     {% for cart_item in header_cart %}
                         {% set picId = 0 %}
@@ -56,7 +56,7 @@
                             {% set imgSize = filesize(picImgPath) %}
                         {% endif %}
                         <div class="row az-ordersmall-cart">
-                            <div class="col-md-6 az-all-pages-cart-img-div">
+                            <div class="col-md-6 col-sm-6 az-all-pages-cart-img-div">
                                 <div class="az-order-cart-item-img show-constructor-img-lazy"
                                      data-src="{{ picImgUrl }}"
                                      data-id="{{ picId }}"
@@ -81,21 +81,21 @@
                                      data-img-side-l="{{ cart_item.frame_material_side_l }}"
                                 ></div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-6">
                                 <div class="row">
                                     {% if picTitle|length > 84 %}
                                         {% set title = picTitle|slice(0, 81) ~ '...' %}
                                     {% else %}
                                         {% set title = picTitle %}
                                     {% endif %}
-                                    <div class="col-md-12 az-all-pages-cart-text">
+                                    <div class="col-md-12 col-sm-12 az-all-pages-cart-text">
                                         {{ title }} <br/>
                                         {{ cart_item.type_value }} <br/>
                                         {{ cart_item.price }} руб.
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12 text-center">
+                                    <div class="col-md-12 col-sm-12 text-center">
                                         <button class="btn-xs delete_cart-btn" data-id="{{ cart_item.id }}">Удалить</button>
                                     </div>
                                 </div>
@@ -109,7 +109,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12">
                 {% if header_cart_count > 0 %}
                     <a href="{{ path( 'order' ) }}">Оформление заказа</a>
                 {% endif %}

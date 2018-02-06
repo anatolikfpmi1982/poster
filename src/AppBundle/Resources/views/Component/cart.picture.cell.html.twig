@@ -17,7 +17,7 @@
 {% endif %}
 <div class="row az-order-cart container-fluid">
 
-    <div class="col-md-3 text-center az-order-cart-item az-cart-img-cell">
+    <div class="col-md-3 col-sm-3 text-center az-order-cart-item az-cart-img-cell">
         <div class="az-order-cart-item-img show-constructor-img-lazy"
              data-src="{{ img }}"
              data-id="{{ picId }}"
@@ -43,9 +43,9 @@
         ></div>
     </div>
 
-    <div class="col-md-3 az-order-cart-item">
+    <div class="col-md-3 col-sm-3 az-order-cart-item">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12">
                 {% if isOwn %}
                     Загруженная картина
                 {% else %}
@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">Размер:
+            <div class="col-md-12 col-sm-12">Размер:
                 {% if item.type_id != 'module' %}
                     {{ item.sizes }} см
                 {% else %}
@@ -67,46 +67,46 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">Тип изделия: {{ item.type_value }}</div>
+            <div class="col-md-12 col-sm-12">Тип изделия: {{ item.type_value }}</div>
         </div>
         {% if item.type_id == 'frame' %}
             <div class="row">
-                <div class="col-md-12">Рама: {{ item.frame_value }} </div>
+                <div class="col-md-12 col-sm-12">Рама: {{ item.frame_value }} </div>
             </div>
             <div class="row">
-                <div class="col-md-12">Материал: {{ item.frame_material_value }} </div>
+                <div class="col-md-12 col-sm-12">Материал: {{ item.frame_material_value }} </div>
             </div>
         {% elseif item.type_id == 'banner' %}
             <div class="row">
-                <div class="col-md-12">Материал: {{ item.banner_material_value }} </div>
+                <div class="col-md-12 col-sm-12">Материал: {{ item.banner_material_value }} </div>
             </div>
             <div class="row">
-                <div class="col-md-12">Толщина подрамника: {{ item.underframe_value }} </div>
+                <div class="col-md-12 col-sm-12">Толщина подрамника: {{ item.underframe_value }} </div>
             </div>
         {% elseif item.type_id == 'module' %}
             <div class="row">
-                <div class="col-md-12">Модуль: {{ item.module_type_value }} </div>
+                <div class="col-md-12 col-sm-12">Модуль: {{ item.module_type_value }} </div>
             </div>
             <div class="row">
-                <div class="col-md-12">Материал: {{ item.banner_material_value }} </div>
+                <div class="col-md-12 col-sm-12">Материал: {{ item.banner_material_value }} </div>
             </div>
             <div class="row">
-                <div class="col-md-12">Толщина подрамника: {{ item.underframe_value }} </div>
+                <div class="col-md-12 col-sm-12">Толщина подрамника: {{ item.underframe_value }} </div>
             </div>
         {% endif %}
     </div>
 
 
-    <div class=" col-md-3 az-order-cart-item container-fluid">
+    <div class=" col-md-3 col-sm-3 az-order-cart-item container-fluid">
         <div class="row">
-            <div class="col-md-6 text-right container-fluid az_btn_postpone">
+            <div class="col-md-6 col-sm-6 text-right container-fluid az_btn_postpone">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12">
                         <button class="btn_az-main-popular_defer delete_order-bnt delete_cart-btn" data-id="{{ item.id }}">Удалить из корзины</button>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 text-center cart_cell">
+                    <div class="col-md-12 col-sm-12 text-center cart_cell">
                         <a class="btn_az-main-popular_defer edit_order-bnt" data-id="{{ item.id }}"
                            href="{% if item.picture is defined %}
                                             {{ path('picture', {'id': item.picture_id, 'cart_id': item.id}) }}
@@ -120,9 +120,9 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3 az-order-cart-item">
+    <div class="col-md-3 col-sm-3 az-order-cart-item">
         <div class="row">
-            <div class="col-md-12 text-left_artik">
+            <div class="col-md-12 col-sm-12 text-left_artik">
                 Цена: {{ item.price }} руб.
             </div>
         </div>

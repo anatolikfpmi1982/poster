@@ -1,7 +1,12 @@
+{% set imgBig = '' %}
 {% if picture.image is defined and picture.image and picture.image.getFilename() %}
     {% set img = '/files/pictures/thumb/' ~ picture.image.getFilename() %}
     {% set imgPath = picture.image.getThumbBaseFile() %}
     {% set imgSize = filesize(imgPath) %}
+    {% set imgBigPath = picture.image.getNormalBaseFile() %}
+    {% if file_exists(imgBigPath) %}
+        {% set imgBig = '/files/pictures/normal/' ~ picture.image.getFilename() %}
+    {% endif %}
 {% else %}
     {% set img = asset('bundles/app/images/default_picture.jpg') %}
     {% set imgPath = asset('bundles/app/images/default_picture.jpg') %}
@@ -34,9 +39,9 @@
         {% set type_value = "Модульная" %}
     {% endif %}
 {% endif %}
-<div class="col-md-4 az-popular-item container">
+<div class="col-md-4 col-sm-6 az-popular-item container">
     <div class="row az-main-popular-item-img-div">
-        <div class="col-md-12 az-main-popular-item-img show-constructor-img-lazy"
+        <div class="col-md-12 col-sm-12 az-main-popular-item-img show-constructor-img-lazy"
              data-src="{{ img }}"
              data-id="{{ picture.id }}"
              data-type="{{ type_value }}"
@@ -58,6 +63,12 @@
              data-img-side-r=""
              data-img-side-b=""
              data-img-side-l=""
+                {% if imgBig and type_value == "Баннер" %}
+                    data-zoom-image="{{ imgBig }}"
+                    data-img-zoom="true"
+                    data-elem-id="az-category-img-{{ picture.id }}"
+                    data-big-src="{{ imgBig }}"
+                {% endif %}
         >
         </div>
     </div>
@@ -113,9 +124,9 @@
     <div class="row">
         <div class="az-main-popular-item-header-buttons container-fluid">
             <div class="row">
-                <div class="col-md-6 text-right container-fluid az_btn_postpone">
+                <div class="col-md-6 col-sm-6 text-right container-fluid az_btn_postpone">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-sm-12">
                             {% if deferredItems is defined and  deferredItems and picture.id in deferredItems %}
                                 <a href="{{ path('deferred') }}" class="btn_az-main-popular_defer">Отложено</a>
                             {% else %}
@@ -126,12 +137,12 @@
                         </div>
                     </div>
                     <div class="row az-main-popular-item-header-buttons">
-                        <div class="col-md-12 text-left_artik">
+                        <div class="col-md-12 col-sm-12 text-left_artik">
                             Артикул: {{ picture.code }}
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 az_btn_order text-left">
+                <div class="col-md-6 col-sm-6 az_btn_order text-left">
                     <a href="{{ picture_url }}"
                        class="btn_az-main-popular_order">Выбрать <br/>тип картины,<br/> размер, цена, <br/>заказать</a>
                 </div>
