@@ -334,7 +334,7 @@ class PictureAdmin extends AbstractAdmin
      */
     public function preRemove($picture){
         if($picture instanceof Picture) {
-            $this->imageManagement->deleteImages($picture->getImage());
+            $this->imageManagement->deleteImage($picture->getImage());
         }
     }
 
