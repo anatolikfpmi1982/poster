@@ -19,8 +19,13 @@
             {% set imgActiveSideL = '' %}
             {% set imgActiveCorner = '' %}
             {% for thickness in pictureThicknesses %}
+                {% set imgBig = '' %}
                 {% if thickness.images is defined and thickness.images and thickness.images[0] is defined and thickness.images[0] %}
                     {% set img = '/files/frames/mini_thumb/' ~ thickness.images[0].getFilename() %}
+                    {% set imgBigPath = thickness.images[0].getNormalBaseFile() %}
+                    {% if file_exists(imgBigPath) %}
+                        {% set imgBig = '/files/frames/normal/' ~ thickness.images[0].getFilename() %}
+                    {% endif %}
                 {% else %}
                     {% set img = asset('bundles/app/images/material_default.png') %}
                 {% endif %}
@@ -57,6 +62,8 @@
                          data-img-side-r="{{ imgSideRight }}"
                          data-img-side-b="{{ imgSideBottom }}"
                          data-img-side-l="{{ imgSideLeft }}"
+                         id="az-picture-page-constructor-picture-thickness-img-{{ thickness.id }}"
+                         {% if imgBig %}data-zoom-image="{{ imgBig }}"{% endif %}
                     />
                     {% if isThicknessActive %}
                         {% set frameId = thickness.id %}

@@ -25,9 +25,9 @@
         {% include('AppBundle:Component:Blocks/breadcrumb.html.twig') %}
     </div>
     <div class="row az-page-main-section-div az-page-category-main-section-div">
-        <div class="col-md-12 container-fluid">
+        <div class="col-md-12 col-sm-12 container-fluid">
             <div class="row page-title az-picture-page-title">
-                <div class="col-md-12"> {{ category.title }} ({{ pagination.getTotalItemCount() }})</div>
+                <div class="col-md-12 col-sm-12"> {{ category.title }} ({{ pagination.getTotalItemCount() }})</div>
 
             </div>
             <div class="row az-category-page-description-div">
@@ -47,16 +47,11 @@
                             {% endif %}
                             {% include('AppBundle:Component:picture.cell.html.twig') %}
                             {% set i = i + 1 %}
-                            {% if loop.index != 1 and loop.index % 3 == 0 %}
-                        </div>
-                        <div class="row">
-                            {% endif %}
-
                             {% endfor %}
                             {% if pagination.getCurrentPageNumber()*pagination.getItemNumberPerPage() < pagination.getTotalItemCount() %}
-                                <div class="col-md-4 az-popular-item container az-category-next">
+                                <div class="col-md-4 col-sm-4 az-popular-item container az-category-next">
                                     <div class="row text-center az-main-popular-item-img-div">
-                                        <div class="col-md-12 category-next">
+                                        <div class="col-md-12 col-sm-12 category-next">
                                             <a class="az-nextpage"
                                                href="{{ path(pagination.getRoute(), pagination.getParams()|merge({'page': pagination.getCurrentPageNumber()+1})) }}"><i
                                                         class="glyphicon glyphicon-menu-right"></i><br/>Дальше</a>
@@ -69,13 +64,13 @@
                 </div>
             {% else %}
                 <div class="row az-category-page-pictures-div">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12">
                         В данной категории нет картин.
                     </div>
                 </div>
             {% endif %}
             <div class="row az-pagination-block az-category-page-pagination-div">
-                <div class="col-md-12">
+                <div class="col-md-12 col-sm-12">
                     {{ knp_pagination_render(pagination) }}
                 </div>
             </div>

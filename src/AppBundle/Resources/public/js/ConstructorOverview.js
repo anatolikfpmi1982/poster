@@ -51,10 +51,14 @@ function ConstructorOverview() {
     this.imgSideR = '';
     this.imgSideB = '';
     this.imgSideL = '';
+
+    // main params
     this.isConstructor = false;
+    this.isZoom = false;
+    this.zoomType = '';
+    this.elemId = '';
 
     this.init = function (params) {
-
         if (params != undefined) {
             this.type = params.type;
             this.size = params.size;
@@ -87,7 +91,9 @@ function ConstructorOverview() {
             this.imgSideR = params.imgSideR != undefined ? params.imgSideR : $('#az-picture-constructor-frame-img-side-r-selected').val();
             this.imgSideB = params.imgSideB != undefined ? params.imgSideB : $('#az-picture-constructor-frame-img-side-b-selected').val();
             this.imgSideL = params.imgSideL != undefined ? params.imgSideL : $('#az-picture-constructor-frame-img-side-l-selected').val();
-
+            this.isZoom = params.imgZoom != undefined ? params.imgZoom : this.isZoom;
+            this.zoomType = params.zoomType != undefined ? params.zoomType : this.zoomType;
+            this.elemId = params.elemId != undefined ? params.elemId : this.elemId;
         } else {
             this.initDefault();
         }
@@ -171,6 +177,22 @@ function ConstructorOverview() {
                 picture.show();
                 this.buildPortrait();
                 panel.hide();
+                if (this.isConstructor) {
+                    $('.az-picture-page-constructor-picture-thickness-img').each(function (index) {
+                        if ($(this).data('zoom-image')) {
+                            $(this).elevateZoom({
+                                zoomWindowPosition: 4,
+                                zoomWindowHeight: 150,
+                                zoomWindowWidth: 150,
+                                borderSize: 0,
+                                easing: true,
+                                zoomWindowContainerClass: "frame-constructor-zoom",
+                                zoomContainerClass: "frame-constructor-zoom",
+                                myid: '#az-picture-page-constructor-picture-thickness-img-' + $(this).data('id')
+                            })
+                        }
+                    });
+                }
                 break;
             case 'Модульная':
                 banner.hide();
@@ -462,9 +484,6 @@ function ConstructorOverview() {
     };
 
     this.showPanelMonitor = function (type, settings, mainIndex) {
-        $(".zoomContainer").remove();
-        $(".zoomWindowContainer").remove();
-
         var imgPath = this.imgPath,
             picWidth = this.picWidth,
             picHeight = this.picHeight,
@@ -663,8 +682,10 @@ function ConstructorOverview() {
                 aLink.appendTo(that.monitor);
             }
 
-
-            if (that.isConstructor && that.type == 'Баннер') {
+            var isZoom = that.isConstructor && that.type == 'Баннер';
+            isZoom = isZoom || (that.isZoom && that.elemId);
+            isZoom = isZoom && that.imgBigPath;
+            if (isZoom) {
                 divMain.data('zoom-image', that.imgBigPath);
                 var id = 'constructorActive' + (new Date()).getTime();
                 divMain.attr('id', id);
@@ -698,16 +719,46 @@ function ConstructorOverview() {
                 break;
         }
 
-        if (this.isConstructor && this.type == 'Баннер') {
-            $('#' + mainIdEl).elevateZoom({
-                constrainType: "height",
-                constrainSize: 274,
-                zoomType: "lens",
-                containLensZoom: true,
-                zoomWindowPosition: mainIdEl,
-                cursor: 'pointer',
-                myid: '.az-picture-page-picture-main-banner-div div div'
-            });
+        var isZoom2 = this.isConstructor && this.type == 'Баннер';
+        isZoom2 = isZoom2 || (this.isZoom && this.elemId);
+        isZoom2 = isZoom2 && this.imgBigPath;
+        if (isZoom2) {
+            if (!this.isZoom) {
+                $('#' + mainIdEl).elevateZoom({
+                    constrainType: "height",
+                    constrainSize: 274,
+                    zoomType: "lens",
+                    containLensZoom: true,
+                    zoomWindowPosition: mainIdEl,
+                    cursor: 'pointer',
+                    zoomWindowContainerClass: "dynamic-constructor-zoom",
+                    zoomContainerClass: "dynamic-constructor-zoom",
+                    myid: '.az-picture-page-picture-main-banner-div div div'
+                });
+            } else {
+                if (!this.zoomType) {
+                    $('#' + mainIdEl).elevateZoom({
+                        zoomWindowPosition: 4,
+                        borderSize: 4,
+                        zoomWindowWidth: 600,
+                        zoomWindowHeight: 600,
+                        easing: true,
+                        cursor: 'pointer',
+                        zoomWindowContainerClass: "constructor-zoom",
+                        zoomContainerClass: "constructor-zoom",
+                        myid: '#' + mainIdEl
+                    });
+                } else {
+                    $('#' + mainIdEl).elevateZoom({
+                        borderSize: 1,
+                        zoomType: "inner",
+                        cursor: 'pointer',
+                        zoomWindowContainerClass: "constructor-zoom",
+                        zoomContainerClass: "constructor-zoom",
+                        myid: '#' + mainIdEl
+                    });
+                }
+            }
         }
 
     };
@@ -797,6 +848,10 @@ function ConstructorOverview() {
             module = $('div.az-picture-page-sidebar-choose-module'),
             panel_sizes = $('div#az-picture-page-sidebar-size-panel-div'),
             mat_color = $('div.az-picture-page-sidebar-choose-mat-color');
+        if (this.isConstructor) {
+            $(".zoomContainer").remove();
+            $(".zoomWindowContainer").remove();
+        }
         switch (this.type) {
             case 'Баннер':
                 subframe.show();

@@ -210,9 +210,9 @@ if (typeof Object.create !== 'function') {
                     + "border-bottom-right-radius: " + String(self.options.lensSize / 2 + self.options.borderSize) + "px;";
 
             }
-            //create the div's                                                + ""
-            //self.zoomContainer = $('<div/>').addClass('zoomContainer').css({"position":"relative", "height":self.nzHeight, "width":self.nzWidth});
-            self.zoomContainer = $('<div class="zoomContainer" style="-webkit-transform: translateZ(0);position:absolute;left:' + self.nzOffset.left + 'px;top:' + self.nzOffset.top + 'px;height:' + self.nzHeight + 'px;width:' + self.nzWidth + 'px;"></div>');
+            //create the div's
+            var zoomContainerClass = 'zoomContainer ' + self.options.zoomContainerClass;
+            self.zoomContainer = $('<div class="' + zoomContainerClass + '" style="-webkit-transform: translateZ(0);position:absolute;left:' + self.nzOffset.left + 'px;top:' + self.nzOffset.top + 'px;height:' + self.nzHeight + 'px;width:' + self.nzWidth + 'px;"></div>');
 
             $('body').append(self.zoomContainer);
 
@@ -266,7 +266,8 @@ if (typeof Object.create !== 'function') {
                         self.$elem.trigger('click');
                     });
             }
-            self.zoomWindowContainer = $('<div/>').addClass('zoomWindowContainer').css("width", self.options.zoomWindowWidth);
+            var zoomWindowContainerClass = 'zoomWindowContainer ' + self.options.zoomWindowContainerClass;
+            self.zoomWindowContainer = $('<div/>').addClass(zoomWindowContainerClass).css("width", self.options.zoomWindowWidth);
             self.zoomWindow.wrap(self.zoomWindowContainer);
 
 
@@ -781,8 +782,8 @@ if (typeof Object.create !== 'function') {
                         self.windowOffsetLeft = (self.nzWidth); //DONE 1, 2, 3, 4, 16
                         break;
                     case 4: //done
-                        self.windowOffsetTop = (self.nzHeight); //DONE - 4,5,6,7,8
-                        self.windowOffsetLeft = (self.nzWidth); //DONE 1, 2, 3, 4, 16
+                        self.windowOffsetTop = (self.nzHeight) + 10; //DONE - 4,5,6,7,8
+                        self.windowOffsetLeft = (self.nzWidth) + 10; //DONE 1, 2, 3, 4, 16
                         break;
                     case 5: //done
                         self.windowOffsetTop = (self.nzHeight); //DONE - 4,5,6,7,8
@@ -864,7 +865,6 @@ if (typeof Object.create !== 'function') {
                 self.externalContainerWidth = self.externalContainer.width();
                 self.externalContainerHeight = self.externalContainer.height();
                 self.externalContainerOffset = self.externalContainer.offset();
-
                 self.windowOffsetTop = self.externalContainerOffset.top;//DONE - 1
                 self.windowOffsetLeft = self.externalContainerOffset.left; //DONE 1, 2, 3, 4, 16
             }
@@ -1186,6 +1186,8 @@ if (typeof Object.create !== 'function') {
         gallery: false,
         cursor: "default", // user should set to what they want the cursor as, if they have set a click function
         responsive: false,
+        zoomWindowContainerClass: "",
+        zoomContainerClass: "",
         myid: null,
         onComplete: $.noop,
         onZoomedImageLoaded: function () {

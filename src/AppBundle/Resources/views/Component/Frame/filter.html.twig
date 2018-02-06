@@ -25,7 +25,7 @@
         {% set filter_value = '' %}
     {% endif %}
 {% endif %}
-<div class="col-md-2 text-center az-filter-frame az-picture-page-constructor-block container-fluid">
+<div class="col-md-2 col-sm-2 text-center az-filter-frame az-picture-page-constructor-block container-fluid">
     <div class="row az-category-page-filter az-category-page-filter-photo">
         {% set title_direction = 'DESC' %}
         {% if sort_field is defined and sort_field == 'f.title' %}
@@ -35,7 +35,7 @@
                     class="glyphicon glyphicon-chevron-{% if title_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
     </div>
 </div>
-<div class="col-md-2 text-center  az-filter-frame az-picture-page-constructor-block container-fluid">
+<div class="col-md-2 col-sm-2 text-center  az-filter-frame az-picture-page-constructor-block container-fluid">
     <div class="row az-category-page-filter az-category-page-filter-photo">
         {% set width_direction = 'DESC' %}
         {% if sort_field == 'f.width' %}
@@ -46,7 +46,7 @@
         glyphicon-chevron-{% if width_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
     </div>
 </div>
-<div class="col-md-2 text-center az-filter-frame az-picture-page-constructor-block container-fluid">
+<div class="col-md-2 col-sm-2 text-center az-filter-frame az-picture-page-constructor-block container-fluid">
     <div class="row az-category-page-filter az-category-page-filter-photo">
         {% set height_direction = 'DESC' %}
         {% if sort_field == 'f.height' %}
@@ -58,7 +58,7 @@
     </div>
 </div>
 
-<div class="col-md-2 text-center az-filter-frame az-picture-page-constructor-block container-fluid">
+<div class="col-md-2 col-sm-2 text-center az-filter-frame az-picture-page-constructor-block container-fluid">
     <div class="row az-category-page-filter az-category-page-filter-photo">
         {% set material_direction = 'DESC' %}
         {% if sort_field == 'm.title' %}

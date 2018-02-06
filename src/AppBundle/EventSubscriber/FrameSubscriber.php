@@ -68,6 +68,8 @@ class FrameSubscriber
                 ->resizeImage($image->getOriginFile(), $image->getSmallThumbBasePath(), $image::THUMB_SMALL_IMAGE_HEIGHT, $image::THUMB_SMALL_IMAGE_WIDTH);
             $this->container->get('helper.imageresizer')
                 ->resizeImage($image->getOriginFile(), $image->getBasePath(), $frame::IMAGE_HEIGHT, $frame::IMAGE_WIDTH);
+            $this->container->get('helper.imageresizer')
+                ->copyImage($image->getOriginFile(), $image->getNormalBasePath(), $image->getFilename());
             unlink($image->getOriginFile());
         }
     }

@@ -17,13 +17,13 @@
         {% include('AppBundle:Component:Blocks/breadcrumb.html.twig') %}
     </div>
     <div class="row az-page-main-section-div az-page-category-main-section-div">
-        <div class="col-md-12 container-fluid">
+        <div class="col-md-12 col-sm-12 container-fluid">
             <div class="row page-title az-picture-page-title">
-                <div class="col-md-12"> Корзина</div>
+                <div class="col-md-12 col-sm-12"> Корзина</div>
             </div>
             {% if cart %}
                 <div class="row az-category-page-pictures-div">
-                    <div class="col-md-12 az-page-section-body az-page-main-popular container-fluid">
+                    <div class="col-md-12 col-sm-12 az-page-section-body az-page-main-popular container-fluid">
                         <div class="row">
                             {% for item in cart %}
 
@@ -40,33 +40,33 @@
 
                 <div class="row container-fluid">
 
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-6">
                         <a class="btn btn_az-main-popular_defer" onclick="javascript:window.history.back();return false;">Продолжить покупки</a>
                     </div>
-                    <div class="col-md-6 text-center az-picture-page-sidebar-header-block az-picture-page-sidebar-price ">Стоимость заказа:
+                    <div class="col-md-6 col-sm-6 text-center az-picture-page-sidebar-header-block az-picture-page-sidebar-price ">Стоимость заказа:
                         <span>{{ total_price }}</span> BYN
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 container-fluid">
+                    <div class="col-md-12 col-sm-12 container-fluid">
                         <h2>Оформление заказа</h2>
 
                         <span class="az-rewievs-comment"> Пожалуйста, внесите свои данные в поля формы. Поля формы, отмеченные * обязательны для заполнения</span>
                         <div class="row az-add-review-container">
                             {{ form_start(form) }}
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-6">
                                 {{ form_row(form._token) }}
                                 {{ form_row(form.fullname) }}
                                 {{ form_row(form.email) }}
                                 {{ form_row(form.phone) }}
                             </div>
-                            <div class="col-md-6">{{ form_row(form.city) }}
+                            <div class="col-md-6 col-sm-6">{{ form_row(form.city) }}
                                 {{ form_row(form.address) }}
                                 {{ form_row(form.company) }}
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 col-sm-12">
                                 {{ form_row(form.comment) }}
                                 {{ form_row(form.conditions) }}
                                 {{ form_row(form.save) }}
@@ -77,7 +77,7 @@
                 </div>
             {% else %}
                 <div class="row az-category-page-pictures-div">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12">
                         У вас в корзине нет картин.
                     </div>
                 </div>

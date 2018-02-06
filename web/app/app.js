@@ -567,6 +567,7 @@ define(function (require, exports, module) {
         $('.az-picture-page-constructor-picture-module-type-img').removeClass('hidden').show();
         $('.az-main-page-slider-img').removeClass('hidden').show();
 
+
     });
 
     function setShowBoard() {
@@ -695,6 +696,10 @@ define(function (require, exports, module) {
                 params['imgSideR'] = $(value).data('img-side-r');
                 params['imgSideB'] = $(value).data('img-side-b');
                 params['imgSideL'] = $(value).data('img-side-l');
+                params['imgZoom'] = $(value).data('img-zoom');
+                params['zoomType'] = $(value).data('zoom-type');
+                params['elemId'] = $(value).data('elem-id');
+
                 constructor.init(params);
                 constructor.show();
             });

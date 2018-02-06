@@ -14,17 +14,19 @@
 
 {% block body %}
 
-    <div class="col-md-12 container-fluid">
+<div class="col-md-12 col-sm-12 container-fluid">
     <div class="row az-page-main-section-div">
         {% include('AppBundle:Component:Blocks/breadcrumb.html.twig') %}
     </div>
 
-        <div class="row az-page-main-section-div">
+    <div class="row az-page-main-section-div">
 
-        <div class="col-md-12 container-fluid">
+        <div class="col-md-12 col-sm-12 container-fluid">
             <div class="row page-title az-picture-page-title">
-                <div class="col-md-6"> Отзывы</div>
-                <div class="col-md-6">  <a href="#form"><button class="btn">Оставьте свой отзыв</button></a></div>
+                <div class="col-md-6 col-sm-6"> Отзывы</div>
+                <div class="col-md-6 col-sm-6"><a href="#form">
+                        <button class="btn">Оставьте свой отзыв</button>
+                    </a></div>
             </div>
 
             {# rewiews body #}
@@ -34,14 +36,16 @@
                     <a name="review{{ article.id }}"></a>
                     <div class="col-md container-fluid">
                         <div class="row">
-                            <div class="col-md-6 az-reviews-name">{{ article.name }} ({{ article.city }})</div>
-                            <div class="col-md-6 az-rewiews-date">{{ article.createdAt | date('Y-m-d') }}</div>
+                            <div class="col-md-6 col-sm-6 az-reviews-name">{{ article.name }} ({{ article.city }})</div>
+                            <div class="col-md-6 col-sm-6 az-rewiews-date">{{ article.createdAt | date('Y-m-d') }}</div>
                         </div>
                         <div class="row">
                             <div class="col-md az-rewiews-article">{{ article.review }}</div>
                         </div>
 
-                </div> <div class="bottomarrowleft"></div> </div>
+                    </div>
+                    <div class="bottomarrowleft"></div>
+                </div>
 
 
             {% endfor %}
@@ -52,33 +56,33 @@
             </div>
         </div>
     </div>
-        <div class="row az-page-main-section-div">
-    <div class="col-md-12 container-fluid">
-        <a name="form"></a>
-        <h2>Оставьте свой отзыв</h2>
+    <div class="row az-page-main-section-div">
+        <div class="col-md-12 col-sm-12 container-fluid">
+            <a name="form"></a>
+            <h2>Оставьте свой отзыв</h2>
 
-        {#<span class="az-rewievs-comment"> Ваш отзыв будет добавлен на страницу только после проверки модератором</span>#}
-        <div class="row az-add-review-container">
+            {#<span class="az-rewievs-comment"> Ваш отзыв будет добавлен на страницу только после проверки модератором</span>#}
+            <div class="row az-add-review-container">
 
                 <form id="add_review">
-                    <div class="col-md-6">
-                  <div><label class="az-add_review_name" for="name">Ф.И.О.</label>
-            <input id="az-add_review_name" name="add_review_name" required />
-           </div>
-              <div><label class="az-add_review_email" for="email">Email</label>
-            <input id="az-add_review_email" name="add_review_email" type="email" required />
-              </div>
-               <div>
-            <label class="az-add_review_city" for="city">Город</label>
-            <input id="az-add_review_city" name="add_review_city" required />
-               </div>
-           </div>
-           <div class="col-md-6">
-            <label class="az-add_review_description" for="description">Отзыв</label>
+                    <div class="col-md-6 col-sm-6">
+                        <div><label class="az-add_review_name" for="name">Ф.И.О.</label>
+                            <input id="az-add_review_name" name="add_review_name" required/>
+                        </div>
+                        <div><label class="az-add_review_email" for="email">Email</label>
+                            <input id="az-add_review_email" name="add_review_email" type="email" required/>
+                        </div>
+                        <div>
+                            <label class="az-add_review_city" for="city">Город</label>
+                            <input id="az-add_review_city" name="add_review_city" required/>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <label class="az-add_review_description" for="description">Отзыв</label>
             <textarea id="az-add_review_description" name="az-add_review_description"
                       placeholder="Введите текст отзыва" required></textarea>
-               <button class="btn btn-bg az-header-feedback-btn" type="submit">Отправить</button>
-           </div>
+                        <button class="btn btn-bg az-header-feedback-btn" type="submit">Отправить</button>
+                    </div>
                     <div id="successReviewForm" class="modal fade" style="display: none;">
                         <div class="modal-dialog">
                             <div class="modal-content az-picture-page-hint-modal-div ">
@@ -106,5 +110,8 @@
                         </div>
                     </div>
 
-    </form></div></div></div>
-        {% endblock %}
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

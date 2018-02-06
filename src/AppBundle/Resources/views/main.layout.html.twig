@@ -15,6 +15,8 @@
         @import url("{{ asset('bower_components/bootstrap/dist/css/bootstrap-social.css', absolute=true) }}");
         @import url("{{ asset('bower_components/bootstrap/dist/css/font-awesome.css', absolute=true) }}");
         @import url("{{ asset('bundles/app/css/custom.css', absolute=true) }}");
+
+        {#@import url("{{ asset('bundles/app/css/non-responsive.css', absolute=true) }}");#}
     </style>
     <script src="{{ asset('bundles/app/js/CategoryMenu.js', absolute=true) }}"></script>
 </head>
@@ -24,13 +26,13 @@
     {% include('AppBundle:Component:header.html.twig') %}
 
     <div class="row">
-        <aside class="col-md-3 container-fluid">
+        <aside class="col-md-3 col-sm-3  container-fluid">
             {% include('AppBundle:Component:blocks.html.twig') %}
         </aside>
-        <section class="col-md-9 az-main">
+        <section class="col-md-9 col-sm-9 az-main">
             <div class="container-fluid">
                 <div class="row message-inner-div az-page-main-section-div alert hidden">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12">
                         <strong id="message-inner-div-type"></strong> <span id="message-inner-div-info"></span>
                     </div>
                 </div>
