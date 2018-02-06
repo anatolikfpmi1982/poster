@@ -1,8 +1,6 @@
 <?php
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\FrameColor;
-use AppBundle\Entity\FrameMaterial;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -494,7 +492,7 @@ class Frame implements ImageInterface
         if(count($this->images) > 0) {
             return '/files/' . $this->images[0]->getEntityName() . '/mini_thumb/' . $this->images[0]->getFilename();
         }
-
+        return '';
     }
 
     /**
