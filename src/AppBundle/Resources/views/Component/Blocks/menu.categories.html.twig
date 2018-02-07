@@ -66,8 +66,37 @@
                                                      data-url="{{ path('category', {'slug': subsubcategory_slug }) }}"
                                                      data-id="{{ subsubidentifier }}">
 
-                                                    <div class="col-md-12 az-subsubcategory-item-img">
-                                                        <span class="az-subsubcat-span">{{ subsubcategory.title }}</span>
+                                                    <div class="col-md-12 container-fluid az-sidebar-subsubcategory-first {% if visible and subsubcategory.id in activeCategories %}active_parent{% endif %}">
+                                                        <span class="az-subcat-span">{{ subsubcategory.title }}</span>
+                                                        {% if subsubcategory.children is defined and subsubcategory.children %}
+                                                            <div class="row category-menu children-subsubcategory-{{ identifier }}" id="children-subsubcategory-{{ subsubidentifier }}"
+                                                                 style="display:{% if visible and subcategory.id in activeCategories %}block{% else %}none{% endif %};">
+                                                                <div class="col-md-12 container-fluid">
+                                                                    {% for subsubsubcategory in subsubcategory.children %}
+                                                                        {% if subsubsubcategory.slug is defined and subsubsubcategory.slug %}
+                                                                            {% set subsubsubcategory_slug = subsubsubcategory.slug %}
+                                                                        {% else %}
+                                                                            {% set subsubsubcategory_slug = '#' %}
+                                                                        {% endif %}
+                                                                        {% if module is defined and module%}
+                                                                            {% set options = {'slug': subsubsubcategory_slug, 'type': 'module'} %}
+                                                                            {% set subsubsubidentifier = 'm' ~ subsubsubcategory.id %}
+                                                                        {% else %}
+                                                                            {% set options = {'slug': subsubsubcategory_slug} %}
+                                                                            {% set subsubsubidentifier = subsubsubcategory.id %}
+                                                                        {% endif %}
+                                                                        <div class="row subsubcategory-menu az-sidebar-subsubsubcategory-item children-subsubsubcategory-{{ subsubidentifier }} {% if visible and subsubsubcategory.id == active_category_id %}active{% endif %}"
+                                                                             data-url="{{ path('category', {'slug': subsubsubcategory_slug }) }}"
+                                                                             data-id="{{ subsubsubidentifier }}">
+
+                                                                            <div class="col-md-12 az-subsubsubcategory-item-img">
+                                                                                <span class="az-subsubsubcat-span">{{ subsubsubcategory.title }}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    {% endfor %}
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}
                                                     </div>
                                                 </div>
                                             {% endfor %}
