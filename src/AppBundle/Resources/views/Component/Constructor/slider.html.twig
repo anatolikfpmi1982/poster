@@ -2,7 +2,7 @@
     <div class="col-md-12 owl-carousel owl-theme" id="owl-example">
         {% if pictureThicknesses is defined and pictureThicknesses %}
             <div class="item">
-                <a href="{{ path('picture_frame', {'id': pictureMain.id}) }}">
+                <a href="{% if ownPicture is defined %}{{ path('my_file_frame', {'id': pictureMain.id}) }}{% else %}{{ path('picture_frame', {'id': pictureMain.id}) }}{% endif %}">
                     <img src="{{ asset('bundles/app/images/material_default.png') }}" class="hidden az-picture-page-constructor-picture-thickness-img"
                          data-title="Автоподбор"
                          data-ratio="0"

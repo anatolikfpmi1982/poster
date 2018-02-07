@@ -182,4 +182,90 @@ class MyFilesController extends FrontController {
         // parameters to template
         return new JsonResponse(array('result' => 1, 'count' => $count));
     }
+
+    /**
+     * @param int $id
+     *
+     * @Route("/myfile/{id}/module", name="my_file_module")
+     *
+     * @return Response
+     * @throws BadRequestHttpException
+     */
+    public function showModuleAction( $id ) {
+        $this->blocks = array_merge($this->blocks);
+        $this->pageSlug = $id;
+        $this->pageType = 'my_file';
+        $this->menu = 'myfile/' . $id;
+        $this->id = $id;
+        $this->doBlocks();
+
+        /** @var Picture $picture */
+        $picture = $this->em->getRepository( 'AppBundle:OwnPicture' )->find( $id );
+        if(!$picture instanceof OwnPicture) {
+            throw new BadRequestHttpException('Загруженная картина не найдена.');
+        }
+
+        $this->data['pictureMain'] = $picture;
+        if($picture->getImage() instanceof Image) {
+            $imgFile = $picture->getImage()->getBaseFile();
+            $size = getimagesize($imgFile);
+            $this->data['pictureBaseWidth'] = $size[0];
+            $this->data['pictureBaseHeight'] = $size[1];
+            $imgFileSmall = $picture->getImage()->getSmallThumbBaseFile();
+            $size = getimagesize($imgFileSmall);
+            $this->data['pictureSmallWidth'] = $size[0];
+            $this->data['pictureSmallHeight'] = $size[1];
+            $imgFileThumb = $picture->getImage()->getThumbBaseFile();
+            $size = getimagesize($imgFileThumb);
+            $this->data['pictureThumbWidth'] = $size[0];
+            $this->data['pictureThumbHeight'] = $size[1];
+        }
+        $this->data['moduleTypes'] = $this->em->getRepository( 'AppBundle:ModuleType' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
+
+        // parameters to template
+        return $this->render( 'AppBundle:Pictures:show.module.html.twig', $this->data );
+    }
+
+    /**
+     * @param int $id
+     *
+     * @Route("/myfile/{id}/frame", name="my_file_frame")
+     *
+     * @return Response
+     * @throws BadRequestHttpException
+     */
+    public function showFrameAction( $id ) {
+        $this->blocks = array_merge($this->blocks);
+        $this->pageSlug = $id;
+        $this->pageType = 'my_file';
+        $this->menu = '/myfile/' . $id;
+        $this->id = $id;
+        $this->doBlocks();
+
+        /** @var Picture $picture */
+        $picture = $this->em->getRepository( 'AppBundle:OwnPicture' )->find( $id );
+        if(!$picture instanceof OwnPicture) {
+            throw new BadRequestHttpException('Загруженная картина не найдена.');
+        }
+
+        $this->data['pictureMain'] = $picture;
+        if($picture->getImage() instanceof Image) {
+            $imgFile = $picture->getImage()->getBaseFile();
+            $size = getimagesize($imgFile);
+            $this->data['pictureBaseWidth'] = $size[0];
+            $this->data['pictureBaseHeight'] = $size[1];
+            $imgFileSmall = $picture->getImage()->getSmallThumbBaseFile();
+            $size = getimagesize($imgFileSmall);
+            $this->data['pictureSmallWidth'] = $size[0];
+            $this->data['pictureSmallHeight'] = $size[1];
+            $imgFileThumb = $picture->getImage()->getThumbBaseFile();
+            $size = getimagesize($imgFileThumb);
+            $this->data['pictureThumbWidth'] = $size[0];
+            $this->data['pictureThumbHeight'] = $size[1];
+        }
+        $this->data['pictureThicknesses'] = $this->em->getRepository( 'AppBundle:Frame' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
+
+        // parameters to template
+        return $this->render( 'AppBundle:Pictures:show.frame.html.twig', $this->data );
+    }
 }
