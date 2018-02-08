@@ -11,8 +11,8 @@
                 <a class="breadcrumb-item" href="/">Главная</a>
                 {% for breadcrumb in site_blocks.BreadCrumb|reverse %}
                     {% set title = breadcrumb.title %}
-                    {% if not isPicturePage and breadcrumb.title|length > 64 %}
-                        {% set title = breadcrumb.title|slice(0, 61) ~ '...' %}
+                    {% if breadcrumb.title|length > 59 %}
+                        {% set title = breadcrumb.title|slice(0, 56) ~ '...' %}
                     {% endif %}
                     {% if not loop.last %}
                         <a class="breadcrumb-item" href="{{ breadcrumb.url }}">{{ title }}</a>

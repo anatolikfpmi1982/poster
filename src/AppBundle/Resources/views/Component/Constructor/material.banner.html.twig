@@ -1,9 +1,9 @@
-<div class="col-md-12 az-picture-size-div az-picture-banner-material-div container-fluid">
+<div class="col-md-12 col-sm-12 az-picture-size-div az-picture-banner-material-div container-fluid">
     <div class="row az-picture-page-sidebar-size">
-        <div class="col-md-4 text-left az-picture-page-sidebar-header-block az-picture-page-sidebar-material-div-left">
+        <div class="col-md-4 col-sm-4 text-left az-picture-page-sidebar-header-block az-picture-page-sidebar-material-div-left">
             <label data-for="picture-size">Материал: </label>
         </div>
-        <div class="col-md-8 az-picture-page-sidebar-div-right">
+        <div class="col-md-8 col-sm-8 az-picture-page-sidebar-div-right">
             <button class="btn az-picture-page-sidebar-size-btn az-picture-page-hint" data-toggle="modal" data-target="#myModabanner">Подробнее ?</button>
             <div id="myModabanner" class="modal fade">
                 <div class="modal-dialog">
@@ -32,22 +32,22 @@
             {% set active_material_id = 0 %}
         {% endif %}
         {% for material in materials %}
-        <div class="col-md-4 container-fluid az-picture-page-sidebar-material-banner-block-selector
+        <div class="col-md-4 col-sm-4 container-fluid az-picture-page-sidebar-material-banner-block-selector
         {% if (active_material_id and active_material_id==material.id) or (not active_material_id and ind == 1) %}active{% endif %}"
              data-title="{{ material.title }}"
              data-id="{{ material.id }}">
             <div class="row">
-                <div class="col-md-12 text-center az-picture-page-material-banner-div-img">
-                    <img src="/files/banner_materials/small_thumb/{{ material.image.getFilename() }}" class="az-picture-page-material-banner-img"/>
+                <div class="col-md-12 col-sm-12 text-center az-picture-page-material-banner-div-img">
+                    <img src="/files/banner_materials/small_thumb/{{ material.image.getFilename() }}" class="img-fluid az-picture-page-material-banner-img"/>
                 </div>
             </div>
             <div class="row text-center">
-                <div class="col-md-12">
-                    <span class="az-picture-page-type-img-text">{{ material.title }}</span>
+                <div class="col-md-12 col-sm-12 az-picture-page-material-banner-div-title">
+                    <label class="az-picture-page-type-img-text">{{ material.title }}</label>
                 </div>
             </div>
             <div class="row text-center az-picture-page-material-radio-div">
-                <div class="col-md-12">
+                <div class="col-md-12 col-sm-12">
                     <input type="radio" class="btn hidden az-picture-page-constructor-material-radio" value="{{ material.title }}" title="az-picture-page-material"
                            name="az-picture-page-material"
                            data-title="{{ material.title }}"

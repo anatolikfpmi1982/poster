@@ -1,4 +1,4 @@
-<div class="col-md-12 az-picture-price-div container-fluid">
+<div class="col-md-12 col-sm-12 az-picture-price-div container-fluid">
     <div class="row text-center az-picture-page-sidebar-header-block az-picture-page-sidebar-price ">
         {% if site_settings is defined and site_settings and site_settings.min_price is defined and site_settings.min_price %}
             {% set min_price = site_settings.min_price %}
@@ -8,7 +8,7 @@
         <span class="az-picture-page-sidebar-price-value" data-min-price="{{ min_price }}" data-price="0">0</span> BYN
     </div>
     <div class="row az-picture-page-sidebar-size-div-body">
-        <div class="col-md-6 text-left az-picture-page-sidebar-price-btn-div-left">
+        <div class="col-md-6 col-sm-6 text-left az-picture-page-sidebar-price-btn-div-left">
             <button class="btn az-picture-page-sidebar-price-btn picture_order-bnt"
                     data-own-id="{% if ownPicture is defined %}{{ pictureMain.id }}{% endif %}"
                     data-id="{% if ownPicture is not defined %}{{ pictureMain.id }}{% endif %}"
@@ -20,7 +20,7 @@
             </button>
         </div>
         {% if ownPicture is not defined %}
-            <div class="col-md-6 text-right az-picture-page-sidebar-price-btn-div-right">
+            <div class="col-md-6 col-sm-6 text-right az-picture-page-sidebar-price-btn-div-right">
                 <button class="btn az-picture-page-sidebar-price-btn picture_defer-bnt" data-id="{{ pictureMain.id }}">Отложить</button>
             </div>
         {% endif %}

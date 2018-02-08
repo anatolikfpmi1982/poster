@@ -220,10 +220,6 @@ div[class*="children-subsubcategory-"]:hover {
     font-size: 15px;
 }
 
-.az-sidebar-popular-item {
-    margin: 10px;
-}
-
 .az-review-block-img {
     margin: 0 10px 0 10px;
 }
@@ -255,9 +251,11 @@ div[class*="children-subsubcategory-"]:hover {
     border-top: 1px solid #e6e6e6;
     border-right: 1px solid #e6e6e6;
     padding: 0 10px 15px 10px;
+    height: 564px;
 }
 
-.az-popular-item:first-child {
+.az-popular-item.col-md-4:nth-child(3n+1),
+.az-popular-item.col-sm-6:nth-child(2n+1) {
     border-left: 1px solid #e6e6e6;
 }
 
@@ -295,26 +293,6 @@ a:-webkit-any-link {
 
 button, input, optgroup, select, textarea {
     color: #ffffff;
-}
-
-/**feedback**/
-
-.az-sidebar-popular-item-name {
-    font-size: 15px;
-    line-height: 22px;
-    padding: 20px 0 0 0;
-}
-
-.az-sidebar-popular-item-date {
-    color: #fd1200;
-    font-size: 13px;
-    margin-bottom: 15px;
-}
-
-.az-sidebar-popular-item-body {
-    font: 11px/16px 'arial', 'helvetica', 'sans-serif';
-    color: #595959;
-    font-style: italic;
 }
 
 /** footer**/
@@ -733,10 +711,6 @@ footer {
 
 .btn.az-picture-page-sidebar-size-select option {
     color: #0b0b0b;
-}
-
-.az-picture-page-sidebar-div-right {
-    padding-top: 10px;
 }
 
 .az-picture-page-material-radio-div {
@@ -1853,6 +1827,11 @@ footer {
     line-height: 10px;
 }
 
+.az-picture-page-material-banner-div-title {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 .az-picture-page-slider-material {
     padding-top: 20px;
 }
@@ -2234,10 +2213,6 @@ button.close:focus, .close:hover {
     cursor: pointer;
     color: #333;
     padding: 0 0 0 5px;
-}
-
-.az-header-download-icon {
-
 }
 
 .az-header-download:hover {
@@ -2786,5 +2761,141 @@ and (-webkit-min-device-pixel-ratio: 2) {
 
     .az-all-breadcrumb-buttons {
         width: 90px;
+    }
+
+    .az-main-sidebar {
+        padding-right: 0;
+    }
+
+    .btn.az-picture-page-sidebar-price-btn {
+        width: 60px;
+        min-width: 60px;
+        padding: 2px 2px;
+        font: 10px 'Open Sans', 'arial', 'helvetica', 'sans-serif';
+    }
+
+    .page-title {
+        font-size: 16px;
+        font-weight: 200;
+        padding: 10px 0 0 0;
+    }
+
+    .az-catalog-block-img {
+        padding-right: 5px;
+    }
+
+    .az-header-download-icon {
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+
+    .az-main-page-header-icon-cell {
+        padding-left: 5px;
+        padding-right: 20px;
+    }
+
+    .az-picture-page-sidebar-header-block {
+        padding-left: 5px;
+        padding-top: 5px;
+        padding-right: 5px;
+        font-size: 10px;
+    }
+
+    .az-picture-page-sidebar-price {
+        font-size: 16px;
+    }
+
+    .az-sidebar-popular-item {
+        margin: 5px;
+    }
+
+    .az-sidebar-popular-item-name {
+        font-size: 11px;
+        line-height: 10px;
+        padding: 5px 0 0 0;
+    }
+
+    .az-sidebar-popular-item-date {
+        font-size: 11px;
+        margin-bottom: 0;
+    }
+
+    .az-picture-page-sidebar-div-right {
+        padding-top: 5px;
+    }
+
+    .az-picture-page-material-banner-div-title {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .owl-carousel .owl-stage-outer {
+        margin: 5px auto;
+        height: 50px;
+    }
+
+    .owl-prev {
+        display: block;
+        left: 0;
+        margin-left: -8px;
+        width: 34px;
+        height: 50px;
+        border-radius: inherit;
+    }
+
+    .owl-next {
+        display: block;
+        right: 15px;
+        margin-top: 0;
+        margin-left: -8px;
+        width: 34px;
+        height: 50px;
+        border-radius: inherit;
+    }
+
+    .az-picture-page-sidebar-choose-sub-title {
+        padding-left: 5px;
+    }
+
+    .az-picture-page-thickness-img {
+        width: 36px;
+        height: 36px;
+    }
+
+    .az-picture-page-type-img-text {
+        font-size: 8px;
+    }
+
+    .az-main-popular-item-header-category {
+        padding-right: 10px;
+        padding-left: 15px;
+        margin: 10px auto 0 auto;
+        height: 20px;
+    }
+
+    .az-popular-item {
+        padding: 0 10px 10px 15px;
+        height: 450px;
+    }
+
+    .text-left_artik {
+        font-size: 11px;
+        padding: 10px 0 10px 25px;
+    }
+
+    .breadcrumb {
+        margin: 0 0;
+    }
+
+    .owl-carousel .owl-item img {
+        height: 48px;
+    }
+
+    .owl-theme .owl-nav .owl-prev {
+        margin: -5px 0 0 -6px;
+    }
+
+    .owl-theme .owl-nav [class*="owl-"] {
+        margin: -5px 0 0 0;
     }
 }

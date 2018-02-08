@@ -3,18 +3,18 @@
 {% else %}
     {% set img = asset('bundles/app/images/default_picture.jpg') %}
 {% endif %}
-<div class="col-md-4 az-popular-item container">
+<div class="col-md-4 col-sm-4 az-popular-item container">
     <div class="row text-center az-main-popular-item-img-div">
-        <div class="col-md-12">
+        <div class="col-md-12 col-sm-12">
             <a href="/myfile/{{ picture.id }}"><img src="{{ img }}" class="az-main-popular-item-img"></a>
         </div>
     </div>
     <div class="row">
         <div class="az-main-popular-item-header-buttons container-fluid">
             <div class="row">
-                <div class="col-md-6 text-right container-fluid az_btn_postpone">
+                <div class="col-md-6 col-sm-6 text-right container-fluid az_btn_postpone">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-sm-12">
                             <button class="btn_az-main-popular_defer delete-myfiles-bnt" data-id="{{ picture.id }}">Удалить</button>
                         </div>
                     </div>

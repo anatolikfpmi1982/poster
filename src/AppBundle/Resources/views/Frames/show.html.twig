@@ -19,19 +19,19 @@
     {% include('AppBundle:Component:Blocks/breadcrumb.html.twig') %}
 </div>
 <div class="row az-page-main-section-div">
-    <div class="col-md-12 container-fluid">
+    <div class="col-md-12 col-sm-12 container-fluid">
         <div class="row page-title az-picture-page-title">
-            <div class="col-md-12">  Рама {{ frame.title }} </div>
+            <div class="col-md-12 col-sm-12"> Рама {{ frame.title }} </div>
 
-       </div>
+        </div>
         <div class="row az-picture-page-author-articul-div">
-            <div class="col-md-2">  {{ frame.width }} X {{ frame.height }} см</div>
-            <div class="col-md-10"> {{ frame.material }}</div>
+            <div class="col-md-2 col-sm-2">  {{ frame.width }} X {{ frame.height }} см</div>
+            <div class="col-md-10 col-sm-10"> {{ frame.material }}</div>
         </div>
 
 
         <div class="row az-page-main-section-div az-frames-slide">
-            <div class="col-md-3">
+            <div class="col-md-3 col-sm-3">
                 <div class="cycle-overlay custom"></div>
 
                 <a class="left carousel-control" href="#carousel-example-generic" role="button" id="prev-slider" data-slide="prev">
@@ -39,7 +39,7 @@
                 </a>
 
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-6">
                 <div class="cycle-slideshow"
                      data-cycle-fx=scrollHorz
                      data-cycle-timeout=0
@@ -66,7 +66,7 @@
 
                 </div>
             </div>
-            <div class="col-md-3"><a class="right carousel-control" href="#carousel-example-generic" id="next-slider" role="button" data-slide="next">
+            <div class="col-md-3 col-sm-3"><a class="right carousel-control" href="#carousel-example-generic" id="next-slider" role="button" data-slide="next">
                     <i class="fa fa-angle-right"></i><span class="sr-only">Next</span>
                 </a></div>
         </div>
@@ -78,7 +78,7 @@
         <!--{% set images = frame.images %}
                 {% block images_list %} {% include 'AppBundle::Images/list.block.html.twig' %}-->
 
-        <div class="col-md-12 az-frame-slide-about">
+        <div class="col-md-12 col-sm-12 az-frame-slide-about">
             <p>Рама "{{ frame.title }}"</p>
             <p>Артикул: {{ frame.id }}</p>
             <p>Цвет: {{ frame.color }}</p>
@@ -86,10 +86,10 @@
             <p>Ширина: {{ frame.width }}</p>
             <p>Высота: {{ frame.height }}</p>
             {% if frame.description %}
-            <p>
-                Описание:<br/>
-                {{ frame.description|raw }}
-            </p>
+                <p>
+                    Описание:<br/>
+                    {{ frame.description|raw }}
+                </p>
             {% endif %}
         </div>
     </div>

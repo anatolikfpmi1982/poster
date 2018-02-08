@@ -21,16 +21,16 @@
         {% include('AppBundle:Component:Blocks/breadcrumb.html.twig') %}
     </div>
     <div class="row az-page-main-section-div">
-        <div class="col-md-9 container-fluid az-picture-page-constructor-global-div">
+        <div class="col-md-9 col-sm-9 container-fluid az-picture-page-constructor-global-div">
             <div class="row page-title az-picture-page-title">Загруженная картина</div>
             {% include('AppBundle:Component:Constructor/picture.html.twig') %}
             <div class="row text-center az-picture-page-slider-material-div">
-                <div class="col-md-12">
+                <div class="col-md-12 col-sm-12">
                     {% include('AppBundle:Component:Constructor/slider.html.twig') %}
                 </div>
             </div>
             <div class="row text-center az-picture-page-constructor-template-div">
-                <div class="col-md-12">
+                <div class="col-md-12 col-sm-12">
                     {% include('AppBundle:Component:Constructor/template.html.twig') %}
                 </div>
             </div>
@@ -59,16 +59,16 @@
             <input type="hidden" name="constructor_picture_price" id="constructor_picture_price" value="0">
             <input type="hidden" name="constructor_picture_ratio" id="constructor_picture_ratio" value="1">
         </div>
-        <div class="col-md-3 container-fluid az-constructor-block">
+        <div class="col-md-3 col-sm-3 container-fluid az-constructor-block">
             <div class="row az-picture-page-constructor-block hidden" id="az-picture-page-sidebar-deffered-div">
-                <div class="col-md-12">
+                <div class="col-md-12 col-sm-12">
                     <a href="{{ path('deferred') }}">
                         <button class="btn az-btn-delayed-image">Отложенные <span id="az-picture-page-sidebar-deffered-div-count">0</span></button>
                     </a>
                 </div>
             </div>
             <div class="row az-picture-page-constructor-block hidden" id="az-picture-page-sidebar-myfiles-div">
-                <div class="col-md-12">
+                <div class="col-md-12 col-sm-12">
                     <a href="{{ path('my_files') }}">
                         <button class="btn az-btn-myfiles-image">Мои файлы <span id="az-picture-page-sidebar-myfiles-div-count">0</span></button>
                     </a>

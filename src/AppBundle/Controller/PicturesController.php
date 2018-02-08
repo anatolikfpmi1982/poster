@@ -87,6 +87,7 @@ class PicturesController extends FrontController {
         if($type === 'module') {
             $this->data['module_active'] = true;
         };
+        $this->data['isMobile'] = $this->get('pictures.service')->isMobile();
 
         // parameters to template
         return $this->render( 'AppBundle:Pictures:show.html.twig', $this->data );

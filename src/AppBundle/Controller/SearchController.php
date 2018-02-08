@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class SearchController extends FrontController
 {
-    const PAGE_LIMIT = 5;
+    const PAGE_LIMIT = 20;
 
     /**
      * @param Request $request

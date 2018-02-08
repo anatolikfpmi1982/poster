@@ -1,9 +1,9 @@
-<div class="col-md-12 az-picture-size-div az-picture-thickness-div container-fluid">
+<div class="col-md-12 col-sm-12 az-picture-size-div az-picture-thickness-div container-fluid">
     <div class="row az-picture-page-sidebar-size">
-        <div class="col-md-4 text-left az-picture-page-sidebar-header-block az-picture-page-sidebar-thickness-div-left">
+        <div class="col-md-4 col-sm-4 text-left az-picture-page-sidebar-header-block az-picture-page-sidebar-thickness-div-left">
             <label data-for="picture-size">Толщина подрамника: </label>
         </div>
-        <div class="col-md-8 az-picture-page-sidebar-div-right">
+        <div class="col-md-8 col-sm-8 az-picture-page-sidebar-div-right">
             <button class="btn az-picture-page-sidebar-size-btn az-picture-page-hint" data-toggle="modal" data-target="#myModalthick">Подробнее ?</button>
 
             <div id="myModalthick" class="modal fade">
@@ -34,21 +34,21 @@
             {% set active_underframe = '' %}
         {% endif %}
         {% for thickness in thicknesses %}
-        <div class="col-md-4 container-fluid az-picture-page-sidebar-thickness-block-selector
+        <div class="col-md-4 col-sm-4 container-fluid az-picture-page-sidebar-thickness-block-selector
         {% if active_underframe==thickness.depth~' см' or ( not active_underframe and ind == 1) %}active{% endif %}"
              data-id="{{ thickness.id }}">
             <div class="row">
-                <div class="col-md-12 text-center az-picture-page-material-banner-div-img">
+                <div class="col-md-12 col-sm-12 text-center az-picture-page-material-banner-div-img">
                     <img src="/files/underframes/small_thumb/{{ thickness.image.getFilename() }}" class="az-picture-page-thickness-img"/>
                 </div>
             </div>
             <div class="row text-center">
-                <div class="col-md-12">
-                    <span class="az-picture-page-type-img-text">{{ thickness.depth }}</span> см
+                <div class="col-md-12 col-sm-12">
+                    <span class="az-picture-page-type-img-text">{{ thickness.depth }} см</span>
                 </div>
             </div>
             <div class="row text-center az-picture-page-material-radio-div">
-                <div class="col-md-12">
+                <div class="col-md-12 col-sm-12">
                     <input type="radio" class="btn hidden az-picture-page-thickness"
                            value="{{ thickness.depth }} см"
                            title="az-picture-page-thickness"

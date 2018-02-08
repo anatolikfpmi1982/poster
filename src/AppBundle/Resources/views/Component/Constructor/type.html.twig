@@ -1,10 +1,10 @@
-<div class="col-md-12 az-picture-size-div container-fluid">
+<div class="col-md-12 col-sm-12 az-picture-size-div container-fluid">
     <div class="row az-picture-page-sidebar-size">
-        <div class="col-md-4 text-left az-picture-page-sidebar-header-block az-picture-page-sidebar-type-div-left">
+        <div class="col-md-4 col-sm-4 text-left az-picture-page-sidebar-header-block az-picture-page-sidebar-type-div-left">
             <label data-for="picture-size">Тип изделия: </label>
         </div>
 
-        <div class="col-md-8 az-picture-page-sidebar-div-right">
+        <div class="col-md-8 col-sm-8 az-picture-page-sidebar-div-right">
             <button class="btn az-picture-page-sidebar-size-btn az-picture-page-hint" data-toggle="modal" data-target="#myModaltype">Подробнее ?</button>
 
             <div id="myModaltype" class="modal fade">
@@ -62,11 +62,11 @@
                 {% set isTypeSelected = true %}
                 {% set isBannerSelected = true %}
             {% endif %}
-            <div class="col-md-6 container-fluid az-picture-page-sidebar-type-block-selector {% if isBannerSelected %}active{% endif %}"
+            <div class="col-md-6 col-sm-6 container-fluid az-picture-page-sidebar-type-block-selector {% if isBannerSelected %}active{% endif %}"
                  data-title="Баннер"
                  data-value="1" data-type="banner">
                 <div class="row az-picture-page-type-div-img">
-                    <div class="col-md-12 az-picture-page-type-div-img show-constructor-img-lazy"
+                    <div class="col-md-12 col-sm-12 az-picture-page-type-div-img show-constructor-img-lazy"
                          data-src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}"
                          data-id="{{ pictureMain.id }}"
                          data-type="Баннер"
@@ -77,7 +77,7 @@
                          data-pad-left=4
                          data-pad-top=4
                          data-butt=2
-                         data-max-width=127
+                         data-max-width={% if not isMobile %}127{% else %}85{% endif %}
                          data-max-height={% if isImgFormExist and pictureForm == 'rectangle vertical' %}80{% else %}50{% endif %}
                          data-code="single|{horizontal|100-100-0}"
                          data-shadow=1
@@ -86,12 +86,12 @@
                     ></div>
                 </div>
                 <div class="row text-center">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12">
                         <span class="az-picture-page-type-img-text">Баннер</span>
                     </div>
                 </div>
                 <div class="row text-center az-picture-page-material-radio-div">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12">
                         <input type="radio" class="btn hidden az-picture-page-constructor-type-radio" data-title="Баннер" value="1"
                                title="az-picture-page-type" data-type='banner' name="az-picture-page-type"
                                {% if isBannerSelected %}checked{% endif %}/>
@@ -101,14 +101,14 @@
         {% endif %}
         {% if isPortraitType %}
             {% set isPortraitSelected = (cart_item.type_value is defined and cart_item.type_value=='В раме') %}
-            {% if isPortraitSelected or (not isTypeSelected and not (cart_item.type_value is defined and cart_item.type_value=='Модульная'))%}
+            {% if isPortraitSelected or (not isTypeSelected and not (cart_item.type_value is defined and cart_item.type_value=='Модульная')) %}
                 {% set isTypeSelected = true %}
                 {% set isPortraitSelected = true %}
             {% endif %}
-            <div class="col-md-6 container-fluid az-picture-page-sidebar-type-block-selector {% if isPortraitSelected %}active{% endif %}"
+            <div class="col-md-6 col-sm-6 container-fluid az-picture-page-sidebar-type-block-selector {% if isPortraitSelected %}active{% endif %}"
                  data-title="В раме" data-value="2" data-type="frame">
                 <div class="row az-picture-page-type-div-img">
-                    <div class="col-md-12 az-picture-page-type-div-img show-constructor-img-lazy"
+                    <div class="col-md-12 col-sm-12 az-picture-page-type-div-img show-constructor-img-lazy"
                          data-src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}"
                          data-id="{{ pictureMain.id }}"
                          data-type="В раме"
@@ -120,19 +120,19 @@
                          data-pad-top=4
                          data-butt=2
                          data-butt-portrait=3
-                         data-max-width=127
+                         data-max-width={% if not isMobile %}127{% else %}85{% endif %}
                          data-max-height={% if isImgFormExist and pictureForm == 'rectangle vertical' %}80{% else %}50{% endif %}
                          data-shadow=1
                          data-fill-in="1"
                     ></div>
                 </div>
                 <div class="row text-center">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12">
                         <span class="az-picture-page-type-img-text">В раме</span>
                     </div>
                 </div>
                 <div class="row text-center az-picture-page-material-radio-div">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12">
                         <input type="radio" class="btn hidden az-picture-page-constructor-type-radio" data-title="В раме" value="2"
                                title="az-picture-page-type" data-type='frame' name="az-picture-page-type"
                                {% if isPortraitSelected %}checked{% endif %}/>
@@ -150,17 +150,17 @@
                 {% set isTypeSelected = true %}
                 {% set isModuleSelected = true %}
             {% endif %}
-            <div class="col-md-6 container-fluid az-picture-page-sidebar-type-block-selector {% if isModuleSelected %}active{% endif %}"
+            <div class="col-md-6 col-sm-6 container-fluid az-picture-page-sidebar-type-block-selector {% if isModuleSelected %}active{% endif %}"
                  data-title="Модульная" data-value="3" data-type='module'>
                 <div class="row text-center">
-                    <div class="col-12 container-fluid">
+                    <div class="col-md-12 col-sm-12 container-fluid">
                         <div class="row text-center">
                             {% if moduleTypes is defined and moduleTypes and moduleTypes[0] is defined and moduleTypes[0] %}
                                 {% set pictureMainCode = moduleTypes[0].formula %}
                             {% else %}
                                 {% set pictureMainCode = 'single|{horizontal|100-100-0}' %}
                             {% endif %}
-                            <div class="col-md-12 az-picture-page-type-div-img show-constructor-img-lazy"
+                            <div class="col-md-12 col-sm-12 az-picture-page-type-div-img show-constructor-img-lazy"
                                  data-src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}"
                                  data-id="21"
                                  data-type="Модульная"
@@ -171,7 +171,7 @@
                                  data-pad-left=6
                                  data-pad-top=4
                                  data-butt=2
-                                 data-max-width=127
+                                 data-max-width={% if not isMobile %}127{% else %}85{% endif %}
                                  data-max-height={% if isImgFormExist and pictureForm == 'rectangle vertical' %}80{% else %}50{% endif %}
                                  data-code="{{ pictureMainCode }}"
                                  data-shadow=1
@@ -179,7 +179,7 @@
                             ></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 col-sm-12">
                                 <span class="az-picture-page-type-img-text">Модульная</span>
                             </div>
                         </div>

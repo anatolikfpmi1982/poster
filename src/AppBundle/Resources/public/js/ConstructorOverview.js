@@ -288,9 +288,9 @@ function ConstructorOverview() {
 
         var divSideT = $(newDivString);
         divSideT.addClass('az-picture-page-portrait-frame-side').addClass('az-picture-page-portrait-frame-side-t');
-        divSideT.css('left', 0);
+        divSideT.css('left', -2);
         divSideT.css('top', '-' + right_width + 'px');
-        divSideT.css('width', picWidth + 'px');
+        divSideT.css('width', (picWidth + 4) + 'px');
         divSideT.css('height', right_width + 'px');
         divSideT.css('background-image', 'url(' + imgSideT + ')');
         divSideT.css('background-size', right_width + 'px ' + right_width + 'px');
@@ -299,9 +299,9 @@ function ConstructorOverview() {
 
         var divSideB = $(newDivString);
         divSideB.addClass('az-picture-page-portrait-frame-side').addClass('az-picture-page-portrait-frame-side-t');
-        divSideB.css('left', 0);
+        divSideB.css('left', -2);
         divSideB.css('bottom', '-' + right_width + 'px');
-        divSideB.css('width', picWidth + 'px');
+        divSideB.css('width', (picWidth + 4) + 'px');
         divSideB.css('height', right_width + 'px');
         divSideB.css('background-image', 'url(' + imgSideB + ')');
         divSideB.css('background-size', right_width + 'px ' + right_width + 'px');
@@ -312,9 +312,9 @@ function ConstructorOverview() {
         var divSideR = $(newDivString);
         divSideR.addClass('az-picture-page-portrait-frame-side').addClass('az-picture-page-portrait-frame-side-r');
         divSideR.css('right', '-' + right_width + 'px');
-        divSideR.css('top', 0);
+        divSideR.css('top', -2);
         divSideR.css('width', right_width + 'px');
-        divSideR.css('height', picHeight + 'px');
+        divSideR.css('height', (picHeight + 4) + 'px');
         divSideR.css('background-image', 'url(' + imgSideR + ')');
         divSideR.css('background-size', right_width + 'px ' + right_width + 'px');
         divSideR.css('background-position', '0px 0px');
@@ -324,9 +324,9 @@ function ConstructorOverview() {
         var divSideL = $(newDivString);
         divSideL.addClass('az-picture-page-portrait-frame-side').addClass('az-picture-page-portrait-frame-side-l');
         divSideL.css('left', '-' + right_width + 'px');
-        divSideL.css('top', 0);
+        divSideL.css('top', -2);
         divSideL.css('width', right_width + 'px');
-        divSideL.css('height', picHeight + 'px');
+        divSideL.css('height', (picHeight + 4) + 'px');
         divSideL.css('background-image', 'url(' + imgSideL + ')');
         divSideL.css('background-size', right_width + 'px ' + right_width + 'px');
         divSideL.css('background-position', '0px 0px');
@@ -390,8 +390,11 @@ function ConstructorOverview() {
                     } else {
                         this.picWidth = maxWidth;
                     }
-
+                } else if (this.picHeight > maxHeight) {
+                    this.picWidth = Math.round((this.picWidth * maxHeight) / this.picHeight);
+                    this.picHeight = maxHeight;
                 }
+
                 if (this.debug) {
                     console.log('this.top_deviation', this.top_deviation);
                     console.log('this.left_deviation', this.left_deviation);
@@ -450,8 +453,11 @@ function ConstructorOverview() {
                     } else {
                         this.picWidth = maxWidth;
                     }
-
+                } else if (this.picHeight > maxHeight) {
+                    this.picWidth = Math.round((this.picWidth * maxHeight) / this.picHeight);
+                    this.picHeight = maxHeight;
                 }
+
                 if (this.debug) {
                     console.log('this.top_deviation', this.top_deviation);
                     console.log('this.left_deviation', this.left_deviation);
@@ -497,7 +503,7 @@ function ConstructorOverview() {
             top_deviation = this.top_deviation,
             panel_type = type,
             deviationRight = 0 - this.right_width,
-            screen_height = picHeight + (2 * top_deviation),
+            screen_height = picHeight + (2 * top_deviation) + (this.panelNumberVertical * this.right_width),
             mainTop = top_deviation,
             size = this.size != undefined ? this.size.split('x') : [],
             that = this, panelActiveInnerBlockNum = 0;

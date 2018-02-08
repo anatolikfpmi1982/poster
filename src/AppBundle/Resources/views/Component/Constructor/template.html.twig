@@ -5,7 +5,7 @@
     {% set moduleRatio = 0 %}
     {% set moduleFormula = '' %}
     {% if moduleTypes is defined and moduleTypes %}
-        <div class="col-md-12 owl-carousel owl-theme" id="owl-template">
+        <div class="col-md-12 col-sm-12 owl-carousel owl-theme" id="owl-template">
 
             <a href="{{ path('picture_module', {'id': pictureMain.id}) }}">
                 <img src="{{ asset('bundles/app/images/material_default.png') }}" class="hidden az-picture-page-constructor-picture-module-type-img"
@@ -41,7 +41,7 @@
             {% endfor %}
         </div>
     {% else %}
-        <div class="col-md-12">
+        <div class="col-md-12 col-sm-12">
             У нас пока отсутствуют шаблоны для данного вида картин.
         </div>
     {% endif %}

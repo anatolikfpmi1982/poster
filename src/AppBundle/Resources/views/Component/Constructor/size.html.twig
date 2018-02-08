@@ -1,9 +1,9 @@
-<div class="col-md-12 az-picture-size-div container-fluid">
+<div class="col-md-12 col-sm-12 az-picture-size-div container-fluid">
     <div class="row az-picture-page-sidebar-size">
-        <div class="col-md-4 text-left az-picture-page-sidebar-header-block az-picture-page-sidebar-size-div-left">
+        <div class="col-md-4 col-sm-4 text-left az-picture-page-sidebar-header-block az-picture-page-sidebar-size-div-left">
             <label data-for="picture-size">Размер: </label>
         </div>
-        <div class="col-md-8 az-picture-page-sidebar-div-right">
+        <div class="col-md-8 col-sm-8 az-picture-page-sidebar-div-right">
             <button class="btn az-picture-page-sidebar-size-btn az-picture-page-hint" data-toggle="modal" data-target="#myModalsize">Подробнее ?</button>
 
             <!-- HTML-код модального окна -->
@@ -59,17 +59,17 @@
         </select>
     </div>
     <div class="row {% if not isOwnSize %}hidden{% endif %} az-picture-page-sidebar-size-div-own-div">
-        <div class="col-md-3 col-md-offset-2">
+        <div class="col-md-3 col-sm-3 col-md-offset-2 col-sm-offset-2">
             <input type="text" name="own_width" id="own_width" value="{% if isOwnSize %}{{ ownSizes[0] }}{% endif %}" maxlength="3"
                    title="own_width" class="az-picture-page-sidebar-size-div-own-input">
         </div>
-        <div class="col-md-1">x</div>
-        <div class="col-md-3">
+        <div class="col-md-1 col-sm-1">x</div>
+        <div class="col-md-3 col-sm-3">
             <input type="text" name="own_height" value="{% if isOwnSize %}{{ ownSizes[1] }}{% endif %}" id="own_height" maxlength="3"
                    title="own_height" class="az-picture-page-sidebar-size-div-own-input">
         </div>
     </div>
     <div class="row" id="az-picture-page-sidebar-size-panel-div" style="display: none;">
-        <div class="col-12 container-fluid az-picture-page-sidebar-size-panel-div-content" id="az-picture-page-sidebar-size-panel-div-content"></div>
+        <div class="col-md-12 col-sm-12 container-fluid az-picture-page-sidebar-size-panel-div-content" id="az-picture-page-sidebar-size-panel-div-content"></div>
     </div>
 </div>
