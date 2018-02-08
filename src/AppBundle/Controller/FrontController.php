@@ -9,9 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  * Class FrontController
  */
 class FrontController extends Controller {
-
-    const MAIN_CATEGORY_ID = 2;
-
     /**
      * @var array
      */
@@ -63,7 +60,7 @@ class FrontController extends Controller {
         }
 
         $this->data['module_active'] = false;
-        $this->data['module_category_id'] = self::MAIN_CATEGORY_ID;
+        $this->data['module_category_id'] = 2;
         $this->data['active_menu'] = $this->menu;
         $this->data['site_settings'] = $this->getSiteSettings();
         $this->data['help_settings'] = $this->getHelpSettings();

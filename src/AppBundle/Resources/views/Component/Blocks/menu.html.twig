@@ -1,30 +1,27 @@
 <div class="row az-sidebar az-sidebar-catalog">
-    {% set active_category_parent_id = 0 %}
-    {% set active_category_parent_parent_id = 0 %}
-    {% set active_category_parent_parent_parent_id = 0 %}
+    {% set active_category_parent_id = ''~0 %}
+    {% set active_category_parent_parent_id = ''~0 %}
+    {% set active_category_parent_parent_parent_id = ''~0 %}
     {% if category is defined and category %}
-        {% set active_category_id = category.id %}
+        {% set active_category_id = (module_active ? 'm' : '')~category.id %}
         {% if category.parentCategory is defined and category.parentCategory and category.parentCategory.id is defined and category.parentCategory.id %}
-            {% set active_category_parent_id = category.parentCategory.id %}
+            {% set active_category_parent_id = (module_active ? 'm' : '')~category.parentCategory.id %}
             {% if category.parentCategory.parentCategory is defined and category.parentCategory.parentCategory and
             category.parentCategory.parentCategory.id is defined and category.parentCategory.parentCategory.id %}
-                {% set active_category_parent_parent_id = category.parentCategory.parentCategory.id %}
+                {% set active_category_parent_parent_id = (module_active ? 'm' : '')~category.parentCategory.parentCategory.id %}
                 {% if category.parentCategory.parentCategory.parentCategory is defined and category.parentCategory.parentCategory.parentCategory and
                     category.parentCategory.parentCategory.parentCategory.id is defined and category.parentCategory.parentCategory.parentCategory.id %}
-                    {% set active_category_parent_parent_parent_id = category.parentCategory.parentCategory.parentCategory.id %}
+                    {% set active_category_parent_parent_parent_id = (module_active ? 'm' : '')~category.parentCategory.parentCategory.parentCategory.id %}
                 {% endif %}
             {% endif %}
         {% endif %}
     {% else %}
-        {% set active_category_id = 0 %}
+        {% set active_category_id = ''~0 %}
     {% endif %}
     <input type="hidden" name="block_menu_active_category" id="block_menu_active_category" value="{{ active_category_id }}">
     <input type="hidden" name="block_menu_active_category_parent" id="block_menu_active_category_parent" value="{{ active_category_parent_id }}">
     <input type="hidden" name="block_menu_active_category_parent_parent" id="block_menu_active_category_parent_parent" value="{{ active_category_parent_parent_id }}">
     <input type="hidden" name="block_menu_active_category_parent_parent_parent" id="block_menu_active_category_parent_parent_parent" value="{{ active_category_parent_parent_parent_id }}">
     {% set activeCategories = [active_category_id,active_category_parent_id, active_category_parent_parent_id, active_category_parent_parent_parent_id ] %}
-    {% set module = false %}
-    {% include('AppBundle:Component:Blocks/menu.categories.html.twig') %}
-    {% set module = true %}
     {% include('AppBundle:Component:Blocks/menu.categories.html.twig') %}
 </div>
