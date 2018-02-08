@@ -120,7 +120,7 @@ class BreadCrumbService {
      */
     public function buildMyFileBreadCrumb() {
         $result = [[
-            'title' => 'Заказанная картина',
+            'title' => 'Загруженная картина',
             'url' => '',
         ]];
         $result = array_merge($result, $this->buildMyFilesBreadCrumb());

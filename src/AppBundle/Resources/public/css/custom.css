@@ -153,6 +153,19 @@ div[class*="children-subcategory-"] {
 
 }
 
+.az-subsubsubcat-span {
+    padding: 0 10px 0 30px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+
+}
+
+.az-subsubsubcategory-item-img {
+    background: url("../images/child_menu.png") no-repeat 10% 5%;
+
+}
+
 .az-sidebar-subcategory-first {
     margin: 0;
     padding: 0;
@@ -198,6 +211,43 @@ div[class*="children-subsubcategory-"]:hover {
 }
 
 .children-subsubcategory:active {
+    line-height: 20px;
+    color: #fd1200;
+}
+
+div[class*="children-subsubsubcategory-"] {
+    border: none;
+    background-color: #ffffff;
+    margin: 0 -15px;
+    color: #333333;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+    padding: 0 3px;
+}
+
+div[class*="children-subsubsubcategory-"].active {
+    border: none;
+    background-color: #ffffff;
+    color: #fd1200;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+    margin: 0 -15px;
+    padding: 0 3px;
+
+}
+
+div[class*="children-subsubsubcategory-"]:hover {
+    border: none;
+    background-color: #ffffff;
+    color: #fd1200;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.children-subsubsubcategory:active {
     line-height: 20px;
     color: #fd1200;
 }

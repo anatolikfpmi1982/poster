@@ -7,7 +7,7 @@
     {% if moduleTypes is defined and moduleTypes %}
         <div class="col-md-12 col-sm-12 owl-carousel owl-theme" id="owl-template">
 
-            <a href="{{ path('picture_module', {'id': pictureMain.id}) }}">
+            <a href="{% if ownPicture is defined %}{{ path('my_file_module', {'id': pictureMain.id}) }}{% else %}{{ path('picture_module', {'id': pictureMain.id}) }}{% endif %}">
                 <img src="{{ asset('bundles/app/images/material_default.png') }}" class="hidden az-picture-page-constructor-picture-module-type-img"
                      data-id="0"
                      data-title="Автоподбор"

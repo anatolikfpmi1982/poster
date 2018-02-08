@@ -70,6 +70,32 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository {
                     $categories[ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['id']    = $category->getId();
                     $categories[ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['title'] = $category->getTitle();
                     $categories[ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['slug']  = $category->getSlug();
+                } else if ( $cause1 && $parent1->getParentCategory() instanceof Category3
+                    && $parent1->getParentCategory()->isIsActive() && $parent1->getParentCategory()->getParentCategory() instanceof Category3
+                    && $parent1->getParentCategory()->getParentCategory()->isIsActive() && $parent1->getParentCategory()->getParentCategory()->getParentCategory() === null
+                ) {
+                    $parentParentParentId = $parent1->getParentCategory()->getParentCategory()->getId();
+                    $parentParentId = $parent1->getParentCategory()->getId();
+                    $parentId       = $category->getParentCategory()->getId();
+                    if ( ! array_key_exists( $parentParentParentId, $categories ) ) {
+                        $categories[ $parentParentParentId ]['children'] = [ ];
+                    }
+                    if ( ! array_key_exists( 'children', $categories[ $parentParentParentId ] ) ||
+                         ! array_key_exists( $parentParentId, $categories[ $parentParentParentId ]['children'] )
+                    ) {
+                        $categories[ $parentParentParentId ]['children'][ $parentParentId ]['children'] = [ ];
+                    }
+                    if ( ! array_key_exists( 'children', $categories[ $parentParentParentId ] ) ||
+                         ! array_key_exists( $parentParentId, $categories[ $parentParentParentId ]['children'] ) ||
+                         ! array_key_exists( 'children', $categories[ $parentParentParentId ]['children'][ $parentParentId ] ) ||
+                         ! array_key_exists( $parentId, $categories[ $parentParentParentId ]['children'][ $parentParentId ]['children'] )
+                    ) {
+                        $categories[ $parentParentParentId ]['children'][ $parentParentId ]['children'][ $parentId ]['children'] = [ ];
+                    }
+
+                    $categories[ $parentParentParentId ]['children'][ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['id']    = $category->getId();
+                    $categories[ $parentParentParentId ]['children'][ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['title'] = $category->getTitle();
+                    $categories[ $parentParentParentId ]['children'][ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['slug']  = $category->getSlug();
                 } else if ( $parent1 === null ) {
                     if ( array_key_exists( $category->getId(), $categories ) ) {
                         $categories[ $category->getId() ]['id']    = $inner['id'];
