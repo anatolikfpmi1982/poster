@@ -36,10 +36,9 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository {
             foreach ( $dbCategories as $category ) {
                 /** @var Category3 $category */
                 $inner = [
-                    'id'            => $category->getId(),
-                    'identifier'    => $category->getId(),
-                    'title'         => $category->getTitle(),
-                    'slug'          => $category->getSlug(),
+                    'id'    => $category->getId(),
+                    'title' => $category->getTitle(),
+                    'slug'  => $category->getSlug(),
                 ];
 
                 $parent1 = $category->getParentCategory();
@@ -50,10 +49,9 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository {
                         $categories[ $parentId ]['children'] = [ ];
                     }
 
-                    $categories[ $parentId ]['children'][ $category->getId() ]['id']            = $category->getId();
-                    $categories[ $parentId ]['children'][ $category->getId() ]['identifier']    = $category->getId();
-                    $categories[ $parentId ]['children'][ $category->getId() ]['title']         = $category->getTitle();
-                    $categories[ $parentId ]['children'][ $category->getId() ]['slug']          = $category->getSlug();
+                    $categories[ $parentId ]['children'][ $category->getId() ]['id']    = $category->getId();
+                    $categories[ $parentId ]['children'][ $category->getId() ]['title'] = $category->getTitle();
+                    $categories[ $parentId ]['children'][ $category->getId() ]['slug']  = $category->getSlug();
 
                 } else if ( $cause1 && $parent1->getParentCategory() instanceof Category3
                             && $parent1->getParentCategory()->isIsActive() && $parent1->getParentCategory()->getParentCategory() === null
@@ -69,10 +67,9 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository {
                         $categories[ $parentParentId ]['children'][ $parentId ]['children'] = [ ];
                     }
 
-                    $categories[ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['id']         = $category->getId();
-                    $categories[ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['identifier'] = $category->getId();
-                    $categories[ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['title']      = $category->getTitle();
-                    $categories[ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['slug']       = $category->getSlug();
+                    $categories[ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['id']    = $category->getId();
+                    $categories[ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['title'] = $category->getTitle();
+                    $categories[ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['slug']  = $category->getSlug();
                 } else if ( $cause1 && $parent1->getParentCategory() instanceof Category3
                     && $parent1->getParentCategory()->isIsActive() && $parent1->getParentCategory()->getParentCategory() instanceof Category3
                     && $parent1->getParentCategory()->getParentCategory()->isIsActive() && $parent1->getParentCategory()->getParentCategory()->getParentCategory() === null
@@ -96,16 +93,14 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository {
                         $categories[ $parentParentParentId ]['children'][ $parentParentId ]['children'][ $parentId ]['children'] = [ ];
                     }
 
-                    $categories[ $parentParentParentId ]['children'][ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['id']            = $category->getId();
-                    $categories[ $parentParentParentId ]['children'][ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['identifier']    = $category->getId();
-                    $categories[ $parentParentParentId ]['children'][ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['title']         = $category->getTitle();
-                    $categories[ $parentParentParentId ]['children'][ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['slug']          = $category->getSlug();
+                    $categories[ $parentParentParentId ]['children'][ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['id']    = $category->getId();
+                    $categories[ $parentParentParentId ]['children'][ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['title'] = $category->getTitle();
+                    $categories[ $parentParentParentId ]['children'][ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['slug']  = $category->getSlug();
                 } else if ( $parent1 === null ) {
                     if ( array_key_exists( $category->getId(), $categories ) ) {
-                        $categories[ $category->getId() ]['id']            = $inner['id'];
-                        $categories[ $category->getId() ]['identifier']    = $inner['identifier'];
-                        $categories[ $category->getId() ]['title']         = $inner['title'];
-                        $categories[ $category->getId() ]['slug']          = $inner['slug'];
+                        $categories[ $category->getId() ]['id']    = $inner['id'];
+                        $categories[ $category->getId() ]['title'] = $inner['title'];
+                        $categories[ $category->getId() ]['slug']  = $inner['slug'];
                     } else {
                         $categories[ $category->getId() ] = $inner;
                     }

@@ -8,8 +8,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Class BlocksService
  */
 class BlocksService {
-    const MODULE_CATEGORY_ID = 2;
-
     /**
      * @var EntityManager
      */
@@ -55,38 +53,7 @@ class BlocksService {
      * @return array
      */
     public function getCategoriesBlock() {
-        $categories = $this->em->getRepository( 'AppBundle:Category3' )->getCatalogMenu();
-        if($categories) {
-            $module = [];
-            foreach($categories as $key => $parent) {
-                if($parent['id'] == self::MODULE_CATEGORY_ID) {
-                    $parent['identifier'] = 'm' . $parent['id'];
-                    $parent['title'] = 'Модульные картины';
-                    $parent['module'] = true;
-                    if(!empty($parent['children'])) {
-                        foreach($parent['children'] as $key2 => $parent2) {
-                            $parent['children'][$key2]['identifier'] = 'm' . $parent2['id'];
-                            if(!empty($parent2['children'])) {
-                                foreach($parent2['children'] as $key3 => $parent3) {
-                                    $parent['children'][$key2]['children'][$key3]['identifier'] = 'm' . $parent3['id'];
-                                    if(!empty($parent3['children'])) {
-                                        foreach($parent3['children'] as $key4 => $parent4) {
-                                            $parent['children'][$key2]['children'][$key3]['children'][$key4]['identifier'] = 'm' . $parent4['id'];
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    $module = $parent;
-                }
-            }
-        }
-        if(!empty($module)) {
-            $categories[] = $module;
-        }
-
-        return $categories;
+        return $this->em->getRepository( 'AppBundle:Category3' )->getCatalogMenu();
     }
 
     /**
