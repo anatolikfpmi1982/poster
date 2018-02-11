@@ -1,113 +1,118 @@
-{% for category in block %}
-    {% if not module or (module and category.id == module_category_id) %}
-        <div class="col-md-12 col-sm-12 container-fluid">
-            {% if category.slug is defined and category.slug %}
-                {% set category_slug = category.slug %}
-            {% else %}
-                {% set category_slug = '#' %}
-            {% endif %}
-            {% if module is defined and module %}
-                {% set options = {'slug': category.slug, 'type': 'module'} %}
-                {% set identifier = 'm' ~ category.id %}
-            {% else %}
-                {% set options = {'slug': category.slug} %}
-                {% set identifier = category.id %}
-            {% endif %}
-            {% set visible = (module and module_active) or (not module and not module_active) %}
-            <div class="row az-sidebar-header az-sidebar-catalog-item-header {% if visible and category.id == active_category_id %}active{% endif %}"
-                 data-id="{{ identifier }}"
-                 data-url="{{ path('category', options) }}">
+{% for categoryBlock in block %}
+    <div class="col-md-12 col-sm-12 container-fluid">
+        {% set category_slug = '#' %}
+        {% if categoryBlock.slug is defined and categoryBlock.slug %}
+            {% set category_slug = categoryBlock.slug %}
+        {% endif %}
+        {% set category_type = 'banner' %}
+        {% set isModuleMenuItem = false %}
+        {% if 'm' in categoryBlock.id %}
+            {% set category_type = 'module' %}
+            {% set isModuleMenuItem = true %}
+        {% endif %}
+        {% set isCheckNav = (isModuleMenuItem and module_active) or (not isModuleMenuItem and not module_active) %}
+        {% set options = {'slug': category_slug, 'type': category_type} %}
+        <a href="{{ path('category', options) }}" class="az-category-item-a">
+            <div class="row az-sidebar-header az-sidebar-catalog-item-header
+        {% if isCheckNav and categoryBlock.clean_id in [active_category_id, ('m' ~ active_category_id)] %}active{% endif %}"
+                 data-id="{{ categoryBlock.id }}"
+                 data-url="">
                 <div class="col-md-12 col-sm-12 ">
-                    <img src="{{ asset('bundles/app/images/catalog.png') }}" class="az-sidebar-block-img az-catalog-block-img" title="{{ category.title }}"/>
-                    {% if module %}Модульные картины{% else %}{{ category.title }}{% endif %}
+                    <img src="{{ asset('bundles/app/images/catalog.png') }}" class="az-sidebar-block-img az-catalog-block-img" title="{{ categoryBlock.title }}"/>
+                    {{ categoryBlock.title }}
                 </div>
             </div>
-            {% if category.children is defined and category.children %}
-                <div class="row category-menu children-category-{{ identifier }}" id="children-category-{{ identifier }}"
-                     style="display:{% if visible and category.id in activeCategories %}block{% else %}none{% endif %};">
-                    <div class="col-md-12 col-sm-12 container-fluid">
-                        {% for subcategory in category.children %}
-                            {% if subcategory.slug is defined and subcategory.slug %}
-                                {% set subcategory_slug = subcategory.slug %}
-                            {% else %}
-                                {% set subcategory_slug = '#' %}
-                            {% endif %}
-                            {% if module is defined and module %}
-                                {% set options = {'slug': subcategory_slug, 'type': 'module'} %}
-                                {% set subidentifier = 'm' ~ subcategory.id %}
-                            {% else %}
-                                {% set options = {'slug': subcategory_slug} %}
-                                {% set subidentifier = subcategory.id %}
-                            {% endif %}
-                            <div class="row az-sidebar-subcategory-item"
-                                 data-id="{{ subidentifier }}" data-parent-id="{{ identifier }}"
-                                 data-url="{{ path('category', options) }}">
+        </a>
+        {% if categoryBlock.children is defined and categoryBlock.children %}
+        <div class="row category-menu children-category-{{ categoryBlock.id }}" id="children-category-{{ categoryBlock.id }}"
+             style="display:{% if isCheckNav and categoryBlock.clean_id in activeCategories %}block{% else %}none{% endif %};">
+            <div class="col-md-12 col-sm-12 container-fluid">
+                {% for subcategory in categoryBlock.children %}
+                    {% set subcategory_slug = '#' %}
+                    {% if subcategory.slug is defined and subcategory.slug %}
+                        {% set subcategory_slug = subcategory.slug %}
+                    {% endif %}
+                    {% set subcategory_type = 'banner' %}
+                    {% if 'm' in subcategory.id %}
+                        {% set subcategory_type = 'module' %}
+                    {% endif %}
+                    {% set options = {'slug': subcategory_slug, 'type': subcategory_type} %}
+                    <div class="row az-sidebar-subcategory-item"
+                         data-id="{{ subcategory.id }}" data-parent-id="{{ categoryBlock.id }}"
+                         data-url="{{ path('category', options) }}">
 
-                                <div class="col-md-12 col-sm-12 container-fluid az-sidebar-subcategory-first {% if visible and subcategory.id in activeCategories %}active_parent{% endif %}">
-                                    <span class="az-subcat-span">{{ subcategory.title }}</span>
-                                    {% if subcategory.children is defined and subcategory.children %}
-                                        <div class="row category-menu children-subcategory-{{ identifier }}" id="children-subcategory-{{ subidentifier }}"
-                                             style="display:{% if visible and subcategory.id in activeCategories %}block{% else %}none{% endif %};">
-                                            <div class="col-md-12 col-sm-12 container-fluid">
-                                                {% for subsubcategory in subcategory.children %}
-                                                    {% if subsubcategory.slug is defined and subsubcategory.slug %}
-                                                        {% set subsubcategory_slug = subsubcategory.slug %}
-                                                    {% else %}
-                                                        {% set subsubcategory_slug = '#' %}
-                                                    {% endif %}
-                                                    {% if module is defined and module %}
-                                                        {% set options = {'slug': subsubcategory_slug, 'type': 'module'} %}
-                                                        {% set subsubidentifier = 'm' ~ subsubcategory.id %}
-                                                    {% else %}
-                                                        {% set options = {'slug': subsubcategory_slug} %}
-                                                        {% set subsubidentifier = subsubcategory.id %}
-                                                    {% endif %}
-                                                    <div class="row subcategory-menu az-sidebar-subsubcategory-item children-subsubcategory-{{ subidentifier }} {% if visible and subsubcategory.id == active_category_id %}active{% endif %}"
-                                                         data-url="{{ path('category', {'slug': subsubcategory_slug }) }}"
-                                                         data-id="{{ subsubidentifier }}">
-
-                                                    <div class="col-md-12 col-sm-12 container-fluid az-sidebar-subsubcategory-first {% if visible and subsubcategory.id in activeCategories %}active_parent{% endif %}">
+                        <div class="col-md-12 col-sm-12 container-fluid az-sidebar-subcategory-first
+                        {% if isCheckNav and subcategory.clean_id in activeCategories %}active_parent{% endif %}">
+                            <a href="{{ path('category', options) }}" class="az-subcategory-item-a">
+                                <span class="az-subcat-span">{{ subcategory.title }}</span>
+                            </a>
+                            {% if subcategory.children is defined and subcategory.children %}
+                                <div class="row category-menu children-subcategory-{{ categoryBlock.id }}"
+                                     id="children-subcategory-{{ subcategory.id }}"
+                                     style="display:{% if isCheckNav and subcategory.clean_id in activeCategories %}block{% else %}none{% endif %};">
+                                    <div class="col-md-12 col-sm-12 container-fluid">
+                                        {% for subsubcategory in subcategory.children %}
+                                            {% set subsubcategory_slug = '#' %}
+                                            {% if subsubcategory.slug is defined and subsubcategory.slug %}
+                                                {% set subsubcategory_slug = subsubcategory.slug %}
+                                            {% endif %}
+                                            {% set subsubcategory_type = 'banner' %}
+                                            {% if 'm' in subsubcategory.id %}
+                                                {% set subsubcategory_type = 'module' %}
+                                            {% endif %}
+                                            {% set options = {'slug': subsubcategory_slug, 'type': subsubcategory_type} %}
+                                            <div class="row subcategory-menu az-sidebar-subsubcategory-item children-subsubcategory-{{ subcategory.id }}
+                                        {% if isCheckNav and subsubcategory.clean_id == active_category_id %}active{% endif %}"
+                                                 data-url="{{ path('category',options) }}"
+                                                 data-id="{{ subsubcategory.id }}">
+                                                <div class="col-md-12 col-sm-12 container-fluid az-sidebar-subsubcategory-first
+                                            {% if isCheckNav and subsubcategory.clean_id in activeCategories %}active_parent{% endif %}">
+                                                    <a href="{{ path('category',options) }}" class="az-subsubcategory-item-a">
                                                         <span class="az-subsubcat-span">{{ subsubcategory.title }}</span>
-                                                        {% if subsubcategory.children is defined and subsubcategory.children %}
-                                                            <div class="row category-menu children-subsubcategory-{{ identifier }}" id="children-subsubcategory-{{ subsubidentifier }}"
-                                                                 style="display:{% if visible and subcategory.id in activeCategories %}block{% else %}none{% endif %};">
-                                                                <div class="col-md-12 col-sm-12 container-fluid">
-                                                                    {% for subsubsubcategory in subsubcategory.children %}
-                                                                        {% if subsubsubcategory.slug is defined and subsubsubcategory.slug %}
-                                                                            {% set subsubsubcategory_slug = subsubsubcategory.slug %}
-                                                                        {% else %}
-                                                                            {% set subsubsubcategory_slug = '#' %}
-                                                                        {% endif %}
-                                                                        {% if module is defined and module%}
-                                                                            {% set options = {'slug': subsubsubcategory_slug, 'type': 'module'} %}
-                                                                            {% set subsubsubidentifier = 'm' ~ subsubsubcategory.id %}
-                                                                        {% else %}
-                                                                            {% set options = {'slug': subsubsubcategory_slug} %}
-                                                                            {% set subsubsubidentifier = subsubsubcategory.id %}
-                                                                        {% endif %}
-                                                                        <div class="row subsubcategory-menu az-sidebar-subsubsubcategory-item children-subsubsubcategory-{{ subsubidentifier }} {% if visible and subsubsubcategory.id == active_category_id %}active{% endif %}"
-                                                                             data-url="{{ path('category', {'slug': subsubsubcategory_slug }) }}"
-                                                                             data-id="{{ subsubsubidentifier }}">
+                                                    </a>
+                                                    {% if subsubcategory.children is defined and subsubcategory.children %}
+                                                        <div class="row category-menu children-subsubcategory-{{ categoryBlock.id }}"
+                                                             id="children-subsubcategory-{{ subsubcategory.id }}"
+                                                             style="display:{% if isCheckNav and subsubcategory.clean_id in activeCategories %}block
+                                                             {% else  %}none{% endif %};">
+                                                            <div class="col-md-12 col-sm-12 container-fluid">
+                                                                {% for subsubsubcategory in subsubcategory.children %}
+                                                                    {% set subsubsubcategory_slug = '#' %}
+                                                                    {% if subsubsubcategory.slug is defined and subsubsubcategory.slug %}
+                                                                        {% set subsubsubcategory_slug = subsubsubcategory.slug %}
+                                                                    {% endif %}
+                                                                    {% set subsubsubcategory_type = 'banner' %}
+                                                                    {% if 'm' in subsubsubcategory.id %}
+                                                                        {% set subsubsubcategory_type = 'module' %}
+                                                                    {% endif %}
+                                                                    {% set options = {'slug': subsubsubcategory_slug, 'type': subsubsubcategory_type} %}
+                                                                    <div class="row subsubsubcategory-menu az-sidebar-subsubsubcategory-item
+                                                            children-subsubsubcategory-{{ subsubsubcategory.id }}
+                                                            {% if isCheckNav and subsubsubcategory.clean_id == active_category_id %}active{% endif %}"
+                                                                         data-url="{{ path('category', options) }}"
+                                                                         data-id="{{ subsubsubcategory.id }}">
 
-                                                                            <div class="col-md-12 col-sm-12 az-subsubsubcategory-item-img">
-                                                                                <span class="az-subsubsubcat-span">{{ subsubsubcategory.title }}</span>
-                                                                            </div>
+                                                                        <div class="col-md-12 col-sm-12 az-subsubsubcategory-item-img">
+                                                                            <a href="{{ path('category',options) }}" class="az-subsubsubcategory-item-a">
+                                                                                <span class="az-subsubcat-span">{{ subsubsubcategory.title }}</span>
+                                                                            </a>
                                                                         </div>
-                                                                    {% endfor %}
-                                                                </div>
+                                                                    </div>
+                                                                {% endfor %}
                                                             </div>
-                                                        {% endif %}
-                                                    </div>
-                                                {% endfor %}
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
                                             </div>
-                                        </div>
-                                    {% endif %}
+                                        {% endfor %}
+                                    </div>
                                 </div>
-                            </div>
-                        {% endfor %}
+                            {% endif %}
+                        </div>
                     </div>
-                </div>
+                {% endfor %}
+            </div>
             {% endif %}
         </div>
-    {% endif %}
+    </div>
 {% endfor %}

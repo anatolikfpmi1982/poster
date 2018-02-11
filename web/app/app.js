@@ -204,17 +204,6 @@ define(function (require, exports, module) {
             setShowBoard();
         });
 
-        // Any page
-        // category menu main category event
-        $("div.az-sidebar-catalog-item-header").click(function (event) {
-            event.stopImmediatePropagation();
-            var id = $(this).data('id'), active_id = $('#block_menu_active_category').val();
-            if (id !== parseInt(active_id)) {
-                window.location.replace($(this).data('url'));
-            }
-            return false;
-        });
-
         // Reviews page
         // add review
         $("#add_review").submit(function (event) {
@@ -234,26 +223,6 @@ define(function (require, exports, module) {
                 } else
                     $('#successReviewForm').removeClass('hidden').modal('show');
             });
-            return false;
-        });
-
-        // category menu main category event
-        $("div.az-sidebar-subcategory-item").click(function (event) {
-            event.stopImmediatePropagation();
-            var id = $(this).data('id'), parent = $(this).data('parent-id'), active_id = $('#block_menu_active_category').val();
-            if (id !== parseInt(active_id)) {
-                window.location.replace($(this).data('url'));
-            }
-            return false;
-        });
-
-        // category menu main category event
-        $("div.az-sidebar-subsubcategory-item").click(function (event) {
-            event.stopImmediatePropagation();
-            var id = $(this).data('id'), active_id = $('#block_menu_active_category').val();
-            if (id !== parseInt(active_id)) {
-                window.location.replace($(this).data('url'));
-            }
             return false;
         });
 

@@ -58,6 +58,12 @@ function ConstructorOverview() {
     this.zoomType = '';
     this.elemId = '';
 
+    // show sizes for constructor
+    this.showSizes = false;
+    this.showSizesHeight = 10;
+    this.showSizesWidth = 100;
+
+
     this.init = function (params) {
         if (params != undefined) {
             this.type = params.type;
@@ -127,7 +133,7 @@ function ConstructorOverview() {
         this.picWidth = parseInt($('#input-az-picture-page-img-thumb-width').val());
         this.picHeight = parseInt($('#input-az-picture-page-img-thumb-height').val());
         this.formulaInput = $('input#az-picture-constructor-module-code-selected').val();
-        this.padding_left = 20;
+        this.padding_left = 15;
         this.padding_top = 10;
         this.right_width = 6;
         this.right_width_portrait = 30;
@@ -432,13 +438,16 @@ function ConstructorOverview() {
                 console.log('this.picHeight', this.picHeight);
                 console.log('this.max_width', this.max_width);
                 console.log('this.max_height', this.max_height);
+                console.log('this.showSizes', this.showSizes);
+                console.log('this.showSizesWidth', this.showSizesWidth);
+                console.log('this.showSizesHeight', this.showSizesHeight);
             }
             var isHeight = this.picHeight > this.picWidth;
 
             var maxHeight = this.max_height - 2 * this.top_deviation - (this.right_width + this.shadow) * this.panelNumberVertical -
-                this.padding_top * (this.panelNumberVertical - 1);
+                this.padding_top * (this.panelNumberVertical - 1) - (this.showSizes ? this.showSizesHeight : 0);
             var maxWidth = this.max_width - 2 * this.left_deviation - (this.right_width + this.shadow) * this.panelNumberHorizontal -
-                (this.padding_left - this.right_width - this.shadow) * (this.panelNumberHorizontal - 1);
+                (this.padding_left - this.right_width - this.shadow) * (this.panelNumberHorizontal - 1) - (this.showSizes ? this.showSizesHeight : 0);
             if (isHeight) {
                 if (this.picHeight > maxHeight) {
                     this.picWidth = Math.round((this.picWidth * maxHeight) / this.picHeight);
@@ -466,9 +475,9 @@ function ConstructorOverview() {
                 }
             }
 
-            this.top_deviation = Math.round((this.max_height - this.picHeight -
-                (this.right_width + this.shadow ) * this.panelNumberVertical - this.padding_top * (this.panelNumberVertical - 1)  ) / 2);
-            this.left_deviation = Math.round((this.max_width - this.picWidth -
+            this.top_deviation = Math.round((this.max_height - this.picHeight - (this.showSizes ? this.showSizesHeight : 0) -
+                (this.right_width + this.shadow) * this.panelNumberVertical - this.padding_top * (this.panelNumberVertical - 1)  ) / 2);
+            this.left_deviation = Math.round((this.max_width - this.picWidth - (this.showSizes ? this.showSizesHeight : 0) -
                 (this.right_width + this.shadow) * this.panelNumberHorizontal - (this.padding_left - this.right_width - this.shadow) *
                 (this.panelNumberHorizontal - 1) ) / 2);
 
@@ -857,6 +866,9 @@ function ConstructorOverview() {
         if (this.isConstructor) {
             $(".zoomContainer").remove();
             $(".zoomWindowContainer").remove();
+            if (this.type == 'Баннер') {
+                this.showSizes = true;
+            }
         }
         switch (this.type) {
             case 'Баннер':
