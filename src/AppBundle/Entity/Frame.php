@@ -150,6 +150,12 @@ class Frame implements ImageInterface
     private $isActive;
 
     /**
+     * @var integer
+     * @ORM\Column(name="weight", type="integer", nullable=true, options={"default" : 0})
+     */
+    private $weight = 0;
+
+    /**
      * Feature constructor.
      */
     public function __construct()
@@ -517,5 +523,29 @@ class Frame implements ImageInterface
     public function getNote()
     {
         return $this->note;
+    }
+
+    /**
+     * Set weight
+     *
+     * @param integer $weight
+     *
+     * @return Frame
+     */
+    public function setWeight($weight)
+    {
+        $this->weight = $weight;
+
+        return $this;
+    }
+
+    /**
+     * Get weight
+     *
+     * @return integer
+     */
+    public function getWeight()
+    {
+        return $this->weight;
     }
 }

@@ -65,10 +65,10 @@ class PicturesController extends FrontController {
         $this->data['pictureSize'] = $this->em->getRepository( 'AppBundle:PictureSize' )->findBy( [ 'isActive' => true ], [ 'width' => 'ASC' ] );
         $this->data['materials']   = $this->em->getRepository( 'AppBundle:BannerMaterial' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
         $this->data['pictureMaterials']   = $this->em->getRepository( 'AppBundle:FrameMaterial' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
-        $this->data['moduleTypes'] = $this->em->getRepository( 'AppBundle:ModuleType' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
+        $this->data['moduleTypes'] = $this->em->getRepository( 'AppBundle:ModuleType' )->findBy( [ 'isActive' => true ], [ 'weight' => 'DESC' ] );
         $this->data['module_formulas'] = $this->em->getRepository('AppBundle:ModuleType')->findBy(['isActive' => true]);
         $this->data['thicknesses'] = $this->em->getRepository( 'AppBundle:Underframe' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
-        $this->data['pictureThicknesses'] = $this->em->getRepository( 'AppBundle:Frame' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
+        $this->data['pictureThicknesses'] = $this->em->getRepository( 'AppBundle:Frame' )->findBy( [ 'isActive' => true ], [ 'weight' => 'DESC' ] );
         $this->data['mats'] = $this->em->getRepository( 'AppBundle:Mat' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
         $_frameSettings = $this->em->getRepository( 'AppBundle:Settings' )->findOneByName('frame_settings');
         $frameSettings = [];
@@ -131,7 +131,7 @@ class PicturesController extends FrontController {
             $this->data['pictureThumbWidth'] = $size[0];
             $this->data['pictureThumbHeight'] = $size[1];
         }
-        $this->data['moduleTypes'] = $this->em->getRepository( 'AppBundle:ModuleType' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
+        $this->data['moduleTypes'] = $this->em->getRepository( 'AppBundle:ModuleType' )->findBy( [ 'isActive' => true ], [ 'weight' => 'DESC' ] );
 
         // parameters to template
         return $this->render( 'AppBundle:Pictures:show.module.html.twig', $this->data );
@@ -175,7 +175,7 @@ class PicturesController extends FrontController {
             $this->data['pictureThumbWidth'] = $size[0];
             $this->data['pictureThumbHeight'] = $size[1];
         }
-        $this->data['pictureThicknesses'] = $this->em->getRepository( 'AppBundle:Frame' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
+        $this->data['pictureThicknesses'] = $this->em->getRepository( 'AppBundle:Frame' )->findBy( [ 'isActive' => true ], [ 'weight' => 'DESC' ] );
 
         // parameters to template
         return $this->render( 'AppBundle:Pictures:show.frame.html.twig', $this->data );

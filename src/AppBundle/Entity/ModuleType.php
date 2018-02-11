@@ -95,6 +95,12 @@ class ModuleType implements ImageInterface
      */
     private $formula;
 
+    /**
+     * @var integer
+     * @ORM\Column(name="weight", type="integer", nullable=true, options={"default" : 0})
+     */
+    private $weight = 0;
+
 
     /**
      * @return string
@@ -306,5 +312,29 @@ class ModuleType implements ImageInterface
         $this->formula = $formula;
 
         return $this;
+    }
+
+    /**
+     * Set weight
+     *
+     * @param integer $weight
+     *
+     * @return ModuleType
+     */
+    public function setWeight($weight)
+    {
+        $this->weight = $weight;
+
+        return $this;
+    }
+
+    /**
+     * Get weight
+     *
+     * @return integer
+     */
+    public function getWeight()
+    {
+        return $this->weight;
     }
 }

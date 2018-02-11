@@ -66,6 +66,7 @@ class FrameAdmin extends AbstractAdmin
             ->add('color', null, array('label' => 'Цвет'))
             ->add('material', null, array('label' => 'Материал'))
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
+            ->add('weight', null, ['required' => false, 'label' => 'Вес', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
             ->add('images', 'sonata_type_collection', [
                 'by_reference' => true,
                 'label' => 'Изображения',
@@ -105,6 +106,7 @@ class FrameAdmin extends AbstractAdmin
             ->add('images', null,
                 ['required' => true, 'label' => 'Изображение', 'template' => 'AppBundle:Admin:frame_list_image.html.twig'])
             ->add('title', null, ['editable'=> true, 'label' => 'Артикул'])
+            ->add('weight', null, ['editable'=> true, 'label' => 'Вес'])
             ->add('note', null, ['editable'=> true, 'label' => 'Примечание'])
             ->add('ratio', null, ['editable'=> true, 'label' => 'Коэфф.'])
             ->add('height', null, ['editable' => true, 'label' => 'Высота',
