@@ -22,7 +22,7 @@ class ReviewRepository extends EntityRepository {
     public function getLatestReviews() {
         return $this->createQueryBuilder( 'review' )
                     ->where( 'review.isActive = :isActive' )
-                    ->orderBy( 'review.createdAt', 'DESC' )
+                    ->orderBy( 'review.updatedAt', 'DESC' )
                     ->setFirstResult( self::LATEST_OFFSET )
                     ->setMaxResults( self::LATEST_LIMIT )
                     ->setParameter( 'isActive', true )
@@ -36,7 +36,7 @@ class ReviewRepository extends EntityRepository {
     public function getActiveReviews() {
         return $this->createQueryBuilder( 'review' )
             ->where( 'review.isActive = :isActive' )
-            ->orderBy( 'review.createdAt', 'DESC' )
+            ->orderBy( 'review.updatedAt', 'DESC' )
             ->setParameter( 'isActive', true );
     }
 }

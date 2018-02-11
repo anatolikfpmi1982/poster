@@ -70,6 +70,12 @@ class CategoriesController extends FrontController
         );
 
 
+        if($request->query->get('type') && $request->query->get('type') === 'module') {
+            $this->data['module_active'] = true;
+            if($category->getId() == self::MAIN_CATEGORY_ID) {
+                $category->setTitle('Модульные картины');
+            }
+        };
         $this->data['pagination'] = $pagination;
         $category->setDescription($this->get('helper.textformater')->formatMoreText($category->getDescription()));
         $this->data['category'] = $category;
@@ -77,9 +83,6 @@ class CategoriesController extends FrontController
         $this->data['mainCategoryId'] = $category->getId();
         $this->data['filters']['tpls'] = $this->em->getRepository('AppBundle:PictureForm')->findBy(['isActive' => true]);
         $this->data['module_formulas'] = $this->em->getRepository('AppBundle:ModuleType')->findBy(['isActive' => true]);
-        if($request->query->get('type') && $request->query->get('type') === 'module') {
-            $this->data['module_active'] = true;
-        };
 
         // parameters to template
         return $this->render('AppBundle:Categories:show.html.twig', $this->data);

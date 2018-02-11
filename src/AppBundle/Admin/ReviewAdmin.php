@@ -24,6 +24,7 @@ class ReviewAdmin extends AbstractAdmin
             ->add('city', null, ['required' => true, 'label' => 'Город'])
             ->add('email', null, ['required' => true, 'label' => 'Email'])
             ->add('slug', null, ['required' => false, 'label' => 'Алиас'])
+            ->add('updatedAt', null, ['required' => false, 'label' => 'Дата изменения'])
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
             ->end();
     }
@@ -92,7 +93,7 @@ class ReviewAdmin extends AbstractAdmin
     public function preUpdate($review)
     {
         if($review instanceof Review) {
-            $review->setUpdatedAt(new \DateTime());
+//            $review->setUpdatedAt(new \DateTime());
         }
     }
 }
