@@ -70,6 +70,12 @@ class CategoriesController extends FrontController
         );
 
 
+        if($request->query->get('type') && $request->query->get('type') === 'module') {
+            $this->data['module_active'] = true;
+            if($category->getId() == self::MAIN_CATEGORY_ID) {
+                $category->setTitle('Модульные картины');
+            }
+        };
         $this->data['pagination'] = $pagination;
         $category->setDescription($this->get('helper.textformater')->formatMoreText($category->getDescription()));
         $this->data['category'] = $category;

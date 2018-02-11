@@ -9,7 +9,7 @@
     {% for review in block %}
         <div class="row az-sidebar-popular-item container-fluid">
             <div class="row az-sidebar-popular-item-name"><a href="{{ path('reviews') }}#review{{ review.id }}">{{ review.name }} ({{ review.city }})</a></div>
-            <div class="row az-sidebar-popular-item-date">{{ review.createdAt|date("d.m.Y") }}</div>
+            <div class="row az-sidebar-popular-item-date">{{ review.updatedAt|date("d.m.Y") }}</div>
             <div class="row az-sidebar-popular-item-body">{{ review.review|escape }}</div>
         </div>
     {% endfor %}
