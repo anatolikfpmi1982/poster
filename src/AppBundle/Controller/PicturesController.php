@@ -86,11 +86,71 @@ class PicturesController extends FrontController {
         $type = $request->query->get('type');
         if($type === 'module') {
             $this->data['module_active'] = true;
-        };
+        } else {
+            $this->data['module_active'] = false;
+        }
         $this->data['isMobile'] = $this->get('pictures.service')->isMobile();
 
         // parameters to template
         return $this->render( 'AppBundle:Pictures:show.html.twig', $this->data );
+    }
+
+    /**
+     * @param int $id
+     * @param Request $request
+     *
+     * @Route("/picture_view/{id}", name="picture_view")
+     *
+     * @return Response
+     * @throws BadRequestHttpException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function showViewAction( $id, Request $request ) {
+        $this->blocks = array_merge($this->blocks, ['LastVisited' => 6, 'Similar' => 7]);
+        $this->pageSlug = $id;
+        $this->pageType = 'picture_view';
+        $this->menu = '/picture_view';
+        $this->id = $id;
+        $this->doBlocks();
+
+        /** @var Picture $picture */
+        $picture = $this->em->getRepository( 'AppBundle:Picture' )->find( $id );
+        if(!$picture instanceof Picture) {
+            throw new BadRequestHttpException('Картина не найдена.');
+        }
+
+        $this->data['pictureMain'] = $picture;
+        if($picture->getImage() instanceof Image) {
+            $imgFile = $picture->getImage()->getBaseFile();
+            $size = getimagesize($imgFile);
+            $this->data['pictureBaseWidth'] = $size[0];
+            $this->data['pictureBaseHeight'] = $size[1];
+            $imgFileSmall = $picture->getImage()->getSmallThumbBaseFile();
+            $size = getimagesize($imgFileSmall);
+            $this->data['pictureSmallWidth'] = $size[0];
+            $this->data['pictureSmallHeight'] = $size[1];
+            $imgFileThumb = $picture->getImage()->getThumbBaseFile();
+            $size = getimagesize($imgFileThumb);
+            $this->data['pictureThumbWidth'] = $size[0];
+            $this->data['pictureThumbHeight'] = $size[1];
+        }
+
+        $_frameSettings = $this->em->getRepository( 'AppBundle:Settings' )->findOneByName('frame_settings');
+        $frameSettings = [];
+        if($_frameSettings instanceof Settings) {
+            $frameSettings = unserialize($_frameSettings->getSettings());
+        }
+        $this->data['frameSettings'] = $frameSettings;
+        $this->data['isMobile'] = $this->get('pictures.service')->isMobile();
+        $type = $request->query->get('view');
+        if($type === 'center') {
+            $this->data['viewPicture'] = true;
+        } else {
+            $this->data['viewPicture'] = false;
+        }
+
+        // parameters to template
+        return $this->render( 'AppBundle:Pictures:show.short.html.twig', $this->data );
     }
 
     /**

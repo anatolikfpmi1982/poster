@@ -58,7 +58,7 @@
         {% if pictureMain.image is defined and pictureMain.image %}
         {% if isBannerType %}
             {% set isBannerSelected = cart_item.type_value is defined and cart_item.type_value=='Баннер' %}
-            {% if isBannerSelected or cart_item.type_value is not defined %}
+            {% if (isBannerSelected or cart_item.type_value is not defined) and not module_active %}
                 {% set isTypeSelected = true %}
                 {% set isBannerSelected = true %}
             {% endif %}
@@ -101,7 +101,7 @@
         {% endif %}
         {% if isPortraitType %}
             {% set isPortraitSelected = (cart_item.type_value is defined and cart_item.type_value=='В раме') %}
-            {% if isPortraitSelected or (not isTypeSelected and not (cart_item.type_value is defined and cart_item.type_value=='Модульная')) %}
+            {% if (isPortraitSelected or (not isTypeSelected and not (cart_item.type_value is defined and cart_item.type_value=='Модульная'))) and not module_active %}
                 {% set isTypeSelected = true %}
                 {% set isPortraitSelected = true %}
             {% endif %}

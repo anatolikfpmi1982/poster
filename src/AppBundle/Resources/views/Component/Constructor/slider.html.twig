@@ -1,4 +1,9 @@
 <div class="row">
+    <div class="col-md-12 col-sm-12 text-right">
+        <a href="{{ path('picture_view', {'id': pictureMain.id}) }}"><img src="{{ asset('bundles/app/images/zoom.png') }}" class="az-picture-constructor-frame-zoom-img"/></a>
+    </div>
+</div>
+<div class="row">
     <div class="col-md-12 col-sm-12 owl-carousel owl-theme" id="owl-example">
         {% if pictureThicknesses is defined and pictureThicknesses %}
             <div class="item">
