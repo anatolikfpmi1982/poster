@@ -170,7 +170,7 @@ class OrderAdmin extends AbstractAdmin
             ->add('isDone', null, ['editable' => true, 'label' => 'Выполнено'])
             ->add('createdAt', null, ['label' => 'Дата заказа'])
             ->add('company', null, ['editable'=> true, 'label' => 'Компания'])
-            ->add('comments', null, ['editable'=> true, 'label' => 'Комментарий к заказу'])
+            ->add('comment', null, ['editable'=> true, 'label' => 'Комментарий к заказу'])
             ->add('underframe', 'choice', ['label' => 'Толщина подрамника','editable' => true,
                 'class' => 'Appbundle\Entity\Underframe', 'choices' => $underframeChoices, 'sortable' => true,
                 'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'underframe']]])
