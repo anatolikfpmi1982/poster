@@ -1027,6 +1027,22 @@ body {
     max-width: 246px;
 }
 
+.az-view-popular-item-img {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0;
+    max-height: 700px;
+    height: 100%;
+    max-width: 700px;
+}
+
+.az-view-row-div {
+    width: 700px;
+    height: 700px;
+    margin-left: 235px;
+}
+
 .az-main-popular-item-img:hover {
     cursor: pointer;
 }
@@ -2746,7 +2762,7 @@ div.az-picture-page-constructor-block.active {
 }
 
 .az-picture-page-sidebar-size-div-own-input {
-    width: 40px;
+    width: 30px;
     color: #333333;
 }
 
@@ -2823,6 +2839,10 @@ div.az-picture-page-constructor-block.active {
 
 a.az-category-item-a div.az-sidebar-catalog-item-header div.az-category-menu-item-text.active_menu {
     color: #fd1200;
+}
+
+.padding_left_right_5 {
+    padding: 5px;
 }
 
 @media only screen

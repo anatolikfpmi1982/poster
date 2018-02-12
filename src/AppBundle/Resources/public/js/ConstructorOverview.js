@@ -187,7 +187,7 @@ function ConstructorOverview() {
                     $('.az-picture-page-constructor-picture-thickness-img').each(function (index) {
                         if ($(this).data('zoom-image')) {
                             $(this).elevateZoom({
-                                zoomWindowPosition: 4,
+                                zoomWindowPosition: 6,
                                 zoomWindowHeight: 150,
                                 zoomWindowWidth: 150,
                                 borderSize: 0,
@@ -239,6 +239,15 @@ function ConstructorOverview() {
         divMain.css('background-size', picWidth + 'px ' + picHeight + 'px');
         divMain.css('background-position', '0px 0px');
         divMain.css('box-shadow', 'rgba(0, 0, 0, 0.4) ' + this.shadow + 'px ' + this.shadow + 'px ' + this.shadow + 'px');
+
+        var isZoom = this.isConstructor && this.type != 'Модульная';
+        isZoom = isZoom || (this.isZoom && this.elemId);
+        isZoom = isZoom && this.imgBigPath;
+        if (isZoom) {
+            divMain.data('zoom-image', this.imgBigPath);
+            var id = 'constructorActive' + (new Date()).getTime();
+            divMain.attr('id', id);
+        }
 
         var divCornerRT = $(newDivString);
         divCornerRT.addClass('az-picture-page-portrait-frame-corner').addClass('az-picture-page-portrait-frame-corner-rt');
@@ -345,6 +354,50 @@ function ConstructorOverview() {
             divMain.appendTo(aLink);
             aLink.appendTo(this.monitor);
         }
+
+        var isZoom2 = this.isConstructor && this.type != 'Модульная';
+        isZoom2 = isZoom2 || (this.isZoom && this.elemId);
+        isZoom2 = isZoom2 && this.imgBigPath;
+        if (isZoom2) {
+            if (!this.isZoom) {
+                var myid = this.type == 'Баннер' ? '.az-picture-page-picture-main-banner-div div div' : '.az-picture-page-picture-main-picture-div div div';
+                $('#' + id).elevateZoom({
+                    constrainType: "height",
+                    constrainSize: 274,
+                    zoomType: "lens",
+                    containLensZoom: true,
+                    zoomWindowPosition: id,
+                    cursor: 'pointer',
+                    zoomWindowContainerClass: "dynamic-constructor-zoom",
+                    zoomContainerClass: "dynamic-constructor-zoom",
+                    myid: myid
+                });
+            } else {
+                if (!this.zoomType) {
+                    $('#' + id).elevateZoom({
+                        zoomWindowPosition: 7,
+                        borderSize: 4,
+                        zoomWindowWidth: 600,
+                        zoomWindowHeight: 600,
+                        easing: true,
+                        cursor: 'pointer',
+                        zoomWindowContainerClass: "constructor-zoom",
+                        zoomContainerClass: "constructor-zoom",
+                        myid: '#' + id
+                    });
+                } else {
+                    $('#' + id).elevateZoom({
+                        borderSize: 1,
+                        zoomType: "inner",
+                        cursor: 'pointer',
+                        zoomWindowContainerClass: "constructor-zoom",
+                        zoomContainerClass: "constructor-zoom",
+                        myid: '#' + id
+                    });
+                }
+            }
+        }
+
         $('.az-picture-page-picture-main-picture-div').css('height', screen_height + 'px');
     };
 
@@ -697,7 +750,7 @@ function ConstructorOverview() {
                 aLink.appendTo(that.monitor);
             }
 
-            var isZoom = that.isConstructor && that.type == 'Баннер';
+            var isZoom = that.isConstructor && that.type != 'Модульная';
             isZoom = isZoom || (that.isZoom && that.elemId);
             isZoom = isZoom && that.imgBigPath;
             if (isZoom) {
@@ -734,11 +787,12 @@ function ConstructorOverview() {
                 break;
         }
 
-        var isZoom2 = this.isConstructor && this.type == 'Баннер';
+        var isZoom2 = this.isConstructor && this.type != 'Модульная';
         isZoom2 = isZoom2 || (this.isZoom && this.elemId);
         isZoom2 = isZoom2 && this.imgBigPath;
         if (isZoom2) {
             if (!this.isZoom) {
+                var myid = this.type == 'Баннер' ? '.az-picture-page-picture-main-banner-div div div' : '.az-picture-page-picture-main-picture-div div div';
                 $('#' + mainIdEl).elevateZoom({
                     constrainType: "height",
                     constrainSize: 274,
@@ -748,12 +802,12 @@ function ConstructorOverview() {
                     cursor: 'pointer',
                     zoomWindowContainerClass: "dynamic-constructor-zoom",
                     zoomContainerClass: "dynamic-constructor-zoom",
-                    myid: '.az-picture-page-picture-main-banner-div div div'
+                    myid: myid
                 });
             } else {
                 if (!this.zoomType) {
                     $('#' + mainIdEl).elevateZoom({
-                        zoomWindowPosition: 4,
+                        zoomWindowPosition: 7,
                         borderSize: 4,
                         zoomWindowWidth: 600,
                         zoomWindowHeight: 600,
@@ -862,7 +916,8 @@ function ConstructorOverview() {
             mat_size = $('div.az-picture-page-sidebar-choose-mat-size'),
             module = $('div.az-picture-page-sidebar-choose-module'),
             panel_sizes = $('div#az-picture-page-sidebar-size-panel-div'),
-            mat_color = $('div.az-picture-page-sidebar-choose-mat-color');
+            mat_color = $('div.az-picture-page-sidebar-choose-mat-color'),
+            zoom_div = $('div.az-picture-page-slider-zoom-div');
         if (this.isConstructor) {
             $(".zoomContainer").remove();
             $(".zoomWindowContainer").remove();
@@ -880,6 +935,7 @@ function ConstructorOverview() {
                 mat_color.hide();
                 module.hide();
                 panel_sizes.hide();
+                zoom_div.show();
                 break;
             case 'В раме':
                 subframe.hide();
@@ -890,6 +946,7 @@ function ConstructorOverview() {
                 mat_color.show();
                 module.hide();
                 panel_sizes.hide();
+                zoom_div.show();
                 break;
             case 'Модульная':
                 subframe.show();
@@ -900,6 +957,7 @@ function ConstructorOverview() {
                 mat_color.hide();
                 module.show();
                 panel_sizes.show();
+                zoom_div.hide();
                 break;
         }
     };

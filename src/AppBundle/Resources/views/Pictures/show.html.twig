@@ -28,6 +28,16 @@
                 <div class="col-md-6 col-sm-6">Артикул: {{ pictureMain.code }}</div>
             </div>
             {% include('AppBundle:Component:Constructor/picture.html.twig') %}
+            <div class="row text-center az-picture-page-slider-zoom-div">
+                <div class="col-md-12 col-sm-12">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 text-right">
+                            <a href="{{ path('picture_view', {'id': pictureMain.id}) }}" target="_blank"><img src="{{ asset('bundles/app/images/zoom.png') }}"
+                                                                                                              class="az-picture-constructor-frame-zoom-img"/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row text-center az-picture-page-slider-material-div">
                 <div class="col-md-12 col-sm-12">
                     {% include('AppBundle:Component:Constructor/slider.html.twig') %}
