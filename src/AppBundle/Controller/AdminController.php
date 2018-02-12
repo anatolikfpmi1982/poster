@@ -92,6 +92,7 @@ class AdminController extends CoreController
                 'contact_us_text' => '',
                 'from_email' => '',
                 'to_email' => '',
+                'my_files_description' => '',
                 'min_price' => ''
             ];
         }
@@ -116,6 +117,7 @@ class AdminController extends CoreController
             ->add('contact_us_text', CKEditorType::class, ['label' => 'Текст над формой в "Свяжись с нами"', 'required' => false])
             ->add('frame_page_text', CKEditorType::class, ['label' => 'Текст на странице Рам', 'required' => false])
             ->add('block_todo_text', CKEditorType::class, ['label' => 'Текст в блоке "Не можете найти?"', 'required' => false])
+            ->add('my_files_description', CKEditorType::class, ['label' => 'Текст на странице Моих файлов', 'required' => false])
             ->add('from_email', TextType::class, ['label' => 'Email для отправки', 'required' => false])
             ->add('to_email', TextType::class, ['label' => 'Email для получения', 'required' => false])
             ->add('enable_own_picture', CheckboxType::class, ['label' => 'Использовать функцию "Загрузить картину"', 'required' => false])

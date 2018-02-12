@@ -9,6 +9,9 @@
             <a href="/myfile/{{ picture.id }}"><img src="{{ img }}" class="az-main-popular-item-img"></a>
         </div>
     </div>
+    <div class="az-main-popular-item-header-category-row">
+        {{ picture.image.getName() }}
+    </div>
     <div class="row">
         <div class="az-main-popular-item-header-buttons container-fluid">
             <div class="row">
@@ -22,7 +25,10 @@
 
                     </div>
                 </div>
-
+                <div class="col-md-6 col-sm-6 az_btn_order text-left">
+                    <a href="/myfile/{{ picture.id }}"
+                       class="btn_az-main-popular_order">Выбрать <br/>тип картины,<br/> размер, цена, <br/>заказать</a>
+                </div>
             </div>
         </div>
     </div>
