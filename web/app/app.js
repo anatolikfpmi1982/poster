@@ -17,32 +17,56 @@ define(function (require, exports, module) {
 
         $('#az-page-main-popular-div').show();
 
-        $("#owl-example").owlCarousel({
-            items: 6,
-            dots: false,
-            nav: true,
-            navText: ["", ""],
-            scrollPerPage: true,
-            lazyLoad: true,
-            slideBy: 5
-        });
-
-        $("#owl-template").owlCarousel({
+        var owl_example = $("#owl-example");
+        owl_example.owlCarousel({
             items: 5,
             dots: false,
             nav: true,
             navText: ["", ""],
             scrollPerPage: true,
             lazyLoad: true,
-            slideBy: 4
+            slideBy: 5
+        }).on('mousewheel', '.owl-stage', function (e) {
+            if (e.deltaY > 0) {
+                owl_example.trigger('next.owl');
+            } else {
+                owl_example.trigger('prev.owl');
+            }
+            e.preventDefault();
         });
 
-        $("#owl-frame").owlCarousel({
+        var owl_template = $("#owl-template");
+        owl_template.owlCarousel({
+            items: 4,
+            dots: false,
+            nav: true,
+            navText: ["", ""],
+            scrollPerPage: true,
+            lazyLoad: true,
+            slideBy: 4
+        }).on('mousewheel', '.owl-stage', function (e) {
+            if (e.deltaY > 0) {
+                owl_template.trigger('next.owl');
+            } else {
+                owl_template.trigger('prev.owl');
+            }
+            e.preventDefault();
+        });
+
+        var owl_frame = $("#owl-frame");
+        owl_frame.owlCarousel({
             items: 1,
             dots: false,
             nav: true,
             navText: ["", ""],
             lazyLoad: true
+        }).on('mousewheel', '.owl-stage', function (e) {
+            if (e.deltaY > 0) {
+                owl_frame.trigger('next.owl');
+            } else {
+                owl_frame.trigger('prev.owl');
+            }
+            e.preventDefault();
         });
 
         // Category page
@@ -121,7 +145,12 @@ define(function (require, exports, module) {
         });
 
         // picture page constructor frame
-        $("img.az-picture-page-constructor-picture-thickness-img").click(function (event) {
+        $("img.az-picture-page-constructor-picture-thickness-img").each(function (index) {
+            if ($(this).data('title') != 'Автоподбор') {
+                var textDiv = $('<div class="bottom-left">' + $(this).data('title') + '</div>');
+                textDiv.appendTo($(this).parent());
+            }
+        }).click(function (event) {
             event.stopImmediatePropagation();
             $('#az-picture-constructor-frame-selected').val($(this).data('title'));
             $('#az-picture-constructor-frame-ratio-selected').val($(this).data('ratio'));
@@ -137,7 +166,12 @@ define(function (require, exports, module) {
         });
 
         // picture page constructor module
-        $("img.az-picture-page-constructor-picture-module-type-img").click(function (event) {
+        $("img.az-picture-page-constructor-picture-module-type-img").each(function (index) {
+            if ($(this).data('title') != 'Автоподбор') {
+                var textDiv = $('<div class="module-bottom-left">' + $(this).data('title') + '</div>');
+                textDiv.appendTo($(this).parent());
+            }
+        }).click(function (event) {
             event.stopImmediatePropagation();
             $('#az-picture-constructor-module-selected').val($(this).data('title'));
             $('#az-picture-constructor-module-id-selected').val($(this).data('id'));
@@ -551,6 +585,7 @@ define(function (require, exports, module) {
         $('.az-picture-page-constructor-picture-thickness-img').removeClass('hidden').show();
         $('.az-picture-page-constructor-picture-module-type-img').removeClass('hidden').show();
         $('.az-main-page-slider-img').removeClass('hidden').show();
+        $('.az-frames-slide-thumb-img').removeClass('hidden').show();
 
 
     });

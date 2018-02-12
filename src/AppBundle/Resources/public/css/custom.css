@@ -1217,7 +1217,7 @@ footer {
 }
 
 .cycle-slideshow {
-    margin: 10px auto;
+    margin: 0 auto;
     padding: 0;
     position: relative;
 }
@@ -1359,7 +1359,7 @@ footer {
 
 /**galleries paint**/
 .owl-carousel .owl-stage-outer {
-    width: 83%;
+    width: 100%;
     margin: 15px auto;
     border: 1px solid #e6e6e6;
     height: 100px;
@@ -1395,7 +1395,7 @@ footer {
 }
 
 .owl-theme .owl-nav .owl-prev {
-    margin: 5px 0 0 -6px;
+    margin: 5px 0 0 -55px;
     padding: 4px 0;
 }
 
@@ -1416,7 +1416,7 @@ footer {
     background: url('../images/next-gall.png') 50% 50% no-repeat rgba(196, 193, 193, 1) !important;
     display: block;
     color: #fff;
-    right: 25px;
+    right: -25px;
     position: absolute;
     margin-top: 0px;
     margin-left: -8px;
@@ -2562,7 +2562,7 @@ button.close:focus, .close:hover {
 .az-frames-slide .cycle-slide {
     max-width: 99%;
     left: 300px;
-    margin: 20px auto;
+    margin: 0 auto;
     text-align: center;
 
 }
@@ -2616,7 +2616,7 @@ button.close:focus, .close:hover {
 
 .az-frames-slide .cycle-slideshow img {
     width: 100%;
-    height: auto;
+    height: 100%;
     vertical-align: middle;
     display: inline-block;
     position: relative;
@@ -2845,6 +2845,32 @@ a.az-category-item-a div.az-sidebar-catalog-item-header div.az-category-menu-ite
     padding: 5px;
 }
 
+.owl-carousel {
+    width: 500px;
+}
+
+.az-picture-page-frame-outer-slider {
+    margin-left: 45px;
+}
+
+.item {
+    position: relative;
+    text-align: center;
+    color: #333333;
+}
+
+.bottom-left {
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+}
+
+.module-bottom-left {
+    position: absolute;
+    bottom: 0;
+    left: 25px;
+}
+
 @media only screen
 and (min-device-width: 320px)
 and (max-device-width: 480px)
@@ -2956,7 +2982,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
 
     .owl-prev {
         display: block;
-        left: 0;
+        left: -35px;
         margin-left: -8px;
         width: 34px;
         height: 50px;
@@ -2965,7 +2991,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
 
     .owl-next {
         display: block;
-        right: 15px;
+        right: -5px;
         margin-top: 0;
         margin-left: -8px;
         width: 34px;
@@ -3017,5 +3043,32 @@ and (-webkit-min-device-pixel-ratio: 2) {
 
     .owl-theme .owl-nav [class*="owl-"] {
         margin: -5px 0 0 0;
+    }
+
+    .az-picture-page-frame-outer-slider {
+        margin-left: 15px;
+    }
+
+    .owl-carousel {
+        width: 330px;
+    }
+
+    .bottom-left {
+        position: absolute;
+        bottom: 0;
+        left: 5px;
+    }
+
+    .module-bottom-left {
+        position: absolute;
+        bottom: 0;
+        left: 5px;
+    }
+
+    .az-main-frames-img {
+        max-height: 70px;
+        max-width: 70px;
+        margin: 0 auto;
+        height: 90px;
     }
 }
