@@ -73,9 +73,9 @@
         </div>
     </div>
     <div class="row">
-        <div class="az-main-popular-item-header-category">
-            {% if picture.title|length > 58 %}
-                {% set picture_title = picture.title|slice(0, 55) ~ '...' %}
+        <div class="az-main-popular-item-header-category-row">
+            {% if picture.title|length > 34 %}
+                {% set picture_title = picture.title|slice(0, 31) ~ '...' %}
             {% else %}
                 {% set picture_title = picture.title %}
             {% endif %}
@@ -84,7 +84,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="az-main-popular-item-header-category">
+        <div class="az-main-popular-item-header-category-row">
             {% set isPictureAuthor = picture.author is defined and picture.author %}
             {% if isPictureAuthor and picture.author.slug is defined and picture.author.slug %}
                 {% set author_url = path('author', {'slug': picture.author.slug}) %}
@@ -92,7 +92,11 @@
                 {% set author_url = '#' %}
             {% endif %}
             {% if isPictureAuthor and picture.author.name is defined and picture.author.name %}
-                {% set author_name = picture.author.name %}
+                {% if picture.author.name|length > 34 %}
+                    {% set author_name = picture.author.name|slice(0, 31) ~ '...' %}
+                {% else %}
+                    {% set author_name = picture.author.name %}
+                {% endif %}
             {% else %}
                 {% set author_name = '-' %}
             {% endif %}
@@ -106,21 +110,32 @@
         {% set limitCategory = 5 %}
         {% set catId = 0 %}
     {% endif %}
-    {% if picture.categories is defined and picture.categories and picture.categories and (( catId > 0 and picture.categories|length > 1 ) or
-    ( catId == 0 and picture.categories|length > 0 )
-    ) %}
-        <div class="row">
-            <div class="az-main-popular-item-header-category">
-                <span class="az_author"> Категории:</span>
+    <div class="row">
+        <div class="az-main-popular-item-header-category">
+            <span class="az_author"> Категории:</span>
+            {% if picture.categories is defined and picture.categories and picture.categories and
+            (( catId > 0 and picture.categories|length > 1 ) or ( catId == 0 and picture.categories|length > 0 ) ) %}
+                {% set categorySymbolsNum = 0 %}
+                {% set categoryInProgress = true %}
                 {% for cat in picture.categories|slice(0, limitCategory) %}
-                    {% if cat.id != catId %}
-                        <a href="{{ path('category', {'slug': cat.slug}) }}"> {{ cat.title }}</a> {% if loop.last == false %},{% endif %}
+                    {% if cat.id != catId and categoryInProgress %}
+                        {% set categorySymbolsNum = categorySymbolsNum + cat.title|length + 3 %}
+                        {% if categorySymbolsNum <= 68 %}
+                            <a href="{{ path('category', {'slug': cat.slug}) }}"> {{ cat.title }}</a>
+                            {% if loop.last == false %},{% endif %}
+                        {% else %}
+                            ...
+                            {% set categoryInProgress = false %}
+                        {% endif %}
+
                     {% endif %}
                 {% endfor %}
+            {% endif %}
 
-            </div>
+
         </div>
-    {% endif %}
+    </div>
+
     <div class="row">
         <div class="az-main-popular-item-header-buttons container-fluid">
             <div class="row">

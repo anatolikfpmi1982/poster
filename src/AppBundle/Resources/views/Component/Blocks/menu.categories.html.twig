@@ -14,12 +14,17 @@
         {% set options = {'slug': category_slug, 'type': category_type} %}
         <a href="{{ path('category', options) }}" class="az-category-item-a">
             <div class="row az-sidebar-header az-sidebar-catalog-item-header
-        {% if isCheckNav and categoryBlock.clean_id in [active_category_id, ('m' ~ active_category_id)] %}active{% endif %}"
+        {% if isCheckNav and categoryBlock.clean_id in activeCategories %}active{% endif %}"
                  data-id="{{ categoryBlock.id }}"
                  data-url="">
-                <div class="col-md-12 col-sm-12 ">
-                    <img src="{{ asset('bundles/app/images/catalog.png') }}" class="az-sidebar-block-img az-catalog-block-img" title="{{ categoryBlock.title }}"/>
-                    {{ categoryBlock.title }}
+                <div class="col-md-12 col-sm-12 az-category-menu-item-text {% if isCheckNav and active_category_id == categoryBlock.clean_id %}active_menu{% endif %}">
+                    <div class="row">
+                        <div class="col-md-2 col-sm-2">
+                            <img src="{{ asset('bundles/app/images/catalog.png') }}" class="az-sidebar-block-img az-catalog-block-img"
+                                 title="{{ categoryBlock.title }}"/>
+                        </div>
+                        <div class="col-md-10 col-sm-10">{{ categoryBlock.title }}</div>
+                    </div>
                 </div>
             </div>
         </a>
@@ -44,7 +49,9 @@
                         <div class="col-md-12 col-sm-12 container-fluid az-sidebar-subcategory-first
                         {% if isCheckNav and subcategory.clean_id in activeCategories %}active_parent{% endif %}">
                             <a href="{{ path('category', options) }}" class="az-subcategory-item-a">
-                                <span class="az-subcat-span">{{ subcategory.title }}</span>
+                                <span class="az-subcat-span {% if isCheckNav and active_category_id == subcategory.clean_id %}active_menu{% endif %}">
+                                    {{ subcategory.title }}
+                                </span>
                             </a>
                             {% if subcategory.children is defined and subcategory.children %}
                                 <div class="row category-menu children-subcategory-{{ categoryBlock.id }}"
@@ -68,7 +75,9 @@
                                                 <div class="col-md-12 col-sm-12 container-fluid az-sidebar-subsubcategory-first
                                             {% if isCheckNav and subsubcategory.clean_id in activeCategories %}active_parent{% endif %}">
                                                     <a href="{{ path('category',options) }}" class="az-subsubcategory-item-a">
-                                                        <span class="az-subsubcat-span">{{ subsubcategory.title }}</span>
+                                                        <span class="az-subsubcat-span {% if isCheckNav and active_category_id == subsubcategory.clean_id %}active_menu{% endif %}">
+                                                            {{ subsubcategory.title }}
+                                                        </span>
                                                     </a>
                                                     {% if subsubcategory.children is defined and subsubcategory.children %}
                                                         <div class="row category-menu children-subsubcategory-{{ categoryBlock.id }}"
@@ -93,8 +102,21 @@
                                                                          data-id="{{ subsubsubcategory.id }}">
 
                                                                         <div class="col-md-12 col-sm-12 az-subsubsubcategory-item-img">
+
                                                                             <a href="{{ path('category',options) }}" class="az-subsubsubcategory-item-a">
-                                                                                <span class="az-subsubcat-span">{{ subsubsubcategory.title }}</span>
+                                                                                <div class="row">
+                                                                                    <div class="col-md-2 col-sm-2">
+                                                                                        <span class="az-subsubsubcat-span"></span>
+                                                                                    </div>
+                                                                                    <div class="col-md-10 col-sm-10 az-subsubsubcat-span-text
+                                                                                    {% if isCheckNav and active_category_id == subsubsubcategory.clean_id %}active_menu{% endif %}">
+                                                                                        {{ subsubsubcategory.title }}
+                                                                                    </div>
+                                                                                </div>
+                                                                                {#<span class="az-subsubsubcat-span#}
+                                                                                {#{% if isCheckNav and active_category_id == subsubsubcategory.clean_id %}active_menu{% endif %}">#}
+                                                                                {#{{ subsubsubcategory.title }}#}
+                                                                                {#</span>#}
                                                                             </a>
                                                                         </div>
                                                                     </div>

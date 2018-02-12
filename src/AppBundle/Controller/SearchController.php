@@ -23,14 +23,14 @@ class SearchController extends FrontController
      */
     public function showAction(Request $request)
     {
-        $em = $this->get('doctrine.orm.entity_manager');
-
+        $this->blocks['LastVisited'] = 6;
+        $this->menu = '/search';
         $searchString = $request->query->get('query');
-
-        $queryBuilder = $em->getRepository('AppBundle:Picture')->getActivePicturesForSearch($searchString);
+        $this->pageSlug = htmlspecialchars($searchString);
+        $this->pageType = 'search';
+        $this->doBlocks();
+        $queryBuilder = $this->em->getRepository('AppBundle:Picture')->getActivePicturesForSearch($searchString);
         $query = $queryBuilder->getQuery();
-
-
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
@@ -38,14 +38,9 @@ class SearchController extends FrontController
             self::PAGE_LIMIT/*limit per page*/
         );
 
-        $this->blocks['LastVisited'] = 6;
-        $this->menu = '/search';
-        $this->pageSlug = $searchString;
-        $this->pageType = 'search';
-        $this->doBlocks();
         $this->data['pagination'] = $pagination;
-        $this->data['searchString'] = $searchString;
-        $this->data['filters']['tpls'] = $em->getRepository('AppBundle:PictureForm')->findBy(['isActive' => true]);
+        $this->data['searchString'] = $this->pageSlug;
+        $this->data['filters']['tpls'] = $this->em->getRepository('AppBundle:PictureForm')->findBy(['isActive' => true]);
 
         // parameters to template
         return $this->render('AppBundle:Search:show.html.twig', $this->data);
