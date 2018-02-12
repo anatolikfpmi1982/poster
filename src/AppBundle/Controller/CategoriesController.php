@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Category3;
+use AppBundle\Repository\CategoryRepository;
 use Doctrine\ORM\QueryBuilder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -72,8 +73,8 @@ class CategoriesController extends FrontController
 
         if($request->query->get('type') && $request->query->get('type') === 'module') {
             $this->data['module_active'] = true;
-            if($category->getId() == self::MAIN_CATEGORY_ID) {
-                $category->setTitle('Модульные картины');
+            if($category->getId() == CategoryRepository::MAIN_CATEGORY_ID) {
+                $category->setTitle(CategoryRepository::MAIN_CATEGORY_TITLE);
             }
         };
         $this->data['pagination'] = $pagination;

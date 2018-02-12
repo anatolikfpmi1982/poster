@@ -492,10 +492,26 @@ define(function (require, exports, module) {
                 dataType: 'json',
                 processData: false,
                 contentType: false,
-                success: function (respond, textStatus, jqXHR) {
-                    location.href = '/myfiles';
+                success: function (data) {
+                    $('#myModal').hide();
+                    $('.modal-backdrop').hide();
+                    if (data != undefined && data && data.result != undefined && data.result == 1) {
+                        location.href = '/myfiles';
+                    } else {
+                        if (data != undefined && data && data.result != undefined) {
+                            error = data.error
+                        } else {
+                            error = 'Произошли технические неполатки. Попробуйте еще раз через пару минут.'
+                        }
+                        showInnerMessage('error', error);
+                        window.setTimeout(function () {
+                            location.reload();
+                        }, 3000);
+                    }
                 },
-                error: function (jqXHR, textStatus, errorThrown) {
+                error: function (data) {
+                    $('#myModal').hide();
+                    $('.modal-backdrop').hide();
                     showInnerMessage('error', 'Произошли технические неполатки. Попробуйте еще раз через пару минут.');
                     console.log('ОШИБКИ AJAX запроса: ' + textStatus);
                 }

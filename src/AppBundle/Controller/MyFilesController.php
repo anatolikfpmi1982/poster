@@ -132,6 +132,11 @@ class MyFilesController extends FrontController {
 
         $uploadedFile = $request->files->all()[0];
 
+        $allowedTypes = ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/png'];
+        if($uploadedFile->getMimeType() && !in_array($uploadedFile->getMimeType(), $allowedTypes)) {
+            return new JsonResponse(['result' => 0, 'error' => 'Допустимые типы файлов - JPG, PNG, GIF']);
+        }
+
         $picture = new OwnPicture();
 
         $picture->setName($uploadedFile->getClientOriginalName());
