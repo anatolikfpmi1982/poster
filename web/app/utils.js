@@ -6,4 +6,5 @@ define(function (require, exports, module) {
     require('cycle2');
     require('owl');
     require('elevatezoom');
+    require('mousewheel');
 });

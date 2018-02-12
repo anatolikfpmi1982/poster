@@ -29,47 +29,42 @@
             <div class="col-md-10 col-sm-10"> {{ frame.material }}</div>
         </div>
 
-
-        <div class="row az-page-main-section-div az-frames-slide">
-            <div class="col-md-3 col-sm-3">
-                <div class="cycle-overlay custom"></div>
-
-                <a class="left carousel-control" href="#carousel-example-generic" role="button" id="prev-slider" data-slide="prev">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-
-            </div>
-            <div class="col-md-6 col-sm-6">
-                <div class="cycle-slideshow"
-                     data-cycle-fx=scrollHorz
-                     data-cycle-timeout=0
-                     data-cycle-pager="#adv-custom-pager"
-                     data-cycle-prev="#prev-slider"
-                     data-cycle-next="#next-slider"
-                     data-cycle-pager-template="<a  class='az-frames-slide-thumb'  href='#'><img src='{{ '{{' }}src{{ '}}' }}'  ></a>"
-                >
-                    <!-- empty element for overlay -->
-
-                    {#<div class="cycle-overlay custom"></div>#}
-
-
-                    {% if frame.images is defined and frame.images %}
+        {% if frame.images is defined and frame.images and frame.images|length > 6 %}
+            <div class="row az-page-main-section-div az-frames-slide">
+                <div class="col-md-3 col-sm-3">
+                    <div class="cycle-overlay custom"></div>
+                    <a class="left carousel-control" href="#carousel-example-generic" role="button" id="prev-slider" data-slide="prev">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="cycle-slideshow"
+                         data-cycle-fx=scrollHorz
+                         data-cycle-timeout=0
+                         data-cycle-pager="#adv-custom-pager"
+                         data-cycle-prev="#prev-slider"
+                         data-cycle-next="#next-slider"
+                         data-cycle-pager-template="<a  class='az-frames-slide-thumb'  href='#'><img src='{{ '{{' }}src{{ '}}' }}'  ></a>"
+                    >
                         {% for image in frame.images %}
-                            {% if image.getFilename() %}
-                                {% set img = '/files/frames/thumb/' ~ image.getFilename() %}
-                            {% else %}
-                                {% set img = asset('bundles/app/images/material_default.png') %}
+                            {% if loop.index > 6 %}
+                                {% if image.getFilename() %}
+                                    {% set img = '/files/frames/thumb/' ~ image.getFilename() %}
+                                {% else %}
+                                    {% set img = asset('bundles/app/images/material_default.png') %}
+                                {% endif %}
+                                <img src="{{ img }}" class="hidden az-frames-slide-thumb-img"/>
                             {% endif %}
-                            <img src="{{ img }}"/>
                         {% endfor %}
-                    {% endif %}
-
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <a class="right carousel-control" href="#carousel-example-generic" id="next-slider" role="button" data-slide="next">
+                        <i class="fa fa-angle-right"></i><span class="sr-only">Next</span>
+                    </a>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-3"><a class="right carousel-control" href="#carousel-example-generic" id="next-slider" role="button" data-slide="next">
-                    <i class="fa fa-angle-right"></i><span class="sr-only">Next</span>
-                </a></div>
-        </div>
+        {% endif %}
     </div>
     <div class="row az-frames-main">
         <div id=adv-custom-pager class="center external"></div>
