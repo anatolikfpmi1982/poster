@@ -136,7 +136,7 @@ function ConstructorOverview() {
         this.padding_left = 15;
         this.padding_top = 10;
         this.right_width = 6;
-        this.right_width_portrait = 30;
+        this.right_width_portrait = parseInt($('#az-picture-constructor-frame-thickness-selected').val());
         this.top_deviation = 20;
         this.left_deviation = 10;
         this.max_width = parseInt($('.az-picture-page-constructor-global-div').css('width'));
@@ -157,7 +157,8 @@ function ConstructorOverview() {
         $('#az-constructor-choose-material').html(this.material);
         $('#az-constructor-choose-thickness').html(this.thickness);
         $('#az-constructor-choose-color').html(this.color);
-        $('#az-constructor-choose-frame').html(this.frame);
+        var frameA = $('<a href="' + $('#az-picture-constructor-frame-url-selected').val() + '">' + this.frame + '</a>');
+        $('#az-constructor-choose-frame').html(frameA);
         $('#az-constructor-choose-mat-type').html(this.mat_type);
         $('#az-constructor-choose-mat-size').html(this.mat_size + ' см');
         $('#az-constructor-choose-mat-color').html(this.mat_color);
@@ -186,14 +187,26 @@ function ConstructorOverview() {
                 if (this.isConstructor) {
                     $('.az-picture-page-constructor-picture-thickness-img').each(function (index) {
                         if ($(this).data('zoom-image')) {
+
+                            var additionalData =
+                                '<div class="row">' +
+                                '<div class="col-md-4 col-sm-4">Артикул:</div><div class="col-md-8 col-sm-8 text-left">' + $(this).data('title') + '</div>' +
+                                '<div class="col-md-4 col-sm-4">Цвет:</div><div class="col-md-8 col-sm-8 text-left">' + $(this).data('frame-color') + '</div>' +
+                                '<div class="col-md-4 col-sm-4">Материал:</div><div class="col-md-8 col-sm-8 text-left">' + $(this).data('frame-material') + '</div>' +
+                                '<div class="col-md-4 col-sm-4">Ширина:</div><div class="col-md-8 col-sm-8 text-left">' + $(this).data('frame-width') + '</div>' +
+                                '<div class="col-md-4 col-sm-4">Высота:</div><div class="col-md-8 col-sm-8 text-left">' + $(this).data('frame-height') + '</div>' +
+                                '</div>';
+
+
                             $(this).elevateZoom({
-                                zoomWindowPosition: 6,
-                                zoomWindowHeight: 150,
-                                zoomWindowWidth: 150,
-                                borderSize: 0,
+                                zoomWindowPosition: 5,
+                                zoomWindowHeight: 250,
+                                zoomWindowWidth: 220,
+                                borderSize: 1,
                                 easing: true,
                                 zoomWindowContainerClass: "frame-constructor-zoom",
                                 zoomContainerClass: "frame-constructor-zoom",
+                                additionalData: additionalData,
                                 myid: '#az-picture-page-constructor-picture-thickness-img-' + $(this).data('id')
                             })
                         }
@@ -219,7 +232,7 @@ function ConstructorOverview() {
             picWidth = this.picWidth,
             picHeight = this.picHeight,
             top_deviation = this.top_deviation,
-            screen_height = picHeight + (2 * top_deviation) + 2 * right_width,
+            screen_height = picHeight + (2 * top_deviation) + 2 * right_width + 5,
             imgCorner = this.imgCorner,
             imgSideT = this.imgSideT,
             imgSideR = this.imgSideR,
@@ -298,7 +311,6 @@ function ConstructorOverview() {
         divCornerRB.css('background-repeat', 'no-repeat');
         divCornerRB.css('background-size', right_width + 'px ' + right_width + 'px');
         divCornerRB.css('background-position', '0px 0px');
-        //divCornerRB.css('box-shadow', 'rgba(0, 0, 0, 0.4) ' + this.shadow + 'px ' + this.shadow + 'px ' + this.shadow + 'px');
         divCornerRB.appendTo(divMain);
 
         var divSideT = $(newDivString);
@@ -321,7 +333,6 @@ function ConstructorOverview() {
         divSideB.css('background-image', 'url(' + imgSideB + ')');
         divSideB.css('background-size', right_width + 'px ' + right_width + 'px');
         divSideB.css('background-position', '0px 0px');
-        //divSideB.css('box-shadow', 'rgba(0, 0, 0, 0.4) ' + this.shadow + 'px ' + this.shadow + 'px ' + this.shadow + 'px');
         divSideB.appendTo(divMain);
 
         var divSideR = $(newDivString);
@@ -333,7 +344,6 @@ function ConstructorOverview() {
         divSideR.css('background-image', 'url(' + imgSideR + ')');
         divSideR.css('background-size', right_width + 'px ' + right_width + 'px');
         divSideR.css('background-position', '0px 0px');
-        //divSideR.css('box-shadow', 'rgba(0, 0, 0, 0.4) ' + this.shadow + 'px ' + this.shadow + 'px ' + this.shadow + 'px');
         divSideR.appendTo(divMain);
 
         var divSideL = $(newDivString);
@@ -453,16 +463,15 @@ function ConstructorOverview() {
                     this.picWidth = Math.round((this.picWidth * maxHeight) / this.picHeight);
                     this.picHeight = maxHeight;
                 }
-
-                if (this.debug) {
-                    console.log('this.top_deviation', this.top_deviation);
-                    console.log('this.left_deviation', this.left_deviation);
-                    console.log('this.right_width_portrait', this.right_width_portrait);
-                    console.log('maxHeight', maxHeight);
-                    console.log('maxWidth', maxWidth);
-                }
             }
 
+            if (this.debug) {
+                console.log('this.top_deviation', this.top_deviation);
+                console.log('this.left_deviation', this.left_deviation);
+                console.log('this.right_width_portrait', this.right_width_portrait);
+                console.log('maxHeight', maxHeight);
+                console.log('maxWidth', maxWidth);
+            }
             this.top_deviation = Math.round((this.max_height - this.picHeight - 2 * this.right_width_portrait - this.shadow  ) / 2);
             this.left_deviation = Math.round((this.max_width - this.picWidth - 2 * this.right_width_portrait - this.shadow ) / 2);
 

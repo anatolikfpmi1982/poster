@@ -119,7 +119,9 @@ if (typeof Object.create !== 'function') {
 //				if window zoom        
             if (self.options.zoomType == "window") {
                 self.zoomWindowStyle = "overflow: hidden;"
-                    + "background-position: 0px 0px;background-color:white;text-align:center;"
+                    + "background-position: 0px 0px;"
+                    + "background-color:white;"
+                    + "text-align:center;"
                     + "width: " + String(self.options.zoomWindowWidth) + "px;"
                     + "height: " + String(self.options.zoomWindowHeight)
                     + "px;float: left;"
@@ -259,8 +261,19 @@ if (typeof Object.create !== 'function') {
                         self.$elem.trigger('click');
                     });
             } else {
-                self.zoomWindow = $("<div style='z-index:999;left:" + (self.windowOffsetLeft) + "px;top:" + (self.windowOffsetTop) + "px;" +
-                    self.zoomWindowStyle + "' class='zoomWindow'>&nbsp;</div>")
+                var innerContent = '';
+                if (self.options.additionalData) {
+                    innerContent = '<div class="container-fluid" style="z-index:999;left:' + (self.windowOffsetLeft) + "px;top:" + (self.windowOffsetTop) + "px;" +
+                        self.zoomWindowStyle + '">' +
+                        '<div class="row" style="height:' + self.largeHeight + 'px;">' +
+                        "<div class='col-md-12 col-sm-12 zoomWindow'>&nbsp;</div>" +
+                        '</div>' + self.options.additionalData +
+                        '</div>';
+                } else {
+                    innerContent = "<div style='z-index:999;left:" + (self.windowOffsetLeft) + "px;top:" + (self.windowOffsetTop) + "px;" +
+                        self.zoomWindowStyle + "' class='zoomWindow'>&nbsp;</div>";
+                }
+                self.zoomWindow = $(innerContent)
                     .appendTo(self.zoomContainer)
                     .click(function () {
                         self.$elem.trigger('click');
@@ -786,8 +799,8 @@ if (typeof Object.create !== 'function') {
                         self.windowOffsetLeft = (self.nzWidth) + 10; //DONE 1, 2, 3, 4, 16
                         break;
                     case 5: //done
-                        self.windowOffsetTop = (self.nzHeight); //DONE - 4,5,6,7,8
-                        self.windowOffsetLeft = (self.nzWidth - self.zoomWindow.width() - (self.options.borderSize * 2)); //DONE - 5,15
+                        self.windowOffsetTop = (self.nzHeight) + 10; //DONE - 4,5,6,7,8
+                        self.windowOffsetLeft = (self.nzWidth - self.zoomWindow.width() - (self.options.borderSize * 2)) + 10; //DONE - 5,15
                         break;
                     case 6:
                         if (self.options.zoomWindowHeight > self.nzHeight) { //positive margin
@@ -1189,6 +1202,7 @@ if (typeof Object.create !== 'function') {
         zoomWindowContainerClass: "",
         zoomContainerClass: "",
         myid: null,
+        additionalData: '',
         onComplete: $.noop,
         onZoomedImageLoaded: function () {
         }

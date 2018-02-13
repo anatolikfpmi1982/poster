@@ -2,14 +2,14 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Image;
+use AppBundle\Entity\OwnPicture;
+use AppBundle\Entity\Settings;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use AppBundle\Entity\OwnPicture;
-use AppBundle\Entity\Settings;
-use AppBundle\Entity\Image;
 
 /**
  * Class DeferredController
@@ -84,6 +84,7 @@ class MyFilesController extends FrontController {
         $this->data['ownPicture'] = true;
         $this->data['cart_item'] = $cartItem;
         $this->data['cart_id'] = $request->get('cart_id');
+        $this->data['isMobile'] = $this->get('pictures.service')->isMobile();
 
         // parameters to template
         return $this->render('AppBundle:Pictures:upload.html.twig', $this->data);

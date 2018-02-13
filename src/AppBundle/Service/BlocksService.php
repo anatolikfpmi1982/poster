@@ -50,10 +50,12 @@ class BlocksService {
     /**
      * Return data for category sidebar.
      *
+     * @param array $settings
+     *
      * @return array
      */
-    public function getCategoriesBlock() {
-        return $this->em->getRepository( 'AppBundle:Category3' )->getCatalogMenu();
+    public function getCategoriesBlock($settings) {
+        return $this->em->getRepository( 'AppBundle:Category3' )->getCatalogMenu($settings);
     }
 
     /**

@@ -67,6 +67,13 @@ class FrameAdmin extends AbstractAdmin
             ->add('material', null, array('label' => 'Материал'))
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
             ->add('weight', null, ['required' => false, 'label' => 'Вес', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
+            ->add('thickness', null, [
+                'required' => false,
+                'label' => 'Толщина',
+                'empty_data' => '0',
+                'attr' => ['placeholder' => 0],
+                'help' => 'Ширина рамы в пикселях для конструктора. По умолчанию: 20px.'
+            ])
             ->add('images', 'sonata_type_collection', [
                 'by_reference' => true,
                 'label' => 'Изображения',
@@ -109,6 +116,7 @@ class FrameAdmin extends AbstractAdmin
             ->add('weight', null, ['editable'=> true, 'label' => 'Вес'])
             ->add('note', null, ['editable'=> true, 'label' => 'Примечание'])
             ->add('ratio', null, ['editable'=> true, 'label' => 'Коэфф.'])
+            ->add('thickness', null, ['editable'=> true, 'label' => 'Толщина'])
             ->add('height', null, ['editable' => true, 'label' => 'Высота',
                 'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
             ->add('width', null, ['editable' => true, 'label' => 'Ширина',

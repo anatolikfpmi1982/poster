@@ -160,6 +160,8 @@ define(function (require, exports, module) {
             $('#az-picture-constructor-frame-img-side-r-selected').val($(this).data('img-side-r'));
             $('#az-picture-constructor-frame-img-side-b-selected').val($(this).data('img-side-b'));
             $('#az-picture-constructor-frame-img-side-l-selected').val($(this).data('img-side-l'));
+            $('#az-picture-constructor-frame-url-selected').val($(this).data('frame-url'));
+            $('#az-picture-constructor-frame-thickness-selected').val($(this).data('frame-thickness'));
             $('img.az-picture-page-constructor-picture-thickness-img').removeClass('active');
             $(this).addClass('active');
             setShowBoard();
@@ -592,7 +594,7 @@ define(function (require, exports, module) {
 
     function setShowBoard() {
         var constructor = new ConstructorOverview();
-        //constructor.debug = true;
+        constructor.debug = true;
         constructor.init();
         constructor.buildConstructor();
         constructor.showPrice();
