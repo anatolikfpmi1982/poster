@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
  * Class DeferredController
  */
 class MyFilesController extends FrontController {
-    const PAGE_LIMIT = 5;
+    const PAGE_LIMIT = 20;
 
     /**
      * @Route("/myfile/{id}", name="my_file_page")
