@@ -138,6 +138,10 @@ class MyFilesController extends FrontController {
             return new JsonResponse(['result' => 0, 'error' => 'Допустимые типы файлов - JPG, PNG, GIF']);
         }
 
+        if($uploadedFile->getClientSize()/1024/1024 > 10) {
+            return new JsonResponse(['result' => 0, 'error' => 'Допустимые размер файла - 10 Mb']);
+        }
+
         $picture = new OwnPicture();
 
         $picture->setName($uploadedFile->getClientOriginalName());

@@ -2353,6 +2353,14 @@ button.close:focus, .close:hover {
     margin-top: 10px;
 }
 
+.az-form-download-error {
+    display: none;
+}
+
+.az-form-download-error span {
+    color: #fd1200;
+}
+
 .navbar-form {
     padding: 0px 10px 5px 10px;
 
