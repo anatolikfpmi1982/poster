@@ -321,7 +321,8 @@ div[class*="children-subsubsubcategory-"]:hover {
     color: #333333;
 }
 
-.az-popular-item {
+.az-popular-item,
+.az-popular-item-my {
     border-bottom: 1px solid #e6e6e6;
     border-top: 1px solid #e6e6e6;
     border-right: 1px solid #e6e6e6;
@@ -329,6 +330,12 @@ div[class*="children-subsubsubcategory-"]:hover {
     height: 465px;
 }
 
+.az-popular-item-my {
+    height: 395px;
+}
+
+.az-popular-item-my.col-md-4:nth-child(3n+1),
+.az-popular-item-my.col-sm-6:nth-child(2n+1),
 .az-popular-item.col-md-4:nth-child(3n+1),
 .az-popular-item.col-sm-6:nth-child(2n+1) {
     border-left: 1px solid #e6e6e6;
@@ -396,10 +403,6 @@ footer {
 
     .az-header-top-last {
         padding: 20px 30px 0 30px !important;
-    }
-
-    .az-header-download-div {
-        float: left;
     }
 }
 
@@ -1190,19 +1193,11 @@ footer {
     .az-header-top-last {
         padding: 20px 30px 0 30px !important;
     }
-
-    .az-header-download-div {
-        float: left;
-    }
 }
 
 @media screen and (max-width: 479px) {
     .az-header-top-last {
         padding: 20px 30px 0 30px !important;
-    }
-
-    .az-header-download-div {
-        float: left;
     }
 }
 
@@ -2206,7 +2201,7 @@ button.close:focus, .close:hover {
 }
 
 .modal-dialog {
-    width: 400px;
+    width: 500px;
     margin: 0 auto;
     font-weight: 400;
 }
@@ -2321,6 +2316,7 @@ button.close:focus, .close:hover {
 
 .az-header-download-div {
     padding: 2px;
+    font-size: 12px;
 }
 
 .az-comment {
@@ -2846,6 +2842,10 @@ a.az-category-item-a div.az-sidebar-catalog-item-header div.az-category-menu-ite
     padding: 5px;
 }
 
+.padding_left_right_0 {
+    padding: 0;
+}
+
 .owl-carousel {
     width: 500px;
 }
@@ -2870,6 +2870,11 @@ a.az-category-item-a div.az-sidebar-catalog-item-header div.az-category-menu-ite
     position: absolute;
     bottom: 0;
     left: 25px;
+}
+
+.az-header-download-icon-title {
+    padding: 0;
+    margin-bottom: 10px;
 }
 
 @media only screen
@@ -3071,5 +3076,10 @@ and (-webkit-min-device-pixel-ratio: 2) {
         max-width: 70px;
         margin: 0 auto;
         height: 90px;
+    }
+
+    .modal-dialog {
+        width: 300px;
+        font-weight: 300;
     }
 }

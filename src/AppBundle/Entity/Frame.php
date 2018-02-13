@@ -59,6 +59,13 @@ class Frame implements ImageInterface
     private $note = '';
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="thickness", type="integer", nullable=true)
+     */
+    private $thickness = 0;
+
+    /**
      * @var float
      * @ORM\Column(name="height", type="float")
      *
@@ -547,5 +554,23 @@ class Frame implements ImageInterface
     public function getWeight()
     {
         return $this->weight;
+    }
+
+    /**
+     * @return int
+     */
+    public function getThickness() {
+        return $this->thickness;
+    }
+
+    /**
+     * @param int $thickness
+     *
+     * @return Frame
+     */
+    public function setThickness( $thickness ) {
+        $this->thickness = $thickness;
+
+        return $this;
     }
 }

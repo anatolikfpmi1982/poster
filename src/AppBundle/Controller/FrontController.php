@@ -46,6 +46,11 @@ class FrontController extends Controller {
     protected $em;
 
     /**
+     * @var array
+     */
+    protected $settings = [ ];
+
+    /**
      *
      */
     public function doBlocks() {
@@ -61,25 +66,30 @@ class FrontController extends Controller {
         }
 
         $this->data['module_active'] = false;
-        $this->data['active_menu'] = $this->menu;
+        $this->data['active_menu']   = $this->menu;
         $this->data['site_settings'] = $this->getSiteSettings();
         $this->data['help_settings'] = $this->getHelpSettings();
-        $this->data['header_cart'] = $this->getCart();
+        $this->data['header_cart']   = $this->getCart();
     }
 
     /**
      * @return array
      */
     protected function getSiteSettings() {
-        $this->em = $this->get( 'doctrine.orm.entity_manager' );
-        $_siteSettings = $this->em->getRepository( 'AppBundle:Settings' )->findOneByName('site_settings');
-        $siteSettings = [];
-        if($_siteSettings instanceof Settings) {
-            $siteSettings = unserialize($_siteSettings->getSettings());
-            $siteSettings['contacts'] = $this->get('helper.textformater')->formatMoreText($siteSettings['contacts']);
-            $siteSettings['under_slider_text'] = $this->get('helper.textformater')->formatMoreText($siteSettings['under_slider_text']);
-            $siteSettings['info_text'] = $this->get('helper.textformater')->formatMoreText($siteSettings['info_text']);
+        if ( ! $this->settings ) {
+            $this->em      = $this->get( 'doctrine.orm.entity_manager' );
+            $_siteSettings = $this->em->getRepository( 'AppBundle:Settings' )->findOneByName( 'site_settings' );
+            $siteSettings  = [ ];
+            if ( $_siteSettings instanceof Settings ) {
+                $siteSettings                      = unserialize( $_siteSettings->getSettings() );
+                $siteSettings['contacts']          = $this->get( 'helper.textformater' )->formatMoreText( $siteSettings['contacts'] );
+                $siteSettings['under_slider_text'] = $this->get( 'helper.textformater' )->formatMoreText( $siteSettings['under_slider_text'] );
+                $siteSettings['info_text']         = $this->get( 'helper.textformater' )->formatMoreText( $siteSettings['info_text'] );
+            }
+        } else {
+            $siteSettings = $this->settings;
         }
+
         return $siteSettings;
     }
 
@@ -88,16 +98,16 @@ class FrontController extends Controller {
      */
     protected function getCart() {
         $cart = $this->get( 'app.session_manager' )->getCart();
-        if( $cart) {
-            foreach($cart as $k => $v) {
-                if(!empty($v['picture_id'])) {
-                    $cart[$k]['picture'] = $this->em->getRepository('AppBundle:Picture')->findOneBy(['isActive' => true, 'id' => $v['picture_id']]);
+        if ( $cart ) {
+            foreach ( $cart as $k => $v ) {
+                if ( ! empty( $v['picture_id'] ) ) {
+                    $cart[ $k ]['picture'] = $this->em->getRepository( 'AppBundle:Picture' )->findOneBy( [ 'isActive' => true, 'id' => $v['picture_id'] ] );
                 } else {
-                    $cart[$k]['own_picture'] = $this->em->getRepository('AppBundle:OwnPicture')->findOneBy(['id' => $v['own_picture_id']]);
+                    $cart[ $k ]['own_picture'] = $this->em->getRepository( 'AppBundle:OwnPicture' )->findOneBy( [ 'id' => $v['own_picture_id'] ] );
                 }
             }
         } else {
-            $cart = [];
+            $cart = [ ];
         }
 
         return $cart;
@@ -107,12 +117,13 @@ class FrontController extends Controller {
      * @return array
      */
     protected function getHelpSettings() {
-        $this->em = $this->get( 'doctrine.orm.entity_manager' );
-        $_helpSettings = $this->em->getRepository( 'AppBundle:Settings' )->findOneByName('help_settings');
-        $helpSettings = [];
-        if($_helpSettings instanceof Settings) {
-            $helpSettings = unserialize($_helpSettings->getSettings());
+        $this->em      = $this->get( 'doctrine.orm.entity_manager' );
+        $_helpSettings = $this->em->getRepository( 'AppBundle:Settings' )->findOneByName( 'help_settings' );
+        $helpSettings  = [ ];
+        if ( $_helpSettings instanceof Settings ) {
+            $helpSettings = unserialize( $_helpSettings->getSettings() );
         }
+
         return $helpSettings;
     }
 
@@ -120,14 +131,16 @@ class FrontController extends Controller {
      * @return array
      */
     protected function getCategoryMenuBlock() {
-        return $this->get( 'blocks.service' )->getCategoriesBlock();
+        $settings = $this->getSiteSettings();
+
+        return $this->get( 'blocks.service' )->getCategoriesBlock( $settings );
     }
 
     /**
      * @return array
      */
     protected function getToDoBlock() {
-        return ['show' => 1];
+        return [ 'show' => 1 ];
     }
 
     /**
@@ -155,7 +168,7 @@ class FrontController extends Controller {
      * @return array
      */
     protected function getSimilarBlock() {
-        return $this->em->getRepository( 'AppBundle:Picture' )->getActiveSimilar($this->id);
+        return $this->em->getRepository( 'AppBundle:Picture' )->getActiveSimilar( $this->id );
     }
 
     /**
@@ -169,9 +182,9 @@ class FrontController extends Controller {
      * @return array
      */
     protected function getLastVisitedBlock() {
-        $lastVisited = $this->get('app.session_manager')->getLastVisitedItems();
-        if($lastVisited) {
-            $lastVisited = $this->em->getRepository('AppBundle:Picture')->findLastVisited($lastVisited);
+        $lastVisited = $this->get( 'app.session_manager' )->getLastVisitedItems();
+        if ( $lastVisited ) {
+            $lastVisited = $this->em->getRepository( 'AppBundle:Picture' )->findLastVisited( $lastVisited );
         }
 
         return $lastVisited;
@@ -181,9 +194,9 @@ class FrontController extends Controller {
      * @return array
      */
     protected function getDeferredBlock() {
-        $deferred = $this->get('app.session_manager')->getDeferredItems();
-        if($deferred) {
-            $deferred = $this->em->getRepository('AppBundle:Picture')->findDeferred($deferred);
+        $deferred = $this->get( 'app.session_manager' )->getDeferredItems();
+        if ( $deferred ) {
+            $deferred = $this->em->getRepository( 'AppBundle:Picture' )->findDeferred( $deferred );
         }
 
         return $deferred;

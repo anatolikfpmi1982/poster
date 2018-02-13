@@ -31,9 +31,11 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository {
     /**
      * Get catalog tree.
      *
+     * @param array $settings
+     *
      * @return array
      */
-    public function getCatalogMenu() {
+    public function getCatalogMenu( $settings ) {
         $categories   = [ ];
         $dbCategories = $this->findBy( [ 'isActive' => true ], [ 'parent_category' => 'ASC', 'weight' => 'DESC' ] );
         if ( $dbCategories ) {
@@ -103,13 +105,13 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository {
                     }
 
                     $categories[ $parentParentParentId ]['children'][ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['id']
-                        = $category->getId();
+                                                       = $category->getId();
                     $categories[ $parentParentParentId ]['children'][ $parentParentId ]['children'][ $parentId ]['children']
-                    [ $category->getId() ]['clean_id']  = $category->getId();
+                    [ $category->getId() ]['clean_id'] = $category->getId();
                     $categories[ $parentParentParentId ]['children'][ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['title']
-                        = $category->getTitle();
+                                                       = $category->getTitle();
                     $categories[ $parentParentParentId ]['children'][ $parentParentId ]['children'][ $parentId ]['children'][ $category->getId() ]['slug']
-                        = $category->getSlug();
+                                                       = $category->getSlug();
                 } else if ( $parent1 === null ) {
                     if ( array_key_exists( $category->getId(), $categories ) ) {
                         $categories[ $category->getId() ]['id']       = $inner['id'];
@@ -123,7 +125,12 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository {
                 }
             }
         }
-        return $this->createModule( $categories );
+
+        if(array_key_exists('enable_module', $settings) && $settings['enable_module']) {
+            $categories = $this->createModule( $categories );
+        }
+
+        return $categories;
     }
 
     /**
@@ -135,7 +142,7 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository {
      */
     protected function createModule( $categories ) {
         if ( array_key_exists( self::MAIN_CATEGORY_ID, $categories ) ) {
-            $categories['m'.self::MAIN_CATEGORY_ID] = $this->applyModuleIdRecursive($categories[ self::MAIN_CATEGORY_ID ]);
+            $categories[ 'm' . self::MAIN_CATEGORY_ID ] = $this->applyModuleIdRecursive( $categories[ self::MAIN_CATEGORY_ID ] );
         }
 
         return $categories;
@@ -149,19 +156,20 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository {
      *
      * @return array
      */
-    protected function applyModuleIdRecursive($array, $isRecursive = false) {
-        if(is_array($array) && array_key_exists('id', $array)) {
-            $array['id'] = 'm'.$array['id'];
-            if(!$isRecursive) {
+    protected function applyModuleIdRecursive( $array, $isRecursive = false ) {
+        if ( is_array( $array ) && array_key_exists( 'id', $array ) ) {
+            $array['id'] = 'm' . $array['id'];
+            if ( ! $isRecursive ) {
                 $array['title'] = self::MAIN_CATEGORY_TITLE;
             }
-            if(array_key_exists('children', $array) && is_array($array['children'])) {
+            if ( array_key_exists( 'children', $array ) && is_array( $array['children'] ) ) {
                 foreach ( $array['children'] as $key => $value ) {
-                    $array['children']['m'.$key] = $this->applyModuleIdRecursive($value, true);
-                    unset($array['children'][$key]);
+                    $array['children'][ 'm' . $key ] = $this->applyModuleIdRecursive( $value, true );
+                    unset( $array['children'][ $key ] );
                 }
             }
         }
+
         return $array;
     }
 }
