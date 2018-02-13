@@ -552,6 +552,10 @@ define(function (require, exports, module) {
             });
         });
 
+        $(".az-form-download-file").change(function() {
+            $("label.az-form-choose-file").html($(this).val());
+        });
+
         $('div.pagination .page').click(function (event) {
             event.stopPropagation();
             event.preventDefault();

@@ -2347,7 +2347,8 @@ button.close:focus, .close:hover {
 .az-form-download-file {
     float: left;
     position: relative;
-
+    width: 30%;
+    height: 22px;
 }
 
 .az-form-btn-download {
