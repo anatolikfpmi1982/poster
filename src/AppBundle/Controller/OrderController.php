@@ -148,7 +148,25 @@ class OrderController extends FrontController {
                 $em->persist($record);
             }
             $em->flush();
+
+            $settings = $this->getSiteSettings();
+
+            if(!empty($settings['from_email']) && !empty('to_email')) {
+                $message = (new \Swift_Message('Новый заказ'))
+                    ->setFrom($settings['from_email'])
+                    ->setTo($settings['to_email'])
+                    ->setBody(
+                        $this->renderView(
+                            'Emails/order.html.twig',
+                            array('orderId' => $orderId, 'count' => count($cart))
+                        ),
+                        'text/html'
+                    );
+
+                $this->get('mailer')->send($message);
+            }
         }
+
 
 
         $this->get( 'app.session_manager' )->cleanCart();
