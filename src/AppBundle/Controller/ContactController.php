@@ -27,7 +27,7 @@ class ContactController extends FrontController {
 
     /**
      *
-     * @Route("/ajax/review/add", name="ajax_reviews_add")
+     * @Route("/ajax/contacts/add", name="ajax_contacts_add")
      *
      * @param Request $request
      * @return JsonResponse
@@ -57,11 +57,28 @@ class ContactController extends FrontController {
             $this->get( 'doctrine.orm.entity_manager' )->persist($reviewEntity);
             $this->get( 'doctrine.orm.entity_manager' )->flush();
 
+            $settings = $this->getSiteSettings();
+
+            if(!empty($settings['from_email']) && !empty('to_email')) {
+                $message = (new \Swift_Message('Новый заказ'))
+                    ->setFrom($settings['from_email'])
+                    ->setTo($settings['to_email'])
+                    ->setBody(
+                        $this->renderView(
+                            'Emails/contacts.html.twig',
+                            array('name' => $name, 'email' => $email, 'city' => $city, 'review' => $review)
+                        ),
+                        'text/html'
+                    );
+
+                $this->get('mailer')->send($message);
+            }
+
             $result = true;
         }
 
         // parameters to template
-        return new JsonResponse(array('result' => $result));
+        return new JsonResponse(array('result' => (int)$result));
     }
 
 }
