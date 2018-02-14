@@ -241,6 +241,8 @@ class MyFilesController extends FrontController {
         }
         $this->data['moduleTypes'] = $this->em->getRepository( 'AppBundle:ModuleType' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
 
+        $this->data['ownPicture'] = true;
+
         // parameters to template
         return $this->render( 'AppBundle:Pictures:show.module.html.twig', $this->data );
     }
@@ -283,6 +285,8 @@ class MyFilesController extends FrontController {
             $this->data['pictureThumbHeight'] = $size[1];
         }
         $this->data['pictureThicknesses'] = $this->em->getRepository( 'AppBundle:Frame' )->findBy( [ 'isActive' => true ], [ 'id' => 'ASC' ] );
+
+        $this->data['ownPicture'] = true;
 
         // parameters to template
         return $this->render( 'AppBundle:Pictures:show.frame.html.twig', $this->data );

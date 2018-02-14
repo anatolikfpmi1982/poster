@@ -1,10 +1,16 @@
 {% extends "AppBundle::layout.html.twig" %}
 
-{% block title %}Модульная картина "{{ pictureMain.title }}" {% endblock %}
+{% if ownPicture is defined %}
+    {% set titleText = 'Загруженная картина' %}
+{% else %}
+    {% set titleText = 'Модульная картина "'~pictureMain.title~'"'  %}
+{% endif %}
 
-{% block meta_keywords %}{{ pictureMain.title }}{% endblock %}
+{% block title %}{{ titleText }}{% endblock %}
 
-{% block meta_description %}Модульная картина {{ pictureMain }} купить{% endblock %}
+{% block meta_keywords %}{{ titleText }}{% endblock %}
+
+{% block meta_description %}{{ titleText }} купить{% endblock %}
 
 {% block body %}
     <div class="row az-page-main-section-div">
@@ -12,7 +18,7 @@
     </div>
     <div class="row az-page-main-section-div az-page-category-main-section-div">
         <div class="col-md-12 col-sm-12 container-fluid">
-            <div class="row page-title az-picture-page-title">Модульная картина {{ pictureMain.title }}</div>
+            <div class="row page-title az-picture-page-title">{{ titleText }}</div>
             {% if moduleTypes is defined and moduleTypes %}
                 <div class="row az-category-page-pictures-div">
                     <div class="row az-page-section-body az-page-main-popular container-fluid">
