@@ -100,6 +100,7 @@ function ConstructorOverview() {
             this.isZoom = params.imgZoom != undefined ? params.imgZoom : this.isZoom;
             this.zoomType = params.zoomType != undefined ? params.zoomType : this.zoomType;
             this.elemId = params.elemId != undefined ? params.elemId : this.elemId;
+            this.debug = params.debug != undefined ? params.debug : this.debug;
         } else {
             this.initDefault();
         }
@@ -446,9 +447,17 @@ function ConstructorOverview() {
             var maxWidth = this.max_width - 2 * this.left_deviation - 2 * this.right_width_portrait - this.shadow;
 
             if (this.picHeight > this.picWidth) {
-                if (this.picHeight > maxHeight) {
+                if (this.picHeight > maxHeight || this.fill) {
                     this.picWidth = Math.round((this.picWidth * maxHeight) / this.picHeight);
-                    this.picHeight = maxHeight;
+                    if (this.picWidth > maxWidth) {
+                        this.picHeight = Math.round((maxWidth * maxHeight) / this.picWidth);
+                        this.picWidth = maxWidth;
+                    } else {
+                        this.picHeight = maxHeight;
+                    }
+                } else if (this.picWidth > maxWidth) {
+                    this.picHeight = Math.round((maxWidth * maxHeight) / this.picWidth);
+                    this.picWidth = maxWidth;
                 }
             } else {
                 if (this.picWidth > maxWidth || this.fill) {
@@ -500,6 +509,9 @@ function ConstructorOverview() {
                 console.log('this.picHeight', this.picHeight);
                 console.log('this.max_width', this.max_width);
                 console.log('this.max_height', this.max_height);
+                console.log('this.top_deviation', this.top_deviation);
+                console.log('this.left_deviation', this.left_deviation);
+                console.log('this.right_width', this.right_width);
                 console.log('this.showSizes', this.showSizes);
                 console.log('this.showSizesWidth', this.showSizesWidth);
                 console.log('this.showSizesHeight', this.showSizesHeight);
@@ -511,9 +523,17 @@ function ConstructorOverview() {
             var maxWidth = this.max_width - 2 * this.left_deviation - (this.right_width + this.shadow) * this.panelNumberHorizontal -
                 (this.padding_left - this.right_width - this.shadow) * (this.panelNumberHorizontal - 1) - (this.showSizes ? this.showSizesHeight : 0);
             if (isHeight) {
-                if (this.picHeight > maxHeight) {
+                if (this.picHeight > maxHeight || this.fill) {
                     this.picWidth = Math.round((this.picWidth * maxHeight) / this.picHeight);
-                    this.picHeight = maxHeight;
+                    if (this.picWidth > maxWidth) {
+                        this.picHeight = Math.round((maxWidth * maxHeight) / this.picWidth);
+                        this.picWidth = maxWidth;
+                    } else {
+                        this.picHeight = maxHeight;
+                    }
+                } else if (this.picWidth > maxWidth) {
+                    this.picHeight = Math.round((maxWidth * maxHeight) / this.picWidth);
+                    this.picWidth = maxWidth;
                 }
             } else {
                 if (this.picWidth > maxWidth || this.fill) {
@@ -528,13 +548,14 @@ function ConstructorOverview() {
                     this.picWidth = Math.round((this.picWidth * maxHeight) / this.picHeight);
                     this.picHeight = maxHeight;
                 }
+            }
 
-                if (this.debug) {
-                    console.log('this.top_deviation', this.top_deviation);
-                    console.log('this.left_deviation', this.left_deviation);
-                    console.log('maxHeight', maxHeight);
-                    console.log('maxWidth', maxWidth);
-                }
+            if (this.debug) {
+                console.log('this.top_deviation', this.top_deviation);
+                console.log('this.left_deviation', this.left_deviation);
+                console.log('maxHeight', maxHeight);
+                console.log('maxWidth', maxWidth);
+                console.log('this.showSizes', this.showSizes);
             }
 
             this.top_deviation = Math.round((this.max_height - this.picHeight - (this.showSizes ? this.showSizesHeight : 0) -

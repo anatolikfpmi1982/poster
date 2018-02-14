@@ -22,7 +22,7 @@
                     {% set img = asset('bundles/app/images/material_default.png') %}
                 {% endif %}
                 {% set isModuleTypeActive = (cart_item.module_type_id is defined and cart_item.module_type_id==moduleType.id) or
-                (cart_item.module_type_id is not defined and loop.index == 1) %}
+                (cart_item.module_type_id is not defined and template_selected_id==0 and loop.index == 1) or (cart_item.module_type_id is not defined and template_selected_id==moduleType.id) %}
                 <div>
                     <img src="{{ img }}" class="hidden az-picture-page-constructor-picture-module-type-img {% if isModuleTypeActive %}active{% endif %}"
                          data-id="{{ moduleType.id }}"
