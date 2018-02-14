@@ -515,6 +515,8 @@ define(function (require, exports, module) {
             event.stopPropagation();
             event.preventDefault();
 
+            $('.az-form-btn-download i').css('display', 'inline-block');
+
             var data = new FormData();
             $.each(files, function (key, value) {
                 data.append(key, value);
@@ -550,6 +552,9 @@ define(function (require, exports, module) {
                     $('.modal-backdrop').hide();
                     showInnerMessage('error', 'Произошли технические неполатки. Попробуйте еще раз через пару минут.');
                     console.log('ОШИБКИ AJAX запроса: ' + textStatus);
+                    window.setTimeout(function () {
+                        location.reload();
+                    }, 3000);
                 }
             });
         });
