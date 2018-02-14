@@ -84,6 +84,15 @@ class MyFilesController extends FrontController {
         $this->data['ownPicture'] = true;
         $this->data['cart_item'] = $cartItem;
         $this->data['cart_id'] = $request->get('cart_id');
+
+        $type = $request->query->get('type');
+        $this->data['picture_type'] = 'banner';
+        if(in_array($type,['module','banner','frame'], true)) {
+            $this->data['picture_type'] = $type;
+        }
+        $this->data['frame_selected_id'] = (int)$request->query->get('frame_id', 0);
+        $this->data['template_selected_id'] = (int)$request->query->get('module_id', 0);
+
         $this->data['isMobile'] = $this->get('pictures.service')->isMobile();
 
         // parameters to template

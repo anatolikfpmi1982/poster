@@ -476,7 +476,7 @@ define(function (require, exports, module) {
 
                     window.setTimeout(function () {
                         location.reload();
-                    }, 3000);
+                    }, 1000);
                 } else {
                     showInnerMessage('error', 'Произошли технические неполатки. Попробуйте еще раз через пару минут.');
                 }
