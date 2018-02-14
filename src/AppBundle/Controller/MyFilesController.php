@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
  * Class DeferredController
  */
 class MyFilesController extends FrontController {
-    const PAGE_LIMIT = 5;
+    const PAGE_LIMIT = 20;
 
     /**
      * @Route("/myfile/{id}", name="my_file_page")
@@ -136,6 +136,10 @@ class MyFilesController extends FrontController {
         $allowedTypes = ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/png'];
         if($uploadedFile->getMimeType() && !in_array($uploadedFile->getMimeType(), $allowedTypes)) {
             return new JsonResponse(['result' => 0, 'error' => 'Допустимые типы файлов - JPG, PNG, GIF']);
+        }
+
+        if($uploadedFile->getClientSize()/1024/1024 > 10) {
+            return new JsonResponse(['result' => 0, 'error' => 'Допустимые размер файла - 10 Mb']);
         }
 
         $picture = new OwnPicture();
