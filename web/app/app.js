@@ -554,8 +554,8 @@ define(function (require, exports, module) {
             });
         });
 
-        $(".az-form-download-file").change(function() {
-            if(this.files[0].size/1024/1024 > 10) {
+        $(".az-form-download-file").change(function () {
+            if (this.files[0].size / 1024 / 1024 > 10) {
                 $('.az-form-download-error').show();
                 $('.az-form-btn-download button').prop('disabled', true);
             } else {
@@ -605,7 +605,7 @@ define(function (require, exports, module) {
 
     function setShowBoard() {
         var constructor = new ConstructorOverview();
-        constructor.debug = true;
+        //constructor.debug = true;
         constructor.init();
         constructor.buildConstructor();
         constructor.showPrice();
@@ -732,6 +732,7 @@ define(function (require, exports, module) {
                 params['imgZoom'] = $(value).data('img-zoom');
                 params['zoomType'] = $(value).data('zoom-type');
                 params['elemId'] = $(value).data('elem-id');
+                params['debug'] = $(value).data('debug');
 
                 constructor.init(params);
                 constructor.show();

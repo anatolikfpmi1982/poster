@@ -30,17 +30,17 @@
         {% include('AppBundle:Component:Blocks/breadcrumb.html.twig') %}
     </div>
     <div class="row container-fluid az-page-main-section-div az-static-page-div">
-        <div class="col-md-12 col-sm-12" container-fluid>
+        <div class="col-md-12 col-sm-12">
             <div class="row page-title az-static-page-title">
+                {% set pageTitle = 'Страница' %}
                 {% if page.showTitle %}
-                    <div class="col-md-8 col-sm-8">{{ page.title }}</div>
+                    {% set pageTitle = page.title %}
                 {% endif %}
-
+                <div class="col-md-12 col-sm-12">{{ pageTitle }}</div>
+            </div>
+            <div class="row az-static-page-content">
+                {{ page.body|raw }}
             </div>
         </div>
-        <div class="row az-static-page-content">
-            {{ page.body|raw }}
-        </div>
-    </div>
     </div>
 {% endblock %}

@@ -84,11 +84,12 @@ class PicturesController extends FrontController {
         }
 
         $type = $request->query->get('type');
-        if($type === 'module') {
-            $this->data['module_active'] = true;
-        } else {
-            $this->data['module_active'] = false;
+        $this->data['picture_type'] = 'banner';
+        if(in_array($type,['module','banner','frame'], true)) {
+            $this->data['picture_type'] = $type;
         }
+        $this->data['frame_selected_id'] = (int)$request->query->get('frame_id', 0);
+        $this->data['template_selected_id'] = (int)$request->query->get('module_id', 0);
         $this->data['isMobile'] = $this->get('pictures.service')->isMobile();
 
         // parameters to template

@@ -37,6 +37,7 @@ body {
 .az-header-basket-count-text {
     color: #b4b4b4;
     font-size: 13px;
+    cursor: pointer;
 }
 
 /**search**/
@@ -321,6 +322,7 @@ div[class*="children-subsubsubcategory-"]:hover {
     color: #333333;
 }
 
+.az-popular-item-frame,
 .az-popular-item,
 .az-popular-item-my {
     border-bottom: 1px solid #e6e6e6;
@@ -334,6 +336,12 @@ div[class*="children-subsubsubcategory-"]:hover {
     height: 395px;
 }
 
+.az-popular-item-frame {
+    height: 280px;
+}
+
+.az-popular-item-frame.col-md-4:nth-child(3n+1),
+.az-popular-item-frame.col-sm-6:nth-child(2n+1),
 .az-popular-item-my.col-md-4:nth-child(3n+1),
 .az-popular-item-my.col-sm-6:nth-child(2n+1),
 .az-popular-item.col-md-4:nth-child(3n+1),
@@ -1478,26 +1486,14 @@ footer {
 }
 
 .az-category-page-description-div #more_text {
-    margin: 5px;
-    display: inline-block;
-    vertical-align: middle;
     margin-left: 10px;
     height: 10px;
     width: 28px;
-    background: url(/bundles/app/images/more.png) no-repeat;
-    transition: background .3s ease 0s;
-    float: left;
-}
-
-.az-category-page-description-div #more_text:hover {
-    margin: 5px;
-    display: inline-block;
     vertical-align: middle;
-    margin-left: 10px;
-    height: 10px;
-    width: 28px;
+    display: inline-block;
     background: url(/bundles/app/images/more_hover.png) no-repeat;
     transition: background .3s ease 0s;
+    cursor: pointer;
 }
 
 /**breadcrumb**/
@@ -2343,22 +2339,13 @@ button.close:focus, .close:hover {
 .az-form-download-file {
     float: left;
     position: relative;
-    width: 30%;
-    height: 22px;
+
 }
 
 .az-form-btn-download {
     display: block;
     width: 100%;
     margin-top: 10px;
-}
-
-.az-form-download-error {
-    display: none;
-}
-
-.az-form-download-error span {
-    color: #fd1200;
 }
 
 .navbar-form {
@@ -2854,6 +2841,11 @@ a.az-category-item-a div.az-sidebar-catalog-item-header div.az-category-menu-ite
     padding: 0;
 }
 
+.margin_left_right_0 {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .owl-carousel {
     width: 500px;
 }
@@ -2883,6 +2875,11 @@ a.az-category-item-a div.az-sidebar-catalog-item-header div.az-category-menu-ite
 .az-header-download-icon-title {
     padding: 0;
     margin-bottom: 10px;
+}
+
+.az-page-picture-frame-cell-header {
+    font-size: larger;
+    margin-top: 10px;
 }
 
 @media only screen
@@ -3089,5 +3086,21 @@ and (-webkit-min-device-pixel-ratio: 2) {
     .modal-dialog {
         width: 300px;
         font-weight: 300;
+    }
+
+    .az-view-popular-item-img {
+        width: 100%;
+        text-align: center;
+        margin: 0 auto;
+        padding: 0;
+        max-height: 700px;
+        height: 100%;
+        max-width: 375px;
+    }
+
+    .az-view-row-div {
+        width: 375px;
+        height: 700px;
+        margin-left: 0;
     }
 }
