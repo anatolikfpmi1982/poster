@@ -3,7 +3,7 @@
         {% if pictureThicknesses is defined and pictureThicknesses %}
             <div class="item">
                 <a href="{% if ownPicture is defined %}{{ path('my_file_frame', {'id': pictureMain.id}) }}{% else %}{{ path('picture_frame', {'id': pictureMain.id}) }}{% endif %}">
-                    <img src="{{ asset('bundles/app/images/material_default.png') }}" class="hidden az-picture-page-constructor-picture-thickness-img"
+                    <img src="{{ asset('bundles/app/images/auto.png') }}" class="hidden az-picture-page-constructor-picture-thickness-img"
                          data-title="Автоподбор"
                          data-ratio="0"
                          data-id="0"
