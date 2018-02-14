@@ -64,7 +64,7 @@
              data-butt=6
              data-butt-portrait=6
              data-code="{% if module_active or type_value == "Модульная" %}{{ module_formulas[i].formula }}{% else %}single|{horizontal|100-100-0}{% endif %}"
-             data-max-width="700"
+             data-max-width="{% if not isMobile %}700{% else %}375{% endif %}"
              data-max-height="700"
              data-href="{{ picture_url }}"
              data-fill-in="1"
