@@ -153,7 +153,7 @@ function ConstructorOverview() {
     this.show = function () {
         this.preShowBuild();
         $('#az-constructor-choose-type').html(this.type);
-        $('#az-constructor-choose-size').html(this.size);
+        $('#az-constructor-choose-size').html(this.size + ' см');
         $('#az-constructor-choose-material').html(this.material);
         $('#az-constructor-choose-thickness').html(this.thickness);
         $('#az-constructor-choose-color').html(this.color);
