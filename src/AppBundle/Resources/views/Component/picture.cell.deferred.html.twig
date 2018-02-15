@@ -1,27 +1,61 @@
+
 {% if picture.image and picture.image.getFilename() %}
     {% set img = '/files/pictures/thumb/' ~ picture.image.getFilename() %}
+    {% set imgPath = picture.image.getThumbBaseFile() %}
+    {% set imgSize = filesize(imgPath) %}
 {% else %}
     {% set img = asset('bundles/app/images/default_picture.jpg') %}
+    {% set imgSize = [245, 200] %}
 {% endif %}
 <div class="col-md-4 col-sm-4 az-popular-item container">
     <div class="row text-center az-main-popular-item-img-div">
-        <div class="col-md-12 col-sm-12">
-            <a href="{{ path('picture', {'id': picture.id}) }}"><img src="{{ img }}" class="az-main-popular-item-img"></a>
+        <div class="col-md-12 col-sm-12 az-main-popular-item-img show-constructor-img-lazy"
+             data-src="{{ img }}"
+             data-id="{{ picture.id }}"
+             data-type="Баннер"
+             data-width={{ imgSize[0] }}
+             data-height={{ imgSize[1] }}
+             data-left=0
+             data-top=06
+             data-pad-left=4
+             data-pad-top=4
+             data-butt=6
+             data-butt-portrait=6
+             date-fill-in="1"
+             data-code="single|{horizontal|100-100-0}"
+             data-max-width="245"
+             data-max-height="240"
+             data-href="{{ path('picture', {'id': picture.id}) }}"
+        ></div>
+    </div>
+    <div class="row">
+        <div class="az-main-popular-item-header-category">
+            {% if picture.title|length > 34 %}
+                {% set picture_title = picture.title|slice(0, 31) ~ '...' %}
+            {% else %}
+                {% set picture_title = picture.title %}
+            {% endif %}
+            <a href="{{ path('picture', {'id': picture.id}) }}">"{{ picture_title }}"</a>
         </div>
     </div>
     <div class="row">
         <div class="az-main-popular-item-header-category">
-            <a href="{{ path('picture', {'id': picture.id}) }}">"{{ picture.title }}"</a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="az-main-popular-item-header-category">
-            {% if picture.author is defined and picture.author and picture.author.slug is defined and picture.author.slug %}
+            {% set isPictureAuthor = picture.author is defined and picture.author %}
+            {% if isPictureAuthor and picture.author.slug is defined and picture.author.slug %}
                 {% set author_url = path('author', {'slug': picture.author.slug}) %}
             {% else %}
                 {% set author_url = '#' %}
             {% endif %}
-            <span class="az_author"> Автор:</span> <a href="{{ author_url }}"> {{ picture.author.name }}</a>
+            {% if isPictureAuthor and picture.author.name is defined and picture.author.name %}
+                {% if picture.author.name|length > 34 %}
+                    {% set author_name = picture.author.name|slice(0, 31) ~ '...' %}
+                {% else %}
+                    {% set author_name = picture.author.name %}
+                {% endif %}
+            {% else %}
+                {% set author_name = '-' %}
+            {% endif %}
+            <span class="az_author"> Автор:</span> <a href="{{ author_url }}"> {{ author_name }}</a>
         </div>
     </div>
     <div class="row">
