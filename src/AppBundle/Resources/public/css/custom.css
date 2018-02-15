@@ -97,13 +97,13 @@ body {
 
 }
 
-.az-sidebar-subcategory-item a.az-subcategory-item-a span,
-.az-sidebar-subcategory-item a.az-subcategory-item-a:visited span {
+.az-sidebar-subcategory-item a.az-subcategory-item-a div.az-subcat-span,
+.az-sidebar-subcategory-item a.az-subcategory-item-a:visited div.az-subcat-span {
     color: #ffffff;
 }
 
-.az-sidebar-subcategory-first.active_parent a.az-subcategory-item-a span,
-.az-sidebar-subcategory-first.active_parent a.az-subcategory-item-a:visited span {
+.az-sidebar-subcategory-first.active_parent a.az-subcategory-item-a div.az-subcat-span,
+.az-sidebar-subcategory-first.active_parent a.az-subcategory-item-a:visited div.az-subcat-span {
     color: #fd1200;
 }
 
@@ -117,7 +117,7 @@ body {
 }
 
 .az-sidebar-subcategory-item .az-sidebar-subcategory-first.active_parent,
-.az-sidebar-subcategory-item .az-sidebar-subcategory-first.active_parent a.az-subcategory-item-a:visited {
+.az-sidebar-subcategory-item .az-sidebar-subcategory-first.active_parent div.row div a.az-subcategory-item-a:visited {
     background: #ffffff;
     color: #fd1200;
     border-top: #fd1200 solid 1px !important;
@@ -221,8 +221,7 @@ div[class*="children-subsubcategory-"] {
     margin: 0;
     color: #333333;
     font-size: 12px;
-    font-weight: 400;
-    line-height: 20px;
+    line-height: 1px;
     padding: 0;
 }
 
@@ -252,25 +251,9 @@ div[class*="children-subsubsubcategory-"] {
     padding: 0;
 }
 
+div[class*="children-subsubsubcategory-"]:hover,
 div[class*="children-subsubsubcategory-"].active {
-    border: none;
-    background-color: #ffffff;
     color: #fd1200;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 20px;
-    margin: 0;
-    padding: 0;
-
-}
-
-div[class*="children-subsubsubcategory-"]:hover {
-    border: none;
-    background-color: #ffffff;
-    color: #fd1200;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 20px;
 }
 
 .children-subsubsubcategory:active {
@@ -3161,5 +3144,36 @@ and (-webkit-min-device-pixel-ratio: 2) {
         width: 375px;
         height: 700px;
         margin-left: 0;
+    }
+
+    div[class*="children-subsubcategory-"] {
+        font-size: 10px;
+        font-weight: 100;
+        line-height: 10px;
+    }
+
+    div[class*="children-subsubsubcategory-"] {
+        font-size: 10px;
+        font-weight: 100;
+        line-height: 10px;
+    }
+
+    .az-subsubcat-span {
+        padding: 0 5px 0 20px;
+        font-size: 10px;
+        font-weight: 100;
+        line-height: 10px;
+    }
+
+    .az-subsubsubcat-span {
+        padding: 0 5px 0 20px;
+        font-size: 8px;
+        font-weight: 100;
+        line-height: 10px;
+    }
+
+    .az-menu-four-lvl-hidden {
+        padding-left: 0;
+        padding-right: 0;
     }
 }

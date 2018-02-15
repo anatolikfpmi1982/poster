@@ -48,11 +48,15 @@
 
                         <div class="col-md-12 col-sm-12 container-fluid az-sidebar-subcategory-first
                         {% if isCheckNav and subcategory.clean_id in activeCategories %}active_parent{% endif %}">
-                            <a href="{{ path('category', options) }}" class="az-subcategory-item-a">
-                                <span class="az-subcat-span {% if isCheckNav and active_category_id == subcategory.clean_id %}active_menu{% endif %}">
-                                    {{ subcategory.title }}
-                                </span>
-                            </a>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 container-fluid">
+                                    <a href="{{ path('category', options) }}" class="az-subcategory-item-a">
+                                        <div class="az-subcat-span {% if isCheckNav and active_category_id == subcategory.clean_id %}active_menu{% endif %}">
+                                            {{ subcategory.title }}
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
                             {% if subcategory.children is defined and subcategory.children %}
                                 <div class="row category-menu children-subcategory-{{ categoryBlock.id }}"
                                      id="children-subcategory-{{ subcategory.id }}"
@@ -74,11 +78,15 @@
                                                  data-id="{{ subsubcategory.id }}">
                                                 <div class="col-md-12 col-sm-12 container-fluid az-sidebar-subsubcategory-first
                                             {% if isCheckNav and subsubcategory.clean_id in activeCategories %}active_parent{% endif %}">
-                                                    <a href="{{ path('category',options) }}" class="az-subsubcategory-item-a">
-                                                        <span class="az-subsubcat-span {% if isCheckNav and active_category_id == subsubcategory.clean_id %}active_menu{% endif %}">
-                                                            {{ subsubcategory.title }}
-                                                        </span>
-                                                    </a>
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-sm-12 container-fluid">
+                                                            <a href="{{ path('category',options) }}" class="az-subsubcategory-item-a">
+                                                                <div class="az-subsubcat-span {% if isCheckNav and active_category_id == subsubcategory.clean_id %}active_menu{% endif %}">
+                                                                    {{ subsubcategory.title }}
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
                                                     {% if subsubcategory.children is defined and subsubcategory.children %}
                                                         <div class="row category-menu children-subsubcategory-{{ categoryBlock.id }}"
                                                              id="children-subsubcategory-{{ subsubcategory.id }}"
@@ -105,7 +113,7 @@
 
                                                                             <a href="{{ path('category',options) }}" class="az-subsubsubcategory-item-a">
                                                                                 <div class="row">
-                                                                                    <div class="col-md-2 col-sm-2">
+                                                                                    <div class="col-md-2 col-sm-1 az-menu-four-lvl-hidden">
                                                                                         <span class="az-subsubsubcat-span"></span>
                                                                                     </div>
                                                                                     <div class="col-md-10 col-sm-10 az-subsubsubcat-span-text
