@@ -39,7 +39,7 @@
         {% set type_value = "Модульная" %}
     {% endif %}
 {% endif %}
-<div class="col-md-4 col-sm-6 az-popular-item container">
+<div class="col-md-4 col-sm-6 az-popular-item container-fluid">
     <div class="row az-main-popular-item-img-div">
         <div class="col-md-12 col-sm-12 az-main-popular-item-img show-constructor-img-lazy"
              data-src="{{ img }}"
@@ -74,8 +74,8 @@
     </div>
     <div class="row">
         <div class="az-main-popular-item-header-category-row">
-            {% if picture.title|length > 34 %}
-                {% set picture_title = picture.title|slice(0, 31) ~ '...' %}
+            {% if picture.title|length > 29 %}
+                {% set picture_title = picture.title|slice(0, 26) ~ ' ...' %}
             {% else %}
                 {% set picture_title = picture.title %}
             {% endif %}
@@ -92,8 +92,8 @@
                 {% set author_url = '#' %}
             {% endif %}
             {% if isPictureAuthor and picture.author.name is defined and picture.author.name %}
-                {% if picture.author.name|length > 34 %}
-                    {% set author_name = picture.author.name|slice(0, 31) ~ '...' %}
+                {% if picture.author.name|length > 29 %}
+                    {% set author_name = picture.author.name|slice(0, 26) ~ ' ...' %}
                 {% else %}
                     {% set author_name = picture.author.name %}
                 {% endif %}
@@ -120,7 +120,7 @@
                 {% for cat in picture.categories|slice(0, limitCategory) %}
                     {% if cat.id != catId and categoryInProgress %}
                         {% set categorySymbolsNum = categorySymbolsNum + cat.title|length + 3 %}
-                        {% if categorySymbolsNum <= 68 %}
+                        {% if categorySymbolsNum < 58 %}
                             <a href="{{ path('category', {'slug': cat.slug}) }}"> {{ cat.title }}</a>
                             {% if loop.last == false %},{% endif %}
                         {% else %}

@@ -82,7 +82,7 @@ class ReviewsController extends FrontController {
                     ->setTo($settings['to_email'])
                     ->setBody(
                         $this->renderView(
-                            'Emails/review.html.twig',
+                            'AppBundle:Emails:review.html.twig',
                             array('name' => $name, 'email' => $email, 'city' => $city, 'review' => $review)
                         ),
                         'text/html'

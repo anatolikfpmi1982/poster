@@ -26,7 +26,7 @@
             {% elseif isEnableCall and not isEnablePicture %}6
             {% else %}4{% endif %} container-fluid az-header-top">
                 <div class="row">
-                    <div class="col-md-12 col-sm-12 container az-header-address-div">
+                    <div class="col-md-12 col-sm-12 container-fluid az-header-address-div">
                         <div class="row az-header-address-container az-header-phone-number">
                             {% if site_settings is defined and site_settings and site_settings.info_text is defined and site_settings.info_text %}
                                 {{ site_settings.info_text|raw }}
@@ -132,7 +132,7 @@
                                          class="az-download-title-img az-basket-title-img"
                                          title="{% trans %}download{% endtrans %}"/>
                                 </div>
-                                <div class="col-md-6 col-sm-6 container az-header-download-div">
+                                <div class="col-md-6 col-sm-6 container-fluid az-header-download-div">
                                     Загрузить свои изображения
                                 </div>
                             </div>
@@ -195,7 +195,7 @@
                         <img src="{{ asset('bundles/app/images/basket.png') }}" class="az-basket-title-img"
                              title="{% trans %}basket{% endtrans %}"/>
                     </div>
-                    <div class="col-md-6 col-sm-7 container text-left az-main-page-header-top-cells az-header-basket-div">
+                    <div class="col-md-6 col-sm-7 container-fluid text-left az-main-page-header-top-cells az-header-basket-div">
                         <div class="row az-header-basket-container az-header-basket-text">
                             <div class="col-md-12 col-sm-12 az-header-download" data-toggle="modal" data-target="#myModal2">
                                 Корзина

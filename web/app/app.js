@@ -631,7 +631,7 @@ define(function (require, exports, module) {
 
     function setShowBoard() {
         var constructor = new ConstructorOverview();
-        //constructor.debug = true;
+        constructor.debug = true;
         constructor.init();
         constructor.buildConstructor();
         constructor.showPrice();

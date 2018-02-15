@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 class SearchController extends FrontController
 {
     const PAGE_LIMIT = 20;
+    const PAGE_MOBILE_LIMIT = 19;
 
     /**
      * @param Request $request
@@ -35,7 +36,7 @@ class SearchController extends FrontController
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
-            self::PAGE_LIMIT/*limit per page*/
+            ($this->get('pictures.service')->isMobile() ? self::PAGE_MOBILE_LIMIT : self::PAGE_LIMIT)/*limit per page*/
         );
 
         $this->data['pagination'] = $pagination;

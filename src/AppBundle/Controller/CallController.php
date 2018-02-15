@@ -43,7 +43,7 @@ class CallController extends FrontController {
                 ->setTo($settings['to_email'])
                 ->setBody(
                     $this->renderView(
-                        'Emails/callback.html.twig',
+                        'AppBundle:Emails:callback.html.twig',
                         array('name' => $name, 'phone' => $phone)
                     ),
                     'text/html'

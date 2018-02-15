@@ -151,13 +151,14 @@ class OrderController extends FrontController {
 
             $settings = $this->getSiteSettings();
 
-            if(!empty($settings['from_email']) && !empty('to_email')) {
+
+            if(!empty($settings['from_email']) && !empty($settings['to_email'])) {
                 $message = (new \Swift_Message('Новый заказ'))
                     ->setFrom($settings['from_email'])
                     ->setTo($settings['to_email'])
                     ->setBody(
                         $this->renderView(
-                            'Emails/order.html.twig',
+                            'AppBundle:Emails:order.html.twig',
                             array('orderId' => $orderId, 'count' => count($cart))
                         ),
                         'text/html'
@@ -166,8 +167,6 @@ class OrderController extends FrontController {
                 $this->get('mailer')->send($message);
             }
         }
-
-
 
         $this->get( 'app.session_manager' )->cleanCart();
     }

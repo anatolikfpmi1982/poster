@@ -61,17 +61,13 @@
         <div class="row az-page-section-body az-page-main-popular container-fluid">
             <div class="row">
                 {% if site_blocks is defined and site_blocks and site_blocks.Popular is defined and site_blocks.Popular %}
-                {% for popular in site_blocks.Popular %}
-                {% if popular.pictures is defined and popular.pictures %}
-                {% for picture in popular.pictures %}
-                {% include('AppBundle:Component:picture.cell.html.twig') %}
-                {% if loop.index != 1 and loop.index % 3 == 0 %}
-            </div>
-            <div class="row">
-                {% endif %}
-                {% endfor %}
-                {% endif %}
-                {% endfor %}
+                    {% for popular in site_blocks.Popular %}
+                        {% if popular.pictures is defined and popular.pictures %}
+                            {% for picture in popular.pictures %}
+                                {% include('AppBundle:Component:picture.cell.html.twig') %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
                 {% endif %}
             </div>
         </div>
