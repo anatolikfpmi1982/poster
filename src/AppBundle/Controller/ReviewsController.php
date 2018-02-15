@@ -74,11 +74,28 @@ class ReviewsController extends FrontController {
             $this->get( 'doctrine.orm.entity_manager' )->persist($reviewEntity);
             $this->get( 'doctrine.orm.entity_manager' )->flush();
 
+            $settings = $this->getSiteSettings();
+
+            if(!empty($settings['from_email']) && !empty('to_email')) {
+                $message = (new \Swift_Message('Новый заказ'))
+                    ->setFrom($settings['from_email'])
+                    ->setTo($settings['to_email'])
+                    ->setBody(
+                        $this->renderView(
+                            'Emails/review.html.twig',
+                            array('name' => $name, 'email' => $email, 'city' => $city, 'review' => $review)
+                        ),
+                        'text/html'
+                    );
+
+                $this->get('mailer')->send($message);
+            }
+
             $result = true;
         }
 
         // parameters to template
-        return new JsonResponse(['result' => 1]);
+        return new JsonResponse(['result' => (int)$result]);
     }
 
 }

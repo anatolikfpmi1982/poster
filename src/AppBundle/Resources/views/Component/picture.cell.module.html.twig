@@ -7,6 +7,11 @@
     {% set imgPath = asset('bundles/app/images/default_picture.jpg') %}
     {% set imgSize = filesize(imgPath) %}
 {% endif %}
+{% if ownPicture is defined and ownPicture %}
+    {% set url_entity = 'my_file_page' %}
+{% else %}
+    {% set url_entity = 'picture' %}
+{% endif %}
 <div class="col-md-4 col-sm-6 az-popular-item-frame container">
     <div class="row text-center">
         <div class="col-md-12 col-sm-12 az-page-picture-frame-cell-header">
@@ -16,7 +21,7 @@
     <div class="row az-main-popular-item-img-div">
         <div class="col-md-12 col-sm-12 az-main-popular-item-img show-constructor-img-lazy"
              data-src="{{ img }}"
-             data-id="21"
+             data-id="{{ pictureMain.id }}"
              data-type="Модульная"
              data-width={{ imgSize[0] }}
              data-height={{ imgSize[1] }}
@@ -25,7 +30,7 @@
              data-pad-left=4
              data-pad-top=4
              data-butt=5
-             data-href="{{ path('picture', {'id': pictureMain.id, 'type': 'module', 'module_id': type.id }) }}"
+             data-href="{{ path(url_entity, {'id': pictureMain.id, 'type': 'module', 'module_id': type.id }) }}"
              data-code="{{ type.formula }}"
              data-max-width="246"
              data-max-height="240"

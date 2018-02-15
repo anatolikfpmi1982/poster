@@ -31,6 +31,11 @@
 {% if type.thickness is defined and type.thickness %}
     {% set imgFrameThickness = type.thickness %}
 {% endif %}
+{% if ownPicture is defined and ownPicture %}
+    {% set url_entity = 'my_file_page' %}
+{% else %}
+    {% set url_entity = 'picture' %}
+{% endif %}
 <div class="col-md-4 col-sm-6 az-popular-item-frame container">
     <div class="row text-center">
         <div class="col-md-12 col-sm-12 az-page-picture-frame-cell-header">
@@ -52,7 +57,7 @@
              data-butt-portrait={{ imgFrameThickness }}
              data-max-width="246"
              data-max-height="240"
-             data-href="{{ path('picture', {'id': pictureMain.id, 'type': 'frame', 'frame_id': type.id }) }}"
+             data-href="{{ path(url_entity, {'id': pictureMain.id, 'type': 'frame', 'frame_id': type.id }) }}"
              data-img-corner="{{ imgCorner }}"
              data-img-side-t="{{ imgSideTop }}"
              data-img-side-r="{{ imgSideRight }}"

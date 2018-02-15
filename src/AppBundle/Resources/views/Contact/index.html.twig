@@ -31,22 +31,48 @@
             </div>
             <div class="row">
                 <div class="col-md-12 col-sm-12 container-fluid">
-                    <form id="add_contacts">
-                        <div><label class="az-add_contacts_name" for="name">Ф.И.О.</label>
-                            <input id="az-add_contacts_name" name="add_review_name" required/>
+                    <form id="add_contacts" method="post">
+                        <div><label class="az-add_contacts_name" for="name">Ф.И.О. *</label>
+                            <input id="az-add_contacts_name" name="add_contacts_name" required/>
                         </div>
-                        <div><label class="az-add_contacts_email" for="email">Email</label>
-                            <input id="az-add_contacts_email" name="add_review_email" required/>
+                        <div><label class="az-add_contacts_email" for="email">Email *</label>
+                            <input id="az-add_contacts_email" name="add_contacts_email" type="email" required/>
                         </div>
                         <div>
                             <label class="az-add_contacts_city" for="city">Город</label>
-                            <input id="az-add_contacts_city" name="add_review_city"/>
+                            <input id="az-add_contacts_city" name="add_contacts_city"/>
                         </div>
-                        <label class="az-add_contacts_description" for="description">Сообщение</label>
-                    <textarea id="az-add_contacts_description" name="az-add_review_description"
+                        <label class="az-add_contacts_description" for="description">Сообщение *</label>
+                    <textarea id="az-add_contacts_description" name="az-add_contacts_description"
                               placeholder="Введите ваше сообщение" required></textarea>
                         <button class="btn btn-bg az-header-feedback-btn" type="submit">Отправить</button>
                     </form>
+                </div>
+            </div>
+            <div id="successContactsForm" class="modal fade" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content az-picture-page-hint-modal-div ">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Отправить сообщение</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div>Ваше сообщение отправлено, Спасибо!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="errorContactsForm" class="modal fade" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content az-picture-page-hint-modal-div ">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Отправить сообщение</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div>Произошли технические неполатки. Попробуйте еще раз через пару минут.</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

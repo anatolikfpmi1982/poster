@@ -257,7 +257,28 @@ define(function (require, exports, module) {
                 if (data != undefined && data && data.result != undefined && data.result) {
                     $('#successReviewForm').removeClass('hidden').modal('show');
                 } else
-                    $('#successReviewForm').removeClass('hidden').modal('show');
+                    $('#errorReviewForm').removeClass('hidden').modal('show');
+            });
+            return false;
+        });
+
+        // add contacts
+        $("#add_contacts").submit(function (event) {
+            event.stopImmediatePropagation();
+            $.ajax({
+                url: "/ajax/contacts/add",
+                method: 'POST',
+                data: {
+                    'name': $('#az-add_contacts_name').val(),
+                    'email': $('#az-add_contacts_email').val(),
+                    'city': $('#az-add_contacts_city').val(),
+                    'review': $('#az-add_contacts_description').val()
+                }
+            }).done(function (data) {
+                if (data != undefined && data && data.result != undefined && data.result) {
+                    $('#successContactsForm').removeClass('hidden').modal('show');
+                } else
+                    $('#errorContactsForm').removeClass('hidden').modal('show');
             });
             return false;
         });
@@ -455,7 +476,7 @@ define(function (require, exports, module) {
 
                     window.setTimeout(function () {
                         location.reload();
-                    }, 3000);
+                    }, 1000);
                 } else {
                     showInnerMessage('error', 'Произошли технические неполатки. Попробуйте еще раз через пару минут.');
                 }
@@ -515,6 +536,8 @@ define(function (require, exports, module) {
             event.stopPropagation();
             event.preventDefault();
 
+            $('.az-form-btn-download i').css('display', 'inline-block');
+
             var data = new FormData();
             $.each(files, function (key, value) {
                 data.append(key, value);
@@ -550,6 +573,9 @@ define(function (require, exports, module) {
                     $('.modal-backdrop').hide();
                     showInnerMessage('error', 'Произошли технические неполатки. Попробуйте еще раз через пару минут.');
                     console.log('ОШИБКИ AJAX запроса: ' + textStatus);
+                    window.setTimeout(function () {
+                        location.reload();
+                    }, 3000);
                 }
             });
         });
