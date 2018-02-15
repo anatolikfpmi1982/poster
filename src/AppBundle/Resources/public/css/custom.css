@@ -3031,7 +3031,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
 
     .owl-carousel .owl-stage-outer {
         margin: 5px auto;
-        height: 50px;
+        height: 90px;
     }
 
     .owl-prev {
@@ -3039,7 +3039,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
         left: -35px;
         margin-left: -8px;
         width: 34px;
-        height: 50px;
+        height: 90px;
         border-radius: inherit;
     }
 
@@ -3049,7 +3049,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
         margin-top: 0;
         margin-left: -8px;
         width: 34px;
-        height: 50px;
+        height: 90px;
         border-radius: inherit;
     }
 
@@ -3088,7 +3088,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
     }
 
     .owl-carousel .owl-item img {
-        height: 48px;
+        height: 88px;
     }
 
     .owl-theme .owl-nav .owl-prev {
@@ -3104,7 +3104,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
     }
 
     .owl-carousel {
-        width: 330px;
+        width: 440px;
     }
 
     .bottom-left {
@@ -3116,7 +3116,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
     .module-bottom-left {
         position: absolute;
         bottom: 0;
-        left: 5px;
+        left: 25px;
     }
 
     .az-main-frames-img {
@@ -3181,5 +3181,10 @@ and (-webkit-min-device-pixel-ratio: 2) {
     .az-page-picture-frame-cell-header {
         margin-top: 5px;
         height: 20px;
+    }
+
+    .az-picture-constructor-frame-zoom-img {
+        width: 25px;
+        height: 25px;
     }
 }
