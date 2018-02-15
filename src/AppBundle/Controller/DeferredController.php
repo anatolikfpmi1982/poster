@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
  * Class DeferredController
  */
 class DeferredController extends FrontController {
-    const PAGE_LIMIT = 16;
+    const PAGE_LIMIT = 20;
 
     /**
      * @Route("/deferred", name="deferred")

@@ -575,7 +575,7 @@ define(function (require, exports, module) {
                     console.log('ОШИБКИ AJAX запроса: ' + textStatus);
                     window.setTimeout(function () {
                         location.reload();
-                    }, 3000);
+                    }, 500);
                 }
             });
         });
