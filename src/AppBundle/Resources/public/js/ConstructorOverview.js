@@ -60,9 +60,9 @@ function ConstructorOverview() {
 
     // show sizes for constructor
     this.showSizes = false;
-    this.showSizesHeight = 10;
+    this.showSizesHeight = 20;
     this.showSizesWidth = 100;
-
+    this.showSizesIndentation = 5;
 
     this.init = function (params) {
         if (params != undefined) {
@@ -137,8 +137,9 @@ function ConstructorOverview() {
         this.padding_left = 15;
         this.padding_top = 10;
         this.right_width = 6;
-        this.right_width_portrait = parseInt($('#az-picture-constructor-frame-thickness-selected').val()) > 0 ?
-            parseInt($('#az-picture-constructor-frame-thickness-selected').val()) :
+        var frameThicknessDivValue = $('#az-picture-constructor-frame-thickness-selected').val();
+        this.right_width_portrait = parseInt(frameThicknessDivValue) > 0 ?
+            parseInt(frameThicknessDivValue) :
             this.right_width_portrait;
         this.top_deviation = 20;
         this.left_deviation = 10;
@@ -151,6 +152,7 @@ function ConstructorOverview() {
         this.imgSideB = $('#az-picture-constructor-frame-img-side-b-selected').val();
         this.imgSideL = $('#az-picture-constructor-frame-img-side-l-selected').val();
         this.isConstructor = true;
+        this.showSizes = true;
     };
 
     this.show = function () {
@@ -188,7 +190,7 @@ function ConstructorOverview() {
                 this.buildPortrait();
                 panel.hide();
                 if (this.isConstructor) {
-                    $('.az-picture-page-constructor-picture-thickness-img').each(function (index) {
+                    $('.az-picture-page-constructor-picture-thickness-img').each(function () {
                         if ($(this).data('zoom-image')) {
 
                             var additionalData =
@@ -368,6 +370,10 @@ function ConstructorOverview() {
             aLink.appendTo(this.monitor);
         }
 
+        if (this.showSizes) {
+            this.showArrows();
+        }
+
         var isZoom2 = this.isConstructor && this.type != 'Модульная';
         isZoom2 = isZoom2 || (this.isZoom && this.elemId);
         isZoom2 = isZoom2 && this.imgBigPath;
@@ -445,8 +451,10 @@ function ConstructorOverview() {
                 console.log('this.max_height', this.max_height);
             }
 
-            var maxHeight = this.max_height - 2 * this.top_deviation - 2 * this.right_width_portrait - this.shadow;
-            var maxWidth = this.max_width - 2 * this.left_deviation - 2 * this.right_width_portrait - this.shadow;
+            var maxHeight = this.max_height - 2 * this.top_deviation - 2 * this.right_width_portrait - this.shadow - (this.showSizes ? this.showSizesHeight : 0) -
+                (this.showSizes ? (this.showSizesIndentation) : 0);
+            var maxWidth = this.max_width - 2 * this.left_deviation - 2 * this.right_width_portrait - this.shadow - (this.showSizes ? this.showSizesHeight : 0) -
+                (this.showSizes ? (this.showSizesIndentation) : 0);
 
             if (this.picHeight > this.picWidth) {
                 if (this.picHeight > maxHeight || this.fill) {
@@ -483,8 +491,8 @@ function ConstructorOverview() {
                 console.log('maxHeight', maxHeight);
                 console.log('maxWidth', maxWidth);
             }
-            this.top_deviation = Math.round((this.max_height - this.picHeight - 2 * this.right_width_portrait - this.shadow  ) / 2);
-            this.left_deviation = Math.round((this.max_width - this.picWidth - 2 * this.right_width_portrait - this.shadow ) / 2);
+            this.top_deviation = Math.round((this.max_height - this.picHeight - 2 * this.right_width_portrait - this.shadow  ) / 2) + (this.showSizes ? this.showSizesHeight : 0);
+            this.left_deviation = Math.round((this.max_width - this.picWidth - 2 * this.right_width_portrait - this.shadow ) / 2) + (this.showSizes ? this.showSizesHeight : 0);
 
             if (this.debug) {
                 console.log('this.picWidth', this.picWidth);
@@ -521,9 +529,10 @@ function ConstructorOverview() {
             var isHeight = this.picHeight > this.picWidth;
 
             var maxHeight = this.max_height - 2 * this.top_deviation - (this.right_width + this.shadow) * this.panelNumberVertical -
-                this.padding_top * (this.panelNumberVertical - 1) - (this.showSizes ? this.showSizesHeight : 0);
+                this.padding_top * (this.panelNumberVertical - 1) - (this.showSizes ? this.showSizesHeight : 0) - (this.showSizes ? (this.showSizesIndentation) : 0);
             var maxWidth = this.max_width - 2 * this.left_deviation - (this.right_width + this.shadow) * this.panelNumberHorizontal -
-                (this.padding_left - this.right_width - this.shadow) * (this.panelNumberHorizontal - 1) - (this.showSizes ? this.showSizesHeight : 0);
+                (this.padding_left - this.right_width - this.shadow) * (this.panelNumberHorizontal - 1) - (this.showSizes ? this.showSizesHeight : 0) -
+                (this.showSizes ? (this.showSizesIndentation) : 0);
             if (isHeight) {
                 if (this.picHeight > maxHeight || this.fill) {
                     this.picWidth = Math.round((this.picWidth * maxHeight) / this.picHeight);
@@ -558,13 +567,14 @@ function ConstructorOverview() {
                 console.log('maxHeight', maxHeight);
                 console.log('maxWidth', maxWidth);
                 console.log('this.showSizes', this.showSizes);
+                console.log('this.showSizesIndentation', this.showSizesIndentation);
+                console.log('this.showSizesHeight', this.showSizesHeight);
             }
 
-            this.top_deviation = Math.round((this.max_height - this.picHeight - (this.showSizes ? this.showSizesHeight : 0) -
-                (this.right_width + this.shadow) * this.panelNumberVertical - this.padding_top * (this.panelNumberVertical - 1)  ) / 2);
-            this.left_deviation = Math.round((this.max_width - this.picWidth - (this.showSizes ? this.showSizesHeight : 0) -
-                (this.right_width + this.shadow) * this.panelNumberHorizontal - (this.padding_left - this.right_width - this.shadow) *
-                (this.panelNumberHorizontal - 1) ) / 2);
+            this.top_deviation = Math.round((this.max_height - this.picHeight - (this.right_width + this.shadow) * this.panelNumberVertical -
+                    this.padding_top * (this.panelNumberVertical - 1)  ) / 2) + (this.showSizes ? this.showSizesHeight : 0);
+            this.left_deviation = Math.round((this.max_width - this.picWidth - (this.right_width + this.shadow) * this.panelNumberHorizontal -
+                    (this.padding_left - this.right_width - this.shadow) * (this.panelNumberHorizontal - 1) ) / 2) + (this.showSizes ? this.showSizesHeight : 0);
 
             if (this.debug) {
                 console.log('this.picWidth', this.picWidth);
@@ -808,6 +818,10 @@ function ConstructorOverview() {
             that.panelSizes[that.panelActiveBlockNum] = Math.round((value.width * size[0] ) / 100) + 'x' + Math.round((value.height * size[1] ) / 100);
         });
 
+        if (this.showSizes) {
+            this.showArrows();
+        }
+
         switch (this.type) {
             case 'Баннер':
                 $('.az-picture-page-picture-main-banner-div').css('height', screen_height + 'px');
@@ -862,6 +876,50 @@ function ConstructorOverview() {
             }
         }
 
+    };
+
+    this.showArrows = function () {
+        var upperSizeDiv = $('<div class="vertical-size-arrow"></div>');
+        upperSizeDiv.css('margin-top', this.showSizesIndentation + 'px');
+        upperSizeDiv.css('margin-bottom', this.showSizesIndentation + 'px');
+        upperSizeDiv.css('height', this.showSizesHeight + 'px');
+        var left = this.left_deviation, identical = 0;
+        var calcWidth = (this.type == 'В раме') ? (this.picWidth + 2 * this.right_width_portrait + this.shadow) :
+        this.picWidth + (this.right_width + this.shadow) * this.panelNumberHorizontal + (this.padding_left - this.right_width - this.shadow) *
+        (this.panelNumberHorizontal - 1);
+        if (calcWidth < 290) {
+            identical = Math.round((290 - calcWidth) / 2);
+            left = left - identical;
+            calcWidth = 290;
+        }
+        var sizePicture = this.size.split('x');
+        upperSizeDiv.css('left', left + 'px');
+        upperSizeDiv.css('top', (this.top_deviation - this.showSizesHeight * 2) + 'px');
+        upperSizeDiv.css('width', calcWidth + 'px');
+        var upperSizeDivSpan = $('<span>' + sizePicture[0] + 'см</span>');
+        upperSizeDivSpan.css('height', (this.showSizesHeight - 4) + 'px');
+        upperSizeDivSpan.appendTo(upperSizeDiv);
+        upperSizeDiv.appendTo(this.monitor);
+
+        var leftSizeDiv = $('<div class="left-size-arrow"></div>');
+        leftSizeDiv.css('margin-left', this.showSizesIndentation + 'px');
+        leftSizeDiv.css('margin-right', this.showSizesIndentation + 'px');
+        var top = this.top_deviation;
+        var calcHeight = this.picHeight + (this.right_width + this.shadow) * this.panelNumberVertical + this.padding_top * (this.panelNumberVertical - 1);
+        if (calcHeight < 200) {
+            identical = Math.round((200 - calcHeight) / 2);
+            top = top - identical;
+            calcHeight = 200;
+        }
+
+        leftSizeDiv.css('left', (this.left_deviation - this.showSizesHeight * 2 ) + 'px');
+        leftSizeDiv.css('top', top + 'px');
+        leftSizeDiv.css('height', calcHeight + 'px');
+        leftSizeDiv.css('width', this.showSizesHeight + 'px');
+        var leftSizeDivSpan = $('<span>' + sizePicture[1] + 'см</span>');
+        upperSizeDivSpan.css('height', (this.showSizesHeight - 4) + 'px');
+        leftSizeDivSpan.appendTo(leftSizeDiv);
+        leftSizeDiv.appendTo(this.monitor);
     };
 
     this.getPanelInfo = function () {
@@ -1084,11 +1142,11 @@ function ConstructorOverview() {
             picture_ratio = $('#constructor_picture_ratio').val();
 
         return Math.round(((this.square * average_price + parseFloat(picture_price) + (this.perimeter * this.calculateFrameSquare())) * parseFloat(picture_ratio) +
-            parseFloat(add_price)) * frame_ratio * parseFloat(add_ratio));
+            parseFloat(add_price)) * parseFloat(frame_ratio) * parseFloat(add_ratio));
     };
 
     this.calculateSquare = function () {
-        var type = this.type != this.type != 'В раме' ? 'banner' : 'pic';
+        var type = this.type != 'В раме' ? 'banner' : 'pic';
         var minSquare = $('#constructor_' + type + '_' + this.material_id + '_min_square').val(),
             maxSquare = $('#constructor_' + type + '_' + this.material_id + '_max_square').val(),
             minPrice = $('#constructor_' + type + '_' + this.material_id + '_min_price').val(),
