@@ -28,7 +28,7 @@
                                 {% include('AppBundle:Component:picture.cell.html.twig') %}
                             {% endfor %}
                             {% if pagination.getCurrentPageNumber()*pagination.getItemNumberPerPage() < pagination.getTotalItemCount() %}
-                                <div class="col-md-4 col-sm-4 az-popular-item container-fluid az-category-next">
+                                <div class="col-md-4 col-sm-6 az-popular-item container-fluid az-category-next">
                                     <div class="row text-center az-main-popular-item-img-div">
                                         <div class="col-md-12 col-sm-12 category-next">
                                             <a class="az-nextpage"
