@@ -25,7 +25,7 @@
                         <div class="row">
                             {% for picture in pagination %}
 
-                            {% include('AppBundle:Component:picture.cell.deferred.html.twig') %}
+                            {% include('AppBundle:Component:picture.cell.html.twig') %}
                             {% if loop.index != 1 and loop.index % 3 == 0 %}
                         </div>
                         <div class="row">
