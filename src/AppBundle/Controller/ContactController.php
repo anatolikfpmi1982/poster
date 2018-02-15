@@ -65,7 +65,7 @@ class ContactController extends FrontController {
                     ->setTo($settings['to_email'])
                     ->setBody(
                         $this->renderView(
-                            'Emails/contacts.html.twig',
+                            'AppBundle:Emails:contacts.html.twig',
                             array('name' => $name, 'email' => $email, 'city' => $city, 'review' => $review)
                         ),
                         'text/html'
