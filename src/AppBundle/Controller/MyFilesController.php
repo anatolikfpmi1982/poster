@@ -92,7 +92,6 @@ class MyFilesController extends FrontController {
         }
         $this->data['frame_selected_id'] = (int)$request->query->get('frame_id', 0);
         $this->data['template_selected_id'] = (int)$request->query->get('module_id', 0);
-
         $this->data['isMobile'] = $this->get('pictures.service')->isMobile();
 
         // parameters to template
