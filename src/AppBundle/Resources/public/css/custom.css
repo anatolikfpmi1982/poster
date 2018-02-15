@@ -2888,7 +2888,11 @@ and (max-device-width: 480px)
 and (-webkit-min-device-pixel-ratio: 2) {
     body {
         font-size: 11px;
-        width: 970px;
+        width: 100%;
+    }
+
+    .container {
+        width: 100%;
     }
 
     .btn_az-main-popular_order,

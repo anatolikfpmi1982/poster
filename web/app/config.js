@@ -12,7 +12,7 @@ require.config({
         'owl': '../bower_components/owl.carousel/dist/owl.carousel.min',
         //'elevatezoom': '../bower_components/elevatezoom/jquery.elevateZoom-2.2.3.min'
         'elevatezoom': '../bower_components/elevatezoom/jquery.elevatezoom',
-        'mousewheel': '../bower_components/jquery-mousewheel/jquery.mousewheel.min'
+        'mousewheel': '../bower_components/jquery-mousewheel/jquery.mousewheel'
     },
     'shim': {
         'jsrender': {

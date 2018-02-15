@@ -12,7 +12,7 @@ use AppBundle\Entity\Category3;
  */
 class CategoryRepository extends \Doctrine\ORM\EntityRepository {
 
-    const MAIN_CATEGORY_ID = 1;
+    const MAIN_CATEGORY_ID = 2;
     const MAIN_CATEGORY_TITLE = 'Модульные картины';
 
     /**
@@ -126,7 +126,7 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository {
             }
         }
 
-        if(array_key_exists('enable_module', $settings) && $settings['enable_module']) {
+        if ( array_key_exists( 'enable_module', $settings ) && $settings['enable_module'] ) {
             $categories = $this->createModule( $categories );
         }
 

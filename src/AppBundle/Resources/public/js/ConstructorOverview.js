@@ -137,7 +137,9 @@ function ConstructorOverview() {
         this.padding_left = 15;
         this.padding_top = 10;
         this.right_width = 6;
-        this.right_width_portrait = parseInt($('#az-picture-constructor-frame-thickness-selected').val());
+        this.right_width_portrait = parseInt($('#az-picture-constructor-frame-thickness-selected').val()) > 0 ?
+            parseInt($('#az-picture-constructor-frame-thickness-selected').val()) :
+            this.right_width_portrait;
         this.top_deviation = 20;
         this.left_deviation = 10;
         this.max_width = parseInt($('.az-picture-page-constructor-global-div').css('width'));
