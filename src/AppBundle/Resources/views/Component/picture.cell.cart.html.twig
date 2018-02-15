@@ -3,7 +3,7 @@
 {% else %}
     {% set img = asset('bundles/app/images/default_picture.jpg') %}
 {% endif %}
-<div class="col-md-4 col-sm-4 az-popular-item container">
+<div class="col-md-4 col-sm-4 az-popular-item container-fluid">
     <div class="row text-center az-main-popular-item-img-div">
         <div class="col-md-12 col-sm-12">
             <a href="{{ path('picture', {'id': item.id}) }}"><img src="{{ img }}" class="az-main-popular-item-img"></a>

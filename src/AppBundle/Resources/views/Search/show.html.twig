@@ -25,16 +25,10 @@
                     <div class="row az-page-section-body az-page-main-popular container-fluid">
                         <div class="row">
                             {% for picture in pagination %}
-
-                            {% include('AppBundle:Component:picture.cell.html.twig') %}
-                            {% if loop.index != 1 and loop.index % 3 == 0 %}
-                        </div>
-                        <div class="row">
-                            {% endif %}
-
+                                {% include('AppBundle:Component:picture.cell.html.twig') %}
                             {% endfor %}
                             {% if pagination.getCurrentPageNumber()*pagination.getItemNumberPerPage() < pagination.getTotalItemCount() %}
-                                <div class="col-md-4 col-sm-4 az-popular-item container az-category-next">
+                                <div class="col-md-4 col-sm-4 az-popular-item container-fluid az-category-next">
                                     <div class="row text-center az-main-popular-item-img-div">
                                         <div class="col-md-12 col-sm-12 category-next">
                                             <a class="az-nextpage"

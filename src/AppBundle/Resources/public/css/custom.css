@@ -320,7 +320,7 @@ div[class*="children-subsubsubcategory-"].active {
 }
 
 .az-popular-item-frame {
-    height: 280px;
+    height: 305px;
 }
 
 .az-popular-item-frame.col-md-4:nth-child(3n+1),
@@ -2918,6 +2918,7 @@ a.az-category-item-a div.az-sidebar-catalog-item-header div.az-category-menu-ite
 .az-page-picture-frame-cell-header {
     font-size: larger;
     margin-top: 10px;
+    height: 40px;
 }
 
 @media only screen
@@ -3175,5 +3176,10 @@ and (-webkit-min-device-pixel-ratio: 2) {
     .az-menu-four-lvl-hidden {
         padding-left: 0;
         padding-right: 0;
+    }
+
+    .az-page-picture-frame-cell-header {
+        margin-top: 5px;
+        height: 20px;
     }
 }
