@@ -4,6 +4,7 @@ namespace AppBundle\Repository;
 
 use AppBundle\Entity\Category3;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 
 /**
@@ -28,8 +29,10 @@ class PictureRepository extends EntityRepository {
         $qb = $this->createQueryBuilder( 'p' );
         return $qb->innerJoin( 'p.categories', 'c' )// Inner Join with categories
                     ->innerJoin( 'p.form', 'f' )// Inner Join with picture forms
-                    ->leftJoin('p.categoriesPictures', 'cp')
+                    ->leftJoin('p.categoriesPictures', 'cp', Expr\Join::WITH, $qb->expr()->eq('cp.category', ':category_id'))
                     ->where( $qb->expr()->in('c.id', $categoryIds) )
+                    ->setParameter( 'category_id', $category->getId() )
+                    ->groupBy( 'p.id' )
                     ->andWhere( 'p.isActive = true' );
     }
 

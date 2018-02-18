@@ -552,8 +552,7 @@ define(function (require, exports, module) {
                 processData: false,
                 contentType: false,
                 success: function (data) {
-                    $('#myModal').hide();
-                    $('.modal-backdrop').hide();
+                    $('#myModal button.close').click();
                     if (data != undefined && data && data.result != undefined && data.result == 1) {
                         location.href = '/myfiles';
                     } else {
@@ -563,19 +562,14 @@ define(function (require, exports, module) {
                             error = 'Произошли технические неполатки. Попробуйте еще раз через пару минут.'
                         }
                         showInnerMessage('error', error);
-                        window.setTimeout(function () {
-                            location.reload();
-                        }, 3000);
+                        $('.az-form-btn-download i').hide();
                     }
                 },
                 error: function (data) {
-                    $('#myModal').hide();
-                    $('.modal-backdrop').hide();
+                    $('.az-form-btn-download i').hide();
+                    $('#myModal button.close').click();
                     showInnerMessage('error', 'Произошли технические неполатки. Попробуйте еще раз через пару минут.');
                     console.log('ОШИБКИ AJAX запроса: ' + textStatus);
-                    window.setTimeout(function () {
-                        location.reload();
-                    }, 500);
                 }
             });
         });
