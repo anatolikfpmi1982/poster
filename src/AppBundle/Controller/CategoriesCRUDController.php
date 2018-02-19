@@ -50,6 +50,30 @@ class CategoriesCRUDController extends BaseController
                         $ids[] = $v2->getId();
                     }
                 }
+                $children2 = $v->getChildren();
+                if(count($children2) > 0) {
+                    foreach ($children2 as $k2 => $v2) {
+                        $cPictures2 = $v2->getPictures();
+                        foreach ($cPictures2 as $k3 => $v3) {
+                            if(!in_array($v3->getId(), $ids)) {
+                                $pictures[] = $v3;
+                                $ids[] = $v3->getId();
+                            }
+                        }
+                        $children3 = $v2->getChildren();
+                        if(count($children3) > 0) {
+                            foreach ($children3 as $k3 => $v3) {
+                                $cPictures3 = $v3->getPictures();
+                                foreach ($cPictures3 as $k4 => $v4) {
+                                    if(!in_array($v4->getId(), $ids)) {
+                                        $pictures[] = $v4;
+                                        $ids[] = $v4->getId();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 

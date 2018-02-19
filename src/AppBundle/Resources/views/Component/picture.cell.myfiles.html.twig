@@ -29,8 +29,8 @@
     </div>
     <div class="row az-main-popular-item-header-category-row">
         <div class="col-md-12 col-sm-12 padding_left_right_0">
-            {% if picture.image.getName()|length > 32 %}
-                {% set picture_title = picture.image.getName()|slice(0, 29) ~ '...' %}
+            {% if picture.image.getName()|length > 29 %}
+                {% set picture_title = picture.image.getName()|slice(0, 26) ~ '...' %}
             {% else %}
                 {% set picture_title = picture.image.getName() %}
             {% endif %}
