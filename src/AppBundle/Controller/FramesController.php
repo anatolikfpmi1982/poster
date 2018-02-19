@@ -55,9 +55,6 @@ class FramesController extends FrontController
         $this->doBlocks();
 
         $frame = $this->em->getRepository('AppBundle:Frame')->find($id);
-        if($frame instanceof Frame) {
-            $frame->setDescription( $this->get( 'helper.textformater' )->formatMoreText( $frame->getDescription() ) );
-        }
         $this->data['frame'] = $frame;
 
         // parameters to template

@@ -1469,7 +1469,7 @@ footer {
     margin: 5px;
 }
 
-.az-category-page-description-div #more_text {
+.az-category-page-description-div .more_text, .more_text {
     margin-left: 10px;
     height: 10px;
     width: 28px;

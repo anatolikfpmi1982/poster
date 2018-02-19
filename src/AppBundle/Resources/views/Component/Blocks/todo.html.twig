@@ -3,6 +3,6 @@
 
 
     {% if site_settings is defined and site_settings and site_settings.block_todo_text is defined and site_settings.block_todo_text %}
-        {{ site_settings.block_todo_text|raw }}
+        {{ site_settings.block_todo_text|moreText|raw }}
     {% endif %}
 </div> </div>

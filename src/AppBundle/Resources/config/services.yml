@@ -44,6 +44,11 @@ services:
         tags:
             - { name: twig.extension }
 
+    app.twig_moretext_extension:
+        class: AppBundle\Twig\MoreTextExtension
+        tags:
+            - { name: twig.extension }
+
     app.menu_listener:
         class: AppBundle\EventListener\MenuBuilderListener
         tags:
