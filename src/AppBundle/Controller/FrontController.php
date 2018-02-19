@@ -218,4 +218,11 @@ class FrontController extends Controller {
 
         return $deferred;
     }
+
+    /**
+     * @return array
+     */
+    protected function getDeferred() {
+        return $this->get( 'app.session_manager' )->getDeferredItems();
+    }
 }
