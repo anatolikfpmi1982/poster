@@ -445,8 +445,7 @@ define(function (require, exports, module) {
                 data: {'id': id}
             }).done(function (data) {
                 if (data != undefined && data && data.result != undefined && data.result == 1) {
-                    $this.text("Удалено");
-                    $this.prop('disabled', true);
+                    $this.text("Удалено").addClass('active').prop('disabled', true);
                     showInnerMessage('success', 'Успешно удалили из отложенных картину с ID ' + id);
 
                     window.setTimeout(function () {

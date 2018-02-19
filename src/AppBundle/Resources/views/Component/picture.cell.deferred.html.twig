@@ -1,43 +1,146 @@
-{% if picture.image and picture.image.getFilename() %}
+{% set imgBig = '' %}
+{% if picture.image is defined and picture.image and picture.image.getFilename() %}
     {% set img = '/files/pictures/thumb/' ~ picture.image.getFilename() %}
+    {% set imgPath = picture.image.getThumbBaseFile() %}
+    {% set imgSize = filesize(imgPath) %}
+    {% set imgBigPath = picture.image.getNormalBaseFile() %}
+    {% if file_exists(imgBigPath) %}
+        {% set imgBig = '/files/pictures/normal/' ~ picture.image.getFilename() %}
+    {% endif %}
 {% else %}
     {% set img = asset('bundles/app/images/default_picture.jpg') %}
+    {% set imgPath = asset('bundles/app/images/default_picture.jpg') %}
+    {% set imgSize = filesize(imgPath) %}
 {% endif %}
-<div class="col-md-4 col-sm-4 az-popular-item container-fluid">
-    <div class="row text-center az-main-popular-item-img-div">
-        <div class="col-md-12 col-sm-12">
-            <a href="{{ path('picture', {'id': picture.id}) }}"><img src="{{ img }}" class="az-main-popular-item-img"></a>
+{% set isModule = module_active is defined and module_active %}
+{% if isModule and moduleTypes is defined and moduleTypes and previousFormula is defined %}
+    {% set randomModuleFormula = random(moduleTypes).formula %}
+    {% if randomModuleFormula == previousFormula %}
+        {% set randomModuleFormula = random(moduleTypes).formula %}
+    {% endif %}
+    {% set previousFormula = randomModuleFormula %}
+{% elseif isModule and moduleTypes is not defined %}
+    {% set randomModuleFormula = 'single|{horizontal|15-70-15:35-100-0:25-100-5:25-70-15}' %}
+{% else %}
+    {% set randomModuleFormula = 'single|{horizontal|100-100-0}' %}
+{% endif %}
+
+{% set picture_url = path('picture', {'id': picture.id}) %}
+
+{% set type_value = "Баннер" %}
+{% if site_settings is defined and site_settings %}
+    {% if site_settings.enable_banner is defined and site_settings.enable_banner and not isModule %}
+        {% set type_value = "Баннер" %}
+    {% elseif site_settings.enable_frame is defined and site_settings.enable_frame and not isModule %}
+        {% set type_value = "В раме" %}
+    {% elseif site_settings.enable_module is defined and site_settings.enable_module %}
+        {% set type_value = "Модульная" %}
+    {% endif %}
+{% endif %}
+<div class="col-md-4 col-sm-6 az-popular-item container-fluid">
+    <div class="row az-main-popular-item-img-div">
+        <div class="col-md-12 col-sm-12 az-main-popular-item-img show-constructor-img-lazy"
+             data-src="{{ img }}"
+             data-id="{{ picture.id }}"
+             data-type="{{ type_value }}"
+             data-width={{ imgSize[0] }}
+             data-height={{ imgSize[1] }}
+             data-left=2
+             data-top=2
+             data-pad-left=14
+             data-pad-top=4
+             data-butt=6
+             data-butt-portrait=6
+             data-code="{% if module_active or type_value == "Модульная" %}{{ module_formulas[i].formula }}{% else %}single|{horizontal|100-100-0}{% endif %}"
+             data-max-width="246"
+             data-max-height="240"
+             data-href="{{ picture_url }}"
+             data-fill-in="1"
+             data-img-corner=""
+             data-img-side-t=""
+             data-img-side-r=""
+             data-img-side-b=""
+             data-img-side-l=""
+                {% if imgBig and type_value == "Баннер" %}
+                    data-zoom-image="{{ imgBig }}"
+                    data-img-zoom="true"
+                    data-elem-id="az-category-img-{{ picture.id }}"
+                    data-big-src="{{ imgBig }}"
+                {% endif %}
+        >
         </div>
     </div>
-    {% if picture.title|length > 29 %}
-        {% set picture_title = picture.title|slice(0, 26) ~ ' ...' %}
+    <div class="row">
+        <div class="az-main-popular-item-header-category-row">
+            {% if picture.title|length > 29 %}
+                {% set picture_title = picture.title|slice(0, 26) ~ ' ...' %}
+            {% else %}
+                {% set picture_title = picture.title %}
+            {% endif %}
+
+            <a href="{{ picture_url }}">"{{ picture_title }}"</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="az-main-popular-item-header-category-row">
+            {% set isPictureAuthor = picture.author is defined and picture.author %}
+            {% if isPictureAuthor and picture.author.slug is defined and picture.author.slug %}
+                {% set author_url = path('author', {'slug': picture.author.slug}) %}
+            {% else %}
+                {% set author_url = '#' %}
+            {% endif %}
+            {% if isPictureAuthor and picture.author.name is defined and picture.author.name %}
+                {% if picture.author.name|length > 29 %}
+                    {% set author_name = picture.author.name|slice(0, 26) ~ ' ...' %}
+                {% else %}
+                    {% set author_name = picture.author.name %}
+                {% endif %}
+            {% else %}
+                {% set author_name = '-' %}
+            {% endif %}
+            <span class="az_author"> Автор:</span> <a href="{{ author_url }}"> {{ author_name }}</a>
+        </div>
+    </div>
+    {% if mainCategoryId is defined and mainCategoryId %}
+        {% set limitCategory = 6 %}
+        {% set catId = mainCategoryId %}
     {% else %}
-        {% set picture_title = picture.title %}
+        {% set limitCategory = 5 %}
+        {% set catId = 0 %}
     {% endif %}
     <div class="row">
         <div class="az-main-popular-item-header-category">
-            <a href="{{ path('picture', {'id': picture.id}) }}">"{{ picture_title }}"</a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="az-main-popular-item-header-category">
-            {% if picture.author is defined and picture.author and picture.author.slug is defined and picture.author.slug %}
-                {% set author_url = path('author', {'slug': picture.author.slug}) %}
-                {% set author_title = picture.author.name %}
-            {% else %}
-                {% set author_url = '#' %}
-                {% set author_title = '~' %}
+            <span class="az_author"> Категории:</span>
+            {% if picture.categories is defined and picture.categories and picture.categories and
+                (( catId > 0 and picture.categories|length > 1 ) or ( catId == 0 and picture.categories|length > 0 ) ) %}
+                {% set categorySymbolsNum = 0 %}
+                {% set categoryInProgress = true %}
+                {% for cat in picture.categories|slice(0, limitCategory) %}
+                    {% if cat.id != catId and categoryInProgress %}
+                        {% set categorySymbolsNum = categorySymbolsNum + cat.title|length + 3 %}
+                        {% if categorySymbolsNum < 58 %}
+                            <a href="{{ path('category', {'slug': cat.slug}) }}"> {{ cat.title }}</a>
+                            {% if loop.last == false %},{% endif %}
+                        {% else %}
+                            ...
+                            {% set categoryInProgress = false %}
+                        {% endif %}
+
+                    {% endif %}
+                {% endfor %}
             {% endif %}
-            <span class="az_author"> Автор:</span> <a href="{{ author_url }}"> {{ author_title }}</a>
+
+
         </div>
     </div>
+
     <div class="row">
         <div class="az-main-popular-item-header-buttons container-fluid">
             <div class="row">
                 <div class="col-md-6 col-sm-6 text-right container-fluid az_btn_postpone">
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
-                            <button class="btn_az-main-popular_defer delete-defer-bnt" data-id="{{ picture.id }}">Удалить из отложенных</button>
+                            <button class="btn_az-main-popular_defer delete-defer-bnt" data-id="{{ picture.id }}">Убрать</button>
                         </div>
                     </div>
                     <div class="row az-main-popular-item-header-buttons">
@@ -45,6 +148,10 @@
                             Артикул: {{ picture.code }}
                         </div>
                     </div>
+                </div>
+                <div class="col-md-6 col-sm-6 az_btn_order text-left">
+                    <a href="{{ picture_url }}"
+                       class="btn_az-main-popular_order">Выбрать <br/>тип картины,<br/> размер, цена, <br/>заказать</a>
                 </div>
 
             </div>
