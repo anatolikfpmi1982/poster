@@ -24,38 +24,53 @@
 <div class="col-md-1 col-sm-1 text-center az-picture-page-constructor-block container-fluid {% if sort_field == 'p.title' %}active{% endif %}">
     <div class="row az-category-page-filter az-category-page-filter-photo">
         <div class="col-md-12 col-sm-12">
-            {% set title_direction = 'DESC' %}
+            {% set title_direction = 'ASC' %}
+            {% set title_direction_icon = 'down' %}
             {% if sort_field == 'p.title' %}
-                {% if sort_direction == 'DESC' %}{% set title_direction = 'ASC' %}{% endif %}
+                {% set title_direction_icon = 'up' %}
+                {% if sort_direction == 'ASC' %}
+                    {% set title_direction_icon = 'down' %}
+                    {% set title_direction = 'DESC' %}
+                {% endif %}
             {% endif %}
             <a class="az-category-page-filter-name"
                href="{{ app.request.pathinfo }}?sort=p.title&direction={{ title_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Имя <span
-                        class="glyphicon glyphicon-chevron-{% if title_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
+                        class="glyphicon glyphicon-chevron-{{ title_direction_icon }}"></span></a>
         </div>
     </div>
 </div>
 <div class="col-md-1 col-sm-1 text-center az-picture-page-constructor-block container-fluid {% if sort_field == 'p.createdAt' %}active{% endif %}">
     <div class="row az-category-page-filter az-category-page-filter-photo">
-        {% set date_direction = 'DESC' %}
+        {% set date_direction = 'ASC' %}
+        {% set date_direction_icon = 'down' %}
         {% if sort_field == 'p.createdAt' %}
-            {% if sort_direction == 'DESC' %}{% set date_direction = 'ASC' %}{% endif %}
+            {% set date_direction_icon = 'up' %}
+            {% if sort_direction == 'ASC' %}
+                {% set date_direction = 'DESC' %}
+                {% set date_direction_icon = 'down' %}
+            {% endif %}
         {% endif %}
         <a class="az-category-page-filter-name"
            href="{{ app.request.pathinfo }}?sort=p.createdAt&direction={{ date_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Дата <span
                     class="glyphicon
-        glyphicon-chevron-{% if date_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
+        glyphicon-chevron-{{ date_direction_icon }}"></span></a>
     </div>
 </div>
 <div class="col-md-2 col-sm-2 text-center az-picture-page-constructor-block container-fluid {% if sort_field == 'p.popularity' %}active{% endif %}">
     <div class="row az-category-page-filter az-category-page-filter-photo">
-        {% set popularity_direction = 'DESC' %}
+        {% set popularity_direction = 'ASC' %}
+        {% set popularity_direction_icon = 'down' %}
         {% if sort_field == 'p.popularity' %}
-            {% if sort_direction == 'DESC' %}{% set popularity_direction = 'ASC' %}{% endif %}
+            {% set popularity_direction_icon = 'up' %}
+            {% if sort_direction == 'ASC' %}
+                {% set popularity_direction = 'DESC' %}
+                {% set popularity_direction_icon = 'down' %}
+            {% endif %}
         {% endif %}
         <a class="az-category-page-filter-name"
            href="{{ app.request.pathinfo }}?sort=p.popularity&direction={{ popularity_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Популярность <span
                     class="glyphicon
-        glyphicon-chevron-{% if popularity_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
+        glyphicon-chevron-{{ popularity_direction_icon }}"></span></a>
     </div>
 </div>
 <div class="col-md-1 col-sm-1 text-center az-picture-page-constructor-block container-fluid">
