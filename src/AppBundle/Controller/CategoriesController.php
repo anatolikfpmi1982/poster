@@ -34,7 +34,6 @@ class CategoriesController extends FrontController
         $this->pageType = 'category';
         $this->doBlocks();
 
-
         /** @var Category3 $category */
         $category = $this->em->getRepository('AppBundle:Category3')->findOneBySlug($slug);
         $category->count = count($category->getPictures());
@@ -57,7 +56,7 @@ class CategoriesController extends FrontController
         }
 
         // hack for pictures sorting
-        if(!empty($_GET['sort']) && $_GET['sort'] == 'p.isTop cp.weight') {
+        if(!empty($_GET['sort']) && $_GET['sort'] === 'p.isTop cp.weight') {
             $_GET['sort'] = 'p.isTop+cp.weight';
         }
 
@@ -74,7 +73,7 @@ class CategoriesController extends FrontController
 
         if($request->query->get('type') && $request->query->get('type') === 'module') {
             $this->data['module_active'] = true;
-            if($category->getId() == CategoryRepository::MAIN_CATEGORY_ID) {
+            if($category->getId() === CategoryRepository::MAIN_CATEGORY_ID) {
                 $category->setTitle(CategoryRepository::MAIN_CATEGORY_TITLE);
             }
         };

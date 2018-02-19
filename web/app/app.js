@@ -298,7 +298,7 @@ define(function (require, exports, module) {
                     deferredSpan = $("button.az-btn-delayed-image span#az-picture-page-sidebar-deffered-div-count");
                 if (data != undefined && data && data.result != undefined && data.result) {
                     deferredSpan.text(parseInt(data.count));
-                    $this.text("Отложено").prop('disabled', true);
+                    $this.text("Отложено").addClass('active').prop('disabled', true);
                     deferredBlock.removeClass('hidden').show();
                 } else {
                     deferredBlock.addClass('hidden').hide();
@@ -327,7 +327,7 @@ define(function (require, exports, module) {
                     defferedBtn = $("button.picture_defer-bnt");
                 if (data != undefined && data && data.result != undefined && data.result) {
                     defferedSpan.text(parseInt(data.count));
-                    defferedBtn.text("Отложено").prop('disabled', true);
+                    defferedBtn.text("Отложено").addClass('active').prop('disabled', true);
                     defferedBlock.removeClass('hidden').show();
                 } else {
                     defferedBlock.addClass('hidden').hide();
@@ -451,7 +451,7 @@ define(function (require, exports, module) {
 
                     window.setTimeout(function () {
                         location.reload();
-                    }, 3000);
+                    }, 1000);
 
                 } else {
                     showInnerMessage('error', 'Произошли технические неполатки. Попробуйте еще раз через пару минут.');
@@ -520,7 +520,7 @@ define(function (require, exports, module) {
 
                     window.setTimeout(function () {
                         location.reload();
-                    }, 3000);
+                    }, 1000);
                 } else {
                     showInnerMessage('error', 'Произошли технические неполатки. Попробуйте еще раз через пару минут.');
                 }
@@ -565,7 +565,7 @@ define(function (require, exports, module) {
                         showInnerMessage('error', error);
                         window.setTimeout(function () {
                             location.reload();
-                        }, 3000);
+                        }, 1000);
                     }
                 },
                 error: function (data) {
@@ -575,7 +575,7 @@ define(function (require, exports, module) {
                     console.log('ОШИБКИ AJAX запроса: ' + textStatus);
                     window.setTimeout(function () {
                         location.reload();
-                    }, 3000);
+                    }, 1000);
                 }
             });
         });
@@ -690,10 +690,11 @@ define(function (require, exports, module) {
         }
     }
 
-    function showInnerMessage(type, message) {
+    function showInnerMessage(type, message, time) {
         var messageBlock = $('div.message-inner-div'),
             type_info = '',
-            typeClass = '';
+            typeClass = '',
+            timeWaiting = time != undefined ? parseInt(time) : 3000;
         if (message != undefined && message) {
             switch (type) {
                 case 'success':
@@ -717,7 +718,7 @@ define(function (require, exports, module) {
 
             window.setTimeout(function () {
                 messageBlock.addClass('hidden').removeClass(typeClass).hide();
-            }, 3000);
+            }, timeWaiting);
         }
 
 

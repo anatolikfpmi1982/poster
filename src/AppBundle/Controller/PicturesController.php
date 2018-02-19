@@ -80,7 +80,7 @@ class PicturesController extends FrontController {
         $this->data['cart_id'] = $request->get('cart_id');
 
         if($picture->getCategories()) {
-            $this->data['category'] = $picture->getCategories()[0];
+            $this->data['category'] = $picture->getCategories()->first();
         }
 
         $type = $request->query->get('type');

@@ -9,19 +9,26 @@
             <a href="{{ path('picture', {'id': picture.id}) }}"><img src="{{ img }}" class="az-main-popular-item-img"></a>
         </div>
     </div>
+    {% if picture.title|length > 29 %}
+        {% set picture_title = picture.title|slice(0, 26) ~ ' ...' %}
+    {% else %}
+        {% set picture_title = picture.title %}
+    {% endif %}
     <div class="row">
         <div class="az-main-popular-item-header-category">
-            <a href="{{ path('picture', {'id': picture.id}) }}">"{{ picture.title }}"</a>
+            <a href="{{ path('picture', {'id': picture.id}) }}">"{{ picture_title }}"</a>
         </div>
     </div>
     <div class="row">
         <div class="az-main-popular-item-header-category">
             {% if picture.author is defined and picture.author and picture.author.slug is defined and picture.author.slug %}
                 {% set author_url = path('author', {'slug': picture.author.slug}) %}
+                {% set author_title = picture.author.name %}
             {% else %}
                 {% set author_url = '#' %}
+                {% set author_title = '~' %}
             {% endif %}
-            <span class="az_author"> Автор:</span> <a href="{{ author_url }}"> {{ picture.author.name }}</a>
+            <span class="az_author"> Автор:</span> <a href="{{ author_url }}"> {{ author_title }}</a>
         </div>
     </div>
     <div class="row">

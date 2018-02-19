@@ -1087,6 +1087,7 @@ body {
     width: 45%;
 }
 
+.btn_az-main-popular_defer.active,
 .btn_az-main-popular_defer:focus,
 .btn_az-main-popular_defer:hover {
     background-color: #ffffff;

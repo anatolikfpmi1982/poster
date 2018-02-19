@@ -2,7 +2,6 @@
 namespace AppBundle\Controller;
 error_reporting(E_ALL);
 use AppBundle\Entity\Settings;
-use Doctrine\DBAL\Types\FloatType;
 use Doctrine\ORM\EntityManager;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Controller\CoreController;
@@ -118,8 +117,8 @@ class AdminController extends CoreController
             ->add('frame_page_text', CKEditorType::class, ['label' => 'Текст на странице Рам', 'required' => false])
             ->add('block_todo_text', CKEditorType::class, ['label' => 'Текст в блоке "Не можете найти?"', 'required' => false])
             ->add('my_files_description', CKEditorType::class, ['label' => 'Текст на странице Моих файлов', 'required' => false])
-            ->add('from_email', TextType::class, ['label' => 'Email для отправки', 'required' => false])
-            ->add('to_email', TextType::class, ['label' => 'Email для получения', 'required' => false])
+            ->add('from_email', TextType::class, ['label' => 'Email сайта', 'required' => false])
+            ->add('to_email', TextType::class, ['label' => 'Email получателя', 'required' => false])
             ->add('enable_own_picture', CheckboxType::class, ['label' => 'Использовать функцию "Загрузить картину"', 'required' => false])
             ->add('enable_call_back', CheckboxType::class, ['label' => 'Использовать функцию "Заказать звонок"', 'required' => false])
             ->add('enable_reviews', CheckboxType::class, ['label' => 'Показывать блок "Отзывы"', 'required' => false])
