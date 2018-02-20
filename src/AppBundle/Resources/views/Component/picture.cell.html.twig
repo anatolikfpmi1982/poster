@@ -91,7 +91,7 @@
             {% else %}
                 {% set author_url = '#' %}
             {% endif %}
-            {% if isPictureAuthor and picture.author.name is defined and picture.author.name %}
+            {% if isPictureAuthor and picture.author.name is defined and picture.author.name and picture.author.isActive %}
                 {% if picture.author.name|length > 29 %}
                     {% set author_name = picture.author.name|slice(0, 26) ~ ' ...' %}
                 {% else %}

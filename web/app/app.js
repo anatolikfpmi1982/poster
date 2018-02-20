@@ -71,9 +71,9 @@ define(function (require, exports, module) {
 
         // Category page
         // category page filter radio button art|photo
-        $("input.az-category-page-filter-radio").click(function (event) {
+        $("div.az-picture-page-filter-art-none").click(function (event) {
             event.stopImmediatePropagation();
-            window.location.replace($(this).data('filterurl'));
+            window.location.replace($(this).find('input.az-category-page-filter-radio').data('filterurl'));
         });
 
         // category page filter form

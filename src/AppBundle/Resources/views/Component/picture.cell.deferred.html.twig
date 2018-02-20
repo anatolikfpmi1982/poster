@@ -21,7 +21,7 @@
     </div>
     <div class="row">
         <div class="az-main-popular-item-header-category">
-            {% if picture.author is defined and picture.author and picture.author.slug is defined and picture.author.slug %}
+            {% if picture.author is defined and picture.author and picture.author.slug is defined and picture.author.slug and picture.author.isActive %}
                 {% set author_url = path('author', {'slug': picture.author.slug}) %}
                 {% set author_title = picture.author.name %}
             {% else %}

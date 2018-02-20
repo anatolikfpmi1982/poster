@@ -111,7 +111,7 @@
     {% set photo_val = 'true' %}
     {% set art_val = 'false' %}
 {% endif %}
-<div class="col-md-1 col-sm-1 text-center az-picture-page-constructor-block container-fluid {% if photo_filter %}active{% endif %}">
+<div class="col-md-1 col-sm-1 text-center az-picture-page-constructor-block az-picture-page-filter-art-none container-fluid {% if photo_filter %}active{% endif %}">
     <div class="row az-category-page-filter az-category-page-filter-photo">
         <span class="az-category-page-filter-art-title">Фото</span>
         <input type="checkbox" class="btn az-category-page-filter-radio" name="az-category-page-filter-photo" title="az-category-page-filter-photo" value="1"
@@ -119,7 +119,7 @@
                {% if photo_filter %}checked{% endif %}>
     </div>
 </div>
-<div class="col-md-1 col-sm-1 text-center az-picture-page-constructor-block container-fluid {% if art_filter %}active{% endif %}">
+<div class="col-md-1 col-sm-1 text-center az-picture-page-constructor-block az-picture-page-filter-art-none container-fluid {% if art_filter %}active{% endif %}">
     <div class="row az-category-page-filter az-category-page-filter-photo">
         <span class="az-category-page-filter-art-title">Арт</span>
         <input type="checkbox" class="btn az-category-page-filter-radio" name="az-category-page-filter-photo" title="az-category-page-filter-photo"
