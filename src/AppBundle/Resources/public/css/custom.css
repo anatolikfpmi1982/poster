@@ -1469,7 +1469,7 @@ footer {
     margin: 5px;
 }
 
-#more_text {
+.more_text {
     margin-left: 10px;
     height: 10px;
     width: 28px;
@@ -1480,7 +1480,7 @@ footer {
     cursor: pointer;
 }
 
-#more_text:hover {
+.more_text:hover {
     background: url(/bundles/app/images/more_hover.png) no-repeat;
 }
 
@@ -2927,6 +2927,41 @@ a.az-category-item-a div.az-sidebar-catalog-item-header div.az-category-menu-ite
     height: 40px;
 }
 
+.show-frame-panel {
+    background-color: #ffffff;
+    border: 1px solid #333333;
+    color: #333333;
+    width: 300px;
+    height: 330px;
+    position: absolute;
+    z-index: 200;
+}
+
+.show-frame-panel-img {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 200px;
+    height: 200px;
+}
+
+.show-picture-panel {
+    background-color: #ffffff;
+    border: 1px solid #333333;
+    color: #333333;
+    width: 502px;
+    height: 522px;
+    position: absolute;
+    z-index: 200;
+}
+
+.show-picture-panel-img {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 470px;
+    max-height: 470px;
+    text-align: center;
+}
+
 @media only screen
 and (min-device-width: 320px)
 and (max-device-width: 480px)
@@ -3190,5 +3225,29 @@ and (-webkit-min-device-pixel-ratio: 2) {
     .az-picture-constructor-frame-zoom-img {
         width: 25px;
         height: 25px;
+    }
+
+    .show-frame-panel {
+        width: 150px;
+        height: 159px;
+    }
+
+    .show-frame-panel-img {
+        width: 75px;
+        height: 75px;
+        margin-top: 3px;
+        margin-bottom: 3px;
+    }
+
+    .show-picture-panel {
+        width: 202px;
+        height: 208px;
+    }
+
+    .show-picture-panel-img {
+        max-width: 200px;
+        max-height: 200px;
+        margin-top: 3px;
+        margin-bottom: 3px;
     }
 }

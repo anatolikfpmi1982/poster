@@ -82,13 +82,13 @@
         </div>
     </div>
     <div class="row">
-        <div class="az-main-popular-item-header-category">
+        <div class="az-main-popular-item-header-category-row">
             {% if picture.author is defined and picture.author and picture.author.slug is defined and picture.author.slug and picture.author.isActive %}
                 {% set author_url = path('author', {'slug': picture.author.slug}) %}
             {% else %}
                 {% set author_url = '#' %}
             {% endif %}
-            {% if isPictureAuthor and picture.author.name is defined and picture.author.name %}
+            {% if picture.author is defined and picture.author and picture.author.name is defined and picture.author.name %}
                 {% if picture.author.name|length > 29 %}
                     {% set author_name = picture.author.name|slice(0, 26) ~ ' ...' %}
                 {% else %}
@@ -111,7 +111,7 @@
         <div class="az-main-popular-item-header-category">
             <span class="az_author"> Категории:</span>
             {% if picture.categories is defined and picture.categories and picture.categories and
-                (( catId > 0 and picture.categories|length > 1 ) or ( catId == 0 and picture.categories|length > 0 ) ) %}
+            (( catId > 0 and picture.categories|length > 1 ) or ( catId == 0 and picture.categories|length > 0 ) ) %}
                 {% set categorySymbolsNum = 0 %}
                 {% set categoryInProgress = true %}
                 {% for cat in picture.categories|slice(0, limitCategory) %}

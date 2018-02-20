@@ -64,6 +64,8 @@ function ConstructorOverview() {
     this.showSizesWidth = 100;
     this.showSizesIndentation = 5;
 
+    this.timer = 0;
+
     this.init = function (params) {
         if (params != undefined) {
             this.type = params.type;
@@ -189,34 +191,6 @@ function ConstructorOverview() {
                 picture.show();
                 this.buildPortrait();
                 panel.hide();
-                if (this.isConstructor) {
-                    $('.az-picture-page-constructor-picture-thickness-img').each(function () {
-                        if ($(this).data('zoom-image')) {
-
-                            var additionalData =
-                                '<div class="row">' +
-                                '<div class="col-md-4 col-sm-4">Артикул:</div><div class="col-md-8 col-sm-8 text-left">' + $(this).data('title') + '</div>' +
-                                '<div class="col-md-4 col-sm-4">Цвет:</div><div class="col-md-8 col-sm-8 text-left">' + $(this).data('frame-color') + '</div>' +
-                                '<div class="col-md-4 col-sm-4">Материал:</div><div class="col-md-8 col-sm-8 text-left">' + $(this).data('frame-material') + '</div>' +
-                                '<div class="col-md-4 col-sm-4">Ширина:</div><div class="col-md-8 col-sm-8 text-left">' + $(this).data('frame-width') + '</div>' +
-                                '<div class="col-md-4 col-sm-4">Высота:</div><div class="col-md-8 col-sm-8 text-left">' + $(this).data('frame-height') + '</div>' +
-                                '</div>';
-
-
-                            $(this).elevateZoom({
-                                zoomWindowPosition: 5,
-                                zoomWindowHeight: 250,
-                                zoomWindowWidth: 220,
-                                borderSize: 1,
-                                easing: true,
-                                zoomWindowContainerClass: "frame-constructor-zoom",
-                                zoomContainerClass: "frame-constructor-zoom",
-                                additionalData: additionalData,
-                                myid: '#az-picture-page-constructor-picture-thickness-img-' + $(this).data('id')
-                            })
-                        }
-                    });
-                }
                 break;
             case 'Модульная':
                 banner.hide();
@@ -792,14 +766,15 @@ function ConstructorOverview() {
                 aLink.appendTo(that.monitor);
             }
 
+            var id = 'constructorActive' + (new Date()).getTime();
+            divMain.attr('id', id);
+            mainIdEl = id;
+
             var isZoom = that.isConstructor && that.type != 'Модульная';
             isZoom = isZoom || (that.isZoom && that.elemId);
             isZoom = isZoom && that.imgBigPath;
             if (isZoom) {
                 divMain.data('zoom-image', that.imgBigPath);
-                var id = 'constructorActive' + (new Date()).getTime();
-                divMain.attr('id', id);
-                mainIdEl = id;
             }
 
             switch (panel_type) {
@@ -874,6 +849,28 @@ function ConstructorOverview() {
                     });
                 }
             }
+        } else if (!this.isConstructor) {
+            console.log('in zoom')
+            $('#' + mainIdEl).hover(function () {
+                console.log('hover')
+                var showPanel = $('#show-picture-panel'),
+                    myThis = $(this);
+                clearTimeout(that.timer);
+                that.timer = setTimeout(function () {
+                    showPanel.find('.show-picture-panel-img').attr('src', that.imgBigPath);
+                    showPanel.removeClass('hidden').show();
+                    showPanel.offset({left: myThis.offset().left, top: (myThis.offset().top + parseInt(myThis.height()) + 3)});
+                }, 1000);
+            }, function () {
+                console.log('hover over')
+                var showPanel = $('#show-picture-panel');
+
+                clearTimeout(that.timer);
+                that.timer = setTimeout(function () {
+                    showPanel.find('.show-picture-panel-img').attr('src', '#');
+                    showPanel.addClass('hidden').hide();
+                }, 1000);
+            });
         }
 
     };

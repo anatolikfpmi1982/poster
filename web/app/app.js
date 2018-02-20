@@ -144,6 +144,8 @@ define(function (require, exports, module) {
             setShowBoard();
         });
 
+        var timer;
+
         // picture page constructor frame
         $("img.az-picture-page-constructor-picture-thickness-img").each(function (index) {
             if ($(this).data('title') != 'Автоподбор') {
@@ -165,6 +167,39 @@ define(function (require, exports, module) {
             $('img.az-picture-page-constructor-picture-thickness-img').removeClass('active');
             $(this).addClass('active');
             setShowBoard();
+        }).hover(function () {
+            var parentOwl = $(this).parent().parent(),
+                showPanel = $('#show-frame-panel'),
+                that = $(this);
+            if (parentOwl.hasClass('owl-item') && parentOwl.hasClass('active') && $(this).data('title') != 'Автоподбор') {
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    showPanel.find('.show-frame-panel-title').html(that.data('title'));
+                    showPanel.find('.show-frame-panel-color').html(that.data('frame-color'));
+                    showPanel.find('.show-frame-panel-material').html(that.data('frame-material'));
+                    showPanel.find('.show-frame-panel-width').html(that.data('frame-width'));
+                    showPanel.find('.show-frame-panel-height').html(that.data('frame-height'));
+                    showPanel.find('.show-frame-panel-img').attr('src', that.data('zoom-image-big'));
+                    showPanel.removeClass('hidden').show();
+                    showPanel.offset({left: that.offset().left, top: (that.offset().top + parseInt(that.height()) + 3)});
+                }, 1000);
+            }
+        }, function () {
+            var parentOwl = $(this).parent().parent(),
+                showPanel = $('#show-frame-panel');
+
+            if (parentOwl.hasClass('owl-item') && parentOwl.hasClass('active') && $(this).data('title') != 'Автоподбор') {
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    showPanel.find('.show-frame-panel-title').html('');
+                    showPanel.find('.show-frame-panel-color').html('');
+                    showPanel.find('.show-frame-panel-material').html('');
+                    showPanel.find('.show-frame-panel-width').html('');
+                    showPanel.find('.show-frame-panel-height').html('');
+                    showPanel.find('.show-frame-panel-img').attr('src', '#');
+                    showPanel.addClass('hidden').hide();
+                }, 1000);
+            }
         });
 
         // picture page constructor module
@@ -624,7 +659,7 @@ define(function (require, exports, module) {
 
     function setShowBoard() {
         var constructor = new ConstructorOverview();
-        constructor.debug = true;
+        //constructor.debug = true;
         constructor.init();
         constructor.buildConstructor();
         constructor.showPrice();

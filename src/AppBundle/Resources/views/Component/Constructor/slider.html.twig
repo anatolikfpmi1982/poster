@@ -21,7 +21,7 @@
             {% set frameActiveUrl = '' %}
             {% set frameActiveThickness = '' %}
             {% for thickness in pictureThicknesses %}
-                {% set imgBig = '' %}
+                {% set imgBig = asset('bundles/app/images/default_picture.jpg') %}
                 {% if thickness.images is defined and thickness.images and thickness.images[0] is defined and thickness.images[0] %}
                     {% set img = '/files/frames/mini_thumb/' ~ thickness.images[0].getFilename() %}
                     {% set imgBigPath = thickness.images[0].getNormalBaseFile() %}
@@ -48,6 +48,11 @@
                             {% set imgSideBottom = '/files/frames/' ~ imgThick.getFilename() %}
                         {% elseif loop.index == 6 %}
                             {% set imgSideLeft = '/files/frames/' ~ imgThick.getFilename() %}
+                        {% elseif loop.index == 7 %}
+                            {% set imgBigPath = imgThick.getNormalBaseFile() %}
+                            {% if file_exists(imgBigPath) %}
+                                {% set imgBig = '/files/frames/normal/' ~ imgThick.getFilename() %}
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                 {% endif %}
@@ -81,7 +86,7 @@
                          data-frame-thickness="{{ thickness.thickness }}"
                          data-frame-url="{{ path('frame',{'id': thickness.id}) }}"
                          id="az-picture-page-constructor-picture-thickness-img-{{ thickness.id }}"
-                         {% if imgBig %}data-zoom-image="{{ imgBig }}"{% endif %}
+                         {% if imgBig %}data-zoom-image-big="{{ imgBig }}"{% endif %}
                     />
                     {% if isThicknessActive %}
                         {% set frameId = thickness.id %}
@@ -121,6 +126,25 @@
            value="{{ frameActiveUrl }}">
     <input type="hidden" name="az-picture-constructor-frame-thickness-selected" id="az-picture-constructor-frame-thickness-selected"
            value="{{ frameActiveThickness }}">
+</div>
+<div id="show-frame-panel" class="hidden show-frame-panel container-fluid">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 show-frame-panel-div-img text-center">
+            <img src="#" class="show-frame-panel-img"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-4">Артикул:</div>
+        <div class="col-md-8 col-sm-8 text-left show-frame-panel-title">title</div>
+        <div class="col-md-4 col-sm-4">Цвет:</div>
+        <div class="col-md-8 col-sm-8 text-left show-frame-panel-color">color</div>
+        <div class="col-md-4 col-sm-4">Материал:</div>
+        <div class="col-md-8 col-sm-8 text-left show-frame-panel-material">material</div>
+        <div class="col-md-4 col-sm-4">Ширина:</div>
+        <div class="col-md-8 col-sm-8 text-left show-frame-panel-width">width</div>
+        <div class="col-md-4 col-sm-4">Высота:</div>
+        <div class="col-md-8 col-sm-8 text-left show-frame-panel-height">height</div>
+    </div>
 </div>
 <div class="row">
     <div class="col-md-12 col-sm-12 text-right az-picture-constructor-frame-link-all">
