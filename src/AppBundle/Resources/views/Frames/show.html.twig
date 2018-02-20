@@ -82,7 +82,7 @@
             {% if frame.description %}
                 <p>
                     Описание:<br/>
-                    {{ frame.description|raw }}
+                    {{ frame.description|moreText|raw }}
                 </p>
             {% endif %}
         </div>

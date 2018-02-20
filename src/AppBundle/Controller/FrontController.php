@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  * Class FrontController
  */
 class FrontController extends Controller {
-    const FILE_SIZE_LIMIT = 2;
+    const FILE_SIZE_LIMIT = 10;
 
     /**
      * @var array
@@ -76,18 +76,18 @@ class FrontController extends Controller {
 
     protected function getFileLimit() {
         $limit = self::FILE_SIZE_LIMIT;
-//        $ini_limit = (int)ini_get('memory_limit');
-//        if(!empty($ini_limit)) {
-//            if ($ini_limit <= 128) {
-//                $limit = 2;
-//            } elseif($ini_limit <= 256) {
-//                $limit = 4;
-//            } elseif($ini_limit <= 384) {
-//                $limit = 7;
-//            } elseif($ini_limit <= 512) {
-//                $limit = 10;
-//            }
-//        }
+        $ini_limit = (int)ini_get('memory_limit');
+        if(!empty($ini_limit)) {
+            if ($ini_limit <= 128) {
+                $limit = 2;
+            } elseif($ini_limit <= 256) {
+                $limit = 4;
+            } elseif($ini_limit <= 384) {
+                $limit = 7;
+            } elseif($ini_limit <= 512) {
+                $limit = 10;
+            }
+        }
 
         return $limit;
     }
@@ -102,9 +102,6 @@ class FrontController extends Controller {
             $siteSettings  = [ ];
             if ( $_siteSettings instanceof Settings ) {
                 $siteSettings                      = unserialize( $_siteSettings->getSettings() );
-                $siteSettings['contacts']          = $this->get( 'helper.textformater' )->formatMoreText( $siteSettings['contacts'] );
-                $siteSettings['under_slider_text'] = $this->get( 'helper.textformater' )->formatMoreText( $siteSettings['under_slider_text'] );
-                $siteSettings['info_text']         = $this->get( 'helper.textformater' )->formatMoreText( $siteSettings['info_text'] );
             }
         } else {
             $siteSettings = $this->settings;
@@ -220,5 +217,12 @@ class FrontController extends Controller {
         }
 
         return $deferred;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getDeferred() {
+        return $this->get( 'app.session_manager' )->getDeferredItems();
     }
 }

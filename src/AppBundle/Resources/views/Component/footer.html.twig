@@ -25,14 +25,14 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
                         {% if site_settings is defined and site_settings and site_settings.info_text is defined and site_settings.info_text %}
-                            {{ site_settings.info_text|raw }}
+                            {{ site_settings.info_text|moreText|raw }}
                         {% endif %}
                     </div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-3">
                 {% if site_settings is defined and site_settings and site_settings.contacts is defined and site_settings.contacts %}
-                    {{ site_settings.contacts|raw }}
+                    {{ site_settings.contacts|moreText|raw }}
                 {% endif %}
             </div>
         </div>

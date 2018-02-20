@@ -28,6 +28,21 @@ class AuthorsController extends FrontController
         $author = $em->getRepository('AppBundle:Author')->findOneBySlug($slug);
 
         $queryBuilder = $em->getRepository('AppBundle:Picture')->getActivePicturesByAuthor($author->getSlug());
+
+        // hack for random pictures sorting
+        if($request->query->get('random') === 'true') {
+
+            if(!$request->query->get('page')) {
+                $randInt = rand(1, 999);
+                $this->get('session')->set('random-author-' . $slug, $randInt);
+            }
+            $randInt = $this->get('session')->get('random-author-' . $slug);
+            $queryBuilder->addSelect('RAND( ' . $randInt. ') as HIDDEN rnd');
+
+            $_GET['sort'] = 'rnd';
+            $_GET['direction'] = 'asc';
+        }
+
         $query = $queryBuilder->getQuery();
 
         $paginator  = $this->get('knp_paginator');

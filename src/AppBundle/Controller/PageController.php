@@ -25,7 +25,6 @@ class PageController extends FrontController {
         $this->pageSlug = $slug;
         $this->pageType = 'static_page';
         $this->doBlocks();
-        $page->setBody($this->get('helper.textformater')->formatMoreText($page->getBody()));
         $this->data['page'] = $page;
 
         // parameters to template

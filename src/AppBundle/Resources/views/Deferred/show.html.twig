@@ -24,7 +24,7 @@
                     <div class="row az-page-section-body az-page-main-popular container-fluid">
                         <div class="row">
                             {% for picture in pagination %}
-                                {% include('AppBundle:Component:picture.cell.html.twig') %}
+                                {% include('AppBundle:Component:picture.cell.deferred.html.twig') %}
                             {% endfor %}
                             {% if pagination.getCurrentPageNumber()*pagination.getItemNumberPerPage() < pagination.getTotalItemCount() %}
                                 <div class="col-md-4 col-sm-6 az-popular-item container-fluid az-category-next">

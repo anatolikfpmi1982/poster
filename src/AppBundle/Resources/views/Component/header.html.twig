@@ -12,7 +12,7 @@
                 </div>
                 <div class="row az-logo-title-text-div">
                     {% if site_settings is defined and site_settings and site_settings.logo_header_text is defined and site_settings.logo_header_text %}
-                        {{ site_settings.logo_header_text|raw }}
+                        {{ site_settings.logo_header_text|moreText|raw }}
                     {% endif %}
                 </div>
             </div>
@@ -29,7 +29,7 @@
                     <div class="col-md-12 col-sm-12 container-fluid az-header-address-div">
                         <div class="row az-header-address-container az-header-phone-number">
                             {% if site_settings is defined and site_settings and site_settings.info_text is defined and site_settings.info_text %}
-                                {{ site_settings.info_text|raw }}
+                                {{ site_settings.info_text|moreText|raw }}
                             {% endif %}
                         </div>
 
