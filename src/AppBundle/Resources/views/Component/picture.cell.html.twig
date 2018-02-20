@@ -1,11 +1,13 @@
 {% set imgBig = asset('bundles/app/images/default_picture.jpg') %}
+{% set imgBigSize = [500,500] %}
 {% if picture.image is defined and picture.image and picture.image.getFilename() %}
     {% set img = '/files/pictures/thumb/' ~ picture.image.getFilename() %}
     {% set imgPath = picture.image.getThumbBaseFile() %}
     {% set imgSize = filesize(imgPath) %}
-    {% set imgBigPath = picture.image.getNormalBaseFile() %}
+    {% set imgBigPath = picture.image.getBaseFile() %}
     {% if file_exists(imgBigPath) %}
         {% set imgBig = '/files/pictures/' ~ picture.image.getFilename() %}
+        {% set imgBigSize = filesize(imgBigPath) %}
     {% endif %}
 {% else %}
     {% set img = asset('bundles/app/images/default_picture.jpg') %}
@@ -63,6 +65,8 @@
              data-img-side-r=""
              data-img-side-b=""
              data-img-side-l=""
+             data-img-big-width="{{ imgBigSize[0] }}"
+             data-img-big-height="{{ imgBigSize[1] }}"
                 {% if imgBig and type_value == "Баннер" %}
                     data-zoom-image-big="{{ imgBig }}"
                     data-img-zoom="false"

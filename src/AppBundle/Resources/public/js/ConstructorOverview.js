@@ -858,6 +858,8 @@ function ConstructorOverview() {
                     showPanel.find('.show-picture-panel-img').attr('src', that.imgBigPath);
                     showPanel.removeClass('hidden').show();
                     showPanel.offset({left: myThis.offset().left, top: (myThis.offset().top + parseInt(myThis.height()) + 3)});
+                    showPanel.css('height', parseInt(myThis.parent().parent().data('img-big-height')) + 22 + 'px');
+                    showPanel.css('width', parseInt(myThis.parent().parent().data('img-big-width')) + 32 + 'px');
                 }, 1000);
             }, function () {
                 var showPanel = $('#show-picture-panel');
