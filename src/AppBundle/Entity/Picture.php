@@ -202,6 +202,13 @@ class Picture implements ImageInterface
     protected $categoriesPictures;
 
     /**
+     * @var AuthorsPictures
+     *
+     * @ORM\OneToMany(targetEntity="AuthorsPictures", mappedBy="picture", cascade={"persist"})
+     */
+    protected $authorsPictures;
+
+    /**
      * Picture constructor.
      */
     public function __construct() {
@@ -209,6 +216,7 @@ class Picture implements ImageInterface
         $this->similar = new ArrayCollection();
         $this->colors = new ArrayCollection();
         $this->categoriesPictures = new ArrayCollection();
+        $this->authorsPictures = new ArrayCollection();
     }
 
     /**
@@ -774,5 +782,39 @@ class Picture implements ImageInterface
     public function getCategoriesPictures()
     {
         return $this->categoriesPictures;
+    }
+
+    /**
+     * Add authorsPicture
+     *
+     * @param AuthorsPictures $authorsPicture
+     *
+     * @return Picture
+     */
+    public function addAuthorsPicture(AuthorsPictures $authorsPicture)
+    {
+        $this->authorsPictures[] = $authorsPicture;
+
+        return $this;
+    }
+
+    /**
+     * Remove authorsPicture
+     *
+     * @param AuthorsPictures $authorsPicture
+     */
+    public function removeAuthorsPicture(AuthorsPictures $authorsPicture)
+    {
+        $this->authorsPictures->removeElement($authorsPicture);
+    }
+
+    /**
+     * Get authorsPictures
+     *
+     * @return AuthorsPictures
+     */
+    public function getAuthorsPictures()
+    {
+        return $this->authorsPictures;
     }
 }

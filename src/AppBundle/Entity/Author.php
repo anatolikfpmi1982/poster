@@ -70,6 +70,27 @@ class Author
      */
     private $slug;
 
+    /**
+     * @var AuthorsPictures
+     *
+     * @ORM\OneToMany(targetEntity="AuthorsPictures", mappedBy="author", cascade={"persist"})
+     */
+    protected $authorsPictures;
+
+    /**
+     * @var ArrayCollection
+     * One author have Many Pictures.
+     * @ORM\OneToMany(targetEntity="Picture", mappedBy="author")
+     */
+    private $pictures;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->authorsPictures = new ArrayCollection();
+    }
 
     /**
      * @return string
@@ -225,5 +246,73 @@ class Author
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Add authorsPicture
+     *
+     * @param AuthorsPictures $authorsPicture
+     *
+     * @return Author
+     */
+    public function addAuthorsPicture(AuthorsPictures $authorsPicture)
+    {
+        $this->authorsPictures[] = $authorsPicture;
+
+        return $this;
+    }
+
+    /**
+     * Remove authorsPicture
+     *
+     * @param AuthorsPictures $authorsPicture
+     */
+    public function removeAuthorsPicture(AuthorsPictures $authorsPicture)
+    {
+        $this->authorsPictures->removeElement($authorsPicture);
+    }
+
+    /**
+     * Get authorsPictures
+     *
+     * @return AuthorsPictures|ArrayCollection
+     */
+    public function getAuthorsPictures()
+    {
+        return $this->authorsPictures;
+    }
+
+    /**
+     * Add picture
+     *
+     * @param Picture $picture
+     *
+     * @return Author
+     */
+    public function addPicture(Picture $picture)
+    {
+        $this->pictures[] = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Remove picture
+     *
+     * @param Picture $picture
+     */
+    public function removePicture(Picture $picture)
+    {
+        $this->pictures->removeElement($picture);
+    }
+
+    /**
+     * Get pictures
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPictures()
+    {
+        return $this->pictures;
     }
 }

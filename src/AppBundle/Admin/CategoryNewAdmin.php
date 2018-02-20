@@ -103,7 +103,6 @@ class CategoryNewAdmin extends AbstractAdmin
         $datagridMapper
             ->add('title', null, ['label' => 'Название'])
             ->add('parent_category', null, ['label' => 'Родительская категория'])
-//            ->add('tags', null, ['label' => 'Тег'])
             ->add('isActive', null, ['label' => 'Показывать'])
         ;
     }

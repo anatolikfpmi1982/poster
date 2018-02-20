@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 class AuthorAdmin extends AbstractAdmin
@@ -40,9 +41,15 @@ class AuthorAdmin extends AbstractAdmin
                     'actions' => [
                         'edit' => [],
                         'delete' => [],
+                        'generate' => ['template' => 'AppBundle:Admin:list__action_generate.html.twig']
                     ],
                 ]
             );
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->add('generate', $this->getRouterIdParameter().'/generate');
     }
 
     /**

@@ -43,13 +43,20 @@ class AuthorsController extends FrontController
             $_GET['direction'] = 'asc';
         }
 
+        // hack for pictures sorting
+        if(!empty($_GET['sort']) && $_GET['sort'] === 'p.isTop ap.weight') {
+            $_GET['sort'] = 'p.isTop+ap.weight';
+        }
+
+
         $query = $queryBuilder->getQuery();
 
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
-            ($this->get('pictures.service')->isMobile() ? self::PAGE_MOBILE_LIMIT : self::PAGE_LIMIT)/*limit per page*/
+            ($this->get('pictures.service')->isMobile() ? self::PAGE_MOBILE_LIMIT : self::PAGE_LIMIT)/*limit per page*/,
+            ['wrap-queries' => true, 'defaultSortFieldName' => ['p.isTop','ap.weight'], 'defaultSortDirection' => 'desc']
         );
 
         $this->blocks['LastVisited'] = 6;

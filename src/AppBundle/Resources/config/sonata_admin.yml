@@ -134,7 +134,8 @@ services:
         arguments:
             - ~
             - AppBundle\Entity\Author
-            - 'SonataAdminBundle:CRUD'
+            - 'AppBundle:AuthorsCRUD'
+            - '@doctrine.orm.entity_manager'
     app.admin.slider:
         class: AppBundle\Admin\SliderAdmin
         tags:
