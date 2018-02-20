@@ -40,7 +40,7 @@
                 {% set isOwnSize = false %}
                 {% set ownSizes = [] %}
             {% endif %}
-            <option value="own_size" {% if isOwnSize %}selected{% endif %}>Свой размер</option>
+            <option value="own_size" style="color: #0000ed;" {% if isOwnSize %}selected{% endif %}>Свой размер</option>
             {% set size_default = 3 %}
             {% for i in range(20, 170, 10) %}
                 {% set koeff = (pictureBaseWidth/pictureBaseHeight) %}

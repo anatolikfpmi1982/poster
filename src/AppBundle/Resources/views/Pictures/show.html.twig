@@ -28,12 +28,19 @@
                 <div class="col-md-6 col-sm-6">Артикул: {{ pictureMain.code }}</div>
             </div>
             {% include('AppBundle:Component:Constructor/picture.html.twig') %}
+            {% set imgBig = asset('bundles/app/images/default_picture.jpg') %}
+            {% if pictureMain.image is defined and pictureMain.image and pictureMain.image.getFilename() %}
+                {% set imgBigPath = pictureMain.image.getNormalBaseFile() %}
+                {% if file_exists(imgBigPath) %}
+                    {% set imgBig = '/files/pictures/normal/' ~ pictureMain.image.getFilename() %}
+                {% endif %}
+            {% endif %}
             <div class="row text-center az-picture-page-slider-zoom-div">
                 <div class="col-md-12 col-sm-12">
                     <div class="row">
                         <div class="col-md-12 col-sm-12 text-right">
-                            <a href="{{ path('picture_view', {'id': pictureMain.id}) }}" target="_blank"><img src="{{ asset('bundles/app/images/zoom.png') }}"
-                                                                                                              class="az-picture-constructor-frame-zoom-img"/></a>
+                            <a href="{{ imgBig }}" target="_blank"><img src="{{ asset('bundles/app/images/zoom.png') }}"
+                                                                        class="az-picture-constructor-frame-zoom-img"/></a>
                         </div>
                     </div>
                 </div>

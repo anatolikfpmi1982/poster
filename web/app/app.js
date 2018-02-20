@@ -231,7 +231,7 @@ define(function (require, exports, module) {
         $("select.az-picture-page-sidebar-size-select").change(function (event) {
             event.stopImmediatePropagation();
             if ($("select.az-picture-page-sidebar-size-select").val() == 'own_size') {
-                var size = $("select.az-picture-page-sidebar-size-select option:last").val();
+                var size = $("select.az-picture-page-sidebar-size-select option:eq(3)").val();
                 size = size.split('x');
                 $('#own_width').val(size[0]);
                 $('#own_height').val(size[1]);

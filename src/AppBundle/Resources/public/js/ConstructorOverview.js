@@ -1043,7 +1043,7 @@ function ConstructorOverview() {
                 mat_color.hide();
                 module.show();
                 panel_sizes.show();
-                zoom_div.hide();
+                zoom_div.show();
                 break;
         }
     };
