@@ -850,9 +850,7 @@ function ConstructorOverview() {
                 }
             }
         } else if (!this.isConstructor) {
-            console.log('in zoom')
             $('#' + mainIdEl).hover(function () {
-                console.log('hover')
                 var showPanel = $('#show-picture-panel'),
                     myThis = $(this);
                 clearTimeout(that.timer);
@@ -862,7 +860,6 @@ function ConstructorOverview() {
                     showPanel.offset({left: myThis.offset().left, top: (myThis.offset().top + parseInt(myThis.height()) + 3)});
                 }, 1000);
             }, function () {
-                console.log('hover over')
                 var showPanel = $('#show-picture-panel');
 
                 clearTimeout(that.timer);
