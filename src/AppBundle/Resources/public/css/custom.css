@@ -2982,7 +2982,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
     }
 
     .az-logo-title-text-div {
-        margin: 0 0 0 20px;
+        margin: -10px 0 0 55px;
         font-size: 10px;
     }
 
