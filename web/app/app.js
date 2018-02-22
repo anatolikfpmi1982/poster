@@ -773,7 +773,15 @@ define(function (require, exports, module) {
                 params['padding_top'] = $(value).data('pad-top');
                 params['right_width'] = $(value).data('butt');
                 params['right_width_portrait'] = $(value).data('butt-portrait');
-                params['panel_max_width'] = $(value).data('max-width');
+                var width = $(value).data('max-width');
+                if (width > $(value).parent().width()) {
+                    width = parseInt($(value).parent().width());
+                }
+                console.log('max-height', $(value).data('max-height'));
+                console.log('max-width', $(value).data('max-width'));
+                console.log('this.width', $(value).parent().width());
+                console.log('width', width);
+                params['panel_max_width'] = width;
                 params['panel_max_height'] = $(value).data('max-height');
                 params['shadow'] = $(value).data('shadow');
                 params['fill'] = $(value).data('fill-in');
