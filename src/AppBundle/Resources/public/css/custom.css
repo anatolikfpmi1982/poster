@@ -2964,7 +2964,7 @@ a.az-category-item-a div.az-sidebar-catalog-item-header div.az-category-menu-ite
 
 @media only screen
 and (min-device-width: 320px)
-and (max-device-width: 480px)
+and (max-device-width: 769px)
 and (-webkit-min-device-pixel-ratio: 2) {
     body {
         font-size: 11px;
@@ -2982,7 +2982,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
     }
 
     .az-logo-title-text-div {
-        margin: 0 0 0 20px;
+        margin: -25px 0 0 55px;
         font-size: 10px;
     }
 
@@ -3249,6 +3249,24 @@ and (-webkit-min-device-pixel-ratio: 2) {
         max-height: 200px;
         margin-top: 3px;
         margin-bottom: 3px;
+    }
+
+    .nav > li > a {
+        padding: 0 5px 0 0;
+    }
+
+    .nav > li > a > img {
+        padding: 0 5px 0 0;
+    }
+
+    .az-main-page-top-menu-div, .az-main-page-search {
+        padding-left: 5px;
+    }
+
+    .az-category-page-filter-random-btn {
+        width: 45px;
+        font: 8px/31px 'arial', 'helvetica', 'sans-serif';
+        padding: 0 5px;
     }
 
     .picture_defer-bnt.active {
