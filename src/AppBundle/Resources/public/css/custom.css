@@ -3250,4 +3250,10 @@ and (-webkit-min-device-pixel-ratio: 2) {
         margin-top: 3px;
         margin-bottom: 3px;
     }
+
+    .picture_defer-bnt.active {
+        background-color: #ffffff;
+        border: 1px solid #fd1200;
+        color: #fd1200;
+    }
 }
