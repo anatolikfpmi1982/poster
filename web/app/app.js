@@ -157,6 +157,7 @@ define(function (require, exports, module) {
             $('#az-picture-constructor-frame-selected').val($(this).data('title'));
             $('#az-picture-constructor-frame-ratio-selected').val($(this).data('ratio'));
             $('#az-picture-constructor-frame-id-selected').val($(this).data('id'));
+            $('#az-picture-constructor-frame-price-selected').val($(this).data('price'));
             $('#az-picture-constructor-frame-img-corner-selected').val($(this).data('img-corner'));
             $('#az-picture-constructor-frame-img-side-t-selected').val($(this).data('img-side-t'));
             $('#az-picture-constructor-frame-img-side-r-selected').val($(this).data('img-side-r'));
@@ -777,10 +778,6 @@ define(function (require, exports, module) {
                 if (width > $(value).parent().width()) {
                     width = parseInt($(value).parent().width());
                 }
-                console.log('max-height', $(value).data('max-height'));
-                console.log('max-width', $(value).data('max-width'));
-                console.log('this.width', $(value).parent().width());
-                console.log('width', width);
                 params['panel_max_width'] = width;
                 params['panel_max_height'] = $(value).data('max-height');
                 params['shadow'] = $(value).data('shadow');

@@ -849,7 +849,7 @@ function ConstructorOverview() {
                     });
                 }
             }
-        } else if (!this.isConstructor) {
+        } else if (!this.isConstructor && this.isZoom) {
             $('#' + mainIdEl).hover(function () {
                 var showPanel = $('#show-picture-panel'),
                     myThis = $(this);
@@ -1134,11 +1134,12 @@ function ConstructorOverview() {
             add_price = $('input#constructor_pic_' + this.material_id + '_additional_price').val(),
             add_ratio = $('input#constructor_pic_' + this.material_id + '_additional_ratio').val(),
             frame_ratio = $('#az-picture-constructor-frame-ratio-selected').val(),
+            frame_price = $('#az-picture-constructor-frame-price-selected').val(),
             picture_price = $('#constructor_picture_price').val(),
             picture_ratio = $('#constructor_picture_ratio').val();
 
-        return Math.round(((this.square * average_price + parseFloat(picture_price) + (this.perimeter * this.calculateFrameSquare())) * parseFloat(picture_ratio) +
-            parseFloat(add_price)) * parseFloat(frame_ratio) * parseFloat(add_ratio));
+        return Math.round(((this.square * average_price + parseFloat(picture_price) + (this.perimeter * this.calculateFrameSquare() * frame_price)) * parseFloat(add_ratio) +
+            parseFloat(add_price)) * parseFloat(picture_ratio) * parseFloat(frame_ratio));
     };
 
     this.calculateSquare = function () {
@@ -1166,10 +1167,10 @@ function ConstructorOverview() {
     };
 
     this.calculateFrameSquare = function () {
-        var minSquare = $('#constructor_min_square').val(),
-            maxSquare = $('#constructor_max_square').val(),
-            minPrice = $('#constructor_min_price').val(),
-            maxPrice = $('#constructor_max_price').val(),
+        var minSquare = parseFloat($('#constructor_min_square').val()),
+            maxSquare = parseFloat($('#constructor_max_square').val()),
+            minPrice = parseFloat($('#constructor_min_price').val()),
+            maxPrice = parseFloat($('#constructor_max_price').val()),
             final_price = 0;
 
         if (this.square <= minSquare) {
@@ -1178,7 +1179,6 @@ function ConstructorOverview() {
             final_price = minPrice;
         } else {
             final_price = (this.square - parseFloat(minSquare)) * ((minPrice - maxPrice) / (maxSquare - minSquare)) + parseFloat(maxPrice);
-            final_price = Math.ceil(final_price);
         }
         return final_price;
     };

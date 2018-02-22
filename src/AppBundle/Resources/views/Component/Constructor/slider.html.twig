@@ -11,6 +11,7 @@
                 </a>
             </div>
             {% set frameId = 0 %}
+            {% set framePrice = 0 %}
             {% set frameTitle = '' %}
             {% set frameRatio = 0 %}
             {% set imgActiveSideT = '' %}
@@ -74,6 +75,7 @@
                          data-title="{{ thickness.title }}"
                          data-ratio="{{ thickness.ratio }}"
                          data-id="{{ thickness.id }}"
+                         data-price="{{ thickness.price }}"
                          data-img-corner="{{ imgCorner }}"
                          data-img-side-t="{{ imgSideTop }}"
                          data-img-side-r="{{ imgSideRight }}"
@@ -90,6 +92,7 @@
                     />
                     {% if isThicknessActive %}
                         {% set frameId = thickness.id %}
+                        {% set framePrice = thickness.price %}
                         {% set frameTitle = thickness.title %}
                         {% set frameRatio = thickness.ratio %}
                         {% set imgActiveCorner = imgCorner %}
@@ -112,6 +115,8 @@
            value="{{ frameRatio }}">
     <input type="hidden" name="az-picture-constructor-frame-id-selected" id="az-picture-constructor-frame-id-selected"
            value="{{ frameId }}">
+    <input type="hidden" name="az-picture-constructor-frame-price-selected" id="az-picture-constructor-frame-price-selected"
+           value="{{ framePrice }}">
     <input type="hidden" name="az-picture-constructor-frame-img-corner-selected" id="az-picture-constructor-frame-img-corner-selected"
            value="{{ imgActiveCorner }}">
     <input type="hidden" name="az-picture-constructor-frame-img-side-t-selected" id="az-picture-constructor-frame-img-side-t-selected"
