@@ -91,6 +91,7 @@ class PicturesController extends FrontController {
         $this->data['frame_selected_id'] = (int)$request->query->get('frame_id', 0);
         $this->data['template_selected_id'] = (int)$request->query->get('module_id', 0);
         $this->data['isMobile'] = $this->get('pictures.service')->isMobile();
+        $this->data['deferredItems'] = $this->get( 'app.session_manager' )->getDeferredItems();
 
         // parameters to template
         return $this->render( 'AppBundle:Pictures:show.html.twig', $this->data );

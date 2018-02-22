@@ -3268,6 +3268,12 @@ and (-webkit-min-device-pixel-ratio: 2) {
         font: 8px/31px 'arial', 'helvetica', 'sans-serif';
         padding: 0 5px;
     }
+
+    .picture_defer-bnt.active {
+        background-color: #ffffff;
+        border: 1px solid #fd1200;
+        color: #fd1200;
+    }
 }
 
 @media only screen
