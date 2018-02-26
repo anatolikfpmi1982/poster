@@ -793,6 +793,31 @@ function ConstructorOverview() {
                     break;
             }
 
+            if (!that.isConstructor && that.isZoom) {
+                $('#' + mainIdEl).hover(function () {
+                    var showPanel = $('#show-picture-panel'),
+                        myThis = $(this),
+                        height = parseInt(myThis.parent().parent().data('img-big-height')),
+                        width = parseInt(myThis.parent().parent().data('img-big-width'));
+                    clearTimeout(that.timer);
+                    that.timer = setTimeout(function () {
+                        showPanel.find('.show-picture-panel-img').attr('src', that.imgBigPath);
+                        showPanel.removeClass('hidden').show();
+                        showPanel.offset({left: (myThis.offset().left - width - 3), top: (myThis.offset().top - Math.round(height / 2))});
+                        showPanel.css('height', height + 'px');
+                        showPanel.css('width', width + 'px');
+                    }, 1000);
+                }, function () {
+                    var showPanel = $('#show-picture-panel');
+
+                    clearTimeout(that.timer);
+                    that.timer = setTimeout(function () {
+                        showPanel.find('.show-picture-panel-img').attr('src', '#');
+                        showPanel.addClass('hidden').hide();
+                    }, 1000);
+                });
+            }
+
             that.panelSizes[that.panelActiveBlockNum] = Math.round((value.width * size[0] ) / 100) + 'x' + Math.round((value.height * size[1] ) / 100);
         });
 
@@ -852,27 +877,6 @@ function ConstructorOverview() {
                     });
                 }
             }
-        } else if (!this.isConstructor && this.isZoom) {
-            $('#' + mainIdEl).hover(function () {
-                var showPanel = $('#show-picture-panel'),
-                    myThis = $(this);
-                clearTimeout(that.timer);
-                that.timer = setTimeout(function () {
-                    showPanel.find('.show-picture-panel-img').attr('src', that.imgBigPath);
-                    showPanel.removeClass('hidden').show();
-                    showPanel.offset({left: myThis.offset().left, top: (myThis.offset().top + parseInt(myThis.height()) + 3)});
-                    showPanel.css('height', parseInt(myThis.parent().parent().data('img-big-height')) + 22 + 'px');
-                    showPanel.css('width', parseInt(myThis.parent().parent().data('img-big-width')) + 32 + 'px');
-                }, 1000);
-            }, function () {
-                var showPanel = $('#show-picture-panel');
-
-                clearTimeout(that.timer);
-                that.timer = setTimeout(function () {
-                    showPanel.find('.show-picture-panel-img').attr('src', '#');
-                    showPanel.addClass('hidden').hide();
-                }, 1000);
-            });
         }
 
     };

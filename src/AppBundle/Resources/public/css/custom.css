@@ -149,8 +149,8 @@ body {
 .az-sidebar-subsubsubcategory-item .az-subsubsubcategory-item-img a.az-subsubsubcategory-item-a .az-subsubsubcat-span-text:hover,
 .az-sidebar-subsubsubcategory-item.active .az-subsubsubcategory-item-img,
 .az-sidebar-subsubsubcategory-item.active .az-subsubsubcategory-item-img a.az-subsubsubcategory-item-a:visited,
-.az-sidebar-subsubcategory-item .az-sidebar-subsubcategory-first.active_parent,
-.az-sidebar-subsubcategory-item .az-sidebar-subsubcategory-first.active_parent a.az-subsubcategory-item-a:visited {
+.az-sidebar-subsubcategory-item .az-sidebar-subsubcategory-first a.az-subsubcategory-item-a div.active_menu,
+.az-sidebar-subsubcategory-item .az-sidebar-subsubcategory-first.active_parent a.az-subsubcategory-item-a:visited .az-subsubcat-span {
     color: #fd1200;
 }
 
@@ -2945,20 +2945,11 @@ a.az-category-item-a div.az-sidebar-catalog-item-header div.az-category-menu-ite
 }
 
 .show-picture-panel {
-    background-color: #ffffff;
-    border: 1px solid #333333;
-    color: #333333;
-    width: 502px;
-    height: 522px;
     position: absolute;
     z-index: 200;
 }
 
 .show-picture-panel-img {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    max-width: 470px;
-    max-height: 470px;
     text-align: center;
 }
 
@@ -3235,18 +3226,6 @@ and (-webkit-min-device-pixel-ratio: 2) {
     .show-frame-panel-img {
         width: 75px;
         height: 75px;
-        margin-top: 3px;
-        margin-bottom: 3px;
-    }
-
-    .show-picture-panel {
-        width: 202px;
-        height: 208px;
-    }
-
-    .show-picture-panel-img {
-        max-width: 200px;
-        max-height: 200px;
         margin-top: 3px;
         margin-bottom: 3px;
     }

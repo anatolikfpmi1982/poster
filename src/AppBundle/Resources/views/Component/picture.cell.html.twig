@@ -51,8 +51,8 @@
              data-height={{ imgSize[1] }}
              data-left=2
              data-top=2
-             data-pad-left=14
-             data-pad-top=4
+             data-pad-left=10
+             data-pad-top=10
              data-butt=6
              data-butt-portrait=6
              data-code="{% if module_active or type_value == "Модульная" %}{{ module_formulas[i].formula }}{% else %}single|{horizontal|100-100-0}{% endif %}"
@@ -67,7 +67,7 @@
              data-img-side-l=""
              data-img-big-width="{{ imgBigSize[0] }}"
              data-img-big-height="{{ imgBigSize[1] }}"
-                {% if imgBig and type_value == "Баннер" %}
+                {% if imgBig and (type_value == "Баннер" or type_value == "Модульная") %}
                     data-zoom-image-big="{{ imgBig }}"
                     data-img-zoom="true"
                     data-big-src="{{ imgBig }}"
@@ -121,7 +121,7 @@
                 {% set categorySymbolsNum = 0 %}
                 {% set categoryInProgress = true %}
                 {% for cat in picture.categories|slice(0, limitCategory) %}
-                    {% if cat.id != catId and categoryInProgress %}
+                    {% if cat.id != catId and categoryInProgress and cat.isActive %}
                         {% set categorySymbolsNum = categorySymbolsNum + cat.title|length + 3 %}
                         {% if categorySymbolsNum < 58 %}
                             <a href="{{ path('category', {'slug': cat.slug}) }}"> {{ cat.title }}</a>
