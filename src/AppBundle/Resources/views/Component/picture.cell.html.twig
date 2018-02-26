@@ -124,7 +124,13 @@
                     {% if cat.id != catId and categoryInProgress and cat.isActive %}
                         {% set categorySymbolsNum = categorySymbolsNum + cat.title|length + 3 %}
                         {% if categorySymbolsNum < 58 %}
-                            <a href="{{ path('category', {'slug': cat.slug}) }}"> {{ cat.title }}</a>
+                            {% if module_active %}
+                                {% set catSlugs = {'slug': cat.slug, 'type': 'module'} %}
+                            {% else %}
+                                {% set catSlugs = {'slug': cat.slug} %}
+                            {% endif %}
+
+                            <a href="{{ path('category', catSlugs ) }}"> {{ cat.title }}</a>
                             {% if loop.last == false %},{% endif %}
                         {% else %}
                             ...
