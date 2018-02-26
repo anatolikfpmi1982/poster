@@ -6,6 +6,7 @@ function ConstructorOverview() {
     this.thickness = "";
     this.color = "";
     this.frame = "";
+    this.frameColor = "";
     this.mat_type = "";
     this.mat_size = "";
     this.mat_color = "";
@@ -126,7 +127,8 @@ function ConstructorOverview() {
         this.thickness_ratio = thickness.data('ratio');
         this.color = '';
         this.frame = $("#az-picture-constructor-frame-selected").val();
-        this.mat_color = $("#az-picture-constructor-frame-color-selected").val();
+        this.frameColor = $("#az-picture-constructor-frame-color-selected").val();
+        this.mat_color = $("#az-picture-constructor-frame-mat-color-selected").val();
         this.mat_type = $("#az-picture-page-mat-type-select").val();
         this.mat_size = $("#az-picture-page-constructor-mat-size-select").val();
         this.module = $("#az-picture-constructor-module-selected").val();
@@ -166,6 +168,7 @@ function ConstructorOverview() {
         $('#az-constructor-choose-color').html(this.color);
         var frameA = $('<a href="' + $('#az-picture-constructor-frame-url-selected').val() + '">' + this.frame + '</a>');
         $('#az-constructor-choose-frame').html(frameA);
+        $('#az-constructor-choose-frame-color').html(this.frameColor);
         $('#az-constructor-choose-mat-type').html(this.mat_type);
         $('#az-constructor-choose-mat-size').html(this.mat_size + ' см');
         $('#az-constructor-choose-mat-color').html(this.mat_color);
@@ -998,6 +1001,7 @@ function ConstructorOverview() {
         var subframe = $('div.az-picture-page-sidebar-choose-subframe'),
             subframe_color = $('div.az-picture-page-sidebar-choose-subframe-color'),
             frame = $('div.az-picture-page-sidebar-choose-frame'),
+            frameColor = $('div.az-picture-page-sidebar-choose-frame-color'),
             mat_type = $('div.az-picture-page-sidebar-choose-mat-type'),
             mat_size = $('div.az-picture-page-sidebar-choose-mat-size'),
             module = $('div.az-picture-page-sidebar-choose-module'),
@@ -1022,11 +1026,13 @@ function ConstructorOverview() {
                 module.hide();
                 panel_sizes.hide();
                 zoom_div.show();
+                frameColor.hide();
                 break;
             case 'В раме':
                 subframe.hide();
                 subframe_color.hide();
                 frame.show();
+                frameColor.show();
                 mat_type.show();
                 mat_size.show();
                 mat_color.show();
@@ -1044,6 +1050,7 @@ function ConstructorOverview() {
                 module.show();
                 panel_sizes.show();
                 zoom_div.show();
+                frameColor.hide();
                 break;
         }
     };

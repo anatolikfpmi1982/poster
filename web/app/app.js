@@ -165,6 +165,7 @@ define(function (require, exports, module) {
             $('#az-picture-constructor-frame-img-side-l-selected').val($(this).data('img-side-l'));
             $('#az-picture-constructor-frame-url-selected').val($(this).data('frame-url'));
             $('#az-picture-constructor-frame-thickness-selected').val($(this).data('frame-thickness'));
+            $('#az-picture-constructor-frame-color-selected').val($(this).data('frame-color'));
             $('img.az-picture-page-constructor-picture-thickness-img').removeClass('active');
             $(this).addClass('active');
             setShowBoard();

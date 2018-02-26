@@ -20,6 +20,7 @@
             {% set imgActiveSideL = '' %}
             {% set imgActiveCorner = '' %}
             {% set frameActiveUrl = '' %}
+            {% set frameActiveColor = '' %}
             {% set frameActiveThickness = '' %}
             {% for thickness in pictureThicknesses %}
                 {% set imgBig = asset('bundles/app/images/default_picture.jpg') %}
@@ -95,6 +96,7 @@
                         {% set framePrice = thickness.price %}
                         {% set frameTitle = thickness.title %}
                         {% set frameRatio = thickness.ratio %}
+                        {% set frameActiveColor = frameColor %}
                         {% set imgActiveCorner = imgCorner %}
                         {% set imgActiveSideT = imgSideTop %}
                         {% set imgActiveSideR = imgSideRight %}
@@ -131,6 +133,8 @@
            value="{{ frameActiveUrl }}">
     <input type="hidden" name="az-picture-constructor-frame-thickness-selected" id="az-picture-constructor-frame-thickness-selected"
            value="{{ frameActiveThickness }}">
+    <input type="hidden" name="az-picture-constructor-frame-color-selected" id="az-picture-constructor-frame-color-selected"
+           value="{{ frameActiveColor }}">
 </div>
 <div id="show-frame-panel" class="hidden show-frame-panel container-fluid">
     <div class="row">
