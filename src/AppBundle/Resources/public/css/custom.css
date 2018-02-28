@@ -2614,8 +2614,9 @@ button.close:focus, .close:hover {
 }
 
 .az-frames-slide .cycle-slideshow img {
-    width: 100%;
-    height: 100%;
+    max-width: 486px;
+    max-height: 300px;
+    min-height: 220px;
     vertical-align: middle;
     display: inline-block;
     position: relative;

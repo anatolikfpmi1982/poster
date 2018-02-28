@@ -145,7 +145,7 @@ function ConstructorOverview() {
         this.right_width_portrait = parseInt(frameThicknessDivValue) > 0 ?
             parseInt(frameThicknessDivValue) :
             this.right_width_portrait;
-        this.top_deviation = 20;
+        this.top_deviation = 10;
         this.left_deviation = 10;
         this.max_width = parseInt($('.az-picture-page-constructor-global-div').css('width'));
         this.max_height = this.picHeight + (2 * this.top_deviation);
@@ -214,7 +214,6 @@ function ConstructorOverview() {
             picWidth = this.picWidth,
             picHeight = this.picHeight,
             top_deviation = this.top_deviation,
-            screen_height = picHeight + (2 * top_deviation) + 2 * right_width + 5,
             imgCorner = this.imgCorner,
             imgSideT = this.imgSideT,
             imgSideR = this.imgSideR,
@@ -392,6 +391,12 @@ function ConstructorOverview() {
                     });
                 }
             }
+        }
+        var screen_height;
+        if (!this.isConstructor) {
+            screen_height = picHeight + (2 * top_deviation) + 2 * right_width + 5;
+        } else {
+            screen_height = picHeight + top_deviation + 2 * right_width + 10;
         }
 
         $('.az-picture-page-picture-main-picture-div').css('height', screen_height + 'px');
@@ -584,7 +589,6 @@ function ConstructorOverview() {
             top_deviation = this.top_deviation,
             panel_type = type,
             deviationRight = 0 - this.right_width,
-            screen_height = picHeight + (2 * top_deviation) + (this.panelNumberVertical * this.right_width),
             mainTop = top_deviation,
             size = this.size != undefined ? this.size.split('x') : [],
             that = this, panelActiveInnerBlockNum = 0;
@@ -825,6 +829,12 @@ function ConstructorOverview() {
             this.showArrows();
         }
 
+        var screen_height;
+        if (!this.isConstructor) {
+            screen_height = picHeight + (2 * top_deviation) + (this.panelNumberVertical * this.right_width);
+        } else {
+            screen_height = picHeight + top_deviation + (this.panelNumberVertical * this.right_width) + 5;
+        }
         switch (this.type) {
             case 'Баннер':
                 $('.az-picture-page-picture-main-banner-div').css('height', screen_height + 'px');
