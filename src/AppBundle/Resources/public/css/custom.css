@@ -1484,6 +1484,41 @@ footer {
     background: url(/bundles/app/images/more_hover.png) no-repeat;
 }
 
+.more_open {
+    margin-left: 10px;
+    height: 10px;
+    width: 28px;
+    vertical-align: middle;
+    display: inline-block;
+    background: url(/bundles/app/images/hover.png) no-repeat;
+    transition: background .3s ease 0s;
+    cursor: pointer;
+}
+
+.more_open:hover {
+    background: url(/bundles/app/images/more_hover.png) no-repeat;
+}
+
+.more_close {
+    margin-left: 10px;
+    height: 10px;
+    width: 28px;
+    vertical-align: middle;
+    display: inline-block;
+    background: url(/bundles/app/images/hover_back.png) no-repeat;
+    transition: background .3s ease 0s;
+    cursor: pointer;
+    display: none;
+}
+
+.more_close:hover {
+    background: url(/bundles/app/images/more_hover_back.png) no-repeat;
+}
+
+.more_block {
+    display: none;
+}
+
 .az-picture-page-filter-art-none:hover {
     cursor: pointer;
 }
