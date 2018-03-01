@@ -82,6 +82,7 @@
                          data-code="single|{horizontal|100-100-0}"
                          data-shadow=1
                          data-fill-in="1"
+                         data-img-zoom="false"
                          data-big-src="/files/pictures/normal/{{ pictureMain.image.getFilename() }}"
                     ></div>
                 </div>
@@ -150,7 +151,7 @@
                 {% set isTypeSelected = true %}
                 {% set isModuleSelected = true %}
             {% endif %}
-            <div class="col-md-6 col-sm-6 container-fluid az-picture-page-sidebar-type-block-selector {% if isModuleSelected %}active{% endif %}"
+            <div class="col-md-6 col-sm-6 col-xs-6 container-fluid az-picture-page-sidebar-type-block-selector {% if isModuleSelected %}active{% endif %}"
                  data-title="Модульная" data-value="3" data-type='module'>
 
                 <div class="row margin_left_right_0 az-picture-page-type-div-img">
@@ -159,7 +160,7 @@
                     {% else %}
                         {% set pictureMainCode = 'single|{horizontal|100-100-0}' %}
                     {% endif %}
-                    <div class="col-md-12 col-sm-12 padding_left_right_0 az-picture-page-type-div-img show-constructor-img-lazy"
+                    <div class="col-md-12 col-sm-12 col-xs-12 padding_left_right_0 az-picture-page-type-div-img show-constructor-img-lazy"
                          data-src="/files/pictures/small_thumb/{{ pictureMain.image.getFilename() }}"
                          data-id="21"
                          data-type="Модульная"
@@ -178,7 +179,7 @@
                     ></div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 col-sm-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
                         <span class="az-picture-page-type-img-text">Модульная</span>
                     </div>
                 </div>

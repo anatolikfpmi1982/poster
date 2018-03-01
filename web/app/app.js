@@ -157,6 +157,7 @@ define(function (require, exports, module) {
             $('#az-picture-constructor-frame-selected').val($(this).data('title'));
             $('#az-picture-constructor-frame-ratio-selected').val($(this).data('ratio'));
             $('#az-picture-constructor-frame-id-selected').val($(this).data('id'));
+            $('#az-picture-constructor-frame-price-selected').val($(this).data('price'));
             $('#az-picture-constructor-frame-img-corner-selected').val($(this).data('img-corner'));
             $('#az-picture-constructor-frame-img-side-t-selected').val($(this).data('img-side-t'));
             $('#az-picture-constructor-frame-img-side-r-selected').val($(this).data('img-side-r'));
@@ -164,6 +165,7 @@ define(function (require, exports, module) {
             $('#az-picture-constructor-frame-img-side-l-selected').val($(this).data('img-side-l'));
             $('#az-picture-constructor-frame-url-selected').val($(this).data('frame-url'));
             $('#az-picture-constructor-frame-thickness-selected').val($(this).data('frame-thickness'));
+            $('#az-picture-constructor-frame-color-selected').val($(this).data('frame-color'));
             $('img.az-picture-page-constructor-picture-thickness-img').removeClass('active');
             $(this).addClass('active');
             setShowBoard();
@@ -422,6 +424,7 @@ define(function (require, exports, module) {
                 frame_material_side_r = $("#az-picture-constructor-frame-img-side-r-selected").val(),
                 frame_material_side_b = $("#az-picture-constructor-frame-img-side-b-selected").val(),
                 frame_material_side_l = $("#az-picture-constructor-frame-img-side-l-selected").val(),
+                frame_color = $("#az-picture-constructor-frame-color-selected").val(),
                 frame_id = $("#az-picture-constructor-frame-id-selected").val(),
                 frame_value = $("#az-picture-constructor-frame-selected").val(),
                 module_type_id = $('#az-picture-constructor-module-id-selected').val(),
@@ -452,6 +455,7 @@ define(function (require, exports, module) {
                     'frame_material_side_l': frame_material_side_l,
                     'frame_id': frame_id,
                     'frame_value': frame_value,
+                    'frame_color': frame_color,
                     'module_type_id': module_type_id,
                     'module_type_value': module_type_value,
                     'module_formula': module_formula,
@@ -773,7 +777,11 @@ define(function (require, exports, module) {
                 params['padding_top'] = $(value).data('pad-top');
                 params['right_width'] = $(value).data('butt');
                 params['right_width_portrait'] = $(value).data('butt-portrait');
-                params['panel_max_width'] = $(value).data('max-width');
+                var width = $(value).data('max-width');
+                if (width > $(value).parent().width()) {
+                    width = parseInt($(value).parent().width());
+                }
+                params['panel_max_width'] = width;
                 params['panel_max_height'] = $(value).data('max-height');
                 params['shadow'] = $(value).data('shadow');
                 params['fill'] = $(value).data('fill-in');

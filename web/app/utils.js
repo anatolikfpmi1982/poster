@@ -4,6 +4,7 @@ define(function (require, exports, module) {
     require('validate/localization');
     require('bootstrap');
     require('cycle2');
+    require('cycle2.center');
     require('owl');
     require('elevatezoom');
     require('mousewheel');

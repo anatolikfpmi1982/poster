@@ -6,6 +6,7 @@ function ConstructorOverview() {
     this.thickness = "";
     this.color = "";
     this.frame = "";
+    this.frameColor = "";
     this.mat_type = "";
     this.mat_size = "";
     this.mat_color = "";
@@ -126,7 +127,8 @@ function ConstructorOverview() {
         this.thickness_ratio = thickness.data('ratio');
         this.color = '';
         this.frame = $("#az-picture-constructor-frame-selected").val();
-        this.mat_color = $("#az-picture-constructor-frame-color-selected").val();
+        this.frameColor = $("#az-picture-constructor-frame-color-selected").val();
+        this.mat_color = $("#az-picture-constructor-frame-mat-color-selected").val();
         this.mat_type = $("#az-picture-page-mat-type-select").val();
         this.mat_size = $("#az-picture-page-constructor-mat-size-select").val();
         this.module = $("#az-picture-constructor-module-selected").val();
@@ -143,7 +145,7 @@ function ConstructorOverview() {
         this.right_width_portrait = parseInt(frameThicknessDivValue) > 0 ?
             parseInt(frameThicknessDivValue) :
             this.right_width_portrait;
-        this.top_deviation = 20;
+        this.top_deviation = 10;
         this.left_deviation = 10;
         this.max_width = parseInt($('.az-picture-page-constructor-global-div').css('width'));
         this.max_height = this.picHeight + (2 * this.top_deviation);
@@ -166,6 +168,7 @@ function ConstructorOverview() {
         $('#az-constructor-choose-color').html(this.color);
         var frameA = $('<a href="' + $('#az-picture-constructor-frame-url-selected').val() + '">' + this.frame + '</a>');
         $('#az-constructor-choose-frame').html(frameA);
+        $('#az-constructor-choose-frame-color').html(this.frameColor);
         $('#az-constructor-choose-mat-type').html(this.mat_type);
         $('#az-constructor-choose-mat-size').html(this.mat_size + ' см');
         $('#az-constructor-choose-mat-color').html(this.mat_color);
@@ -211,7 +214,6 @@ function ConstructorOverview() {
             picWidth = this.picWidth,
             picHeight = this.picHeight,
             top_deviation = this.top_deviation,
-            screen_height = picHeight + (2 * top_deviation) + 2 * right_width + 5,
             imgCorner = this.imgCorner,
             imgSideT = this.imgSideT,
             imgSideR = this.imgSideR,
@@ -389,6 +391,12 @@ function ConstructorOverview() {
                     });
                 }
             }
+        }
+        var screen_height;
+        if (!this.isConstructor) {
+            screen_height = picHeight + (2 * top_deviation) + 2 * right_width + 5;
+        } else {
+            screen_height = picHeight + top_deviation + 2 * right_width + 10;
         }
 
         $('.az-picture-page-picture-main-picture-div').css('height', screen_height + 'px');
@@ -581,7 +589,6 @@ function ConstructorOverview() {
             top_deviation = this.top_deviation,
             panel_type = type,
             deviationRight = 0 - this.right_width,
-            screen_height = picHeight + (2 * top_deviation) + (this.panelNumberVertical * this.right_width),
             mainTop = top_deviation,
             size = this.size != undefined ? this.size.split('x') : [],
             that = this, panelActiveInnerBlockNum = 0;
@@ -790,6 +797,31 @@ function ConstructorOverview() {
                     break;
             }
 
+            if (!that.isConstructor && that.isZoom) {
+                $('#' + mainIdEl).hover(function () {
+                    var showPanel = $('#show-picture-panel'),
+                        myThis = $(this),
+                        height = parseInt(myThis.parent().parent().data('img-big-height')),
+                        width = parseInt(myThis.parent().parent().data('img-big-width'));
+                    clearTimeout(that.timer);
+                    that.timer = setTimeout(function () {
+                        showPanel.find('.show-picture-panel-img').attr('src', that.imgBigPath);
+                        showPanel.removeClass('hidden').show();
+                        showPanel.offset({left: (myThis.offset().left - width - 3), top: (myThis.offset().top - Math.round(height / 2))});
+                        showPanel.css('height', height + 'px');
+                        showPanel.css('width', width + 'px');
+                    }, 1000);
+                }, function () {
+                    var showPanel = $('#show-picture-panel');
+
+                    clearTimeout(that.timer);
+                    that.timer = setTimeout(function () {
+                        showPanel.find('.show-picture-panel-img').attr('src', '#');
+                        showPanel.addClass('hidden').hide();
+                    }, 1000);
+                });
+            }
+
             that.panelSizes[that.panelActiveBlockNum] = Math.round((value.width * size[0] ) / 100) + 'x' + Math.round((value.height * size[1] ) / 100);
         });
 
@@ -797,6 +829,12 @@ function ConstructorOverview() {
             this.showArrows();
         }
 
+        var screen_height;
+        if (!this.isConstructor) {
+            screen_height = picHeight + (2 * top_deviation) + (this.panelNumberVertical * this.right_width);
+        } else {
+            screen_height = picHeight + top_deviation + (this.panelNumberVertical * this.right_width) + 5;
+        }
         switch (this.type) {
             case 'Баннер':
                 $('.az-picture-page-picture-main-banner-div').css('height', screen_height + 'px');
@@ -849,27 +887,6 @@ function ConstructorOverview() {
                     });
                 }
             }
-        } else if (!this.isConstructor) {
-            $('#' + mainIdEl).hover(function () {
-                var showPanel = $('#show-picture-panel'),
-                    myThis = $(this);
-                clearTimeout(that.timer);
-                that.timer = setTimeout(function () {
-                    showPanel.find('.show-picture-panel-img').attr('src', that.imgBigPath);
-                    showPanel.removeClass('hidden').show();
-                    showPanel.offset({left: myThis.offset().left, top: (myThis.offset().top + parseInt(myThis.height()) + 3)});
-                    showPanel.css('height', parseInt(myThis.parent().parent().data('img-big-height')) + 22 + 'px');
-                    showPanel.css('width', parseInt(myThis.parent().parent().data('img-big-width')) + 32 + 'px');
-                }, 1000);
-            }, function () {
-                var showPanel = $('#show-picture-panel');
-
-                clearTimeout(that.timer);
-                that.timer = setTimeout(function () {
-                    showPanel.find('.show-picture-panel-img').attr('src', '#');
-                    showPanel.addClass('hidden').hide();
-                }, 1000);
-            });
         }
 
     };
@@ -998,6 +1015,7 @@ function ConstructorOverview() {
         var subframe = $('div.az-picture-page-sidebar-choose-subframe'),
             subframe_color = $('div.az-picture-page-sidebar-choose-subframe-color'),
             frame = $('div.az-picture-page-sidebar-choose-frame'),
+            frameColor = $('div.az-picture-page-sidebar-choose-frame-color'),
             mat_type = $('div.az-picture-page-sidebar-choose-mat-type'),
             mat_size = $('div.az-picture-page-sidebar-choose-mat-size'),
             module = $('div.az-picture-page-sidebar-choose-module'),
@@ -1022,11 +1040,13 @@ function ConstructorOverview() {
                 module.hide();
                 panel_sizes.hide();
                 zoom_div.show();
+                frameColor.hide();
                 break;
             case 'В раме':
                 subframe.hide();
                 subframe_color.hide();
                 frame.show();
+                frameColor.show();
                 mat_type.show();
                 mat_size.show();
                 mat_color.show();
@@ -1044,6 +1064,7 @@ function ConstructorOverview() {
                 module.show();
                 panel_sizes.show();
                 zoom_div.show();
+                frameColor.hide();
                 break;
         }
     };
@@ -1134,11 +1155,12 @@ function ConstructorOverview() {
             add_price = $('input#constructor_pic_' + this.material_id + '_additional_price').val(),
             add_ratio = $('input#constructor_pic_' + this.material_id + '_additional_ratio').val(),
             frame_ratio = $('#az-picture-constructor-frame-ratio-selected').val(),
+            frame_price = $('#az-picture-constructor-frame-price-selected').val(),
             picture_price = $('#constructor_picture_price').val(),
             picture_ratio = $('#constructor_picture_ratio').val();
 
-        return Math.round(((this.square * average_price + parseFloat(picture_price) + (this.perimeter * this.calculateFrameSquare())) * parseFloat(picture_ratio) +
-            parseFloat(add_price)) * parseFloat(frame_ratio) * parseFloat(add_ratio));
+        return Math.round(((this.square * average_price + parseFloat(picture_price) + (this.perimeter * this.calculateFrameSquare() * frame_price)) * parseFloat(add_ratio) +
+            parseFloat(add_price)) * parseFloat(picture_ratio) * parseFloat(frame_ratio));
     };
 
     this.calculateSquare = function () {
@@ -1166,10 +1188,10 @@ function ConstructorOverview() {
     };
 
     this.calculateFrameSquare = function () {
-        var minSquare = $('#constructor_min_square').val(),
-            maxSquare = $('#constructor_max_square').val(),
-            minPrice = $('#constructor_min_price').val(),
-            maxPrice = $('#constructor_max_price').val(),
+        var minSquare = parseFloat($('#constructor_min_square').val()),
+            maxSquare = parseFloat($('#constructor_max_square').val()),
+            minPrice = parseFloat($('#constructor_min_price').val()),
+            maxPrice = parseFloat($('#constructor_max_price').val()),
             final_price = 0;
 
         if (this.square <= minSquare) {
@@ -1178,7 +1200,6 @@ function ConstructorOverview() {
             final_price = minPrice;
         } else {
             final_price = (this.square - parseFloat(minSquare)) * ((minPrice - maxPrice) / (maxSquare - minSquare)) + parseFloat(maxPrice);
-            final_price = Math.ceil(final_price);
         }
         return final_price;
     };

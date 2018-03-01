@@ -8,6 +8,7 @@ require.config({
         'underscore': '../bower_components/underscore/underscore',
         'bootstrap': '../bower_components/bootstrap/dist/js/bootstrap',
         'cycle2': '../bower_components/jquery.cycle2/index',
+        'cycle2.center': '../bower_components/jquery-cycle2/src/jquery.cycle2.center',
         'ConstructorOverview': '../bundles/app/js/ConstructorOverview',
         'owl': '../bower_components/owl.carousel/dist/owl.carousel.min',
         //'elevatezoom': '../bower_components/elevatezoom/jquery.elevateZoom-2.2.3.min'
@@ -32,6 +33,9 @@ require.config({
         },
         'cycle2': {
             'deps': ['bootstrap']
+        },
+        'cycle2.center': {
+            'deps': ['cycle2', 'bootstrap']
         },
         'ConstructorOverview': {
             'deps': ['jquery']

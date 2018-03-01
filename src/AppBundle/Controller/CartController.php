@@ -39,6 +39,7 @@ class CartController extends FrontController {
             'frame_material_side_l' => $request->query->get('frame_material_side_l'),
             'frame_id' => $request->query->get('frame_id'),
             'frame_value' => $request->query->get('frame_value'),
+            'frame_color' => $request->query->get('frame_color'),
             'module_type_id' => $request->query->get('module_type_id'),
             'module_type_value' => $request->query->get('module_type_value'),
             'type_id' => $request->query->get('type_id'),

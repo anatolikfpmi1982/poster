@@ -31,19 +31,21 @@
 
         {% if frame.images is defined and frame.images and frame.images|length > 6 %}
             <div class="row az-page-main-section-div az-frames-slide">
-                <div class="col-md-3 col-sm-3">
+                <div class="col-md-2 col-sm-2">
                     <div class="cycle-overlay custom"></div>
                     <a class="left carousel-control" href="#carousel-example-generic" role="button" id="prev-slider" data-slide="prev">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 </div>
-                <div class="col-md-6 col-sm-6">
+                <div class="col-md-8 col-sm-8">
                     <div class="cycle-slideshow"
                          data-cycle-fx=scrollHorz
                          data-cycle-timeout=0
                          data-cycle-pager="#adv-custom-pager"
                          data-cycle-prev="#prev-slider"
                          data-cycle-next="#next-slider"
+                         data-cycle-center-horz=true
+                         data-cycle-center-vert=true
                          data-cycle-pager-template="<a  class='az-frames-slide-thumb'  href='#'><img src='{{ '{{' }}src{{ '}}' }}'  ></a>"
                     >
                         {% for image in frame.images %}
@@ -58,7 +60,7 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-3">
+                <div class="col-md-2 col-sm-2">
                     <a class="right carousel-control" href="#carousel-example-generic" id="next-slider" role="button" data-slide="next">
                         <i class="fa fa-angle-right"></i><span class="sr-only">Next</span>
                     </a>

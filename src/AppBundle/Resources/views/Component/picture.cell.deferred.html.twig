@@ -1,11 +1,13 @@
 {% set imgBig = '' %}
+{% set imgBigSize = [500,500] %}
 {% if picture.image is defined and picture.image and picture.image.getFilename() %}
     {% set img = '/files/pictures/thumb/' ~ picture.image.getFilename() %}
     {% set imgPath = picture.image.getThumbBaseFile() %}
     {% set imgSize = filesize(imgPath) %}
-    {% set imgBigPath = picture.image.getNormalBaseFile() %}
+    {% set imgBigPath = picture.image.getBaseFile() %}
     {% if file_exists(imgBigPath) %}
-        {% set imgBig = '/files/pictures/normal/' ~ picture.image.getFilename() %}
+        {% set imgBig = '/files/pictures/' ~ picture.image.getFilename() %}
+        {% set imgBigSize = filesize(imgBigPath) %}
     {% endif %}
 {% else %}
     {% set img = asset('bundles/app/images/default_picture.jpg') %}
@@ -61,10 +63,11 @@
              data-img-side-r=""
              data-img-side-b=""
              data-img-side-l=""
-                {% if imgBig and type_value == "Баннер" %}
-                    data-zoom-image="{{ imgBig }}"
+             data-img-big-width="{{ imgBigSize[0] }}"
+             data-img-big-height="{{ imgBigSize[1] }}"
+                {% if imgBig and (type_value == "Баннер" or type_value == "Модульная") %}
+                    data-zoom-image-big="{{ imgBig }}"
                     data-img-zoom="true"
-                    data-elem-id="az-category-img-{{ picture.id }}"
                     data-big-src="{{ imgBig }}"
                 {% endif %}
         >
@@ -115,10 +118,15 @@
                 {% set categorySymbolsNum = 0 %}
                 {% set categoryInProgress = true %}
                 {% for cat in picture.categories|slice(0, limitCategory) %}
-                    {% if cat.id != catId and categoryInProgress %}
+                    {% if cat.id != catId and categoryInProgress and cat.isActive %}
                         {% set categorySymbolsNum = categorySymbolsNum + cat.title|length + 3 %}
                         {% if categorySymbolsNum < 58 %}
-                            <a href="{{ path('category', {'slug': cat.slug}) }}"> {{ cat.title }}</a>
+                            {% if module_active or type_value == "Модульная" %}
+                                {% set catSlugs = {'slug': cat.slug, 'type': 'module'} %}
+                            {% else %}
+                                {% set catSlugs = {'slug': cat.slug} %}
+                            {% endif %}
+                            <a href="{{ path('category', catSlugs) }}"> {{ cat.title }}</a>
                             {% if loop.last == false %},{% endif %}
                         {% else %}
                             ...

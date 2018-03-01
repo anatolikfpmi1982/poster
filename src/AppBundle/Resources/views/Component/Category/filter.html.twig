@@ -21,6 +21,10 @@
         {% set filter_value = '' %}
     {% endif %}
 {% endif %}
+{% set pageFilterUrl = app.request.pathinfo ~ '?' %}
+{% if module_active %}
+    {% set pageFilterUrl = pageFilterUrl ~ 'type=module&' %}
+{% endif %}
 <div class="col-md-1 col-sm-1 text-center az-picture-page-constructor-block container-fluid {% if sort_field == 'p.title' %}active{% endif %}">
     <div class="row az-category-page-filter az-category-page-filter-photo">
         <div class="col-md-12 col-sm-12">
@@ -34,7 +38,7 @@
                 {% endif %}
             {% endif %}
             <a class="az-category-page-filter-name"
-               href="{{ app.request.pathinfo }}?sort=p.title&direction={{ title_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Имя <span
+               href="{{ pageFilterUrl }}sort=p.title&direction={{ title_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Имя <span
                         class="glyphicon glyphicon-chevron-{{ title_direction_icon }}"></span></a>
         </div>
     </div>
@@ -51,7 +55,7 @@
             {% endif %}
         {% endif %}
         <a class="az-category-page-filter-name"
-           href="{{ app.request.pathinfo }}?sort=p.createdAt&direction={{ date_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Дата <span
+           href="{{ pageFilterUrl }}sort=p.createdAt&direction={{ date_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Дата <span
                     class="glyphicon
         glyphicon-chevron-{{ date_direction_icon }}"></span></a>
     </div>
@@ -68,19 +72,19 @@
             {% endif %}
         {% endif %}
         <a class="az-category-page-filter-name"
-           href="{{ app.request.pathinfo }}?sort=p.popularity&direction={{ popularity_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Популярность <span
+           href="{{ pageFilterUrl }}sort=p.popularity&direction={{ popularity_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Популярность <span
                     class="glyphicon
         glyphicon-chevron-{{ popularity_direction_icon }}"></span></a>
     </div>
 </div>
 <div class="col-md-1 col-sm-1 text-center az-picture-page-constructor-block container-fluid">
     <div class="row az-category-page-filter az-category-page-filter-photo az-cat-filter-btn">
-        <button class="btn az-category-page-filter-btn az-category-page-filter-random-btn" data-filterurl="{{ app.request.pathinfo }}?random=true">Случайно</button>
+        <button class="btn az-category-page-filter-btn az-category-page-filter-random-btn" data-filterurl="{{ pageFilterUrl }}random=true">Случайно</button>
     </div>
 </div>
 <div class="col-md-1 col-sm-1 text-center az-picture-page-constructor-block container-fluid">
     <div class="row az-category-page-filter az-category-page-filter-photo">
-        <button class="btn az-category-page-filter-btn az-category-page-filter-random-btn az-category-page-filter-clear-btn" data-filterurl="{{ app.request.pathinfo }}">Сбросить
+        <button class="btn az-category-page-filter-btn az-category-page-filter-random-btn az-category-page-filter-clear-btn" data-filterurl="{{ pageFilterUrl }}">Сбросить
         </button>
     </div>
 </div>
@@ -95,7 +99,7 @@
                     {% set form_filter = true %}
                 {% endif %}
                 <a href="#" class="az-picture-page-material-img-a"
-                   data-filterurl="{{ app.request.pathinfo }}?sort={{ sort_field }}&direction={{ sort_direction }}&page={{ pagination.currentPageNumber }}&filterField=f.id&filterValue={{ tpl.id }}">
+                   data-filterurl="{{ pageFilterUrl }}sort={{ sort_field }}&direction={{ sort_direction }}&page={{ pagination.currentPageNumber }}&filterField=f.id&filterValue={{ tpl.id }}">
                     <img src="/files/picture_forms/small_thumb/{{ tpl.image.getFilename() }}" class="az-picture-page-material-img{% if form_filter %} selected{% endif %}"/>
                 </a>
                 {% set loopIndex = loopIndex + 1 %}
@@ -130,7 +134,7 @@
     <div class="row az-category-page-filter az-category-page-filter-photo">
         <span class="az-category-page-filter-art-title">Фото</span>
         <input type="checkbox" class="btn az-category-page-filter-radio" name="az-category-page-filter-photo" title="az-category-page-filter-photo" value="1"
-               data-filterurl="{{ app.request.pathinfo }}?sort={{ sort_field }}&direction={{ sort_direction }}&page={{ pagination.currentPageNumber }}&filterField=p.type&filterValue={{ photo_val }}"
+               data-filterurl="{{ pageFilterUrl }}sort={{ sort_field }}&direction={{ sort_direction }}&page={{ pagination.currentPageNumber }}&filterField=p.type&filterValue={{ photo_val }}"
                {% if photo_filter %}checked{% endif %}>
     </div>
 </div>
@@ -138,7 +142,7 @@
     <div class="row az-category-page-filter az-category-page-filter-photo">
         <span class="az-category-page-filter-art-title">Арт</span>
         <input type="checkbox" class="btn az-category-page-filter-radio" name="az-category-page-filter-photo" title="az-category-page-filter-photo"
-               data-filterurl="{{ app.request.pathinfo }}?sort={{ sort_field }}&direction={{ sort_direction }}&page={{ pagination.currentPageNumber }}&filterField=p.type&filterValue={{ art_val }}"
+               data-filterurl="{{ pageFilterUrl }}sort={{ sort_field }}&direction={{ sort_direction }}&page={{ pagination.currentPageNumber }}&filterField=p.type&filterValue={{ art_val }}"
                value="1" {% if art_filter %}checked{% endif %}>
     </div>
 </div>

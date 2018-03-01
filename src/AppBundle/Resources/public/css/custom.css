@@ -149,8 +149,8 @@ body {
 .az-sidebar-subsubsubcategory-item .az-subsubsubcategory-item-img a.az-subsubsubcategory-item-a .az-subsubsubcat-span-text:hover,
 .az-sidebar-subsubsubcategory-item.active .az-subsubsubcategory-item-img,
 .az-sidebar-subsubsubcategory-item.active .az-subsubsubcategory-item-img a.az-subsubsubcategory-item-a:visited,
-.az-sidebar-subsubcategory-item .az-sidebar-subsubcategory-first.active_parent,
-.az-sidebar-subsubcategory-item .az-sidebar-subsubcategory-first.active_parent a.az-subsubcategory-item-a:visited {
+.az-sidebar-subsubcategory-item .az-sidebar-subsubcategory-first a.az-subsubcategory-item-a div.active_menu,
+.az-sidebar-subsubcategory-item .az-sidebar-subsubcategory-first.active_parent a.az-subsubcategory-item-a:visited .az-subsubcat-span {
     color: #fd1200;
 }
 
@@ -2614,8 +2614,9 @@ button.close:focus, .close:hover {
 }
 
 .az-frames-slide .cycle-slideshow img {
-    width: 100%;
-    height: 100%;
+    max-width: 486px;
+    max-height: 300px;
+    min-height: 220px;
     vertical-align: middle;
     display: inline-block;
     position: relative;
@@ -2945,20 +2946,11 @@ a.az-category-item-a div.az-sidebar-catalog-item-header div.az-category-menu-ite
 }
 
 .show-picture-panel {
-    background-color: #ffffff;
-    border: 1px solid #333333;
-    color: #333333;
-    width: 502px;
-    height: 522px;
     position: absolute;
     z-index: 200;
 }
 
 .show-picture-panel-img {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    max-width: 470px;
-    max-height: 470px;
     text-align: center;
 }
 
@@ -3239,18 +3231,6 @@ and (-webkit-min-device-pixel-ratio: 2) {
         margin-bottom: 3px;
     }
 
-    .show-picture-panel {
-        width: 202px;
-        height: 208px;
-    }
-
-    .show-picture-panel-img {
-        max-width: 200px;
-        max-height: 200px;
-        margin-top: 3px;
-        margin-bottom: 3px;
-    }
-
     .nav > li > a {
         padding: 0 5px 0 0;
     }
@@ -3274,4 +3254,11 @@ and (-webkit-min-device-pixel-ratio: 2) {
         border: 1px solid #fd1200;
         color: #fd1200;
     }
+}
+
+@media only screen
+and (min-device-width: 768px)
+and (max-device-width: 900px)
+and (-webkit-min-device-pixel-ratio: 2) {
+
 }

@@ -32,7 +32,7 @@
             {% set active_material_id = 0 %}
         {% endif %}
         {% for material in materials %}
-        <div class="col-md-4 col-sm-4 container-fluid az-picture-page-sidebar-material-banner-block-selector
+        <div class="col-md-4 col-sm-4 col-xs-6 container-fluid az-picture-page-sidebar-material-banner-block-selector
         {% if (active_material_id and active_material_id==material.id) or (not active_material_id and ind == 1) %}active{% endif %}"
              data-title="{{ material.title }}"
              data-id="{{ material.id }}">
