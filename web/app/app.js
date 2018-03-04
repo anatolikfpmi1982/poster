@@ -613,14 +613,9 @@ define(function (require, exports, module) {
         });
 
         $(".az-form-download-file").change(function () {
-            if (this.files[0].size / 1024 / 1024 > 10) {
-                $('.az-form-download-error').show();
-                $('.az-form-btn-download button').prop('disabled', true);
-            } else {
-                $('.az-form-download-error').hide();
-                $("label.az-form-choose-file").html($(this).val());
-                $('.az-form-btn-download button').prop('disabled', false);
-            }
+            $('.az-form-download-error').hide();
+            $("label.az-form-choose-file").html($(this).val());
+            $('.az-form-btn-download button').prop('disabled', false);
         });
 
         $('div.pagination .page').click(function (event) {
