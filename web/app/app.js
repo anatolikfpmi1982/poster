@@ -24,7 +24,6 @@ define(function (require, exports, module) {
             nav: true,
             navText: ["", ""],
             scrollPerPage: true,
-            lazyLoad: true,
             slideBy: 5
         }).on('mousewheel', '.owl-stage', function (e) {
             if (e.deltaY > 0) {

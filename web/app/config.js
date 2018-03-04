@@ -10,7 +10,8 @@ require.config({
         'cycle2': '../bower_components/jquery.cycle2/index',
         'cycle2.center': '../bower_components/jquery-cycle2/src/jquery.cycle2.center',
         'ConstructorOverview': '../bundles/app/js/ConstructorOverview',
-        'owl': '../bower_components/owl.carousel/dist/owl.carousel.min',
+        //'owl': '../bower_components/owl.carousel/dist/owl.carousel.min',
+        'owl': '../bower_components/owl.carousel/dist/owl.carousel',
         //'elevatezoom': '../bower_components/elevatezoom/jquery.elevateZoom-2.2.3.min'
         'elevatezoom': '../bower_components/elevatezoom/jquery.elevatezoom',
         'mousewheel': '../bower_components/jquery-mousewheel/jquery.mousewheel'
