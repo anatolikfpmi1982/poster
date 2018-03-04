@@ -28,13 +28,13 @@
 <div class="col-md-1 col-sm-1 text-center az-picture-page-constructor-block container-fluid {% if sort_field == 'p.title' %}active{% endif %}">
     <div class="row az-category-page-filter az-category-page-filter-photo">
         <div class="col-md-12 col-sm-12">
-            {% set title_direction = 'DESC' %}
+            {% set title_direction = 'ASC' %}
             {% set title_direction_icon = 'down' %}
             {% if sort_field == 'p.title' %}
                 {% set title_direction_icon = 'up' %}
-                {% if sort_direction == 'DESC' %}
+                {% if sort_direction == 'ASC' %}
                     {% set title_direction_icon = 'down' %}
-                    {% set title_direction = 'ASC' %}
+                    {% set title_direction = 'DESC' %}
                 {% endif %}
             {% endif %}
             <a class="az-category-page-filter-name"
