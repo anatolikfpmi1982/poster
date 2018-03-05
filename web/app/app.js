@@ -22,6 +22,8 @@ define(function (require, exports, module) {
             items: 5,
             dots: false,
             nav: true,
+            mouseDrag: false,
+            touchDrag: true,
             navText: ["", ""],
             scrollPerPage: true,
             slideBy: 5
@@ -39,6 +41,8 @@ define(function (require, exports, module) {
             items: 4,
             dots: false,
             nav: true,
+            mouseDrag: false,
+            touchDrag: true,
             navText: ["", ""],
             scrollPerPage: true,
             lazyLoad: true,
@@ -57,6 +61,8 @@ define(function (require, exports, module) {
             items: 1,
             dots: false,
             nav: true,
+            mouseDrag: false,
+            touchDrag: true,
             navText: ["", ""],
             lazyLoad: true
         }).on('mousewheel', '.owl-stage', function (e) {
@@ -152,7 +158,6 @@ define(function (require, exports, module) {
                 textDiv.appendTo($(this).parent());
             }
         }).click(function (event) {
-            event.stopImmediatePropagation();
             $('#az-picture-constructor-frame-selected').val($(this).data('title'));
             $('#az-picture-constructor-frame-ratio-selected').val($(this).data('ratio'));
             $('#az-picture-constructor-frame-id-selected').val($(this).data('id'));
@@ -210,7 +215,6 @@ define(function (require, exports, module) {
                 textDiv.appendTo($(this).parent());
             }
         }).click(function (event) {
-            event.stopImmediatePropagation();
             $('#az-picture-constructor-module-selected').val($(this).data('title'));
             $('#az-picture-constructor-module-id-selected').val($(this).data('id'));
             $('#az-picture-constructor-module-ratio-selected').val($(this).data('ratio'));
@@ -222,7 +226,6 @@ define(function (require, exports, module) {
 
         // picture page constructor frame color
         $("li.az-picture-page-constructor-frame-color-item").click(function (event) {
-            event.stopImmediatePropagation();
             $('#az-picture-constructor-frame-color-selected').val($(this).data('name'));
             setShowBoard();
         });
