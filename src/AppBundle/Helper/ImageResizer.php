@@ -68,7 +68,7 @@ class ImageResizer {
                 break;
         }
 
-        imagecopyresampled( $gd_image_dest, $gd_image_src, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig );
+        imagecopyresized( $gd_image_dest, $gd_image_src, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig );
 
         $filesystem = new Filesystem();
         $filesystem->mkdir( $newPath, 0744 );

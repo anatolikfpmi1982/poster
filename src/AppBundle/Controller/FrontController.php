@@ -71,25 +71,6 @@ class FrontController extends Controller {
         $this->data['site_settings'] = $this->getSiteSettings();
         $this->data['help_settings'] = $this->getHelpSettings();
         $this->data['header_cart']   = $this->getCart();
-        $this->data['size_limit']    = $this->getFileLimit();
-    }
-
-    protected function getFileLimit() {
-        $limit = self::FILE_SIZE_LIMIT;
-        $ini_limit = (int)ini_get('memory_limit');
-        if(!empty($ini_limit)) {
-            if ($ini_limit <= 128) {
-                $limit = 2;
-            } elseif($ini_limit <= 256) {
-                $limit = 4;
-            } elseif($ini_limit <= 384) {
-                $limit = 7;
-            } elseif($ini_limit <= 512) {
-                $limit = 10;
-            }
-        }
-
-        return $limit;
     }
 
     /**
