@@ -69,10 +69,11 @@ class OrderAdmin extends AbstractAdmin
             ->add('width', null, ['required' => false, 'label' => 'Ширина', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
             ->add('price', null, ['required' => false, 'label' => 'Цена', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
             ->add('frame', null, array('label' => 'Рама'))
-            ->add('frameMaterial', null, array('label' => 'Материал картины в раме'))
-            ->add('bannerMaterial', null, array('label' => 'Материал баннера'))
+            ->add('frameMaterial', null, array('label' => 'Материал для картины в раме'))
+            ->add('bannerMaterial', null, array('label' => 'Материал для баннера'))
             ->add('underframe', null, array('label' => 'Подрамник'))
             ->add('frameColor', null, array('label' => 'Цвет рамы'))
+            ->add('material', null, array('label' => 'Материал рамы'))
             ->add('moduleType', null, array('label' => 'Тип модульности'))
             ->add('isActive', null, ['required' => false, 'label' => 'Взято в работу'])
             ->add('isDone', null, ['required' => false, 'label' => 'Выполнено'])
@@ -141,10 +142,10 @@ class OrderAdmin extends AbstractAdmin
             ->add('moduleType', 'choice', ['label' => 'Модульность','editable' => true,
                 'class' => 'Appbundle\Entity\ModuleType', 'choices' => $moduleTypeChoices, 'sortable' => true,
                 'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'moduleType']]])
-            ->add('bannerMaterial', 'choice', ['label' => 'Материал баннера','editable' => true,
+            ->add('bannerMaterial', 'choice', ['label' => 'Материал для баннера','editable' => true,
                 'class' => 'Appbundle\Entity\BannerMaterial', 'choices' => $bannerMaterialsChoices, 'sortable' => true,
                 'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'bannerMaterial']]])
-            ->add('frameMaterial', 'choice', ['label' => 'Материал рамы','editable' => true,
+            ->add('frameMaterial', 'choice', ['label' => 'Материал для картины в раме','editable' => true,
                 'class' => 'Appbundle\Entity\FrameMaterial', 'choices' => $frameMaterialsChoices, 'sortable' => true,
                 'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'frameMaterial']]])
             ->add('fullname', null, ['editable'=> true, 'label' => 'Ф.И.О.'])
@@ -190,8 +191,8 @@ class OrderAdmin extends AbstractAdmin
             ->add('type', null, ['label' => 'Тип'])
             ->add('frame', null, ['label' => 'Рама'])
             ->add('moduleType', null, ['label' => 'Модульность'])
-            ->add('bannerMaterial', null, ['label' => 'Материал баннера'])
-            ->add('frameMaterial', null, ['label' => 'Материал рамы'])
+            ->add('bannerMaterial', null, ['label' => 'Материал для баннера'])
+            ->add('frameMaterial', null, ['label' => 'Материал для картины в раме'])
             ->add('fullname', null, ['label' => 'Ф.И.О.'])
             ->add('email', null, ['label' => 'Email'])
             ->add('phone', null, ['label' => 'Телефон'])
@@ -251,6 +252,8 @@ class OrderAdmin extends AbstractAdmin
         if($order->getType() == 'banner') {
             $order->setFrame(null);
             $order->setFrameMaterial(null);
+            $order->setFrameColor(null);
+            $order->setMaterial(null);
             $order->setModuleType(null);
         } elseif($order->getType() == 'frame') {
             $order->setBannerMaterial(null);
@@ -259,6 +262,8 @@ class OrderAdmin extends AbstractAdmin
         } elseif($order->getType() == 'module') {
             $order->setFrame(null);
             $order->setFrameMaterial(null);
+            $order->setFrameColor(null);
+            $order->setMaterial(null);
             $order->setModuleType(null);
         }
 

@@ -142,6 +142,13 @@ class Order
     private $frameMaterial;
 
     /**
+     * @var Material
+     * @ORM\ManyToOne(targetEntity="Material")
+     * @ORM\JoinColumn(name="material_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $material;
+
+    /**
      * @var Underframe
      * @ORM\ManyToOne(targetEntity="Underframe")
      * @ORM\JoinColumn(name="underframe_id", referencedColumnName="id", onDelete="SET NULL")
@@ -598,6 +605,30 @@ class Order
     public function getFrameMaterial()
     {
         return $this->frameMaterial;
+    }
+
+    /**
+     * Set material
+     *
+     * @param \AppBundle\Entity\Material $material
+     *
+     * @return Order
+     */
+    public function setMaterial(\AppBundle\Entity\Material $material = null)
+    {
+        $this->material = $material;
+
+        return $this;
+    }
+
+    /**
+     * Get material
+     *
+     * @return \AppBundle\Entity\Material
+     */
+    public function getMaterial()
+    {
+        return $this->material;
     }
 
     /**

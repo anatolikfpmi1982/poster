@@ -27,46 +27,46 @@
 {% endif %}
 <div class="col-md-2 col-sm-2 text-center az-filter-frame az-picture-page-constructor-block container-fluid">
     <div class="row az-category-page-filter az-category-page-filter-photo">
-        {% set title_direction = 'DESC' %}
+        {% set title_direction = 'ASC' %}
         {% if sort_field is defined and sort_field == 'f.title' %}
-            {% if sort_direction == 'DESC' %}{% set title_direction = 'ASC' %}{% endif %}
+            {% if sort_direction == 'ASC' %}{% set title_direction = 'DESC' %}{% endif %}
         {% endif %}
         <a href="{{ app.request.pathinfo }}?sort=f.title&direction={{ title_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Артикул <span
-                    class="glyphicon glyphicon-chevron-{% if title_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
+                    class="glyphicon glyphicon-chevron-{% if title_direction == 'ASC' %}down{% else %}up{% endif %}"></span></a>
     </div>
 </div>
 <div class="col-md-2 col-sm-2 text-center  az-filter-frame az-picture-page-constructor-block container-fluid">
     <div class="row az-category-page-filter az-category-page-filter-photo">
-        {% set width_direction = 'DESC' %}
+        {% set width_direction = 'ASC' %}
         {% if sort_field == 'f.width' %}
-            {% if sort_direction == 'DESC' %}{% set width_direction = 'ASC' %}{% endif %}
+            {% if sort_direction == 'ASC' %}{% set width_direction = 'DESC' %}{% endif %}
         {% endif %}
         <a href="{{ app.request.pathinfo }}?sort=f.width&direction={{ width_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Ширина <span
                     class="glyphicon
-        glyphicon-chevron-{% if width_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
+        glyphicon-chevron-{% if width_direction == 'ASC' %}down{% else %}up{% endif %}"></span></a>
     </div>
 </div>
 <div class="col-md-2 col-sm-2 text-center az-filter-frame az-picture-page-constructor-block container-fluid">
     <div class="row az-category-page-filter az-category-page-filter-photo">
-        {% set height_direction = 'DESC' %}
+        {% set height_direction = 'ASC' %}
         {% if sort_field == 'f.height' %}
-            {% if sort_direction == 'DESC' %}{% set height_direction = 'ASC' %}{% endif %}
+            {% if sort_direction == 'ASC' %}{% set height_direction = 'DESC' %}{% endif %}
         {% endif %}
         <a href="{{ app.request.pathinfo }}?sort=f.height&direction={{ height_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Высота <span
                     class="glyphicon
-        glyphicon-chevron-{% if height_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
+        glyphicon-chevron-{% if height_direction == 'ASC' %}down{% else %}up{% endif %}"></span></a>
     </div>
 </div>
 
 <div class="col-md-2 col-sm-2 text-center az-filter-frame az-picture-page-constructor-block container-fluid">
     <div class="row az-category-page-filter az-category-page-filter-photo">
-        {% set material_direction = 'DESC' %}
+        {% set material_direction = 'ASC' %}
         {% if sort_field == 'm.name' %}
-            {% if sort_direction == 'DESC' %}{% set material_direction = 'ASC' %}{% endif %}
+            {% if sort_direction == 'ASC' %}{% set material_direction = 'DESC' %}{% endif %}
         {% endif %}
         <a href="{{ app.request.pathinfo }}?sort=m.name&direction={{ material_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Материал <span
                     class="glyphicon
-        glyphicon-chevron-{% if material_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
+        glyphicon-chevron-{% if material_direction == 'ASC' %}down{% else %}up{% endif %}"></span></a>
     </div>
 
 </div>

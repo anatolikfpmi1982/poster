@@ -132,6 +132,12 @@ class OrderController extends FrontController {
 
                         $frameMaterial = $em->getRepository('AppBundle:FrameMaterial')->findOneBy(['id' => $v['frame_material_id']]);
                         $record->setFrameMaterial($frameMaterial);
+
+                        $material = $em->getRepository('AppBundle:Material')->findOneBy(['name' => $v['frame_material']]);
+                        $record->setMaterial($material);
+
+                        $frameColor = $em->getRepository('AppBundle:FrameColor')->findOneBy(['title' => $v['frame_color']]);
+                        $record->setFrameColor($frameColor);
                         break;
                     case 'module':
                         $bannerMaterial = $em->getRepository('AppBundle:BannerMaterial')->findOneBy(['id' => $v['banner_material_id']]);
