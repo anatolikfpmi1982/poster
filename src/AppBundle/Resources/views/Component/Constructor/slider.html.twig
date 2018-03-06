@@ -21,6 +21,7 @@
             {% set imgActiveCorner = '' %}
             {% set frameActiveUrl = '' %}
             {% set frameActiveColor = '' %}
+            {% set frameActiveMaterial = '' %}
             {% set frameActiveThickness = '' %}
             {% for thickness in pictureThicknesses %}
                 {% set imgBig = asset('bundles/app/images/default_picture.jpg') %}
@@ -64,8 +65,8 @@
                     {% set frameColor = thickness.color.title %}
                 {% endif %}
                 {% set frameMaterial = '' %}
-                {% if thickness.material is defined and thickness.material and thickness.material.title is defined and thickness.material.title %}
-                    {% set frameMaterial = thickness.material.title %}
+                {% if thickness.frameMaterial is defined and thickness.frameMaterial and thickness.frameMaterial.name is defined and thickness.frameMaterial.name %}
+                    {% set frameMaterial = thickness.frameMaterial.name %}
                 {% endif %}
 
                 {% set isThicknessActive = (cart_item.frame_id is defined and cart_item.frame_id==thickness.id) or (cart_item.frame_id is not defined and frame_selected_id == 0
@@ -97,6 +98,7 @@
                         {% set frameTitle = thickness.title %}
                         {% set frameRatio = thickness.ratio %}
                         {% set frameActiveColor = frameColor %}
+                        {% set frameActiveMaterial = frameMaterial %}
                         {% set imgActiveCorner = imgCorner %}
                         {% set imgActiveSideT = imgSideTop %}
                         {% set imgActiveSideR = imgSideRight %}
@@ -135,6 +137,8 @@
            value="{{ frameActiveThickness }}">
     <input type="hidden" name="az-picture-constructor-frame-color-selected" id="az-picture-constructor-frame-color-selected"
            value="{{ frameActiveColor }}">
+    <input type="hidden" name="az-picture-constructor-frame-material-selected" id="az-picture-constructor-frame-material-selected"
+           value="{{ frameActiveMaterial }}">
 </div>
 <div id="show-frame-panel" class="hidden show-frame-panel container-fluid">
     <div class="row">

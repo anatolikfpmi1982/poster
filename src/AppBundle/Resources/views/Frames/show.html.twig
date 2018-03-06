@@ -26,7 +26,7 @@
         </div>
         <div class="row az-picture-page-author-articul-div">
             <div class="col-md-2 col-sm-2">  {{ frame.width }} X {{ frame.height }} см</div>
-            <div class="col-md-10 col-sm-10"> {{ frame.material }}</div>
+            <div class="col-md-10 col-sm-10"> {{ frame.frameMaterial }}</div>
         </div>
 
         {% if frame.images is defined and frame.images and frame.images|length > 6 %}
@@ -78,7 +78,7 @@
         <div class="col-md-12 col-sm-12 az-frame-slide-about">
             <p>Рама "{{ frame.title }}"</p>
             <p>Цвет: {{ frame.color }}</p>
-            <p>Материал: {{ frame.material }}</p>
+            <p>Материал: {{ frame.frameMaterial }}</p>
             <p>Ширина: {{ frame.width }}</p>
             <p>Высота: {{ frame.height }}</p>
             {% if frame.description %}

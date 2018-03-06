@@ -105,7 +105,6 @@ class PicturesController extends FrontController {
      *
      * @return Response
      * @throws BadRequestHttpException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function showViewAction( $id, Request $request ) {
         $this->blocks = array_merge($this->blocks, ['LastVisited' => 6, 'Similar' => 7]);

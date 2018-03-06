@@ -17,7 +17,7 @@ class FrameRepository extends \Doctrine\ORM\EntityRepository {
     public function getFrameList() {
         return $this->createQueryBuilder( 'f' )
                     ->where( 'f.isActive = true' )
-                    ->innerJoin( 'f.material', 'm' )// Inner Join with picture forms
+                    ->innerJoin( 'f.frameMaterial', 'm' )// Inner Join with picture forms
                     ->getQuery();
     }
 }

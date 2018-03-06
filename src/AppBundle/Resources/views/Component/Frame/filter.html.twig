@@ -61,10 +61,10 @@
 <div class="col-md-2 col-sm-2 text-center az-filter-frame az-picture-page-constructor-block container-fluid">
     <div class="row az-category-page-filter az-category-page-filter-photo">
         {% set material_direction = 'DESC' %}
-        {% if sort_field == 'm.title' %}
+        {% if sort_field == 'm.name' %}
             {% if sort_direction == 'DESC' %}{% set material_direction = 'ASC' %}{% endif %}
         {% endif %}
-        <a href="{{ app.request.pathinfo }}?sort=m.title&direction={{ material_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Материал <span
+        <a href="{{ app.request.pathinfo }}?sort=m.name&direction={{ material_direction }}&page={{ pagination.currentPageNumber }}&filterField={{ filter_field }}&filterValue={{ filter_value }}">Материал <span
                     class="glyphicon
         glyphicon-chevron-{% if material_direction == 'DESC' %}down{% else %}up{% endif %}"></span></a>
     </div>

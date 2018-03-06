@@ -7,6 +7,7 @@ function ConstructorOverview() {
     this.color = "";
     this.frame = "";
     this.frameColor = "";
+    this.frameMaterial = "";
     this.mat_type = "";
     this.mat_size = "";
     this.mat_color = "";
@@ -128,6 +129,7 @@ function ConstructorOverview() {
         this.color = '';
         this.frame = $("#az-picture-constructor-frame-selected").val();
         this.frameColor = $("#az-picture-constructor-frame-color-selected").val();
+        this.frameMaterial = $("#az-picture-constructor-frame-material-selected").val();
         this.mat_color = $("#az-picture-constructor-frame-mat-color-selected").val();
         this.mat_type = $("#az-picture-page-mat-type-select").val();
         this.mat_size = $("#az-picture-page-constructor-mat-size-select").val();
@@ -168,6 +170,7 @@ function ConstructorOverview() {
         $('#az-constructor-choose-color').html(this.color);
         var frameA = $('<a href="' + $('#az-picture-constructor-frame-url-selected').val() + '">' + this.frame + '</a>');
         $('#az-constructor-choose-frame').html(frameA);
+        $('#az-constructor-choose-frame-material').html(this.frameMaterial);
         $('#az-constructor-choose-frame-color').html(this.frameColor);
         $('#az-constructor-choose-mat-type').html(this.mat_type);
         $('#az-constructor-choose-mat-size').html(this.mat_size + ' см');
@@ -1016,6 +1019,7 @@ function ConstructorOverview() {
             subframe_color = $('div.az-picture-page-sidebar-choose-subframe-color'),
             frame = $('div.az-picture-page-sidebar-choose-frame'),
             frameColor = $('div.az-picture-page-sidebar-choose-frame-color'),
+            frameMaterial = $('div.az-picture-page-sidebar-choose-frame-material'),
             mat_type = $('div.az-picture-page-sidebar-choose-mat-type'),
             mat_size = $('div.az-picture-page-sidebar-choose-mat-size'),
             module = $('div.az-picture-page-sidebar-choose-module'),
@@ -1041,12 +1045,14 @@ function ConstructorOverview() {
                 panel_sizes.hide();
                 zoom_div.show();
                 frameColor.hide();
+                frameMaterial.hide();
                 break;
             case 'В раме':
                 subframe.hide();
                 subframe_color.hide();
                 frame.show();
                 frameColor.show();
+                frameMaterial.show();
                 mat_type.show();
                 mat_size.show();
                 mat_color.show();
@@ -1065,6 +1071,7 @@ function ConstructorOverview() {
                 panel_sizes.show();
                 zoom_div.show();
                 frameColor.hide();
+                frameMaterial.hide();
                 break;
         }
     };

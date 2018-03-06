@@ -101,7 +101,7 @@ class FrameAdmin extends AbstractAdmin
             }
         }
         $materialsChoices = [];
-        $materials = $this->em->getRepository('AppBundle\Entity\FrameMaterial')->findBy(['isActive' => true]);
+        $materials = $this->em->getRepository('AppBundle\Entity\Material')->findBy(['isActive' => true]);
         if($materials) {
             foreach ($materials as $v) {
                 $materialsChoices[$v->getId()] = (string)$v;
@@ -124,9 +124,9 @@ class FrameAdmin extends AbstractAdmin
             ->add('color', 'choice', ['editable' => true, 'label' => 'Цвет','editable' => true,
                 'class' => 'Appbundle\Entity\FrameColor', 'choices' => $colorsChoices, 'sortable' => true,
                 'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'color']]])
-            ->add('material', 'choice', ['editable' => true, 'label' => 'Материал','editable' => true,
-                'class' => 'Appbundle\Entity\FrameMaterial', 'choices' => $materialsChoices, 'sortable' => true,
-                'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'material']]])
+            ->add('frameMaterial', 'choice', ['editable' => true, 'label' => 'Материал','editable' => true,
+                'class' => 'Appbundle\Entity\Material', 'choices' => $materialsChoices, 'sortable' => true,
+                'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'frameMaterial']]])
             ->add('isActive', null, ['editable' => true, 'label' => 'Показывать'])
             ->add(
                 '_action',
@@ -150,7 +150,7 @@ class FrameAdmin extends AbstractAdmin
             ->add('width', null, ['label' => 'Ширина'])
             ->add('height', null, ['label' => 'Высота'])
             ->add('color', null, ['label' => 'Цвет'])
-            ->add('material', null, ['label' => 'Материал'])
+            ->add('frameMaterial', null, ['label' => 'Материал'])
             ->add('isActive', null, ['label' => 'Показывать'])
         ;
     }
