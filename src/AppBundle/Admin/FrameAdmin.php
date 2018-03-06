@@ -64,7 +64,7 @@ class FrameAdmin extends AbstractAdmin
             ->add('ratio', null, ['required' => false, 'label' => 'Коэффициент', 'empty_data' => '1', 'attr' => ['placeholder' => 1]])
             ->add('useRatio', null, ['required' => false, 'label' => 'Использовать коэффициент'])
             ->add('color', null, array('label' => 'Цвет'))
-            ->add('material', null, array('label' => 'Материал'))
+            ->add('frameMaterial', null, array('label' => 'Материал'))
             ->add('isActive', null, ['required' => false, 'label' => 'Показывать'])
             ->add('weight', null, ['required' => false, 'label' => 'Вес', 'empty_data' => '0', 'attr' => ['placeholder' => 0]])
             ->add('thickness', null, [
@@ -121,10 +121,10 @@ class FrameAdmin extends AbstractAdmin
                 'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
             ->add('width', null, ['editable' => true, 'label' => 'Ширина',
                 'template' => 'AppBundle:Admin:list_field_float_editable.html.twig'])
-            ->add('color', 'choice', ['editable' => true, 'label' => 'Цвет','editable' => true,
+            ->add('color', 'choice', ['editable' => true, 'label' => 'Цвет',
                 'class' => 'Appbundle\Entity\FrameColor', 'choices' => $colorsChoices, 'sortable' => true,
                 'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'color']]])
-            ->add('frameMaterial', 'choice', ['editable' => true, 'label' => 'Материал','editable' => true,
+            ->add('frameMaterial', 'choice', ['editable' => true, 'label' => 'Материал',
                 'class' => 'Appbundle\Entity\Material', 'choices' => $materialsChoices, 'sortable' => true,
                 'sort_field_mapping'=> ['fieldName'=>'id'], 'sort_parent_association_mappings' => [['fieldName'=>'frameMaterial']]])
             ->add('isActive', null, ['editable' => true, 'label' => 'Показывать'])

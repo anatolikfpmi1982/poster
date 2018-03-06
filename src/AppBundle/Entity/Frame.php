@@ -130,13 +130,6 @@ class Frame implements ImageInterface
     private $color;
 
     /**
-     * @var FrameMaterial
-     * @ORM\ManyToOne(targetEntity="FrameMaterial")
-     * @ORM\JoinColumn(name="material_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    private $material;
-
-    /**
      * @var Material
      * @ORM\ManyToOne(targetEntity="Material")
      * @ORM\JoinColumn(name="frame_material_id", referencedColumnName="id", onDelete="SET NULL")
