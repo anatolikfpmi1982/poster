@@ -44,6 +44,14 @@ services:
              - AppBundle\Entity\FrameMaterial
              - 'SonataAdminBundle:CRUD'
              - '@app.image_manager'
+    app.admin.material:
+        class: AppBundle\Admin\MaterialAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Рамы", label: "Материалы рам", show_in_dashboard: true}
+        arguments:
+             - ~
+             - AppBundle\Entity\Material
+             - 'SonataAdminBundle:CRUD'
     app.admin.bannermaterial:
         class: AppBundle\Admin\BannerMaterialAdmin
         tags:

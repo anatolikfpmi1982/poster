@@ -106,28 +106,32 @@ class ParserCommand extends ContainerAwareCommand
         }
 
         // create pictures
+        $authors = [];
         foreach($rows as $key => $row) {
             $filename = iconv('Windows-1251', 'Utf-8', $row[0]);
-            $picture = $this->em->getRepository('AppBundle:Picture')->findOneBy(['name' => $filename]);
-            if($picture) {
-                if(!in_array($picture, $files))
-                    continue;
-            } else {
-                $picture = new Picture();
-            }
+
+            $picture = new Picture();
             $picture->setName(iconv('Windows-1251', 'Utf-8', $row[0]));
             $picture->setTitle(iconv('Windows-1251', 'Utf-8', $row[1]));
 
-            $author = $this->em->getRepository('AppBundle:Author')->findOneBy(['name' => iconv('Windows-1251', 'Utf-8', $row[2])]);
-            if(!$author) {
-                $author = new Author();
-                $author->setName(iconv('Windows-1251', 'Utf-8', $row[2]));
-                $author->setSlug($this->getContainer()->get('helper.slugcreator')->createSlug($author->getName()));
-                $author->setIsActive(true);
-                $this->em->persist($author);
-                $this->em->flush();
+            if(!empty($row[2])) {
+                if(!empty($authors[iconv('Windows-1251', 'Utf-8', $row[2])])) {
+                    $author = $authors[iconv('Windows-1251', 'Utf-8', $row[2])];
+                } else {
+                    $author = $this->getEm()->getRepository('AppBundle:Author')->findOneBy(['name' => iconv('Windows-1251', 'Utf-8', $row[2])]);
+
+                    if(!$author) {
+                        $author = new Author();
+                        $author->setName(iconv('Windows-1251', 'Utf-8', $row[2]));
+                        $author->setSlug($this->getContainer()->get('helper.slugcreator')->createSlug($author->getName()));
+                        $author->setIsActive(true);
+                        $this->getEm()->persist($author);
+                        $this->getEm()->flush();
+                    }
+                    $authors[iconv('Windows-1251', 'Utf-8', $row[2])] = $author;
+                }
+                $picture->setAuthor($author);
             }
-            $picture->setAuthor($author);
             $picture->setType((boolean)$row[4]);
             $picture->setNote(iconv('Windows-1251', 'Utf-8', $row[5]));
             $picture->setPrice($row[6] ? $row[6] : 0);
@@ -141,7 +145,7 @@ class ParserCommand extends ContainerAwareCommand
 
             if(!empty($row[3])) {
                 $categories = explode(',', iconv('Windows-1251', 'Utf-8', $row[3]));
-                $categiriesEntities = $this->em->getRepository('AppBundle:Category3')->findBy(['title' => $categories]);
+                $categiriesEntities = $this->getEm()->getRepository('AppBundle:Category3')->findBy(['title' => $categories]);
                 $picture->setCategories($categiriesEntities);
             }
 
@@ -151,13 +155,13 @@ class ParserCommand extends ContainerAwareCommand
             $image->upload();
             $image->setCreatedAt(new \DateTime())
                 ->setEntityName($picture::IMAGE_PATH);
-            $this->em->persist($image);
+            $this->getEm()->persist($image);
             $picture->setImage($image);
 
-            $this->em->persist($picture);
+            $this->getEm()->persist($picture);
         }
 
-        $this->em->flush();
+        $this->getEm()->flush();
 
         $this->updateLog('Добавлено ' . count($rows) . ' картин.');
 
@@ -185,7 +189,7 @@ class ParserCommand extends ContainerAwareCommand
             $this->errors[] = 'Отсутствует CSV файл!';
         }
 
-        $lastDate = $this->em->getRepository('AppBundle:ParserLog')->findOneBy([], ['fileDate' => 'DESC']);
+        $lastDate = $this->getEm()->getRepository('AppBundle:ParserLog')->findOneBy([], ['fileDate' => 'DESC']);
 
         if($lastDate && $lastDate->getFileDate()->format("F d Y H:i:s.") == date("F d Y H:i:s.", filectime(self::PARSE_DIR . '/' . self::CSV_FILENAME))) {
 //            $this->errors[] = 'Файл CSV не был изменен!';
@@ -207,30 +211,36 @@ class ParserCommand extends ContainerAwareCommand
 
     private function validateCSV($rows, $files) {
         $categories = [];
-        $categoriesEntities = $this->em->getRepository('AppBundle:Category3')->findBy([]);
+        $categoriesEntities = $this->getEm()->getRepository('AppBundle:Category3')->findBy([]);
         foreach ($categoriesEntities as $category) {
             $categories[] = mb_strtolower($category->getTitle(), 'UTF-8');
         }
 
+        $names = [];
+        $cats = [];
         foreach ($rows as $key => $row) {
             $name = iconv('Windows-1251', 'Utf-8', $row[0]);
-            $cat = iconv('Windows-1251', 'Utf-8', $row[3]);
             if(!in_array($name, $files)) {
                 $this->errors[] = "Файл " . $name . ' отсутствует в архиве!';
             }
 
-            $picture = $this->em->getRepository('AppBundle:Picture')->findOneBy(['name' => $name]);
-            if($picture) {
-                $this->errors[] = 'Файл ' . $name . ' уже присутствует в базе данных!';
-            }
+            $names[] = $name;
 
             if(!empty($row[3])) {
-                $rowCategories = explode(',', $cat);
+                $cat = iconv('Windows-1251', 'Utf-8', $row[3]);
+                $cats = array_merge(explode(',', $cat), $cats);
+            }
+        }
+        $pictures = $this->getEm()->getRepository('AppBundle:Picture')->findBy(['name' => $names]);
+        foreach($pictures as $picture) {
+            $this->errors[] = 'Файл ' . $picture->getName() . ' уже присутствует в базе данных!';
+        }
 
-                foreach ($rowCategories as $category) {
-                    if(!in_array(mb_strtolower($category, 'UTF-8'), $categories)) {
-                        $this->errors[] = 'Категория ' . $category . ' файла ' . $name . ' отсутствует в базе данных!';
-                    }
+        $cats = array_unique($cats);
+        if(!empty($cats)) {
+            foreach($cats as $category) {
+                if(!in_array(mb_strtolower($category, 'UTF-8'), $categories)) {
+                    $this->errors[] = 'Категория ' . $category . ' отсутствует в базе данных!';
                 }
             }
         }
@@ -247,8 +257,8 @@ class ParserCommand extends ContainerAwareCommand
         $entity->setMessage($message);
         $entity->setFileDate(new \DateTime(date("F d Y H:i:s.", filectime(self::PARSE_DIR . '/' . self::CSV_FILENAME))));
         $entity->setUpdatedAt(new \DateTime());
-        $this->em->persist($entity);
-        $this->em->flush();
+        $this->getEm()->persist($entity);
+        $this->getEm()->flush();
     }
 
     /**
@@ -260,10 +270,10 @@ class ParserCommand extends ContainerAwareCommand
             $entity->setMessage($error);
             $entity->setCreatedAt(new \DateTime());
             $entity->setIsActive(false);
-            $this->em->persist($entity);
+            $this->getEm()->persist($entity);
         }
 
-        $this->em->flush();
+        $this->getEm()->flush();
     }
 
     /**
@@ -294,5 +304,14 @@ class ParserCommand extends ContainerAwareCommand
             $file = $this->tmpFolder . '/' . $v;
             unset($file);
         }
+    }
+
+    public function getEm() {
+        if ($this->em->getConnection()->ping() === false) {
+            $this->em->getConnection()->close();
+            $this->em->getConnection()->connect();
+        }
+
+        return $this->em;
     }
 }

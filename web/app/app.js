@@ -170,6 +170,7 @@ define(function (require, exports, module) {
             $('#az-picture-constructor-frame-url-selected').val($(this).data('frame-url'));
             $('#az-picture-constructor-frame-thickness-selected').val($(this).data('frame-thickness'));
             $('#az-picture-constructor-frame-color-selected').val($(this).data('frame-color'));
+            $('#az-picture-constructor-frame-material-selected').val($(this).data('frame-material'));
             $('img.az-picture-page-constructor-picture-thickness-img').removeClass('active');
             $(this).addClass('active');
             setShowBoard();
@@ -427,6 +428,7 @@ define(function (require, exports, module) {
                 frame_material_side_b = $("#az-picture-constructor-frame-img-side-b-selected").val(),
                 frame_material_side_l = $("#az-picture-constructor-frame-img-side-l-selected").val(),
                 frame_color = $("#az-picture-constructor-frame-color-selected").val(),
+                frame_material = $("#az-picture-constructor-frame-material-selected").val(),
                 frame_id = $("#az-picture-constructor-frame-id-selected").val(),
                 frame_value = $("#az-picture-constructor-frame-selected").val(),
                 module_type_id = $('#az-picture-constructor-module-id-selected').val(),
@@ -458,6 +460,7 @@ define(function (require, exports, module) {
                     'frame_id': frame_id,
                     'frame_value': frame_value,
                     'frame_color': frame_color,
+                    'frame_material': frame_material,
                     'module_type_id': module_type_id,
                     'module_type_value': module_type_value,
                     'module_formula': module_formula,

@@ -137,6 +137,13 @@ class Frame implements ImageInterface
     private $material;
 
     /**
+     * @var Material
+     * @ORM\ManyToOne(targetEntity="Material")
+     * @ORM\JoinColumn(name="frame_material_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $frameMaterial;
+
+    /**
      * @var \DateTime
      * @ORM\Column(name="created_at", type="datetime", nullable=true)
      * @Gedmo\Timestampable(on="create")
@@ -410,6 +417,25 @@ class Frame implements ImageInterface
     public function setMaterial(FrameMaterial $material)
     {
         $this->material = $material;
+
+        return $this;
+    }
+
+    /**
+     * @return Material
+     */
+    public function getFrameMaterial()
+    {
+        return $this->frameMaterial;
+    }
+
+    /**
+     * @param Material $material
+     * @return Frame
+     */
+    public function setFrameMaterial(Material $material)
+    {
+        $this->frameMaterial = $material;
 
         return $this;
     }
