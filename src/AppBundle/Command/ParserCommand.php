@@ -302,7 +302,7 @@ class ParserCommand extends ContainerAwareCommand
     private function cleanFiles($files) {
         foreach ($files as $v) {
             $file = $this->tmpFolder . '/' . $v;
-            unset($file);
+            unlink($file);
         }
     }
 

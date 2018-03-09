@@ -77,6 +77,14 @@ class PictureSubscriber
     }
 
     /**
+     * @param LifecycleEventArgs $args
+     */
+    public function postRemove(LifecycleEventArgs $args)
+    {
+        $this->container->get('app.image_manager')->cleanGarbageImages();
+    }
+
+    /**
      * @param Picture $picture
      * @param Image $image
      */
@@ -92,7 +100,7 @@ class PictureSubscriber
             $this->container->get('helper.imageresizer')
                 ->resizeImage($image->getOriginFile(), $image->getSmallThumbBasePath(), $picture::THUMB_SMALL_IMAGE_HEIGHT, $picture::THUMB_SMALL_IMAGE_WIDTH);
             $this->container->get('helper.imageresizer')
-                            ->copyImage($image->getOriginFile(), $image->getNormalBasePath(), $image->getFilename());
+                ->copyImage($image->getOriginFile(), $image->getNormalBasePath(), $image->getFilename());
             unlink($image->getOriginFile());
         }
     }

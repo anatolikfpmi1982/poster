@@ -37,16 +37,16 @@ class ImageManagement
         $query = $this->em->createNativeQuery('
 SELECT id, filename, created_at, updated_at
 FROM images
-WHERE id NOT IN (SELECT DISTINCT image_id FROM frames_images)
-AND id NOT IN (SELECT DISTINCT image_id FROM slider)
-AND id NOT IN (SELECT DISTINCT image_id FROM underframes)
-AND id NOT IN (SELECT DISTINCT image_id FROM frame_materials)
-AND id NOT IN (SELECT DISTINCT image_id FROM banner_materials)
-AND id NOT IN (SELECT DISTINCT image_id FROM module_types)
-AND id NOT IN (SELECT DISTINCT image_id FROM main_menu_items)
-AND id NOT IN (SELECT DISTINCT image_id FROM own_pictures)
-AND id NOT IN (SELECT DISTINCT image_id FROM picture_forms)
-AND id NOT IN (SELECT DISTINCT image_id FROM pictures)', $rsm);
+WHERE id NOT IN (SELECT DISTINCT image_id FROM frames_images WHERE image_id IS NOT NULL)
+AND id NOT IN (SELECT DISTINCT image_id FROM slider WHERE image_id IS NOT NULL)
+AND id NOT IN (SELECT DISTINCT image_id FROM underframes WHERE image_id IS NOT NULL)
+AND id NOT IN (SELECT DISTINCT image_id FROM frame_materials WHERE image_id IS NOT NULL)
+AND id NOT IN (SELECT DISTINCT image_id FROM banner_materials WHERE image_id IS NOT NULL)
+AND id NOT IN (SELECT DISTINCT image_id FROM module_types WHERE image_id IS NOT NULL)
+AND id NOT IN (SELECT DISTINCT image_id FROM main_menu_items WHERE image_id IS NOT NULL)
+AND id NOT IN (SELECT DISTINCT image_id FROM own_pictures WHERE image_id IS NOT NULL)
+AND id NOT IN (SELECT DISTINCT image_id FROM picture_forms WHERE image_id IS NOT NULL)
+AND id NOT IN (SELECT DISTINCT image_id FROM pictures WHERE image_id IS NOT NULL)', $rsm);
 
         $images = $query->getResult();
         if(count($images) > 0) {
@@ -63,10 +63,10 @@ AND id NOT IN (SELECT DISTINCT image_id FROM pictures)', $rsm);
         if (count($images) > 0) {
             foreach($images as $image) {
                 /** @var Image $image  */
-                $this->em->remove($image);
                 $image->onPreRemove();
+                $this->em->remove($image);
+                $this->em->flush();
             }
-            $this->em->flush();
         }
     }
 
