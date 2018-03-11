@@ -75,9 +75,11 @@ class ParserCommand extends ContainerAwareCommand
 
         $this->em = $this->getContainer()->get('doctrine.orm.entity_manager');
         $this->validateFiles();
+        $files = $this->getFilenames();
 
         if($this->errors) {
             $this->saveErrors();
+            $this->exit($output, $files);
             return;
         }
 
@@ -96,12 +98,11 @@ class ParserCommand extends ContainerAwareCommand
         }
 
         // validate CSV
-        $files = $this->getFilenames();
-
         $this->validateCSV($rows, $files);
 
         if($this->errors) {
             $this->saveErrors();
+            $this->exit($output, $files);
             return;
         }
 
@@ -165,8 +166,11 @@ class ParserCommand extends ContainerAwareCommand
 
         $this->updateLog('Добавлено ' . count($rows) . ' картин.');
 
-        $this->cleanFiles($files);
+        $this->exit($output, $files);
+    }
 
+    private function exit($output, $files) {
+        $this->cleanFiles($files);
         $output->writeln('Success!');
     }
 
@@ -211,36 +215,30 @@ class ParserCommand extends ContainerAwareCommand
 
     private function validateCSV($rows, $files) {
         $categories = [];
-        $categoriesEntities = $this->getEm()->getRepository('AppBundle:Category3')->findBy([]);
+        $categoriesEntities = $this->em->getRepository('AppBundle:Category3')->findBy([]);
         foreach ($categoriesEntities as $category) {
             $categories[] = mb_strtolower($category->getTitle(), 'UTF-8');
         }
 
-        $names = [];
-        $cats = [];
         foreach ($rows as $key => $row) {
             $name = iconv('Windows-1251', 'Utf-8', $row[0]);
+            $cat = iconv('Windows-1251', 'Utf-8', $row[3]);
             if(!in_array($name, $files)) {
                 $this->errors[] = "Файл " . $name . ' отсутствует в архиве!';
             }
 
-            $names[] = $name;
+            $picture = $this->em->getRepository('AppBundle:Picture')->findOneBy(['name' => $name]);
+            if($picture) {
+                $this->errors[] = 'Файл ' . $name . ' уже присутствует в базе данных!';
+            }
 
             if(!empty($row[3])) {
-                $cat = iconv('Windows-1251', 'Utf-8', $row[3]);
-                $cats = array_merge(explode(',', $cat), $cats);
-            }
-        }
-        $pictures = $this->getEm()->getRepository('AppBundle:Picture')->findBy(['name' => $names]);
-        foreach($pictures as $picture) {
-            $this->errors[] = 'Файл ' . $picture->getName() . ' уже присутствует в базе данных!';
-        }
+                $rowCategories = explode(',', $cat);
 
-        $cats = array_unique($cats);
-        if(!empty($cats)) {
-            foreach($cats as $category) {
-                if(!in_array(mb_strtolower($category, 'UTF-8'), $categories)) {
-                    $this->errors[] = 'Категория ' . $category . ' отсутствует в базе данных!';
+                foreach ($rowCategories as $category) {
+                    if(!in_array(mb_strtolower($category, 'UTF-8'), $categories)) {
+                        $this->errors[] = 'Категория ' . $category . ' файла ' . $name . ' отсутствует в базе данных!';
+                    }
                 }
             }
         }
@@ -302,7 +300,7 @@ class ParserCommand extends ContainerAwareCommand
     private function cleanFiles($files) {
         foreach ($files as $v) {
             $file = $this->tmpFolder . '/' . $v;
-            unset($file);
+            unlink($file);
         }
     }
 

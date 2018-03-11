@@ -112,7 +112,7 @@ class PictureRepository extends EntityRepository
     public function getActivePicturesForSearch($searchString)
     {
         return $this->createQueryBuilder('p')
-            ->innerJoin('p.author', 'a')// Inner Join with author
+            ->leftJoin('p.author', 'a')// Inner Join with author
             ->innerJoin('p.form', 'f')// Inner Join with picture form
             ->where('p.isActive = true')
             ->andWhere('(a.name LIKE :search_like OR p.title LIKE :search_like OR p.code = :search)')
@@ -153,7 +153,7 @@ class PictureRepository extends EntityRepository
 
             $limit = self::SIMILAR_COUNT - count($similar);
             $qb = $this->createQueryBuilder('p')
-                ->innerJoin('p.author', 'a')// Inner Join with author
+                ->leftJoin('p.author', 'a')// Inner Join with author
                 ->where('a.id = :author_id')
                 ->andWhere('p.isActive = true')
                 ->andWhere('p.id != :id')
