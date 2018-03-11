@@ -658,7 +658,45 @@ define(function (require, exports, module) {
         $('.az-main-page-slider-img').removeClass('hidden').show();
         $('.az-frames-slide-thumb-img').removeClass('hidden').show();
 
+        // category menu
+        $('.menu-category-1-lvl-item').click(function (event) {
+            event.stopImmediatePropagation();
+            var catId = $(this).data('item-id'),
+                subMenu = $('#children-category-' + catId);
+            if ($(this).find('span').hasClass('glyphicon-menu-down')) {
+                $(this).find('span').removeClass('glyphicon-menu-down').addClass('glyphicon-menu-up');
+                subMenu.hide();
+            } else {
+                $(this).find('span').removeClass('glyphicon-menu-up').addClass('glyphicon-menu-down');
+                subMenu.show();
+            }
+        });
 
+        $('.menu-category-2-lvl-item').click(function (event) {
+            event.stopImmediatePropagation();
+            var catId = $(this).data('item-id'),
+                subMenu = $('#children-subcategory-' + catId);
+            if ($(this).find('span').hasClass('glyphicon-menu-down')) {
+                $(this).find('span').removeClass('glyphicon-menu-down').addClass('glyphicon-menu-up');
+                subMenu.hide();
+            } else {
+                $(this).find('span').removeClass('glyphicon-menu-up').addClass('glyphicon-menu-down');
+                subMenu.show();
+            }
+        });
+
+        $('.menu-category-3-lvl-item').click(function (event) {
+            event.stopImmediatePropagation();
+            var catId = $(this).data('item-id'),
+                subMenu = $('#children-subsubcategory-' + catId);
+            if ($(this).find('span').hasClass('glyphicon-menu-down')) {
+                $(this).find('span').removeClass('glyphicon-menu-down').addClass('glyphicon-menu-up');
+                subMenu.hide();
+            } else {
+                $(this).find('span').removeClass('glyphicon-menu-up').addClass('glyphicon-menu-down');
+                subMenu.show();
+            }
+        });
     });
 
     function setShowBoard() {

@@ -403,14 +403,22 @@ footer {
 
 /**sidebar**/
 .az-sidebar-header {
-    color: white;
+    color: #ffffff;
     background-color: #fd1200;
     padding: 8px;
     text-transform: uppercase;
     font-size: 16px;
     transition: .3s ease 0s, color .3s ease 0s;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid #ffffff;
+}
 
+.az-sidebar-catalog-item-header.az-sidebar-header a:visited,
+.az-sidebar-catalog-item-header.az-sidebar-header a {
+    color: #ffffff;
+}
+
+.az-sidebar-catalog-item-header.az-sidebar-header a:hover {
+    color: #fd1200;
 }
 
 .az-sidebar-catalog-item-header.az-sidebar-header:hover {
@@ -2877,7 +2885,7 @@ div.az-picture-page-constructor-block.active {
     text-transform: none;
 }
 
-a.az-category-item-a div.az-sidebar-catalog-item-header div.az-category-menu-item-text.active_menu {
+div.az-sidebar-catalog-item-header a.az-category-item-a div.az-category-menu-item-text.active_menu {
     color: #fd1200;
 }
 
