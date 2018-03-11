@@ -63,8 +63,8 @@ AND id NOT IN (SELECT DISTINCT image_id FROM pictures WHERE image_id IS NOT NULL
         if (count($images) > 0) {
             foreach($images as $image) {
                 /** @var Image $image  */
-                $image->onPreRemove();
                 $this->em->remove($image);
+                $image->onPreRemove();
                 $this->em->flush();
             }
         }

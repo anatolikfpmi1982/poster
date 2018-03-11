@@ -142,7 +142,7 @@ class PictureRepository extends EntityRepository
             $similar = [];
         }
 
-        if (count($similar) < self::SIMILAR_COUNT && $entities[0]->getAuthor()) {
+        if (count($similar) < self::SIMILAR_COUNT && !empty($entities[0]) && $entities[0]->getAuthor()) {
             if (count($similar) > 0) {
                 foreach ($similar as $k => $v) {
                     $ids[] = $v->getId();
