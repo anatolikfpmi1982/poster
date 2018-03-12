@@ -134,10 +134,10 @@ class ParserCommand extends ContainerAwareCommand
                 $picture->setAuthor($author);
             }
             $picture->setType((boolean)$row[4]);
-            $picture->setNote(iconv('Windows-1251', 'Utf-8', $row[5]));
-            $picture->setPrice($row[6] ? $row[6] : 0);
-            $picture->setRatio($row[7] ? $row[7] : 1);
-            $picture->setBody(iconv('Windows-1251', 'Utf-8', $row[8]));
+            $picture->setNote(iconv('Windows-1251', 'Utf-8', isset($row[5]) ? $row[5] : ''));
+            $picture->setPrice(isset($row[6]) ? $row[6] : 0);
+            $picture->setRatio(isset($row[7]) ? $row[7] : 1);
+            $picture->setBody(iconv('Windows-1251', 'Utf-8', isset($row[8]) ? $row[8] : ''));
             $picture->setIsActive(false);
             $picture->setIsTop(false);
             $picture->setCreatedAt(new \DateTime());
@@ -191,12 +191,6 @@ class ParserCommand extends ContainerAwareCommand
 
         if(!$this->fs->exists(self::PARSE_DIR . '/' . self::CSV_FILENAME)) {
             $this->errors[] = 'Отсутствует CSV файл!';
-        }
-
-        $lastDate = $this->getEm()->getRepository('AppBundle:ParserLog')->findOneBy([], ['fileDate' => 'DESC']);
-
-        if($lastDate && $lastDate->getFileDate()->format("F d Y H:i:s.") == date("F d Y H:i:s.", filectime(self::PARSE_DIR . '/' . self::CSV_FILENAME))) {
-//            $this->errors[] = 'Файл CSV не был изменен!';
         }
     }
 
@@ -300,7 +294,9 @@ class ParserCommand extends ContainerAwareCommand
     private function cleanFiles($files) {
         foreach ($files as $v) {
             $file = $this->tmpFolder . '/' . $v;
-            unlink($file);
+            if(file_exists($file)) {
+                unlink($file);
+            }
         }
     }
 
