@@ -10,6 +10,7 @@ use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 
 class PictureAdmin extends AbstractAdmin
@@ -269,6 +270,22 @@ class PictureAdmin extends AbstractAdmin
         }
 
         return $actions;
+    }
+
+    public function preBatchAction($actionName, ProxyQueryInterface $query, array & $idx, $allElements)
+    {
+        if (true === $allElements) {
+            throw new \InvalidArgumentException('Not supported');
+        }
+
+        if ('delete' === $actionName) {
+            foreach ($idx as $id) {
+                $picture = $this->getObject($id);
+                if($picture instanceof Picture) {
+                    $this->imageManagement->deleteImage($picture->getImage());
+                }
+            }
+        }
     }
 
     /**

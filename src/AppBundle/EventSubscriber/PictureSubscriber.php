@@ -77,14 +77,6 @@ class PictureSubscriber
     }
 
     /**
-     * @param LifecycleEventArgs $args
-     */
-    public function postRemove(LifecycleEventArgs $args)
-    {
-        $this->container->get('app.image_manager')->cleanGarbageImages();
-    }
-
-    /**
      * @param Picture $picture
      * @param Image $image
      */
