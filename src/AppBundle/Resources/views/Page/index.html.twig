@@ -31,13 +31,11 @@
     </div>
     <div class="row container-fluid az-page-main-section-div az-static-page-div">
         <div class="col-md-12 col-sm-12">
-            <div class="row page-title az-static-page-title">
-                {% set pageTitle = 'Страница' %}
-                {% if page.showTitle %}
-                    {% set pageTitle = page.title %}
-                {% endif %}
-                <div class="col-md-12 col-sm-12">{{ pageTitle }}</div>
-            </div>
+            {% if page.showTitle %}
+                <div class="row page-title az-static-page-title">
+                    <div class="col-md-12 col-sm-12">{{ page.title }}</div>
+                </div>
+            {% endif %}
             <div class="row az-static-page-content">
                 {{ page.body|moreText|raw }}
             </div>
