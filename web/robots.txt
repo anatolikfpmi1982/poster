@@ -1,5 +1,20 @@
-# www.robotstxt.org/
-# www.google.com/support/webmasters/bin/answer.py?hl=en&answer=156449
-
 User-agent: *
-Disallow:
+Disallow: /admin/
+Allow: /app/*.js
+Allow: /bundles/app/*.css
+Allow: /bundles/app/*.js
+Allow: /files/*.png
+Allow: /files/*.jpg
+Allow: /files/*.gif
+Crawl-Delay: 5
+
+User-agent: GoogleBot
+Disallow: /admin/
+Allow: /app/*.js
+Allow: /bundles/app/*.css
+Allow: /bundles/app/*.js
+Allow: /files/*.png
+Allow: /files/*.jpg
+Allow: /files/*.gif
+
+Host: http://artzakaz.by

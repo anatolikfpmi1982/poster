@@ -2,6 +2,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Settings;
+use AppBundle\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -71,6 +72,7 @@ class FrontController extends Controller {
         $this->data['site_settings'] = $this->getSiteSettings();
         $this->data['help_settings'] = $this->getHelpSettings();
         $this->data['header_cart']   = $this->getCart();
+        $this->data['duplicate_category_id'] = CategoryRepository::MAIN_CATEGORY_ID;
     }
 
     /**

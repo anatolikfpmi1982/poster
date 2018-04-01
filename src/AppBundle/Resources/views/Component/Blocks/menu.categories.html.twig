@@ -1,3 +1,6 @@
+{% set isHomePage = isMainPage is defined and isMainPage == true %}
+{% set isMFPage = isMyFilesPage is defined and isMyFilesPage == true %}
+{% set isPageForOpenMenu = isHomePage or isMFPage %}
 {% for categoryBlock in block %}
     <div class="col-md-12 col-sm-12 container-fluid">
         {% set category_slug = '#' %}
@@ -12,6 +15,7 @@
         {% endif %}
         {% set isCheckNav = (isModuleMenuItem and module_active) or (not isModuleMenuItem and not module_active) %}
         {% set options = {'slug': category_slug, 'type': category_type} %}
+        {% set isChildren1 = categoryBlock.children is defined and categoryBlock.children %}
 
         <div class="row az-sidebar-header az-sidebar-catalog-item-header
         {% if isCheckNav and categoryBlock.clean_id in activeCategories %}active{% endif %}"
@@ -31,16 +35,20 @@
                     </div>
                 </div>
             </a>
-            {% if isCheckNav and categoryBlock.clean_id in activeCategories %}
-                <div class="col-md-2 col-sm-2 menu-category-1-lvl-item" data-item-id="{{ categoryBlock.id }}">
+            {% if isChildren1 and isCheckNav and categoryBlock.clean_id in activeCategories %}
+                <div class="col-md-2 col-sm-2 menu-category-1-lvl-item" data-item-id="{{ categoryBlock.id }}" data-item-child="{% if isChildren1 %}1{% else %}0{% endif %}">
                     <span class="glyphicon glyphicon-menu-down"></span>
                 </div>
             {% endif %}
         </div>
 
-        {% if categoryBlock.children is defined and categoryBlock.children %}
+        {% if isChildren1 %}
+        {% set defaultOpen = false %}
+        {% if isPageForOpenMenu and duplicate_category_id==categoryBlock.id %}
+            {% set defaultOpen = true %}
+        {% endif %}
         <div class="row category-menu children-category-{{ categoryBlock.id }}" id="children-category-{{ categoryBlock.id }}"
-             style="display:{% if isCheckNav and categoryBlock.clean_id in activeCategories %}block{% else %}none{% endif %};">
+             style="display:{% if (isCheckNav and categoryBlock.clean_id in activeCategories) or defaultOpen %}block{% else %}none{% endif %};">
             <div class="col-md-12 col-sm-12 container-fluid">
                 {% for subcategory in categoryBlock.children %}
                     {% set subcategory_slug = '#' %}
@@ -52,6 +60,7 @@
                         {% set subcategory_type = 'module' %}
                     {% endif %}
                     {% set options = {'slug': subcategory_slug, 'type': subcategory_type} %}
+                    {% set isChildren2 = subcategory.children is defined and subcategory.children %}
                     <div class="row az-sidebar-subcategory-item"
                          data-id="{{ subcategory.id }}" data-parent-id="{{ categoryBlock.id }}"
                          data-url="{{ path('category', options) }}">
@@ -59,7 +68,8 @@
                         <div class="col-md-12 col-sm-12 container-fluid az-sidebar-subcategory-first
                         {% if isCheckNav and subcategory.clean_id in activeCategories %}active_parent{% endif %}">
                             <div class="row">
-                                <div class="{% if isCheckNav and subcategory.clean_id in activeCategories %}col-md-10 col-sm-10{% else %}col-md-12 col-sm-12{% endif %}
+                                <div class="{% if isChildren2 and isChildren1 and isCheckNav and subcategory.clean_id in activeCategories %}col-md-10 col-sm-10
+                                {% else %}col-md-12 col-sm-12{% endif %}
                                 container-fluid">
                                     <a href="{{ path('category', options) }}" class="az-subcategory-item-a">
                                         <div class="az-subcat-span {% if isCheckNav and active_category_id == subcategory.clean_id %}active_menu{% endif %}">
@@ -67,16 +77,18 @@
                                         </div>
                                     </a>
                                 </div>
-                                {% if isCheckNav and subcategory.clean_id in activeCategories %}
-                                    <div class="col-md-2 col-sm-2 menu-category-2-lvl-item" data-item-id="{{ subcategory.id }}">
+                                {% if isChildren2 and isCheckNav and subcategory.clean_id in activeCategories %}
+                                    <div class="col-md-2 col-sm-2 menu-category-2-lvl-item" data-item-id="{{ subcategory.id }}"
+                                         data-item-child="{% if isChildren2 %}1{% else %}0{% endif %}">
                                         <span class="glyphicon glyphicon-menu-down"></span>
                                     </div>
                                 {% endif %}
                             </div>
-                            {% if subcategory.children is defined and subcategory.children %}
+                            {% if isChildren2 %}
                                 <div class="row category-menu children-subcategory-{{ categoryBlock.id }}"
                                      id="children-subcategory-{{ subcategory.id }}"
                                      style="display:{% if isCheckNav and subcategory.clean_id in activeCategories %}block{% else %}none{% endif %};">
+                                    {% set isChildren3 = subsubcategory.children is defined and subsubcategory.children %}
                                     <div class="col-md-12 col-sm-12 container-fluid">
                                         {% for subsubcategory in subcategory.children %}
                                             {% set subsubcategory_slug = '#' %}
@@ -95,7 +107,8 @@
                                                 <div class="col-md-12 col-sm-12 container-fluid az-sidebar-subsubcategory-first
                                             {% if isCheckNav and subsubcategory.clean_id in activeCategories %}active_parent{% endif %}">
                                                     <div class="row">
-                                                        <div class="{% if isCheckNav and subsubcategory.clean_id in activeCategories %}col-md-10 col-sm-10{% else %}col-md-12 col-sm-12{% endif %}
+                                                        <div class="{% if isChildren3 and isCheckNav and subsubcategory.clean_id in activeCategories %}col-md-10 col-sm-10
+                                                        {% else %}col-md-12 col-sm-12{% endif %}
                                                          container-fluid">
                                                             <a href="{{ path('category',options) }}" class="az-subsubcategory-item-a">
                                                                 <div class="az-subsubcat-span {% if isCheckNav and active_category_id == subsubcategory.clean_id %}active_menu{% endif %}">
@@ -103,13 +116,14 @@
                                                                 </div>
                                                             </a>
                                                         </div>
-                                                        {% if isCheckNav and subsubcategory.clean_id in activeCategories %}
-                                                            <div class="col-md-2 col-sm-2 menu-category-3-lvl-item" data-item-id="{{ subsubcategory.id }}">
+                                                        {% if isChildren3 and isCheckNav and subsubcategory.clean_id in activeCategories %}
+                                                            <div class="col-md-2 col-sm-2 menu-category-3-lvl-item" data-item-id="{{ subsubcategory.id }}"
+                                                                 data-item-child="{% if isChildren3 %}1{% else %}0{% endif %}">
                                                                 <span class="glyphicon glyphicon-menu-down"></span>
                                                             </div>
                                                         {% endif %}
                                                     </div>
-                                                    {% if subsubcategory.children is defined and subsubcategory.children %}
+                                                    {% if isChildren3 %}
                                                         <div class="row category-menu children-subsubcategory-{{ categoryBlock.id }}"
                                                              id="children-subsubcategory-{{ subsubcategory.id }}"
                                                              style="display:{% if isCheckNav and subsubcategory.clean_id in activeCategories %}block

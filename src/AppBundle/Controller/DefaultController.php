@@ -22,6 +22,7 @@ class DefaultController extends FrontController {
         $this->menu = '/';
         $this->doBlocks();
         $this->data['sliders'] = $this->get( 'blocks.service' )->getSliderItems();
+        $this->data['isMainPage'] = true;
         // replace this example code with whatever you need
         return $this->render( 'AppBundle:Main:index.html.twig', $this->data );
     }

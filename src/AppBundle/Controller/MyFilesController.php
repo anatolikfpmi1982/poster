@@ -104,13 +104,17 @@ class MyFilesController extends FrontController {
      *
      * @param Request $request
      * @return Response
+     * @throws \LogicException
      */
     public function listAction(Request $request) {
-        $em = $this->get('doctrine.orm.entity_manager');
+        $this->menu = '/my_files';
+        $this->pageSlug = '';
+        $this->pageType = 'my_files';
+        $this->doBlocks();
 
         $ids = $this->get( 'app.session_manager' )->getMyFiles();
 
-        $queryBuilder = $em->getRepository('AppBundle:OwnPicture')->getOwnPicturesForMyFiles($ids);
+        $queryBuilder = $this->em->getRepository('AppBundle:OwnPicture')->getOwnPicturesForMyFiles($ids);
         $query = $queryBuilder->getQuery();
 
         $paginator  = $this->get('knp_paginator');
@@ -120,11 +124,9 @@ class MyFilesController extends FrontController {
             self::PAGE_LIMIT/*limit per page*/
         );
 
-        $this->menu = '/my_files';
-        $this->pageSlug = '';
-        $this->pageType = 'my_files';
-        $this->doBlocks();
+
         $this->data['pagination'] = $pagination;
+        $this->data['isMyFilesPage'] = true;
 
         // parameters to template
         return $this->render('AppBundle:MyFiles:list.html.twig', $this->data);

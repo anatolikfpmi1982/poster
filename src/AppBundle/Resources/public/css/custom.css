@@ -102,6 +102,7 @@ body {
     color: #ffffff;
 }
 
+.az-sidebar-subcategory-item a.az-subcategory-item-a div.az-subcat-span:hover,
 .az-sidebar-subcategory-first.active_parent a.az-subcategory-item-a div.az-subcat-span,
 .az-sidebar-subcategory-first.active_parent a.az-subcategory-item-a:visited div.az-subcat-span {
     color: #fd1200;
